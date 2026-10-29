@@ -3,12 +3,11 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "c42f3fb8-dc4b-41a0-8a91-ed61d7cf6e48")
-	(paper "A4")
+	(paper "B")
 	(title_block
-		(title "ULX3S")
-		(rev "1.0.0")
-		(company "EMARD")
-		(comment 1 "SDRAM memory")
+		(title "FPGA CAM LCD")
+		(date "2026-10-29")
+		(rev "0.1")
 	)
 	(lib_symbols
 		(symbol "Device:C"
@@ -11471,7 +11470,7 @@
 			(uuid "83c0b0cf-9530-4df5-bda9-7eb61ba99a5f")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0124")
 					(unit 1)
@@ -11545,7 +11544,7 @@
 			(uuid "256e107a-087e-4dcf-9335-855766e79847")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0128")
 					(unit 1)
@@ -11619,7 +11618,7 @@
 			(uuid "14174a70-ce0f-4fef-81f9-b5f3a9a687d1")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0125")
 					(unit 1)
@@ -11693,7 +11692,7 @@
 			(uuid "04ada1d0-bc7b-47ed-b3cb-a8ea851cb93d")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0129")
 					(unit 1)
@@ -11772,7 +11771,7 @@
 			(uuid "110f25f6-e617-4f30-b56d-aa59e64f5894")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "C16")
 					(unit 1)
@@ -11846,7 +11845,7 @@
 			(uuid "56ea2313-cffc-409f-be94-53b923a650e7")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0127")
 					(unit 1)
@@ -11920,7 +11919,7 @@
 			(uuid "91924c92-0f17-45f0-a7db-78f6f0e8bc95")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0126")
 					(unit 1)
@@ -12471,7 +12470,7 @@
 			(uuid "ad591aec-c301-426a-b652-8860ba76f747")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "U2")
 					(unit 1)
@@ -13691,7 +13690,7 @@
 			(uuid "73134146-d8da-46b0-96d7-ba629d2cc5ef")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "U1")
 					(unit 3)
@@ -14911,7 +14910,7 @@
 			(uuid "2fb08650-d735-4f3e-864c-a682cd73d83d")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "U1")
 					(unit 4)
@@ -15001,7 +15000,7 @@
 			(uuid "6bf3ad74-49b8-4e41-9fa4-18f26abcb58c")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "C33")
 					(unit 1)
@@ -15075,7 +15074,7 @@
 			(uuid "35a18ed2-25d0-4d36-910d-b462c9b30a29")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0131")
 					(unit 1)
@@ -15149,7 +15148,7 @@
 			(uuid "f9fdd841-f2b0-4c1d-8864-4bd883300ddc")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0130")
 					(unit 1)
@@ -15239,7 +15238,7 @@
 			(uuid "25dda0ce-d50e-4d38-a24d-8adf39523bc5")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "C34")
 					(unit 1)
@@ -15313,7 +15312,7 @@
 			(uuid "e20ef04e-7bc7-4242-bd7e-a82efe210c3b")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0133")
 					(unit 1)
@@ -15387,7 +15386,7 @@
 			(uuid "46ecc4ff-a8de-4876-99d8-f504acf8f5d6")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0132")
 					(unit 1)
@@ -15477,7 +15476,7 @@
 			(uuid "1f107ec0-fbf1-4fcf-9b07-e0bd1a735c8d")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "C35")
 					(unit 1)
@@ -15551,7 +15550,7 @@
 			(uuid "2a1de70b-1091-40d2-958d-5648045ce7a9")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0135")
 					(unit 1)
@@ -15625,7 +15624,7 @@
 			(uuid "9332f3d8-69e1-4ad3-b20c-85961c780a2d")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0134")
 					(unit 1)
@@ -15715,7 +15714,7 @@
 			(uuid "0ffe933f-f3ff-41a0-8618-9afbdb28b45d")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "C52")
 					(unit 1)
@@ -15789,7 +15788,7 @@
 			(uuid "9a688617-d467-4281-b1e9-79ebd80a2b98")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0137")
 					(unit 1)
@@ -15863,7 +15862,7 @@
 			(uuid "653421c4-c303-4bb0-9e92-1d20ee2b9ce8")
 		)
 		(instances
-			(project "ulx3s"
+			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d6d507"
 					(reference "#PWR0136")
 					(unit 1)

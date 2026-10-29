@@ -264,7 +264,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": "3.1.7"
+      "sch_revision": "0.1"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -513,7 +513,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "ulx3s.kicad_pro",
+    "filename": "FCL.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -683,8 +683,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "ulx3s.kicad_sch",
-        "name": "ulx3s",
+        "filename": "FCL.kicad_sch",
+        "name": "FCL",
         "uuid": "4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d"
       }
     ],
@@ -694,7 +694,7 @@
   "sheets": [
     [
       "4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d",
-      "ulx3s"
+      "FCL"
     ],
     [
       "00000000-0000-0000-0000-000058d51cad",
