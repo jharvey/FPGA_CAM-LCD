@@ -1,8 +1,67 @@
+# --- KiCad backups & autosave ---
+*.bak
+*.bck
+*_bak
+*-bak
+*.kicad_pcb-bak
+*.sch-bak
 *~
-# intermediate generate netlist file
-ulx3s.net
-# intermediate files of the freeroute
-ulx3s.dsn
-ulx3s.bin
-ulx3s.ses
-ulx3s.rules
+_autosave-*
+*.tmp
+*.swp
+
+# KiCad local history / recovery
+**/.history/
+*-backups/
+*.kicad_prl
+
+# Lock / temporary files
+*.lck
+.~lock.*
+
+# --- Generated / local files (usually do not commit) ---
+# Uncomment if you prefer not to track these:
+# *.kicad_pcb-bak
+# fp-info-cache
+# *.net
+# *.xml
+# *.csv
+# *.tsv
+
+# Gerbers / plot outputs (regenerate when needed)
+plot/
+gerber/
+gerbers/
+*.gbr
+*.gbrjob
+*.drl
+*.pho
+*.pdf
+!doc/**/*.pdf
+
+# 3D / STEP exports (optional – keep if you want them in repo)
+# *.step
+# *.stp
+# *.wrl
+# *.vrml
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Python / tools
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Old KiCad rescue / cache libs (optional)
+*-rescue.lib
+*-cache.lib
+fp-info-cache
