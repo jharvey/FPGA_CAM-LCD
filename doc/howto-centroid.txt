@@ -1,4 +1,0 @@
-Here are good guidelines on how to prepare the
-schematics for production. I should have read this before.
-
-https://rheingoldheavy.com/design-assembly-kicad/
