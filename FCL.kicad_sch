@@ -1492,6 +1492,52 @@
 		)
 	)
 	(sheet
+		(at 220.98 133.35)
+		(size 19.05 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6953ecf3-f35f-46e2-b73c-2bfbe90b2c43")
+		(property "Sheetname" "gpio"
+			(at 220.98 132.5114 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "gpio.kicad_sch"
+			(at 220.98 145.4662 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 177.8 149.86)
 		(size 25.4 45.72)
 		(exclude_from_sim no)
