@@ -1,6 +1,5 @@
 (sym_lib_table
 	(version 7)
-	(lib (name "ulx3s-rescue") (type "KiCad") (uri "${KIPRJMOD}/ulx3s-rescue.kicad_sym") (options "") (descr ""))
 	(lib (name "lfe5bg381") (type "Legacy") (uri "${KIPRJMOD}/footprints/lattice/lfe5bg381.lib") (options "") (descr ""))
 	(lib (name "ft2232") (type "Legacy") (uri "${KIPRJMOD}/footprints/usbserial/ft2232.lib") (options "") (descr ""))
 	(lib (name "esp32") (type "Legacy") (uri "${KIPRJMOD}/footprints/esp32/esp32.lib") (options "") (descr ""))
