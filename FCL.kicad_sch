@@ -1002,7 +1002,7 @@
 		)
 	)
 	(sheet
-		(at 242.57 149.86)
+		(at 242.57 153.67)
 		(size 19.05 11.43)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1018,7 +1018,7 @@
 		)
 		(uuid "00000000-0000-0000-0000-000058d6d447")
 		(property "Sheetname" "wifi"
-			(at 242.57 149.0214 0)
+			(at 242.57 152.8314 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1029,7 +1029,7 @@
 			)
 		)
 		(property "Sheetfile" "wifi.kicad_sch"
-			(at 242.57 161.9762 0)
+			(at 242.57 165.7862 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1094,7 +1094,7 @@
 		)
 	)
 	(sheet
-		(at 264.16 149.86)
+		(at 264.16 153.67)
 		(size 19.05 11.43)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1110,7 +1110,7 @@
 		)
 		(uuid "00000000-0000-0000-0000-000058d913ec")
 		(property "Sheetname" "flash"
-			(at 264.16 149.0214 0)
+			(at 264.16 152.8314 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1121,7 +1121,7 @@
 			)
 		)
 		(property "Sheetfile" "flash.kicad_sch"
-			(at 264.16 161.9762 0)
+			(at 264.16 165.7862 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1140,7 +1140,7 @@
 		)
 	)
 	(sheet
-		(at 177.8 149.86)
+		(at 177.8 153.67)
 		(size 25.4 11.43)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1154,8 +1154,8 @@
 			(color 0 0 0 0)
 		)
 		(uuid "772ab9f9-005b-4350-9bd3-c463cc777db7")
-		(property "Sheetname" "Camera"
-			(at 177.8 149.0214 0)
+		(property "Sheetname" "LCD-Camera"
+			(at 177.8 152.8314 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1165,8 +1165,8 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "Camera.kicad_sch"
-			(at 178.054 161.798 0)
+		(property "Sheetfile" "LCD-Camera.kicad_sch"
+			(at 178.054 165.608 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
