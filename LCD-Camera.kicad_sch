@@ -13872,28 +13872,6 @@
 			)
 		)
 	)
-	(global_label "GP13"
-		(shape input)
-		(at 26.67 68.58 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "12cc22fd-4a88-4676-96b6-ec3765c20c1d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.67 68.58 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "GN13"
 		(shape input)
 		(at 222.25 152.4 0)
@@ -16964,28 +16942,6 @@
 		(uuid "eea54445-69da-442f-a207-5854de063191")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 223.52 64.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "LCD_BL"
-		(shape input)
-		(at 26.67 71.12 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "eea60300-ed96-47c5-a64c-4d367e2f4427")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 26.67 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
