@@ -92,3 +92,6 @@
 - Original files stay on `master`. All destructive work happens on `monocular-strip`.
 - Mark checklist items complete as we finish them.
 - Update this file at the end of each phase.
+- add boost circuit to get bottom 10% out of a dead 18650
+- add individual cell control to consume the most dead 18650 1st. 
+- add bulk charge stage to allow vibration / debounce of 18650 springs. If vibration causes short gaps of supply voltage, bulk cap stroage should ride out the gap. 
