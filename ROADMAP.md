@@ -28,8 +28,11 @@
 - Remove GPDI, large GPIO headers, audio
 - 3 independent 18650 cells, sequential discharge, hot-swap
 - Ideal-diode priority (LM66100 family preferred)
+- Individual cell enable/control so the most-depleted cell is consumed first (via CE pins on ideal diodes, driven by FPGA)
 - USB charging (independent single-cell chargers)
-- Voltage sense of each cell to FPGA
+- Voltage sense of each cell to FPGA (for SoC estimation and prioritization)
+- Boost stage (optional / later) to extract the remaining ~5–15 % capacity once cells fall below the ~3.3–3.5 V brown-out point of the 3.3 V rail
+- Bulk capacitance after the ideal-diode OR-ing to ride through brief contact bounce / vibration-induced gaps from the 18650 spring contacts
 - Camera: OV7670 parallel + SCCB
 - Display: NHD-2.1-480480AF-ASXP (40-pin FFC, RGB + SPI)
 - Case: 3D-printed first → metal later
@@ -47,9 +50,12 @@
 
 ### Phase 2 – Power input redesign
 - [ ] On `power.sch`: identify and remove single-battery / old power-path input
-- [ ] Keep 1.1 V / 2.5 V / 3.3 V regulators and support parts
+- [ ] Keep 1.1 V / 2.5 V / 3.3 V regulators (TLV62569) and support parts
 - [ ] Add 3×18650 holders + LM66100 ideal diodes + sense dividers
+- [ ] Wire CE pins of the ideal diodes so the FPGA can enable/disable individual cells (sequential “most-dead-first” discharge)
 - [ ] Add USB charging path (3× single-cell chargers)
+- [ ] Add bulk capacitance on the OR-ed battery rail (VBAT_OR) to bridge short contact interruptions from vibration / spring bounce
+- [ ] (Later / optional) Add boost converter after the ideal-diode stage to recover the bottom ~10 % of capacity once cell voltage drops below the 3.3 V rail headroom
 - [ ] Document nets: VBAT_OR, VBATx_SENSE, +3V3, +2V5, +1V1
 
 ### Phase 3 – Camera & Display
@@ -92,6 +98,5 @@
 - Original files stay on `master`. All destructive work happens on `monocular-strip`.
 - Mark checklist items complete as we finish them.
 - Update this file at the end of each phase.
-- add boost circuit to get bottom 10% out of a dead 18650
-- add individual cell control to consume the most dead 18650 1st. 
-- add bulk charge stage to allow vibration / debounce of 18650 springs. If vibration causes short gaps of supply voltage, bulk cap stroage should ride out the gap. 
+- The 3.3 V rail (and therefore the whole system) will brown out once the selected cell(s) drop to roughly 3.3–3.5 V under load. This leaves ~5–15 % of cell capacity unused unless a boost stage is added later.
+- Per-cell voltage sensing already planned; this is sufficient for basic SoC estimation and for deciding which cell to enable next.
