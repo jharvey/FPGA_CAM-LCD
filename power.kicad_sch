@@ -37640,7 +37640,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C131337"
+			(at 25.4 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Transistor_FET:Q_PMOS_GSD")
 		(at 55.88 198.12 0)
@@ -37702,7 +37711,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15127"
+			(at 55.88 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 81.28 198.12 0)
@@ -37764,7 +37782,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 81.28 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Power_Management:LM66100DCK")
 		(at 111.76 198.12 0)
@@ -37826,7 +37853,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2869734"
+			(at 111.76 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Battery_Management:TP4056-42-ESOP8")
 		(at 55.88 233.68 0)
@@ -37886,7 +37922,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C16581"
+			(at 55.88 233.68 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 92.71 236.22 0)
@@ -37946,7 +37991,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C23189"
+			(at 92.71 236.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 35.56 215.9 0)
@@ -38008,7 +38062,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 35.56 215.9 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 116.84 228.6 0)
@@ -38068,7 +38131,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21190"
+			(at 116.84 228.6 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:LED")
 		(at 116.84 248.92 0)
@@ -38128,7 +38200,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2286"
+			(at 116.84 248.92 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 154.94 198.12 0)
@@ -38188,7 +38269,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C131337"
+			(at 154.94 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Transistor_FET:Q_PMOS_GSD")
 		(at 185.42 198.12 0)
@@ -38250,7 +38340,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15127"
+			(at 185.42 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 210.82 198.12 0)
@@ -38312,7 +38411,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 210.82 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Power_Management:LM66100DCK")
 		(at 241.3 198.12 0)
@@ -38374,7 +38482,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2869734"
+			(at 241.3 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Battery_Management:TP4056-42-ESOP8")
 		(at 185.42 233.68 0)
@@ -38434,7 +38551,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C16581"
+			(at 185.42 233.68 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 222.25 236.22 0)
@@ -38494,7 +38620,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C23189"
+			(at 222.25 236.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 165.1 215.9 0)
@@ -38556,7 +38691,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 165.1 215.9 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 246.38 228.6 0)
@@ -38616,7 +38760,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21190"
+			(at 246.38 228.6 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:LED")
 		(at 246.38 248.92 0)
@@ -38676,7 +38829,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2286"
+			(at 246.38 248.92 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 284.48 198.12 0)
@@ -38736,7 +38898,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C131337"
+			(at 284.48 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Transistor_FET:Q_PMOS_GSD")
 		(at 314.96 198.12 0)
@@ -38798,7 +38969,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15127"
+			(at 314.96 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 340.36 198.12 0)
@@ -38860,7 +39040,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 340.36 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Power_Management:LM66100DCK")
 		(at 370.84 198.12 0)
@@ -38922,7 +39111,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2869734"
+			(at 370.84 198.12 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Battery_Management:TP4056-42-ESOP8")
 		(at 314.96 233.68 0)
@@ -38982,7 +39180,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C16581"
+			(at 314.96 233.68 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 351.79 236.22 0)
@@ -39042,7 +39249,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C23189"
+			(at 351.79 236.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 294.64 215.9 0)
@@ -39104,7 +39320,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 294.64 215.9 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 375.92 228.6 0)
@@ -39164,7 +39389,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21190"
+			(at 375.92 228.6 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:LED")
 		(at 375.92 248.92 0)
@@ -39224,7 +39458,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2286"
+			(at 375.92 248.92 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 304.8 45.72 0)
@@ -39284,7 +39527,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25819"
+			(at 304.8 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 327.66 45.72 0)
@@ -39344,7 +39596,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25819"
+			(at 327.66 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 350.52 45.72 0)
@@ -39404,7 +39665,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25819"
+			(at 350.52 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 304.8 57.15 0)
@@ -39464,7 +39734,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C22807"
+			(at 304.8 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 327.66 57.15 0)
@@ -39524,7 +39803,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C22807"
+			(at 327.66 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 350.52 57.15 0)
@@ -39584,7 +39872,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C22807"
+			(at 350.52 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 312.42 57.15 0)
@@ -39646,7 +39943,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15195"
+			(at 312.42 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 335.28 57.15 0)
@@ -39708,7 +40014,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15195"
+			(at 335.28 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 358.14 57.15 0)
@@ -39770,7 +40085,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15195"
+			(at 358.14 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 388.62 57.15 0)
@@ -39832,7 +40156,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15195"
+			(at 388.62 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 381 45.72 0)
@@ -39892,7 +40225,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25744"
+			(at 381 45.72 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:Thermistor_NTC")
 		(at 381 57.15 0)
@@ -39952,7 +40294,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C13564"
+			(at 381 57.15 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Analog_ADC:ADS1115IDGS")
 		(at 347.98 111.76 0)
@@ -40012,7 +40363,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C37593"
+			(at 347.98 111.76 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 360.68 96.52 0)
@@ -40074,7 +40434,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C1525"
+			(at 360.68 96.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 381 100.33 0)
@@ -40134,7 +40503,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25900"
+			(at 381 100.33 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 393.7 100.33 0)
@@ -40194,7 +40572,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C25900"
+			(at 393.7 100.33 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Power_Management:LM66100DCK")
 		(at 320.04 160.02 0)
@@ -40256,7 +40643,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2869734"
+			(at 320.04 160.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Power_Management:LM66100DCK")
 		(at 383.54 160.02 0)
@@ -40318,7 +40714,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C2869734"
+			(at 383.54 160.02 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 345.44 140.97 0)
@@ -40380,7 +40785,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 345.44 140.97 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 398.78 140.97 0)
@@ -40442,5 +40856,14 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15850"
+			(at 398.78 140.97 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 )
