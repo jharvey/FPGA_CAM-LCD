@@ -21466,6 +21466,36 @@
 		)
 		(uuid "62949f85-7bb3-47e4-9d12-8dc0989a0fe9")
 	)
+	(label "VADC"
+		(at 223.52 198.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5d3fe999-20e9-49e8-b4d3-509a98a50330")
+	)
+	(label "VADC"
+		(at 242.57 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a69a6cdf-4487-4633-be95-de024f4d061e")
+	)
+	(label "VADC"
+		(at 179.07 207.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "78b6aa5d-fda5-41dd-b7f5-f3d673bfe7f8")
+	)
 	(global_label "GND"
 		(shape input)
 		(at 223.52 231.14 0)
@@ -21720,28 +21750,6 @@
 		(uuid "253f60e8-c1ab-4f99-a536-3882e4862b89")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 187.96 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "+3V3"
-		(shape input)
-		(at 242.57 194.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "26e17f7d-b953-4cf8-81bf-61fd290bf38f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.57 194.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22666,28 +22674,6 @@
 		(uuid "f0f5e6cc-23ce-451c-ad3f-9b94797e5ea4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 123.19 175.26 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "+3V3"
-		(shape input)
-		(at 179.07 207.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f663d8af-8f12-4fec-a6a7-260ab477c9a7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 179.07 207.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42954,7 +42940,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21189"
+			(at 148.59 189.23 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 148.59 189.23 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 148.59 226.06 90)
@@ -43014,7 +43018,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21189"
+			(at 148.59 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 148.59 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 148.59 264.16 90)
@@ -43074,7 +43096,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21189"
+			(at 148.59 264.16 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 148.59 264.16 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 201.93 252.73 0)
@@ -43134,7 +43174,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21189"
+			(at 201.93 252.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 201.93 252.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:R")
 		(at 260.35 252.73 0)
@@ -43194,7 +43252,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C21189"
+			(at 260.35 252.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 260.35 252.73 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Regulator_Linear:XC6206PxxxMR")
 		(at 309.88 215.9 0)
@@ -43255,7 +43331,25 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C5446"
+			(at 309.88 215.9 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "XC6206P332MR-G"
+			(at 309.88 215.9 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 299.72 220.98 0)
@@ -43317,7 +43411,16 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15849"
+			(at 299.72 220.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 	(symbol
 		(lib_id "Device:C")
 		(at 323.85 220.98 0)
@@ -43379,5 +43482,14 @@
 				)
 			)
 		)
-	)
+	
+		(property "LCSC" "C15849"
+			(at 323.85 220.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		))
 )
