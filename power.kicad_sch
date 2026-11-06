@@ -22057,28 +22057,6 @@
 			)
 		)
 	)
-	(global_label "GND"
-		(shape input)
-		(at 238.76 220.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "bf7de3d3-77cf-45c7-b3aa-44f4c2c4e6db")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 238.76 220.98 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "+3V3"
 		(shape input)
 		(at 256.54 194.31 0)
