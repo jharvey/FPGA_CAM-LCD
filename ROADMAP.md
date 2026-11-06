@@ -27,8 +27,9 @@
 - Remove GPDI, large GPIO headers, audio
 - 3 independent 18650 cells with ideal-diode OR-ing (LM66100), hot-swap capable
 - Per-cell reverse-polarity protection (AO3401A) + TP4056 chargers
-- Per-cell voltage sensing via ADS1115 (I²C shared with ESP32/FPGA)
-- ADS1115 powered from a small always-on 3.3 V LDO fed from VSYS (correct I²C levels even when USB is present)
+- **8-channel ADC** (replace ADS1115) with absolute voltage reference so measurements are non-ratiometric
+- ADC channels used for: per-cell voltages, NTC / temperature, +V / VSYS rail sense, and spare channels
+- ADC powered from a small always-on 3.3 V LDO fed from VSYS (correct I²C levels even when USB is present)
 - ST pins of all LM66100s tied to GND through 0 Ω links (removable later)
 - VSYS = OR of (VBAT_OR + USB 5 V)
 - Soft-shutdown path (Q2 / SHUT) retained
@@ -38,6 +39,13 @@
 - Camera: OV7670 parallel + SCCB
 - Display: NHD-2.1-480480AF-ASXP (40-pin FFC, RGB + SPI)
 - Case: 3D-printed first → metal later
+
+### Power / charging evolution
+- **Near-term**: Add USB-C PD sink / trigger chip that requests highest available **5 V** current (ideally 3 A). Keeps existing TP4056 linear chargers.
+- **Longer-term**: Evaluate higher-voltage / higher-wattage PD path (9–20 V) together with switching chargers or a multi-cell charger IC for significantly higher total charge power.
+
+### Sensors (longer-term)
+- Add IMU (e.g. ICM-42688, BMI270, or similar) for orientation / motion sensing once core power + camera + display are stable.
 
 ---
 
@@ -59,6 +67,10 @@
 - [x] ST pins of all five LM66100s linked to GND via 0 Ω (removable)
 - [x] TLV62569 inputs and wake circuit moved to VSYS
 - [x] LCD backlight boost input renamed to VSYS
+- [ ] **Replace ADS1115 with 8-channel ADC + absolute voltage reference**
+- [ ] Add resistor divider for +V / VSYS rail sensing into the new ADC
+- [ ] Route absolute reference so ADC operates in non-ratiometric mode
+- [ ] Add USB-C PD sink/trigger chip (request max 5 V current, preferably 3 A)
 - [ ] Break out / control LM66100 CE pins for true “most-dead-first” sequential discharge (firmware later)
 - [ ] Expose TP4056 CE / status pins if desired
 - [ ] Add bulk capacitance on VBAT_OR / VSYS for vibration robustness
@@ -81,6 +93,12 @@
 - [ ] Gerbers + CPL
 - [ ] First order
 
+### Later / stretch goals
+- [ ] Higher-voltage / higher-wattage USB-C PD path + switching or multi-cell charger (max charging power)
+- [ ] IMU (orientation / motion)
+- [ ] Firmware-driven cell prioritisation (CE control) using the new 8-ch ADC data
+- [ ] Optional bottom-capacity boost stage
+
 ---
 
 ## Power architecture notes (current)
@@ -88,9 +106,10 @@
 - Cell negatives common (GND). Positives individual (CELLx_RAW → VBATx after reverse FET).
 - VSYS powers the main regulators and the LCD boost. CR1225 VBAT is unrelated.
 - 3.3 V rail needs ≥ ~3.4 V on VSYS → practical cutoff ≈ 3.5–3.6 V on the highest cell.
-- ADS1115 shares I²C with ESP32/FPGA; firmware must use ±4.096 V range.
+- Current ADS1115 shares I²C with ESP32/FPGA; will be replaced by 8-channel ADC + absolute reference.
 - CHGx LEDs are local only; charger enable/status not yet routed to a processor.
 - Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control.
+- Near-term PD chip will request highest available 5 V current while keeping the existing TP4056s.
 
 ---
 
@@ -116,4 +135,4 @@
 - Original files stay on `master`. All destructive work happens on `monocular-strip`.
 - Mark checklist items complete as we finish them.
 - Update this file at the end of each phase.
-- Next power-related work: CE pin control for sequential discharge + bulk caps + final ERC/layout polish.
+- Next power-related work: 8-ch ADC + absolute reference + rail sense, USB-C PD 5 V trigger, CE pin control, bulk caps, final ERC/layout polish.
