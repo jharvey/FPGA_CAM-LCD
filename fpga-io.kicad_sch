@@ -11391,7 +11391,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO35"
+	(global_label "WIFI_GPIO41"
 		(shape input)
 		(at 185.42 87.63 180)
 		(effects
@@ -13063,7 +13063,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO25"
+	(global_label "WIFI_GPIO1"
 		(shape input)
 		(at 223.52 72.39 0)
 		(effects

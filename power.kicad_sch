@@ -22619,7 +22619,7 @@
 		)
 		(uuid "fe6aa241-442f-440d-8e19-4adaaac47551")
 	)
-	(global_label "WIFI_GPIO26"
+	(global_label "WIFI_GPIO9"
 		(shape input)
 		(at 387.35 215.9 0)
 		(effects
@@ -23169,7 +23169,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO19"
+	(global_label "WIFI_GPIO6"
 		(shape input)
 		(at 387.35 218.44 0)
 		(effects
@@ -23609,7 +23609,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO22"
+	(global_label "WIFI_GPIO8"
 		(shape input)
 		(at 387.35 223.52 0)
 		(effects

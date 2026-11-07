@@ -14,7 +14,8 @@
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
 | 2 | Power input redesign (3×18650 + monitoring) | **Done** – schematic frozen (CE drive later) |
-| 2b | USB-C 5 V PD trigger | **Done** – CH224K 5 V-only sink on new USB-C charge port (schematic) |
+| 2b | USB-C 5 V PD trigger | **Done** – CH224K 5 V-only sink on the USB-C port (schematic) |
+| 2c | Single USB-C (power + SD + programming) | **Done** – ESP32-S3 native USB, USBLC6 ESD, FTDI/micro-B fallback DNP (schematic) |
 | 3 | Camera + display connectors / sheets | **Done** – schematic frozen |
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
@@ -27,7 +28,8 @@
 ## Decisions (locked)
 
 - Full single PCB (not shield)
-- Keep ECP5-85F, SDRAM, flash, USB, WiFi (ESP32), SD card
+- Keep ECP5-85F, SDRAM, flash, WiFi, SD card
+- **One USB-C port** for power/charging, SD card (USB MSC) and programming; the ESP32-S3 (native USB) is the USB device and the ECP5 programmer (Phase 2c). FTDI / micro-B kept only as DNP fallback
 - Remove GPDI, large GPIO headers, audio
 - 3 independent 18650 cells with ideal-diode OR-ing (LM66100), hot-swap capable
 - Cell interface: PCB-mounted Keystone-style contacts per cell – positive button **MY-18650-04-J (LCSC C19184125)**, negative spring **MY-18650-05-J (LCSC C19184124)** (MYOUNG); replaces the JST-PH placeholders
@@ -81,7 +83,7 @@
 - [x] ST pins of all five LM66100s linked to GND via 0 Ω (R46, R47, R48, R51, R55)
 - [x] TLV62569 inputs and wake circuit moved to VSYS
 - [x] LCD backlight boost input renamed to VSYS
-- [x] **Replace ADS1115 with 8-channel ADC** – U21 AD7689BCPZ, SPI to ESP32: SDO=WIFI_GPIO19, DIN=WIFI_GPIO21, SCK=WIFI_GPIO22, CNV=WIFI_GPIO26
+- [x] **Replace ADS1115 with 8-channel ADC** – U21 AD7689BCPZ, SPI to ESP32: SDO=WIFI_GPIO19, DIN=WIFI_GPIO21, SCK=WIFI_GPIO22, CNV=WIFI_GPIO26 (renumbered for the ESP32-S3 in Phase 2c: SDO=WIFI_GPIO6, DIN=WIFI_GPIO21, SCK=WIFI_GPIO8, CNV=WIFI_GPIO9)
   - IN0–IN2: VBAT1–3 via 47 k / 56 k dividers (4.2 V → 2.28 V), 100 nF filter caps
   - IN3: TEMP_BAT, 10 k pull-up (R43) + 10 k NTC (TH1)
   - IN4: REF3025 (U17) output – absolute-reference cross-check
@@ -114,7 +116,30 @@
 - [x] **5 V only:** CH224K level mode – **CFG1 (pin 9) tied directly to VDD** (= request 5 V), CFG2/CFG3 to GND. No CFG1 resistor: a resistor or open CFG1 would select 9/12/15/20 V. Marked on the sheet.
 - [x] PD-only mode (datasheet §5.5): DP shorted to DM on the CH224K, not wired to the connector. CC1/CC2 go straight to the CH224K (Rd is internal – the external 5.1 k in the WCH reference is only for the CH221K). PG unused. `#FLG03` marks PD_VDD as a supply for ERC.
 - [x] TP4056 path unchanged: `VBUS_C` only joins `+5V` through D55, like the existing micro-B inputs.
-- [ ] Phase 4: J17 at the case edge; keep the VBUS_C → D55 → +5V path wide enough for 3 A; D8 / D9 (STPS2L40AF, 2 A) remain the micro-B paths.
+- [ ] Phase 4: J17 at the case edge; keep the VBUS_C → D55 → +5V path wide enough for 3 A. (J17 became the USB 2.0 data + power port in Phase 2c; the micro-B paths D8/D9 are DNP.)
+
+### Phase 2c – Single USB-C: power + SD card + programming
+**Decision:** replace the classic ESP32-WROOM-32 (no native USB) with an **ESP32-S3-WROOM-1-N8R2** and make it the only USB device on the one USB-C port. Rejected: USB hub + FT231X + separate USB card-reader IC (more parts, and the SD card would need a bus switch between the reader, ESP32 and FPGA).
+
+| Ref | Part | LCSC | Role |
+|---|---|---|---|
+| U9 | **ESP32-S3-WROOM-1-N8R2** (8 MB flash, 2 MB quad PSRAM) | **C2913204** | USB device (CDC + MSC), WiFi/BLE, SD host, ECP5 JTAG programmer |
+| J17 | **HCTL HC-TYPE-C-16P-01A** (USB 2.0 USB-C) | **C2894897** | single port: VBUS/CC (power) + D+/D− (data); replaces the 6P power-only connector |
+| U24 | **USBLC6-2SC6** | **C7519** | ESD on D+/D−/VBUS |
+| U23 | CH224K (unchanged) | C970725 | 5 V-only PD sink on CC1/CC2 |
+| B3 / B4 | PTS645 tact switch | C285463 | BOOT (GPIO0) / RESET (EN) for USB download-mode recovery |
+| C81 | 1 µF 0603 | C15849 | EN RC delay required by ESP32-S3 |
+| R86 | 10 k 0402 | C25744 | SD card-detect pull-up |
+| SD1 | Molex 104031-0811 microSD (existing socket) | C585350 | card-detect pin 10 now wired (`SD_CD`) |
+
+- **USB data path:** J17 D+/D− (A6/B6, A7/B7 joined) → U24 → `USB_DP`/`USB_DN` → ESP32-S3 GPIO20/19. **CC1/CC2 stay on the CH224K**, which runs in PD-only mode (its DP/DM shorted together, not connected to the bus), so PD and USB data coexist. VBUS still feeds `+5V` only through D55, so the TP4056 chargers are unchanged; no higher-voltage path.
+- **Programming the ESP32-S3:** built-in USB-Serial-JTAG (CDC console + flashing, no DTR/RTS). If application firmware switches the PHY to TinyUSB (CDC + MSC), recover with **BOOT (B3) + RESET (B4)** → ROM download mode.
+- **SD card ownership: ESP32-S3** (SDMMC 4-bit, same GPIO numbers as before: CLK 14, CMD 15, D0 2, D1 4, D2 12, D3 13; card detect `SD_CD` on GPIO10, low = card present). Exposed to the PC as **USB Mass Storage** by the S3 firmware. The FPGA bank-6 SD pins (and N5 for `SD_CD`) remain connected: the FPGA bitstream must keep them Hi-Z while the S3 owns the card.
+- **Programming the ECP5 over the same USB-C:** the ESP32-S3 drives the existing JTAG nets (`JTAG_TCK` GPIO18, `JTAG_TMS` GPIO5, `JTAG_TDI` GPIO16, `JTAG_TDO` GPIO17) to load SRAM or program the config flash through the FPGA (esp32ecp5 / openFPGALoader-style bit-bang, triggered over USB CDC or WiFi). No second USB interface.
+- **ESP32-S3 GPIO map:** EN = `WIFIEN`; GPIO0 `WIFI_GPIO0` (BOOT, R56 pull-up, FPGA F1); UART0 TXD/RXD to the FPGA (`WIFI_TXD`/`WIFI_RXD`); ADC SPI SDO 6 / DIN 21 / SCK 8 / CNV 9; FPGA links GPIO1 (E9), GPIO40 (N3), GPIO41 (E6). Nets renamed to the S3 GPIO numbers: `WIFI_GPIO19→6`, `22→8`, `26→9`, `25→1`, `27→40`, `35→41`. Strapping pins 3/45/46 and GPIO35–37 left unconnected.
+- **Side benefit:** the ESP32 no longer shares the display SPI pins (`GN12/GP12/GN13/GP13`), so that Phase 3 limitation is gone.
+- **Fallback (DNP):** FT231X bridge U6 with micro-B US1 (the old USB-serial + JTAG path), FPGA-USB micro-B US2 and their parts (D8, D9, R9, R40, R49, R50, R52, R53, R54, R63, R64, D20, D21, D23–D26), and the 2×3 JTAG header **J4**. Populating U6 + US1 restores the original ULX3S programming path (the ESP32-S3 must then release the JTAG lines).
+- [ ] Limitations / to do: no VBUS-detect GPIO on the S3 (self-powered device; add one if strict USB compliance is needed); S3 USB is full-speed (12 Mbit/s), so MSC throughput is roughly 1 MB/s; firmware work: TinyUSB CDC + MSC composite, SDMMC, JTAG bit-bang for the ECP5. Phase 4: J17 + B3/B4 reachable from the case, S3 antenna at a board edge.
 - Full higher-voltage / higher-wattage PD charging (9–20 V + switching or multi-cell charger) remains a **Later** item.
 
 ### Phase 3 – Camera & Display
@@ -146,7 +171,7 @@
 - [ ] U8 uses the `AP3019AKTR` symbol with value AP3032KTR-G1 – confirm identical SOT-23-6 pinout; confirm L4 4.7 µH against the AP3032 datasheet recommendation.
 - [ ] J7 footprint is Hirose FH12-40S-0.5SH; NHD recommends Molex 54104 (datasheet lists both -4031 and -4096). Pick contact side (top/bottom) once the FPC fold direction is fixed in Phase 4.
 - [ ] LCD VDD = +3V3 is at the panel's 3.3 V maximum (typ 3.0 V) – accepted, note only.
-- [ ] ESP32 IO32/IO33 share LCD_SCK/LCD_DC – firmware must keep them Hi-Z.
+- [x] ~~ESP32 IO32/IO33 share LCD_SCK/LCD_DC~~ – resolved in Phase 2c (ESP32-S3 no longer connected to the display SPI lines).
 
 **Sheet map (camera / display area)**
 
@@ -221,8 +246,9 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   reverse-FET / LM66100 input stage; the PCB must span the full cell length (≈ 65 mm + springs). The NTC must
   physically touch or sit next to the cells. Hot-swap needs a cell door that does not stress
   the PCB.
-- *Edge-accessible parts.* US1 (FTDI micro-B, programming), US2 (OTG micro-B), the microSD
-  slot (SCHD3A0100), B0 power button (PTS645), J3 WIFI_OFF, J4 JTAG 2×3, BAT1 CR1225 holder.
+- *Edge-accessible parts.* J17 USB-C (power + data + programming), the microSD slot SD1, B0 power button,
+  B3 BOOT / B4 RESET (can sit behind pin-holes), J3 WIFI_OFF, BAT1 CR1225 holder.
+  DNP fallbacks US1 / US2 / J4 only need edge access if they are ever populated.
   J17 (USB-C 5 V charge port, Phase 2b) also needs case-edge access; higher-voltage PD stays deferred.
 - *ESP32 antenna.* Board edge with copper keep-out under the antenna, away from the cells and
   any future metal case (the metal case will need an RF window).
@@ -249,7 +275,7 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - Cell negatives common (GND). Positives individual (CELLx_RAW → VBATx after reverse FET).
 - VSYS powers the main regulators and the LCD boost. CR1225 VBAT is unrelated.
 - 3.3 V rail needs ≥ ~3.4 V on VSYS → practical cutoff ≈ 3.5–3.6 V on the highest cell.
-- AD7689 8-ch ADC on SPI (WIFI_GPIO19/21/22/26, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
+- AD7689 8-ch ADC on SPI (WIFI_GPIO6/21/8/9 on the ESP32-S3, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
 - CHGx LEDs are local only; charger enable/status not yet routed to a processor (open item).
 - Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control: ~CE pins are broken out via R71–R73 (0 Ω), and the level-shifted drive is still to be designed.
 - CH224K (U23) requests a 5 V-only PD contract on the USB-C charge port; the existing TP4056s are unchanged.
@@ -259,7 +285,7 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 ## What we keep from original ULX3S
 
 - ECP5-85F + config flash + SDRAM
-- USB (FTDI) programming / serial
+- ~~USB (FTDI) programming / serial~~ → single USB-C via ESP32-S3; FTDI path kept as DNP fallback (Phase 2c)
 - WiFi (ESP32) sheet
 - SD card sheet
 - Core power regulators (1.1 / 2.5 / 3.3 V)

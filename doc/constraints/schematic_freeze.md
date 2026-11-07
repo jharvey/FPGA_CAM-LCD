@@ -46,13 +46,14 @@ None are "must fix". The three must-fix items found in the hygiene pass were fix
 
 - **Battery contacts (post-freeze change)** – JST-PH J8/J9/J10 removed and replaced by PCB contacts BT11/BT21/BT31 (+ button, MY-18650-04-J, LCSC C19184125) and BT12/BT22/BT32 (− spring, MY-18650-05-J, LCSC C19184124). Mechanical retention and length tolerance come from the plastic battery bay (Phase 4).
 
-- **ESP32 shares display SPI pins** – `LCD_SCK`/`LCD_DC` also on ESP32 IO32/IO33; firmware must keep them Hi-Z.
+- ~~ESP32 shares display SPI pins~~ – resolved by the ESP32-S3 swap (post-freeze, Phase 2c).
 - **LM66100 ~CE control** – broken out via R71–R73 (0 Ω) only. Firmware-driven cell selection needs a level-shifted driver (~CE is VIN-referenced, up to ~4.3 V).
 - **RTC I²C pull-ups to +3V3** – the bus is unpowered when +3V3 is off (RTC runs from VBAT then; I²C access only with the system on).
-- **SD card detect / write protect** – socket switch (SD1 pad 10) not wired; `SD_CD`/`SD_WP` FPGA labels orphaned. Add if needed.
+- **SD card detect** – wired post-freeze (SD1 pin 10 → `SD_CD`, R86 pull-up, ESP32-S3 GPIO10 + FPGA N5). `SD_WP` stays orphaned (microSD has no WP).
 - **LCD VDD at 3.3 V** – at the panel's maximum (typ 3.0 V).
 - **J7 FFC contact side** and **J1 camera socket type** depend on the Phase 4 PCB orientation.
 - **AP3032 on AP3019A symbol**, **L4 = 4.7 µH** – verify against AP3032 datasheet before ordering.
 - **Status LEDs** – red 0603, ~1–1.5 mA; colour / brightness to revisit with the case.
-- **USB-C PD (post-freeze addition)** – new power-only USB-C charge port J17 with CH224K (U23, C970725) fixed at 5 V (CFG1 = VDD), feeding `+5V` via D55 SS34. US1/US2 stay micro-B. Higher-voltage PD still deferred.
+- **USB-C PD (post-freeze addition)** – CH224K (U23, C970725) fixed at 5 V (CFG1 = VDD), feeding `+5V` via D55 SS34. Higher-voltage PD still deferred.
+- **Single USB-C (post-freeze, Phase 2c)** – J17 is now a USB 2.0 USB-C (HC-TYPE-C-16P-01A, C2894897); ESP32-S3-WROOM-1-N8R2 (C2913204) is the USB device (CDC + SD mass storage) and ECP5 JTAG programmer; USBLC6-2SC6 ESD; FTDI/micro-B (U6, US1, US2 + parts) and J4 JTAG are DNP fallbacks. ERC stays at 167; #FLG04 added on GND (the old ESP32 symbol's power-output GND pin had been the only GND driver).
 - **PCB** not yet synced to the schematic (no footprints for the camera/display/user-I/O parts yet).

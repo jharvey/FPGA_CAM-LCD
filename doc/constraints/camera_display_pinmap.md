@@ -45,8 +45,7 @@ The panel must be initialised over SPI before RGB pixel data is accepted.
 | - | LCD_BL_PWM (U8 CTRL) | `GP13` | H4 | PL41A | 7 | GR_PCLK7_1 |
 
 Notes
-- `GN12` / `GP12` (LCD_SCK / LCD_DC) are also wired to ESP32 IO32 / IO33. ESP32 firmware must
-  leave those pins as inputs (Hi-Z). `GN13` (ESP32 IO39) and `GP13` (ESP32 IO36) are input-only on the ESP32.
+- Since the ESP32-S3 swap (Phase 2c) the display SPI lines `GN12`/`GP12`/`GN13`/`GP13` are no longer shared with the ESP32.
 - `GP13` has a 100 k pull-down (R18): backlight is off while the FPGA is unconfigured.
 - Backlight current is set in hardware (R19 2R0 -> 100 mA); `GP13` is enable / PWM dimming.
 - J2 (legacy 2x20 header, DNP) also sits on all `GN0..13` / `GP0..13` nets.

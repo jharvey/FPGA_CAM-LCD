@@ -9,7 +9,8 @@ Single PCB monocular:
 - OV7670 camera
 - Newhaven 2.1" TFT (40-pin)
 - 3×18650 sequential / hot-swap + USB charge
-- Keep USB (FTDI), WiFi (ESP32), SD (on wifi sheet)
+- One USB-C (J17): power/charging (CH224K 5 V PD) + ESP32-S3 native USB (CDC + SD mass storage) + ECP5 programming via ESP32-S3 JTAG; FTDI micro-B is a DNP fallback
+- WiFi (ESP32-S3-WROOM-1), SD (on wifi sheet)
 
 Base: stripped ULX3S. Branch: `monocular-strip`.
 
