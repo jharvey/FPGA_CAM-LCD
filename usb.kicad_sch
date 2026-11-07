@@ -11777,7 +11777,7 @@
 			)
 		)
 	)
-	(global_label "OLED_CLK"
+	(global_label "SRV_PWM4"
 		(shape input)
 		(at 257.81 69.85 0)
 		(effects
@@ -12041,7 +12041,7 @@
 			)
 		)
 	)
-	(global_label "OLED_MOSI"
+	(global_label "SRV_PWM3"
 		(shape input)
 		(at 219.71 69.85 180)
 		(effects
@@ -12327,7 +12327,7 @@
 			)
 		)
 	)
-	(global_label "OLED_BL"
+	(global_label "SRV_PWM6"
 		(shape input)
 		(at 219.71 41.91 180)
 		(effects
@@ -12481,7 +12481,7 @@
 			)
 		)
 	)
-	(global_label "OLED_DC"
+	(global_label "SRV_PWM1"
 		(shape input)
 		(at 219.71 72.39 180)
 		(effects
@@ -12547,7 +12547,7 @@
 			)
 		)
 	)
-	(global_label "OLED_CS"
+	(global_label "SRV_PWM5"
 		(shape input)
 		(at 219.71 67.31 180)
 		(effects
@@ -12965,7 +12965,7 @@
 			)
 		)
 	)
-	(global_label "OLED_RES"
+	(global_label "SRV_PWM2"
 		(shape input)
 		(at 257.81 72.39 0)
 		(effects

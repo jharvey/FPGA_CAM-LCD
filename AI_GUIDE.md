@@ -17,7 +17,7 @@ Base: stripped ULX3S. Branch: `monocular-strip`.
 
 1. **Always work on branch `monocular-strip`.** Never commit design changes to `master` unless asked.
 2. **Prefer hierarchical sheets.** Do not move everything onto the root schematic.
-3. **Keep these sheets:** power, usb, ram, flash, wifi, fpga-io, camera, display, imu.  
+3. **Keep these sheets:** power, usb, ram, flash, wifi, fpga-io, camera, display, imu, servo.  
    Camera and display each have a dedicated sheet (see the sheet map in `ROADMAP.md`).
    They connect to the FPGA only through global `GN*`/`GP*` labels; FPGA bank units stay on `fpga-io`.
 4. **Power strategy:** keep the existing TLV62569 rails (1.1 / 2.5 / 3.3 V). Replace only the *input* stage with 3×18650 + ideal diodes (LM66100 family) + sense dividers + USB charging.

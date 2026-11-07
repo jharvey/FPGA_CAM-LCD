@@ -102,3 +102,16 @@ B0 (power button, `BTN_PWRn`) stays on the power path. Debounce the buttons in F
 | 9 INT2/FSYNC | `IMU_INT2` | D1 | PL38B | 7 | INT2 or FSYNC input (camera frame sync) |
 
 I²C address 0x68 (AP_AD0 = GND); AP_CS tied to VDDIO selects I²C. Separate from the RTC bus (`FPDI_SCL`/`FPDI_SDA`, E12/B19).
+
+## RC servo headers (servo sheet, all DNP)
+
+| Header | Net | ECP5 ball | Bank | Notes |
+|---|---|---|---|---|
+| J_SRV1 | `SRV_PWM1` | P1 | 6 | 1 k series (R78) |
+| J_SRV2 | `SRV_PWM2` | P2 | 6 | 1 k series (R79) |
+| J_SRV3 | `SRV_PWM3` | P3 | 6 | 1 k series (R80) |
+| J_SRV4 | `SRV_PWM4` | P4 | 6 | 1 k series (R81) |
+| J_SRV5 | `SRV_PWM5` | N2 | 6 | 1 k series (R82) |
+| J_SRV6 | `SRV_PWM6` | J4 | 6 | 1 k series (R83) |
+
+Header pinout: 1 Signal (1–2 ms pulse, 3.3 V), 2 `SERVO_V` (source not yet chosen), 3 GND. Use `IO_TYPE=LVCMOS33`.

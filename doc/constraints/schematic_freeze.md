@@ -3,7 +3,8 @@
 Status: **schematic frozen for mechanical / placement work.** Changes after this point should be
 layout-driven (pin swaps, footprint choices) or fixes, each with its own commit.
 
-ERC (KiCad 10, `kicad-cli sch erc --severity-all`): **179 violations, all classified below.**
+ERC (KiCad 10, `kicad-cli sch erc --severity-all`): **179 violations at freeze, all classified below.**
+After the post-freeze servo addition: **167** (the six orphan `OLED_*` labels were repurposed as `SRV_PWM1–6`, removing 12 items; no new items).
 None are "must fix". The three must-fix items found in the hygiene pass were fixed in the freeze commit.
 
 ## Fixed in the freeze pass (must fix)
@@ -38,6 +39,8 @@ None are "must fix". The three must-fix items found in the hygiene pass were fix
 | 6 | (no footprint) | BT11–BT32 18650 contacts MY-18650-04-J / -05-J (added after freeze, see below) | Footprint field empty – create/import before PCB update. |
 
 ## Known limitations at freeze
+
+- **RC servo headers (post-freeze addition)** – J_SRV1–6 + R78–R83 on new `servo` sheet, all DNP; `SERVO_V` source (VSYS jumper vs dedicated regulator) still open.
 
 - **IMU (post-freeze addition)** – ICM-42688-P (U22, LCSC C1850418) on new `imu` sheet, dedicated I²C to FPGA (E7/D7, INT C1/D1). Symbol lives in `symbols/fcl_local.kicad_sym`; verify footprint pin 1 orientation against the DS-000347 package drawing during placement.
 

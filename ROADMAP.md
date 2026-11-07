@@ -17,6 +17,7 @@
 | 3 | Camera + display connectors / sheets | **Done** – schematic frozen |
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
+| 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -156,6 +157,22 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   | `IMU_INT2` | 9 INT2/FSYNC/CLKIN | D1 (PL38B) | 7 |
   (FPGA pins reuse balls freed in Phase 3. INT2 pin can instead be used as FSYNC, e.g. camera frame sync from the FPGA; the ESP32 can reach the IMU through the FPGA.)
 - [ ] Phase 4: place U22 rigidly near the board's centre of mass, away from the boost inductor / switching regulators; record its axis orientation relative to the camera optical axis.
+
+### Phase 3c – RC servo headers (DNP for first prototype)
+- [x] New sheet `servo.kicad_sch`: 6× 1x3 2.54 mm headers **J_SRV1–J_SRV6** (`PinHeader_1x03_P2.54mm_Vertical`), **all DNP**
+- [x] Pinout (standard RC servo): **1 = Signal** (1–2 ms pulse), **2 = +V (`SERVO_V`)**, **3 = GND**
+- [x] Signals from FPGA bank 6 (3.3 V, not used by camera/display) through 1 k series resistors R78–R83 (0603, C21190, **DNP with the headers** – protects the FPGA pin if a servo lead is miswired):
+  | Header | Net | FPGA ball |
+  |---|---|---|
+  | J_SRV1 | `SRV_PWM1` | P1 |
+  | J_SRV2 | `SRV_PWM2` | P2 |
+  | J_SRV3 | `SRV_PWM3` | P3 |
+  | J_SRV4 | `SRV_PWM4` | P4 |
+  | J_SRV5 | `SRV_PWM5` | N2 |
+  | J_SRV6 | `SRV_PWM6` | J4 |
+  (these balls previously carried the orphan ULX3S `OLED_*` labels, now repurposed)
+- [ ] **Open decision – SERVO_V source.** `SERVO_V` currently only joins the six header pin 2s. Options: jumper / 0 Ω link to VSYS (simple, but servo stall current – often > 1 A each – then loads the cells and the LM66100 path), or a dedicated 5–6 V regulator. Decide before the servo headers are populated; size copper and connector for the chosen current.
+- [ ] Phase 4: keep footprint space for J_SRV1–6 + R78–R83 near a board edge (they are DNP but on the PCB); header LCSC part still to pick.
 
 ### Phase 4 – Mechanical & PCB
 - [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons) and add footprints for the 18650 contacts BT11–BT32, then *Update PCB from Schematic*
