@@ -92,7 +92,18 @@
 - [x] Add OV7670 connector / sheet
 - [x] Add 40-pin FFC for Newhaven TFT
 - [x] Map pins (reuse known mappings from existing projects)
+- [x] Split former `LCD-Camera` sheet into dedicated `camera` and `display` sheets (residual renamed `fpga-io`)
 - [ ] Constraints note for later FPGA work
+
+**Sheet map (camera / display area)**
+
+| Sheet file | Contents | Connects via |
+|---|---|---|
+| `display.kicad_sch` | J7 NHD-2.1-480480AF-ASXP 40-pin FFC, C74/C75 VDD decoupling, backlight boost U8 AP3032 (L4, D1, C37, C38, R18, R19) from VSYS | Global `GN0..13`/`GP0..13` (RGB, sync, SPI, reset), `GP13` (BL PWM), `+3V3`, `VSYS`, `GND` |
+| `camera.kicad_sch` | J1 OV7670 2×9 header, SCCB pull-ups R7/R14, R15 XCLK series, R16/R17, C18/C36 decoupling | Global `GN14..17,21..24`/`GP14..17,21..24` (XCLK via `GN16`, net named `CAM_XCLK`), `+3V3`, `GND` |
+| `fpga-io.kicad_sch` | U1 ECP5 bank units (BANK0/7 and BANK1 I/O), legacy ULX3S headers J2 (DNP) and J6, D51/D52 5 V links | Global labels to the sheets above |
+
+Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 
 ### Phase 4 – Mechanical & PCB
 - [ ] Board outline for monocular (camera + TFT inline, batteries side-by-side)
