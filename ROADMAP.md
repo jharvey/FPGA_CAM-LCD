@@ -232,7 +232,7 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 | Fit check | Needed | Available |
 |---|---|---|
 | Cell + contacts along X | 18650 65.0 mm (protected cells up to ~69.5) + spring ~5 + button ~1.5 → bay ≈ 72–76 mm | 85 mm (≈ 5 mm margin each side) |
-| 3 cells stacked along Y | 3 × 18.6 + 2 × 0.9 gap ≈ 57.6 mm (row pitch 19.5) | 75 mm (≈ 8.5 mm strip top and bottom) |
+| 3 cells stacked along Y | 3 × 18.6 + 2 × 1.9 gap = 59.6 mm (row pitch **20.5**, refined in 4.4) | 75 mm (≈ 7.7 mm strip top and bottom) |
 | Depth (front → back) | lens ≈ 25 (socket 8.5 + module 1.6 + lens ~15) + PCB 1.6 + bay standoff 1.5 + cell 18.6 + TFT ~3 | ≈ 50 mm + case walls |
 
 **3. Component positions – LOCKED (zones; exact XY during placement)**
@@ -242,11 +242,11 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 | OV7670 module + J1 | F | lens on the axis (42.5, 37.5); keep-out ≈ 35 × 35 mm centred on it, ≈ 25 mm tall | J1 position = axis minus the module's lens-to-header offset (measure the module). Parts ≤ 6 mm tall may sit under the module. |
 | Round TFT | on the bay (B side) | active-area centre on the axis | outline + FPC exit/length from the NHD drawing (datasheet p.3) – still to measure |
 | Display FFC J7 | B | bottom edge, centred (x ≈ 42.5, y ≈ 70–73) | FPC leaves the display bottom and folds down past the bottom cell; the fold fixes the FFC contact side. If the FPC is too short: J7 moves to the F bottom edge with the FPC wrapping the board edge. Backlight boost (U8, L4, D1, C38, R19) next to J7. |
-| 18650 cells 1/2/3 | B | rows y = 18.0 / 37.5 / 57.0, axes along X | cell 1 top, cell 3 bottom |
+| 18650 cells 1/2/3 | B | rows y = **17.0 / 37.5 / 58.0** (pitch 20.5, symmetric about the axis), axes along X | cell 1 top, cell 3 bottom |
 | − springs BT12 / BT22 / BT32 | B | left end, x ≈ 6 | common GND – wide GND pour |
 | + buttons BT11 / BT21 / BT31 | B | right end, x ≈ 79 | each → `CELLn_RAW` → Q3/Q4/Q5 on F directly behind |
 | Power input stage (Q3–Q5, U11/U13/U15 TP4056, LM66100 U12/U14/U16/U18/U19, sense dividers, ADC U21, REF U17) | F | right strip, x ≈ 62–85 | short cell paths; TP4056 heat kept away from the IMU and camera |
-| NTC TH1 | B | between cell rows, in contact with the cells | |
+| NTC TH1 | B | (36, 37.5) under the middle cell's bottom line | thermal pad to cell 2 (4.4) |
 | FPGA U1 + SDRAM U2 + flash U10 + TLV62569 regulators | F | left strip, U1 centre (17, 28) rotated 90° CW, SDRAM below U1 | rotation puts banks 2/3 (SDRAM + camera) at the bottom and bank 1/0 toward the centre; x ≥ 8 keeps the BGA clear of the spring-contact tabs that come through the board at x ≈ 5.5 |
 | **IMU U22** | F | **on the optical axis, under the camera module (≈ 42.5, 37.5)** | board centre = most rigid point; away from TP4056/boost heat; record its axes relative to the camera |
 | ESP32-S3 U9 | F | top-right, antenna at the top edge (y < 7) | antenna keep-out on all layers; no cell behind it (cells start at y ≈ 8.7); case needs an RF window |
@@ -276,9 +276,9 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 | SD1 microSD | F | (25, 68.3), rot 180 | new footprint `fcl_local:microSD_Molex_104031-0811_FCL` |
 | B0 / B1 / B2 | F | (14, 5.5) / (25, 5.5) / (36, 5.5) | top edge |
 | J4 JTAG (DNP fallback) | F | (49, 12) | below the antenna band |
-| TH1 NTC | B | (42.5, 27.75) | between cell rows 1 and 2 |
-| BT12 / BT22 / BT32 (− springs) | B | x 5.5, y 18 / 37.5 / 57 | spring tips reach x ≈ 18 (≈ 5 mm compression with a 65 mm cell) |
-| BT11 / BT21 / BT31 (+ buttons) | B | x 79.5, y 18 / 37.5 / 57 | foot-to-foot 74 mm |
+| TH1 NTC | B | (36, 37.5) | under cell 2 (moved in 4.4) |
+| BT12 / BT22 / BT32 (− springs) | B | x 5.5, y 17 / 37.5 / 58 | spring tips reach x ≈ 18 (≈ 5.8 mm compression with a 65 mm cell) |
+| BT11 / BT21 / BT31 (+ buttons) | B | x 79.5, y 17 / 37.5 / 58 | foot-to-foot 74 mm |
 
 Reference drawings: optical-axis crosshair (Dwgs.User), OV7670 35 × 35 keep-out (F.Fab), three 65 × 18.6 cell outlines and a nominal Ø53.3 TFT circle (B.Fab).
 
@@ -289,6 +289,43 @@ Footprint work done for this step:
 
 DRC after placement (mechanical categories): no courtyard overlaps, no keep-out violations, no edge-clearance violations. Remaining items are for the routing phase: pad-to-pad clearance / solder-mask bridges inside the fine-pitch U22 (0.5 mm LGA) and J17 (USB-C) with the inherited 0.2 mm clearance rule, J17 pad-to-peg hole clearance (footprint-inherent), and silkscreen cosmetics.
 
+#### 4.4 Battery bay, NTC, IMU and mechanical-stress constraints (2026-11-07)
+**Cell contacts (confirmed):**
+- Three identical pairs, **all cells the same way round**: − springs (MY-18650-05-J) at the left end x 5.5, + buttons (MY-18650-04-J) at the right end x 79.5; both stand on the back (B) and face the cell (checked in the 3D render). Reverse insertion is protected electrically by the AO3401A FETs; the bay should still carry "+ →" moulded marks.
+- Row pitch widened 19.5 → **20.5 mm** (rows 17 / 37.5 / 58): 1.9 mm gap between cans leaves room for 1.6 mm printed ribs.
+- Length: contact bases 74.0 mm apart; spring tip x ≈ 18.0, button face x ≈ 77.2 → 59.2 mm free gap. A 65.0 mm cell compresses the spring ≈ 5.8 mm of ≈ 12.4 mm free length. **Usable cell length ≈ 65.0–67.5 mm** (flat or button-top, unprotected). **Protected 69–70 mm cells do not fit.** Dimensions are from the EasyEDA footprints – confirm spring free/solid length on the MY-18650-05-J drawing.
+
+**Battery bay (case part) – reserved on the PCB back as rule areas (no B-side footprints; tracks allowed):**
+
+| Rule area | Region (x, y) | Purpose |
+|---|---|---|
+| `BAY_END_WALL_L` | 0.3–3.3, 8–67 | wall behind the springs takes the spring load |
+| `BAY_END_WALL_R` | 82.3–84.7, 8–67 | wall behind the buttons |
+| `BAY_RIB_1` / `BAY_RIB_2` | 19–76, y 27.25 ± 0.9 / 47.75 ± 0.9 | 1.6 mm ribs between cells rest on the PCB (also stiffen the board centre) |
+| `CASE_BOSS_TR` | 78.5–84.7, 3.5–9 | case boss / ledge replacing the removed H2 at the antenna corner |
+
+- Cradle height: cells sit **2.5 mm above the PCB** → B-side parts under the cells ≤ **1.5 mm** tall (0402–0805 passives, SOT-23 OK; no inductors / electrolytics / tall connectors under the bay).
+- The bay's bottom side-wall must **bridge x ≈ 28–57** (no contact with the PCB) where J7 and the TFT FPC pass; J7 sits ≈ 7 mm below the bottom cell's edge.
+- Notes for the bay are on Dwgs.User beside the board outline; bay outline and rib lines on B.Fab.
+
+**NTC (TH1):** moved to (36, 37.5) on B, under the bottom line of the middle cell (cell 2 – the warmest, surrounded by the other two). Thermal coupling through a **2 mm compressible silicone thermal pad** (≈ 3 W/m·K, ≈ 5 × 5 mm) between TH1 and the can; nothing else in a 6 × 6 mm area around it. One NTC = bay temperature only, not per-cell.
+
+**IMU (U22) – confirmed at (42.5, 37.5):**
+- On the optical axis at the board centre: not at an edge, between the three screws and directly over the cell-2 cradle and both ribs, so the stiffest region once the bay is fitted.
+- Distances as placed: FPGA courtyard ≈ 14.6 mm, ESP32-S3 module ≈ 15 mm (antenna ≈ 30 mm), USB-C / charge input ≈ 27 mm, display boost (U8/L4, next to J7) ≈ 30 mm.
+- **Quiet radius 15 mm (F.Fab circle):** no switchers (TLV62569 + L1–L3, AP3032 + L4, TP4056s) or VSYS/charging high-current paths inside it; no vias/traces under the LGA; solid GND plane beneath; C76–C78 right at the part. The camera module sits ≈ 8.5 mm above it on J1 – fine for an IMU, but keep its mass secured (below).
+
+**Vibration / mechanical-stress concerns (to design out in the case and placement):**
+1. **Spring load:** 6 contacts at ≈ 5.8 mm compression push the board ends outward (order of 3–6 N each). The contact plates must bear on the bay end walls (`BAY_END_WALL_*`); the slotted THT tabs and SMD anchors must not carry the spring force.
+2. **Top-right corner (no H2):** the top-row button contact BT11 loads a corner without a screw → the case boss/ledge `CASE_BOSS_TR` is mandatory.
+3. **Camera module ≈ 25 mm tall on a friction-fit 2×9 socket:** a lever arm under vibration (socket fretting, intermittent pixels). Fix the module with its two M2 holes on standoffs (reserve them once the module is measured) or a case clamp.
+4. **BGA (U1) next to the left-end springs:** board flex at the left edge stresses the BGA balls. U1 keeps ≥ 2.4 mm from the contact tabs; the left bay wall must be stiff and flush.
+5. **USB-C J17:** plug insertion/levering at the bottom edge – THT shell legs help; the case should surround the receptacle so the case, not the PCB, takes side loads.
+6. **TFT:** held by the bay/case, never by its FPC; FPC strain relief and minimum bend radius at the board edge; J7 latch closed.
+7. **Heavy parts** (inductors, C73 100 µF 1210, J4 if fitted) not at the unsupported top-right corner or mid-span away from ribs.
+8. **Hot-swap door:** opening/closing must not load the PCB; door hinge and latch on the case.
+9. Firmware: run the IMU with a suitable low-pass / ODR so residual board resonance (plate modes between supports) is filtered.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
@@ -296,7 +333,8 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - [x] Major mechanical items placed (4.2)
 - [ ] **In KiCad: Tools → Update PCB from Schematic** (keep the defaults; the placed footprints already carry their schematic links) to add the remaining ≈ 250 parts and all nets
 - [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset → adjust J1 / J7
-- [ ] Battery bay geometry: final contact positions, spring travel / cell-length tolerance, reverse-insertion keying
+- [x] Battery bay geometry on the PCB: contact pitch 20.5 mm, cell-length window, bay rule areas, NTC thermal pad, IMU quiet zone, stress list (4.4)
+- [ ] Confirm spring free/solid length and contact plate dimensions on the MY-18650-04/05-J drawings; bay CAD (ribs, end walls, J7 bridge, boss)
 - [ ] Fine-pitch design rules (U22, J17, BGA fan-out) before routing
 - [ ] Remaining placement per 4.1 (vibration: no tall/heavy parts on unsupported spans; keep CAM_PCLK / LCD_PCLK short and away from switchers)
 - [ ] 3D-print case concept
