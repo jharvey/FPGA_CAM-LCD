@@ -59,7 +59,7 @@ Notes
 | 4 | CAM_SIOD | `GP14` | U18 | PR92A | 3 | - |
 | 5 | CAM_VSYNC | `GN15` | P16 | PR56B | 3 | VREF1_3 |
 | 6 | CAM_HREF | `GP15` | N17 | PR56A | 3 | - |
-| 7 | CAM_PCLK | `GP16` | N16 | PR53A | 3 | - |
+| 7 | CAM_PCLK | `GP17` | L16 | PR50A | 3 | GR_PCLK3_0 |
 | 8 | CAM_XCLK (via R15 33R) | `CAM_XCLK` | M17 | PR53B | 3 | - |
 | 9 | CAM_D7 | `GN21` | D17 | PR11B | 2 | URC_GPLL0C_IN |
 | 10 | CAM_D6 | `GP21` | C18 | PR11A | 2 | URC_GPLL0T_IN |
@@ -70,13 +70,13 @@ Notes
 | 15 | CAM_D1 | `GN24` | D16 | PT112B | 1 | - |
 | 16 | CAM_D0 | `GP24` | C16 | PT112A | 1 | - |
 | 17 | CAM_RESETn | `GN17` | L17 | PR50B | 3 | - |
-| 18 | CAM_PWDN | `GP17` | L16 | PR50A | 3 | GR_PCLK3_0 |
+| 18 | CAM_PWDN | `GP16` | N16 | PR53A | 3 | - |
 
 Notes
 - SCCB pull-ups: R7 / R14 4.7 k to +3V3. CAM_RESETn pulled up (R16 10 k), CAM_PWDN has R17 10 k.
-- **Open:** CAM_PCLK (`GP16`, N16) is not on a clock-capable input, while CAM_PWDN (`GP17`) uses
-  GR_PCLK3_0 (L16). Swapping CAM_PCLK <-> CAM_PWDN would put the camera pixel clock on a
-  global-clock pin. Decide before layout (see ROADMAP Phase 3).
-- J6 (legacy 2x20 header, still fitted) also sits on every camera net.
+- CAM_PCLK is on GR_PCLK3_0 (L16), a global-clock-capable input. CAM_PWDN moved to N16.
+  (Swapped from the original ULX3S `gp16`/`gp17` assignment: in an old `ulx3s_v20.lpf`,
+  `gp[16]` is now PWDN and `gp[17]` is PCLK.)
+- J6 (legacy 2x20 header, DNP) also sits on every camera net.
 - Camera data spans banks 1, 2 and 3 (right-hand side of the BGA); display uses banks 0 and 7
   (top / left). This favours display on the left, camera on the right of the FPGA in placement.

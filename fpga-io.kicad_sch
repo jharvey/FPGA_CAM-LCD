@@ -16334,7 +16334,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "8a002c7f-2010-4da4-bbb6-c30ff503cd33")
 		(property "Reference" "J6"
 			(at 260.35 250.19 0)

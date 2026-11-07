@@ -14,7 +14,7 @@
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
 | 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 3 open items (ADC ref loading, CE breakout, KiCad ERC pass) |
-| 3 | Camera + display connectors / sheets | **Schematic done** – 5 open decisions before layout (see Phase 3) |
+| 3 | Camera + display connectors / sheets | **Schematic done** – 2 open items before layout (user buttons/LEDs, +5V ERC flag; see Phase 3) |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -99,10 +99,11 @@
 - [x] OV7670 J1 pinout checked (standard 18-pin module); SCCB pull-ups present
 - [x] VCCIO for display banks 0/7 fixed at 3.3 V (RV2 DNP, RV3 fitted); legacy header J2 DNP
 
+- [x] **CAM_PCLK on a clock pin** – swapped `GP16`/`GP17` on the `camera` sheet: CAM_PCLK now on L16 (GR_PCLK3_0), CAM_PWDN (with R17) on N16
+- [x] **J6 legacy 2×20 header** – DNP (kept in schematic/layout like J2; keep/drop decided at layout). D51/D52 5 V links to the header still fitted – make DNP if J6 stays unpopulated.
+- [x] **J5 VCCIO jumper (power sheet)** – DNP; VCCIO for banks 0/7 is hard-set to 3.3 V by RV3
+
 **Open before Phase 4 (schematic decisions)**
-- [ ] **CAM_PCLK on a clock pin** – CAM_PCLK (`GP16`, N16) is plain I/O; CAM_PWDN (`GP17`) occupies GR_PCLK3_0 (L16). Recommend swapping the two labels on the `camera` sheet.
-- [ ] **J6 legacy 2×20 header** – still fitted and on every camera net plus IN5V/OUT5V (D51/D52). Decide DNP (like J2) or keep for debug; D51/D52 follow that decision.
-- [ ] **J5 VCCIO jumper (power sheet)** – 3-pin header across +2V5 / 2V5_3V3 / +3V3. With RV3 fitted, a jumper on 1–2 shorts +2V5 to +3V3 → mark DNP (or remove).
 - [ ] **User I/O for the monocular** – orphan global labels on `fpga-io` from stripped ULX3S sheets: `SW1..4` (buttons), `LED0..7`, `AUDIO_*` (12). Decide which buttons / status LEDs the monocular needs (only B0 power button exists today); delete the rest and add no-connect flags (also U1 D9).
 - [ ] **ERC clean-up** – `+5V` power-input not driven (#PWR015 on `fpga-io`, needs PWR_FLAG or goes away with the J6/D51/D52 decision). Remaining `multiple_net_names` warnings are the intentional `LCD_*`/`CAM_*` aliases.
 
@@ -118,7 +119,7 @@
 |---|---|---|
 | `display.kicad_sch` | J7 NHD-2.1-480480AF-ASXP 40-pin FFC, C74/C75 VDD decoupling, backlight boost U8 AP3032 (L4, D1, C37, C38, R18, R19) from VSYS | Global `GN0..13`/`GP0..13` (RGB, sync, SPI, reset), `GP13` (BL PWM), `+3V3`, `VSYS`, `GND` |
 | `camera.kicad_sch` | J1 OV7670 2×9 header, SCCB pull-ups R7/R14, R15 XCLK series, R16/R17, C18/C36 decoupling | Global `GN14..17,21..24`/`GP14..17,21..24` (XCLK via `GN16`, net named `CAM_XCLK`), `+3V3`, `GND` |
-| `fpga-io.kicad_sch` | U1 ECP5 bank units (BANK0/7 and BANK1 I/O), legacy ULX3S headers J2 (DNP) and J6, D51/D52 5 V links | Global labels to the sheets above |
+| `fpga-io.kicad_sch` | U1 ECP5 bank units (BANK0/7 and BANK1 I/O), legacy ULX3S headers J2 and J6 (both DNP), D51/D52 5 V links | Global labels to the sheets above |
 
 Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 
@@ -155,8 +156,8 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   The USB-C PD rework is deferred (Phase 2b / later), so leave edge room where US1 / US2 sit.
 - *ESP32 antenna.* Board edge with copper keep-out under the antenna, away from the cells and
   any future metal case (the metal case will need an RF window).
-- *Large / optional parts.* J2 (DNP) and J6 2×20 angled headers are ≈ 51 mm long; keep or drop
-  per the layout space (J2 decision deferred to layout).
+- *Large / optional parts.* J2 and J6 2×20 angled headers (both DNP) are ≈ 51 mm long; keep the
+  footprints or drop them depending on layout space.
 - *Mounting.* H1–H4 M3 holes exist but are still at ULX3S positions; re-place them for the case.
   Avoid putting tall or heavy parts (headers, inductors, cell connectors) at unsupported spans
   (vibration).

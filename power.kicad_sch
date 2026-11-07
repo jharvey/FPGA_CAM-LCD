@@ -35438,7 +35438,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005aa2a24d")
 		(property "Reference" "J5"
 			(at 40.64 48.26 0)
