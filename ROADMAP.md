@@ -13,7 +13,7 @@
 |-------|-------------|--------|
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
-| 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 3 open items (ADC ref loading, CE breakout, KiCad ERC pass) |
+| 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 1 open item (KiCad ERC pass) |
 | 3 | Camera + display connectors / sheets | **Done** – schematic closed; footprint / LED-colour items carried into Phase 4 |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
@@ -75,9 +75,11 @@
   - IN6, IN7 spare and COM tied to GND via 0 Ω (R57, R58, R59) – lift to use
 - [x] Add resistor divider for +V / VSYS rail sensing into the new ADC (R44/R45 → IN5)
 - [x] Absolute reference / non-ratiometric: AD7689 internal 2.5 V reference (REF + 10 µF C68, REFIN + 100 nF C70). Firmware must set CFG.REF = internal 2.5 V.
-- [ ] **Review ADC reference loading**: the NTC pull-up R43 is fed from the AD7689 REF pin (DC load on the conversion reference), and REF3025 is only measured, not used as the reference. Options: (a) feed R43 from REF3025 OUT (VREF_SENSE), or (b) drive REF from REF3025 and use external-reference mode. Needs a wiring change on the power sheet – decide before layout.
+- [x] **ADC reference loading** – chose option (a): NTC pull-up R43 now fed from REF3025 OUT (`VREF_SENSE`) instead of the AD7689 REF pin. The conversion reference (`VREF_2V5`, internal 2.5 V + C68) carries no DC load; cell / VSYS readings stay absolute (non-ratiometric). NTC: compute the divider ratio as IN3 / IN4 – both channels see the same REF3025 voltage, so the NTC result cancels both reference tolerances. No firmware config change (AD7689 stays in internal-reference mode). Option (b) rejected: it needs a config change, makes REF3025 drive the REF pin's switched load, and gives up the ADC's lower-drift internal reference.
 - [x] Bulk capacitance: VBAT_OR = C58 10 µF + **C73 100 µF 1210 (CL32A107MPVNNNE, LCSC C23742)**; VSYS = 3× 22 µF (C1/C5/C9) + C63 10 µF. Revisit at layout (X5R DC-bias derating).
-- [ ] Break out / control LM66100 CE pins for true “most-dead-first” sequential discharge (firmware later). Currently CE = VOUT (plain ideal-diode OR). Needs a GPIO / IO-expander decision.
+- [x] **LM66100 ~CE break-out** – U12/U14/U18 ~CE now on local nets `BAT1_CE` / `BAT2_CE` / `BAT3_CE`, tied to `VBAT_OR` through 0 Ω links R71 / R72 / R73 (0603, C21189, fitted). Behaviour unchanged (plain ideal-diode OR); the 0 Ω pads are the rework point for later control.
+  - Control constraint (LM66100 datasheet): the device turns OFF when ~CE > VIN + 80 mV and ON when ~CE < VIN − 250 mV (~CE max 5.5 V). Forcing a cell off therefore needs ~CE driven above that cell's voltage (up to ~4.3 V), so a 3.3 V ESP32/FPGA GPIO needs a level shifter (e.g. small PFET or open-drain + pull-up to a rail above the highest cell). Forcing ON (pulling ~CE low) can back-feed the other cells, so avoid it.
+  - [ ] Later: pick GPIO source (ESP32 / FPGA / I²C expander) and the level-shift circuit, together with firmware cell prioritisation.
 - [ ] Expose TP4056 CE / ~CHRG status (currently CE tied to +5 V, ~CHRG drives LEDs only)
 - [x] Schematic clean-up: 4 dangling wire stubs fixed (PWREN ×3, VBAT1)
 - [ ] Final KiCad ERC run + visual review of the power area (remaining known items: unused ADS1115 symbol in the power-sheet library cache – drops on re-save; orphan ADC_SCLK/ADC_MOSI/ADC_CSn/ADC_MISO global labels on `ram` from the removed MAX11123 analog sheet – ask before removing)
@@ -186,9 +188,9 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - Cell negatives common (GND). Positives individual (CELLx_RAW → VBATx after reverse FET).
 - VSYS powers the main regulators and the LCD boost. CR1225 VBAT is unrelated.
 - 3.3 V rail needs ≥ ~3.4 V on VSYS → practical cutoff ≈ 3.5–3.6 V on the highest cell.
-- AD7689 8-ch ADC on SPI (WIFI_GPIO19/21/22/26, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference; REF3025 measured on IN4.
+- AD7689 8-ch ADC on SPI (WIFI_GPIO19/21/22/26, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
 - CHGx LEDs are local only; charger enable/status not yet routed to a processor (open item).
-- Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control.
+- Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control: ~CE pins are broken out via R71–R73 (0 Ω), and the level-shifted drive is still to be designed.
 - Near-term PD chip will request highest available 5 V current while keeping the existing TP4056s.
 
 ---

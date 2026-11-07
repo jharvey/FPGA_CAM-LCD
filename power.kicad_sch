@@ -21969,7 +21969,7 @@
 		)
 		(uuid "4630d00c-423c-4407-8378-d491d8989efb")
 	)
-	(label "VREF_2V5"
+	(label "VREF_SENSE"
 		(at 294.64 203.2 0)
 		(effects
 			(font
@@ -22619,27 +22619,15 @@
 			)
 		)
 	)
-	(global_label "VBAT_OR"
-		(shape input)
+	(label "BAT2_CE"
 		(at 129.54 226.06 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
-		(uuid "2970cf84-e9ce-49c5-b230-578cd59d25c4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 129.54 226.06 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+		(uuid "71fb2cc4-520e-45c9-97e6-0f44c246eaa4")
 	)
 	(global_label "GND"
 		(shape input)
@@ -23059,27 +23047,15 @@
 			)
 		)
 	)
-	(global_label "VBAT_OR"
-		(shape input)
+	(label "BAT1_CE"
 		(at 129.54 189.23 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
-		(uuid "8d0f18f4-f896-45dc-9919-4ca8c83e1ce5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 129.54 189.23 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+		(uuid "d1ab9c34-9e90-45bb-bf96-4c40bf078c84")
 	)
 	(global_label "PWRBTn"
 		(shape input)
@@ -23411,27 +23387,15 @@
 			)
 		)
 	)
-	(global_label "VBAT_OR"
-		(shape input)
+	(label "BAT3_CE"
 		(at 129.54 264.16 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify right bottom)
 		)
-		(uuid "e60c9e4d-3a87-4c1a-b789-eae16213e519")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 129.54 264.16 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+		(uuid "d723f965-5eff-411c-bb95-aea527060e75")
 	)
 	(global_label "WIFI_GPIO22"
 		(shape input)
@@ -23555,6 +23519,476 @@
 		(uuid "fd85efe2-653b-46c2-b381-9bc1eec2b28f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 252.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(text "LM66100 ~CE break-out (cells 1-3)\nR71-R73 0R fitted: ~CE tied to VBAT_OR = plain ideal-diode OR (unchanged behaviour).\nFuture firmware control: remove 0R and drive BATx_CE. ~CE > VBATx + 80 mV turns a cell OFF,\n~CE < VBATx - 250 mV forces it ON (max 5.5 V) -> a 3.3 V GPIO needs a level shifter."
+		(exclude_from_sim no)
+		(at 223.52 186.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "389a93bc-11c0-4641-bb06-f3ebd3c03543")
+	)
+	(label "BAT1_CE"
+		(at 236.22 193.04 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "16da0ae4-cfa2-44b1-90c9-ed41dc39527d")
+	)
+	(wire
+		(pts
+			(xy 236.22 193.04) (xy 238.76 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f70619d-7b3c-4958-8ab5-dc4ccfd85567")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 242.57 193.04 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "37c5522d-c311-421b-a6f1-ec8cde6d1935")
+		(property "Reference" "R71"
+			(at 242.57 191.008 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 242.57 193.04 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 242.57 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 242.57 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C21189"
+			(at 242.57 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 242.57 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a3cddb03-fe29-4dd8-a853-dd2e56b85092")
+		)
+		(pin "2"
+			(uuid "5e99aa0f-e143-4734-ae76-51335bb54c7a")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
+					(reference "R71")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 246.38 193.04) (xy 248.92 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "728bda81-20ba-43bc-9605-67537f44c8e5")
+	)
+	(global_label "VBAT_OR"
+		(shape input)
+		(at 248.92 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d16f102e-32e1-4ef6-9363-5d325eb89640")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 248.92 193.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(label "BAT2_CE"
+		(at 236.22 200.66 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "60a013bd-7833-40c7-b71b-9dcb8c111b5b")
+	)
+	(wire
+		(pts
+			(xy 236.22 200.66) (xy 238.76 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77b8bdbb-1f55-4735-9510-5c808a45a8a7")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 242.57 200.66 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "eb3a436c-bf12-4b80-913d-e9b1e2990871")
+		(property "Reference" "R72"
+			(at 242.57 198.628 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 242.57 200.66 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 242.57 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 242.57 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C21189"
+			(at 242.57 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 242.57 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0c924b84-b7e5-4816-a596-90cf81bc5521")
+		)
+		(pin "2"
+			(uuid "49bef3d9-814b-4f1c-994c-49556993af0c")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
+					(reference "R72")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 246.38 200.66) (xy 248.92 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "299fa620-548e-4c5d-9082-dc1396657eb8")
+	)
+	(global_label "VBAT_OR"
+		(shape input)
+		(at 248.92 200.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9bb461a0-b609-436a-aa84-a5ae79b0216a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 248.92 200.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(label "BAT3_CE"
+		(at 236.22 208.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "11ba0a59-680e-43de-a3ed-857c845eeaf7")
+	)
+	(wire
+		(pts
+			(xy 236.22 208.28) (xy 238.76 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd58574d-e4a6-4082-9ade-4e426c422613")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 242.57 208.28 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "86878b30-922f-4f3e-b69b-562cb375342e")
+		(property "Reference" "R73"
+			(at 242.57 206.248 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 242.57 208.28 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 242.57 208.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 208.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 242.57 208.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C21189"
+			(at 242.57 208.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF0000T5E"
+			(at 242.57 208.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5b0d7558-b295-40a2-b821-84e15f986e0e")
+		)
+		(pin "2"
+			(uuid "41139e8e-09f0-4e3c-b726-aab641790711")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
+					(reference "R73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 246.38 208.28) (xy 248.92 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "266f1c79-fa21-4d5c-b737-5a1aeabb65a9")
+	)
+	(global_label "VBAT_OR"
+		(shape input)
+		(at 248.92 208.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5dc406e3-949f-4bfd-a5b0-60d13faf5a8a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 248.92 208.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
