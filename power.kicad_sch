@@ -21415,6 +21415,139 @@
 		)
 		(uuid "93533589-d02b-4efe-b4dc-b43173ec93ea")
 	)
+	(wire
+		(pts
+			(xy 368.3 198.12)
+			(xy 368.3 193.04)
+		)
+		(uuid "bb929322-6023-41fc-894e-4fe1909c5f43")
+	)
+	(wire
+		(pts
+			(xy 381 182.88)
+			(xy 381 177.8)
+		)
+		(uuid "7c446ae4-f9ad-434a-b36d-b7061af46a19")
+	)
+	(wire
+		(pts
+			(xy 349.25 190.5)
+			(xy 349.25 195.58)
+		)
+		(uuid "de3375f9-0671-46c2-9bb2-3cce91dcdbc8")
+	)
+	(wire
+		(pts
+			(xy 358.14 190.5)
+			(xy 358.14 195.58)
+		)
+		(uuid "f9ea4222-3966-46d0-8c03-417755b57922")
+	)
+	(wire
+		(pts
+			(xy 381 190.5)
+			(xy 381 195.58)
+		)
+		(uuid "2b04ee05-d7e1-4bce-af59-ea280dfbf6c4")
+	)
+	(wire
+		(pts
+			(xy 320.04 254)
+			(xy 320.04 259.08)
+		)
+		(uuid "a05d2440-991b-407a-b332-8922172edada")
+	)
+	(wire
+		(pts
+			(xy 345.44 238.76)
+			(xy 345.44 243.84)
+		)
+		(uuid "47b45dee-9833-481b-900d-9085729fadf6")
+	)
+	(wire
+		(pts
+			(xy 350.52 240.03)
+			(xy 350.52 245.11)
+		)
+		(uuid "708e541a-7ff2-41d5-86f5-7d69524e4682")
+	)
+	(wire
+		(pts
+			(xy 327.66 261.62)
+			(xy 327.66 266.7)
+		)
+		(uuid "4c1c1106-73cc-4736-86f3-3c197f087f05")
+	)
+	(wire
+		(pts
+			(xy 353.06 228.6)
+			(xy 345.44 228.6)
+		)
+		(uuid "56bb43ed-87dc-493d-b205-2aeac1bddd88")
+	)
+	(wire
+		(pts
+			(xy 345.44 228.6)
+			(xy 345.44 231.14)
+		)
+		(uuid "396833e0-00dd-4b11-90c8-2e45ffe7fead")
+	)
+	(wire
+		(pts
+			(xy 353.06 231.14)
+			(xy 350.52 231.14)
+		)
+		(uuid "739c2f50-9c15-43b4-bc6b-b950e7e136a1")
+	)
+	(wire
+		(pts
+			(xy 350.52 231.14)
+			(xy 350.52 232.41)
+		)
+		(uuid "a9224db3-4747-457a-a755-80d2a8a0c603")
+	)
+	(wire
+		(pts
+			(xy 327.66 246.38)
+			(xy 327.66 241.3)
+		)
+		(uuid "f4bf7db2-cec5-4404-b4eb-d825d2e73f4e")
+	)
+	(wire
+		(pts
+			(xy 337.82 254)
+			(xy 342.9 254)
+		)
+		(uuid "8123799b-06bf-4230-a8e6-557549e063a9")
+	)
+	(wire
+		(pts
+			(xy 378.46 213.36)
+			(xy 393.7 213.36)
+		)
+		(uuid "4cb3de3a-7b22-4b26-b4c8-e6a37416fbc0")
+	)
+	(wire
+		(pts
+			(xy 378.46 215.9)
+			(xy 393.7 215.9)
+		)
+		(uuid "e66737fe-4245-4616-a058-1a2ea7ce36f7")
+	)
+	(wire
+		(pts
+			(xy 378.46 218.44)
+			(xy 393.7 218.44)
+		)
+		(uuid "a3c2a939-a8dc-4ed0-b612-95837de40533")
+	)
+	(wire
+		(pts
+			(xy 378.46 220.98)
+			(xy 393.7 220.98)
+		)
+		(uuid "6eaa9c19-f8e9-46ef-a655-414a8a53d64a")
+	)
 	(text "FTDI_nSLEEP is 2.5V\nD12 must be schottky"
 		(at 21.59 128.27 0)
 		(effects
@@ -22174,6 +22307,76 @@
 			(justify left bottom)
 		)
 		(uuid "d8ebe8ff-4caf-4811-957f-730d66b56192")
+	)
+	(label "VREF_2V5"
+		(at 345.44 228.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "44baefb0-0c37-4393-82d1-e8a8447c0501")
+	)
+	(label "VADC"
+		(at 327.66 241.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d900e8f3-9e00-4196-b820-20c392baf2c9")
+	)
+	(label "VREF_2V5"
+		(at 342.9 254 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "453d514d-9f1d-4e8c-b7fa-52897b7846e0")
+	)
+	(label "ADC_CNV"
+		(at 393.7 213.36 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f29c2555-8382-4b20-bf82-6dd37a74f869")
+	)
+	(label "ADC_SDO"
+		(at 393.7 215.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "165f5202-72a9-46a7-8483-16a4c1391b11")
+	)
+	(label "ADC_DIN"
+		(at 393.7 218.44 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "44454fc4-5d03-4d38-8d12-462c458ba5c8")
+	)
+	(label "ADC_SCK"
+		(at 393.7 220.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e4667247-19f2-468d-90c9-1399c8d0c24e")
 	)
 	(global_label "VSYS"
 		(shape input)
@@ -23428,6 +23631,149 @@
 			(justify left)
 		)
 		(uuid "a512d4fd-c260-4ad7-a261-baa5f1cfd521")
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 368.3 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c53c5ff8-35d8-4c62-914d-69b0611bc175")
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 381 177.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "21f2ae8c-0004-4382-bcfe-f937be68c370")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 349.25 195.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "edb96d76-c263-4500-8068-ad8a6aa44a91")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 358.14 195.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "29bd069f-c637-4a77-a802-87da10cc94a1")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 381 195.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e77d12fb-adc9-46a2-bc92-b2962fb4f374")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 320.04 259.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9a9dd6f1-0b68-4a1d-9fa8-a2ed983fae8e")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 345.44 243.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "adf52572-2222-4d3d-810b-0064ddca76f5")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 350.52 245.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fca77e04-8bfd-4c12-8566-c73da316092d")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 327.66 266.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0a8d8c89-1240-421f-bb78-51a467cb35da")
+	)
+	(global_label "WIFI_GPIO26"
+		(shape input)
+		(at 393.7 213.36 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0132908f-8da6-48cc-9b2a-615aee780289")
+	)
+	(global_label "WIFI_GPIO19"
+		(shape input)
+		(at 393.7 215.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7c00669a-9bee-445a-94a9-9bf1653d4e67")
+	)
+	(global_label "WIFI_GPIO21"
+		(shape input)
+		(at 393.7 218.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "781f45a1-b2d3-4d0a-b743-6cdc937d3ad1")
+	)
+	(global_label "WIFI_GPIO22"
+		(shape input)
+		(at 393.7 220.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e6571a12-30d6-4175-9264-0c31154e6473")
 	)
 	(symbol
 		(lib_id "power:GND")
