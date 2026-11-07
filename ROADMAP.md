@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | Pending |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – axis, 85 × 75 mm outline and zones locked (4.1); placement not started |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -214,49 +214,60 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - [ ] Phase 4: keep footprint space for J_SRV1–6 + R78–R83 near a board edge (they are DNP but on the PCB); header LCSC part still to pick.
 
 ### Phase 4 – Mechanical & PCB
-- [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons) and add footprints for the 18650 contacts BT11–BT32, then *Update PCB from Schematic*
-- [ ] Battery bay geometry: 3×18650 bay in the case, PCB contact positions BT11–BT32, spring travel / cell-length tolerance, reverse-insertion keying
-- [ ] Board outline for monocular (camera + TFT inline, batteries side-by-side)
-- [ ] Placement for vibration robustness (NTC next to cells)
-- [ ] 3D-print case concept
 
-**Placement constraints (prepared – outline / placement not started)**
-- *Optical axis first.* TFT faces the eye, camera faces forward, inline. Decide PCB orientation
-  before anything else:
-  - (a) PCB perpendicular to the axis: TFT on the rear face, camera on the front face.
-  - (b) PCB along the axis.
-  OV7670 modules have in-plane header pins, so with J1 as a *vertical* 2×9 socket the lens
-  looks parallel to the PCB (suits b). Option (a) needs a right-angle socket or a flat-mounted
-  module. This choice sets the J1 type and position.
-- *TFT.* 2.1" 480×480 IPS. Take the outline, active-area centre, FPC exit position / length and
-  stiffener from the drawing on datasheet page 3 (vector drawing, not transcribed here). Put J7
-  where the FPC lands without a twist; the FPC fold direction fixes the FFC contact side.
-  Keep the backlight boost loop (U8, L4, D1, C38, R19) tight and close to J7.
-- *Camera / TFT alignment.* The lens axis and the TFT active-area centre should be coaxial (or
-  offset by a known amount for software correction). Fix that in the case model, then place
-  J1 / J7 from it.
-- *FPGA side.* Display nets exit the BGA top / left (banks 0, 7); camera nets exit the right
-  (banks 1, 2, 3). Natural arrangement: J7 left / top of U1, J1 right of U1. Keep CAM_PCLK and
-  LCD_PCLK short and away from the switching regulators.
-- *Batteries.* 3×18650 (Ø18.6 × 65 mm each, ≈ 56 × 65 mm side-by-side + bay walls) sit in a
-  plastic battery bay in the case and press directly on PCB-mounted contacts: positive buttons
-  BT11/BT21/BT31 and negative springs BT12/BT22/BT32 (one pair per cell, at opposite ends of each cell).
-  The final bay geometry (contact pitch, spring compression, cell length tolerance, polarity
-  keying so a reversed cell cannot touch) is defined in Phase 4. Keep the contacts close to the
-  reverse-FET / LM66100 input stage; the PCB must span the full cell length (≈ 65 mm + springs). The NTC must
-  physically touch or sit next to the cells. Hot-swap needs a cell door that does not stress
-  the PCB.
-- *Edge-accessible parts.* J17 USB-C (power + data + programming), the microSD slot SD1, B0 power button,
-  B3 BOOT / B4 RESET (can sit behind pin-holes), J3 WIFI_OFF, BAT1 CR1225 holder.
-  DNP fallbacks US1 / US2 / J4 only need edge access if they are ever populated.
-  J17 (USB-C 5 V charge port, Phase 2b) also needs case-edge access; higher-voltage PD stays deferred.
-- *ESP32 antenna.* Board edge with copper keep-out under the antenna, away from the cells and
-  any future metal case (the metal case will need an RF window).
-- *Large / optional parts.* J2 and J6 2×20 angled headers (both DNP) are ≈ 51 mm long; keep the
-  footprints or drop them depending on layout space.
-- *Mounting.* H1–H4 M3 holes exist but are still at ULX3S positions; re-place them for the case.
-  Avoid putting tall or heavy parts (headers, inductors, cell connectors) at unsupported spans
-  (vibration).
+#### 4.1 Locked mechanical decisions (2026-11-07)
+Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene side).
+**Coordinates:** front view = looking at the scene/camera side; origin = top-left board corner, +X right, +Y down, mm.
+**Front = PCB top layer (F)**, faces the scene. **Back = bottom layer (B)**, faces the eye.
+
+**1. Optical axis – LOCKED: perpendicular to the PCB** (option (a)).
+- Front (F): OV7670 module mounted **flat, parallel to the board**, lens forward, plugged into J1 (vertical 2×9 socket; module header pins point into the board).
+- Back (B): 3×18650 battery bay; the round TFT sits on top of the bay facing the eye.
+- The axis passes through the **board centre (42.5, 37.5)**: camera lens centre and TFT active-area centre are **coaxial** (target ±0.5 mm), so no software parallax offset is needed.
+
+**2. Outline – LOCKED: 85.0 × 75.0 mm**, rectangle with R3 corners, 1.6 mm, **4 layers** (ULX3S-derived stack-up and BGA 0.8 mm rules).
+- M3 holes H1–H4 at (4, 4), (81, 4), (4, 71), (81, 71) – outside the cell rows.
+- **Fresh PCB:** the ULX3S placement/routing in `FCL.kicad_pcb` is not reused (different outline, most parts gone).
+
+| Fit check | Needed | Available |
+|---|---|---|
+| Cell + contacts along X | 18650 65.0 mm (protected cells up to ~69.5) + spring ~5 + button ~1.5 → bay ≈ 72–76 mm | 85 mm (≈ 5 mm margin each side) |
+| 3 cells stacked along Y | 3 × 18.6 + 2 × 0.9 gap ≈ 57.6 mm (row pitch 19.5) | 75 mm (≈ 8.5 mm strip top and bottom) |
+| Depth (front → back) | lens ≈ 25 (socket 8.5 + module 1.6 + lens ~15) + PCB 1.6 + bay standoff 1.5 + cell 18.6 + TFT ~3 | ≈ 50 mm + case walls |
+
+**3. Component positions – LOCKED (zones; exact XY during placement)**
+
+| Item | Side | Position (front view) | Notes |
+|---|---|---|---|
+| OV7670 module + J1 | F | lens on the axis (42.5, 37.5); keep-out ≈ 35 × 35 mm centred on it, ≈ 25 mm tall | J1 position = axis minus the module's lens-to-header offset (measure the module). Parts ≤ 6 mm tall may sit under the module. |
+| Round TFT | on the bay (B side) | active-area centre on the axis | outline + FPC exit/length from the NHD drawing (datasheet p.3) – still to measure |
+| Display FFC J7 | B | bottom edge, centred (x ≈ 42.5, y ≈ 70–73) | FPC leaves the display bottom and folds down past the bottom cell; the fold fixes the FFC contact side. If the FPC is too short: J7 moves to the F bottom edge with the FPC wrapping the board edge. Backlight boost (U8, L4, D1, C38, R19) next to J7. |
+| 18650 cells 1/2/3 | B | rows y = 18.0 / 37.5 / 57.0, axes along X | cell 1 top, cell 3 bottom |
+| − springs BT12 / BT22 / BT32 | B | left end, x ≈ 6 | common GND – wide GND pour |
+| + buttons BT11 / BT21 / BT31 | B | right end, x ≈ 79 | each → `CELLn_RAW` → Q3/Q4/Q5 on F directly behind |
+| Power input stage (Q3–Q5, U11/U13/U15 TP4056, LM66100 U12/U14/U16/U18/U19, sense dividers, ADC U21, REF U17) | F | right strip, x ≈ 62–85 | short cell paths; TP4056 heat kept away from the IMU and camera |
+| NTC TH1 | B | between cell rows, in contact with the cells | |
+| FPGA U1 + SDRAM U2 + flash U10 + TLV62569 regulators | F | left strip, x ≈ 0–25 (U1 centre ≈ (13, 30)), SDRAM below U1 | camera banks 1/2/3 (right side of the BGA) face J1 |
+| **IMU U22** | F | **on the optical axis, under the camera module (≈ 42.5, 37.5)** | board centre = most rigid point; away from TP4056/boost heat; record its axes relative to the camera |
+| ESP32-S3 U9 | F | top-right, antenna at the top edge (y < 7) | antenna keep-out on all layers; no cell behind it (cells start at y ≈ 8.7); case needs an RF window |
+
+**4. Edge-accessible parts – LOCKED**
+
+| Edge | Parts |
+|---|---|
+| Bottom | J17 USB-C (F, x ≈ 62), SD1 microSD (F, x ≈ 25), J7 FFC (B, centre), servo headers J_SRV1–6 (F, bottom-right block ≈ 16 × 8 mm, DNP but footprints kept – next to the power stage for future `SERVO_V`) |
+| Top | B0 power, B1 / B2 user buttons, D53 / D54 status LEDs (F, top-left to centre); ESP32-S3 antenna (top-right) |
+| Internal (no edge needed) | B3 BOOT / B4 RESET (near U9, may sit behind case pin-holes), J3 WIFI_OFF, BAT1 CR1225 (F) |
+| Not on the rev-A PCB | J2, J6 legacy 2×20 headers (DNP, ≈ 51 mm long – do not fit) → set *Exclude from board*. DNP fallbacks U6/US1/US2/J4: keep footprints only if space remains after placement. |
+
+#### 4.2 Phase 4 checklist
+- [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
+- [ ] Close KiCad editors, then fix the 12 footprint-link issues + add footprints for BT11–BT32 (MY-18650-04-J / -05-J), set J2/J6 *Exclude from board*, then *Update PCB from Schematic* into a fresh board
+- [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset, MY-18650 contact footprints
+- [ ] Draw the 85 × 75 outline, holes, axis marker and keep-outs (camera module, antenna, cell bay, contacts)
+- [ ] Battery bay geometry: contact positions, spring travel / cell-length tolerance, reverse-insertion keying
+- [ ] Placement per 4.1 (vibration: no tall/heavy parts on unsupported spans; keep CAM_PCLK / LCD_PCLK short and away from switchers)
+- [ ] 3D-print case concept
 
 ### Phase 5 – Prototype
 - [ ] BOM with LCSC / JLCPCB numbers
