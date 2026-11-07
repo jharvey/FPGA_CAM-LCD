@@ -63,8 +63,15 @@
 ### Phase 2 – Power input redesign
 - [x] Replace single-cell input with 3×18650 paths
 - [x] Per-cell: AO3401A reverse protection, TP4056 charger, LM66100 ideal diode
-- [x] Cell connection changed from JST-PH (J8/J9/J10, now DNP – kept in the schematic until layout confirms the contacts) to PCB spring/button contacts: J11/J13/J15 = MY-18650-04-J positive button (C19184125) → `CELL1..3_RAW` (AO3401A drain); J12/J14/J16 = MY-18650-05-J negative spring (C19184124) → GND. Electrical path unchanged; note on the power sheet: the plastic battery bay provides retention and length tolerance.
-  - [ ] Phase 4: create/import footprints for J11–J16 (LCSC lists them as "SMT" in the title but "TH" in the attributes – confirm from the datasheet / EasyEDA model) and define the bay geometry (contact spacing for 65 mm cells + spring travel).
+- [x] Cell connection changed from JST-PH (J8/J9/J10, **removed**) to PCB spring/button contacts, one pair per cell:
+  | Cell | Positive button → `CELLn_RAW` (AO3401A drain) | Negative spring → GND |
+  |---|---|---|
+  | 1 | BT11 MY-18650-04-J (LCSC **C19184125**) | BT12 MY-18650-05-J (LCSC **C19184124**) |
+  | 2 | BT21 MY-18650-04-J (C19184125) | BT22 MY-18650-05-J (C19184124) |
+  | 3 | BT31 MY-18650-04-J (C19184125) | BT32 MY-18650-05-J (C19184124) |
+
+  AO3401A / TP4056 / LM66100 path unchanged. Note on the power sheet: the contacts are for a plastic battery bay that provides mechanical retention and cell-length tolerance.
+  - [ ] Phase 4: create/import footprints for BT11–BT32 (LCSC lists them as "SMT" in the title but "TH" in the attributes – confirm from the datasheet / EasyEDA model) and define the bay geometry (contact spacing for 65 mm cells + spring travel).
 - [x] VBAT_OR + USB → VSYS via additional LM66100s
 - [x] ~~ADS1115 (0x48) on WIFI_GPIO21/22~~ – superseded by AD7689 (below)
 - [x] Always-on 3.3 V LDO from VSYS for the ADC (U20 XC6206 → VADC)
@@ -136,8 +143,8 @@
 Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 
 ### Phase 4 – Mechanical & PCB
-- [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons) and add footprints for the 18650 contacts J11–J16, then *Update PCB from Schematic*
-- [ ] Battery bay geometry: 3×18650 bay in the case, PCB contact positions J11–J16, spring travel / cell-length tolerance, reverse-insertion keying
+- [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons) and add footprints for the 18650 contacts BT11–BT32, then *Update PCB from Schematic*
+- [ ] Battery bay geometry: 3×18650 bay in the case, PCB contact positions BT11–BT32, spring travel / cell-length tolerance, reverse-insertion keying
 - [ ] Board outline for monocular (camera + TFT inline, batteries side-by-side)
 - [ ] Placement for vibration robustness (NTC next to cells)
 - [ ] 3D-print case concept
@@ -162,7 +169,7 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   LCD_PCLK short and away from the switching regulators.
 - *Batteries.* 3×18650 (Ø18.6 × 65 mm each, ≈ 56 × 65 mm side-by-side + bay walls) sit in a
   plastic battery bay in the case and press directly on PCB-mounted contacts: positive buttons
-  J11/J13/J15 and negative springs J12/J14/J16 (one pair per cell, at opposite ends of each cell).
+  BT11/BT21/BT31 and negative springs BT12/BT22/BT32 (one pair per cell, at opposite ends of each cell).
   The final bay geometry (contact pitch, spring compression, cell length tolerance, polarity
   keying so a reversed cell cannot touch) is defined in Phase 4. Keep the contacts close to the
   reverse-FET / LM66100 input stage; the PCB must span the full cell length (≈ 65 mm + springs). The NTC must

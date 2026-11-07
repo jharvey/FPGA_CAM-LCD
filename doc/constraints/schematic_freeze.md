@@ -35,11 +35,11 @@ None are "must fix". The three must-fix items found in the hygiene pass were fix
 | Count | Type | Items | Action |
 |---|---|---|---|
 | 12 | footprint_link_issues | H1–H4 (`Mounting_Holes` lib not configured), J2/J4/J6 (`Socket_Strips` lib), RV2/RV3 (`R_0805…HandSolder` name), B0/B1/B2 (`SW_SPST_PTS645` renamed in KiCad 10) | **Must be resolved before "Update PCB from Schematic"**: add the legacy libraries to `fp-lib-table` or reassign to KiCad 10 footprints. |
-| 6 | (no footprint) | J11–J16 18650 contacts MY-18650-04-J / -05-J (added after freeze, see below) | Footprint field empty – create/import before PCB update. |
+| 6 | (no footprint) | BT11–BT32 18650 contacts MY-18650-04-J / -05-J (added after freeze, see below) | Footprint field empty – create/import before PCB update. |
 
 ## Known limitations at freeze
 
-- **Battery contacts (post-freeze change)** – JST-PH J8/J9/J10 replaced by PCB spring/button contacts J11–J16 (MY-18650-04-J C19184125 +, MY-18650-05-J C19184124 −); J8–J10 kept as DNP. Mechanical retention and length tolerance come from the plastic battery bay (Phase 4).
+- **Battery contacts (post-freeze change)** – JST-PH J8/J9/J10 removed and replaced by PCB contacts BT11/BT21/BT31 (+ button, MY-18650-04-J, LCSC C19184125) and BT12/BT22/BT32 (− spring, MY-18650-05-J, LCSC C19184124). Mechanical retention and length tolerance come from the plastic battery bay (Phase 4).
 
 - **ESP32 shares display SPI pins** – `LCD_SCK`/`LCD_DC` also on ESP32 IO32/IO33; firmware must keep them Hi-Z.
 - **LM66100 ~CE control** – broken out via R71–R73 (0 Ω) only. Firmware-driven cell selection needs a level-shifted driver (~CE is VIN-referenced, up to ~4.3 V).

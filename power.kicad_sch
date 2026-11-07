@@ -16281,16 +16281,6 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 247.65) (xy 123.19 247.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f1cd9ac-4c8b-4b1c-8b34-5aed6da1dff9")
-	)
-	(wire
-		(pts
 			(xy 20.32 238.76) (xy 111.76 238.76)
 		)
 		(stroke
@@ -17301,7 +17291,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 209.55) (xy 123.19 209.55)
+			(xy 104.14 209.55) (xy 109.22 209.55)
 		)
 		(stroke
 			(width 0)
@@ -18048,16 +18038,6 @@
 			(type default)
 		)
 		(uuid "635c4fe8-3100-40ac-a32f-ceeaa890a5a7")
-	)
-	(wire
-		(pts
-			(xy 123.19 250.19) (xy 121.92 250.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6388070c-e10a-49bb-9c61-056fc2268357")
 	)
 	(wire
 		(pts
@@ -19521,16 +19501,6 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 212.09) (xy 121.92 212.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9e973726-d144-45ea-a0d6-f3785b693c47")
-	)
-	(wire
-		(pts
 			(xy 236.22 193.04) (xy 238.76 193.04)
 		)
 		(stroke
@@ -20298,16 +20268,6 @@
 			(type default)
 		)
 		(uuid "bd3c5311-e697-4f0a-8c1c-f0f48138e28d")
-	)
-	(wire
-		(pts
-			(xy 124.46 175.26) (xy 123.19 175.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bd799232-8529-4a66-bb02-46c50fdddfe0")
 	)
 	(wire
 		(pts
@@ -21831,7 +21791,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 172.72) (xy 124.46 172.72)
+			(xy 104.14 172.72) (xy 109.22 172.72)
 		)
 		(stroke
 			(width 0)
@@ -22703,28 +22663,6 @@
 			)
 		)
 	)
-	(global_label "GND"
-		(shape input)
-		(at 121.92 212.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "11193fdd-5ce0-4053-9e71-bb3c8543e3e0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 121.92 212.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "2V5_3V3"
 		(shape input)
 		(at 186.69 24.13 90)
@@ -23111,28 +23049,6 @@
 		(uuid "5dc406e3-949f-4bfd-a5b0-60d13faf5a8a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 248.92 208.28 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "GND"
-		(shape input)
-		(at 121.92 250.19 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "5e630b6f-88d3-4782-a2ac-dfb896db16bd")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 121.92 250.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23715,28 +23631,6 @@
 			)
 		)
 	)
-	(global_label "GND"
-		(shape input)
-		(at 123.19 175.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f0f5e6cc-23ce-451c-ad3f-9b94797e5ea4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 123.19 175.26 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "FPDI_SCL"
 		(shape input)
 		(at 59.69 87.63 0)
@@ -23825,7 +23719,7 @@
 			)
 		)
 	)
-	(text "18650 CELL CONTACTS (replace JST-PH J8-J10, now DNP)\nPCB-mounted button (+) / spring (-) contacts, Keystone style.\nIntended for a plastic battery bay in the case: the bay provides mechanical\nretention, cell alignment and the 18650 length tolerance; contacts only carry current."
+	(text "18650 CELL CONTACTS (replace the former JST-PH J8-J10)\nBTn1 = cell n positive button (MY-18650-04-J, LCSC C19184125) -> CELLn_RAW\nBTn2 = cell n negative spring (MY-18650-05-J, LCSC C19184124) -> GND\nPCB-mounted button (+) / spring (-) contacts, Keystone style.\nIntended for a plastic battery bay in the case: the bay provides mechanical\nretention, cell alignment and the 18650 length tolerance; contacts only carry current."
 		(exclude_from_sim no)
 		(at 297.18 128.27 0)
 		(effects
@@ -23867,7 +23761,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "41a3cc1a-6b3a-4157-85e9-46d982f0928e")
-		(property "Reference" "J11"
+		(property "Reference" "BT11"
 			(at 314.96 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23950,7 +23844,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J11")
+					(reference "BT11")
 					(unit 1)
 				)
 			)
@@ -23999,7 +23893,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "10cde939-b02e-40f3-9788-ffd7c531d34d")
-		(property "Reference" "J12"
+		(property "Reference" "BT12"
 			(at 347.98 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24082,7 +23976,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J12")
+					(reference "BT12")
 					(unit 1)
 				)
 			)
@@ -24119,7 +24013,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3038bb5c-738a-4857-af7b-75492fa61d15")
-		(property "Reference" "J13"
+		(property "Reference" "BT21"
 			(at 314.96 140.97 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24202,7 +24096,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J13")
+					(reference "BT21")
 					(unit 1)
 				)
 			)
@@ -24251,7 +24145,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d7b7c55d-63d7-4092-881b-a7e818e0e2bf")
-		(property "Reference" "J14"
+		(property "Reference" "BT22"
 			(at 347.98 140.97 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24334,7 +24228,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J14")
+					(reference "BT22")
 					(unit 1)
 				)
 			)
@@ -24371,7 +24265,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "08e1b553-950b-4ada-9b35-2a2b00fe9806")
-		(property "Reference" "J15"
+		(property "Reference" "BT31"
 			(at 314.96 148.59 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24454,7 +24348,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J15")
+					(reference "BT31")
 					(unit 1)
 				)
 			)
@@ -24503,7 +24397,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5a0ae267-1f59-43cf-9668-102309fa785e")
-		(property "Reference" "J16"
+		(property "Reference" "BT32"
 			(at 347.98 148.59 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24586,7 +24480,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J16")
+					(reference "BT32")
 					(unit 1)
 				)
 			)
@@ -42374,96 +42268,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 128.27 209.55 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp yes)
-		(uuid "541284ad-2229-4a32-9bc0-242de7ec6c1b")
-		(property "Reference" "J9"
-			(at 128.27 207.01 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAT2 18650"
-			(at 128.27 214.63 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 128.27 209.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 128.27 209.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 128.27 209.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C131337"
-			(at 128.27 209.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fcbdbe74-df59-430f-bcde-00f30d977634")
-		)
-		(pin "2"
-			(uuid "532154f2-4c95-49af-a62c-ca5bffcf06f2")
-		)
-		(instances
-			(project "FCL"
-				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Regulator_Linear:XC6206PxxxMR")
 		(at 274.32 227.33 0)
 		(unit 1)
@@ -43428,96 +43232,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 128.27 247.65 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp yes)
-		(uuid "8182d466-495c-480c-af85-1016dbd0be2c")
-		(property "Reference" "J10"
-			(at 128.27 245.11 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAT3 18650"
-			(at 128.27 252.73 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 128.27 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 128.27 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 128.27 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C131337"
-			(at 128.27 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "84a4681e-6186-44f9-9e17-c134d11794fc")
-		)
-		(pin "2"
-			(uuid "fa7a8cf0-585b-4c78-8560-a57e138e6639")
-		)
-		(instances
-			(project "FCL"
-				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Battery_Management:TP4056-42-ESOP8")
 		(at 64.77 264.16 0)
 		(unit 1)
@@ -44027,96 +43741,6 @@
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
 					(reference "R59")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 129.54 172.72 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp yes)
-		(uuid "9b25fdb3-63aa-44d3-8a6b-594cde544321")
-		(property "Reference" "J8"
-			(at 129.54 170.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAT1 18650"
-			(at 137.16 175.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
-			(at 129.54 172.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 129.54 172.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 129.54 172.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C131337"
-			(at 129.54 172.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "5b83c4ca-078a-461d-93c7-57136c000bea")
-		)
-		(pin "1"
-			(uuid "1030075e-3021-4a43-9732-58d376c4cf1e")
-		)
-		(instances
-			(project "FCL"
-				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "J8")
 					(unit 1)
 				)
 			)
