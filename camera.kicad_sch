@@ -2248,7 +2248,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1614f62f-53ab-4af3-8f21-580484dbdce1")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR0178"
 			(at 299.72 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -2308,7 +2308,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/131c312a-4d96-47bc-a6ef-92948b7860a8"
-					(reference "#PWR04")
+					(reference "#PWR0178")
 					(unit 1)
 				)
 			)
@@ -2415,7 +2415,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2635fbeb-44f7-4ce1-99f0-9cd99def7f58")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR0177"
 			(at 328.93 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -2475,7 +2475,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/131c312a-4d96-47bc-a6ef-92948b7860a8"
-					(reference "#PWR03")
+					(reference "#PWR0177")
 					(unit 1)
 				)
 			)
@@ -2582,7 +2582,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6babeab1-cb5b-45be-be67-e3d6d7a5e492")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR0175"
 			(at 303.53 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -2642,7 +2642,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/131c312a-4d96-47bc-a6ef-92948b7860a8"
-					(reference "#PWR01")
+					(reference "#PWR0175")
 					(unit 1)
 				)
 			)
@@ -3267,7 +3267,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "aa5fc883-9bec-4cd0-acb7-eaa2fc0f9a3c")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR0176"
 			(at 316.23 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -3327,7 +3327,7 @@
 		(instances
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/131c312a-4d96-47bc-a6ef-92948b7860a8"
-					(reference "#PWR02")
+					(reference "#PWR0176")
 					(unit 1)
 				)
 			)
