@@ -2,7 +2,7 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "fa9ce560-b5c8-4aff-8663-a649bede396e")
+	(uuid "1be217e0-db79-464f-b922-11f8cb9c0378")
 	(paper "B")
 	(title_block
 		(title "FPGA CAM LCD - GPIO / FPGA banks")
