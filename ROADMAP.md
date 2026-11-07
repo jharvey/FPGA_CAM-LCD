@@ -14,7 +14,7 @@
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
 | 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 3 open items (ADC ref loading, CE breakout, KiCad ERC pass) |
-| 3 | Camera + display connectors / sheets | In progress |
+| 3 | Camera + display connectors / sheets | **Schematic done** – 5 open decisions before layout (see Phase 3) |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -93,7 +93,24 @@
 - [x] Add 40-pin FFC for Newhaven TFT
 - [x] Map pins (reuse known mappings from existing projects)
 - [x] Split former `LCD-Camera` sheet into dedicated `camera` and `display` sheets (residual renamed `fpga-io`)
-- [ ] Constraints note for later FPGA work
+- [x] Constraints note for later FPGA work → `doc/constraints/camera_display_pinmap.md` (ball / bank table for J7 + J1, all LVCMOS33)
+- [x] J7 pinout checked against NHD datasheet (RGB666 + SPI, IM[2:0]=001); local VDD decoupling C74/C75 added
+- [x] Backlight boost U8 (AP3032) on VSYS, 100 mA set by R19 2R0, CTRL pulled down (R18)
+- [x] OV7670 J1 pinout checked (standard 18-pin module); SCCB pull-ups present
+- [x] VCCIO for display banks 0/7 fixed at 3.3 V (RV2 DNP, RV3 fitted); legacy header J2 DNP
+
+**Open before Phase 4 (schematic decisions)**
+- [ ] **CAM_PCLK on a clock pin** – CAM_PCLK (`GP16`, N16) is plain I/O; CAM_PWDN (`GP17`) occupies GR_PCLK3_0 (L16). Recommend swapping the two labels on the `camera` sheet.
+- [ ] **J6 legacy 2×20 header** – still fitted and on every camera net plus IN5V/OUT5V (D51/D52). Decide DNP (like J2) or keep for debug; D51/D52 follow that decision.
+- [ ] **J5 VCCIO jumper (power sheet)** – 3-pin header across +2V5 / 2V5_3V3 / +3V3. With RV3 fitted, a jumper on 1–2 shorts +2V5 to +3V3 → mark DNP (or remove).
+- [ ] **User I/O for the monocular** – orphan global labels on `fpga-io` from stripped ULX3S sheets: `SW1..4` (buttons), `LED0..7`, `AUDIO_*` (12). Decide which buttons / status LEDs the monocular needs (only B0 power button exists today); delete the rest and add no-connect flags (also U1 D9).
+- [ ] **ERC clean-up** – `+5V` power-input not driven (#PWR015 on `fpga-io`, needs PWR_FLAG or goes away with the J6/D51/D52 decision). Remaining `multiple_net_names` warnings are the intentional `LCD_*`/`CAM_*` aliases.
+
+**Verify (no schematic change expected)**
+- [ ] U8 uses the `AP3019AKTR` symbol with value AP3032KTR-G1 – confirm identical SOT-23-6 pinout; confirm L4 4.7 µH against the AP3032 datasheet recommendation.
+- [ ] J7 footprint is Hirose FH12-40S-0.5SH; NHD recommends Molex 54104 (datasheet lists both -4031 and -4096). Pick contact side (top/bottom) once the FPC fold direction is fixed in Phase 4.
+- [ ] LCD VDD = +3V3 is at the panel's 3.3 V maximum (typ 3.0 V) – accepted, note only.
+- [ ] ESP32 IO32/IO33 share LCD_SCK/LCD_DC – firmware must keep them Hi-Z.
 
 **Sheet map (camera / display area)**
 
@@ -109,6 +126,40 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - [ ] Board outline for monocular (camera + TFT inline, batteries side-by-side)
 - [ ] Placement for vibration robustness (NTC next to cells)
 - [ ] 3D-print case concept
+
+**Placement constraints (prepared – outline / placement not started)**
+- *Optical axis first.* TFT faces the eye, camera faces forward, inline. Decide PCB orientation
+  before anything else:
+  - (a) PCB perpendicular to the axis: TFT on the rear face, camera on the front face.
+  - (b) PCB along the axis.
+  OV7670 modules have in-plane header pins, so with J1 as a *vertical* 2×9 socket the lens
+  looks parallel to the PCB (suits b). Option (a) needs a right-angle socket or a flat-mounted
+  module. This choice sets the J1 type and position.
+- *TFT.* 2.1" 480×480 IPS. Take the outline, active-area centre, FPC exit position / length and
+  stiffener from the drawing on datasheet page 3 (vector drawing, not transcribed here). Put J7
+  where the FPC lands without a twist; the FPC fold direction fixes the FFC contact side.
+  Keep the backlight boost loop (U8, L4, D1, C38, R19) tight and close to J7.
+- *Camera / TFT alignment.* The lens axis and the TFT active-area centre should be coaxial (or
+  offset by a known amount for software correction). Fix that in the case model, then place
+  J1 / J7 from it.
+- *FPGA side.* Display nets exit the BGA top / left (banks 0, 7); camera nets exit the right
+  (banks 1, 2, 3). Natural arrangement: J7 left / top of U1, J1 right of U1. Keep CAM_PCLK and
+  LCD_PCLK short and away from the switching regulators.
+- *Batteries.* 3×18650 (Ø18.6 × 65 mm each, ≈ 56 × 65 mm side-by-side + holder walls) are
+  off-board in case holders and connect through JST PH 2-pin J8 / J9 / J10. Place J8–J10 at the
+  board edge facing the cell bay, near the reverse-FET / LM66100 input stage. The NTC must
+  physically touch or sit next to the cells. Hot-swap needs a cell door that does not stress
+  the PCB.
+- *Edge-accessible parts.* US1 (FTDI micro-B, programming), US2 (OTG micro-B), the microSD
+  slot (SCHD3A0100), B0 power button (PTS645), J3 WIFI_OFF, J4 JTAG 2×3, BAT1 CR1225 holder.
+  The USB-C PD rework is deferred (Phase 2b / later), so leave edge room where US1 / US2 sit.
+- *ESP32 antenna.* Board edge with copper keep-out under the antenna, away from the cells and
+  any future metal case (the metal case will need an RF window).
+- *Large / optional parts.* J2 (DNP) and J6 2×20 angled headers are ≈ 51 mm long; keep or drop
+  per the layout space (J2 decision deferred to layout).
+- *Mounting.* H1–H4 M3 holes exist but are still at ULX3S positions; re-place them for the case.
+  Avoid putting tall or heavy parts (headers, inductors, cell connectors) at unsupported spans
+  (vibration).
 
 ### Phase 5 – Prototype
 - [ ] BOM with LCSC / JLCPCB numbers
