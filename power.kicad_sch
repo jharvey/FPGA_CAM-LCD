@@ -13833,6 +13833,12 @@
 		(uuid "e76aeda2-86dc-43a5-9217-77418c25892d")
 	)
 	(junction
+		(at 218.44 242.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "aed878c9-9019-43bc-adbe-52487efa2dd4")
+	)
+	(junction
 		(at 231.14 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -15312,6 +15318,16 @@
 	)
 	(wire
 		(pts
+			(xy 218.44 250.19) (xy 218.44 252.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8821e8c-562e-4bd1-9553-9d85f4bb600c")
+	)
+	(wire
+		(pts
 			(xy 270.51 63.5) (xy 270.51 66.04)
 		)
 		(stroke
@@ -16012,7 +16028,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 88.9) (xy 175.26 88.9)
+			(xy 189.23 88.9) (xy 176.53 88.9)
 		)
 		(stroke
 			(width 0)
@@ -17912,7 +17928,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 184.15) (xy 74.93 184.15)
+			(xy 63.5 184.15) (xy 74.93 184.15)
 		)
 		(stroke
 			(width 0)
@@ -18732,7 +18748,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 119.38) (xy 176.53 119.38)
+			(xy 189.23 119.38) (xy 177.8 119.38)
 		)
 		(stroke
 			(width 0)
@@ -20542,7 +20558,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 149.86) (xy 176.53 149.86)
+			(xy 189.23 149.86) (xy 177.8 149.86)
 		)
 		(stroke
 			(width 0)
@@ -22440,6 +22456,28 @@
 		(uuid "253f60e8-c1ab-4f99-a536-3882e4862b89")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 187.96 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "VBAT_OR"
+		(shape input)
+		(at 218.44 252.73 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c28f2950-478e-444b-8907-b601bcd3ea45")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 218.44 252.73 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45306,6 +45344,109 @@
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
 					(reference "U11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 218.44 246.38 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0314ce5e-5ffc-4d86-b054-03bd044ad067")
+		(property "Reference" "C73"
+			(at 219.71 245.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100uF 10V"
+			(at 219.71 247.65 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
+			(at 218.44 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 218.44 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "VBAT_OR bulk capacitance (cell contact bounce / hot-swap)"
+			(at 218.44 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23742"
+			(at 218.44 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL32A107MPVNNNE"
+			(at 218.44 246.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "280ef658-bbf6-4413-82a9-d656e6416c1b")
+		)
+		(pin "2"
+			(uuid "f3dac388-c573-46d7-b943-f5ea2ba03d8a")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
+					(reference "C73")
 					(unit 1)
 				)
 			)
