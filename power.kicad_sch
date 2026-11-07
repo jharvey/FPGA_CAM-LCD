@@ -21548,6 +21548,41 @@
 		)
 		(uuid "6eaa9c19-f8e9-46ef-a655-414a8a53d64a")
 	)
+	(wire
+		(pts
+			(xy 335.28 181.61)
+			(xy 335.28 185.42)
+		)
+		(uuid "5d36f274-f264-49c0-afee-0c8ad0ab11cc")
+	)
+	(wire
+		(pts
+			(xy 335.28 185.42)
+			(xy 342.9 185.42)
+		)
+		(uuid "62436a9d-0dcd-46bc-be61-4f58993f88e8")
+	)
+	(wire
+		(pts
+			(xy 335.28 193.04)
+			(xy 342.9 193.04)
+		)
+		(uuid "188e577a-5698-4384-a050-bda7e334c41d")
+	)
+	(wire
+		(pts
+			(xy 335.28 173.99)
+			(xy 335.28 168.91)
+		)
+		(uuid "10348c69-35ee-4898-b9ad-4e2b9376b25f")
+	)
+	(wire
+		(pts
+			(xy 335.28 193.04)
+			(xy 335.28 198.12)
+		)
+		(uuid "33429869-abdd-404a-8a3e-67e0308035ee")
+	)
 	(text "FTDI_nSLEEP is 2.5V\nD12 must be schottky"
 		(at 21.59 128.27 0)
 		(effects
@@ -22208,16 +22243,6 @@
 		)
 		(uuid "a69a6cdf-4487-4633-be95-de024f4d061e")
 	)
-	(label "VADC"
-		(at 179.07 207.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "78b6aa5d-fda5-41dd-b7f5-f3d673bfe7f8")
-	)
 	(label "VBAT1_SENSE"
 		(at 347.98 203.2 180)
 		(effects
@@ -22377,6 +22402,36 @@
 			(justify right bottom)
 		)
 		(uuid "e4667247-19f2-468d-90c9-1399c8d0c24e")
+	)
+	(label "VSYS_SENSE"
+		(at 335.28 183.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "81531d22-7471-41bf-aa98-7311e0c1b9e0")
+	)
+	(label "VREF_2V5"
+		(at 179.07 207.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59de348c-dc5f-48e3-a4ae-8692265b7ebe")
+	)
+	(label "TEMP_BAT"
+		(at 182.88 220.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da88272a-fa0c-460b-b793-7c340c2f4ade")
 	)
 	(global_label "VSYS"
 		(shape input)
@@ -23774,6 +23829,28 @@
 			(justify left)
 		)
 		(uuid "e6571a12-30d6-4175-9264-0c31154e6473")
+	)
+	(global_label "VSYS"
+		(shape input)
+		(at 335.28 168.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4c3d015f-a9b8-4d12-9658-391a1df57955")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 335.28 198.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b769b159-3c60-4348-9ef9-7c45a80aca2d")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -39667,7 +39744,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10nF"
+		(property "Value" "100nF"
 			(at 118.745 275.59 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39711,7 +39788,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15195"
+		(property "LCSC" "C1525"
 			(at 118.11 273.05 0)
 			(hide yes)
 			(show_name no)
@@ -40422,7 +40499,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10nF"
+		(property "Value" "100nF"
 			(at 120.015 237.49 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -40466,7 +40543,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15195"
+		(property "LCSC" "C1525"
 			(at 119.38 234.95 0)
 			(hide yes)
 			(show_name no)
@@ -40788,7 +40865,7 @@
 				)
 			)
 		)
-		(property "Value" "150k"
+		(property "Value" "56k"
 			(at 111.76 234.95 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -40831,7 +40908,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C22807"
+		(property "LCSC" "C23206"
 			(at 111.76 234.95 0)
 			(hide yes)
 			(show_name no)
@@ -41188,7 +41265,7 @@
 				)
 			)
 		)
-		(property "Value" "150k"
+		(property "Value" "56k"
 			(at 111.76 198.12 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -41231,7 +41308,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C22807"
+		(property "LCSC" "C23206"
 			(at 111.76 198.12 0)
 			(hide yes)
 			(show_name no)
@@ -42316,7 +42393,7 @@
 				)
 			)
 		)
-		(property "Value" "150k"
+		(property "Value" "56k"
 			(at 110.49 273.05 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42359,7 +42436,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C22807"
+		(property "LCSC" "C23206"
 			(at 110.49 273.05 0)
 			(hide yes)
 			(show_name no)
@@ -42864,7 +42941,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10nF"
+		(property "Value" "100nF"
 			(at 120.015 200.66 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42908,7 +42985,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15195"
+		(property "LCSC" "C1525"
 			(at 119.38 198.12 0)
 			(hide yes)
 			(show_name no)
@@ -43226,7 +43303,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10nF"
+		(property "Value" "100nF"
 			(at 187.325 227.33 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -43270,7 +43347,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15195"
+		(property "LCSC" "C1525"
 			(at 186.69 224.79 0)
 			(hide yes)
 			(show_name no)
