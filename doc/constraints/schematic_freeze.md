@@ -39,6 +39,8 @@ None are "must fix". The three must-fix items found in the hygiene pass were fix
 
 ## Known limitations at freeze
 
+- **IMU (post-freeze addition)** – ICM-42688-P (U22, LCSC C1850418) on new `imu` sheet, dedicated I²C to FPGA (E7/D7, INT C1/D1). Symbol lives in `symbols/fcl_local.kicad_sym`; verify footprint pin 1 orientation against the DS-000347 package drawing during placement.
+
 - **Battery contacts (post-freeze change)** – JST-PH J8/J9/J10 removed and replaced by PCB contacts BT11/BT21/BT31 (+ button, MY-18650-04-J, LCSC C19184125) and BT12/BT22/BT32 (− spring, MY-18650-05-J, LCSC C19184124). Mechanical retention and length tolerance come from the plastic battery bay (Phase 4).
 
 - **ESP32 shares display SPI pins** – `LCD_SCK`/`LCD_DC` also on ESP32 IO32/IO33; firmware must keep them Hi-Z.

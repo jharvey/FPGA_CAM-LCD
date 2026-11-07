@@ -16,6 +16,7 @@
 | 2 | Power input redesign (3×18650 + monitoring) | **Done** – schematic frozen (USB-C PD in Phase 2b, CE drive later) |
 | 3 | Camera + display connectors / sheets | **Done** – schematic frozen |
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
+| 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -46,8 +47,8 @@
 - **Near-term**: Add USB-C PD sink / trigger chip that requests highest available **5 V** current (ideally 3 A). Keeps existing TP4056 linear chargers.
 - **Longer-term**: Evaluate higher-voltage / higher-wattage PD path (9–20 V) together with switching chargers or a multi-cell charger IC for significantly higher total charge power.
 
-### Sensors (longer-term)
-- Add IMU (e.g. ICM-42688, BMI270, or similar) for orientation / motion sensing once core power + camera + display are stable.
+### Sensors
+- IMU added now (Phase 3b): TDK InvenSense **ICM-42688-P**, LCSC **C1850418** (JLCPCB extended part), I²C to the FPGA. See Phase 3b.
 
 ---
 
@@ -142,6 +143,20 @@
 
 Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 
+### Phase 3b – IMU (moved from stretch goals)
+- [x] Part: TDK InvenSense **ICM-42688-P** (6-axis gyro + accel, LGA-14 2.5×3 mm), LCSC **C1850418**, JLCPCB assembly: extended part (stock to re-check at order time)
+- [x] New sheet `imu.kicad_sch` (U22); symbol in project library `symbols/fcl_local.kicad_sym` (KiCad 10 has none); footprint `Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y` (pad pattern matches DS-000347 pin-out)
+- [x] Power: VDD + VDDIO from +3V3; decoupling per datasheet Table 10 – C76 100 nF (C1525) + C77 2.2 µF (C87995) on VDD, C78 10 nF (C15195) on VDDIO
+- [x] Interface: **I²C, dedicated bus to the FPGA** (separate from the RTC bus, so it can run at up to 1 MHz), AP_CS = VDDIO selects I²C, address **0x68** (AP_AD0 = GND), 4.7 k pull-ups R76/R77 (C25900)
+  | Net | IMU pin | FPGA ball | Bank |
+  |---|---|---|---|
+  | `IMU_SCL` | 13 AP_SCL | E7 (PT9A) | 0 |
+  | `IMU_SDA` | 14 AP_SDA | D7 (PT9B) | 0 |
+  | `IMU_INT1` | 4 INT1 | C1 (PL38A) | 7 |
+  | `IMU_INT2` | 9 INT2/FSYNC/CLKIN | D1 (PL38B) | 7 |
+  (FPGA pins reuse balls freed in Phase 3. INT2 pin can instead be used as FSYNC, e.g. camera frame sync from the FPGA; the ESP32 can reach the IMU through the FPGA.)
+- [ ] Phase 4: place U22 rigidly near the board's centre of mass, away from the boost inductor / switching regulators; record its axis orientation relative to the camera optical axis.
+
 ### Phase 4 – Mechanical & PCB
 - [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons) and add footprints for the 18650 contacts BT11–BT32, then *Update PCB from Schematic*
 - [ ] Battery bay geometry: 3×18650 bay in the case, PCB contact positions BT11–BT32, spring travel / cell-length tolerance, reverse-insertion keying
@@ -193,7 +208,6 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 
 ### Later / stretch goals
 - [ ] Higher-voltage / higher-wattage USB-C PD path + switching or multi-cell charger (max charging power)
-- [ ] IMU (orientation / motion)
 - [ ] Firmware-driven cell prioritisation (CE control) using the new 8-ch ADC data
 - [ ] Optional bottom-capacity boost stage
 

@@ -91,3 +91,14 @@ Notes
 | D54 | Status LED 1 | `LED1` | C2 | PL35D | 7 | active-high, 1 k (R70) |
 
 B0 (power button, `BTN_PWRn`) stays on the power path. Debounce the buttons in FPGA logic.
+
+## IMU (imu sheet, U22 ICM-42688-P)
+
+| IMU pin | Net | ECP5 ball | Site | Bank | Notes |
+|---|---|---|---|---|---|
+| 13 AP_SCL | `IMU_SCL` | E7 | PT9A | 0 | I²C clock, 4.7 k pull-up (R76), up to 1 MHz |
+| 14 AP_SDA | `IMU_SDA` | D7 | PT9B | 0 | I²C data, 4.7 k pull-up (R77) |
+| 4 INT1 | `IMU_INT1` | C1 | PL38A | 7 | configure push-pull |
+| 9 INT2/FSYNC | `IMU_INT2` | D1 | PL38B | 7 | INT2 or FSYNC input (camera frame sync) |
+
+I²C address 0x68 (AP_AD0 = GND); AP_CS tied to VDDIO selects I²C. Separate from the RTC bus (`FPDI_SCL`/`FPDI_SDA`, E12/B19).

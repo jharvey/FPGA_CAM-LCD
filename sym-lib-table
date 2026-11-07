@@ -17,4 +17,5 @@
 	(lib (name "st7789") (type "Legacy") (uri "${KIPRJMOD}/footprints/lcd/st7789.lib") (options "") (descr ""))
 	(lib (name "micro_sd_slide") (type "Legacy") (uri "${KIPRJMOD}/footprints/micro-sd/104031-0811.lib") (options "") (descr ""))
 	(lib (name "ulx3s-cache") (type "Legacy") (uri "C:/Users/MyPC/Desktop/ULX3S_FPGA_CAM-LCD/ulx3s-cache.lib") (options "") (descr "Legacy project cache library"))
+	(lib (name "fcl_local") (type "KiCad") (uri "${KIPRJMOD}/symbols/fcl_local.kicad_sym") (options "") (descr "Project-local symbols (monocular)"))
 )
