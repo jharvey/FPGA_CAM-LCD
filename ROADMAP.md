@@ -14,7 +14,7 @@
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
 | 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 3 open items (ADC ref loading, CE breakout, KiCad ERC pass) |
-| 3 | Camera + display connectors / sheets | **Schematic done** – 2 open items before layout (user buttons/LEDs, +5V ERC flag; see Phase 3) |
+| 3 | Camera + display connectors / sheets | **Done** – schematic closed; footprint / LED-colour items carried into Phase 4 |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -100,12 +100,18 @@
 - [x] VCCIO for display banks 0/7 fixed at 3.3 V (RV2 DNP, RV3 fitted); legacy header J2 DNP
 
 - [x] **CAM_PCLK on a clock pin** – swapped `GP16`/`GP17` on the `camera` sheet: CAM_PCLK now on L16 (GR_PCLK3_0), CAM_PWDN (with R17) on N16
-- [x] **J6 legacy 2×20 header** – DNP (kept in schematic/layout like J2; keep/drop decided at layout). D51/D52 5 V links to the header still fitted – make DNP if J6 stays unpopulated.
+- [x] **J6 legacy 2×20 header** – DNP (kept in schematic/layout like J2; keep/drop decided at layout). D51/D52 5 V links to the header are DNP as well.
 - [x] **J5 VCCIO jumper (power sheet)** – DNP; VCCIO for banks 0/7 is hard-set to 3.3 V by RV3
 
-**Open before Phase 4 (schematic decisions)**
-- [ ] **User I/O for the monocular** – orphan global labels on `fpga-io` from stripped ULX3S sheets: `SW1..4` (buttons), `LED0..7`, `AUDIO_*` (12). Decide which buttons / status LEDs the monocular needs (only B0 power button exists today); delete the rest and add no-connect flags (also U1 D9).
-- [ ] **ERC clean-up** – `+5V` power-input not driven (#PWR015 on `fpga-io`, needs PWR_FLAG or goes away with the J6/D51/D52 decision). Remaining `multiple_net_names` warnings are the intentional `LCD_*`/`CAM_*` aliases.
+- [x] **User I/O for the monocular** – 2 buttons + 2 status LEDs on `fpga-io` (besides power button B0):
+  B1/B2 PTS645 (C285463) active-low on `BTN1n` (E8) / `BTN2n` (D8), 10 k pull-ups R67/R68;
+  D53/D54 0603 red (C2286) active-high on `LED0` (B2) / `LED1` (C2) via 1 k R69/R70.
+  Orphan ULX3S labels removed (`SW3/4`, `LED2..7`, 12× `AUDIO_*`); those U1 pins plus D9 now carry no-connect flags.
+- [x] **ERC clean-up (+5V)** – D51/D52 DNP (follow J6); `#FLG02` PWR_FLAG added on `+5V` at U16 VIN (power sheet), since +5V is only fed through the D8/D9 diodes from USB VBUS. `fpga-io` now shows only the intentional `CAM_XCLK` alias warnings.
+
+**Carried into Phase 4**
+- [ ] B0/B1/B2 footprint `Button_Switch_SMD:SW_SPST_PTS645` no longer exists in the KiCad 10 library (now e.g. `SW_SPST_PTS645Sx43SMTR92`) – pick the variant matching LCSC C285463 (and the case: top vs side-actuated) during placement.
+- [ ] LED colour / brightness: D53/D54 reuse the red charge-LED part; 1 k at 3.3 V ≈ 1–1.5 mA (kept dim, the LEDs sit near the eyepiece). Revisit with the case design.
 
 **Verify (no schematic change expected)**
 - [ ] U8 uses the `AP3019AKTR` symbol with value AP3032KTR-G1 – confirm identical SOT-23-6 pinout; confirm L4 4.7 µH against the AP3032 datasheet recommendation.
@@ -119,7 +125,7 @@
 |---|---|---|
 | `display.kicad_sch` | J7 NHD-2.1-480480AF-ASXP 40-pin FFC, C74/C75 VDD decoupling, backlight boost U8 AP3032 (L4, D1, C37, C38, R18, R19) from VSYS | Global `GN0..13`/`GP0..13` (RGB, sync, SPI, reset), `GP13` (BL PWM), `+3V3`, `VSYS`, `GND` |
 | `camera.kicad_sch` | J1 OV7670 2×9 header, SCCB pull-ups R7/R14, R15 XCLK series, R16/R17, C18/C36 decoupling | Global `GN14..17,21..24`/`GP14..17,21..24` (XCLK via `GN16`, net named `CAM_XCLK`), `+3V3`, `GND` |
-| `fpga-io.kicad_sch` | U1 ECP5 bank units (BANK0/7 and BANK1 I/O), legacy ULX3S headers J2 and J6 (both DNP), D51/D52 5 V links | Global labels to the sheets above |
+| `fpga-io.kicad_sch` | U1 ECP5 bank units (BANK0/7 and BANK1 I/O), user I/O (B1/B2 buttons, D53/D54 LEDs), legacy ULX3S headers J2 and J6 and their D51/D52 5 V links (all DNP) | Global labels to the sheets above |
 
 Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 

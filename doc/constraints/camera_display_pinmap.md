@@ -80,3 +80,14 @@ Notes
 - J6 (legacy 2x20 header, DNP) also sits on every camera net.
 - Camera data spans banks 1, 2 and 3 (right-hand side of the BGA); display uses banks 0 and 7
   (top / left). This favours display on the left, camera on the right of the FPGA in placement.
+
+## User I/O (fpga-io sheet)
+
+| Part | Signal | Net | ECP5 ball | Site | Bank | Polarity |
+|---|---|---|---|---|---|---|
+| B1 | Button 1 | `BTN1n` | E8 | PT13A | 0 | active-low, 10 k pull-up (R67) |
+| B2 | Button 2 | `BTN2n` | D8 | PT13B | 0 | active-low, 10 k pull-up (R68) |
+| D53 | Status LED 0 | `LED0` | B2 | PL35C | 7 | active-high, 1 k (R69) |
+| D54 | Status LED 1 | `LED1` | C2 | PL35D | 7 | active-high, 1 k (R70) |
+
+B0 (power button, `BTN_PWRn`) stays on the power path. Debounce the buttons in FPGA logic.
