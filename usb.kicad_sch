@@ -9977,6 +9977,194 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Oscillator:ASE-xxxMHz"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "Y"
+				(at -5.08 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "ASE-xxxMHz"
+				(at 1.27 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm"
+				(at 17.78 -8.89 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "http://www.abracon.com/Oscillators/ASV.pdf"
+				(at -2.54 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "3.3V CMOS SMD Crystal Clock Oscillator, Abracon"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "3.3V CMOS SMD Crystal Clock Oscillator"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Oscillator*SMD*Abracon*ASE*3.2x2.5mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "ASE-xxxMHz_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -0.762) (xy -1.016 -0.762) (xy -1.016 0.762) (xy -0.508 0.762) (xy -0.508 -0.762) (xy 0 -0.762)
+						(xy 0 0.762) (xy 0.508 0.762) (xy 0.508 -0.762) (xy 0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "ASE-xxxMHz_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "Vdd"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "WIFI_EN <=v3.1.4"
 		(exclude_from_sim no)
@@ -10433,16 +10621,6 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 36.83) (xy 132.08 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03a37892-7419-4128-89e8-de7ef1cb9b1b")
-	)
-	(wire
-		(pts
 			(xy 54.61 38.1) (xy 49.53 38.1)
 		)
 		(stroke
@@ -10563,7 +10741,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 36.83) (xy 132.08 30.48)
+			(xy 132.08 39.37) (xy 132.08 30.48)
 		)
 		(stroke
 			(width 0)
@@ -12559,7 +12737,7 @@
 	)
 	(global_label "CLK_25MHz"
 		(shape input)
-		(at 142.24 36.83 0)
+		(at 146.05 39.37 0)
 		(effects
 			(font
 				(size 1.524 1.524)
@@ -12568,7 +12746,7 @@
 		)
 		(uuid "ca6a64c4-917d-4ced-a5d0-a147528e54d5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 142.24 36.83 0)
+			(at 146.05 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12798,6 +12976,16 @@
 				)
 			)
 		)
+	)
+	(wire
+		(pts
+			(xy 132.08 39.37) (xy 130.81 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7563b7c7-1018-4abd-8b71-6d6e98611aaa")
 	)
 	(symbol
 		(lib_id "Device:D_Schottky_Small")
@@ -15782,9 +15970,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Crystal_GND24")
-		(at 138.43 36.83 0)
-		(mirror x)
+		(lib_id "Oscillator:ASE-xxxMHz")
+		(at 138.43 39.37 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -15794,7 +15981,7 @@
 		(dnp no)
 		(uuid "00000000-0000-0000-0000-00005a079883")
 		(property "Reference" "Y1"
-			(at 141.605 41.91 0)
+			(at 144.78 33.02 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15805,7 +15992,7 @@
 			)
 		)
 		(property "Value" "FNETHE025"
-			(at 141.605 40.005 0)
+			(at 144.78 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15816,7 +16003,7 @@
 			)
 		)
 		(property "Footprint" "oscxo:Crystal_SMD_7050_4Pads"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15827,7 +16014,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/FNETHE025.pdf"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15838,7 +16025,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15859,7 +16046,7 @@
 			)
 		)
 		(property "MPN" "FNETHE025"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15903,7 +16090,7 @@
 			)
 		)
 		(property "Mouser" "729-FNETHE025"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15925,7 +16112,7 @@
 			)
 		)
 		(property "Digikey" "3305-7050XOM2500BMD13CCC-CT-ND"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15947,7 +16134,7 @@
 			)
 		)
 		(property "Newark" "80AC8624"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15958,7 +16145,7 @@
 			)
 		)
 		(property "LCSC" "C390569"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15980,7 +16167,7 @@
 			)
 		)
 		(property "Koncar" "FQ001"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15991,7 +16178,7 @@
 			)
 		)
 		(property "Side" "T"
-			(at 138.43 36.83 0)
+			(at 138.43 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18465,7 +18652,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 138.43 41.91 0)
+		(at 138.43 46.99 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -18475,7 +18662,7 @@
 		(dnp no)
 		(uuid "00000000-0000-0000-0000-00005a07a1d3")
 		(property "Reference" "#PWR0110"
-			(at 138.43 48.26 0)
+			(at 138.43 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18486,7 +18673,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 138.43 45.72 0)
+			(at 138.43 50.8 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -18496,7 +18683,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 138.43 41.91 0)
+			(at 138.43 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18507,7 +18694,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 41.91 0)
+			(at 138.43 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18518,7 +18705,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 138.43 41.91 0)
+			(at 138.43 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

@@ -13,8 +13,9 @@
 |-------|-------------|--------|
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
-| 2 | Power input redesign (3×18650 + monitoring) | **Core done** – 1 open item (KiCad ERC pass) |
-| 3 | Camera + display connectors / sheets | **Done** – schematic closed; footprint / LED-colour items carried into Phase 4 |
+| 2 | Power input redesign (3×18650 + monitoring) | **Done** – schematic frozen (USB-C PD in Phase 2b, CE drive later) |
+| 3 | Camera + display connectors / sheets | **Done** – schematic frozen |
+| – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 4 | PCB mechanical outline (monocular form) | Pending |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
@@ -82,7 +83,7 @@
   - [ ] Later: pick GPIO source (ESP32 / FPGA / I²C expander) and the level-shift circuit, together with firmware cell prioritisation.
 - [ ] Expose TP4056 CE / ~CHRG status (currently CE tied to +5 V, ~CHRG drives LEDs only)
 - [x] Schematic clean-up: 4 dangling wire stubs fixed (PWREN ×3, VBAT1)
-- [ ] Final KiCad ERC run + visual review of the power area (remaining known items: unused ADS1115 symbol in the power-sheet library cache – drops on re-save; orphan ADC_SCLK/ADC_MOSI/ADC_CSn/ADC_MISO global labels on `ram` from the removed MAX11123 analog sheet – ask before removing)
+- [x] Final KiCad ERC run – done in the schematic-freeze pass (`doc/constraints/schematic_freeze.md`): 179 items, all classified acceptable or deferred to layout. Orphan `ADC_*` labels on `ram` kept (harmless, unconnected FPGA pins). The unused ADS1115 cache entry drops on the next save in KiCad.
 - [ ] ~~Add USB-C PD sink/trigger chip~~ → moved to **Phase 2b** (below)
 - [ ] (Optional later) Boost stage to extract remaining capacity below ~3.5 V
 
@@ -132,6 +133,7 @@
 Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`/`GP*` global labels carry the connections.
 
 ### Phase 4 – Mechanical & PCB
+- [ ] **First:** resolve the 12 footprint-link issues from the freeze note (mounting holes, socket strips, RV2/RV3, PTS645 buttons), then *Update PCB from Schematic*
 - [ ] Board outline for monocular (camera + TFT inline, batteries side-by-side)
 - [ ] Placement for vibration robustness (NTC next to cells)
 - [ ] 3D-print case concept
