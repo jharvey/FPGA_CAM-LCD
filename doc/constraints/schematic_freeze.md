@@ -54,5 +54,5 @@ None are "must fix". The three must-fix items found in the hygiene pass were fix
 - **J7 FFC contact side** and **J1 camera socket type** depend on the Phase 4 PCB orientation.
 - **AP3032 on AP3019A symbol**, **L4 = 4.7 µH** – verify against AP3032 datasheet before ordering.
 - **Status LEDs** – red 0603, ~1–1.5 mA; colour / brightness to revisit with the case.
-- **USB-C PD** – deferred (Phase 2b / later); USB stays micro-B (US1, US2).
+- **USB-C PD (post-freeze addition)** – new power-only USB-C charge port J17 with CH224K (U23, C970725) fixed at 5 V (CFG1 = VDD), feeding `+5V` via D55 SS34. US1/US2 stay micro-B. Higher-voltage PD still deferred.
 - **PCB** not yet synced to the schematic (no footprints for the camera/display/user-I/O parts yet).

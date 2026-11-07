@@ -1364,6 +1364,51 @@
 			)
 		)
 	)
+	(sheet
+		(at 264.16 173.99)
+		(size 19.05 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "46e043b3-b829-4991-88bc-d0e611abe5a4")
+		(property "Sheetname" "usbc_pd"
+			(at 264.16 173.151 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "usbc_pd.kicad_sch"
+			(at 264.414 185.928 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d"
+					(page "9")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

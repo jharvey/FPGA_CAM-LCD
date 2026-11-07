@@ -13,7 +13,8 @@
 |-------|-------------|--------|
 | 0 | Architecture decisions locked | Done |
 | 1 | Branch created, cleanup | Done |
-| 2 | Power input redesign (3×18650 + monitoring) | **Done** – schematic frozen (USB-C PD in Phase 2b, CE drive later) |
+| 2 | Power input redesign (3×18650 + monitoring) | **Done** – schematic frozen (CE drive later) |
+| 2b | USB-C 5 V PD trigger | **Done** – CH224K 5 V-only sink on new USB-C charge port (schematic) |
 | 3 | Camera + display connectors / sheets | **Done** – schematic frozen |
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
@@ -45,7 +46,7 @@
 - Case: 3D-printed first → metal later
 
 ### Power / charging evolution
-- **Near-term**: Add USB-C PD sink / trigger chip that requests highest available **5 V** current (ideally 3 A). Keeps existing TP4056 linear chargers.
+- **Near-term (done, Phase 2b)**: USB-C PD sink / trigger **WCH CH224K (LCSC C970725)** fixed to request **5 V only** on a new USB-C charge port. Keeps existing TP4056 linear chargers.
 - **Longer-term**: Evaluate higher-voltage / higher-wattage PD path (9–20 V) together with switching chargers or a multi-cell charger IC for significantly higher total charge power.
 
 ### Sensors
@@ -99,9 +100,22 @@
 - [ ] ~~Add USB-C PD sink/trigger chip~~ → moved to **Phase 2b** (below)
 - [ ] (Optional later) Boost stage to extract remaining capacity below ~3.5 V
 
-### Phase 2b – USB-C 5 V PD trigger (deferred, not started)
-- [ ] Add USB-C PD sink/trigger chip requesting max 5 V current (preferably 3 A); keep TP4056s
-- Higher-voltage / higher-wattage PD stays under *Later / stretch goals*
+### Phase 2b – USB-C 5 V PD trigger
+- [x] New sheet `usbc_pd.kicad_sch`. The board had no USB-C connector (US1 FTDI and US2 OTG are micro-B), so a **dedicated power-only USB-C charge port** was added; both micro-B data ports are unchanged.
+  | Ref | Part | LCSC | Role |
+  |---|---|---|---|
+  | U23 | **WCH CH224K** (ESSOP-10) | **C970725** | USB PD sink controller, 5 V only |
+  | J17 | GCT USB4125-GF-A, USB-C 6P power-only | C3151650 (JLC extended) | charge port, footprint `USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal` |
+  | D55 | SS34 Schottky 3 A / 40 V (SMA) | C8678 | VBUS_C → `+5V` OR-ing, parallel to D8/D9 |
+  | R84 | 1 k 0603 | C21190 | VBUS_C → CH224K VDD (shunt regulator) |
+  | C79 | 1 µF 0603 | C15849 | CH224K VDD decoupling |
+  | R85 | 10 k 0402 | C25744 | CH224K VBUS sense |
+  | C80 | 10 µF 0805 | C15850 | VBUS_C bulk |
+- [x] **5 V only:** CH224K level mode – **CFG1 (pin 9) tied directly to VDD** (= request 5 V), CFG2/CFG3 to GND. No CFG1 resistor: a resistor or open CFG1 would select 9/12/15/20 V. Marked on the sheet.
+- [x] PD-only mode (datasheet §5.5): DP shorted to DM on the CH224K, not wired to the connector. CC1/CC2 go straight to the CH224K (Rd is internal – the external 5.1 k in the WCH reference is only for the CH221K). PG unused. `#FLG03` marks PD_VDD as a supply for ERC.
+- [x] TP4056 path unchanged: `VBUS_C` only joins `+5V` through D55, like the existing micro-B inputs.
+- [ ] Phase 4: J17 at the case edge; keep the VBUS_C → D55 → +5V path wide enough for 3 A; D8 / D9 (STPS2L40AF, 2 A) remain the micro-B paths.
+- Full higher-voltage / higher-wattage PD charging (9–20 V + switching or multi-cell charger) remains a **Later** item.
 
 ### Phase 3 – Camera & Display
 - [x] Add OV7670 connector / sheet
@@ -209,7 +223,7 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   the PCB.
 - *Edge-accessible parts.* US1 (FTDI micro-B, programming), US2 (OTG micro-B), the microSD
   slot (SCHD3A0100), B0 power button (PTS645), J3 WIFI_OFF, J4 JTAG 2×3, BAT1 CR1225 holder.
-  The USB-C PD rework is deferred (Phase 2b / later), so leave edge room where US1 / US2 sit.
+  J17 (USB-C 5 V charge port, Phase 2b) also needs case-edge access; higher-voltage PD stays deferred.
 - *ESP32 antenna.* Board edge with copper keep-out under the antenna, away from the cells and
   any future metal case (the metal case will need an RF window).
 - *Large / optional parts.* J2 and J6 2×20 angled headers (both DNP) are ≈ 51 mm long; keep the
@@ -238,7 +252,7 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - AD7689 8-ch ADC on SPI (WIFI_GPIO19/21/22/26, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
 - CHGx LEDs are local only; charger enable/status not yet routed to a processor (open item).
 - Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control: ~CE pins are broken out via R71–R73 (0 Ω), and the level-shifted drive is still to be designed.
-- Near-term PD chip will request highest available 5 V current while keeping the existing TP4056s.
+- CH224K (U23) requests a 5 V-only PD contract on the USB-C charge port; the existing TP4056s are unchanged.
 
 ---
 
