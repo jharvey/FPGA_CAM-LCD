@@ -15973,7 +15973,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
 			(at 99.06 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -20679,7 +20679,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp yes)
 		(uuid "8a002c7f-2010-4da4-bbb6-c30ff503cd33")
@@ -20703,7 +20703,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Socket_Strips:Socket_Strip_Angled_2x20"
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Horizontal"
 			(at 259.08 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -20981,7 +20981,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
 			(at 63.5 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -21385,7 +21385,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp yes)
 		(uuid "a9f71491-d105-4c6c-8b84-5b70a174aa9b")
@@ -21409,7 +21409,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Socket_Strips:Socket_Strip_Angled_2x20"
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Horizontal"
 			(at 143.51 246.38 0)
 			(hide yes)
 			(show_name no)

@@ -4498,7 +4498,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
 			(at 132.08 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -4612,7 +4612,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
 			(at 205.74 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -6109,7 +6109,7 @@
 				)
 			)
 		)
-		(property "Footprint" "micro-sd-schd3a0100-104031-811:SCHD3A100-104031-0811"
+		(property "Footprint" "fcl_local:microSD_Molex_104031-0811_FCL"
 			(at 252.73 137.16 0)
 			(hide yes)
 			(show_name no)

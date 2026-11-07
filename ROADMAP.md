@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – axis, 85 × 75 mm outline and zones locked (4.1); placement not started |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – outline + major mechanical parts placed (4.2), not routed; next: Update PCB from Schematic |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -226,7 +226,7 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 - The axis passes through the **board centre (42.5, 37.5)**: camera lens centre and TFT active-area centre are **coaxial** (target ±0.5 mm), so no software parallax offset is needed.
 
 **2. Outline – LOCKED: 85.0 × 75.0 mm**, rectangle with R3 corners, 1.6 mm, **4 layers** (ULX3S-derived stack-up and BGA 0.8 mm rules).
-- M3 holes H1–H4 at (4, 4), (81, 4), (4, 71), (81, 71) – outside the cell rows.
+- M3 holes H1 (4, 4), H3 (4, 71), H4 (81, 71). **H2 (81, 4) removed from the rev-A board** (*Exclude from board*): that corner is inside the ESP32-S3 antenna keep-out, which forbids any footprint; the case supports the corner with a ledge, which also keeps a metal screw away from the antenna. The cells are held by the bay, not the PCB, so 3 screws are enough.
 - **Fresh PCB:** the ULX3S placement/routing in `FCL.kicad_pcb` is not reused (different outline, most parts gone).
 
 | Fit check | Needed | Available |
@@ -247,7 +247,7 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 | + buttons BT11 / BT21 / BT31 | B | right end, x ≈ 79 | each → `CELLn_RAW` → Q3/Q4/Q5 on F directly behind |
 | Power input stage (Q3–Q5, U11/U13/U15 TP4056, LM66100 U12/U14/U16/U18/U19, sense dividers, ADC U21, REF U17) | F | right strip, x ≈ 62–85 | short cell paths; TP4056 heat kept away from the IMU and camera |
 | NTC TH1 | B | between cell rows, in contact with the cells | |
-| FPGA U1 + SDRAM U2 + flash U10 + TLV62569 regulators | F | left strip, x ≈ 0–25 (U1 centre ≈ (13, 30)), SDRAM below U1 | camera banks 1/2/3 (right side of the BGA) face J1 |
+| FPGA U1 + SDRAM U2 + flash U10 + TLV62569 regulators | F | left strip, U1 centre (17, 28) rotated 90° CW, SDRAM below U1 | rotation puts banks 2/3 (SDRAM + camera) at the bottom and bank 1/0 toward the centre; x ≥ 8 keeps the BGA clear of the spring-contact tabs that come through the board at x ≈ 5.5 |
 | **IMU U22** | F | **on the optical axis, under the camera module (≈ 42.5, 37.5)** | board centre = most rigid point; away from TP4056/boost heat; record its axes relative to the camera |
 | ESP32-S3 U9 | F | top-right, antenna at the top edge (y < 7) | antenna keep-out on all layers; no cell behind it (cells start at y ≈ 8.7); case needs an RF window |
 
@@ -255,18 +255,50 @@ Reference renders: `Pic_LCD_ISO.png` (eye side) and `Pic_Cam_ISO.png` (scene sid
 
 | Edge | Parts |
 |---|---|
-| Bottom | J17 USB-C (F, x ≈ 62), SD1 microSD (F, x ≈ 25), J7 FFC (B, centre), servo headers J_SRV1–6 (F, bottom-right block ≈ 16 × 8 mm, DNP but footprints kept – next to the power stage for future `SERVO_V`) |
+| Bottom | J17 USB-C (F, x ≈ 62, mouth flush with the edge), SD1 microSD (F, x ≈ 25, Molex 104031 card slot ≈ 1 mm inside the edge, card protrudes ≈ 3 mm), J7 FFC (B, centre, cable entry from the edge), servo headers J_SRV1–6 (F, bottom-right block ≈ 16 × 8 mm, DNP but footprints kept – next to the power stage for future `SERVO_V`) |
 | Top | B0 power, B1 / B2 user buttons, D53 / D54 status LEDs (F, top-left to centre); ESP32-S3 antenna (top-right) |
 | Internal (no edge needed) | B3 BOOT / B4 RESET (near U9, may sit behind case pin-holes), J3 WIFI_OFF, BAT1 CR1225 (F) |
 | Not on the rev-A PCB | J2, J6 legacy 2×20 headers (DNP, ≈ 51 mm long – do not fit) → set *Exclude from board*. DNP fallbacks U6/US1/US2/J4: keep footprints only if space remains after placement. |
 
-#### 4.2 Phase 4 checklist
+#### 4.2 First board outline + mechanical placement (done 2026-11-07, not routed)
+`FCL.kicad_pcb` was rebuilt from scratch (ULX3S placement/routing, tracks, zones and nets removed; 4-layer stack-up and design rules kept). Board origin = page (100, 100) = top-left corner; drill/grid origin set there. Coordinates below are board mm, front (top) view.
+
+| Ref | Side | Position | Notes |
+|---|---|---|---|
+| Outline | – | 85.0 × 75.0, R3 corners | Edge.Cuts |
+| H1 / H3 / H4 | – | (4, 4) / (4, 71) / (81, 71) | M3 ISO14580 pad; H2 excluded (antenna corner) |
+| U22 IMU | F | (42.5, 37.5) – on the optical axis | under the camera module |
+| J1 camera socket | F | pad centroid (42.5, 52.5), 2×9 along X | 15 mm lens-to-header offset is provisional – measure the OV7670 module |
+| U1 ECP5 | F | (17, 28), rot −90 | courtyard x 7.9–26.1 |
+| U9 ESP32-S3 | F | (68, 12.75), antenna at the top edge | library keep-out zone kept (no copper/footprints x 44–92, y < 6) |
+| J7 display FFC | B | (42.5, 69.1), opening toward the bottom edge | |
+| J17 USB-C | F | (62, 70.7) | |
+| SD1 microSD | F | (25, 68.3), rot 180 | new footprint `fcl_local:microSD_Molex_104031-0811_FCL` |
+| B0 / B1 / B2 | F | (14, 5.5) / (25, 5.5) / (36, 5.5) | top edge |
+| J4 JTAG (DNP fallback) | F | (49, 12) | below the antenna band |
+| TH1 NTC | B | (42.5, 27.75) | between cell rows 1 and 2 |
+| BT12 / BT22 / BT32 (− springs) | B | x 5.5, y 18 / 37.5 / 57 | spring tips reach x ≈ 18 (≈ 5 mm compression with a 65 mm cell) |
+| BT11 / BT21 / BT31 (+ buttons) | B | x 79.5, y 18 / 37.5 / 57 | foot-to-foot 74 mm |
+
+Reference drawings: optical-axis crosshair (Dwgs.User), OV7670 35 × 35 keep-out (F.Fab), three 65 × 18.6 cell outlines and a nominal Ø53.3 TFT circle (B.Fab).
+
+Footprint work done for this step:
+- 18650 contacts: real EasyEDA footprints + STEP models for **MY-18650-04-J (C19184125)** and **MY-18650-05-J (C19184124)** in `footprints/fcl_local.pretty` / `fcl_local.3dshapes` – both are **through-hole** (slotted tab + two SMD anchor pads).
+- microSD: `fcl_local:microSD_Molex_104031-0811_FCL` (KiCad's Molex 104031-0811 pattern, pad 9 renamed GS4, shield tabs GM1–GM4 to match the SD1 symbol). The old dual SCHD3A0100/104031 footprint put extra pads past the card opening. Symbol pins 11, 12 (NC) and GS1–GS3 (extra GND) have no pads – *Update PCB* lists them as warnings.
+- All 14 footprint-link issues fixed (PTS645 → `SW_SPST_PTS645Sx43SMTR92`, `MountingHole:` library, 2.54 mm sockets, RV2/RV3 pad name); J2/J6 and H2 set *Exclude from board*.
+
+DRC after placement (mechanical categories): no courtyard overlaps, no keep-out violations, no edge-clearance violations. Remaining items are for the routing phase: pad-to-pad clearance / solder-mask bridges inside the fine-pitch U22 (0.5 mm LGA) and J17 (USB-C) with the inherited 0.2 mm clearance rule, J17 pad-to-peg hole clearance (footprint-inherent), and silkscreen cosmetics.
+
+#### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
-- [ ] Close KiCad editors, then fix the 12 footprint-link issues + add footprints for BT11–BT32 (MY-18650-04-J / -05-J), set J2/J6 *Exclude from board*, then *Update PCB from Schematic* into a fresh board
-- [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset, MY-18650 contact footprints
-- [ ] Draw the 85 × 75 outline, holes, axis marker and keep-outs (camera module, antenna, cell bay, contacts)
-- [ ] Battery bay geometry: contact positions, spring travel / cell-length tolerance, reverse-insertion keying
-- [ ] Placement per 4.1 (vibration: no tall/heavy parts on unsupported spans; keep CAM_PCLK / LCD_PCLK short and away from switchers)
+- [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
+- [x] 85 × 75 outline, holes, axis marker, camera / cell / TFT reference outlines; antenna keep-out from the ESP32-S3 footprint
+- [x] Major mechanical items placed (4.2)
+- [ ] **In KiCad: Tools → Update PCB from Schematic** (keep the defaults; the placed footprints already carry their schematic links) to add the remaining ≈ 250 parts and all nets
+- [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset → adjust J1 / J7
+- [ ] Battery bay geometry: final contact positions, spring travel / cell-length tolerance, reverse-insertion keying
+- [ ] Fine-pitch design rules (U22, J17, BGA fan-out) before routing
+- [ ] Remaining placement per 4.1 (vibration: no tall/heavy parts on unsupported spans; keep CAM_PCLK / LCD_PCLK short and away from switchers)
 - [ ] 3D-print case concept
 
 ### Phase 5 – Prototype

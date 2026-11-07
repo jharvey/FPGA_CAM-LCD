@@ -34,4 +34,5 @@
   (lib (name dm)(type KiCad)(uri "$(KIPRJMOD)/footprints/logo/dm.pretty")(options "")(descr ""))
   (lib (name oshw)(type KiCad)(uri "$(KIPRJMOD)/footprints/logo/oshw.pretty")(options "")(descr ""))
   (lib (name abs07)(type KiCad)(uri "$(KIPRJMOD)/footprints/crystal/abs07.pretty")(options "")(descr ""))
+  (lib (name fcl_local)(type KiCad)(uri "${KIPRJMOD}/footprints/fcl_local.pretty")(options "")(descr "Project-local footprints (monocular)"))
 )

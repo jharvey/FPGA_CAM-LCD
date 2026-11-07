@@ -526,7 +526,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Mounting_Holes:MountingHole_3.2mm_M3_ISO14580_Pad"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO14580_Pad"
 			(at 80.01 161.29 0)
 			(hide yes)
 			(show_name no)
@@ -576,7 +576,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "00000000-0000-0000-0000-000058e6bace")
@@ -600,7 +600,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Mounting_Holes:MountingHole_3.2mm_M3_ISO14580_Pad"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO14580_Pad"
 			(at 107.95 161.29 0)
 			(hide yes)
 			(show_name no)
@@ -674,7 +674,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Mounting_Holes:MountingHole_3.2mm_M3_ISO14580_Pad"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO14580_Pad"
 			(at 107.95 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -748,7 +748,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Mounting_Holes:MountingHole_3.2mm_M3_ISO14580_Pad"
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO14580_Pad"
 			(at 80.01 143.51 0)
 			(hide yes)
 			(show_name no)

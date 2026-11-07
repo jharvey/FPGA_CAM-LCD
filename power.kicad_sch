@@ -23783,7 +23783,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-04-J"
 			(at 312.42 135.89 0)
 			(hide yes)
 			(show_name no)
@@ -23915,7 +23915,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
 			(at 345.44 135.89 0)
 			(hide yes)
 			(show_name no)
@@ -24035,7 +24035,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-04-J"
 			(at 312.42 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -24167,7 +24167,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -24287,7 +24287,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-04-J"
 			(at 312.42 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -24419,7 +24419,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
 			(at 345.44 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -31301,7 +31301,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
 			(at 55.88 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -38062,7 +38062,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.29x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 22.86 46.99 0)
 			(hide yes)
 			(show_name no)
@@ -38173,7 +38173,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.29x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)

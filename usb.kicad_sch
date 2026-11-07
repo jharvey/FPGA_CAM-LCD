@@ -14771,7 +14771,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Socket_Strips:Socket_Strip_Straight_2x03"
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical"
 			(at 237.49 157.48 0)
 			(hide yes)
 			(show_name no)
