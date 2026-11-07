@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – outline + major mechanical parts placed (4.2), not routed; next: Update PCB from Schematic |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – all parts rough-placed by function (4.5), not routed; next: fine-pitch rules, placement refinement, routing |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -326,17 +326,45 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 8. **Hot-swap door:** opening/closing must not load the PCB; door hinge and latch on the case.
 9. Firmware: run the IMU with a suitable low-pass / ODR so residual board resonance (plate modes between supports) is filtered.
 
+#### 4.5 Netlist import + rough functional placement (2026-11-07, not routed)
+- *Update PCB from Schematic* done in KiCad (after renumbering duplicate `#PWR01–04` on the camera sheet). All 21 pre-placed parts kept their positions.
+- **Excluded from the rev-A board** (*Exclude from board*, DNP or obsolete; no room on 85 × 75): FT231X fallback U6 + micro-B US1/US2 and their parts (D8, D9, D20, D21, D23–D26, R9, R40, R49, R50, R52–R54, R63, R64); D51/D52 (5 V links for the already-excluded J6); J5 (obsolete VCCIO jumper); J3 WIFI_OFF header (its pins would enter the battery bay; B4 RESET and the FPGA's `WIFI_EN` cover it). **J4 stays as the JTAG fallback.**
+- **RP1–RP3** (NC solder jumpers on the 1V1/2V5/3V3 rails, cut to measure current) now use `fcl_local:R_0805_Jumper_NC_NetTie` – the same copper-bridge jumper with pads 1–2 declared as a **net tie**, so DRC accepts the intentional short.
+- 246 footprints, all inside the outline. Rough placement by functional group into the 4.1 zones (front unless noted):
+
+| Group | Where |
+|---|---|
+| Flash U10, 25 MHz Y1, AE1, flash/config resistors | top-left above U1 |
+| Regulators U3–U5, L1–L3, their caps and feedback | top-centre between U1 and J4 (outside the IMU quiet radius); feedback parts partly on B |
+| SDRAM U2 | below U1 (15, 50); decoupling on B under U2 |
+| FPGA decoupling, RV2/RV3 | B, under/next to U1 |
+| RTC U7 + Y2, power-button / wake logic, D11 | around the IMU under the camera module (low-noise logic only) |
+| CR1225 holder BAT1 | bottom-centre (43.5, 67.6) |
+| IMU C76–C78, R76/R77 | ring around U22 |
+| Camera R7, R14–R17, C18, C36 | just below J1 |
+| Chargers U11/U13/U15, LM66100 U12/U14/U18/U19, Q3–Q5, sense dividers, C73, charge LEDs | right strip x ≈ 58–78 |
+| ADC U21, REF U17, LDO U20 and passives | B, right end under cell 1 (all ≤ 1.5 mm) |
+| USB-C group U24, R84, R85, C79, C80, U16, +5V caps | above / beside J17; CH224K U23 on B bottom strip; D55 right of J17 |
+| Servo J_SRV1–6 (DNP) | 2 × 3 block x ≈ 59–77, y ≈ 48–61 (pins clear of `BAY_RIB_2` and the BT31 plate); R78–R83 on B |
+| Display boost U8, L4, D1, C37, C38, R18, R19, C74, C75 | B bottom strip right of J7 (not under the cells) |
+| BOOT/RESET B3/B4, button/LED/I²C pull-ups | B top strip (above the cells) |
+| Status LEDs D53/D54 | F top edge next to B2 |
+
+- Checks: no courtyard overlaps, no shorts, no keep-out / rule-area / edge violations; every back-side part under the cells is a low-profile package. DRC remaining: 199 solder-mask bridges + 13 clearance hits **all inside single fine-pitch parts** (U2, U21, J7, J17, U22, SOICs) → design-rule task; 499 unrouted connections; silkscreen overlaps (cosmetic). Schematic parity: only the 5 expected SD1 pins without pads (11, 12, GS1–GS3).
+- **Placement concerns to address while refining:** the three TP4056s sit close together (up to ≈ 3 × 1.3 W at 1 A charge each) → spread them, add thermal vias/copper, or lower the charge current; FPGA decoupling should move directly under the BGA ball field once the fan-out is planned; silkscreen cleanup.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
 - [x] 85 × 75 outline, holes, axis marker, camera / cell / TFT reference outlines; antenna keep-out from the ESP32-S3 footprint
 - [x] Major mechanical items placed (4.2)
-- [ ] **In KiCad: Tools → Update PCB from Schematic** (keep the defaults; the placed footprints already carry their schematic links) to add the remaining ≈ 250 parts and all nets
+- [x] Update PCB from Schematic (4.5); fallback/obsolete parts excluded from board; RP1–RP3 as net-tie jumpers
+- [x] Rough functional placement of all parts into the 4.1 zones (4.5)
 - [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset → adjust J1 / J7
 - [x] Battery bay geometry on the PCB: contact pitch 20.5 mm, cell-length window, bay rule areas, NTC thermal pad, IMU quiet zone, stress list (4.4)
 - [ ] Confirm spring free/solid length and contact plate dimensions on the MY-18650-04/05-J drawings; bay CAD (ribs, end walls, J7 bridge, boss)
-- [ ] Fine-pitch design rules (U22, J17, BGA fan-out) before routing
-- [ ] Remaining placement per 4.1 (vibration: no tall/heavy parts on unsupported spans; keep CAM_PCLK / LCD_PCLK short and away from switchers)
+- [ ] Fine-pitch design rules (solder-mask web / clearance for 0.5 mm parts: U2, U21, U22, J7, J17; BGA fan-out) before routing
+- [ ] Placement refinement: TP4056 thermal spread, decoupling under the BGA, short CAM_PCLK / LCD_PCLK, silkscreen
 - [ ] 3D-print case concept
 
 ### Phase 5 – Prototype

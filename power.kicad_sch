@@ -32188,7 +32188,7 @@
 				)
 			)
 		)
-		(property "Footprint" "jumper:R_0805_2012Metric_Pad1.29x1.40mm_HandSolder_Jumper_NC"
+		(property "Footprint" "fcl_local:R_0805_Jumper_NC_NetTie"
 			(at 271.78 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -32354,7 +32354,7 @@
 				)
 			)
 		)
-		(property "Footprint" "jumper:R_0805_2012Metric_Pad1.29x1.40mm_HandSolder_Jumper_NC"
+		(property "Footprint" "fcl_local:R_0805_Jumper_NC_NetTie"
 			(at 271.78 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -32443,7 +32443,7 @@
 				)
 			)
 		)
-		(property "Footprint" "jumper:R_0805_2012Metric_Pad1.29x1.40mm_HandSolder_Jumper_NC"
+		(property "Footprint" "fcl_local:R_0805_Jumper_NC_NetTie"
 			(at 271.78 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -36472,7 +36472,7 @@
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(in_pos_files yes)
 		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005aa2a24d")
