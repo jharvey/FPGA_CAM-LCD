@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge (4.6), digital core (4.7), analog/power + NTCs (4.8) placed; decoupling/RTC/support/servo staged; not routed |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge (4.6), digital core (4.7), analog/power + NTCs (4.8), decoupling (4.9) placed; RTC/support/servo staged; not routed |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -406,6 +406,16 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 
 - **Still staged off-board:** FPGA/SDRAM decoupling and rail caps (C16, C17, C19, C20, C25–C35, C47–C53, RV2, RV3 – go on B under U1/U2 with the BGA fan-out), RTC group (U7, Y2, C54–C57, R65, BAT1), flash/config, camera, ESP32 support (B3, B4 …), LEDs D53/D54, AE1, servo J_SRV1–6 + R78–R83 (last).
 - DRC: no courtyard, keep-out, edge, short or inter-part clearance violations; remaining items are inside fine-pitch footprints + silkscreen. Parity unchanged (5 SD1 pins).
+
+#### 4.9 Decoupling + local bulk caps (2026-11-07, not routed)
+- Every cap placed against the power pin it serves (search over both sides and 4 rotations, cost = cap power pad to the nearest *unserved* pin of that net + 0.3 × GND pad to the IC's nearest GND pin, so caps spread over a BGA's supply balls). No IC or locked part moved.
+- **U1 ECP5:** all caps on the back inside the ball field – +1V1 C27, C28 (+ C17 2.2 µF), +2V5 C29, C30 (+ C19), VCCIO `2V5_3V3` C26, C48, C49, C53 (+ C47), +3V3 C25, C31, C32, C50, C51 (+ C20); RV2/RV3 (VCCIO select) beside them. Small caps 0–2 mm from their ball, bulk ≤ 6 mm. `BAY_RIB_1` crosses under U1 (y 26.4–28.2) and stays empty.
+- **U2 SDRAM:** C33 on B, C34/C35/C16 on F in the 3 mm strip between U2 and the BT12 tab, C52 on F right of U2 (the BT12 spring courtyard and B0 block most of the back under U2).
+- **New in the schematic:** **C84** 100 nF 0402 (C1525) for the config flash U10 (`flash` sheet) and **C85** 100 nF 0402 for the 25 MHz oscillator Y1 (`usb` sheet) – neither had a local cap. Both on B directly under their supply pin; footprints added to the PCB with schematic links (parity clean).
+- Re-targeted from the 4.8 satellite pass to the actual pins: TP4056 input caps C39/C41/C43 (+5V, VCC pin) and BAT caps C40/C42/C46; display logic caps C74/C75 to J7's +3V3 pins; CH224K VDD cap C79.
+- Others: ESP32 C21 under the module's 3V3 pin; camera C18 (F) / C36 (B) at J1's 3V3 pin; SD supply R38 + C15 at SD1.
+- **Coverage (worst pin → nearest same-net cap):** U1 ≤ 6.5 mm (+2V5 corner ball), all other U1 rails ≤ 4 mm; U2 ≤ 6.5 mm; U9 0.7; U10 0 (C84); Y1 4.5 (second +3V3 pin; C85 is at the VDD pin); IMU 3.5; ADC/REF/LDO ≤ 3; regulators 2.1; boost 2.5; TP4056 VCC 0.2 (CE pin tied to +5V ~6 mm); CH224K VDD 0.03; J7 1.8; J1 2.3; SD1 2.4. LM66100 VBAT_OR outputs (U12/U14) are 10 mm from C73 – a shared OR-bus with 100 µF + 10 µF bulk, no per-device cap needed. J4 (DNP header) has none.
+- DRC: no courtyard, keep-out, edge, short or inter-part clearance violations; ERC unchanged (153); parity unchanged (5 SD1 pins).
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
