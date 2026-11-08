@@ -487,6 +487,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Copied (group `ULX3S_CORE_COPY`):** all SDRAM routing, the BGA fan-out / escapes and decoupling connections, the +1V1, +2V5 and 2V5_3V3 islands. Copper only copied where the net exists in our design and lands on a pad of the same net; copper on nets we no longer use (FTDI, ULX3S buttons, unused GP/GN, FPGA USB) dropped.
 - **Stackup now matches the reference:** In1 = +3V3 plane + VSYS / +1V1 / +2V5 / 2V5_3V3 islands, In2 = GND (all inner tracks and zones swapped). Zones unfilled.
 - Our old U1/U2 dogbones, decoupling stubs and the old `1V1_U1_core` island removed. `U1_BGA` rule area moved with U1; new rule area `ULX3S_CORE` + custom rule (clearance 0.127 mm, hole-to-hole 0.3 mm, hole clearance 0.15 mm) for the reference geometry.
+- **Regulator blocks staged too:** 1V1 (U3, L1, C2–C5, C22, RA1, RB1, RP1) and 3V3 (U5, L3, C6–C9, C24, RA3, RB3, RP3) at their reference positions beside the core; reference copper copied with `+5V` → `VSYS` (the only net difference). RP1/RP3 keep our net-tie footprint (3 solder-mask-bridge items where the reference tracks enter it differently). `ULX3S_CORE` rule area extended over them.
 - DRC: one 0.125 mm hit (C27 GND pad vs a +3V3 via), 8 courtyard overlaps between the reference's tightly packed caps under the BGA, 147 dangling escape stubs (the ULX3S escapes continue outside the copied window). Next: decide where the core goes on the board and integrate.
 
 #### 4.3 Phase 4 checklist
