@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – all parts rough-placed by function (4.5), not routed; next: fine-pitch rules, placement refinement, routing |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – placement reset (4.6): fixed/edge parts on board, rest staged for controlled re-placement; not routed |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -352,6 +352,23 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 
 - Checks: no courtyard overlaps, no shorts, no keep-out / rule-area / edge violations; every back-side part under the cells is a low-profile package. DRC remaining: 199 solder-mask bridges + 13 clearance hits **all inside single fine-pitch parts** (U2, U21, J7, J17, U22, SOICs) → design-rule task; 499 unrouted connections; silkscreen overlaps (cosmetic). Schematic parity: only the 5 expected SD1 pins without pads (11, 12, GS1–GS3).
 - **Placement concerns to address while refining:** the three TP4056s sit close together (up to ≈ 3 × 1.3 W at 1 A charge each) → spread them, add thermal vias/copper, or lower the charge current; FPGA decoupling should move directly under the BGA ball field once the fan-out is planned; silkscreen cleanup.
+
+#### 4.6 Placement reset – controlled re-placement order (2026-11-07)
+- The 4.5 rough placement was cleared: every footprint except the fixed/edge set below was moved **off the board** into a staging field below the outline (grouped by sheet, front side, 0°, servo headers last). Footprints keep their nets and schematic links, so nothing needs re-importing; they are brought back in a controlled order.
+- **On the board (unchanged X/Y/rotation from 4.5; locked unless noted):**
+
+| Part | Role | Note |
+|---|---|---|
+| SD1 | microSD at the bottom-left edge | locked, no rotation |
+| J17 | USB-C at the bottom-right edge | locked, no rotation; nudged 0.15 mm up to clear the corner radius (edge clearance) |
+| B0 / B1 / B2 | buttons, back top strip | **not locked** – may rotate, stay within ±0.5 mm |
+| J7 | display FFC, back bottom edge | locked |
+| J1 | camera header on the optical axis | locked |
+| BT11–BT32 | 18650 spring/button pairs, rows 17 / 37.5 / 58 (pitch 20.5) | locked |
+| H1 / H3 / H4 | M3 case screws | locked |
+
+- Housing clearance: `CASE_BOSS_TR` trimmed to y 3.5–8.3 so BT11's top tab no longer intrudes; board outline and all bay rule areas otherwise unchanged.
+- Re-placement order from here: U1 (FPGA) + U9 (ESP32-S3, antenna in the top-right keep-out) + U22 (IMU, axis) + TH1 + J4 → SDRAM / flash / clock → regulators → chargers / power path → ADC → USB-C and display support → passives/decoupling → servo headers (last).
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
