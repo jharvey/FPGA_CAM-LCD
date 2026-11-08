@@ -594,6 +594,16 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Still not routed:** the SD branch to U1 and JTAG (see 4.24); owner decision pending on keeping the FPGA↔SD connection.
 - **Checks:** DRC has no clearance, short or keep-out errors (only the B0 edge item). ERC 153, parity only the 5 known SD1 pins. Camera, USB and SD1→ESP32 connectivity verified.
 
+#### 4.26 J1 to −7.62 mm, SD1 bus re-routed without vias (2026-11-08)
+- **J1** moved a further 2.54 mm left (7.62 mm in total from 4.24; pads x 24.72–45.04). That puts J1's right edge at x ≈ 45.9, leaving a ≈ 8 mm B.Cu lane (x 46–54) for the LCD ribbon. C85 was parked: J1's pins now cover its old spot. The lens is 7.62 mm left of the optical axis.
+- **Camera ribbon** rebuilt by a level planner (`camplan`). At this J1 position it needs 11 levels at 0.3 mm pitch, which fit between U1 and J1. Same rules as before: F.Cu, J1 column order, no crossings; XCLK has its own lane plus R15 on B below J1; PCLK takes one via.
+- **SD1 → ESP32 re-routed on F.Cu with no signal vias:**
+  - The lines leave the top of SD1 at 0.35 mm pitch, with card detect as the outermost line over the top.
+  - They turn down tight against SD1's right edge, about 1.5 mm into the antenna band, then fan straight into ESP32 pads 4–10.
+  - The ESP32 SD pads were re-ordered to suit: 4–10 = CD, D2, D3, CMD, CLK, D0, D1.
+  - Only the SD 3V3 and GND pins use vias: 3V3 goes on B to C15, GND to the plane.
+  - **This board's copy of the U9 antenna keep-out now starts at x 43.6 instead of 42** (owner OK). DRC reports one `lib_footprint_mismatch` warning on U9 for this.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

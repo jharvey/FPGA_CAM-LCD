@@ -8,13 +8,13 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 
 | Net | Function | ESP32 pad | ESP32 GPIO | FPGA ball (old → new) | Other end |
 |---|---|---|---|---|---|
-| SD_D1 | SD DAT1 | 4 | 4 | H1 → G3 | SD1.8 |
-| SD_D0 | SD DAT0 | 5 | 5 | J3 → H3 | SD1.7 |
-| SD_CLK | SD CLK | 6 | 6 | H2 → J3 | SD1.5 |
+| SD_CD | card detect | 4 | 4 | N5 → N4 | SD1.10, R86 pull-up |
+| SD_D2 | SD DAT2 | 5 | 5 | K1 → N3 | SD1.1 |
+| SD_D3 | SD DAT3/CD | 6 | 6 | K2 → K4 | SD1.2 |
 | SD_CMD | SD CMD | 7 | 7 | J1 → K3 | SD1.3 |
-| SD_D3 | SD DAT3/CD | 8 | 15 | K2 → K4 | SD1.2 |
-| SD_D2 | SD DAT2 | 9 | 16 | K1 → N3 | SD1.1 |
-| SD_CD | card detect | 10 | 17 | N5 → N4 | SD1.10, R86 pull-up |
+| SD_CLK | SD CLK | 8 | 15 | H2 → J3 | SD1.5 |
+| SD_D0 | SD DAT0 | 9 | 16 | J3 → H3 | SD1.7 |
+| SD_D1 | SD DAT1 | 10 | 17 | H1 → G3 | SD1.8 |
 | JTAG_TDO | FPGA JTAG | 11 | 18 | V4 (fixed) | J4.6 |
 | JTAG_TMS | FPGA JTAG | 12 | 8 | U5 (fixed) | J4.5 |
 | JTAG_TCK | FPGA JTAG | 17 | 9 | T5 (fixed) | J4.4 |
@@ -44,7 +44,7 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 - **SD1 needs only 3.3 V I/O,** with SDMMC 4-bit available on GPIO4–7/15/16.
 
 ## Routing intent
-- **SD (routed):** a via above each SD1 pad, then the back layer under the connector to a via column beside SD1. From there a front-layer ribbon runs into ESP32 pads 4–9. Card detect goes along the front from SD1 pin 10 past R86 to pad 10. **The branch to U1 (balls N4, N3, K4, K3, J3, H3, G3) is not routed yet** (see ROADMAP 4.24).
+- **SD (routed, no vias):** the seven lines leave the top of SD1 at 0.35 mm pitch (card detect wraps over the top as the outermost line). They turn down tight against SD1's right edge, about 1.5 mm into the antenna band (this board's copy of the U9 keep-out starts at x 43.6), then fan straight into ESP32 pads 4–10. **The branch to U1 is not routed yet.**
 - **JTAG (not routed yet):** J4 to ESP32 pads 11/12 (TDO/TMS, left column) and 17/18 (TCK/TDI, bottom row; these must cross the USB pair on the back layer), and J4 down to U1's JTAG dogbone vias.
 - **FPGA links:** a front-layer ribbon from the ESP32 bottom-row pads 19–23 to U1's outer balls L1, L2, K1, K2 and J1, in order. GPIO0 runs from pad 27 to F1.
 - **ADC SPI:** back layer, from pads 24, 25, 28 and 29 past U1's col-3/4 balls F4, F3, E4 and E3 (dogbones) down to U21, which is also on the back.
