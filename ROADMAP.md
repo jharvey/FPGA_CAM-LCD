@@ -687,6 +687,15 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - ERC 152: −4 multiple_net_names, +3 pin_not_driven on U1 B1/C1/D1, the usual input-typed FPGA pin artefact.
 - **SD:** moving from the ESP32 to the FPGA (next).
 
+#### 4.34 GND lattice under U1 removed (owner request, 2026-11-08)
+- **Removed:** 337 GND track segments on F/B under U1 (the copied ULX3S lattice joining dogbones to each other). Each GND ball and each decap GND pad now has one short stub to its own via, and the vias reach the In2 GND plane. This frees the diamonds and gaps between balls for signal escapes.
+- **Vias:** 18 new GND vias added where a pad had none nearby; G10→G9 and P14→N14 linked ball-to-ball.
+- **Still need a GND via:** U1 G11, P11, P12, P13 and C19 pad 2. Every diamond around them is taken by power vias, so they need a hand-placed via or a ball-to-ball link (to fix with the power hookup).
+- **SD → FPGA (in progress, not committed):**
+  - Plan: share SD between the ESP32 (routed) and the FPGA. FPGA SD balls move to the free top-left balls: CD M17, D2 U18, D3 U17, CMD U16, CLK T16, D0 R17, D1 R16. U16/R16/R17/P17 carry the dead old-ULX3S ADC nets.
+  - The first maze-router attempt reached only 2 of 7, before this GND-lattice removal.
+  - Also: move C51 out from under U1's top-left corner (B).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
