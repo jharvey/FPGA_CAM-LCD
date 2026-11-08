@@ -461,6 +461,11 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Still open (59 nets):** most of the SDRAM bus (A0–A3, A6, A10, A11, BA0/1, CKE, nCS/nRAS/nCAS/nWE, DQM0/1, D1, D3–D6, D9–D11, D13, D15), the SD bus (SD_CLK/CMD/D0–D2) and ~28 camera/LCD `GPn/GNn` nets.
 - **Root cause:** placement. With U1 at 180° all 39 SDRAM balls face **left** (toward the board edge and the spring tabs), while U2 sits above U1 – the bus has to squeeze through a ~3.5 mm corridor (≈ 11 tracks per layer). The original 4.1 plan (U1 rotated so the SDRAM bank faces down, U2 below U1) avoids this. Recommended before finishing these buses: either restore that orientation (and redo the U1 fan-out), or finish the buses with KiCad's interactive push-and-shove router.
 
+#### 4.13 Routing step 3 – power paths (2026-11-08)
+- Groups `ROUTE_3_POWER` / `ROUTE_3_POWER_B`. Power nets routed at their class width (PWR_HIGH 1.0, PWR_CELL 0.8, PWR_SW 0.6, PWR_RAIL 0.4 mm), necking only where a pad forces it, 0.6/0.3 vias; every pad on a plane net (GND, +3V3, +1V1 island, VSYS band) that was not yet on its plane got a short stub + via. Planes still one island each. DRC clean (no clearance / short / hole items).
+- Unconnected items 447 → 282.
+- **Still open (36):** +2V5 ×5 and VCCIO `2V5_3V3` ×5 (BGA balls F6/F15/P6/P15, H6/H7/J6/F9/F10 with no via site – need the fan-out reworked under U1), GND ×9 / +3V3 ×8 / +1V1 ×1 (mostly balls and caps under U1 with no free via site), `VBUS_C` ×4 and +5V ×2 (J17 / D55 / U16 area), VBAT_OR ×1, P1V1 ×1.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
