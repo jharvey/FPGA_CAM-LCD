@@ -22358,48 +22358,6 @@
 			)
 		)
 	)
-	(global_label "SD_D1"
-		(shape input)
-		(at 184.15 157.48 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "ee1f957b-12e1-469b-b049-6f8c008b70cc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 157.48 180)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "SD_D0"
-		(shape input)
-		(at 222.25 149.86 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "b1b930e9-e9ba-403d-8a96-4e6d03af3184")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.25 149.86 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "ADC_CNV"
 		(shape input)
 		(at 222.25 142.24 0)
@@ -22449,5 +22407,13 @@
 	(no_connect
 		(at 184.15 137.16)
 		(uuid "372966c6-296d-407d-a58c-88b65b726bcb")
+	)
+	(no_connect
+		(at 184.15 157.48)
+		(uuid "124c00f8-dac4-4350-ac40-bad547db7e68")
+	)
+	(no_connect
+		(at 222.25 149.86)
+		(uuid "d96ef100-3f8b-44c2-a99f-62d1f7aac01b")
 	)
 )
