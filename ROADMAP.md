@@ -497,6 +497,16 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Parked off-board (right of the outline) for step 2:** AE1, BAT1, C1, C14, C16, C30, C48, C51, C52, C54, C84, D12, D14, D15, D28, D29, D53, D54, R7, R11–R13, R18, R27–R29, R32, R33, R66–R70, R75, R80, U7, U8, U10, Y1.
 - Our copper inside the new areas removed; conflicting copied escape stubs removed (policy: ours yields to copied SDRAM/core copper, copied stubs yield to our parts). DRC: no clearance / short / hole / edge / keep-out items; remaining courtyard overlaps are the reference's tight cap packing + the servo gang; dangling items are escape stubs and plane vias (zones unfilled).
 
+#### 4.19 Step 1 redone – core rotated 180° from the reference, per the owner's mock-up (2026-11-08)
+- Supersedes the 4.18 placement. Block = reference geometry turned 180°: **U1 at board (45.5, 17) rot 180°, U2 at (18.9, 17) rot −90° (horizontal), 26.6 mm left of U1** – the copied SDRAM routing stays valid.
+- Signal flow: SDRAM → left into U2; camera/LCD bank → down to J1 (directly below) and J7; ESP32 / SD banks → right, ESP32 alongside. Of 80 FPGA signals with on-board targets only 23 need to route backwards (was 37), 3214 mm straight-line total (was 3552).
+- Raised from the mock-up's y 28.8 to **y 17** so the BGA (ball field y ≈ 8.5–25.5) clears bay rib 1 (y 26.4–28.2) and the IMU stays on the optical axis ~12 mm below U1. U2's left end clears the cell-1 spring tab; B0–B2 untouched.
+- U1 overlaps the ESP32 footprint's courtyard only (the library courtyard includes the RF clearance band to x = 42; module body starts at x = 56.6, antenna keep-out y < 6.6 is respected).
+- Regulator blocks re-placed on B: **1V1 (U3) at (59, 43)** between the bay ribs, **3V3 (U5) at (45, 61)**; switchers ≥ 15 mm from the IMU. The +1V1 feed to the core island now needs a ~30 mm path (step 2).
+- `ULX3S_CORE` rule area split into three tight areas (core, 1V1 block, 3V3 block) so the 0.127 mm reference rule does not override the fine-pitch exception on nearby parts.
+- Parked off-board for step 2: AE1, BAT1, C1, C14, C16, C30, C45, C48, C51, C52, C54, C81, C84, D12, D14, D15, D28, D29, D53, D54, J4, R7, R11–R13, R18, R24, R25, R27–R30, R32, R33, R35, R66–R70, R75, R80, TH1, U4, U7, U8, U10, Y1.
+- DRC: no clearance / short / hole / edge / keep-out items; courtyard overlaps are the reference's tight cap packing + servo gang; dangling items are escape stubs and plane vias. Zones unfilled.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
