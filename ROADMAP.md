@@ -612,6 +612,17 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Cleanup:** removed a leftover JTAG_TMS stub on In2 (the GND plane layer) from an earlier pass.
 - **Checks:** all four JTAG nets connected (J4, U1, U9); DRC adds nothing new.
 
+#### 4.28 LCD prep: parts parked, floating segments removed (2026-11-08, in progress)
+- **Parked for step 2** (front-layer parts between J1 and J7, in the LCD ribbon's path): D16, D17, D27, Q2, R3, R5, R6, R8, C38, C60, D11. This is the soft-power / LED circuit; re-place it after the LCD ribbon.
+- **Removed floating track segments around J1/J7** left by earlier parking (GND, VSYS, LCD_BL_A and SERVO_V stubs). One of them was the dangling GND stub of C19, which has no GND via yet.
+- **Planned next** (owner approved):
+  - Camera RESET/PWDN move to balls A12/B13 (swapped) with one via each, then B.Cu into J1.17/J1.18.
+  - Park C19 (2V5 decap under U1's bottom-right corner).
+  - Hand-route the LCD ribbon: rows A/B on F, shifted right past J1, fanned above J7 with staggered vias; row C dogbones to B, straight to J7 (`lcdgen.py`).
+- **Questions noted:**
+  - The FPGA SD balls could move to U1's top-right outer balls (servo PWM today; the servos are now bottom-left).
+  - J4 can switch to the TC2030-NL footprint (three small holes, no leg holes) if space gets tight.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
