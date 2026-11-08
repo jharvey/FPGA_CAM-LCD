@@ -590,6 +590,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - All lines are on F.Cu in J1 column order with no crossings, using the same level scheme as 4.24.
   - **XCLK** now has its own F lane, then a via above J1.7, then B.Cu through the J1.5/J1.7 gap. **R15 is on B just below J1** at (34.25, 55.6), joined to J1.8 on B.
   - **PCLK** (B12) uses one dogbone via, then B.Cu, entering J1.7 from the upper right through the J1.7/J1.9 gap.
+- **Also parked (owner):** R19 (LCD backlight resistor, was B (50.2, 64.2)) and TH3 (cell-3 NTC, was B (47.6, 58.0)). Re-place both after LCD routing; TH3 goes back near the cell-3 centre.
 - **Still not routed:** the SD branch to U1 and JTAG (see 4.24); owner decision pending on keeping the FPGA↔SD connection.
 - **Checks:** DRC has no clearance, short or keep-out errors (only the B0 edge item). ERC 153, parity only the 5 known SD1 pins. Camera, USB and SD1→ESP32 connectivity verified.
 
