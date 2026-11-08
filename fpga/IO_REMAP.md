@@ -64,12 +64,12 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 | WIFI_GPIO21 (was GPIO1) | E9 | J1 |
 | WIFI_GPIO0 | F1 | F1 |
 | SD_CD | N5 | N4 |
-| SD_D1 | H1 | N3 |
-| SD_D0 | J3 | K4 |
-| SD_CLK | H2 | K3 |
-| SD_CMD | J1 | J3 |
-| SD_D3 | K2 | H3 |
-| SD_D2 | K1 | G3 |
+| SD_D1 | H1 | G3 |
+| SD_D0 | J3 | H3 |
+| SD_CLK | H2 | J3 |
+| SD_CMD | J1 | K3 |
+| SD_D3 | K2 | K4 |
+| SD_D2 | K1 | N3 |
 | WIFI_GPIO47 (ADC CNV, was GPIO9) | L1 | F4 |
 | WIFI_GPIO48 (ADC DIN, was GPIO21) | K5 | F3 |
 | WIFI_GPIO35 (ADC SCK, was GPIO8) | L2 | E4 |

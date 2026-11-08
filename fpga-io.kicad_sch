@@ -22408,7 +22408,7 @@
 			)
 		)
 	)
-	(global_label "SD_D2"
+	(global_label "SD_D1"
 		(shape input)
 		(at 184.15 157.48 180)
 		(effects
@@ -22429,7 +22429,7 @@
 			)
 		)
 	)
-	(global_label "SD_D3"
+	(global_label "SD_D0"
 		(shape input)
 		(at 222.25 149.86 0)
 		(effects
@@ -22450,4 +22450,5 @@
 			)
 		)
 	)
+
 )

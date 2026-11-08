@@ -11756,7 +11756,7 @@
 			)
 		)
 	)
-	(global_label "SD_CLK"
+	(global_label "SD_CMD"
 		(shape input)
 		(at 257.81 39.37 0)
 		(effects
@@ -11976,7 +11976,7 @@
 			)
 		)
 	)
-	(global_label "SD_D0"
+	(global_label "SD_D3"
 		(shape input)
 		(at 219.71 52.07 180)
 		(effects
@@ -12944,7 +12944,7 @@
 			)
 		)
 	)
-	(global_label "SD_D1"
+	(global_label "SD_D2"
 		(shape input)
 		(at 219.71 62.23 180)
 		(effects
@@ -12966,7 +12966,7 @@
 			)
 		)
 	)
-	(global_label "SD_CMD"
+	(global_label "SD_CLK"
 		(shape input)
 		(at 219.71 39.37 180)
 		(effects
@@ -19608,4 +19608,5 @@
 		(at 257.81 57.15)
 		(uuid "9aec4e33-f3cf-4842-bb8a-6c1196c410d9")
 	)
+
 )

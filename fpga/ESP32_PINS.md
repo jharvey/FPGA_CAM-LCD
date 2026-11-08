@@ -1,6 +1,6 @@
 # ESP32-S3 (U9) ↔ FPGA (U1) ↔ SD / ADC / JTAG pin map (FCL board)
 
-Remapped 2026-11-08 so the ESP32 pads that carry FPGA, SD and JTAG signals face U1, SD1 and J4. The ESP32 is the WROOM-1-N8R2: quad PSRAM, so GPIO35–37 are free. U9 is at (66.0, 12.8) with the antenna up. Its left pad column faces SD1 and J4, and its bottom row faces U1.
+Remapped 2026-11-08 (SD and JTAG order revised the same day to match the routed SD bus) so the ESP32 pads that carry FPGA, SD and JTAG signals face U1, SD1 and J4. The ESP32 is the WROOM-1-N8R2: quad PSRAM, so GPIO35–37 are free. U9 is at (66.0, 12.8) with the antenna up. Its left pad column faces SD1 and J4, and its bottom row faces U1.
 
 The FPGA design (`main_FCL.lpf`) uses none of these balls, so no FPGA rebuild is needed. ESP32 firmware has to use the GPIO numbers below. UART, SDMMC and SPI all go through the S3 GPIO matrix, so any GPIO works.
 
@@ -8,15 +8,15 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 
 | Net | Function | ESP32 pad | ESP32 GPIO | FPGA ball (old → new) | Other end |
 |---|---|---|---|---|---|
-| SD_D2 | SD DAT2 | 4 | 4 | K1 → G3 | SD1.1 |
-| SD_D3 | SD DAT3/CD | 5 | 5 | K2 → H3 | SD1.2 |
-| SD_CMD | SD CMD | 6 | 6 | J1 → J3 | SD1.3 |
-| SD_CLK | SD CLK | 7 | 7 | H2 → K3 | SD1.5 |
-| SD_D0 | SD DAT0 | 8 | 15 | J3 → K4 | SD1.7 |
-| SD_D1 | SD DAT1 | 9 | 16 | H1 → N3 | SD1.8 |
+| SD_D1 | SD DAT1 | 4 | 4 | H1 → G3 | SD1.8 |
+| SD_D0 | SD DAT0 | 5 | 5 | J3 → H3 | SD1.7 |
+| SD_CLK | SD CLK | 6 | 6 | H2 → J3 | SD1.5 |
+| SD_CMD | SD CMD | 7 | 7 | J1 → K3 | SD1.3 |
+| SD_D3 | SD DAT3/CD | 8 | 15 | K2 → K4 | SD1.2 |
+| SD_D2 | SD DAT2 | 9 | 16 | K1 → N3 | SD1.1 |
 | SD_CD | card detect | 10 | 17 | N5 → N4 | SD1.10, R86 pull-up |
-| JTAG_TMS | FPGA JTAG | 11 | 18 | U5 (fixed) | J4.5 |
-| JTAG_TDO | FPGA JTAG | 12 | 8 | V4 (fixed) | J4.6 |
+| JTAG_TDO | FPGA JTAG | 11 | 18 | V4 (fixed) | J4.6 |
+| JTAG_TMS | FPGA JTAG | 12 | 8 | U5 (fixed) | J4.5 |
 | JTAG_TCK | FPGA JTAG | 17 | 9 | T5 (fixed) | J4.4 |
 | JTAG_TDI | FPGA JTAG | 18 | 10 | R5 (fixed) | J4.3 |
 | WIFI_TXD | UART ESP→FPGA | 19 | 11 | K4 → L1 | |
@@ -44,8 +44,8 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 - **SD1 needs only 3.3 V I/O,** with SDMMC 4-bit available on GPIO4–7/15/16.
 
 ## Routing intent
-- **SD:** a via above each SD1 pad, then the back layer to the ESP32 left column (pads 4–10, in pad order) and on to U1's col-3/4 balls (rows N–G) through dogbones.
-- **JTAG:** J4 to the ESP32 pads 11/12 (left column) and 17/18 (bottom row), and J4 down to U1's dedicated JTAG balls.
+- **SD (routed):** a via above each SD1 pad, then the back layer under the connector to a via column beside SD1. From there a front-layer ribbon runs into ESP32 pads 4–9. Card detect goes along the front from SD1 pin 10 past R86 to pad 10. **The branch to U1 (balls N4, N3, K4, K3, J3, H3, G3) is not routed yet** (see ROADMAP 4.24).
+- **JTAG (not routed yet):** J4 to ESP32 pads 11/12 (TDO/TMS, left column) and 17/18 (TCK/TDI, bottom row; these must cross the USB pair on the back layer), and J4 down to U1's JTAG dogbone vias.
 - **FPGA links:** a front-layer ribbon from the ESP32 bottom-row pads 19–23 to U1's outer balls L1, L2, K1, K2 and J1, in order. GPIO0 runs from pad 27 to F1.
 - **ADC SPI:** back layer, from pads 24, 25, 28 and 29 past U1's col-3/4 balls F4, F3, E4 and E3 (dogbones) down to U21, which is also on the back.
 

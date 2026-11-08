@@ -3440,7 +3440,7 @@
 			)
 		)
 	)
-	(global_label "JTAG_TDO"
+	(global_label "JTAG_TMS"
 		(shape input)
 		(at 153.67 97.79 180)
 		(effects
@@ -3484,7 +3484,7 @@
 			)
 		)
 	)
-	(global_label "SD_D2"
+	(global_label "SD_D1"
 		(shape input)
 		(at 153.67 87.63 180)
 		(effects
@@ -3726,7 +3726,7 @@
 			)
 		)
 	)
-	(global_label "SD_CMD"
+	(global_label "SD_CLK"
 		(shape input)
 		(at 153.67 92.71 180)
 		(effects
@@ -3836,7 +3836,7 @@
 			)
 		)
 	)
-	(global_label "JTAG_TMS"
+	(global_label "JTAG_TDO"
 		(shape input)
 		(at 184.15 80.01 0)
 		(effects
@@ -3902,7 +3902,7 @@
 			)
 		)
 	)
-	(global_label "SD_D1"
+	(global_label "SD_D2"
 		(shape input)
 		(at 153.67 118.11 180)
 		(effects
@@ -3990,7 +3990,7 @@
 			)
 		)
 	)
-	(global_label "SD_D3"
+	(global_label "SD_D0"
 		(shape input)
 		(at 153.67 90.17 180)
 		(effects
@@ -4078,7 +4078,7 @@
 			)
 		)
 	)
-	(global_label "SD_D0"
+	(global_label "SD_D3"
 		(shape input)
 		(at 153.67 115.57 180)
 		(effects
@@ -6388,7 +6388,7 @@
 		(at 153.67 80.01)
 		(uuid "745c3aa2-d405-4f12-b926-e47a10cb45ba")
 	)
-	(global_label "SD_CLK"
+	(global_label "SD_CMD"
 		(shape input)
 		(at 153.67 95.25 180)
 		(effects
@@ -6409,4 +6409,5 @@
 			)
 		)
 	)
+
 )

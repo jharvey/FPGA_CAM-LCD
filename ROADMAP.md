@@ -559,6 +559,22 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - Parity: only the 5 known SD1 pins.
   - DRC has no clearance, keep-out or hole errors. The remaining courtyard overlaps are the copied ULX3S decoupling (as on the reference) and the butted servo headers.
 
+#### 4.24 Highway routing before step 2: USB, camera, SD (2026-11-08)
+- **USB D+/D− (USB_DP/USB_DN):** a side-by-side pair on F.Cu with **no vias**, 0.2 mm tracks with a 0.2 mm gap, about 51 mm long. The path runs from ESP32 pads 13/14 down beside U1's right edge at x ≈ 57.7, around the charger cluster at x ≈ 63.8–65.5, then along y ≈ 63.4 into U24 pins 6/4. The GND via of C58 moved to (76.75, 60.45) to clear the approach, and the U24 VBUS pin still has room for its via between the two lines. A 4 mm strip right of U1 (x 53–57.6, y 27.5–47) is left free for the 25 MHz oscillator and config flash.
+- **Camera (J1):** 14 signals fan out on F.Cu in J1 column order with no crossings. Each line drops from its ball, takes its own horizontal level (pitch 0.35 mm, outermost line on top) and drops into J1. Row-2 pins are reached through the gaps between row-1 pads. PCLK (B12) uses one dogbone via and runs on B.Cu straight to J1.7. XCLK (A18) has a stub and via ready for R15. Pull-ups R14/R16/R17 are connected; R7 and R15 are still parked.
+- **SD1 → ESP32:** a via above each SD1 pad, B.Cu under the connector, a via column at x ≈ 41.5, then a front-layer ribbon into ESP32 pads 4–9. Card detect runs on F past R86 to pad 10. To make the ribbon order work:
+  - The ESP32 SD pads were re-ordered: pads 4–10 = D1, D0, CLK, CMD, D3, D2, CD.
+  - The FPGA balls were re-ordered to match.
+  - JTAG TDO/TMS swapped to pads 11/12.
+  - C15 (SD 3V3 bulk) moved to B under SD1 at (35.19, 6.5).
+  - R86 moved to F at (29.26, 17.6).
+- **J4 (Tag-Connect)** moved left to (44.5, 21.5), out of the U9↔U1 corridor.
+- **Constraints found, not routed yet:**
+  - **The USB pair splits the U9↔U1 corridor.** Everything from the ESP32 bottom row to U1 (FPGA links, ADC SPI, GPIO0, JTAG TCK/TDI) must cross it on B.Cu.
+  - **The SD branch to U1 has no clean lane.** 7 nets need the same B corridor, which also holds U1's top-right config-flash escape and the future flash chip. Options: route it through that corridor after the flash is placed, or drop the FPGA↔SD connection. The FPGA design does not use it, and the ESP32 owns the card.
+  - **JTAG at J4:** the TC2030's middle pads (TCK/TDI) exit only between the leg holes, and TCK/TDI must cross USB to reach ESP32 pads 17/18.
+- **Checks:** DRC has no clearance or short errors, ERC 153, parity only the 5 known SD1 pins. USB, camera and SD1→ESP32 connectivity verified net by net.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
