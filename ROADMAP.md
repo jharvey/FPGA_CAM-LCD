@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge (4.6), digital core (4.7), analog/power + NTCs (4.8), decoupling (4.9) placed; RTC/support/servo staged; not routed |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – placement complete (4.6–4.10, all footprints on board); next: fine-pitch rules, silkscreen, routing |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -402,7 +402,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 | IMU | F | U22 on the optical axis (42.5, 37.5), rot 0 (X/Y = board X/Y) | C76–C78, R76, R77 ring |
 | Power-on / wake / shutdown logic | F | bottom band below J1, x 38–61 | Q1, Q2, D10–D17, D27, R1–R8, R10, R13, R66, C13, C14, C60, D11, D12 |
 
-**Battery NTCs (TH1–TH3, one per cell, read by U21 via `TEMP_BAT_CELL1–3`):** on the back at x 10, y 23.4 / 43.9 / 64.4 – directly beside each − spring (MY-18650-05-J; its courtyard covers x 3.8–18 so nothing can sit under the coil), 6.5 mm below its own cell axis. The NTC's second pin is GND, the same copper as the spring tab: pour GND from the spring tab to the NTC pad (short and wide) so the cell's − cap heats the NTC through the spring and tab. All three sit left of the U1 ball field (x < 12.7) so FPGA heat does not bias them; TH1 is under the SDRAM edge (low power). This replaces the 4.4 single-NTC thermal-pad spot at (36, 37.5).
+**Battery NTCs (TH1–TH3, one per cell, read by U21 via `TEMP_BAT_CELL1–3`)** *(moved to the cell centres in 4.10)*: on the back at x 10, y 23.4 / 43.9 / 64.4 – directly beside each − spring (MY-18650-05-J; its courtyard covers x 3.8–18 so nothing can sit under the coil), 6.5 mm below its own cell axis. The NTC's second pin is GND, the same copper as the spring tab: pour GND from the spring tab to the NTC pad (short and wide) so the cell's − cap heats the NTC through the spring and tab. All three sit left of the U1 ball field (x < 12.7) so FPGA heat does not bias them; TH1 is under the SDRAM edge (low power). This replaces the 4.4 single-NTC thermal-pad spot at (36, 37.5).
 
 - **Still staged off-board:** FPGA/SDRAM decoupling and rail caps (C16, C17, C19, C20, C25–C35, C47–C53, RV2, RV3 – go on B under U1/U2 with the BGA fan-out), RTC group (U7, Y2, C54–C57, R65, BAT1), flash/config, camera, ESP32 support (B3, B4 …), LEDs D53/D54, AE1, servo J_SRV1–6 + R78–R83 (last).
 - DRC: no courtyard, keep-out, edge, short or inter-part clearance violations; remaining items are inside fine-pitch footprints + silkscreen. Parity unchanged (5 SD1 pins).
@@ -416,6 +416,16 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Others: ESP32 C21 under the module's 3V3 pin; camera C18 (F) / C36 (B) at J1's 3V3 pin; SD supply R38 + C15 at SD1.
 - **Coverage (worst pin → nearest same-net cap):** U1 ≤ 6.5 mm (+2V5 corner ball), all other U1 rails ≤ 4 mm; U2 ≤ 6.5 mm; U9 0.7; U10 0 (C84); Y1 4.5 (second +3V3 pin; C85 is at the VDD pin); IMU 3.5; ADC/REF/LDO ≤ 3; regulators 2.1; boost 2.5; TP4056 VCC 0.2 (CE pin tied to +5V ~6 mm); CH224K VDD 0.03; J7 1.8; J1 2.3; SD1 2.4. LM66100 VBAT_OR outputs (U12/U14) are 10 mm from C73 – a shared OR-bus with 100 µF + 10 µF bulk, no per-device cap needed. J4 (DNP header) has none.
 - DRC: no courtyard, keep-out, edge, short or inter-part clearance violations; ERC unchanged (153); parity unchanged (5 SD1 pins).
+
+#### 4.10 Remaining parts + servo headers – all 250 footprints on the board (2026-11-07, not routed)
+- **Battery NTCs moved to the middle of each cell** (supersedes 4.8): TH1 (47.6, 20.0), TH2 (47.6, 37.5), TH3 (47.6, 58.0) on B – midway between spring tip (x 18) and button (x 77.2), on the cell axis (TH1 is 3 mm off-axis: the regulator column sits on cell 1's axis). Couple each to its can with the 2 mm compressible thermal pad from 4.4 (≈ 5 × 5 mm); keep 3 mm around each NTC free of other parts. Shorter `TEMP_BAT_CELLn` runs to U21.
+- **Status LEDs** D53/D54 on F at the top edge (25 / 27, 2.5) with R69/R70 – as locked in 4.1.
+- **RTC:** CR1225 holder BAT1 on F top-centre (43.5, 13.2), between U10/J4 and the ESP32, outside the camera module; MCP7940 U7 (34.5, 36.5) and 32 kHz Y2 (39.7, 30.2) on F under the camera module (≤ 6 mm parts allowed there), C54–C57, R65 beside; I²C pull-ups R74/R75 at U7. ⚠ BAT1's metal holder ends ≈ 2–3 mm left of the ESP32 antenna keep-out – check RF; alternative is BAT1 on the bottom-left once the servo block is dropped.
+- **Pull-ups / small parts:** flash/config R11, R12, R27–R33, D28, D29 next to U10 / under U1 (B); camera R7, R14–R17 at J1; ESP32 strapping R34, R35, C81, R56 at U9; SD_CD R86 at SD1; button pull-ups R67/R68; 433 MHz pad AE1 at U1.
+- **ESP32 BOOT/RESET** B3 (16, 49) and B4 (7, 27.5) on F left side (tall 4.3 mm parts; outside the camera module; press through case pin-holes). Native USB programming does not need them.
+- **Servo headers J_SRV1–6 (DNP):** one ganged 3 × 6 grid at 2.54 mm pitch on F, (20.5–33.2, 58) between Y1, SD1, J1 and H3, series resistors R78–R83 beside. This was the only spot with both sides free for through-hole pins outside the camera module. The headers' courtyards overlap by design (butted 2.54 mm bodies) → **5 expected `courtyards_overlap` DRC items**. Under cell 3 on B: if ever fitted, trim the pin tails to ≤ 1.5 mm (cells sit 2.5 mm above the PCB).
+- No test points in the schematic besides AE1; mounting holes unchanged (H1, H3, H4; H2 excluded). Camera-module M2 standoffs still to reserve once the module is measured.
+- DRC: no keep-out, edge, short or inter-part clearance violations; courtyard overlaps only inside the servo gang; remaining mask/clearance items are inside fine-pitch footprints; silkscreen overlaps to clean up. Parity: only the 5 SD1 pins. ERC unchanged.
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
