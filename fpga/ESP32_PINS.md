@@ -24,11 +24,11 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 | WIFI_GPIO13 | spare link (was GPIO40) | 21 | 13 | N3 → K1 | |
 | WIFI_GPIO14 | spare link (was GPIO41) | 22 | 14 | E6 → K2 | |
 | WIFI_GPIO21 | spare link (was GPIO1) | 23 | 21 | E9 → J1 | |
-| WIFI_GPIO47 | ADC CNV (was GPIO9) | 24 | 47 | L1 → F4 | U21.11 |
-| WIFI_GPIO48 | ADC DIN (was GPIO21) | 25 | 48 | K5 → F3 | U21.12 |
+| WIFI_GPIO47 | ADC CNV (was GPIO9) | 24 | 47 | L1 → F4 → B1 | U21.11 |
+| WIFI_GPIO48 | ADC DIN (was GPIO21) | 25 | 48 | K5 → F3 → C1 | U21.12 |
 | WIFI_GPIO0 | BOOT strap / link | 27 | 0 | F1 (unchanged) | B3, R56 |
-| WIFI_GPIO35 | ADC SCK (was GPIO8) | 28 | 35 | L2 → E4 | U21.13 |
-| WIFI_GPIO36 | ADC SDO (was GPIO6) | 29 | 36 | N4 → E3 | U21.14 |
+| WIFI_GPIO35 | ADC SCK (was GPIO8) | 28 | 35 | L2 → E4 → D1 | U21.13 |
+| WIFI_GPIO36 | ADC SDO (was GPIO6) | 29 | 36 | N4 → E3 → E1 | U21.14 |
 
 **Unchanged:** EN (pad 3, `WIFIEN`) and USB D−/D+ (pads 13/14, GPIO19/20).
 
@@ -47,6 +47,6 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 - **SD (routed, no vias):** the seven lines leave the top of SD1 at 0.35 mm pitch (card detect wraps over the top as the outermost line). They turn down tight against SD1's right edge, about 1.5 mm into the antenna band (this board's copy of the U9 keep-out starts at x 43.6), then fan straight into ESP32 pads 4–10. **The branch to U1 is not routed yet.**
 - **JTAG (routed, hand-planned):** J4 (TC2030) escapes through the gaps between its leg holes: TDO/TMS on the right, TCK on top, TDI on the bottom, 3V3/GND on the left to vias. TDO/TMS run on F into ESP32 pads 11/12, each with one via to a B lane into U1 (TDO through a new dogbone via at (51.1, 31.1)). TCK runs on B into U1 and under the USB pair to pad 17. TDI runs on F with a via into U1, then drops to B under the USB pair to pad 18.
 - **FPGA links:** a front-layer ribbon from the ESP32 bottom-row pads 19–23 to U1's outer balls L1, L2, K1, K2 and J1, in order. GPIO0 runs from pad 27 to F1.
-- **ADC SPI:** back layer, from pads 24, 25, 28 and 29 past U1's col-3/4 balls F4, F3, E4 and E3 (dogbones) down to U21, which is also on the back.
+- **ADC SPI (FPGA side routed):** U1 outer balls E1/D1/C1/B1 (SDO/SCK/DIN/CNV), one dogbone via each, then B.Cu lanes beside the 25 MHz oscillator, under it, and into U21's top pins. The ESP32 side (pads 24/25/28/29) is not routed yet.
 
 J4 is a Tag-Connect TC2030 pad footprint (legged version, no part fitted), used only as a backup JTAG port. Pin numbers are unchanged: 1 GND, 2 3V3, 3 TDI, 4 TCK, 5 TMS, 6 TDO. A TC2030-IDC cable maps them 1:1 onto a 2×3 2.54 mm IDC plug.

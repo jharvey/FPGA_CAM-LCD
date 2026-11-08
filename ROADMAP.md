@@ -666,6 +666,17 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **All parts now on the board.** ERC 153, parity only the 5 known SD1 pins.
 - **Next (step 3, routing):** remap groups so each faces its partner (e.g. the ADC SPI toward U21), then route the short local groups first (ADC SPI, flash, oscillator, regulators) before the long buses.
 
+#### 4.32 Step 3 started – ADC SPI, FPGA side (2026-11-08)
+- **FPGA remap:**
+  - ADC SPI moved to U1's outer right-edge balls facing U21: E1 = SDO, D1 = SCK, C1 = DIN, B1 = CNV (order chosen for a crossing-free run).
+  - IMU_INT1/2 moved to F3/E3 (IMU is top-left).
+- **Hand-routed:** dogbone via per ball, then B.Cu lanes beside Y1, a level run under Y1, and straight down into U21's SPI pins. R8 is parked: it sat in the lane and has to be re-placed.
+- **VSYS link moved to In1** (power layer before GND, per owner): the B.Cu VSYS jumper between vias (54.5, 51.6) and (62.6, 48.4) now runs on In1. The via moved 1.1 mm off U21's SDO column.
+- **Open:**
+  - ESP32 side of the SPI (pads 24/25/28/29), planned together with the ESP32 → FPGA links.
+  - IMU interrupts.
+  - R8 placement.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

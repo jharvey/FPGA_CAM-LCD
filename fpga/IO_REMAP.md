@@ -70,9 +70,11 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 | SD_CMD | J1 | K3 |
 | SD_D3 | K2 | K4 |
 | SD_D2 | K1 | N3 |
-| WIFI_GPIO47 (ADC CNV, was GPIO9) | L1 | F4 |
-| WIFI_GPIO48 (ADC DIN, was GPIO21) | K5 | F3 |
-| WIFI_GPIO35 (ADC SCK, was GPIO8) | L2 | E4 |
-| WIFI_GPIO36 (ADC SDO, was GPIO6) | N4 | E3 |
+| WIFI_GPIO47 (ADC CNV, was GPIO9) | L1 | B1 |
+| WIFI_GPIO48 (ADC DIN, was GPIO21) | K5 | C1 |
+| WIFI_GPIO35 (ADC SCK, was GPIO8) | L2 | D1 |
+| WIFI_GPIO36 (ADC SDO, was GPIO6) | N4 | E1 |
 
 2026-11-08 (LCD routing): camera RESET (`cmos_rst_n`, net GN17, J1.17) and PWDN (`cmos_pwdn`, net GP16, J1.18) swapped balls to A12 / B13 so both drop straight to the back layer beside J1 and leave the top layer clear for the LCD ribbon.
+
+2026-11-08 (step 3): ADC SPI moved to U1 outer balls B1 (CNV), C1 (DIN), D1 (SCK), E1 (SDO) facing U21; IMU_INT1 / IMU_INT2 moved from C1 / D1 to F3 / E3 (IMU is top-left, slow signals). Not used by the FPGA design (no .lpf change).
