@@ -39363,11 +39363,11 @@
 	(footprint "SOA008-150mil:SOA008-150-208mil"
 		(layer "B.Cu")
 		(uuid "229d69ed-99a6-4fca-963c-814076867ab4")
-		(at 135.5 89.5 90)
+		(at 135.5 89.5 -90)
 		(descr "Cypress SOA008 SOIC-8 150/208 mil")
 		(tags "SOA008 SOIC-8 1.27 150 208 mil")
 		(property "Reference" "U10"
-			(at 0 0 90)
+			(at 0 0 270)
 			(layer "B.SilkS")
 			(uuid "fa773d9c-7ed4-4655-add5-384f7d4d9b5b")
 			(effects
@@ -39379,7 +39379,7 @@
 			)
 		)
 		(property "Value" "IS25LP128F-JBLE"
-			(at -0.018 -3.668 90)
+			(at -0.018 -3.668 270)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "f5df2200-2f25-4be6-bd98-349ba20ebfd8")
@@ -39392,7 +39392,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.issi.com/WW/pdf/25LP-WP128F.pdf"
-			(at 0 0 90)
+			(at 0 0 270)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "32a81acb-eef4-4e34-a527-04cc6208d723")
@@ -39404,7 +39404,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 90)
+			(at 0 0 270)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "914491d0-de6c-4cf8-a5a8-f73b91e4b525")
@@ -39416,7 +39416,7 @@
 			)
 		)
 		(property "MNF1_URL" "www.issi.com"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39430,7 +39430,7 @@
 			)
 		)
 		(property "MPN" "IS25LP128F-JBLE"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39444,7 +39444,7 @@
 			)
 		)
 		(property "MNF2_URL" "www.issi.com"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39458,7 +39458,7 @@
 			)
 		)
 		(property "Datasheet2" "http://www.issi.com/WW/pdf/25LP-WP032D.pdf"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39472,7 +39472,7 @@
 			)
 		)
 		(property "MPN2" "IS25LP032D-JNLE-TR"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39486,7 +39486,7 @@
 			)
 		)
 		(property "MNF3_URL" "www.issi.com"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39500,7 +39500,7 @@
 			)
 		)
 		(property "MPN3" "IS25LP032D-JNLA3"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39514,7 +39514,7 @@
 			)
 		)
 		(property "Dtasheet4" "https://www.winbond.com/resource-files/w25q128jv%20spi%20revc%2011162016.pdf"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39528,7 +39528,7 @@
 			)
 		)
 		(property "MNF4_URL" "www.winbond.com"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39542,7 +39542,7 @@
 			)
 		)
 		(property "MPN4" "W25Q128JVSIM"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39556,7 +39556,7 @@
 			)
 		)
 		(property "Mouser" "454-W25Q128JVSIMTR"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39570,7 +39570,7 @@
 			)
 		)
 		(property "Mouse_1r" "727-S25FL128LAMFV013"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39584,7 +39584,7 @@
 			)
 		)
 		(property "Mouse_r3" "454-W25Q128JVSIQTR"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39598,7 +39598,7 @@
 			)
 		)
 		(property "Digikey" "W25Q128JVSIQCT-ND "
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39612,7 +39612,7 @@
 			)
 		)
 		(property "Digike_y2" "IS25LP128F-JBLE-ND"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39626,7 +39626,7 @@
 			)
 		)
 		(property "Digike_y3" "706-1607-1-ND"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39640,7 +39640,7 @@
 			)
 		)
 		(property "Newark" "38AC3510"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39654,7 +39654,7 @@
 			)
 		)
 		(property "LCSC" "C113767"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39668,7 +39668,7 @@
 			)
 		)
 		(property "price100_LCSC" "0.7796$"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39682,7 +39682,7 @@
 			)
 		)
 		(property "LowCost" "870-IS25LP032DJBLETR"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39696,7 +39696,7 @@
 			)
 		)
 		(property "Koncar" "FU003"
-			(at 0 0 270)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -39722,14 +39722,14 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start 2.286 -2.54)
-			(end -2.286 -2.54)
+			(start -0.635 2.54)
+			(end -4.318 2.54)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "B.SilkS")
-			(uuid "3d605616-4f7d-4a1d-9544-3d8186e7513f")
+			(uuid "4a92a566-8eee-45c1-9e27-f7d97bae4c1a")
 		)
 		(fp_line
 			(start 0.635 2.54)
@@ -39742,14 +39742,14 @@
 			(uuid "2438a36a-5bf8-43a4-b99e-eb8753bbe3fc")
 		)
 		(fp_line
-			(start -0.635 2.54)
-			(end -4.318 2.54)
+			(start 2.286 -2.54)
+			(end -2.286 -2.54)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "B.SilkS")
-			(uuid "4a92a566-8eee-45c1-9e27-f7d97bae4c1a")
+			(uuid "3d605616-4f7d-4a1d-9544-3d8186e7513f")
 		)
 		(fp_arc
 			(start -0.635 2.54)
@@ -39763,24 +39763,14 @@
 			(uuid "eb761a89-2e64-49f7-b371-b7b62927de4c")
 		)
 		(fp_line
-			(start -3.75 -2.75)
-			(end 3.75 -2.75)
+			(start -3.75 2.75)
+			(end 3.75 2.75)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "B.CrtYd")
-			(uuid "a8ae4d2f-d27a-47ed-a018-419d17c836a3")
-		)
-		(fp_line
-			(start 3.75 2.75)
-			(end 3.75 -2.75)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "B.CrtYd")
-			(uuid "12ab0dda-5b2e-459d-8538-6dfafaaff7b1")
+			(uuid "35375918-6858-424e-acdf-2d8093a7eae0")
 		)
 		(fp_line
 			(start -3.75 2.75)
@@ -39793,44 +39783,34 @@
 			(uuid "9b234816-2d9e-4f32-a4fc-2f857de5806b")
 		)
 		(fp_line
-			(start -3.75 2.75)
-			(end 3.75 2.75)
+			(start 3.75 2.75)
+			(end 3.75 -2.75)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "B.CrtYd")
-			(uuid "35375918-6858-424e-acdf-2d8093a7eae0")
+			(uuid "12ab0dda-5b2e-459d-8538-6dfafaaff7b1")
 		)
 		(fp_line
-			(start 1.95 -2.45)
-			(end -1.95 -2.45)
+			(start -3.75 -2.75)
+			(end 3.75 -2.75)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "a8ae4d2f-d27a-47ed-a018-419d17c836a3")
+		)
+		(fp_line
+			(start -0.95 2.45)
+			(end 1.95 2.45)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "B.Fab")
-			(uuid "c65d37d5-0f6b-45f0-95af-a7fe2ffc10d5")
-		)
-		(fp_line
-			(start -1.95 -2.45)
-			(end -1.95 1.45)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "B.Fab")
-			(uuid "af031b41-9247-4d9f-a874-75cdfeecd587")
-		)
-		(fp_line
-			(start -1.95 1.45)
-			(end -0.95 2.45)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "B.Fab")
-			(uuid "b0cd242a-e5ea-4e6c-8d1d-d34c8238eb09")
+			(uuid "d1664e81-07e5-4372-9aed-e4643e4b963a")
 		)
 		(fp_line
 			(start 1.95 2.45)
@@ -39843,17 +39823,37 @@
 			(uuid "e102f9ac-b154-4f02-840e-7f6b99863945")
 		)
 		(fp_line
-			(start -0.95 2.45)
-			(end 1.95 2.45)
+			(start -1.95 1.45)
+			(end -0.95 2.45)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "B.Fab")
-			(uuid "d1664e81-07e5-4372-9aed-e4643e4b963a")
+			(uuid "b0cd242a-e5ea-4e6c-8d1d-d34c8238eb09")
+		)
+		(fp_line
+			(start -1.95 -2.45)
+			(end -1.95 1.45)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "af031b41-9247-4d9f-a874-75cdfeecd587")
+		)
+		(fp_line
+			(start 1.95 -2.45)
+			(end -1.95 -2.45)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "c65d37d5-0f6b-45f0-95af-a7fe2ffc10d5")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
+			(at 0 0 270)
 			(layer "B.Fab")
 			(uuid "b23bedb1-da6b-4e94-874c-115ff8d18312")
 			(effects
@@ -39865,7 +39865,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -3.302 1.905 90)
+			(at -3.302 1.905 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_nCS")
@@ -39874,7 +39874,7 @@
 			(uuid "75ec68c1-5606-4a76-bada-a951792ca3f8")
 		)
 		(pad "2" smd oval
-			(at -3.302 0.635 90)
+			(at -3.302 0.635 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_MISO")
@@ -39883,7 +39883,7 @@
 			(uuid "6458f3f1-b07f-427e-aaf3-df9dbce2b72e")
 		)
 		(pad "3" smd oval
-			(at -3.302 -0.635 90)
+			(at -3.302 -0.635 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_nWP")
@@ -39892,7 +39892,7 @@
 			(uuid "c115391f-c014-4897-bf84-ad76b4b5c33a")
 		)
 		(pad "4" smd oval
-			(at -3.302 -1.905 90)
+			(at -3.302 -1.905 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "GND")
@@ -39901,7 +39901,7 @@
 			(uuid "cd2c3264-c8b4-4067-814c-f2d8f77d2fc9")
 		)
 		(pad "5" smd oval
-			(at 3.302 -1.905 90)
+			(at 3.302 -1.905 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_MOSI")
@@ -39910,7 +39910,7 @@
 			(uuid "fbf31af8-d8c8-4061-8b3a-f673d726a170")
 		)
 		(pad "6" smd oval
-			(at 3.302 -0.635 90)
+			(at 3.302 -0.635 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_SCK")
@@ -39919,7 +39919,7 @@
 			(uuid "742a6044-97d4-4572-a996-82abac350919")
 		)
 		(pad "7" smd oval
-			(at 3.302 0.635 90)
+			(at 3.302 0.635 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/flash/FLASH_nHOLD")
@@ -39928,7 +39928,7 @@
 			(uuid "9484e74d-e560-43fa-b0a7-9c174eb53fbf")
 		)
 		(pad "8" smd oval
-			(at 3.302 1.905 90)
+			(at 3.302 1.905 270)
 			(size 2.1 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "+3V3")
@@ -43728,11 +43728,11 @@
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "B.Cu")
 		(uuid "3bbe16c1-765b-470e-91de-cfeb1ff24ae6")
-		(at 145.52 95.34 90)
+		(at 134.09 80.1)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R28"
-			(at 2.514 0 270)
+			(at 2.514 0 180)
 			(layer "B.SilkS")
 			(uuid "5c23f5d8-8e3b-4ada-996d-734b97cf1e9b")
 			(effects
@@ -43744,7 +43744,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 -1.43 270)
+			(at 0 -1.43 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "c9eb2707-e539-4027-ad95-da2127dd473a")
@@ -43757,7 +43757,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 270)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "806d54de-0ac5-4993-b174-77cdc3914920")
@@ -43769,7 +43769,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 270)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "d50a8e55-15fa-4645-ac53-16e4d297a172")
@@ -43781,7 +43781,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 270)
+			(at 0 0 180)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "6dcd754c-a408-412a-822d-52f4f87bd694")
@@ -43848,7 +43848,7 @@
 			(uuid "121f550b-813f-4e39-8102-e6383cd3b2fb")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 270)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(uuid "6e4de6f0-551f-431d-8b3e-acdb594c391b")
 			(effects
@@ -43860,7 +43860,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.825 0 90)
+			(at -0.825 0)
 			(size 0.8 0.95)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
@@ -43869,7 +43869,7 @@
 			(uuid "ab63395e-574c-4094-9b64-fde741600e92")
 		)
 		(pad "2" smd roundrect
-			(at 0.825 0 90)
+			(at 0.825 0)
 			(size 0.8 0.95)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
@@ -68095,14 +68095,6 @@
 		(uuid "10c2cc03-4b7f-478a-9fba-b0940b9a5f20")
 	)
 	(via
-		(at 138.70109 86.29874)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "+3V3")
-		(uuid "19360400-d807-43f5-b3b5-74af2d5c50a3")
-	)
-	(via
 		(at 135.02 98.15)
 		(size 0.4)
 		(drill 0.2)
@@ -68285,6 +68277,14 @@
 		(layers "F.Cu" "B.Cu")
 		(net "+3V3")
 		(uuid "56082f12-80cd-4e99-a1be-d052ca2121fe")
+	)
+	(via
+		(at 133.989999 80.099999)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "+3V3")
+		(uuid "593e1f0b-c6e1-4941-a6c6-e983f618b920")
 	)
 	(via
 		(at 150.5 78.5)
@@ -68495,6 +68495,14 @@
 		(uuid "d328c113-941e-44dd-a3dd-42a176616e8b")
 	)
 	(via
+		(at 132.373399 93.246626)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "+3V3")
+		(uuid "d9cd3dd1-8855-47e7-917d-0fd9bff8713b")
+	)
+	(via
 		(at 139.035 93.325)
 		(size 0.4)
 		(drill 0.2)
@@ -68623,14 +68631,6 @@
 		(uuid "1be4f3aa-f31a-48f9-8228-57a68e3d5faf")
 	)
 	(segment
-		(start 137.405 86.197999)
-		(end 138.70109 86.29874)
-		(width 0.3)
-		(layer "B.Cu")
-		(net "+3V3")
-		(uuid "1f51fbe8-b3c3-417c-bf35-06677391249f")
-	)
-	(segment
 		(start 100.375 85.549999)
 		(end 99.693722 85.797964)
 		(width 0.3)
@@ -68743,6 +68743,14 @@
 		(uuid "474d39a1-e619-407b-a188-6de69853999d")
 	)
 	(segment
+		(start 133.595 92.802)
+		(end 132.373399 93.246626)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "+3V3")
+		(uuid "4dbfd677-4592-4409-98e1-6abe3a68629b")
+	)
+	(segment
 		(start 109.879999 101.78)
 		(end 109.366447 101.532686)
 		(width 0.3)
@@ -68853,6 +68861,14 @@
 		(layer "B.Cu")
 		(net "+3V3")
 		(uuid "7dcb6726-c2eb-4beb-a558-c24c8f5f519a")
+	)
+	(segment
+		(start 133.264999 80.099999)
+		(end 133.989999 80.099999)
+		(width 0.3)
+		(layer "B.Cu")
+		(net "+3V3")
+		(uuid "7e4fdebc-e1c6-4cce-b1f4-69976aa5b01c")
 	)
 	(segment
 		(start 121.48 95.33)
@@ -71919,14 +71935,6 @@
 		(uuid "ade62a8d-904e-4319-8124-7bd9aa53edf6")
 	)
 	(via
-		(at 134.200856 93.95219)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "GND")
-		(uuid "ae3fc7d1-9b61-438a-a5e1-94b5eb312f31")
-	)
-	(via
 		(at 99.005 57.25)
 		(size 0.4)
 		(drill 0.2)
@@ -73311,14 +73319,6 @@
 		(uuid "c30a8086-a647-4e09-a6ca-cb11f7434271")
 	)
 	(segment
-		(start 133.595 92.802)
-		(end 134.200856 93.95219)
-		(width 0.3)
-		(layer "B.Cu")
-		(net "GND")
-		(uuid "c6cd98bd-d17f-4d09-ba8b-f85c318119ac")
-	)
-	(segment
 		(start 152.025 105.655)
 		(end 150.975 105.655)
 		(width 0.4)
@@ -73951,12 +73951,68 @@
 		(uuid "a8dc35bb-1d14-4a9d-b8b5-5b45960dd064")
 	)
 	(segment
+		(start 137.7 87.9)
+		(end 137.1 87.3)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "05bc0dd0-e4f2-4e11-a826-3ea0357347db")
+	)
+	(segment
+		(start 136.6 90)
+		(end 136.6 90.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "1390db86-73ab-41db-a228-4ec94ba986bb")
+	)
+	(segment
+		(start 131.6 85.4)
+		(end 131.6 85.7)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "29e7b6db-b10c-480a-a865-51c36bf15232")
+	)
+	(segment
+		(start 137.7 88.9)
+		(end 136.6 90)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "352560bd-c10f-47fa-8fc2-7957f9fc3586")
+	)
+	(segment
+		(start 137.7 88.7)
+		(end 137.7 88.9)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "46851fb2-75c4-4038-853c-e953bd4fea38")
+	)
+	(segment
 		(start 131.574521 85.725479)
 		(end 131.574521 85.454166)
 		(width 0.19)
 		(layer "F.Cu")
 		(net "/flash/FLASH_nHOLD")
 		(uuid "50a687a7-ec55-461c-9e63-7d54ddbf0980")
+	)
+	(segment
+		(start 135 89.6)
+		(end 135 94.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "937e96b1-ba9d-44ea-93a8-3b9c31c428bc")
+	)
+	(segment
+		(start 137.1 87.3)
+		(end 137.1 83)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "dc291aa6-6502-4123-b2cd-cc4ba9a16c86")
 	)
 	(segment
 		(start 131.574521 85.454166)
@@ -73974,6 +74030,14 @@
 		(net "/flash/FLASH_nHOLD")
 		(uuid "ec8176f9-e43c-49d2-b593-511ada88a960")
 	)
+	(segment
+		(start 131.6 85.7)
+		(end 131.5 85.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "f3777e6c-fbca-4a68-8391-607cb7092eb7")
+	)
 	(via
 		(at 131.641406 85.387281)
 		(size 0.419)
@@ -73981,6 +74045,78 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/flash/FLASH_nHOLD")
 		(uuid "36e1c5e3-5a77-493f-b118-62a793ba302a")
+	)
+	(via
+		(at 135 89.6)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "7fab18a4-6513-494c-9e10-ad8aae667a75")
+	)
+	(via
+		(at 136.6 90.5)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "cab853e1-1df5-4439-8cb9-c0ecb1fc367e")
+	)
+	(via
+		(at 137.1 83)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "fdb49afd-bbfe-4f4c-affa-dbc80d6a36b2")
+	)
+	(via
+		(at 135 94.2)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "ff34ad84-b23d-4e92-ba2d-da49521c1c20")
+	)
+	(segment
+		(start 137.1 83)
+		(end 134 83)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "7ca069cd-db41-49f0-a4e6-7ad8ed187677")
+	)
+	(segment
+		(start 135.9 90.5)
+		(end 135 89.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "a34cee4b-1f50-43c3-8b38-bd93d00c9b12")
+	)
+	(segment
+		(start 134 83)
+		(end 131.6 85.4)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "b4729a3e-7fae-4927-8285-ba3dcd05f31b")
+	)
+	(segment
+		(start 135 94.2)
+		(end 135 93.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "ba3ac657-6eac-4e52-86ac-a0e10f790f97")
+	)
+	(segment
+		(start 136.6 90.5)
+		(end 135.9 90.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nHOLD")
+		(uuid "ee5e4e45-9d78-4de3-ba1b-ccabfe160390")
 	)
 	(segment
 		(start 89.6 61.6)
@@ -79759,52 +79895,12 @@
 		(uuid "f9460407-f858-46a5-8d7b-a83cfa527c1c")
 	)
 	(segment
-		(start 133.7 91.7)
-		(end 135 90.4)
+		(start 133.1 123.4)
+		(end 136.2 126.5)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "2596ce92-e3f3-42b3-b91b-e1f5dce7e2d4")
-	)
-	(segment
-		(start 154.1 81.5)
-		(end 157.2 81.5)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "26ea9de8-e726-4712-bbe6-9c94336e2743")
-	)
-	(segment
-		(start 151.6 79.3)
-		(end 152.3 79.3)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "4bd1840a-d58f-4277-90fe-88dadbd4c39d")
-	)
-	(segment
-		(start 157.2 81.5)
-		(end 158.1 82.4)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "a91933b3-d812-449d-b5fc-2f2134291a40")
-	)
-	(segment
-		(start 133.7 93.8)
-		(end 133.7 91.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "bd828fe7-845a-40ce-bdfe-15f936f56081")
-	)
-	(segment
-		(start 131.1 96.4)
-		(end 133.7 93.8)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "cd83f5e1-4d18-48ce-96d3-3bbf0141a318")
+		(uuid "07a3ca9a-be7f-42c1-8d56-05c0c5e63f42")
 	)
 	(segment
 		(start 152.9 80)
@@ -79812,31 +79908,151 @@
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "d02fdecb-dea9-42f5-9a60-67cced75187f")
+		(uuid "0b75472b-7cd8-42d8-806d-59ef0c694d78")
 	)
-	(via
-		(at 154.1 81.5)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
+	(segment
+		(start 136.2 126.5)
+		(end 137.6 126.5)
+		(width 0.15)
+		(layer "F.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "2c5e8f41-9cb8-45f7-b6ab-cabb4303a5a3")
+		(uuid "25a201cb-bdb8-455f-85c3-97e53c7c4f00")
 	)
-	(via
-		(at 135 90.4)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
+	(segment
+		(start 159.6 115.8)
+		(end 159.6 87)
+		(width 0.15)
+		(layer "F.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "416b2913-5fb1-45d4-93a3-5b7c5037d1ae")
+		(uuid "2d23fc2b-4521-43f4-b2ac-44b79eedc1ca")
 	)
-	(via
-		(at 152.9 80.3)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
+	(segment
+		(start 131.3 96.6)
+		(end 131.6 96.6)
+		(width 0.1)
+		(layer "F.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "8fc21e26-d8a1-4d34-a594-6c9b50ed9aae")
+		(uuid "32828ffd-34bb-4480-8a7c-7809e1783842")
+	)
+	(segment
+		(start 141.1 123.2)
+		(end 144.3 120)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "58cb2421-098f-498d-b8b5-4a218349517c")
+	)
+	(segment
+		(start 155.9 80.2)
+		(end 158.1 82.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "5fbf22ef-c158-4e3f-8b34-0e5fa3685330")
+	)
+	(segment
+		(start 130.1 121.4)
+		(end 132.1 123.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "6b4c7b21-2c6c-46a0-9684-ac17aa65a607")
+	)
+	(segment
+		(start 154.6 117.2)
+		(end 158.2 117.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "6e5a1acb-ba6c-43d3-a034-516fc7f5c3e1")
+	)
+	(segment
+		(start 144.3 120)
+		(end 151.2 120)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "73a2490b-3e29-4182-83e9-257ff815eae5")
+	)
+	(segment
+		(start 155.1 82.5)
+		(end 155.1 80.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "8f1f4851-3b10-4f42-aca5-d7527f76308d")
+	)
+	(segment
+		(start 158.2 117.2)
+		(end 159.6 115.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "c7ee2515-ffb7-40b3-bfff-9f92a5b780c4")
+	)
+	(segment
+		(start 130.1 119.6)
+		(end 130.1 121.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "cb07620a-2b66-4564-a7b5-e55819ccdcd0")
+	)
+	(segment
+		(start 137.6 126.5)
+		(end 140.9 123.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "cb2382a0-b1e1-4e88-9d5f-ea51d73dfade")
+	)
+	(segment
+		(start 159.6 87)
+		(end 155.1 82.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "d490e203-6db5-4796-bdf3-62e4c66d5633")
+	)
+	(segment
+		(start 151.6 79.3)
+		(end 152.3 79.3)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "d666d2c9-aace-41bb-aa02-40e9644dd179")
+	)
+	(segment
+		(start 155.1 80.2)
+		(end 155.9 80.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "d7d2f466-fbde-448e-aabe-2674dbaa24e2")
+	)
+	(segment
+		(start 132.1 123.4)
+		(end 133.1 123.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "e255998a-c160-4a74-acb8-c288bda59d45")
+	)
+	(segment
+		(start 154.1 117.7)
+		(end 154.6 117.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "e7bd3609-0ecc-4808-94a7-1eac4cc553b3")
+	)
+	(segment
+		(start 140.9 123.2)
+		(end 141.1 123.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "eab2c5fa-8c0f-4435-810a-653fad760e02")
 	)
 	(via
 		(at 151.6 79.3)
@@ -79844,7 +80060,127 @@
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "9deb5b63-ec4c-4a8b-a1fc-362f30e95df0")
+		(uuid "2035389d-354c-4027-97db-d4da5a840553")
+	)
+	(via
+		(at 155.1 80.2)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "36dee7e5-4424-463f-a2cd-7cbd2f44d0e1")
+	)
+	(via
+		(at 131.6 96.6)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "4dd5dc98-ebe8-4c67-836b-b5e64565847f")
+	)
+	(via
+		(at 130.1 119.6)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "5c1ec0ae-cff1-4ce1-bc63-c6106b154bf7")
+	)
+	(via
+		(at 152.9 80.3)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "7f08c940-7bf2-4e49-9281-aff65a66f64d")
+	)
+	(via
+		(at 154.1 117.7)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "8f726734-d2b3-4d43-b5aa-77834dd22c43")
+	)
+	(via
+		(at 151.2 120)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "fd72c4d7-85d6-4507-8a76-9d9626d9dd84")
+	)
+	(segment
+		(start 131.6 96.6)
+		(end 131.3 96.6)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "29ebe69b-fdc4-4a28-b37a-89a9cd9a56e5")
+	)
+	(segment
+		(start 151.9 117.7)
+		(end 154.1 117.7)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "377e2221-d8a5-4346-98a6-42917e67946f")
+	)
+	(segment
+		(start 151.1 77.3)
+		(end 151.1 78)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "47847550-d21c-4088-aee6-a4f3fe224e5b")
+	)
+	(segment
+		(start 155.1 80.2)
+		(end 152 77.1)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "51863ef3-77ab-4ead-b970-bacaa8724539")
+	)
+	(segment
+		(start 131.3 96.6)
+		(end 130.3 97.6)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "6325ddd0-c725-4522-9c95-4e820d1c4650")
+	)
+	(segment
+		(start 151.2 120)
+		(end 151.9 119.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "6af6f3e0-d2ea-48f5-829b-82620cf1b424")
+	)
+	(segment
+		(start 130.3 97.6)
+		(end 130.3 105.6)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "7d1cc46a-605e-4e96-aad7-0b4cae54cfb7")
+	)
+	(segment
+		(start 152.9 80.3)
+		(end 155 80.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "80dc5df1-c06f-48e7-aad8-8a859f32213f")
+	)
+	(segment
+		(start 151.3 77.1)
+		(end 151.1 77.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO0")
+		(uuid "8983ffea-ef7a-4ec9-806c-2cd42f1f94b0")
 	)
 	(segment
 		(start 151.6 79)
@@ -79852,71 +80188,55 @@
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "076061a3-56f6-4851-9b3d-597313751c7b")
+		(uuid "95a21e30-dce7-4b8b-b5f3-3360dcf3d821")
 	)
 	(segment
-		(start 137.9 87.2)
-		(end 138.3 86.8)
+		(start 155 80.3)
+		(end 155.1 80.2)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "372b89cf-600b-4ac0-8022-af8d8f93996d")
+		(uuid "a622e272-cb40-4e4f-952e-26bc79d145b2")
 	)
 	(segment
-		(start 139.3 86.8)
-		(end 146.8 79.3)
+		(start 127.9 117.4)
+		(end 130.1 119.6)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "65c3e35a-eba3-40a4-912a-95114f865a5a")
+		(uuid "aadac042-6d73-4a54-9f15-5abca755e13c")
 	)
 	(segment
-		(start 146.8 79.3)
-		(end 150.6 79.3)
+		(start 127.9 108)
+		(end 127.9 117.4)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "9c85c535-9298-469d-a0a6-dc18de230fa2")
+		(uuid "ab84f4b7-8838-425c-bf5e-671c2626c4af")
 	)
 	(segment
-		(start 150.6 79.3)
-		(end 151 78.9)
+		(start 152 77.1)
+		(end 151.3 77.1)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "bf00ce4d-f57c-4708-93ec-8d07da394695")
+		(uuid "bc6a9d70-c204-4117-830c-c0854b45085b")
 	)
 	(segment
-		(start 152.9 80.3)
-		(end 154.1 81.5)
+		(start 130.3 105.6)
+		(end 127.9 108)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "d34d4a9d-ca1b-49ad-b2fd-8a99e2796b4d")
+		(uuid "e1a7087e-b192-4e8f-8b7a-d40851e74b52")
 	)
 	(segment
-		(start 135 90.4)
-		(end 137.9 87.5)
+		(start 151.9 119.3)
+		(end 151.9 117.7)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO0")
-		(uuid "e4c32060-c792-46e7-bcf0-54dec4edf7f8")
-	)
-	(segment
-		(start 137.9 87.5)
-		(end 137.9 87.2)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "f4034dff-470c-41cc-9cff-c76909fa8ce5")
-	)
-	(segment
-		(start 138.3 86.8)
-		(end 139.3 86.8)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO0")
-		(uuid "f4b81c50-523c-4a01-914b-67542f26b31b")
+		(uuid "e534c094-b6be-4d1c-ae9a-457e48e1f7c7")
 	)
 	(segment
 		(start 120.407 89.693)
@@ -81407,124 +81727,380 @@
 		(uuid "c4d939be-1d8f-43e0-a55f-371f553d9e30")
 	)
 	(segment
-		(start 131.1 94)
-		(end 133.3 91.8)
+		(start 135.2 108.7)
+		(end 135.2 111.3)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "0fcee102-3b5c-4f2a-ab2f-b7d66d0ab076")
+	)
+	(segment
+		(start 135.9 108)
+		(end 135.2 108.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "1136a497-1762-4c41-8457-b86b5d69a653")
+	)
+	(segment
+		(start 140.8 112.3)
+		(end 141.1 112.6)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "19d0dc9d-6b9b-4409-b80f-6fdddc544acd")
+	)
+	(segment
+		(start 133.1 99.4)
+		(end 133.1 100.6)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "1b5fc492-7237-441c-9dda-8910cadcc39c")
+	)
+	(segment
+		(start 159.2 97.9)
+		(end 155.8 94.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "2cfca318-d3a6-4e79-960d-df8943c7891d")
+	)
+	(segment
+		(start 155.8 94.5)
+		(end 155.8 87.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "37bc1196-c56c-4641-b5d9-e8a475d57ad3")
+	)
+	(segment
+		(start 153.7 116.9)
+		(end 153.8 116.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "3a45c7b4-0ac2-497f-84e9-7c268f823774")
+	)
+	(segment
+		(start 151.9 81.3)
+		(end 151.7 81.1)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "41e093ca-59df-4238-a01c-16deafa65e6b")
+	)
+	(segment
+		(start 133.1 96.4)
+		(end 133.1 98.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "450465a7-1ada-46c4-b944-b1de42d9bd42")
+	)
+	(segment
+		(start 155.8 87.5)
+		(end 155.7 87.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "4ae97997-5514-4893-9c94-9f41ec3fd457")
+	)
+	(segment
+		(start 155.7 85.2)
+		(end 155.3 84.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "631307e0-a99c-4785-b90c-638b33055ebd")
+	)
+	(segment
+		(start 136 103.5)
+		(end 136 105.3)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "6749afe4-c841-4334-8276-af3ac10789e9")
+	)
+	(segment
+		(start 140.4 112.3)
+		(end 140.8 112.3)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "7254ccbc-8445-4fff-8abd-b296ad5cc0d1")
+	)
+	(segment
+		(start 159.2 115.5)
+		(end 159.2 97.9)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "76a48ccc-97fd-43f2-b3c4-26a3fffc71d7")
+	)
+	(segment
+		(start 155.7 87.4)
+		(end 155.7 85.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "77f3a291-def7-484b-987f-1f9743294b25")
+	)
+	(segment
+		(start 157.9 116.8)
+		(end 159.2 115.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "a6266a97-1ffe-488b-aff9-cb6c6c7bcad7")
+	)
+	(segment
+		(start 151.7 79.8)
+		(end 147.8 79.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "b02f9043-a9f1-4e50-bb24-77ce224b96e5")
+	)
+	(segment
+		(start 141.1 115.9)
+		(end 142.7 117.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "b8f59caa-b12c-4e2e-a13b-dbac7ceef9c5")
+	)
+	(segment
+		(start 135.4 111.5)
+		(end 138 111.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "b96d62c6-354f-4cd0-97e8-834930740ceb")
+	)
+	(segment
+		(start 135.9 105.4)
+		(end 135.9 108)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "bc8f9be9-98c4-4584-ad9e-d31ba11a2e64")
+	)
+	(segment
+		(start 153.8 116.8)
+		(end 157.9 116.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "c1615b0a-26c0-41df-885b-cb90ffd1c9e0")
+	)
+	(segment
+		(start 131.1 94.4)
+		(end 133.1 96.4)
 		(width 0.1)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "0e9f1e88-c606-4042-b2cb-9d84f2271bfb")
+		(uuid "c5a092b9-ceb6-4d84-8e16-5475dbfd2ea6")
 	)
 	(segment
-		(start 146.6 81.7)
-		(end 147.1 81.2)
+		(start 133.1 100.6)
+		(end 136 103.5)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "2bba7b6b-7523-4721-bd26-2ce6f07103e9")
+		(uuid "cc64a3cf-6de1-4ea9-ad72-7acee0012c9c")
 	)
 	(segment
-		(start 137.1 87.2)
-		(end 137.1 83)
+		(start 141.1 112.6)
+		(end 141.1 115.9)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "2ec012af-b6c5-43e5-bd6f-a3542d018b79")
+		(uuid "d8d686a5-a6a4-452b-82c5-de24b83582b9")
 	)
 	(segment
-		(start 133.3 91)
-		(end 135 89.3)
+		(start 147.8 79.8)
+		(end 147.4 80.2)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "589c381b-d93f-416e-9904-d1fa283b26b4")
+		(uuid "e470a0ce-df39-4e0a-8e17-64f1278d0ba8")
 	)
 	(segment
-		(start 140.4 82.9)
-		(end 140.5 83)
+		(start 151.7 81.1)
+		(end 151.7 79.8)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "5c08193f-0142-489c-95f2-5310add0bc8f")
+		(uuid "eb7bfa94-b184-49b7-ab9d-4e12b2444e82")
 	)
 	(segment
-		(start 137.1 83)
-		(end 137.2 82.9)
+		(start 135.2 111.3)
+		(end 135.4 111.5)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "650bf10f-8eed-4d58-86b1-f34da45a52ab")
+		(uuid "f2ca7623-3df4-4e7d-8c1a-c73f605cce5f")
 	)
 	(segment
-		(start 133.3 91.8)
-		(end 133.3 91)
+		(start 136 105.3)
+		(end 135.9 105.4)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "6b38c821-fd13-4a12-9a8e-06fdfbaded14")
-	)
-	(segment
-		(start 137.2 82.9)
-		(end 140.4 82.9)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO21")
-		(uuid "883395b9-df08-4015-9165-abb029cdaf04")
-	)
-	(segment
-		(start 145 81.7)
-		(end 146.6 81.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO21")
-		(uuid "8e0eab55-2dd3-4660-b0eb-6feedda9147f")
-	)
-	(segment
-		(start 140.5 83)
-		(end 143.7 83)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO21")
-		(uuid "90c7e7f0-60e1-4937-ace4-af3004079327")
-	)
-	(segment
-		(start 136.6 87.7)
-		(end 137.1 87.2)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO21")
-		(uuid "b98da906-88dc-434d-bc46-5c62e3079905")
-	)
-	(segment
-		(start 143.7 83)
-		(end 145 81.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO21")
-		(uuid "dbf12de7-6806-410a-8755-2105eba518f4")
+		(uuid "fa18eabd-5045-4002-b3b2-aeae5d8ab92e")
 	)
 	(via
-		(at 136.6 87.7)
+		(at 142.7 117.5)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "27502cdb-3862-4191-8151-a7948d928666")
+		(uuid "2314c080-f4db-4022-a49e-3a27eed3ebe3")
 	)
 	(via
-		(at 135 89.3)
+		(at 138 111.5)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "6a30070c-d596-4cbe-b88d-7f8938a0b114")
+		(uuid "393365ef-c4a0-4232-a243-fd1dd4a491ff")
+	)
+	(via
+		(at 151.9 81.3)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "63801329-b261-4e3e-9da5-b77d96d94103")
+	)
+	(via
+		(at 140.4 112.3)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "6b08162a-d1de-4701-b45f-e91ad085a13b")
+	)
+	(via
+		(at 155.3 84.8)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "7b04310c-3a5a-4e3d-9855-71701c2a906c")
+	)
+	(via
+		(at 133.1 98.2)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "83beb799-028e-4b47-a964-233309567faa")
+	)
+	(via
+		(at 133.1 99.4)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "880f8af8-10fd-44fb-b2de-221b97b19396")
+	)
+	(via
+		(at 153.7 116.9)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "d8e27375-31c5-4698-be80-b647dc38ace5")
 	)
 	(segment
-		(start 135 89.3)
-		(end 136.6 87.7)
+		(start 146.7 117.5)
+		(end 147.5 118.3)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO21")
-		(uuid "d8c23f19-c9de-49ea-86ae-b713118cc081")
+		(uuid "043630f0-62de-437d-833b-c26998b75c76")
+	)
+	(segment
+		(start 133.1 98.2)
+		(end 133.1 99.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "65998f95-a650-4a3f-9720-6330faa73b51")
+	)
+	(segment
+		(start 142.7 117.5)
+		(end 146.7 117.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "8bdac1d7-f008-4669-ab5f-094e6a857b2c")
+	)
+	(segment
+		(start 150.6 116.9)
+		(end 153.7 116.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "8f9a65cd-8d73-4a42-a478-adcdaabd25d0")
+	)
+	(segment
+		(start 138 112)
+		(end 138.3 112.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "9722b417-20c2-4163-83e7-70a75e133a4f")
+	)
+	(segment
+		(start 138.3 112.3)
+		(end 140.4 112.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "a2425730-d59d-48e2-b277-c7d134ab95de")
+	)
+	(segment
+		(start 138 111.5)
+		(end 138 112)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "c5ad820c-17bb-4758-aee6-1da966ab4547")
+	)
+	(segment
+		(start 155.3 84.8)
+		(end 151.9 81.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "d14f8ee4-fde4-4f46-a608-7da9cea73a22")
+	)
+	(segment
+		(start 149.2 118.3)
+		(end 150.6 116.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "d8839d7d-07dc-47f0-b9ba-2390b7fe4364")
+	)
+	(segment
+		(start 147.5 118.3)
+		(end 149.2 118.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "f4e16c48-3ed0-423d-8360-95a6986dcda5")
+	)
+	(segment
+		(start 151.9 81.4)
+		(end 151.9 81.3)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO21")
+		(uuid "fb4d54d3-c8af-4b49-8351-8f3cf9a6d702")
 	)
 	(segment
 		(start 127.9 94.2)
@@ -82023,36 +82599,12 @@
 		(uuid "e95ad518-7974-4afb-aee3-889c614dccb9")
 	)
 	(segment
-		(start 132.8 91.5)
-		(end 132.8 91.3)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "08ec8576-10a9-4df1-be99-b41b7e569957")
-	)
-	(segment
-		(start 142.9 82.5)
-		(end 143.7 81.7)
+		(start 134.5 88.2)
+		(end 135 87.7)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO13")
-		(uuid "40cf8dd8-c869-4aca-bab5-a72adda4d70f")
-	)
-	(segment
-		(start 143.7 81.7)
-		(end 144 81.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "68c3df94-5158-471e-bdf9-44fd9b6a5cee")
-	)
-	(segment
-		(start 131.1 93.2)
-		(end 132.8 91.5)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "d13e8d56-f600-4ed0-a151-dceafcd23deb")
+		(uuid "1c22b7e3-e2fc-435a-832c-4c7f311e992a")
 	)
 	(segment
 		(start 144 81.7)
@@ -82060,271 +82612,287 @@
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_GPIO13")
-		(uuid "fd71f4cc-600a-4a11-b9c4-771dd0ee503f")
+		(uuid "1f6020d9-3f88-48a2-9c3d-74e965f23228")
+	)
+	(segment
+		(start 141.9 82.9)
+		(end 142.4 82.9)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "4a7734d9-3b70-491e-b4b4-125b5699eb16")
+	)
+	(segment
+		(start 143.6 81.7)
+		(end 144 81.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "574c949a-b073-4828-a060-8edd739c69e9")
+	)
+	(segment
+		(start 134.5 89.8)
+		(end 134.5 88.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "63057682-caed-439c-b2e1-9a2a655dff14")
+	)
+	(segment
+		(start 142.4 82.9)
+		(end 143.6 81.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "65790bf6-785f-4517-9573-a59f2ba133c7")
+	)
+	(segment
+		(start 131.1 93.2)
+		(end 134.5 89.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "e4b7f529-97c1-4fa8-980f-0a57e3b72f40")
 	)
 	(via
-		(at 132.8 91.3)
+		(at 138.1 86.7)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO13")
-		(uuid "8216bfbd-5845-4570-ae36-df398b64f8de")
+		(uuid "06c8f9c2-b57f-48e9-8c91-d771fbb2144f")
 	)
 	(via
-		(at 142.9 82.5)
+		(at 141.9 82.9)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO13")
-		(uuid "8dace134-a248-479d-b039-d56b6b858a76")
-	)
-	(segment
-		(start 135.6 84.9)
-		(end 140.5 84.9)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "81afce16-1420-45cf-940f-141a3055d683")
-	)
-	(segment
-		(start 134.5 89.6)
-		(end 134.5 88.4)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "86668b88-9c79-4a6d-b6d7-2436fb890274")
-	)
-	(segment
-		(start 140.5 84.9)
-		(end 142.9 82.5)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "c1877977-bf2e-4930-b834-fa59de828475")
-	)
-	(segment
-		(start 135.6 87.3)
-		(end 135.6 84.9)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "c3599bbe-396a-449c-9199-470ec5a4ba74")
-	)
-	(segment
-		(start 134.5 88.4)
-		(end 135.6 87.3)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "e2c7e5a1-2516-4d18-983a-0b186e271261")
-	)
-	(segment
-		(start 132.8 91.3)
-		(end 134.5 89.6)
-		(width 0.1)
-		(layer "B.Cu")
-		(net "WIFI_GPIO13")
-		(uuid "e7aa54bc-69f1-46b2-8790-c0d562e2a14c")
-	)
-	(segment
-		(start 146.5 79.8)
-		(end 146.1 80.2)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "4d17cc44-61d1-49c6-a9c4-48f533c374f2")
-	)
-	(segment
-		(start 131.5 95.4)
-		(end 132.4 94.5)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "72979e51-5181-42b6-868d-11b0c4ffee85")
-	)
-	(segment
-		(start 129.9 95.2)
-		(end 130.1 95.4)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "893c434c-241e-4155-8caa-032a38620834")
-	)
-	(segment
-		(start 130.1 95.4)
-		(end 131.5 95.4)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "8e5f068f-974f-457a-bdae-87b45818f597")
-	)
-	(segment
-		(start 151.7 80.2)
-		(end 151.7 79.8)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "939cd962-ea06-4ea7-be0e-d79bbdd23b92")
-	)
-	(segment
-		(start 151.9 80.4)
-		(end 151.7 80.2)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "b996c328-6d9f-42a5-9430-5ce2f8165b95")
-	)
-	(segment
-		(start 151.7 79.8)
-		(end 146.5 79.8)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "d317553b-acbd-4467-9960-7df37ea38800")
-	)
-	(segment
-		(start 130.3 93.6)
-		(end 129.9 94)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "ef2340d8-be33-486a-b664-957e079f1b5f")
-	)
-	(segment
-		(start 129.9 94)
-		(end 129.9 95.2)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "f1e0f046-c283-44e3-b27a-b8cfe461f62c")
+		(uuid "11d4415b-1cbb-4010-8853-f22caf151311")
 	)
 	(via
-		(at 132.4 94.5)
+		(at 135 87.7)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "5c015c42-38ef-4623-8388-5a5434abffb3")
+	)
+	(segment
+		(start 138.1 86.7)
+		(end 141.9 82.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "8374ba8e-036e-4d6b-a964-d74cd34d00e8")
+	)
+	(segment
+		(start 135 87.7)
+		(end 137.1 87.7)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "a61b77b3-c0d5-4d6b-bc43-ae2d6fbc38ff")
+	)
+	(segment
+		(start 137.1 87.7)
+		(end 138.1 86.7)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "WIFI_GPIO13")
+		(uuid "c840a552-1290-4996-8173-2368ea20dd0c")
+	)
+	(segment
+		(start 143.2 82.9)
+		(end 143.8 82.9)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "1a7295f0-0d1d-4063-86e6-75f3e981dbe8")
+	)
+	(segment
+		(start 145 81.7)
+		(end 145.3 81.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "594cec10-e78d-446c-a009-a3abc5ca6d38")
+	)
+	(segment
+		(start 130.9 93.8)
+		(end 131.3 93.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "5e65b67f-b835-4f93-b1a7-62c82c9a5eaa")
+	)
+	(segment
+		(start 133.9 96.4)
+		(end 133.9 98.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "7f787061-691a-420f-bfaa-b89ff2fdfcbe")
+	)
+	(segment
+		(start 145.3 81.7)
+		(end 145.8 81.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "99cfcdf6-68da-4d30-9eb5-43f48ec6cbd3")
+	)
+	(segment
+		(start 131.3 93.8)
+		(end 133.9 96.4)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "ba93661f-a54f-423d-a446-9646c7280377")
+	)
+	(segment
+		(start 143.8 82.9)
+		(end 145 81.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "c0b0b1ee-50d5-410c-8780-9d76f3e92c53")
+	)
+	(segment
+		(start 130.5 93.4)
+		(end 130.9 93.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "c5fc1dc1-a0cf-49a7-a1df-85fc44905c1e")
+	)
+	(via
+		(at 143.2 82.9)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "8e65089e-684b-4b62-89fd-abb6032e85a0")
+		(uuid "5109ecad-357b-4231-93d3-9ac937d362e3")
 	)
 	(via
-		(at 151.9 80.4)
+		(at 133.9 98.4)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "9bade573-a24d-4354-930c-c6f2600fa3a4")
+		(uuid "cbe2646d-1e13-4c97-ba4b-58c07d9877b3")
 	)
 	(segment
-		(start 140.3 87.8)
-		(end 142.4 87.8)
+		(start 141.5 95.9)
+		(end 141.5 92.6)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "100c826b-9e8e-4f1c-be8a-5b8925cfe468")
+		(uuid "03aa1a9c-f30e-4ca5-bf44-c2fe3c5dd478")
 	)
 	(segment
-		(start 143 85.5)
-		(end 144 84.5)
+		(start 140.3 85.8)
+		(end 143.2 82.9)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "127a1425-5f2a-4ecb-abc7-a7b3acd614ad")
+		(uuid "07264f9f-9883-4ca8-afe4-bda1220b5ef9")
 	)
 	(segment
-		(start 135 94.5)
-		(end 135.6 93.9)
+		(start 134.3 99.4)
+		(end 139.5 99.4)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "1aeab84a-6273-42c2-928c-d4a1c8fb30e6")
+		(uuid "0d9b0c07-dfc2-4f67-b5bf-302db8aa3237")
 	)
 	(segment
-		(start 138.5 91.7)
-		(end 139.8 91.7)
+		(start 141.2 91.1)
+		(end 140.3 90.2)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "2afa2f9f-0953-4538-b0e1-8d65780b8a52")
+		(uuid "539ffb46-2db5-4548-a35a-8b21632c24f3")
 	)
 	(segment
-		(start 132.4 94.5)
-		(end 135 94.5)
-		(width 0.1)
-		(layer "B.Cu")
-		(net "WIFI_GPIO14")
-		(uuid "63ebba4f-6b08-4910-aeba-a93cea5387dc")
-	)
-	(segment
-		(start 139.8 91.7)
-		(end 140.3 91.2)
+		(start 140.9 98)
+		(end 141.4 98)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "7d3e39da-fc2d-471c-ae2c-f81257ebdff3")
+		(uuid "59b89ac0-37ea-46cd-8377-fd2dbfa82e38")
 	)
 	(segment
-		(start 135.6 93.9)
-		(end 135.6 91.5)
+		(start 140.3 90.2)
+		(end 140.3 85.8)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "8b51605c-ea68-41d4-a566-27b650e5f1f8")
+		(uuid "6fe5950f-5e20-4d37-8ee4-911a1bb6ec85")
 	)
 	(segment
-		(start 143 87.2)
-		(end 143 85.5)
+		(start 133.9 98.4)
+		(end 133.9 99)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "916b3197-0cfa-4c4f-9173-5185f61a8b91")
+		(uuid "79547c24-225e-4b23-9f44-e0976e30779d")
 	)
 	(segment
-		(start 140.3 91.2)
-		(end 140.3 87.8)
+		(start 139.5 99.4)
+		(end 140.9 98)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "98ec48ba-2a6d-4780-b53c-5c4cb1a1664a")
+		(uuid "86e90f0a-f20f-402e-8007-8849f5a01c36")
 	)
 	(segment
-		(start 138.3 91.5)
-		(end 138.5 91.7)
+		(start 141.5 92.6)
+		(end 141.2 92.3)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "9c2cb8a8-68ad-4a6b-bae3-6d449069eb32")
+		(uuid "8b794232-a4e4-46a6-b23f-98f079b6873f")
 	)
 	(segment
-		(start 142.4 87.8)
-		(end 143 87.2)
+		(start 142 97.4)
+		(end 142 96.4)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "bcda061c-0cf2-46a5-b9a7-b92dcd86ace6")
+		(uuid "9c1760b1-9108-442b-a0ba-5b13c6981f08")
 	)
 	(segment
-		(start 135.6 91.5)
-		(end 138.3 91.5)
+		(start 141.4 98)
+		(end 142 97.4)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "bfff408c-1dfd-445c-ab46-1d1199b0d6a9")
+		(uuid "ab0099ef-e15c-4477-8274-183922c69f5b")
 	)
 	(segment
-		(start 144 84.5)
-		(end 147.8 84.5)
+		(start 141.2 92.3)
+		(end 141.2 91.1)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "c587a3d7-d3ff-4195-927d-fc3cb51fbfce")
+		(uuid "c681fa1b-fbb2-40a6-9379-218a74efc833")
 	)
 	(segment
-		(start 147.8 84.5)
-		(end 151.9 80.4)
+		(start 133.9 99)
+		(end 134.3 99.4)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_GPIO14")
-		(uuid "ef667a8f-69f6-4880-a0f0-e42955bd6718")
+		(uuid "d320f75f-1b7a-4b32-af17-19aa8a6eda0e")
+	)
+	(segment
+		(start 142 96.4)
+		(end 141.5 95.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_GPIO14")
+		(uuid "dc731719-918a-4667-812e-9d878f62d7d1")
 	)
 	(segment
 		(start 112.194992 93.9165)
@@ -82607,140 +83175,260 @@
 		(uuid "f2c90eb8-2ffb-4535-b001-b944f8f84979")
 	)
 	(segment
-		(start 135 88.5)
-		(end 135 84.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_TXD")
-		(uuid "2547ced6-a608-423d-b547-0d0641b7c243")
-	)
-	(segment
-		(start 131.1 92.4)
-		(end 135 88.5)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_TXD")
-		(uuid "450d6f1c-899b-48f9-8783-2c971780aee8")
-	)
-	(segment
-		(start 141.7 82.5)
-		(end 141.7 81.1)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_TXD")
-		(uuid "5ca03242-4d29-4253-809d-e8d897e97943")
-	)
-	(via
-		(at 135 84.7)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "WIFI_TXD")
-		(uuid "0e3af8d5-ba7a-4ff8-b68c-1394b3fc2b91")
-	)
-	(via
-		(at 141.7 82.5)
-		(size 0.4)
-		(drill 0.2)
-		(layers "F.Cu" "B.Cu")
-		(net "WIFI_TXD")
-		(uuid "c1007f56-3f44-40c7-a531-c267278812b7")
-	)
-	(segment
-		(start 141.2 83)
-		(end 141.7 82.5)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_TXD")
-		(uuid "4a922f80-e55a-4e90-96f1-6251bc6d70d9")
-	)
-	(segment
-		(start 135 84.7)
-		(end 136.7 83)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_TXD")
-		(uuid "4faceb52-ea4c-4f87-883f-b0f98340d2cf")
-	)
-	(segment
-		(start 136.7 83)
-		(end 141.2 83)
-		(width 0.15)
-		(layer "B.Cu")
-		(net "WIFI_TXD")
-		(uuid "cc529c33-71e1-4b63-b3aa-406ed92dc827")
-	)
-	(segment
-		(start 133.1 81.6)
+		(start 132.9 81.6)
 		(end 133 81.5)
 		(width 0.15)
 		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "05fc391d-f05d-4b14-804e-8ac94f776259")
-	)
-	(segment
-		(start 130.9 89.8)
-		(end 131.3 89.8)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "0b21dd95-ba30-48c8-adcc-a85b84381ffb")
-	)
-	(segment
-		(start 142.3 81.9)
-		(end 142.5 81.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "1d05f0ec-d384-437e-a992-44a530c97db1")
-	)
-	(segment
-		(start 129.9 90.8)
-		(end 130.1 90.6)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "2aabf8d7-a000-4ccc-81b2-3b14a2435028")
-	)
-	(segment
-		(start 142.5 81.7)
-		(end 142.8 81.7)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "2e9ea213-83e1-4529-90aa-c5d6d8155b2c")
-	)
-	(segment
-		(start 129.9 92)
-		(end 129.9 90.8)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "57d3ad90-f670-4106-8fa4-5455e045e4da")
-	)
-	(segment
-		(start 130.1 90.6)
-		(end 130.5 90.6)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "5c352d24-5a3a-4966-9f83-e789563e688e")
+		(net "WIFI_TXD")
+		(uuid "1c338bb8-581a-4068-bcc4-ffe9639038c6")
 	)
 	(segment
 		(start 130.7 90.4)
 		(end 130.7 90)
 		(width 0.1)
 		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "64745cac-a45b-427e-9266-8a536f9faf23")
+		(net "WIFI_TXD")
+		(uuid "210de467-c9d5-43c9-8804-c97b872bebe4")
+	)
+	(segment
+		(start 141.3 79.6)
+		(end 141.9 80.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "40e31796-e567-454f-b14e-08bf8356b1d5")
+	)
+	(segment
+		(start 130.1 93)
+		(end 129.9 92.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "549f6a6d-ea81-42a5-9e40-00601e8a5d69")
+	)
+	(segment
+		(start 129.9 90.8)
+		(end 130.1 90.6)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "5e08e8ed-76c1-4c26-a460-2a15af4ddf04")
+	)
+	(segment
+		(start 132.5 88.6)
+		(end 132.5 88.3)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "68890446-e77d-46d8-b70a-1bdfc7699149")
+	)
+	(segment
+		(start 131 92.7)
+		(end 130.7 93)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "76d612aa-1906-4f0e-9809-1f1fb4eecf88")
+	)
+	(segment
+		(start 130.1 90.6)
+		(end 130.5 90.6)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "7cfbcdeb-149e-4ab7-9ab9-3782b253366e")
 	)
 	(segment
 		(start 131.3 89.8)
-		(end 133.1 88)
+		(end 132.5 88.6)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "8eb37583-f5e0-4ced-af88-bf2f86548b9c")
+	)
+	(segment
+		(start 130.9 89.8)
+		(end 131.3 89.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "9758be5f-9146-487e-bcaa-d3883f21c546")
+	)
+	(segment
+		(start 130.5 90.6)
+		(end 130.7 90.4)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "a7ece7f1-0743-4e28-add4-f7f75f2cd1eb")
+	)
+	(segment
+		(start 132.9 85.7)
+		(end 132.9 81.6)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "b3a115dc-6788-43eb-ab75-251d046a66c5")
+	)
+	(segment
+		(start 129.9 92.8)
+		(end 129.9 90.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "b97449d7-37d7-4d00-9eae-f7b184ab943e")
+	)
+	(segment
+		(start 130.7 93)
+		(end 130.1 93)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "e39cf387-b054-4208-a2ac-83cb6153cfe6")
+	)
+	(segment
+		(start 137.2 79.6)
+		(end 141.3 79.6)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "f254c015-634e-4b7f-89cd-ee141ab5da2a")
+	)
+	(segment
+		(start 130.7 90)
+		(end 130.9 89.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "f549129a-90e6-4639-b38b-550a1c038f45")
+	)
+	(via
+		(at 137.2 79.6)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "54d0ba06-37e9-46b6-8db5-0bd445c5b620")
+	)
+	(via
+		(at 132.9 85.7)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "63b48c41-e5f6-4740-b000-9352ec134308")
+	)
+	(via
+		(at 132.5 88.3)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "dbed6c33-e0d8-4830-a6f5-c0a29a1fb070")
+	)
+	(via
+		(at 133 81.5)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "efa369e9-7dc9-4765-b66d-fd0df74e5b2e")
+	)
+	(segment
+		(start 133 81.5)
+		(end 135.3 81.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "ac5900ec-2a5d-47fd-8c7f-1b32c907a16d")
+	)
+	(segment
+		(start 135.3 81.5)
+		(end 137.2 79.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "b6ea0cd3-d612-43a5-97e0-f5daaa1e4a2c")
+	)
+	(segment
+		(start 133.4 86.9)
+		(end 133.4 86.2)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "WIFI_TXD")
+		(uuid "55bd307f-2446-470b-ab19-5b65683b0f27")
+	)
+	(segment
+		(start 132.5 88.3)
+		(end 132.5 87.8)
+		(width 0.1)
+		(layer "In1.Cu")
+		(net "WIFI_TXD")
+		(uuid "bc3e3cd4-74d8-471c-8819-a0e906e8a32b")
+	)
+	(segment
+		(start 133.4 86.2)
+		(end 132.9 85.7)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "WIFI_TXD")
+		(uuid "e289f941-4a09-4b1a-9d60-683b32b95365")
+	)
+	(segment
+		(start 132.5 87.8)
+		(end 133.4 86.9)
+		(width 0.1)
+		(layer "In1.Cu")
+		(net "WIFI_TXD")
+		(uuid "f40cf534-90c4-4471-a4e6-a01107e31c23")
+	)
+	(segment
+		(start 140.7 83.2)
+		(end 140.7 83.1)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "20e8df7e-c037-4af2-b104-7c990cc40fd7")
+	)
+	(segment
+		(start 130.5 92.6)
+		(end 130.9 92.2)
 		(width 0.1)
 		(layer "F.Cu")
 		(net "WIFI_RXD")
-		(uuid "68186ddf-e6a7-43b4-91f2-3db86b96d9e2")
+		(uuid "249a5e31-6512-4ce7-adbb-521139e399ff")
+	)
+	(segment
+		(start 140.4 83.5)
+		(end 140.7 83.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "60fc7709-7b4d-44b0-a73c-1038c292cf31")
+	)
+	(segment
+		(start 140.7 83.1)
+		(end 140.8 83)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "6a31b14e-e5e5-4328-a04d-e7fc299d2105")
+	)
+	(segment
+		(start 134 89.5)
+		(end 134 88)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "734515be-5f95-4153-a35b-c4945318f282")
+	)
+	(segment
+		(start 141.2 83)
+		(end 141.4 82.8)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "898a031b-c660-4e34-8384-5eb034d4282e")
 	)
 	(segment
 		(start 142.8 81.7)
@@ -82748,87 +83436,119 @@
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_RXD")
-		(uuid "6ab930ad-145e-4d5b-add7-b24b566fb75e")
+		(uuid "8eeafbb5-5818-4223-b2d2-a7efe5f0a775")
 	)
 	(segment
-		(start 130.5 90.6)
-		(end 130.7 90.4)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "729ae01d-8303-4c4c-9c0d-383a4fc62633")
-	)
-	(segment
-		(start 130.3 92.4)
-		(end 129.9 92)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "a31da23f-5d16-405f-8d00-67db95984c09")
-	)
-	(segment
-		(start 130.7 90)
-		(end 130.9 89.8)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "WIFI_RXD")
-		(uuid "a983c141-f363-4a35-a17a-01ba09a66a9d")
-	)
-	(segment
-		(start 133.1 88)
-		(end 133.1 81.6)
+		(start 141.4 82.6)
+		(end 142.3 81.7)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_RXD")
-		(uuid "c2e43a9d-827a-4e48-a72c-917866182f55")
+		(uuid "b26239cf-7704-4a45-924f-237bc2fd5c07")
+	)
+	(segment
+		(start 131.3 92.2)
+		(end 134 89.5)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "bb0054e1-142d-4b9e-9515-2caae1a0eac7")
+	)
+	(segment
+		(start 140.8 83)
+		(end 141.2 83)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "bc333e27-db26-4b27-bece-b0b7eae757c5")
+	)
+	(segment
+		(start 142.3 81.7)
+		(end 142.8 81.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "cdb36935-e18d-4927-abfb-5c620248d8b6")
+	)
+	(segment
+		(start 130.9 92.2)
+		(end 131.3 92.2)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "eb1a956f-a7ff-45ed-8b64-3fbf551705ea")
+	)
+	(segment
+		(start 141.4 82.8)
+		(end 141.4 82.6)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_RXD")
+		(uuid "f427a390-9b97-48f0-8443-99d16886f48f")
 	)
 	(via
-		(at 133 81.5)
+		(at 138.1 85.8)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_RXD")
-		(uuid "5224c8b1-26e8-4aba-a6a3-49fd891b0898")
+		(uuid "06d6ee7a-5e16-4357-a981-00b14338ed43")
 	)
 	(via
-		(at 142.3 81.9)
+		(at 134 88)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_RXD")
-		(uuid "e07dcd58-6f32-4b29-9821-acf17f4eb51b")
+		(uuid "1b076051-54b8-4fe3-b407-2c47a658daf4")
+	)
+	(via
+		(at 140.4 83.5)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_RXD")
+		(uuid "8789b58d-cb6b-4491-a03b-f9dca85c1bbc")
 	)
 	(segment
-		(start 139.3 81.4)
-		(end 141.8 81.4)
+		(start 138.1 85.8)
+		(end 140.4 83.5)
 		(width 0.15)
 		(layer "B.Cu")
 		(net "WIFI_RXD")
-		(uuid "45b2e114-d1ea-42ea-a8eb-e44b96f60236")
+		(uuid "d17d9ea5-4493-4fa1-a721-5daa9fa949a4")
 	)
 	(segment
-		(start 141.8 81.4)
-		(end 142.3 81.9)
+		(start 134.5 87.5)
+		(end 134.5 87.4)
 		(width 0.15)
-		(layer "B.Cu")
+		(layer "In1.Cu")
 		(net "WIFI_RXD")
-		(uuid "b1b6c795-9e2b-4d56-8e47-4406adcadfec")
+		(uuid "0e6852eb-afb6-40f8-a821-f269f5b0c0a3")
 	)
 	(segment
-		(start 139.2 81.5)
-		(end 139.3 81.4)
+		(start 134 88)
+		(end 134.5 87.5)
 		(width 0.15)
-		(layer "B.Cu")
+		(layer "In1.Cu")
 		(net "WIFI_RXD")
-		(uuid "c40ca28e-7617-4291-ab0b-6aeb60b37b4d")
+		(uuid "1b925871-c4e0-417f-97e6-cc196edc0c25")
 	)
 	(segment
-		(start 133 81.5)
-		(end 139.2 81.5)
+		(start 134.5 87.4)
+		(end 136.1 85.8)
 		(width 0.15)
-		(layer "B.Cu")
+		(layer "In1.Cu")
 		(net "WIFI_RXD")
-		(uuid "ce05bd87-37be-4cee-bd13-1131a7eaf699")
+		(uuid "a6346e00-adf6-4595-a460-4a3c5c88e6a5")
+	)
+	(segment
+		(start 136.1 85.8)
+		(end 138.1 85.8)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "WIFI_RXD")
+		(uuid "a8ba396e-08e8-493d-b929-a960a4b8a7cb")
 	)
 	(segment
 		(start 105.809331 85.353034)
@@ -83919,6 +84639,22 @@
 		(uuid "d32b1eb8-3618-4eec-ab7b-68ba46122e83")
 	)
 	(segment
+		(start 132.68 86.91)
+		(end 132.68 86.4)
+		(width 0.13)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "21852ddc-95b5-49e6-9327-e4d83d7ca408")
+	)
+	(segment
+		(start 130.7 89)
+		(end 130.7 88.4)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "2537654e-a8ca-4bc1-8c13-d7df8f4508af")
+	)
+	(segment
 		(start 131.596003 88.580675)
 		(end 132.676433 87.500245)
 		(width 0.127)
@@ -83933,6 +84669,38 @@
 		(layer "F.Cu")
 		(net "/flash/FLASH_nCS")
 		(uuid "6f06a911-efed-44e7-a73d-4a1e598a7d48")
+	)
+	(segment
+		(start 131.3 88.2)
+		(end 132.7 86.8)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "701c069f-1891-4e4d-96fa-b4dd1009e386")
+	)
+	(segment
+		(start 130.9 88.2)
+		(end 131.3 88.2)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "753de6a7-7e35-4e26-ba1a-37d537c48217")
+	)
+	(segment
+		(start 132.7 86.4)
+		(end 133 86.4)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "7a35d77b-b517-48d4-abae-392212247825")
+	)
+	(segment
+		(start 133 86.4)
+		(end 135 84.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "8fbf256d-44e5-4eef-b27c-af4ee50defd4")
 	)
 	(segment
 		(start 132.676433 86.911888)
@@ -83967,12 +84735,100 @@
 		(uuid "abf797ad-4348-490e-8c38-c8a84c694cce")
 	)
 	(segment
+		(start 130.7 88.4)
+		(end 130.9 88.2)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "b3a3aa0a-a2ce-47b1-af67-df9e0b875303")
+	)
+	(segment
 		(start 131.276907 89)
 		(end 131.596003 88.680904)
 		(width 0.127)
 		(layer "F.Cu")
 		(net "/flash/FLASH_nCS")
 		(uuid "f7b08e3e-9cb5-4ea7-9248-4d85e97fbd77")
+	)
+	(segment
+		(start 132.7 86.8)
+		(end 132.7 86.4)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "fb98c90c-088b-49ff-8e02-b4005af70269")
+	)
+	(via
+		(at 132.68 86.4)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "7b4e09d3-aa86-490d-a929-fcaac29a3451")
+	)
+	(via
+		(at 135 84.4)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "bcec8b3e-b0dc-4b23-b6a7-345c2cc38159")
+	)
+	(segment
+		(start 136.9 88.4)
+		(end 139 90.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "09898890-cf0f-444f-8108-2531b673baa6")
+	)
+	(segment
+		(start 133.1 86.4)
+		(end 132.7 86.4)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "266fe431-97d6-4d22-883e-91024237eee0")
+	)
+	(segment
+		(start 132.68 86.4)
+		(end 133.59 86.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "391669ff-3f70-42b1-8635-26f58e3c3e2b")
+	)
+	(segment
+		(start 132.7 86.4)
+		(end 133.1 86.4)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "5cf8f96f-3bff-4dac-a5ad-8b7030056825")
+	)
+	(segment
+		(start 135 84.4)
+		(end 136.2 84.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "9b4155af-f283-456b-8c50-55adf8789202")
+	)
+	(segment
+		(start 136.9 85.1)
+		(end 136.9 88.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "b7667b47-3143-499b-9282-cffae47272b4")
+	)
+	(segment
+		(start 136.2 84.4)
+		(end 136.9 85.1)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nCS")
+		(uuid "f6e9dbf8-61ef-41ea-b709-c2d5ba218382")
 	)
 	(segment
 		(start 119.1 89.4)
@@ -84935,6 +85791,142 @@
 		(uuid "bd8c5666-13fa-48e3-800d-78aea0f7b300")
 	)
 	(segment
+		(start 137.6 94.5)
+		(end 137.6 94.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "123d18b7-0761-4107-8ef8-53eb2cffebb5")
+	)
+	(segment
+		(start 137.7 94.9)
+		(end 138.4 95.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "18fd8e67-e8e2-47be-83c0-5a1cf90a95f9")
+	)
+	(segment
+		(start 130.3 88.1)
+		(end 133.7 91.5)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "26b79c8c-0715-4fb0-9ab3-d0bc005f8cc2")
+	)
+	(segment
+		(start 137.2 94.1)
+		(end 137.6 94.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "3bc944a6-bad5-4e37-bdc1-05e18f35bb25")
+	)
+	(segment
+		(start 130.2 87.9)
+		(end 130.3 88)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "3cd06f1e-c76c-48f4-8a38-d902fcd6e5c7")
+	)
+	(segment
+		(start 136.9 94.1)
+		(end 137.2 94.1)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "47ae3787-af6e-49e8-a417-aa423779fdea")
+	)
+	(segment
+		(start 133.7 91.5)
+		(end 135.4 91.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "61a78467-f326-4f66-9f0e-6cedef91f98f")
+	)
+	(segment
+		(start 137.7 94.6)
+		(end 137.7 94.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "6e1c0352-9ffb-4b0b-b036-6fa0801269bc")
+	)
+	(segment
+		(start 138.4 95.6)
+		(end 139.2 95.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "71b1a911-2603-4fdb-b39e-2cb4e91c7be9")
+	)
+	(segment
+		(start 129.9 87.4)
+		(end 130.2 87.7)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "8866e8e6-9b52-4dee-9474-c5f6395e2198")
+	)
+	(segment
+		(start 139.2 95.6)
+		(end 140.1 94.7)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "8c4a054c-701e-4727-abf4-2218eb76b665")
+	)
+	(segment
+		(start 135.4 91.5)
+		(end 136.1 92.2)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "8e4144b0-54d0-4ecc-9f09-63cb8c9cfdf7")
+	)
+	(segment
+		(start 136.9 93.8)
+		(end 136.9 94.1)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "904a277e-eca2-41fa-9b4d-ccb14bf2e292")
+	)
+	(segment
+		(start 130.3 88)
+		(end 130.3 88.1)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "96cc62f3-d950-4e5a-91ba-bfebe5209f77")
+	)
+	(segment
+		(start 130.2 87.7)
+		(end 130.2 87.9)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "abfd219d-4596-4c92-b978-95fb978559c0")
+	)
+	(segment
+		(start 136.4 93.3)
+		(end 136.9 93.8)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "b35ef398-8ac1-4f42-aef3-61345bc5bb04")
+	)
+	(segment
+		(start 137.6 94.6)
+		(end 137.7 94.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_SCK")
+		(uuid "e2aaa007-39bc-4263-97e5-2b6e843fc82a")
+	)
+	(segment
 		(start 116.794999 58)
 		(end 119.6 58)
 		(width 0.15)
@@ -85591,6 +86583,14 @@
 		(uuid "37a784d1-cb5e-45f9-8c66-87f22eabb088")
 	)
 	(segment
+		(start 132.09 85.95)
+		(end 132.45 85.59)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "4a7dd3c7-daa2-4a1f-a94d-8be343823469")
+	)
+	(segment
 		(start 131.490501 87.187441)
 		(end 131.490501 87.012642)
 		(width 0.127)
@@ -85615,12 +86615,36 @@
 		(uuid "619cb33a-3b76-471a-afaf-c019adb96022")
 	)
 	(segment
+		(start 132.09 86.41)
+		(end 132.09 85.95)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "75209f1f-d826-42d5-a45c-2cb8f1613092")
+	)
+	(segment
 		(start 130.3 87)
 		(end 130.690501 87.390501)
 		(width 0.127)
 		(layer "F.Cu")
 		(net "/flash/FLASH_MISO")
 		(uuid "8219ce24-8675-45bc-a737-8c7309c2ec45")
+	)
+	(segment
+		(start 132.45 85.59)
+		(end 132.45 83)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "af16f54d-1792-4536-a208-90101e06f2a1")
+	)
+	(via
+		(at 132.45 83)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "47acde8b-6cc9-4b90-80b0-019fb2aa7900")
 	)
 	(via
 		(at 132.092705 86.410438)
@@ -85629,6 +86653,78 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/flash/FLASH_MISO")
 		(uuid "7b1c34bf-9379-411c-a8d8-85ede6de9e8a")
+	)
+	(via
+		(at 134.55 80.9)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "7d67b1c0-6cb1-4ec8-b1c9-0c4a22b17d46")
+	)
+	(segment
+		(start 134.91 80.54)
+		(end 134.91 80.1)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "2b620d92-a01e-4f03-afe2-ced7d0530609")
+	)
+	(segment
+		(start 134.6 87.48)
+		(end 134.87 87.21)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "4597c6f9-303a-45fe-9c1a-309fec152567")
+	)
+	(segment
+		(start 132.09 86.41)
+		(end 132.5 86.82)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "58a00295-4e8f-433d-bd12-b76232bd93b8")
+	)
+	(segment
+		(start 132.5 86.82)
+		(end 133.16 87.48)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "5de8ebe2-fc89-4767-a8b1-0871874a07e7")
+	)
+	(segment
+		(start 133.16 87.48)
+		(end 134.6 87.48)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "646442e5-659b-45ef-afe4-9202727affbb")
+	)
+	(segment
+		(start 134.55 80.9)
+		(end 134.91 80.54)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "768bd11e-18f7-483f-b3ed-5db47575ad05")
+	)
+	(segment
+		(start 134.87 87.21)
+		(end 134.87 87)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "a4130641-bec2-4b17-8db9-efbd48cd465e")
+	)
+	(segment
+		(start 132.45 83)
+		(end 134.55 80.9)
+		(width 0.15)
+		(layer "In1.Cu")
+		(net "/flash/FLASH_MISO")
+		(uuid "2be21a6b-e55e-44c4-821e-edfee64e6a42")
 	)
 	(segment
 		(start 127.8 82.9)
@@ -85711,6 +86807,14 @@
 		(uuid "9a0194bb-1ca2-466f-9b26-25829982b09d")
 	)
 	(segment
+		(start 137.4 91.4)
+		(end 137.8 91.4)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "02eabe53-f49e-4d4c-8883-a86d3dd2d579")
+	)
+	(segment
 		(start 130.491127 86.008873)
 		(end 130.554733 86.008873)
 		(width 0.127)
@@ -85733,6 +86837,62 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/flash/FLASH_MOSI")
 		(uuid "555d08cb-0a95-4069-a49b-9d4f2743a459")
+	)
+	(via
+		(at 137.4 91.4)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "f4b369d0-011c-40fb-8e21-9d5767c90a62")
+	)
+	(segment
+		(start 130.6 86)
+		(end 131.3 86.7)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "5124ba02-6dc6-4f7e-a498-24fdaac323dc")
+	)
+	(segment
+		(start 136.3 91.5)
+		(end 136.7 91.5)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "58d5c0f8-18a0-456f-b127-0cb04383deae")
+	)
+	(segment
+		(start 131.5 86.7)
+		(end 136.3 91.5)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "6fd77ec9-8663-4929-84db-ccef25c9b887")
+	)
+	(segment
+		(start 137.4 92.2)
+		(end 137.4 91.4)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "79769a7d-2049-44cf-a850-f4241a527a0c")
+	)
+	(segment
+		(start 136.7 91.5)
+		(end 137.4 92.2)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "988fc6bc-6f49-4ca9-97d7-d38d7f594164")
+	)
+	(segment
+		(start 131.3 86.7)
+		(end 131.5 86.7)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_MOSI")
+		(uuid "dbffce7a-4d73-4012-b996-e9fbd74b4806")
 	)
 	(segment
 		(start 116.921161 83.445989)
@@ -85927,12 +87087,36 @@
 		(uuid "e06bb8d5-84a8-406c-85d3-8478ad0cb64a")
 	)
 	(segment
+		(start 139.2 92.7)
+		(end 139.6 93.1)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "36260e85-f113-4740-859f-d5c971347c56")
+	)
+	(segment
 		(start 130.3 85.4)
 		(end 130.3 85.37953)
 		(width 0.19)
 		(layer "F.Cu")
 		(net "/flash/FLASH_nWP")
 		(uuid "38c01c0e-7e01-4b8e-94c3-4ce322d6ad97")
+	)
+	(segment
+		(start 139.6 93.1)
+		(end 139.6 94.5)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "4775d8d2-573f-4acc-acfb-135774f7ba08")
+	)
+	(segment
+		(start 130.8 85.7)
+		(end 131 85.7)
+		(width 0.1)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "4b4e6d99-4e24-4dac-b33c-0532495dad4a")
 	)
 	(segment
 		(start 130.4463 85.23323)
@@ -85966,6 +87150,22 @@
 		(net "/flash/FLASH_nWP")
 		(uuid "a495aa6b-4f81-48fa-865c-75c0fb58de02")
 	)
+	(segment
+		(start 139.2 91.8)
+		(end 139.2 92.7)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "d8bdbb92-4f9a-4d43-8be4-dc42fcc6a327")
+	)
+	(via
+		(at 139.2 91.8)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "6a6f5a9d-b77a-48ac-9963-804c415f0bb0")
+	)
 	(via
 		(at 130.991997 85.674471)
 		(size 0.419)
@@ -85973,6 +87173,78 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/flash/FLASH_nWP")
 		(uuid "996f6360-60d3-4248-99f8-94930798cc37")
+	)
+	(segment
+		(start 138.6 91.8)
+		(end 139.2 91.8)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "006cd3ff-8525-4fd7-ab27-409bf3be6b5f")
+	)
+	(segment
+		(start 135.4 84.9)
+		(end 136.1 85.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "1764341d-b1bc-40ea-a60d-89cdc38e88a4")
+	)
+	(segment
+		(start 131 85.7)
+		(end 131.1 85.7)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "386f0c88-23d2-43e7-ad09-6d345143c425")
+	)
+	(segment
+		(start 133.1 84.9)
+		(end 135.4 84.9)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "7d959d39-ffa7-47c8-97d8-367aff27c153")
+	)
+	(segment
+		(start 136.4 86.7)
+		(end 136.4 89.6)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "9ddaded5-033c-4054-974d-f8f3eb9889e8")
+	)
+	(segment
+		(start 132.1 85.9)
+		(end 133.1 84.9)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "c11def5a-408b-4c35-ba2b-a15792be9581")
+	)
+	(segment
+		(start 131.1 85.7)
+		(end 131.3 85.9)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "d7aefa29-e132-4d4c-948e-5b17dc693559")
+	)
+	(segment
+		(start 131.3 85.9)
+		(end 132.1 85.9)
+		(width 0.1)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "da58ae2b-7e51-4fc2-915f-7901c732d5ec")
+	)
+	(segment
+		(start 136.4 89.6)
+		(end 138.6 91.8)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "/flash/FLASH_nWP")
+		(uuid "dc87792d-a088-484a-93fc-53a3d737b174")
 	)
 	(segment
 		(start 125.2 85)
@@ -90993,6 +92265,14 @@
 			"e7c31c95-34b6-44ed-abe5-a54f4bded838" "eefdd043-545a-40fa-9e1d-40a025584921"
 		)
 	)
+	(group "FLASH_HAND"
+		(uuid "071e4749-b218-4c72-8de4-3f7bc732216a")
+		(members "2b620d92-a01e-4f03-afe2-ced7d0530609" "2be21a6b-e55e-44c4-821e-edfee64e6a42"
+			"47acde8b-6cc9-4b90-80b0-019fb2aa7900" "4a7dd3c7-daa2-4a1f-a94d-8be343823469"
+			"75209f1f-d826-42d5-a45c-2cb8f1613092" "768bd11e-18f7-483f-b3ed-5db47575ad05"
+			"7d67b1c0-6cb1-4ec8-b1c9-0c4a22b17d46" "af16f54d-1792-4536-a208-90101e06f2a1"
+		)
+	)
 	(group "STITCH"
 		(uuid "0e2dc6ca-b998-41d9-92a8-8a7ae1574722")
 		(members "01549bc9-b45d-4db0-9a7b-063579379ed3" "6ccfb170-d760-4532-96c9-bc1a152dcc52"
@@ -91119,6 +92399,38 @@
 			"fc304d54-c237-426b-b14d-4cffee0f9317"
 		)
 	)
+	(group "FLASH"
+		(uuid "4df6ecc7-ac87-4e71-a381-14764adb1c5c")
+		(members "006cd3ff-8525-4fd7-ab27-409bf3be6b5f" "02eabe53-f49e-4d4c-8883-a86d3dd2d579"
+			"05bc0dd0-e4f2-4e11-a826-3ea0357347db" "123d18b7-0761-4107-8ef8-53eb2cffebb5"
+			"1390db86-73ab-41db-a228-4ec94ba986bb" "1764341d-b1bc-40ea-a60d-89cdc38e88a4"
+			"18fd8e67-e8e2-47be-83c0-5a1cf90a95f9" "26b79c8c-0715-4fb0-9ab3-d0bc005f8cc2"
+			"29e7b6db-b10c-480a-a865-51c36bf15232" "352560bd-c10f-47fa-8fc2-7957f9fc3586"
+			"36260e85-f113-4740-859f-d5c971347c56" "386f0c88-23d2-43e7-ad09-6d345143c425"
+			"3bc944a6-bad5-4e37-bdc1-05e18f35bb25" "3cd06f1e-c76c-48f4-8a38-d902fcd6e5c7"
+			"46851fb2-75c4-4038-853c-e953bd4fea38" "4775d8d2-573f-4acc-acfb-135774f7ba08"
+			"47ae3787-af6e-49e8-a417-aa423779fdea" "4b4e6d99-4e24-4dac-b33c-0532495dad4a"
+			"5124ba02-6dc6-4f7e-a498-24fdaac323dc" "58d5c0f8-18a0-456f-b127-0cb04383deae"
+			"61a78467-f326-4f66-9f0e-6cedef91f98f" "6a6f5a9d-b77a-48ac-9963-804c415f0bb0"
+			"6e1c0352-9ffb-4b0b-b036-6fa0801269bc" "6fd77ec9-8663-4929-84db-ccef25c9b887"
+			"71b1a911-2603-4fdb-b39e-2cb4e91c7be9" "79769a7d-2049-44cf-a850-f4241a527a0c"
+			"7ca069cd-db41-49f0-a4e6-7ad8ed187677" "7d959d39-ffa7-47c8-97d8-367aff27c153"
+			"7fab18a4-6513-494c-9e10-ad8aae667a75" "8866e8e6-9b52-4dee-9474-c5f6395e2198"
+			"8c4a054c-701e-4727-abf4-2218eb76b665" "8e4144b0-54d0-4ecc-9f09-63cb8c9cfdf7"
+			"904a277e-eca2-41fa-9b4d-ccb14bf2e292" "937e96b1-ba9d-44ea-93a8-3b9c31c428bc"
+			"96cc62f3-d950-4e5a-91ba-bfebe5209f77" "988fc6bc-6f49-4ca9-97d7-d38d7f594164"
+			"9ddaded5-033c-4054-974d-f8f3eb9889e8" "a34cee4b-1f50-43c3-8b38-bd93d00c9b12"
+			"abfd219d-4596-4c92-b978-95fb978559c0" "b35ef398-8ac1-4f42-aef3-61345bc5bb04"
+			"b4729a3e-7fae-4927-8285-ba3dcd05f31b" "ba3ac657-6eac-4e52-86ac-a0e10f790f97"
+			"c11def5a-408b-4c35-ba2b-a15792be9581" "cab853e1-1df5-4439-8cb9-c0ecb1fc367e"
+			"d7aefa29-e132-4d4c-948e-5b17dc693559" "d8bdbb92-4f9a-4d43-8be4-dc42fcc6a327"
+			"da58ae2b-7e51-4fc2-915f-7901c732d5ec" "dbffce7a-4d73-4012-b996-e9fbd74b4806"
+			"dc291aa6-6502-4123-b2cd-cc4ba9a16c86" "dc87792d-a088-484a-93fc-53a3d737b174"
+			"e2aaa007-39bc-4263-97e5-2b6e843fc82a" "ee5e4e45-9d78-4de3-ba1b-ccabfe160390"
+			"f3777e6c-fbca-4a68-8391-607cb7092eb7" "f4b369d0-011c-40fb-8e21-9d5767c90a62"
+			"fdb49afd-bbfe-4f4c-affa-dbc80d6a36b2" "ff34ad84-b23d-4e92-ba2d-da49521c1c20"
+		)
+	)
 	(group "ROUTE_3_POWER_B"
 		(uuid "532e3ef2-882a-4e9b-aa40-b62bacab24ad")
 		(members "3ddf7645-0077-4d25-9be6-b3bedae53b0c" "4b6eb6b9-7944-4dd5-91a9-a274de79ff80"
@@ -91128,61 +92440,6 @@
 			"d87161c0-e090-4f36-a2db-abc7303e9df4" "ed412de8-c1c9-4099-b4d3-9430de69da8f"
 			"fa71649c-afb5-45db-99c8-30db7c307b00" "ff416ad6-ec4d-49a5-91b6-df97cc1d1e09"
 			"ffb86cef-7830-4d5b-bad2-a01e88b6d3d6"
-		)
-	)
-	(group "ESP_FPGA"
-		(uuid "57dbafc9-b28c-4e56-b07d-33238c2713af")
-		(members "05fc391d-f05d-4b14-804e-8ac94f776259" "076061a3-56f6-4851-9b3d-597313751c7b"
-			"08ec8576-10a9-4df1-be99-b41b7e569957" "0b21dd95-ba30-48c8-adcc-a85b84381ffb"
-			"0e3af8d5-ba7a-4ff8-b68c-1394b3fc2b91" "0e9f1e88-c606-4042-b2cb-9d84f2271bfb"
-			"100c826b-9e8e-4f1c-be8a-5b8925cfe468" "127a1425-5f2a-4ecb-abc7-a7b3acd614ad"
-			"1aeab84a-6273-42c2-928c-d4a1c8fb30e6" "1d05f0ec-d384-437e-a992-44a530c97db1"
-			"2547ced6-a608-423d-b547-0d0641b7c243" "2596ce92-e3f3-42b3-b91b-e1f5dce7e2d4"
-			"26ea9de8-e726-4712-bbe6-9c94336e2743" "27502cdb-3862-4191-8151-a7948d928666"
-			"2aabf8d7-a000-4ccc-81b2-3b14a2435028" "2afa2f9f-0953-4538-b0e1-8d65780b8a52"
-			"2bba7b6b-7523-4721-bd26-2ce6f07103e9" "2c5e8f41-9cb8-45f7-b6ab-cabb4303a5a3"
-			"2e9ea213-83e1-4529-90aa-c5d6d8155b2c" "2ec012af-b6c5-43e5-bd6f-a3542d018b79"
-			"372b89cf-600b-4ac0-8022-af8d8f93996d" "40cf8dd8-c869-4aca-bab5-a72adda4d70f"
-			"416b2913-5fb1-45d4-93a3-5b7c5037d1ae" "450d6f1c-899b-48f9-8783-2c971780aee8"
-			"45b2e114-d1ea-42ea-a8eb-e44b96f60236" "4a922f80-e55a-4e90-96f1-6251bc6d70d9"
-			"4bd1840a-d58f-4277-90fe-88dadbd4c39d" "4d17cc44-61d1-49c6-a9c4-48f533c374f2"
-			"4faceb52-ea4c-4f87-883f-b0f98340d2cf" "5224c8b1-26e8-4aba-a6a3-49fd891b0898"
-			"57d3ad90-f670-4106-8fa4-5455e045e4da" "589c381b-d93f-416e-9904-d1fa283b26b4"
-			"5c08193f-0142-489c-95f2-5310add0bc8f" "5c352d24-5a3a-4966-9f83-e789563e688e"
-			"5ca03242-4d29-4253-809d-e8d897e97943" "63ebba4f-6b08-4910-aeba-a93cea5387dc"
-			"64745cac-a45b-427e-9266-8a536f9faf23" "650bf10f-8eed-4d58-86b1-f34da45a52ab"
-			"65c3e35a-eba3-40a4-912a-95114f865a5a" "68186ddf-e6a7-43b4-91f2-3db86b96d9e2"
-			"68c3df94-5158-471e-bdf9-44fd9b6a5cee" "6a30070c-d596-4cbe-b88d-7f8938a0b114"
-			"6ab930ad-145e-4d5b-add7-b24b566fb75e" "6b38c821-fd13-4a12-9a8e-06fdfbaded14"
-			"72979e51-5181-42b6-868d-11b0c4ffee85" "729ae01d-8303-4c4c-9c0d-383a4fc62633"
-			"7d3e39da-fc2d-471c-ae2c-f81257ebdff3" "81afce16-1420-45cf-940f-141a3055d683"
-			"8216bfbd-5845-4570-ae36-df398b64f8de" "86668b88-9c79-4a6d-b6d7-2436fb890274"
-			"883395b9-df08-4015-9165-abb029cdaf04" "893c434c-241e-4155-8caa-032a38620834"
-			"8b51605c-ea68-41d4-a566-27b650e5f1f8" "8dace134-a248-479d-b039-d56b6b858a76"
-			"8e0eab55-2dd3-4660-b0eb-6feedda9147f" "8e5f068f-974f-457a-bdae-87b45818f597"
-			"8e65089e-684b-4b62-89fd-abb6032e85a0" "8fc21e26-d8a1-4d34-a594-6c9b50ed9aae"
-			"90c7e7f0-60e1-4937-ace4-af3004079327" "916b3197-0cfa-4c4f-9173-5185f61a8b91"
-			"939cd962-ea06-4ea7-be0e-d79bbdd23b92" "98ec48ba-2a6d-4780-b53c-5c4cb1a1664a"
-			"9bade573-a24d-4354-930c-c6f2600fa3a4" "9c2cb8a8-68ad-4a6b-bae3-6d449069eb32"
-			"9c85c535-9298-469d-a0a6-dc18de230fa2" "9deb5b63-ec4c-4a8b-a1fc-362f30e95df0"
-			"a31da23f-5d16-405f-8d00-67db95984c09" "a91933b3-d812-449d-b5fc-2f2134291a40"
-			"a983c141-f363-4a35-a17a-01ba09a66a9d" "b1b6c795-9e2b-4d56-8e47-4406adcadfec"
-			"b98da906-88dc-434d-bc46-5c62e3079905" "b996c328-6d9f-42a5-9430-5ce2f8165b95"
-			"bcda061c-0cf2-46a5-b9a7-b92dcd86ace6" "bd828fe7-845a-40ce-bdfe-15f936f56081"
-			"bf00ce4d-f57c-4708-93ec-8d07da394695" "bfff408c-1dfd-445c-ab46-1d1199b0d6a9"
-			"c1007f56-3f44-40c7-a531-c267278812b7" "c1877977-bf2e-4930-b834-fa59de828475"
-			"c2e43a9d-827a-4e48-a72c-917866182f55" "c3599bbe-396a-449c-9199-470ec5a4ba74"
-			"c40ca28e-7617-4291-ab0b-6aeb60b37b4d" "c587a3d7-d3ff-4195-927d-fc3cb51fbfce"
-			"cc529c33-71e1-4b63-b3aa-406ed92dc827" "cd83f5e1-4d18-48ce-96d3-3bbf0141a318"
-			"ce05bd87-37be-4cee-bd13-1131a7eaf699" "d02fdecb-dea9-42f5-9a60-67cced75187f"
-			"d13e8d56-f600-4ed0-a151-dceafcd23deb" "d317553b-acbd-4467-9960-7df37ea38800"
-			"d34d4a9d-ca1b-49ad-b2fd-8a99e2796b4d" "d8c23f19-c9de-49ea-86ae-b713118cc081"
-			"dbf12de7-6806-410a-8755-2105eba518f4" "e07dcd58-6f32-4b29-9821-acf17f4eb51b"
-			"e2c7e5a1-2516-4d18-983a-0b186e271261" "e4c32060-c792-46e7-bcf0-54dec4edf7f8"
-			"e7aa54bc-69f1-46b2-8790-c0d562e2a14c" "ef2340d8-be33-486a-b664-957e079f1b5f"
-			"ef667a8f-69f6-4880-a0f0-e42955bd6718" "f1e0f046-c283-44e3-b27a-b8cfe461f62c"
-			"f4034dff-470c-41cc-9cff-c76909fa8ce5" "f4b81c50-523c-4a01-914b-67542f26b31b"
-			"fd71f4cc-600a-4a11-b9c4-771dd0ee503f"
 		)
 	)
 	(group "FANOUT_5_1"
@@ -91270,6 +92527,40 @@
 			"f61d3d18-2f3b-4eff-a380-9dab4c3106bd" "f651d912-0043-4483-8e4a-9fa98ee68086"
 			"f6996389-484c-4eef-8d6f-75e60d35e78c" "f9b4d588-a748-49aa-a41f-5036ae12c6c9"
 			"fb199184-d955-4a17-9662-d36d9e889b0c" "fdcef77d-548a-45e0-823f-40e0f5eb777e"
+		)
+	)
+	(group "ESP_FPGA2"
+		(uuid "78c35b90-c206-4a9e-8f85-9294bdb32001")
+		(members "06c8f9c2-b57f-48e9-8c91-d771fbb2144f" "06d6ee7a-5e16-4357-a981-00b14338ed43"
+			"0e6852eb-afb6-40f8-a821-f269f5b0c0a3" "11d4415b-1cbb-4010-8853-f22caf151311"
+			"1b076051-54b8-4fe3-b407-2c47a658daf4" "1b925871-c4e0-417f-97e6-cc196edc0c25"
+			"1c22b7e3-e2fc-435a-832c-4c7f311e992a" "1c338bb8-581a-4068-bcc4-ffe9639038c6"
+			"1f6020d9-3f88-48a2-9c3d-74e965f23228" "20e8df7e-c037-4af2-b104-7c990cc40fd7"
+			"210de467-c9d5-43c9-8804-c97b872bebe4" "249a5e31-6512-4ce7-adbb-521139e399ff"
+			"40e31796-e567-454f-b14e-08bf8356b1d5" "4a7734d9-3b70-491e-b4b4-125b5699eb16"
+			"549f6a6d-ea81-42a5-9e40-00601e8a5d69" "54d0ba06-37e9-46b6-8db5-0bd445c5b620"
+			"55bd307f-2446-470b-ab19-5b65683b0f27" "574c949a-b073-4828-a060-8edd739c69e9"
+			"5c015c42-38ef-4623-8388-5a5434abffb3" "5e08e8ed-76c1-4c26-a460-2a15af4ddf04"
+			"60fc7709-7b4d-44b0-a73c-1038c292cf31" "63057682-caed-439c-b2e1-9a2a655dff14"
+			"63b48c41-e5f6-4740-b000-9352ec134308" "65790bf6-785f-4517-9573-a59f2ba133c7"
+			"68890446-e77d-46d8-b70a-1bdfc7699149" "6a31b14e-e5e5-4328-a04d-e7fc299d2105"
+			"734515be-5f95-4153-a35b-c4945318f282" "76d612aa-1906-4f0e-9809-1f1fb4eecf88"
+			"7cfbcdeb-149e-4ab7-9ab9-3782b253366e" "8374ba8e-036e-4d6b-a964-d74cd34d00e8"
+			"8789b58d-cb6b-4491-a03b-f9dca85c1bbc" "898a031b-c660-4e34-8384-5eb034d4282e"
+			"8eb37583-f5e0-4ced-af88-bf2f86548b9c" "8eeafbb5-5818-4223-b2d2-a7efe5f0a775"
+			"9758be5f-9146-487e-bcaa-d3883f21c546" "a61b77b3-c0d5-4d6b-bc43-ae2d6fbc38ff"
+			"a6346e00-adf6-4595-a460-4a3c5c88e6a5" "a7ece7f1-0743-4e28-add4-f7f75f2cd1eb"
+			"a8ba396e-08e8-493d-b929-a960a4b8a7cb" "ac5900ec-2a5d-47fd-8c7f-1b32c907a16d"
+			"b26239cf-7704-4a45-924f-237bc2fd5c07" "b3a115dc-6788-43eb-ab75-251d046a66c5"
+			"b6ea0cd3-d612-43a5-97e0-f5daaa1e4a2c" "b97449d7-37d7-4d00-9eae-f7b184ab943e"
+			"bb0054e1-142d-4b9e-9515-2caae1a0eac7" "bc333e27-db26-4b27-bece-b0b7eae757c5"
+			"bc3e3cd4-74d8-471c-8819-a0e906e8a32b" "c840a552-1290-4996-8173-2368ea20dd0c"
+			"cdb36935-e18d-4927-abfb-5c620248d8b6" "d17d9ea5-4493-4fa1-a721-5daa9fa949a4"
+			"dbed6c33-e0d8-4830-a6f5-c0a29a1fb070" "e289f941-4a09-4b1a-9d60-683b32b95365"
+			"e39cf387-b054-4208-a2ac-83cb6153cfe6" "e4b7f529-97c1-4fa8-980f-0a57e3b72f40"
+			"eb1a956f-a7ff-45ed-8b64-3fbf551705ea" "efa369e9-7dc9-4765-b66d-fd0df74e5b2e"
+			"f254c015-634e-4b7f-89cd-ee141ab5da2a" "f40cf534-90c4-4471-a4e6-a01107e31c23"
+			"f427a390-9b97-48f0-8443-99d16886f48f" "f549129a-90e6-4639-b38b-550a1c038f45"
 		)
 	)
 	(group "SIGNALS2"
@@ -91369,6 +92660,71 @@
 			"ed1e4e60-ab04-47d6-8e7d-7661c7ae2e83" "edb7e24e-5645-400e-a6ed-4379a9a558ad"
 			"f7af4c3b-4b19-4af9-9416-cbf602d2fc43" "fac397ce-ccfa-495d-a588-57d0a60d3bb9"
 			"fb9d8361-b28e-4112-b7b6-2588942aab79" "ff729b55-c6a6-4cfe-9b1b-3075d0b760b5"
+		)
+	)
+	(group "STITCH"
+		(uuid "9fa96e45-ff13-48e4-a8a4-9f963297b59d")
+		(members "593e1f0b-c6e1-4941-a6c6-e983f618b920" "7e4fdebc-e1c6-4cce-b1f4-69976aa5b01c")
+	)
+	(group "ESP_FPGA"
+		(uuid "a661e108-94d3-419d-8e13-f9f3ac64119c")
+		(members "03aa1a9c-f30e-4ca5-bf44-c2fe3c5dd478" "043630f0-62de-437d-833b-c26998b75c76"
+			"07264f9f-9883-4ca8-afe4-bda1220b5ef9" "07a3ca9a-be7f-42c1-8d56-05c0c5e63f42"
+			"0b75472b-7cd8-42d8-806d-59ef0c694d78" "0d9b0c07-dfc2-4f67-b5bf-302db8aa3237"
+			"0fcee102-3b5c-4f2a-ab2f-b7d66d0ab076" "1136a497-1762-4c41-8457-b86b5d69a653"
+			"19d0dc9d-6b9b-4409-b80f-6fdddc544acd" "1a7295f0-0d1d-4063-86e6-75f3e981dbe8"
+			"1b5fc492-7237-441c-9dda-8910cadcc39c" "2035389d-354c-4027-97db-d4da5a840553"
+			"2314c080-f4db-4022-a49e-3a27eed3ebe3" "25a201cb-bdb8-455f-85c3-97e53c7c4f00"
+			"29ebe69b-fdc4-4a28-b37a-89a9cd9a56e5" "2cfca318-d3a6-4e79-960d-df8943c7891d"
+			"2d23fc2b-4521-43f4-b2ac-44b79eedc1ca" "32828ffd-34bb-4480-8a7c-7809e1783842"
+			"36dee7e5-4424-463f-a2cd-7cbd2f44d0e1" "377e2221-d8a5-4346-98a6-42917e67946f"
+			"37bc1196-c56c-4641-b5d9-e8a475d57ad3" "393365ef-c4a0-4232-a243-fd1dd4a491ff"
+			"3a45c7b4-0ac2-497f-84e9-7c268f823774" "41e093ca-59df-4238-a01c-16deafa65e6b"
+			"450465a7-1ada-46c4-b944-b1de42d9bd42" "47847550-d21c-4088-aee6-a4f3fe224e5b"
+			"4ae97997-5514-4893-9c94-9f41ec3fd457" "4dd5dc98-ebe8-4c67-836b-b5e64565847f"
+			"5109ecad-357b-4231-93d3-9ac937d362e3" "51863ef3-77ab-4ead-b970-bacaa8724539"
+			"539ffb46-2db5-4548-a35a-8b21632c24f3" "58cb2421-098f-498d-b8b5-4a218349517c"
+			"594cec10-e78d-446c-a009-a3abc5ca6d38" "59b89ac0-37ea-46cd-8377-fd2dbfa82e38"
+			"5c1ec0ae-cff1-4ce1-bc63-c6106b154bf7" "5e65b67f-b835-4f93-b1a7-62c82c9a5eaa"
+			"5fbf22ef-c158-4e3f-8b34-0e5fa3685330" "631307e0-a99c-4785-b90c-638b33055ebd"
+			"6325ddd0-c725-4522-9c95-4e820d1c4650" "63801329-b261-4e3e-9da5-b77d96d94103"
+			"65998f95-a650-4a3f-9720-6330faa73b51" "6749afe4-c841-4334-8276-af3ac10789e9"
+			"6af6f3e0-d2ea-48f5-829b-82620cf1b424" "6b08162a-d1de-4701-b45f-e91ad085a13b"
+			"6b4c7b21-2c6c-46a0-9684-ac17aa65a607" "6e5a1acb-ba6c-43d3-a034-516fc7f5c3e1"
+			"6fe5950f-5e20-4d37-8ee4-911a1bb6ec85" "7254ccbc-8445-4fff-8abd-b296ad5cc0d1"
+			"73a2490b-3e29-4182-83e9-257ff815eae5" "76a48ccc-97fd-43f2-b3c4-26a3fffc71d7"
+			"77f3a291-def7-484b-987f-1f9743294b25" "79547c24-225e-4b23-9f44-e0976e30779d"
+			"7b04310c-3a5a-4e3d-9855-71701c2a906c" "7d1cc46a-605e-4e96-aad7-0b4cae54cfb7"
+			"7f08c940-7bf2-4e49-9281-aff65a66f64d" "7f787061-691a-420f-bfaa-b89ff2fdfcbe"
+			"80dc5df1-c06f-48e7-aad8-8a859f32213f" "83beb799-028e-4b47-a964-233309567faa"
+			"86e90f0a-f20f-402e-8007-8849f5a01c36" "880f8af8-10fd-44fb-b2de-221b97b19396"
+			"8983ffea-ef7a-4ec9-806c-2cd42f1f94b0" "8b794232-a4e4-46a6-b23f-98f079b6873f"
+			"8bdac1d7-f008-4669-ab5f-094e6a857b2c" "8f1f4851-3b10-4f42-aca5-d7527f76308d"
+			"8f726734-d2b3-4d43-b5aa-77834dd22c43" "8f9a65cd-8d73-4a42-a478-adcdaabd25d0"
+			"95a21e30-dce7-4b8b-b5f3-3360dcf3d821" "9722b417-20c2-4163-83e7-70a75e133a4f"
+			"99cfcdf6-68da-4d30-9eb5-43f48ec6cbd3" "9c1760b1-9108-442b-a0ba-5b13c6981f08"
+			"a2425730-d59d-48e2-b277-c7d134ab95de" "a622e272-cb40-4e4f-952e-26bc79d145b2"
+			"a6266a97-1ffe-488b-aff9-cb6c6c7bcad7" "aadac042-6d73-4a54-9f15-5abca755e13c"
+			"ab0099ef-e15c-4477-8274-183922c69f5b" "ab84f4b7-8838-425c-bf5e-671c2626c4af"
+			"b02f9043-a9f1-4e50-bb24-77ce224b96e5" "b8f59caa-b12c-4e2e-a13b-dbac7ceef9c5"
+			"b96d62c6-354f-4cd0-97e8-834930740ceb" "ba93661f-a54f-423d-a446-9646c7280377"
+			"bc6a9d70-c204-4117-830c-c0854b45085b" "bc8f9be9-98c4-4584-ad9e-d31ba11a2e64"
+			"c0b0b1ee-50d5-410c-8780-9d76f3e92c53" "c1615b0a-26c0-41df-885b-cb90ffd1c9e0"
+			"c5a092b9-ceb6-4d84-8e16-5475dbfd2ea6" "c5ad820c-17bb-4758-aee6-1da966ab4547"
+			"c5fc1dc1-a0cf-49a7-a1df-85fc44905c1e" "c681fa1b-fbb2-40a6-9379-218a74efc833"
+			"c7ee2515-ffb7-40b3-bfff-9f92a5b780c4" "cb07620a-2b66-4564-a7b5-e55819ccdcd0"
+			"cb2382a0-b1e1-4e88-9d5f-ea51d73dfade" "cbe2646d-1e13-4c97-ba4b-58c07d9877b3"
+			"cc64a3cf-6de1-4ea9-ad72-7acee0012c9c" "d14f8ee4-fde4-4f46-a608-7da9cea73a22"
+			"d320f75f-1b7a-4b32-af17-19aa8a6eda0e" "d490e203-6db5-4796-bdf3-62e4c66d5633"
+			"d666d2c9-aace-41bb-aa02-40e9644dd179" "d7d2f466-fbde-448e-aabe-2674dbaa24e2"
+			"d8839d7d-07dc-47f0-b9ba-2390b7fe4364" "d8d686a5-a6a4-452b-82c5-de24b83582b9"
+			"d8e27375-31c5-4698-be80-b647dc38ace5" "dc731719-918a-4667-812e-9d878f62d7d1"
+			"e1a7087e-b192-4e8f-8b7a-d40851e74b52" "e255998a-c160-4a74-acb8-c288bda59d45"
+			"e470a0ce-df39-4e0a-8e17-64f1278d0ba8" "e534c094-b6be-4d1c-ae9a-457e48e1f7c7"
+			"e7bd3609-0ecc-4808-94a7-1eac4cc553b3" "eab2c5fa-8c0f-4435-810a-653fad760e02"
+			"eb7bfa94-b184-49b7-ab9d-4e12b2444e82" "f2ca7623-3df4-4e7d-8c1a-c73f605cce5f"
+			"f4e16c48-3ed0-423d-8360-95a6986dcda5" "fa18eabd-5045-4002-b3b2-aeae5d8ab92e"
+			"fb4d54d3-c8af-4b49-8351-8f3cf9a6d702" "fd72c4d7-85d6-4507-8a76-9d9626d9dd84"
 		)
 	)
 	(group "ULX3S_CORE_COPY"
@@ -91737,13 +93093,12 @@
 			"0df141fd-1dbb-4261-980a-98800a2934d2" "0e8b79c2-4157-4a67-8b7b-698ed7cab0af"
 			"10c2cc03-4b7f-478a-9fba-b0940b9a5f20" "13f2fd96-3426-4200-b84c-e1c4f3cf5656"
 			"15487db6-9c24-447e-b4d0-a1f63a0c54a7" "1855b42f-31a9-4f23-94b1-4c3b56256932"
-			"19360400-d807-43f5-b3b5-74af2d5c50a3" "1a769964-0d76-491b-82dc-97d96237985a"
-			"1a8922e0-c004-420b-8732-20baf9904870" "1aa1d2eb-4a96-486b-9246-7a1299e85625"
-			"1ab8f72c-44fe-4422-9d7f-707482b84ca0" "1c9d8684-3126-461c-983c-9c3a2ed87151"
-			"1cfe0033-6b01-42e0-ae22-fc5be4d2e1ed" "1d50b04b-f54c-46ec-8166-6ccdac6a3971"
-			"1e6929c3-2cc8-46f6-b0e2-b93525c5225f" "1ed2107c-204c-4209-a910-e0b24ec5329d"
-			"1ef543ea-03c4-4ede-acfc-8cbb47d556a9" "1f136bb4-bb0c-43cf-99f5-12e25027eefc"
-			"1f51fbe8-b3c3-417c-bf35-06677391249f" "1fe604ae-f883-4072-8e96-d565ec0eefe0"
+			"1a769964-0d76-491b-82dc-97d96237985a" "1a8922e0-c004-420b-8732-20baf9904870"
+			"1aa1d2eb-4a96-486b-9246-7a1299e85625" "1ab8f72c-44fe-4422-9d7f-707482b84ca0"
+			"1c9d8684-3126-461c-983c-9c3a2ed87151" "1cfe0033-6b01-42e0-ae22-fc5be4d2e1ed"
+			"1d50b04b-f54c-46ec-8166-6ccdac6a3971" "1e6929c3-2cc8-46f6-b0e2-b93525c5225f"
+			"1ed2107c-204c-4209-a910-e0b24ec5329d" "1ef543ea-03c4-4ede-acfc-8cbb47d556a9"
+			"1f136bb4-bb0c-43cf-99f5-12e25027eefc" "1fe604ae-f883-4072-8e96-d565ec0eefe0"
 			"1ff5a525-9dfc-43f9-9848-aaa3ed1feca0" "1ffc6d5d-74d2-438c-9509-1df0e38761e8"
 			"2246e331-639b-4bf5-b1e3-15469d7c2484" "224f8c3c-e3d8-4ab4-8cf5-132cceacc451"
 			"23246a7a-19d5-4733-a788-3db9dbf2274b" "24414666-c8ae-4ced-a0b8-3b553dbd9d72"
@@ -91831,22 +93186,21 @@
 			"a2d5c311-0191-46bd-b491-bdcff4d673dd" "a4a16e95-f893-4518-ad99-7541b3b2f67a"
 			"a5ceb4ee-f50a-4e29-bade-91ef510db1e4" "a7bf49d3-6317-4af9-845e-152f11d625cf"
 			"a8213148-9d4b-4424-a0bd-362fda4c5e99" "aa9000a4-f432-41f9-abbe-9d260567a4fa"
-			"ac778a4f-dec3-4b69-b6f8-ab3c232d6817" "ae3fc7d1-9b61-438a-a5e1-94b5eb312f31"
-			"aeb3dd5e-0a87-4f1a-9303-0013827d9018" "aece3825-b080-4c7f-9515-dd23cc148bac"
-			"af700d6d-b637-410a-8e4a-56c5d95067d8" "b0b7fdab-b3af-4558-9e3d-98d7194c3b81"
-			"b0ca8084-5c6e-4eca-beb4-ed1d316e0872" "b2591b63-fbe7-450b-9200-361b40f188c1"
-			"b39994c7-fe2e-4d1c-b59d-1de9bce09d1c" "b42b4c3b-b63d-485e-8e55-2ba16ced18f9"
-			"b4f7d0f3-f0b0-4e1b-9d4e-998f3774551c" "b6b7442b-c22f-40ea-9b62-1318cdf58c3e"
-			"b7d93bce-c1ed-4452-8009-3729b335cfe6" "ba04fd56-ccb3-4c32-b55a-46de0118f8bb"
-			"ba486461-d92a-4f55-8e1b-7722d9726e36" "bb041ab7-b340-401b-b997-484b8e02d8bf"
-			"bb65512d-d20a-4eb6-94a8-b74d75c07e1e" "bc9c520e-ca20-462a-851f-a5ae9b047e7f"
-			"bcb0ef8a-b7c0-4bca-84f9-aaaa522d4c8f" "bd7f9037-1d6a-4a9b-a5e1-f1b1e7ff3224"
-			"bd948033-dfb0-4535-8f75-7b3714636ef0" "be3ffeef-617f-4cbd-b89e-4a2c6316da26"
-			"bebdf2f2-5766-4ac2-84e2-ea85e4503465" "bf9f4341-894e-413a-89d9-1256d9014abe"
-			"c0926ae8-fdc4-4061-aba7-6b764b7e93b3" "c250f9c3-ca5f-4ae2-8af9-e2d7002c3562"
-			"c30a8086-a647-4e09-a6ca-cb11f7434271" "c39b256d-58d3-4947-a994-08b927e0c45c"
-			"c45a752e-c031-469c-85c7-cdc3eb15820e" "c54de0c0-c5e1-492a-9ebe-1dc24d9b372a"
-			"c5a5df9e-b112-467d-bcd1-91b0c52d5820" "c6cd98bd-d17f-4d09-ba8b-f85c318119ac"
+			"ac778a4f-dec3-4b69-b6f8-ab3c232d6817" "aeb3dd5e-0a87-4f1a-9303-0013827d9018"
+			"aece3825-b080-4c7f-9515-dd23cc148bac" "af700d6d-b637-410a-8e4a-56c5d95067d8"
+			"b0b7fdab-b3af-4558-9e3d-98d7194c3b81" "b0ca8084-5c6e-4eca-beb4-ed1d316e0872"
+			"b2591b63-fbe7-450b-9200-361b40f188c1" "b39994c7-fe2e-4d1c-b59d-1de9bce09d1c"
+			"b42b4c3b-b63d-485e-8e55-2ba16ced18f9" "b4f7d0f3-f0b0-4e1b-9d4e-998f3774551c"
+			"b6b7442b-c22f-40ea-9b62-1318cdf58c3e" "b7d93bce-c1ed-4452-8009-3729b335cfe6"
+			"ba04fd56-ccb3-4c32-b55a-46de0118f8bb" "ba486461-d92a-4f55-8e1b-7722d9726e36"
+			"bb041ab7-b340-401b-b997-484b8e02d8bf" "bb65512d-d20a-4eb6-94a8-b74d75c07e1e"
+			"bc9c520e-ca20-462a-851f-a5ae9b047e7f" "bcb0ef8a-b7c0-4bca-84f9-aaaa522d4c8f"
+			"bd7f9037-1d6a-4a9b-a5e1-f1b1e7ff3224" "bd948033-dfb0-4535-8f75-7b3714636ef0"
+			"be3ffeef-617f-4cbd-b89e-4a2c6316da26" "bebdf2f2-5766-4ac2-84e2-ea85e4503465"
+			"bf9f4341-894e-413a-89d9-1256d9014abe" "c0926ae8-fdc4-4061-aba7-6b764b7e93b3"
+			"c250f9c3-ca5f-4ae2-8af9-e2d7002c3562" "c30a8086-a647-4e09-a6ca-cb11f7434271"
+			"c39b256d-58d3-4947-a994-08b927e0c45c" "c45a752e-c031-469c-85c7-cdc3eb15820e"
+			"c54de0c0-c5e1-492a-9ebe-1dc24d9b372a" "c5a5df9e-b112-467d-bcd1-91b0c52d5820"
 			"c6ecb3e9-f193-4a53-b3e4-5ed854240ee6" "c8d11a6d-9e1f-48a0-8882-fdf404ee10fd"
 			"c9017278-f3fa-470a-97dc-3d8cc2f66935" "c9226c84-cc8e-48d6-8e53-ef2318af59dc"
 			"ca3ba94a-107c-4c04-81b2-818e9cbc146b" "ca4dcd33-110d-4a31-816c-d5a92a78f46a"
@@ -91995,6 +93349,29 @@
 			"fa3f8859-2b37-4186-ae53-b8bd04d7b9d8" "fafe411e-60c9-4555-b71a-9f2e428c0c42"
 			"fbe44916-dd69-4571-986c-ba1018345e53" "fc149299-0434-4ea2-8c58-25b0aca29b9e"
 			"fc6902df-a998-4089-858e-502cca70ba22" "ff5f6999-e152-470a-a224-70c0b1481cc8"
+		)
+	)
+	(group "FLASH4"
+		(uuid "c288d809-dd2c-4b7b-8453-dbe99e3fbe09")
+		(members "09898890-cf0f-444f-8108-2531b673baa6" "2537654e-a8ca-4bc1-8c13-d7df8f4508af"
+			"266fe431-97d6-4d22-883e-91024237eee0" "5cf8f96f-3bff-4dac-a5ad-8b7030056825"
+			"701c069f-1891-4e4d-96fa-b4dd1009e386" "753de6a7-7e35-4e26-ba1a-37d537c48217"
+			"7a35d77b-b517-48d4-abae-392212247825" "8fbf256d-44e5-4eef-b27c-af4ee50defd4"
+			"9b4155af-f283-456b-8c50-55adf8789202" "b3a3aa0a-a2ce-47b1-af67-df9e0b875303"
+			"b7667b47-3143-499b-9282-cffae47272b4" "bcec8b3e-b0dc-4b23-b6a7-345c2cc38159"
+			"f6e9dbf8-61ef-41ea-b709-c2d5ba218382" "fb98c90c-088b-49ff-8e02-b4005af70269"
+		)
+	)
+	(group "STITCH"
+		(uuid "d6c920c8-c967-4b65-8d86-d8340cd0bba5")
+		(members "4dbfd677-4592-4409-98e1-6abe3a68629b" "d9cd3dd1-8855-47e7-917d-0fd9bff8713b")
+	)
+	(group "FLASH_HAND"
+		(uuid "dcbc0e0f-48ee-4404-a4ab-f37876f8836f")
+		(members "21852ddc-95b5-49e6-9327-e4d83d7ca408" "391669ff-3f70-42b1-8635-26f58e3c3e2b"
+			"4597c6f9-303a-45fe-9c1a-309fec152567" "58a00295-4e8f-433d-bd12-b76232bd93b8"
+			"5de8ebe2-fc89-4767-a8b1-0871874a07e7" "646442e5-659b-45ef-afe4-9202727affbb"
+			"7b4e09d3-aa86-490d-a929-fcaac29a3451" "a4130641-bec2-4b17-8db9-efbd48cd465e"
 		)
 	)
 	(group "JTAG"
