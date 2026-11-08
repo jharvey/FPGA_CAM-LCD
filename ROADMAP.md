@@ -676,6 +676,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - ESP32 side of the SPI (pads 24/25/28/29), planned together with the ESP32 → FPGA links.
   - IMU interrupts.
   - R8 placement.
+- **BAT1 kept at −35°** (owner decision, for easier cell access). Known DRC item: BAT1's courtyard overlaps J1's courtyard (outline only, no copper). Only 0° fits without it since J1 moved left.
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
