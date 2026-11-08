@@ -51,3 +51,26 @@ Files: `CameraToTFTSobel_FCL.ice` (Icestudio project with the new pins) and `mai
 | cmos_xclk | gn16 | M17 | A18 |
 
 Board-specific: camera PCLK is on J1 pin 7 and PWDN on J1 pin 18 (swapped relative to the original project). The RTC I2C data line FPDI_SDA moved from B19 to C15 to free an outer ball (not part of this FPGA project).
+
+## ESP32 / SD / ADC links (2026-11-08)
+These balls are not used by the FPGA design (no `.lpf` change). They were re-ordered on U1's right edge to match the ESP32's new pads. See `ESP32_PINS.md`.
+
+| Net | old ball | new ball |
+|---|---|---|
+| WIFI_TXD | K4 | L1 |
+| WIFI_RXD | K3 | L2 |
+| WIFI_GPIO13 (was GPIO40) | N3 | K1 |
+| WIFI_GPIO14 (was GPIO41) | E6 | K2 |
+| WIFI_GPIO21 (was GPIO1) | E9 | J1 |
+| WIFI_GPIO0 | F1 | F1 |
+| SD_CD | N5 | N4 |
+| SD_D1 | H1 | N3 |
+| SD_D0 | J3 | K4 |
+| SD_CLK | H2 | K3 |
+| SD_CMD | J1 | J3 |
+| SD_D3 | K2 | H3 |
+| SD_D2 | K1 | G3 |
+| WIFI_GPIO47 (ADC CNV, was GPIO9) | L1 | F4 |
+| WIFI_GPIO48 (ADC DIN, was GPIO21) | K5 | F3 |
+| WIFI_GPIO35 (ADC SCK, was GPIO8) | L2 | E4 |
+| WIFI_GPIO36 (ADC SDO, was GPIO6) | N4 | E3 |

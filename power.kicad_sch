@@ -22832,7 +22832,7 @@
 		)
 		(uuid "ffe24f79-460e-4e5b-924f-422585e7204d")
 	)
-	(global_label "WIFI_GPIO9"
+	(global_label "WIFI_GPIO47"
 		(shape input)
 		(at 387.35 215.9 0)
 		(effects
@@ -23360,7 +23360,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO21"
+	(global_label "WIFI_GPIO48"
 		(shape input)
 		(at 387.35 220.98 0)
 		(effects
@@ -23382,7 +23382,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO6"
+	(global_label "WIFI_GPIO36"
 		(shape input)
 		(at 387.35 218.44 0)
 		(effects
@@ -23954,7 +23954,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO8"
+	(global_label "WIFI_GPIO35"
 		(shape input)
 		(at 387.35 223.52 0)
 		(effects

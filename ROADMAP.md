@@ -83,7 +83,7 @@
 - [x] ST pins of all five LM66100s linked to GND via 0 Ω (R46, R47, R48, R51, R55)
 - [x] TLV62569 inputs and wake circuit moved to VSYS
 - [x] LCD backlight boost input renamed to VSYS
-- [x] **Replace ADS1115 with 8-channel ADC** – U21 AD7689BCPZ, SPI to ESP32: SDO=WIFI_GPIO19, DIN=WIFI_GPIO21, SCK=WIFI_GPIO22, CNV=WIFI_GPIO26 (renumbered for the ESP32-S3 in Phase 2c: SDO=WIFI_GPIO6, DIN=WIFI_GPIO21, SCK=WIFI_GPIO8, CNV=WIFI_GPIO9)
+- [x] **Replace ADS1115 with 8-channel ADC** – U21 AD7689BCPZ, SPI to ESP32: SDO=WIFI_GPIO19, DIN=WIFI_GPIO21, SCK=WIFI_GPIO22, CNV=WIFI_GPIO26 (renumbered for the ESP32-S3 in Phase 2c: SDO=WIFI_GPIO6, DIN=WIFI_GPIO21, SCK=WIFI_GPIO8, CNV=WIFI_GPIO9; moved again in 4.23: SDO=WIFI_GPIO36, DIN=WIFI_GPIO48, SCK=WIFI_GPIO35, CNV=WIFI_GPIO47)
   - IN0–IN2: VBAT1–3 via 47 k / 56 k dividers (4.2 V → 2.28 V), 100 nF filter caps
   - IN3: TEMP_BAT, 10 k pull-up (R43) + 10 k NTC (TH1)
   - IN4: REF3025 (U17) output – absolute-reference cross-check
@@ -136,7 +136,7 @@
 - **Programming the ESP32-S3:** built-in USB-Serial-JTAG (CDC console + flashing, no DTR/RTS). If application firmware switches the PHY to TinyUSB (CDC + MSC), recover with **BOOT (B3) + RESET (B4)** → ROM download mode.
 - **SD card ownership: ESP32-S3** (SDMMC 4-bit, same GPIO numbers as before: CLK 14, CMD 15, D0 2, D1 4, D2 12, D3 13; card detect `SD_CD` on GPIO10, low = card present). Exposed to the PC as **USB Mass Storage** by the S3 firmware. The FPGA bank-6 SD pins (and N5 for `SD_CD`) remain connected: the FPGA bitstream must keep them Hi-Z while the S3 owns the card.
 - **Programming the ECP5 over the same USB-C:** the ESP32-S3 drives the existing JTAG nets (`JTAG_TCK` GPIO18, `JTAG_TMS` GPIO5, `JTAG_TDI` GPIO16, `JTAG_TDO` GPIO17) to load SRAM or program the config flash through the FPGA (esp32ecp5 / openFPGALoader-style bit-bang, triggered over USB CDC or WiFi). No second USB interface.
-- **ESP32-S3 GPIO map:** EN = `WIFIEN`; GPIO0 `WIFI_GPIO0` (BOOT, R56 pull-up, FPGA F1); UART0 TXD/RXD to the FPGA (`WIFI_TXD`/`WIFI_RXD`); ADC SPI SDO 6 / DIN 21 / SCK 8 / CNV 9; FPGA links GPIO1 (E9), GPIO40 (N3), GPIO41 (E6). Nets renamed to the S3 GPIO numbers: `WIFI_GPIO19→6`, `22→8`, `26→9`, `25→1`, `27→40`, `35→41`. Strapping pins 3/45/46 and GPIO35–37 left unconnected.
+- **ESP32-S3 GPIO map:** EN = `WIFIEN`; GPIO0 `WIFI_GPIO0` (BOOT, R56 pull-up, FPGA F1); UART0 TXD/RXD to the FPGA (`WIFI_TXD`/`WIFI_RXD`); ADC SPI SDO 6 / DIN 21 / SCK 8 / CNV 9; FPGA links GPIO1 (E9), GPIO40 (N3), GPIO41 (E6). Nets renamed to the S3 GPIO numbers: `WIFI_GPIO19→6`, `22→8`, `26→9`, `25→1`, `27→40`, `35→41`. Strapping pins 3/45/46 and GPIO35–37 left unconnected. *(Superseded by the 4.23 remap; current table in `fpga/ESP32_PINS.md`.)*
 - **Side benefit:** the ESP32 no longer shares the display SPI pins (`GN12/GP12/GN13/GP13`), so that Phase 3 limitation is gone.
 - **Fallback (DNP):** FT231X bridge U6 with micro-B US1 (the old USB-serial + JTAG path), FPGA-USB micro-B US2 and their parts (D8, D9, R9, R40, R49, R50, R52, R53, R54, R63, R64, D20, D21, D23–D26), and the 2×3 JTAG header **J4**. Populating U6 + US1 restores the original ULX3S programming path (the ESP32-S3 must then release the JTAG lines).
 - [ ] Limitations / to do: no VBUS-detect GPIO on the S3 (self-powered device; add one if strict USB compliance is needed); S3 USB is full-speed (12 Mbit/s), so MSC throughput is roughly 1 MB/s; firmware work: TinyUSB CDC + MSC composite, SDMMC, JTAG bit-bang for the ECP5. Phase 4: J17 + B3/B4 reachable from the case, S3 antenna at a board edge.
@@ -530,6 +530,34 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Schematic (fpga-io), PCB pad nets and `fpga/` files updated; netlist verified, ERC 153, parity clean.
 - Owner placement in progress (commit d9ead1f6): SD1 + C15 + R86 at the top near the ESP32, servos in a row at the bottom-left, J4 at (49, 24), H3 and B2 moved. Open DRC items from that WIP: SD1 inside a rule area / overlapping the ESP32 courtyard, B2 overlapping BT12 / C35, two hole-to-hole items.
 
+#### 4.23 ESP32 ↔ FPGA ↔ SD remap; step 1 redone for the owner's placement (2026-11-08)
+- **ESP32-S3 pads re-assigned to face their partners:**
+  - Left column, facing SD1/J4: SD_D2, D3, CMD, CLK, D0, D1, CD on pads 4–10 (GPIO4–7, 15–17), and JTAG TMS/TDO on pads 11/12 (GPIO18/8).
+  - Bottom row, facing U1: JTAG TCK/TDI on pads 17/18 (GPIO9/10), the FPGA UART TXD/RXD on pads 19/20 (GPIO11/12), and the spare links on pads 21–23 (GPIO13/14/21).
+  - ADC SPI: CNV/DIN on pads 24/25 (GPIO47/48), SCK/SDO on pads 28/29 (GPIO35/36).
+  - Unchanged: GPIO0 on pad 27 and USB on pads 13/14.
+  - Strapping pins 3/45/46, GPIO37–42 and UART0 are left unconnected.
+- **Nets renamed to the new GPIO numbers:** `WIFI_GPIO40→13`, `41→14`, `1→21`, `9→47`, `21→48`, `8→35`, `6→36`.
+- **FPGA balls in matching order on U1's right edge:**
+  - Front-layer links on the outer balls L1, L2, K1, K2, J1, plus F1 for GPIO0.
+  - SD (back layer, dogbones) on N4, N3, K4, K3, J3, H3, G3.
+  - ADC SPI on F4, F3, E4, E3.
+  - JTAG stays on its dedicated balls.
+  - The FPGA design uses none of these balls, so `main_FCL.lpf` is unchanged.
+  - Full table and routing intent in `fpga/ESP32_PINS.md`.
+- **Step-1 clean-up of the owner's placement:**
+  - SD1 moved 4 mm left to (35.0, 9.6). Its courtyard now ends at x 42, clear of the ESP32 antenna keep-out, and the card still enters from the top edge.
+  - R86 moved with it.
+  - C15 moved to the back under the SD1 body, out from under the card overhang.
+  - B2 moved right to (23.2, 11.0), off the cell-1 spring.
+  - C35 moved below B2.
+  - Removed a stale SERVO_V via under J_SRV3 pin 2.
+- **Checks:**
+  - Netlist verified.
+  - ERC 153 (unchanged).
+  - Parity: only the 5 known SD1 pins.
+  - DRC has no clearance, keep-out or hole errors. The remaining courtyard overlaps are the copied ULX3S decoupling (as on the reference) and the butted servo headers.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
@@ -561,7 +589,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Cell negatives common (GND). Positives individual (CELLx_RAW → VBATx after reverse FET).
 - VSYS powers the main regulators and the LCD boost. CR1225 VBAT is unrelated.
 - 3.3 V rail needs ≥ ~3.4 V on VSYS → practical cutoff ≈ 3.5–3.6 V on the highest cell.
-- AD7689 8-ch ADC on SPI (WIFI_GPIO6/21/8/9 on the ESP32-S3, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
+- AD7689 8-ch ADC on SPI (SDO/DIN/SCK/CNV = WIFI_GPIO36/48/35/47 on the ESP32-S3, also routed to FPGA pins on the usb sheet). Internal 2.5 V reference (unloaded); REF3025 measured on IN4 and also feeds the NTC pull-up R43 (NTC ratio = IN3 / IN4).
 - CHGx LEDs are local only; charger enable/status not yet routed to a processor (open item).
 - Ideal-diode OR-ing currently prefers the highest cell. True sequential “dead-first” requires CE control: ~CE pins are broken out via R71–R73 (0 Ω), and the level-shifted drive is still to be designed.
 - CH224K (U23) requests a 5 V-only PD contract on the USB-C charge port; the existing TP4056s are unchanged.
