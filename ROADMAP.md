@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – placement reset (4.6): fixed/edge parts on board, rest staged for controlled re-placement; not routed |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge parts (4.6) and digital core (4.7) placed; rest staged; not routed |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -369,6 +369,23 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 
 - Housing clearance: `CASE_BOSS_TR` trimmed to y 3.5–8.3 so BT11's top tab no longer intrudes; board outline and all bay rule areas otherwise unchanged.
 - Re-placement order from here: U1 (FPGA) + U9 (ESP32-S3, antenna in the top-right keep-out) + U22 (IMU, axis) + TH1 + J4 → SDRAM / flash / clock → regulators → chargers / power path → ADC → USB-C and display support → passives/decoupling → servo headers (last).
+
+#### 4.7 Digital core placement (2026-11-07, not routed)
+- Digital section on the front, in the "near" digital zone: left strip (FPGA, SDRAM, flash, clock) plus the ESP32-S3 top-right. Analog/sensor items (IMU on the axis, ADC, chargers on the right) stay outside it; the inner GND plane is continuous under the digital block.
+- Rotations and positions chosen by **ratsnest length** (MST of every signal net to the parts already on the board) with ≥ 1 mm routing channels between chips, ≥ 10 mm from the IMU spot, and clear of the BT tab slots, H1, SD1, J1 and the antenna keep-out. Comparing SDRAM *below* vs *above* the FPGA: above is ≈ 12 % shorter in total (U1 then sits nearer J1 / J7 for the camera and display buses), so the 4.1 "SDRAM below U1" note is superseded.
+
+| Ref | Part | Position (board mm, F) | Rot | Note |
+|---|---|---|---|---|
+| U2 | SDRAM TSOP-54 | (17.0, 12.5) | 0° | top-left, above U1 |
+| U1 | ECP5 BGA-381 | (22.0, 34.0) | 180° | box x 12.7–31.3, y 24.7–43.3; 11 mm from the IMU spot |
+| U10 | config flash SOIC-8 | (29.0, 20.0) | 180° | between U2 and U1, next to the SPI-config bank |
+| Y1 | 25 MHz oscillator | (25.0, 48.0) | 0° | below U1, next to the clock input |
+| J4 | JTAG 2×3 (DNP fallback) | (37.0, 23.0) | 90° | between U1 and U9, outside the antenna band |
+| U9 | ESP32-S3-WROOM-1 | (66.0, 12.75) | 0° | antenna flush with the top edge (moved 2 mm left of 4.2) |
+
+- No USB bridge chip any more (FT231X excluded in 4.5; the ESP32-S3 native USB is the bridge).
+- **Long nets left (straight-line MST):** SD bus SD_CLK/CMD/D0–D3/CD ≈ 73–90 mm (SD1 is fixed bottom-left, the ESP32 top-right, the FPGA taps the same bus) → route as a grouped bus down the left/centre on one inner-adjacent layer, keep the FPGA tap short or consider moving SD1 later; ESP32↔FPGA UART/SPI/GPIO (`WIFI_*`) ≈ 30–59 mm and JTAG ≈ 31–35 mm (low speed, OK); camera/display `GPn/GNn` ≈ 27–41 mm; SDRAM data ≈ 25–33 mm (length-match the SDRAM group during routing); BTN1n/BTN2n ≈ 41 mm to the top buttons (slow).
+- DRC: no courtyard, keep-out, edge or short violations; parity unchanged (5 SD1 pins).
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)

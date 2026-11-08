@@ -9768,9 +9768,9 @@
 	(footprint "lfe5bg381:BGA-381_pitch0.8mm_dia0.4mm"
 		(layer "F.Cu")
 		(uuid "20c34f91-4dcb-49e8-808d-f5b5e6dd3c51")
-		(at 102.215 187.495)
+		(at 100 89.5 180)
 		(property "Reference" "U1"
-			(at -8.2 -9.8 0)
+			(at -8.2 -9.8 180)
 			(layer "F.SilkS")
 			(uuid "bb3c6eb4-1403-437c-8e4b-4c2b448cde71")
 			(effects
@@ -9781,7 +9781,7 @@
 			)
 		)
 		(property "Value" "LFE5U-85F-6BG381C"
-			(at -0.184 3.1475 0)
+			(at -0.184 3.1475 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "530aa599-38a2-45a4-8df1-3971677a00d0")
@@ -9793,7 +9793,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/ECP5/FPGA-DS-02012.pdf"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a74a6f52-a47c-4bc2-89a0-18788bafcb5e")
@@ -9804,7 +9804,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1762b9b6-aafe-4bf4-851e-406e2d41eb2a")
@@ -9815,7 +9815,7 @@
 			)
 		)
 		(property "MNF1_URL" "www.latticesemi.com"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -9828,7 +9828,7 @@
 			)
 		)
 		(property "MPN" "LFE5U-85F-6BG381C"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -9923,16 +9923,6 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.2 0)
-			(end 0.2 0)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.Mask")
-			(uuid "57e57a7d-b822-4e02-a79a-6df9dcf73735")
-		)
-		(fp_line
 			(start 0 -0.2)
 			(end 0 0.2)
 			(stroke
@@ -9943,164 +9933,14 @@
 			(uuid "e21b7241-69a5-425d-b6da-5263221f546a")
 		)
 		(fp_line
-			(start -9 9)
-			(end -9 -8.5)
+			(start -0.2 0)
+			(end 0.2 0)
 			(stroke
-				(width 0.15)
+				(width 0.12)
 				(type solid)
 			)
-			(layer "F.SilkS")
-			(uuid "ef0e79c3-2098-4154-ac70-81c576889703")
-		)
-		(fp_line
-			(start -8.6 8.1)
-			(end -8.6 -8.1)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "e51ca71e-0026-47dd-8891-81bdf4a92cc9")
-		)
-		(fp_line
-			(start -8.5 -9)
-			(end -9 -8.5)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "d6343d19-d77f-4640-839b-93daa245dc0d")
-		)
-		(fp_line
-			(start -8.5 -9)
-			(end 9 -9)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "2d84d571-6d22-4dbc-9e01-2e76c39aa2d7")
-		)
-		(fp_line
-			(start -8.1 -8.6)
-			(end 8.1 -8.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "6b2fd285-1e1b-42e4-a1a6-2c695dcad269")
-		)
-		(fp_line
-			(start -7.6 -7.6)
-			(end -7.4 -7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "ca1e6b17-5fef-4298-82d7-d212d2736a6a")
-		)
-		(fp_line
-			(start -7.6 -7.4)
-			(end -7.6 -7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "ccf2315c-96f2-4b4b-a1c3-e258c8bf54fc")
-		)
-		(fp_line
-			(start -7.6 7.4)
-			(end -7.6 7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "9d5dcead-d1f2-48d3-897c-062a49ff8d0e")
-		)
-		(fp_line
-			(start -7.6 7.6)
-			(end -7.4 7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "39938325-2290-44ad-944e-f9433f1fa797")
-		)
-		(fp_line
-			(start 7.4 -7.6)
-			(end 7.6 -7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "bdd230b1-5da4-4a4a-8e65-9d4244215c7b")
-		)
-		(fp_line
-			(start 7.4 7.6)
-			(end 7.6 7.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "f15acfab-3bd0-4b86-8d62-955f368f9cae")
-		)
-		(fp_line
-			(start 7.6 -7.6)
-			(end 7.6 -7.4)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "cc585fcd-7426-4c2d-a945-f3f411cacb61")
-		)
-		(fp_line
-			(start 7.6 7.6)
-			(end 7.6 7.4)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "a15e45f9-f846-47c5-a38e-847a77e51053")
-		)
-		(fp_line
-			(start 8.1 8.6)
-			(end -8.1 8.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "593539ac-6a94-4add-82ae-b6be385feb77")
-		)
-		(fp_line
-			(start 8.6 -8.1)
-			(end 8.6 8.1)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "28c47d61-4300-49f4-b336-6d3a575d0699")
-		)
-		(fp_line
-			(start 9 -9)
-			(end 9 9)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "7ea6684f-50cf-4f8a-b227-d11d2f9a8369")
+			(layer "F.Mask")
+			(uuid "57e57a7d-b822-4e02-a79a-6df9dcf73735")
 		)
 		(fp_line
 			(start 9 9)
@@ -10113,34 +9953,174 @@
 			(uuid "dbb5ef05-ce75-4fc1-9117-a0f97ef1c80a")
 		)
 		(fp_line
-			(start -9 -8.2)
-			(end -8.2 -9)
+			(start 9 -9)
+			(end 9 9)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "0929fd4d-0776-4cbe-b2d8-2f1f8186a5e3")
+			(layer "F.SilkS")
+			(uuid "7ea6684f-50cf-4f8a-b227-d11d2f9a8369")
 		)
 		(fp_line
-			(start -9 9)
-			(end -9 -8.2)
+			(start 8.6 -8.1)
+			(end 8.6 8.1)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "f344e66e-d939-455f-a1bd-0791dadfa9f5")
+			(layer "F.SilkS")
+			(uuid "28c47d61-4300-49f4-b336-6d3a575d0699")
 		)
 		(fp_line
-			(start -8.2 -9)
+			(start 8.1 8.6)
+			(end -8.1 8.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "593539ac-6a94-4add-82ae-b6be385feb77")
+		)
+		(fp_line
+			(start 7.6 7.6)
+			(end 7.6 7.4)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "a15e45f9-f846-47c5-a38e-847a77e51053")
+		)
+		(fp_line
+			(start 7.6 -7.6)
+			(end 7.6 -7.4)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "cc585fcd-7426-4c2d-a945-f3f411cacb61")
+		)
+		(fp_line
+			(start 7.4 7.6)
+			(end 7.6 7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "f15acfab-3bd0-4b86-8d62-955f368f9cae")
+		)
+		(fp_line
+			(start 7.4 -7.6)
+			(end 7.6 -7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "bdd230b1-5da4-4a4a-8e65-9d4244215c7b")
+		)
+		(fp_line
+			(start -7.6 7.6)
+			(end -7.4 7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "39938325-2290-44ad-944e-f9433f1fa797")
+		)
+		(fp_line
+			(start -7.6 7.4)
+			(end -7.6 7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "9d5dcead-d1f2-48d3-897c-062a49ff8d0e")
+		)
+		(fp_line
+			(start -7.6 -7.4)
+			(end -7.6 -7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "ccf2315c-96f2-4b4b-a1c3-e258c8bf54fc")
+		)
+		(fp_line
+			(start -7.6 -7.6)
+			(end -7.4 -7.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "ca1e6b17-5fef-4298-82d7-d212d2736a6a")
+		)
+		(fp_line
+			(start -8.1 -8.6)
+			(end 8.1 -8.6)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "6b2fd285-1e1b-42e4-a1a6-2c695dcad269")
+		)
+		(fp_line
+			(start -8.5 -9)
 			(end 9 -9)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
+			(layer "F.SilkS")
+			(uuid "2d84d571-6d22-4dbc-9e01-2e76c39aa2d7")
+		)
+		(fp_line
+			(start -8.5 -9)
+			(end -9 -8.5)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "d6343d19-d77f-4640-839b-93daa245dc0d")
+		)
+		(fp_line
+			(start -8.6 8.1)
+			(end -8.6 -8.1)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "e51ca71e-0026-47dd-8891-81bdf4a92cc9")
+		)
+		(fp_line
+			(start -9 9)
+			(end -9 -8.5)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "ef0e79c3-2098-4154-ac70-81c576889703")
+		)
+		(fp_line
+			(start 9 9)
+			(end -9 9)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
 			(layer "F.Fab")
-			(uuid "c3093cff-d1d8-4678-9380-fe51342257e5")
+			(uuid "acb44a1a-42ff-471e-9b22-52006825814b")
 		)
 		(fp_line
 			(start 9 -9)
@@ -10153,17 +10133,37 @@
 			(uuid "aa54011b-da91-4f5f-aa87-2205e8cfefca")
 		)
 		(fp_line
-			(start 9 9)
-			(end -9 9)
+			(start -8.2 -9)
+			(end 9 -9)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "acb44a1a-42ff-471e-9b22-52006825814b")
+			(uuid "c3093cff-d1d8-4678-9380-fe51342257e5")
+		)
+		(fp_line
+			(start -9 9)
+			(end -9 -8.2)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "f344e66e-d939-455f-a1bd-0791dadfa9f5")
+		)
+		(fp_line
+			(start -9 -8.2)
+			(end -8.2 -9)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "0929fd4d-0776-4cbe-b2d8-2f1f8186a5e3")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.98 0)
+			(at 0 -0.98 180)
 			(layer "F.Fab")
 			(uuid "38e64041-8d0c-4583-9e98-0d3025a1a5f9")
 			(effects
@@ -10174,7 +10174,7 @@
 			)
 		)
 		(pad "A2" smd circle
-			(at -6.8 -7.6)
+			(at -6.8 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP9")
@@ -10185,7 +10185,7 @@
 			(uuid "6cccfd34-1460-4f58-bb14-6738564142fd")
 		)
 		(pad "A3" smd circle
-			(at -6 -7.6)
+			(at -6 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL14C-PadA3)")
@@ -10196,7 +10196,7 @@
 			(uuid "6f8bc91c-d7d7-4141-86a3-86001bbdf4fa")
 		)
 		(pad "A4" smd circle
-			(at -5.2 -7.6)
+			(at -5.2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP8")
@@ -10207,7 +10207,7 @@
 			(uuid "d77e1586-e6dd-4c7e-aeaf-379774328dd9")
 		)
 		(pad "A5" smd circle
-			(at -4.4 -7.6)
+			(at -4.4 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN8")
@@ -10218,7 +10218,7 @@
 			(uuid "7fc0afb3-ad15-464b-939f-a71efc0af544")
 		)
 		(pad "A6" smd circle
-			(at -3.6 -7.6)
+			(at -3.6 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP7")
@@ -10229,7 +10229,7 @@
 			(uuid "d8b317a3-9d10-4580-beeb-81590e091689")
 		)
 		(pad "A7" smd circle
-			(at -2.8 -7.6)
+			(at -2.8 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP4")
@@ -10240,7 +10240,7 @@
 			(uuid "86343abc-832e-47a1-aaab-5fe679d078ba")
 		)
 		(pad "A8" smd circle
-			(at -2 -7.6)
+			(at -2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN4")
@@ -10251,7 +10251,7 @@
 			(uuid "2ae6ceb0-f669-4be3-b42d-2f3c7a358a7f")
 		)
 		(pad "A9" smd circle
-			(at -1.2 -7.6)
+			(at -1.2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP2")
@@ -10262,7 +10262,7 @@
 			(uuid "080c8219-3e3c-46e6-8d14-8f32ba418f4a")
 		)
 		(pad "A10" smd circle
-			(at -0.4 -7.6)
+			(at -0.4 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP1")
@@ -10273,7 +10273,7 @@
 			(uuid "dd18f5de-9672-458d-acfa-48915b6ba4e7")
 		)
 		(pad "A11" smd circle
-			(at 0.4 -7.6)
+			(at 0.4 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN1")
@@ -10284,7 +10284,7 @@
 			(uuid "4bbe80e1-c0a5-47ad-adbd-1d850535c561")
 		)
 		(pad "A12" smd circle
-			(at 1.2 -7.6)
+			(at 1.2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT76A-PadA12)")
@@ -10295,7 +10295,7 @@
 			(uuid "cf2b816a-f312-4bc0-8cf4-a7346f910318")
 		)
 		(pad "A13" smd circle
-			(at 2 -7.6)
+			(at 2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT76B-PadA13)")
@@ -10306,7 +10306,7 @@
 			(uuid "c10fb8f2-4262-4be7-b1ce-eda937a76233")
 		)
 		(pad "A14" smd circle
-			(at 2.8 -7.6)
+			(at 2.8 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT83A-PadA14)")
@@ -10317,7 +10317,7 @@
 			(uuid "4cbfef94-514e-4604-9e52-faba67b1083b")
 		)
 		(pad "A15" smd circle
-			(at 3.6 -7.6)
+			(at 3.6 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT103A-PadA15)")
@@ -10328,7 +10328,7 @@
 			(uuid "4027731a-f858-4551-8f8b-d51c213776a4")
 		)
 		(pad "A16" smd circle
-			(at 4.4 -7.6)
+			(at 4.4 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT110A-PadA16)")
@@ -10339,7 +10339,7 @@
 			(uuid "89dc2677-2444-4e2e-8e59-9273fda31a0a")
 		)
 		(pad "A17" smd circle
-			(at 5.2 -7.6)
+			(at 5.2 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT116A-PadA17)")
@@ -10350,7 +10350,7 @@
 			(uuid "11a8e367-4f0b-49cc-b1e0-181c8216c32a")
 		)
 		(pad "A18" smd circle
-			(at 6 -7.6)
+			(at 6 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT119A-PadA18)")
@@ -10361,7 +10361,7 @@
 			(uuid "7def1572-0281-4ee7-b6a0-fde459cd138f")
 		)
 		(pad "A19" smd circle
-			(at 6.8 -7.6)
+			(at 6.8 -7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT121A-PadA19)")
@@ -10372,7 +10372,7 @@
 			(uuid "5cab3cc1-4215-4e41-a09b-3f7681564f9a")
 		)
 		(pad "B1" smd circle
-			(at -7.6 -6.8)
+			(at -7.6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN9")
@@ -10383,7 +10383,7 @@
 			(uuid "34dd7526-96f1-4edf-b86c-7cb191f99031")
 		)
 		(pad "B2" smd circle
-			(at -6.8 -6.8)
+			(at -6.8 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "LED0")
@@ -10394,7 +10394,7 @@
 			(uuid "800dfb5d-2b9d-4ce3-b10b-dd43d2372070")
 		)
 		(pad "B3" smd circle
-			(at -6 -6.8)
+			(at -6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL14D-PadB3)")
@@ -10405,7 +10405,7 @@
 			(uuid "b9b7bb8a-93da-4062-a149-75af3f5551c1")
 		)
 		(pad "B4" smd circle
-			(at -5.2 -6.8)
+			(at -5.2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN10")
@@ -10416,7 +10416,7 @@
 			(uuid "66c777d0-e752-4d79-bf87-b9ff87bbdf19")
 		)
 		(pad "B5" smd circle
-			(at -4.4 -6.8)
+			(at -4.4 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL11C-PadB5)")
@@ -10427,7 +10427,7 @@
 			(uuid "34e2c19d-7523-4667-bd38-07b40401123a")
 		)
 		(pad "B6" smd circle
-			(at -3.6 -6.8)
+			(at -3.6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN7")
@@ -10438,7 +10438,7 @@
 			(uuid "eba61ff9-51d3-430d-ba8d-074c3d40a034")
 		)
 		(pad "B7" smd circle
-			(at -2.8 -6.8)
+			(at -2.8 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -10449,7 +10449,7 @@
 			(uuid "f507bcd9-b503-41d6-bfa3-aed0ba45db17")
 		)
 		(pad "B8" smd circle
-			(at -2 -6.8)
+			(at -2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN5")
@@ -10460,7 +10460,7 @@
 			(uuid "801693f0-94f7-46ac-8670-3bff5e11ebc4")
 		)
 		(pad "B9" smd circle
-			(at -1.2 -6.8)
+			(at -1.2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP3")
@@ -10471,7 +10471,7 @@
 			(uuid "41470b04-c034-4b99-86e1-03806e722c39")
 		)
 		(pad "B10" smd circle
-			(at -0.4 -6.8)
+			(at -0.4 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN2")
@@ -10482,7 +10482,7 @@
 			(uuid "db0b2f85-324f-4d2d-a5d1-fc14d898aa95")
 		)
 		(pad "B11" smd circle
-			(at 0.4 -6.8)
+			(at 0.4 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP0")
@@ -10493,7 +10493,7 @@
 			(uuid "89c333d2-d661-4fee-b5cf-a8dfb39eda2d")
 		)
 		(pad "B12" smd circle
-			(at 1.2 -6.8)
+			(at 1.2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PCLKT1_0-PadB12)")
@@ -10504,7 +10504,7 @@
 			(uuid "aa09752a-5e60-4cf8-9250-776cde8567dd")
 		)
 		(pad "B13" smd circle
-			(at 2 -6.8)
+			(at 2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT78A-PadB13)")
@@ -10515,7 +10515,7 @@
 			(uuid "c965681e-6520-4996-9591-22bb868d8e66")
 		)
 		(pad "B14" smd circle
-			(at 2.8 -6.8)
+			(at 2.8 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -10526,7 +10526,7 @@
 			(uuid "c225b156-4ba5-47b3-9094-04eb59099a0b")
 		)
 		(pad "B15" smd circle
-			(at 3.6 -6.8)
+			(at 3.6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP22")
@@ -10537,7 +10537,7 @@
 			(uuid "ddf83e46-b808-44c7-9e6d-12bef1fb8a60")
 		)
 		(pad "B16" smd circle
-			(at 4.4 -6.8)
+			(at 4.4 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT110B-PadB16)")
@@ -10548,7 +10548,7 @@
 			(uuid "194d55a6-6a99-4147-811d-d10df5701e8c")
 		)
 		(pad "B17" smd circle
-			(at 5.2 -6.8)
+			(at 5.2 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP23")
@@ -10559,7 +10559,7 @@
 			(uuid "00fc1e0f-d7ae-4078-9467-eabc256c612e")
 		)
 		(pad "B18" smd circle
-			(at 6 -6.8)
+			(at 6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT116B-PadB18)")
@@ -10570,7 +10570,7 @@
 			(uuid "7f9816cc-61a1-4612-ab72-312a47c9d67e")
 		)
 		(pad "B19" smd circle
-			(at 6.8 -6.8)
+			(at 6.8 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FPDI_SDA")
@@ -10581,7 +10581,7 @@
 			(uuid "2411fe54-b2b2-4175-b61e-601356b6ba01")
 		)
 		(pad "B20" smd circle
-			(at 7.6 -6.8)
+			(at 7.6 -6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT121B-PadB20)")
@@ -10592,7 +10592,7 @@
 			(uuid "1713fef7-93a3-43c6-bc72-328006cfb0d1")
 		)
 		(pad "C1" smd circle
-			(at -7.6 -6)
+			(at -7.6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "IMU_INT1")
@@ -10603,7 +10603,7 @@
 			(uuid "445e695b-5285-478a-8b38-fd39c0e52fd4")
 		)
 		(pad "C2" smd circle
-			(at -6.8 -6)
+			(at -6.8 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "LED1")
@@ -10614,7 +10614,7 @@
 			(uuid "3f104206-21ae-4be5-b042-5a63526df450")
 		)
 		(pad "C3" smd circle
-			(at -6 -6)
+			(at -6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL17C-PadC3)")
@@ -10625,7 +10625,7 @@
 			(uuid "09f5c988-0cdc-407d-99c2-2cada290ff99")
 		)
 		(pad "C4" smd circle
-			(at -5.2 -6)
+			(at -5.2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP10")
@@ -10636,7 +10636,7 @@
 			(uuid "6b04f998-cd56-4b1a-a3d0-d6b7fae75e31")
 		)
 		(pad "C5" smd circle
-			(at -4.4 -6)
+			(at -4.4 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL11D-PadC5)")
@@ -10647,7 +10647,7 @@
 			(uuid "a5c808d8-0d53-4084-bbcc-a10a619afc47")
 		)
 		(pad "C6" smd circle
-			(at -3.6 -6)
+			(at -3.6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP6")
@@ -10658,7 +10658,7 @@
 			(uuid "e7c430c3-ffc8-4006-b092-1704c5ed426c")
 		)
 		(pad "C7" smd circle
-			(at -2.8 -6)
+			(at -2.8 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN6")
@@ -10669,7 +10669,7 @@
 			(uuid "35a508f0-4e0a-43a7-9ba8-cf9089e133fe")
 		)
 		(pad "C8" smd circle
-			(at -2 -6)
+			(at -2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP5")
@@ -10680,7 +10680,7 @@
 			(uuid "b77efb10-774d-4496-84b5-ca4591929ac7")
 		)
 		(pad "C9" smd circle
-			(at -1.2 -6)
+			(at -1.2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1A-PT54A-PadC9)")
@@ -10691,7 +10691,7 @@
 			(uuid "738ad4cf-7d83-46c7-a18f-7c72cb1c5242")
 		)
 		(pad "C10" smd circle
-			(at -0.4 -6)
+			(at -0.4 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN3")
@@ -10702,7 +10702,7 @@
 			(uuid "4f42ecfb-645f-49e6-a5ae-737001d3a430")
 		)
 		(pad "C11" smd circle
-			(at 0.4 -6)
+			(at 0.4 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN0")
@@ -10713,7 +10713,7 @@
 			(uuid "b1d7d7c6-c3a6-48d6-81f6-5fcd613551ff")
 		)
 		(pad "C12" smd circle
-			(at 1.2 -6)
+			(at 1.2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PCLKC1_0-PadC12)")
@@ -10724,7 +10724,7 @@
 			(uuid "6149f92a-79f6-4b2a-a600-27e22b9e2afd")
 		)
 		(pad "C13" smd circle
-			(at 2 -6)
+			(at 2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT78B-PadC13)")
@@ -10735,7 +10735,7 @@
 			(uuid "3c3bc62d-7edd-416b-954f-0915956b0bbd")
 		)
 		(pad "C14" smd circle
-			(at 2.8 -6)
+			(at 2.8 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT83B-PadC14)")
@@ -10746,7 +10746,7 @@
 			(uuid "c6c8ca15-49b5-447e-8d2b-68a96c10e7a2")
 		)
 		(pad "C15" smd circle
-			(at 3.6 -6)
+			(at 3.6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN22")
@@ -10757,7 +10757,7 @@
 			(uuid "caaf5e8d-1c5f-472c-8999-6b0205cc4e50")
 		)
 		(pad "C16" smd circle
-			(at 4.4 -6)
+			(at 4.4 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP24")
@@ -10768,7 +10768,7 @@
 			(uuid "56c2fc7d-b3ab-4981-8552-edd7961962a2")
 		)
 		(pad "C17" smd circle
-			(at 5.2 -6)
+			(at 5.2 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN23")
@@ -10779,7 +10779,7 @@
 			(uuid "dfbf3c0e-e805-45ac-b627-2e4346333413")
 		)
 		(pad "C18" smd circle
-			(at 6 -6)
+			(at 6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP21")
@@ -10790,7 +10790,7 @@
 			(uuid "223d5c10-56f5-4e41-8871-bdf65f19eca1")
 		)
 		(pad "C19" smd circle
-			(at 6.8 -6)
+			(at 6.8 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -10801,7 +10801,7 @@
 			(uuid "7b34a4ab-78d3-4966-9090-e6c811058769")
 		)
 		(pad "C20" smd circle
-			(at 7.6 -6)
+			(at 7.6 -6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D11")
@@ -10812,7 +10812,7 @@
 			(uuid "e6f6e8f7-57f9-4827-baa2-841b75341558")
 		)
 		(pad "D1" smd circle
-			(at -7.6 -5.2)
+			(at -7.6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "IMU_INT2")
@@ -10823,7 +10823,7 @@
 			(uuid "d978ef59-a388-4bd3-b051-8c7ec3630337")
 		)
 		(pad "D2" smd circle
-			(at -6.8 -5.2)
+			(at -6.8 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL38C-PadD2)")
@@ -10834,7 +10834,7 @@
 			(uuid "31bd53db-73d9-4404-9278-594e00bbc741")
 		)
 		(pad "D3" smd circle
-			(at -6 -5.2)
+			(at -6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL17D-PadD3)")
@@ -10845,7 +10845,7 @@
 			(uuid "a465b2e6-5916-4004-a0ac-64040c769ffe")
 		)
 		(pad "D4" smd circle
-			(at -5.2 -5.2)
+			(at -5.2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -10856,7 +10856,7 @@
 			(uuid "6ce2afa4-078f-4683-a4e6-ed8efc79aa3f")
 		)
 		(pad "D5" smd circle
-			(at -4.4 -5.2)
+			(at -4.4 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL17B-PadD5)")
@@ -10867,7 +10867,7 @@
 			(uuid "0602247d-27da-468f-95a4-efa311d1c61a")
 		)
 		(pad "D6" smd circle
-			(at -3.6 -5.2)
+			(at -3.6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_PWRn")
@@ -10878,7 +10878,7 @@
 			(uuid "c64f7ff1-7bf3-4587-9097-26e847696be1")
 		)
 		(pad "D7" smd circle
-			(at -2.8 -5.2)
+			(at -2.8 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "IMU_SDA")
@@ -10889,7 +10889,7 @@
 			(uuid "a2989b60-cf07-4370-a6f9-77fabbe826f5")
 		)
 		(pad "D8" smd circle
-			(at -2 -5.2)
+			(at -2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN2n")
@@ -10900,7 +10900,7 @@
 			(uuid "7a56e120-1c8b-4253-92e4-38b8e1327778")
 		)
 		(pad "D9" smd circle
-			(at -1.2 -5.2)
+			(at -1.2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1A-PT20A-PadD9)")
@@ -10911,7 +10911,7 @@
 			(uuid "890c55a3-25a0-4089-8399-9c5e38ebbf1a")
 		)
 		(pad "D10" smd circle
-			(at -0.4 -5.2)
+			(at -0.4 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1A-PT56A-PadD10)")
@@ -10922,7 +10922,7 @@
 			(uuid "8227da21-2b8e-4d9e-a38f-534d7ea5c0c0")
 		)
 		(pad "D11" smd circle
-			(at 0.4 -5.2)
+			(at 0.4 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PCLKT1_1-PadD11)")
@@ -10933,7 +10933,7 @@
 			(uuid "cebe7b88-a2d5-4816-b1dd-54e6a4ea4d6f")
 		)
 		(pad "D12" smd circle
-			(at 1.2 -5.2)
+			(at 1.2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-GR_PCLK1_0-PadD12)")
@@ -10944,7 +10944,7 @@
 			(uuid "6dc283d6-c185-4b60-9583-4d5b089e7ca9")
 		)
 		(pad "D13" smd circle
-			(at 2 -5.2)
+			(at 2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT80A-PadD13)")
@@ -10955,7 +10955,7 @@
 			(uuid "73e25552-edf9-40da-834f-1af1880e7264")
 		)
 		(pad "D14" smd circle
-			(at 2.8 -5.2)
+			(at 2.8 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT85A-PadD14)")
@@ -10966,7 +10966,7 @@
 			(uuid "1ce503e3-a861-4770-bd85-3aae8a7f488d")
 		)
 		(pad "D15" smd circle
-			(at 3.6 -5.2)
+			(at 3.6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT107A-PadD15)")
@@ -10977,7 +10977,7 @@
 			(uuid "5d0470c7-0b15-4aef-bca1-65ba768c6e4a")
 		)
 		(pad "D16" smd circle
-			(at 4.4 -5.2)
+			(at 4.4 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN24")
@@ -10988,7 +10988,7 @@
 			(uuid "72ad5b32-722b-4bf1-93d8-3fb87e9dc72e")
 		)
 		(pad "D17" smd circle
-			(at 5.2 -5.2)
+			(at 5.2 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN21")
@@ -10999,7 +10999,7 @@
 			(uuid "e3d687b8-428b-41ea-9f97-cd05ba56eb4c")
 		)
 		(pad "D18" smd circle
-			(at 6 -5.2)
+			(at 6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP20")
@@ -11010,7 +11010,7 @@
 			(uuid "a0d19fb5-9b32-4c3f-8707-0bc3ef2c4c31")
 		)
 		(pad "D19" smd circle
-			(at 6.8 -5.2)
+			(at 6.8 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D10")
@@ -11021,7 +11021,7 @@
 			(uuid "0a0768bf-58ac-43d3-8619-afebd0ea9066")
 		)
 		(pad "D20" smd circle
-			(at 7.6 -5.2)
+			(at 7.6 -5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D9")
@@ -11032,7 +11032,7 @@
 			(uuid "d4ea7b33-a3af-4144-9ad6-110ebedbc7fb")
 		)
 		(pad "E1" smd circle
-			(at -7.6 -4.4)
+			(at -7.6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL38D-PadE1)")
@@ -11043,7 +11043,7 @@
 			(uuid "8787c05b-797a-46e6-a874-a3864aae111f")
 		)
 		(pad "E2" smd circle
-			(at -6.8 -4.4)
+			(at -6.8 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PCLKC7_0-PadE2)")
@@ -11054,7 +11054,7 @@
 			(uuid "f1ae1bfe-b02c-43fb-a23e-6212d66801c0")
 		)
 		(pad "E3" smd circle
-			(at -6 -4.4)
+			(at -6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN11")
@@ -11065,7 +11065,7 @@
 			(uuid "317f8588-78df-48d7-a97b-bdfa926b2725")
 		)
 		(pad "E4" smd circle
-			(at -5.2 -4.4)
+			(at -5.2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL17A-PadE4)")
@@ -11076,7 +11076,7 @@
 			(uuid "08eaaff9-e6e4-4ef7-ac7b-edf0e98edb6a")
 		)
 		(pad "E5" smd circle
-			(at -4.4 -4.4)
+			(at -4.4 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL20C-PadE5)")
@@ -11087,7 +11087,7 @@
 			(uuid "cd67b8de-d1c3-4fd4-8a86-7fa64443fcb3")
 		)
 		(pad "E6" smd circle
-			(at -3.6 -4.4)
+			(at -3.6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO41")
@@ -11098,7 +11098,7 @@
 			(uuid "0ab7fa0a-a517-4f56-b8ca-ab281414744e")
 		)
 		(pad "E7" smd circle
-			(at -2.8 -4.4)
+			(at -2.8 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "IMU_SCL")
@@ -11109,7 +11109,7 @@
 			(uuid "1a224a59-8d24-46c2-b5bc-f83e34f598ab")
 		)
 		(pad "E8" smd circle
-			(at -2 -4.4)
+			(at -2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN1n")
@@ -11120,7 +11120,7 @@
 			(uuid "97feee51-3984-40cc-aeab-3cbdbcf130aa")
 		)
 		(pad "E9" smd circle
-			(at -1.2 -4.4)
+			(at -1.2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO1")
@@ -11131,7 +11131,7 @@
 			(uuid "afd24fd7-777d-4132-9cf4-3bf54e534abf")
 		)
 		(pad "E10" smd circle
-			(at -0.4 -4.4)
+			(at -0.4 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1A-PT56B-PadE10)")
@@ -11142,7 +11142,7 @@
 			(uuid "d2642fe9-3bb7-47ed-9090-d07c33992f9e")
 		)
 		(pad "E11" smd circle
-			(at 0.4 -4.4)
+			(at 0.4 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PCLKC1_1-PadE11)")
@@ -11153,7 +11153,7 @@
 			(uuid "db74ed25-4834-4415-85a3-53010a83a2aa")
 		)
 		(pad "E12" smd circle
-			(at 1.2 -4.4)
+			(at 1.2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FPDI_SCL")
@@ -11164,7 +11164,7 @@
 			(uuid "d72dade3-d45f-4792-8fdd-568beaa64d0e")
 		)
 		(pad "E13" smd circle
-			(at 2 -4.4)
+			(at 2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT80B-PadE13)")
@@ -11175,7 +11175,7 @@
 			(uuid "0bc04a58-c59e-4541-a87d-f430dfcfdd45")
 		)
 		(pad "E14" smd circle
-			(at 2.8 -4.4)
+			(at 2.8 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT85B-PadE14)")
@@ -11186,7 +11186,7 @@
 			(uuid "f8dbe75f-a04c-4d73-84be-2663be7e5cc6")
 		)
 		(pad "E15" smd circle
-			(at 3.6 -4.4)
+			(at 3.6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1B-PT107B-PadE15)")
@@ -11197,7 +11197,7 @@
 			(uuid "c6ffe864-5658-4a06-b63c-1a2e324f42eb")
 		)
 		(pad "E16" smd circle
-			(at 4.4 -4.4)
+			(at 4.4 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "USB_FPGA_D+")
@@ -11208,7 +11208,7 @@
 			(uuid "39938fca-a639-47c5-8015-17b41307edc2")
 		)
 		(pad "E17" smd circle
-			(at 5.2 -4.4)
+			(at 5.2 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN20")
@@ -11219,7 +11219,7 @@
 			(uuid "56c81b9e-2a9d-40ec-ab2c-e963989b66e3")
 		)
 		(pad "E18" smd circle
-			(at 6 -4.4)
+			(at 6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D12")
@@ -11230,7 +11230,7 @@
 			(uuid "af2337af-4e70-421e-a59b-0c91c977286f")
 		)
 		(pad "E19" smd circle
-			(at 6.8 -4.4)
+			(at 6.8 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D8")
@@ -11241,7 +11241,7 @@
 			(uuid "6d0994fd-fdb7-491f-985a-14df3604b3d9")
 		)
 		(pad "E20" smd circle
-			(at 7.6 -4.4)
+			(at 7.6 -4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_DQM1")
@@ -11252,7 +11252,7 @@
 			(uuid "b95ecfb5-beb7-4841-b2d9-d497c841a549")
 		)
 		(pad "F1" smd circle
-			(at -7.6 -3.6)
+			(at -7.6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO0")
@@ -11263,7 +11263,7 @@
 			(uuid "74889901-b5dd-4d9c-a57f-7344687ae34a")
 		)
 		(pad "F2" smd circle
-			(at -6.8 -3.6)
+			(at -6.8 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PCLKT7_0-PadF2)")
@@ -11274,7 +11274,7 @@
 			(uuid "9886df14-ef84-4237-95da-bc09bd351074")
 		)
 		(pad "F3" smd circle
-			(at -6 -3.6)
+			(at -6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN12")
@@ -11285,7 +11285,7 @@
 			(uuid "e3cf6ed6-3b0b-4a15-99ff-6f7c66b0ced6")
 		)
 		(pad "F4" smd circle
-			(at -5.2 -3.6)
+			(at -5.2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP11")
@@ -11296,7 +11296,7 @@
 			(uuid "c20a6245-06f2-4eee-ac1d-9847d7375dae")
 		)
 		(pad "F5" smd circle
-			(at -4.4 -3.6)
+			(at -4.4 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL20D-PadF5)")
@@ -11307,7 +11307,7 @@
 			(uuid "9e09ddc3-9191-48a5-9123-16488d1b140b")
 		)
 		(pad "F6" smd circle
-			(at -3.6 -3.6)
+			(at -3.6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+2V5")
@@ -11318,7 +11318,7 @@
 			(uuid "7e956c73-a972-4a8e-b727-82ee375b6c66")
 		)
 		(pad "F7" smd circle
-			(at -2.8 -3.6)
+			(at -2.8 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11329,7 +11329,7 @@
 			(uuid "6274c77d-ee48-4861-8b9c-b8cc69b37a43")
 		)
 		(pad "F8" smd circle
-			(at -2 -3.6)
+			(at -2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11340,7 +11340,7 @@
 			(uuid "52f1a83d-eb67-48c8-8928-01437303b620")
 		)
 		(pad "F9" smd circle
-			(at -1.2 -3.6)
+			(at -1.2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "2V5_3V3")
@@ -11351,7 +11351,7 @@
 			(uuid "4668636e-97c8-42e2-9102-eea53bee74da")
 		)
 		(pad "F10" smd circle
-			(at -0.4 -3.6)
+			(at -0.4 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "2V5_3V3")
@@ -11362,7 +11362,7 @@
 			(uuid "a59bab9b-3a82-4688-a578-a8a97ff9dd0a")
 		)
 		(pad "F11" smd circle
-			(at 0.4 -3.6)
+			(at 0.4 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -11373,7 +11373,7 @@
 			(uuid "7a9cd211-e927-4071-b938-d9c5cdf5e666")
 		)
 		(pad "F12" smd circle
-			(at 1.2 -3.6)
+			(at 1.2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -11384,7 +11384,7 @@
 			(uuid "886beb20-bca7-44b9-957e-6eca9d2f3369")
 		)
 		(pad "F13" smd circle
-			(at 2 -3.6)
+			(at 2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11395,7 +11395,7 @@
 			(uuid "7abbe0d0-1ef9-4ff7-9454-b2f035636380")
 		)
 		(pad "F14" smd circle
-			(at 2.8 -3.6)
+			(at 2.8 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11406,7 +11406,7 @@
 			(uuid "d29f9471-6332-4ea2-a0ae-c135c71b2351")
 		)
 		(pad "F15" smd circle
-			(at 3.6 -3.6)
+			(at 3.6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+2V5")
@@ -11417,7 +11417,7 @@
 			(uuid "c929242e-85e8-49e8-9e00-2cc6923d9479")
 		)
 		(pad "F16" smd circle
-			(at 4.4 -3.6)
+			(at 4.4 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "USB_FPGA_D-")
@@ -11428,7 +11428,7 @@
 			(uuid "dc26a149-c4ba-4f87-ad0d-f3c44d75da02")
 		)
 		(pad "F17" smd circle
-			(at 5.2 -3.6)
+			(at 5.2 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP19")
@@ -11439,7 +11439,7 @@
 			(uuid "4e323cdc-abf6-4eea-8dbf-d6c73540cbcb")
 		)
 		(pad "F18" smd circle
-			(at 6 -3.6)
+			(at 6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D13")
@@ -11450,7 +11450,7 @@
 			(uuid "753b8fe5-30fe-4597-ba04-4887de000910")
 		)
 		(pad "F19" smd circle
-			(at 6.8 -3.6)
+			(at 6.8 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_CLK")
@@ -11461,7 +11461,7 @@
 			(uuid "b01a2148-5ea5-44b1-a2a1-3d593ffb4bb9")
 		)
 		(pad "F20" smd circle
-			(at 7.6 -3.6)
+			(at 7.6 -3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_CKE")
@@ -11472,7 +11472,7 @@
 			(uuid "c59f08e4-c03a-440f-9ae5-4359f2a3ff5b")
 		)
 		(pad "G1" smd circle
-			(at -7.6 -2.8)
+			(at -7.6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/usb/ANT_433MHz")
@@ -11483,7 +11483,7 @@
 			(uuid "dd06899e-9f0a-46c6-a541-866b18b53d4d")
 		)
 		(pad "G2" smd circle
-			(at -6.8 -2.8)
+			(at -6.8 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "CLK_25MHz")
@@ -11494,7 +11494,7 @@
 			(uuid "77fc3086-6022-4087-a7b1-d719a3553fb3")
 		)
 		(pad "G3" smd circle
-			(at -6 -2.8)
+			(at -6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP12")
@@ -11505,7 +11505,7 @@
 			(uuid "dfda8146-53bc-445c-a50f-6765f1731f3f")
 		)
 		(pad "G4" smd circle
-			(at -5.2 -2.8)
+			(at -5.2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11516,7 +11516,7 @@
 			(uuid "e8e39ae2-1e82-4ed7-9f15-0383389b0891")
 		)
 		(pad "G5" smd circle
-			(at -4.4 -2.8)
+			(at -4.4 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN13")
@@ -11527,7 +11527,7 @@
 			(uuid "960222be-b08b-46c9-8fe2-3d397f0d4c81")
 		)
 		(pad "G6" smd circle
-			(at -3.6 -2.8)
+			(at -3.6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11538,7 +11538,7 @@
 			(uuid "ec62895b-1892-45fd-ae84-17bdb169a690")
 		)
 		(pad "G7" smd circle
-			(at -2.8 -2.8)
+			(at -2.8 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11549,7 +11549,7 @@
 			(uuid "4e402a29-f8e9-4571-bb85-2c1c563814b0")
 		)
 		(pad "G8" smd circle
-			(at -2 -2.8)
+			(at -2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11560,7 +11560,7 @@
 			(uuid "6b44d1aa-4471-4119-9ca4-438addbcdc35")
 		)
 		(pad "G9" smd circle
-			(at -1.2 -2.8)
+			(at -1.2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11571,7 +11571,7 @@
 			(uuid "d6dd7ce6-249a-43b2-95b9-d4ff8021a7ee")
 		)
 		(pad "G10" smd circle
-			(at -0.4 -2.8)
+			(at -0.4 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11582,7 +11582,7 @@
 			(uuid "b8bd9c07-0b14-464e-86c7-a8c7f5803842")
 		)
 		(pad "G11" smd circle
-			(at 0.4 -2.8)
+			(at 0.4 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11593,7 +11593,7 @@
 			(uuid "845f2e8c-94fc-4ac3-98db-864f241d73f3")
 		)
 		(pad "G12" smd circle
-			(at 1.2 -2.8)
+			(at 1.2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11604,7 +11604,7 @@
 			(uuid "00c8c708-8e89-40a5-b384-d21f6e852484")
 		)
 		(pad "G13" smd circle
-			(at 2 -2.8)
+			(at 2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11615,7 +11615,7 @@
 			(uuid "c8927ed4-f8de-4ad5-a75e-7d9a1e601f51")
 		)
 		(pad "G14" smd circle
-			(at 2.8 -2.8)
+			(at 2.8 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11626,7 +11626,7 @@
 			(uuid "f175ca43-8f44-41b7-a2e6-a49ab87b6568")
 		)
 		(pad "G15" smd circle
-			(at 3.6 -2.8)
+			(at 3.6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11637,7 +11637,7 @@
 			(uuid "fca28e97-2cec-4e5d-af32-fbe4eb3d72b7")
 		)
 		(pad "G16" smd circle
-			(at 4.4 -2.8)
+			(at 4.4 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SHUTDOWN")
@@ -11648,7 +11648,7 @@
 			(uuid "2b5220ad-ac96-4064-a804-594b838bac06")
 		)
 		(pad "G17" smd circle
-			(at 5.2 -2.8)
+			(at 5.2 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11659,7 +11659,7 @@
 			(uuid "b7c0f78b-f4bb-4d18-a2d4-a04e77d7aa4d")
 		)
 		(pad "G18" smd circle
-			(at 6 -2.8)
+			(at 6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN19")
@@ -11670,7 +11670,7 @@
 			(uuid "088be2a0-652e-4c73-a6fc-2597a086417f")
 		)
 		(pad "G19" smd circle
-			(at 6.8 -2.8)
+			(at 6.8 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A12")
@@ -11681,7 +11681,7 @@
 			(uuid "ef7644bb-d7ca-468e-a73c-65e9fd01ec88")
 		)
 		(pad "G20" smd circle
-			(at 7.6 -2.8)
+			(at 7.6 -2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A11")
@@ -11692,7 +11692,7 @@
 			(uuid "bcebbe98-d8e9-492e-8d22-414709be0583")
 		)
 		(pad "H1" smd circle
-			(at -7.6 -2)
+			(at -7.6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_D1")
@@ -11703,7 +11703,7 @@
 			(uuid "b8509f09-8ceb-47ac-aba0-490753f46dc4")
 		)
 		(pad "H2" smd circle
-			(at -6.8 -2)
+			(at -6.8 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_CLK")
@@ -11714,7 +11714,7 @@
 			(uuid "4803f838-911b-4256-877b-05af3713620a")
 		)
 		(pad "H3" smd circle
-			(at -6 -2)
+			(at -6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-PL41D-PadH3)")
@@ -11725,7 +11725,7 @@
 			(uuid "b8241c93-4ac5-425e-a76d-db4442687638")
 		)
 		(pad "H4" smd circle
-			(at -5.2 -2)
+			(at -5.2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP13")
@@ -11736,7 +11736,7 @@
 			(uuid "d1da988e-c565-44c9-8133-72ef52498e52")
 		)
 		(pad "H5" smd circle
-			(at -4.4 -2)
+			(at -4.4 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1F-GR_PCLK7_0-PadH5)")
@@ -11747,7 +11747,7 @@
 			(uuid "e095a288-3de3-4a2c-b7c9-51eb06470cbc")
 		)
 		(pad "H6" smd circle
-			(at -3.6 -2)
+			(at -3.6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "2V5_3V3")
@@ -11758,7 +11758,7 @@
 			(uuid "65161aca-f338-4c33-9797-5948613aa010")
 		)
 		(pad "H7" smd circle
-			(at -2.8 -2)
+			(at -2.8 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "2V5_3V3")
@@ -11769,7 +11769,7 @@
 			(uuid "bee18eee-d407-4ce3-acd6-3433cf35ee1e")
 		)
 		(pad "H8" smd circle
-			(at -2 -2)
+			(at -2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11780,7 +11780,7 @@
 			(uuid "5bb0d1a6-7905-45c2-ab91-e999e38505cb")
 		)
 		(pad "H9" smd circle
-			(at -1.2 -2)
+			(at -1.2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11791,7 +11791,7 @@
 			(uuid "33e4b5f3-95ae-41bf-aca0-018323dfbfdf")
 		)
 		(pad "H10" smd circle
-			(at -0.4 -2)
+			(at -0.4 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11802,7 +11802,7 @@
 			(uuid "5cfb1ea1-8f39-41fd-b607-57e529fc7a78")
 		)
 		(pad "H11" smd circle
-			(at 0.4 -2)
+			(at 0.4 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11813,7 +11813,7 @@
 			(uuid "d18a8e79-48c0-4be5-80bf-be2b441cabb6")
 		)
 		(pad "H12" smd circle
-			(at 1.2 -2)
+			(at 1.2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11824,7 +11824,7 @@
 			(uuid "4a266581-1be2-4840-baea-82e99ee1714d")
 		)
 		(pad "H13" smd circle
-			(at 2 -2)
+			(at 2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -11835,7 +11835,7 @@
 			(uuid "2f8803c0-c5d3-49fb-9680-f792dce43735")
 		)
 		(pad "H14" smd circle
-			(at 2.8 -2)
+			(at 2.8 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -11846,7 +11846,7 @@
 			(uuid "665a6980-8dc5-41b8-a2c6-a5a8eca49cf7")
 		)
 		(pad "H15" smd circle
-			(at 3.6 -2)
+			(at 3.6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -11857,7 +11857,7 @@
 			(uuid "1b5f9c1b-d181-48a1-b757-fa7ccf5d0380")
 		)
 		(pad "H16" smd circle
-			(at 4.4 -2)
+			(at 4.4 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_R")
@@ -11868,7 +11868,7 @@
 			(uuid "582b7a98-2041-43b3-b861-e25bd5210a66")
 		)
 		(pad "H17" smd circle
-			(at 5.2 -2)
+			(at 5.2 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN18")
@@ -11879,7 +11879,7 @@
 			(uuid "03cd2305-3d63-4d93-9590-25c14708ce7b")
 		)
 		(pad "H18" smd circle
-			(at 6 -2)
+			(at 6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP18")
@@ -11890,7 +11890,7 @@
 			(uuid "bdff69c4-34ba-4b94-9ea7-6d7d371ec527")
 		)
 		(pad "H19" smd circle
-			(at 6.8 -2)
+			(at 6.8 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11901,7 +11901,7 @@
 			(uuid "7afc26ff-98b3-4a6f-a036-6a81f7d2a23a")
 		)
 		(pad "H20" smd circle
-			(at 7.6 -2)
+			(at 7.6 -2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A9")
@@ -11912,7 +11912,7 @@
 			(uuid "07945ed5-a824-42e5-bf8e-e58cd015a980")
 		)
 		(pad "J1" smd circle
-			(at -7.6 -1.2)
+			(at -7.6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_CMD")
@@ -11923,7 +11923,7 @@
 			(uuid "517937f3-a72f-46ac-9670-517980cf8d96")
 		)
 		(pad "J2" smd circle
-			(at -6.8 -1.2)
+			(at -6.8 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11934,7 +11934,7 @@
 			(uuid "27f10369-8fd6-4b5c-bbd4-4c43bf015083")
 		)
 		(pad "J3" smd circle
-			(at -6 -1.2)
+			(at -6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_D0")
@@ -11945,7 +11945,7 @@
 			(uuid "843b2b2e-99ac-45ae-8406-35870f3360d7")
 		)
 		(pad "J4" smd circle
-			(at -5.2 -1.2)
+			(at -5.2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM6")
@@ -11956,7 +11956,7 @@
 			(uuid "90d96eff-b140-4a2f-83e7-1d89826cfe1a")
 		)
 		(pad "J5" smd circle
-			(at -4.4 -1.2)
+			(at -4.4 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_EN")
@@ -11967,7 +11967,7 @@
 			(uuid "5a69ba25-68a4-4b03-a33a-c5030eafb752")
 		)
 		(pad "J6" smd circle
-			(at -3.6 -1.2)
+			(at -3.6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "2V5_3V3")
@@ -11978,7 +11978,7 @@
 			(uuid "b19fc4a2-0b4a-4dc5-abcc-20334952db82")
 		)
 		(pad "J7" smd circle
-			(at -2.8 -1.2)
+			(at -2.8 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -11989,7 +11989,7 @@
 			(uuid "2e5ca924-0ec5-4c43-a53a-f444af20f518")
 		)
 		(pad "J8" smd circle
-			(at -2 -1.2)
+			(at -2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12000,7 +12000,7 @@
 			(uuid "a8e1b564-9bfb-4550-8c3f-0b6217656dca")
 		)
 		(pad "J9" smd circle
-			(at -1.2 -1.2)
+			(at -1.2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12011,7 +12011,7 @@
 			(uuid "41ddff27-59f0-46e4-b85e-5c3262377a34")
 		)
 		(pad "J10" smd circle
-			(at -0.4 -1.2)
+			(at -0.4 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12022,7 +12022,7 @@
 			(uuid "55102961-3cb4-443a-9e51-117b67918bdd")
 		)
 		(pad "J11" smd circle
-			(at 0.4 -1.2)
+			(at 0.4 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12033,7 +12033,7 @@
 			(uuid "4294c5a5-2b63-490d-98ce-330986e7a080")
 		)
 		(pad "J12" smd circle
-			(at 1.2 -1.2)
+			(at 1.2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12044,7 +12044,7 @@
 			(uuid "37687152-4221-4fff-a10f-20b8f416824b")
 		)
 		(pad "J13" smd circle
-			(at 2 -1.2)
+			(at 2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12055,7 +12055,7 @@
 			(uuid "ebf94627-1e8a-4da4-a2ba-b4da885dd234")
 		)
 		(pad "J14" smd circle
-			(at 2.8 -1.2)
+			(at 2.8 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12066,7 +12066,7 @@
 			(uuid "885b90cf-6247-4009-85f2-6c09a4631ec4")
 		)
 		(pad "J15" smd circle
-			(at 3.6 -1.2)
+			(at 3.6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12077,7 +12077,7 @@
 			(uuid "90b284a5-0343-4b7e-b90b-88a34132c14e")
 		)
 		(pad "J16" smd circle
-			(at 4.4 -1.2)
+			(at 4.4 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D0")
@@ -12088,7 +12088,7 @@
 			(uuid "f71c2d8d-60af-4c9c-a6bd-2f05f796b51d")
 		)
 		(pad "J17" smd circle
-			(at 5.2 -1.2)
+			(at 5.2 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D15")
@@ -12099,7 +12099,7 @@
 			(uuid "a15173ef-7416-4326-bf9a-22214e451c06")
 		)
 		(pad "J18" smd circle
-			(at 6 -1.2)
+			(at 6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D14")
@@ -12110,7 +12110,7 @@
 			(uuid "a0fa86fc-0f54-4498-acd7-5b4338b1075b")
 		)
 		(pad "J19" smd circle
-			(at 6.8 -1.2)
+			(at 6.8 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A8")
@@ -12121,7 +12121,7 @@
 			(uuid "33471835-5cf3-47f4-aebe-df34157d5ecc")
 		)
 		(pad "J20" smd circle
-			(at 7.6 -1.2)
+			(at 7.6 -1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A7")
@@ -12132,7 +12132,7 @@
 			(uuid "c5efbb4e-77d9-4d9d-b931-f9e910b2d43e")
 		)
 		(pad "K1" smd circle
-			(at -7.6 -0.4)
+			(at -7.6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_D2")
@@ -12143,7 +12143,7 @@
 			(uuid "66730196-8023-4291-96d7-b33d05fc36d1")
 		)
 		(pad "K2" smd circle
-			(at -6.8 -0.4)
+			(at -6.8 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_D3")
@@ -12154,7 +12154,7 @@
 			(uuid "5fa17522-ad18-405c-a054-1be8e7e0b4f7")
 		)
 		(pad "K3" smd circle
-			(at -6 -0.4)
+			(at -6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_RXD")
@@ -12165,7 +12165,7 @@
 			(uuid "863d5d8e-da65-4a94-a402-4daee2e4d04a")
 		)
 		(pad "K4" smd circle
-			(at -5.2 -0.4)
+			(at -5.2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_TXD")
@@ -12176,7 +12176,7 @@
 			(uuid "3974f7db-92ba-4c2b-b557-777c552a8b08")
 		)
 		(pad "K5" smd circle
-			(at -4.4 -0.4)
+			(at -4.4 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO21")
@@ -12187,7 +12187,7 @@
 			(uuid "d9f63090-e108-4bbe-a8ab-4137165b5d38")
 		)
 		(pad "K6" smd circle
-			(at -3.6 -0.4)
+			(at -3.6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12198,7 +12198,7 @@
 			(uuid "bd072ca9-f40e-41cd-991f-a4dd7ac9bbea")
 		)
 		(pad "K7" smd circle
-			(at -2.8 -0.4)
+			(at -2.8 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12209,7 +12209,7 @@
 			(uuid "838e4761-855c-4c18-a04e-c342c4bb41ac")
 		)
 		(pad "K8" smd circle
-			(at -2 -0.4)
+			(at -2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12220,7 +12220,7 @@
 			(uuid "1535f9cd-adf2-49ee-9536-9e6835efb783")
 		)
 		(pad "K9" smd circle
-			(at -1.2 -0.4)
+			(at -1.2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12231,7 +12231,7 @@
 			(uuid "647fe512-f6a3-4c6a-af10-4d0afb086fba")
 		)
 		(pad "K10" smd circle
-			(at -0.4 -0.4)
+			(at -0.4 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12242,7 +12242,7 @@
 			(uuid "848ae850-e2ed-4e4f-a5ff-aa58cebab4aa")
 		)
 		(pad "K11" smd circle
-			(at 0.4 -0.4)
+			(at 0.4 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12253,7 +12253,7 @@
 			(uuid "39de171f-381e-4e38-b56b-f4bc78028558")
 		)
 		(pad "K12" smd circle
-			(at 1.2 -0.4)
+			(at 1.2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12264,7 +12264,7 @@
 			(uuid "e0e60684-c4b1-4ce1-86a9-06e6338eeb30")
 		)
 		(pad "K13" smd circle
-			(at 2 -0.4)
+			(at 2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12275,7 +12275,7 @@
 			(uuid "d4d8d44f-942e-4755-b2b5-36529f1385b6")
 		)
 		(pad "K14" smd circle
-			(at 2.8 -0.4)
+			(at 2.8 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12286,7 +12286,7 @@
 			(uuid "e1873377-6553-4306-a5a8-05ed6da2419e")
 		)
 		(pad "K15" smd circle
-			(at 3.6 -0.4)
+			(at 3.6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12297,7 +12297,7 @@
 			(uuid "6baf72fa-cd33-412c-a0c2-3032e48d9ebf")
 		)
 		(pad "K16" smd circle
-			(at 4.4 -0.4)
+			(at 4.4 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1C-PR29A-PadK16)")
@@ -12308,7 +12308,7 @@
 			(uuid "a016367c-3c3e-4837-8cd9-d92aeb8ffa5b")
 		)
 		(pad "K17" smd circle
-			(at 5.2 -0.4)
+			(at 5.2 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1C-PR29B-PadK17)")
@@ -12319,7 +12319,7 @@
 			(uuid "c04bfe9a-275c-45f0-9f7f-ca65f1c3c015")
 		)
 		(pad "K18" smd circle
-			(at 6 -0.4)
+			(at 6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A6")
@@ -12330,7 +12330,7 @@
 			(uuid "cead2d0d-a564-4813-8679-c3b355acf899")
 		)
 		(pad "K19" smd circle
-			(at 6.8 -0.4)
+			(at 6.8 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A5")
@@ -12341,7 +12341,7 @@
 			(uuid "74d9c1fe-f8b8-4a77-a904-873acab77d4f")
 		)
 		(pad "K20" smd circle
-			(at 7.6 -0.4)
+			(at 7.6 -0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A4")
@@ -12352,7 +12352,7 @@
 			(uuid "df619a9b-4b59-473b-995d-421d7b4f5857")
 		)
 		(pad "L1" smd circle
-			(at -7.6 0.4)
+			(at -7.6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO9")
@@ -12363,7 +12363,7 @@
 			(uuid "026b9887-8539-435f-9982-b8aae733cd0e")
 		)
 		(pad "L2" smd circle
-			(at -6.8 0.4)
+			(at -6.8 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO8")
@@ -12374,7 +12374,7 @@
 			(uuid "1bdd1495-8e50-4f9e-adeb-2fe060016113")
 		)
 		(pad "L3" smd circle
-			(at -6 0.4)
+			(at -6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_TXDEN")
@@ -12385,7 +12385,7 @@
 			(uuid "06114320-9081-43ff-8dff-1a3c8b78497e")
 		)
 		(pad "L4" smd circle
-			(at -5.2 0.4)
+			(at -5.2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_RXD")
@@ -12396,7 +12396,7 @@
 			(uuid "59df5bc7-f94e-4b39-94c2-49259874f715")
 		)
 		(pad "L5" smd circle
-			(at -4.4 0.4)
+			(at -4.4 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_nRXLED")
@@ -12407,7 +12407,7 @@
 			(uuid "a36e8ea8-ae6e-4562-9f52-6c0ef134f3a8")
 		)
 		(pad "L6" smd circle
-			(at -3.6 0.4)
+			(at -3.6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12418,7 +12418,7 @@
 			(uuid "91cb8271-91a0-43c2-8329-48cc06e95b75")
 		)
 		(pad "L7" smd circle
-			(at -2.8 0.4)
+			(at -2.8 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12429,7 +12429,7 @@
 			(uuid "8ef23b47-47b7-4d7a-907a-f542109f10ab")
 		)
 		(pad "L8" smd circle
-			(at -2 0.4)
+			(at -2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12440,7 +12440,7 @@
 			(uuid "2fcdce0b-6724-4e93-91f9-19d6321e1fc5")
 		)
 		(pad "L9" smd circle
-			(at -1.2 0.4)
+			(at -1.2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12451,7 +12451,7 @@
 			(uuid "598ab3a9-0391-4e90-ab62-099f4156f6c3")
 		)
 		(pad "L10" smd circle
-			(at -0.4 0.4)
+			(at -0.4 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12462,7 +12462,7 @@
 			(uuid "65ad6090-07df-4e3a-8348-e3a0a2384107")
 		)
 		(pad "L11" smd circle
-			(at 0.4 0.4)
+			(at 0.4 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12473,7 +12473,7 @@
 			(uuid "cc903885-959b-4968-93c7-4cdd5694df78")
 		)
 		(pad "L12" smd circle
-			(at 1.2 0.4)
+			(at 1.2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12484,7 +12484,7 @@
 			(uuid "a5d5a4e7-0eac-41e9-9ad4-6c94d29bd527")
 		)
 		(pad "L13" smd circle
-			(at 2 0.4)
+			(at 2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12495,7 +12495,7 @@
 			(uuid "b015f488-2afd-47e4-ac76-f8553b7a8d4b")
 		)
 		(pad "L14" smd circle
-			(at 2.8 0.4)
+			(at 2.8 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12506,7 +12506,7 @@
 			(uuid "bc4ba35e-21fa-4f80-8688-a66a1dc5cd81")
 		)
 		(pad "L15" smd circle
-			(at 3.6 0.4)
+			(at 3.6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12517,7 +12517,7 @@
 			(uuid "d96d20a8-d82e-4169-b020-1fc704dae5e4")
 		)
 		(pad "L16" smd circle
-			(at 4.4 0.4)
+			(at 4.4 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP17")
@@ -12528,7 +12528,7 @@
 			(uuid "db02d11f-aebb-4338-8c54-ac173dfdd45b")
 		)
 		(pad "L17" smd circle
-			(at 5.2 0.4)
+			(at 5.2 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN17")
@@ -12539,7 +12539,7 @@
 			(uuid "57f97d0b-345b-4a41-81a3-ea0669d51d31")
 		)
 		(pad "L18" smd circle
-			(at 6 0.4)
+			(at 6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D1")
@@ -12550,7 +12550,7 @@
 			(uuid "425156a5-1b96-4e31-81a8-4ff8bd1d5f36")
 		)
 		(pad "L19" smd circle
-			(at 6.8 0.4)
+			(at 6.8 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A3")
@@ -12561,7 +12561,7 @@
 			(uuid "4868100d-ca3a-4f46-ab10-7223caa59f06")
 		)
 		(pad "L20" smd circle
-			(at 7.6 0.4)
+			(at 7.6 0.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A2")
@@ -12572,7 +12572,7 @@
 			(uuid "eeb64c5a-0d65-4982-841d-609687a3afea")
 		)
 		(pad "M1" smd circle
-			(at -7.6 1.2)
+			(at -7.6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_TXD")
@@ -12583,7 +12583,7 @@
 			(uuid "3d87c161-d338-41c9-a850-15e6b84f261d")
 		)
 		(pad "M2" smd circle
-			(at -6.8 1.2)
+			(at -6.8 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12594,7 +12594,7 @@
 			(uuid "eaa2f27b-44d3-4ffa-8e77-8f05a89c8f7e")
 		)
 		(pad "M3" smd circle
-			(at -6 1.2)
+			(at -6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_nRTS")
@@ -12605,7 +12605,7 @@
 			(uuid "15b73255-63aa-4040-8baa-136d45c483bb")
 		)
 		(pad "M4" smd circle
-			(at -5.2 1.2)
+			(at -5.2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "USER_PROGRAMN")
@@ -12616,7 +12616,7 @@
 			(uuid "8a31683b-2d4d-4f98-9c4f-e65f81ad8d1d")
 		)
 		(pad "M5" smd circle
-			(at -4.4 1.2)
+			(at -4.4 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1E-PL77A-PadM5)")
@@ -12627,7 +12627,7 @@
 			(uuid "ab6b22a0-6ba0-4973-9224-72558161322a")
 		)
 		(pad "M6" smd circle
-			(at -3.6 1.2)
+			(at -3.6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12638,7 +12638,7 @@
 			(uuid "4a709a17-3879-4535-a9c0-ecd139121dd4")
 		)
 		(pad "M7" smd circle
-			(at -2.8 1.2)
+			(at -2.8 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12649,7 +12649,7 @@
 			(uuid "4e089b0e-24ef-4539-ac01-488bd23c1dad")
 		)
 		(pad "M8" smd circle
-			(at -2 1.2)
+			(at -2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12660,7 +12660,7 @@
 			(uuid "151d91f8-6457-4cc1-9d99-63c7dc8512ee")
 		)
 		(pad "M9" smd circle
-			(at -1.2 1.2)
+			(at -1.2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12671,7 +12671,7 @@
 			(uuid "93c85e42-ecae-4b4a-9d4c-0e994464403e")
 		)
 		(pad "M10" smd circle
-			(at -0.4 1.2)
+			(at -0.4 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12682,7 +12682,7 @@
 			(uuid "88bb2ac9-2339-40ec-aa9b-cf1280e99738")
 		)
 		(pad "M11" smd circle
-			(at 0.4 1.2)
+			(at 0.4 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12693,7 +12693,7 @@
 			(uuid "618ad854-db9e-4a14-bd3e-a2ea0f343018")
 		)
 		(pad "M12" smd circle
-			(at 1.2 1.2)
+			(at 1.2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12704,7 +12704,7 @@
 			(uuid "59aacbe1-7d0b-458f-a004-fca9b6e6ac57")
 		)
 		(pad "M13" smd circle
-			(at 2 1.2)
+			(at 2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12715,7 +12715,7 @@
 			(uuid "39cd8be1-8d4e-4841-8241-60496963f8cf")
 		)
 		(pad "M14" smd circle
-			(at 2.8 1.2)
+			(at 2.8 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12726,7 +12726,7 @@
 			(uuid "96a04ca2-3447-463c-b65d-879086179b9c")
 		)
 		(pad "M15" smd circle
-			(at 3.6 1.2)
+			(at 3.6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -12737,7 +12737,7 @@
 			(uuid "2b48300c-253d-458a-9f94-725ecb6aca19")
 		)
 		(pad "M16" smd circle
-			(at 4.4 1.2)
+			(at 4.4 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12748,7 +12748,7 @@
 			(uuid "1c32c89b-9c2f-4a8e-b2e8-5c9559cf2619")
 		)
 		(pad "M17" smd circle
-			(at 5.2 1.2)
+			(at 5.2 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "CAM_XCLK")
@@ -12759,7 +12759,7 @@
 			(uuid "8e48b4fc-2bf4-4014-a30a-07090d0966ff")
 		)
 		(pad "M18" smd circle
-			(at 6 1.2)
+			(at 6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D2")
@@ -12770,7 +12770,7 @@
 			(uuid "14619d8e-140d-4bc4-b55e-593c2c8dbe6c")
 		)
 		(pad "M19" smd circle
-			(at 6.8 1.2)
+			(at 6.8 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A1")
@@ -12781,7 +12781,7 @@
 			(uuid "02490379-c24b-4bcc-9360-d363561dfd13")
 		)
 		(pad "M20" smd circle
-			(at 7.6 1.2)
+			(at 7.6 1.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A0")
@@ -12792,7 +12792,7 @@
 			(uuid "c14a2e1f-e30e-4911-a901-402063b27cd4")
 		)
 		(pad "N1" smd circle
-			(at -7.6 2)
+			(at -7.6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "FTDI_nDTR")
@@ -12803,7 +12803,7 @@
 			(uuid "8a7e5b14-71c8-4f0b-a848-0b6e79dad8fd")
 		)
 		(pad "N2" smd circle
-			(at -6.8 2)
+			(at -6.8 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM5")
@@ -12814,7 +12814,7 @@
 			(uuid "41923cd2-0bb3-4f51-baf2-d8c53cf99e2e")
 		)
 		(pad "N3" smd circle
-			(at -6 2)
+			(at -6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO40")
@@ -12825,7 +12825,7 @@
 			(uuid "ffcf3984-df0e-487f-b1cd-31944436a4e6")
 		)
 		(pad "N4" smd circle
-			(at -5.2 2)
+			(at -5.2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "WIFI_GPIO6")
@@ -12836,7 +12836,7 @@
 			(uuid "7aaa5769-f734-4dc1-bb58-f8f00162747e")
 		)
 		(pad "N5" smd circle
-			(at -4.4 2)
+			(at -4.4 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_CD")
@@ -12847,7 +12847,7 @@
 			(uuid "8b21c512-084d-4a11-951f-2a784e225b9f")
 		)
 		(pad "N6" smd circle
-			(at -3.6 2)
+			(at -3.6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12858,7 +12858,7 @@
 			(uuid "935ff4c5-add1-49a1-85cf-e6688f8da342")
 		)
 		(pad "N7" smd circle
-			(at -2.8 2)
+			(at -2.8 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12869,7 +12869,7 @@
 			(uuid "4395887e-caab-4008-bd8c-3f80d32cc4ca")
 		)
 		(pad "N8" smd circle
-			(at -2 2)
+			(at -2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12880,7 +12880,7 @@
 			(uuid "b1c95b41-0db5-46fe-80b1-972d4eb38fef")
 		)
 		(pad "N9" smd circle
-			(at -1.2 2)
+			(at -1.2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12891,7 +12891,7 @@
 			(uuid "a06bac15-11c8-4117-b08e-907bacdf121e")
 		)
 		(pad "N10" smd circle
-			(at -0.4 2)
+			(at -0.4 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12902,7 +12902,7 @@
 			(uuid "17960de4-12ff-4c73-acb7-3e4ec1c04a52")
 		)
 		(pad "N11" smd circle
-			(at 0.4 2)
+			(at 0.4 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12913,7 +12913,7 @@
 			(uuid "e500402b-7f0e-4bfc-8cc1-001bacf67e19")
 		)
 		(pad "N12" smd circle
-			(at 1.2 2)
+			(at 1.2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12924,7 +12924,7 @@
 			(uuid "0a42c6e8-04a6-4fc0-a16c-d8f4eabfbdd6")
 		)
 		(pad "N13" smd circle
-			(at 2 2)
+			(at 2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+1V1")
@@ -12935,7 +12935,7 @@
 			(uuid "b16b910b-3cb0-4ee3-89ae-f15bcb2b303d")
 		)
 		(pad "N14" smd circle
-			(at 2.8 2)
+			(at 2.8 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12946,7 +12946,7 @@
 			(uuid "7b35a048-5b8a-40bd-85df-163dfa8beff9")
 		)
 		(pad "N15" smd circle
-			(at 3.6 2)
+			(at 3.6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -12957,7 +12957,7 @@
 			(uuid "2a5bf76b-6b0e-4e23-bd0a-ed34923ace54")
 		)
 		(pad "N16" smd circle
-			(at 4.4 2)
+			(at 4.4 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP16")
@@ -12968,7 +12968,7 @@
 			(uuid "e18a8734-0693-410d-a256-9f4ed24aaf60")
 		)
 		(pad "N17" smd circle
-			(at 5.2 2)
+			(at 5.2 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP15")
@@ -12979,7 +12979,7 @@
 			(uuid "02b98ef9-06ea-4d6f-8a29-189b5212a117")
 		)
 		(pad "N18" smd circle
-			(at 6 2)
+			(at 6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D3")
@@ -12990,7 +12990,7 @@
 			(uuid "a1d03a0b-c2c0-40e3-9cd9-749287b695bf")
 		)
 		(pad "N19" smd circle
-			(at 6.8 2)
+			(at 6.8 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_A10")
@@ -13001,7 +13001,7 @@
 			(uuid "1b993f30-f101-4849-9cfd-1ceb36a2931c")
 		)
 		(pad "N20" smd circle
-			(at 7.6 2)
+			(at 7.6 2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_BA1")
@@ -13012,7 +13012,7 @@
 			(uuid "19527156-2508-4bef-a2e4-6d75fee530eb")
 		)
 		(pad "P1" smd circle
-			(at -7.6 2.8)
+			(at -7.6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM1")
@@ -13023,7 +13023,7 @@
 			(uuid "a3374cea-dd9f-4764-b0e8-e0415e7533f1")
 		)
 		(pad "P2" smd circle
-			(at -6.8 2.8)
+			(at -6.8 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM2")
@@ -13034,7 +13034,7 @@
 			(uuid "cb2b8446-5367-4234-a024-eccb3fc5385b")
 		)
 		(pad "P3" smd circle
-			(at -6 2.8)
+			(at -6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM3")
@@ -13045,7 +13045,7 @@
 			(uuid "8266018a-0a14-47c3-af2d-b440c44b463b")
 		)
 		(pad "P4" smd circle
-			(at -5.2 2.8)
+			(at -5.2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SRV_PWM4")
@@ -13056,7 +13056,7 @@
 			(uuid "3ec60071-32fc-4fa9-b62a-136af5211a89")
 		)
 		(pad "P5" smd circle
-			(at -4.4 2.8)
+			(at -4.4 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SD_WP")
@@ -13067,7 +13067,7 @@
 			(uuid "1672afa9-ab41-4397-93bf-f102773f95c0")
 		)
 		(pad "P6" smd circle
-			(at -3.6 2.8)
+			(at -3.6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+2V5")
@@ -13078,7 +13078,7 @@
 			(uuid "0f348ea2-c5b3-4bec-900c-05c962e7628e")
 		)
 		(pad "P7" smd circle
-			(at -2.8 2.8)
+			(at -2.8 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13089,7 +13089,7 @@
 			(uuid "d7796b82-2761-4b86-ab5e-8d303177a96f")
 		)
 		(pad "P8" smd circle
-			(at -2 2.8)
+			(at -2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13100,7 +13100,7 @@
 			(uuid "0bb3089c-4d37-4f55-b35b-ea7cc2f7be32")
 		)
 		(pad "P9" smd circle
-			(at -1.2 2.8)
+			(at -1.2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13111,7 +13111,7 @@
 			(uuid "e6467b9e-792c-4482-aa4b-6d44c82a7b45")
 		)
 		(pad "P10" smd circle
-			(at -0.4 2.8)
+			(at -0.4 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13122,7 +13122,7 @@
 			(uuid "581830c5-5902-4bc7-8c70-682d1a7fb988")
 		)
 		(pad "P11" smd circle
-			(at 0.4 2.8)
+			(at 0.4 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13133,7 +13133,7 @@
 			(uuid "1afd205f-e00c-42d8-8daa-620cd43e5a6c")
 		)
 		(pad "P12" smd circle
-			(at 1.2 2.8)
+			(at 1.2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13144,7 +13144,7 @@
 			(uuid "c4a23dc8-af6f-4746-b16b-e3ee94ab4824")
 		)
 		(pad "P13" smd circle
-			(at 2 2.8)
+			(at 2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13155,7 +13155,7 @@
 			(uuid "96c59b4c-0123-49e5-b582-5f501c617f78")
 		)
 		(pad "P14" smd circle
-			(at 2.8 2.8)
+			(at 2.8 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13166,7 +13166,7 @@
 			(uuid "aafaab35-500d-4982-a79c-bb9e15e478d1")
 		)
 		(pad "P15" smd circle
-			(at 3.6 2.8)
+			(at 3.6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+2V5")
@@ -13177,7 +13177,7 @@
 			(uuid "6ba0ca49-923c-48a2-88b3-53c1f8325d6d")
 		)
 		(pad "P16" smd circle
-			(at 4.4 2.8)
+			(at 4.4 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN15")
@@ -13188,7 +13188,7 @@
 			(uuid "43b7e5c2-d472-4c1a-9d0b-d95379aacac8")
 		)
 		(pad "P17" smd circle
-			(at 5.2 2.8)
+			(at 5.2 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "ADC_SCLK")
@@ -13199,7 +13199,7 @@
 			(uuid "ddcd9b30-7cab-4fab-b8b6-db73bd5510b6")
 		)
 		(pad "P18" smd circle
-			(at 6 2.8)
+			(at 6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D4")
@@ -13210,7 +13210,7 @@
 			(uuid "838626c2-ce29-4d29-a17a-bd095c3dd564")
 		)
 		(pad "P19" smd circle
-			(at 6.8 2.8)
+			(at 6.8 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_BA0")
@@ -13221,7 +13221,7 @@
 			(uuid "37c8d7a3-d120-4e57-89c4-4087b1431b22")
 		)
 		(pad "P20" smd circle
-			(at 7.6 2.8)
+			(at 7.6 2.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_nCS")
@@ -13232,7 +13232,7 @@
 			(uuid "0daa125b-1fa7-48b3-ae16-fea91e9521b0")
 		)
 		(pad "R1" smd circle
-			(at -7.6 3.6)
+			(at -7.6 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_F1")
@@ -13243,7 +13243,7 @@
 			(uuid "78ba3436-3970-456f-befc-28240bfdbf14")
 		)
 		(pad "R2" smd circle
-			(at -6.8 3.6)
+			(at -6.8 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nCS")
@@ -13254,7 +13254,7 @@
 			(uuid "c5cfe603-bba7-43ec-b238-cf4565bf0bee")
 		)
 		(pad "R3" smd circle
-			(at -6 3.6)
+			(at -6 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1G-DOUT{slash}CSOn-PadR3)")
@@ -13265,7 +13265,7 @@
 			(uuid "c1d35a60-9d51-4976-abf2-d4fb268a848d")
 		)
 		(pad "R4" smd circle
-			(at -5.2 3.6)
+			(at -5.2 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13276,7 +13276,7 @@
 			(uuid "42281dca-463e-4f69-aa11-abd934438789")
 		)
 		(pad "R5" smd circle
-			(at -4.4 3.6)
+			(at -4.4 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "JTAG_TDI")
@@ -13287,7 +13287,7 @@
 			(uuid "3c47833c-7330-4e59-ba2d-dbd85083efc2")
 		)
 		(pad "R16" smd circle
-			(at 4.4 3.6)
+			(at 4.4 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "ADC_MOSI")
@@ -13298,7 +13298,7 @@
 			(uuid "390b9f25-9003-432d-8fd1-bf6c1a4c59bc")
 		)
 		(pad "R17" smd circle
-			(at 5.2 3.6)
+			(at 5.2 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "ADC_CSn")
@@ -13309,7 +13309,7 @@
 			(uuid "1575af06-edce-4264-bd12-9264e698826e")
 		)
 		(pad "R18" smd circle
-			(at 6 3.6)
+			(at 6 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_U")
@@ -13320,7 +13320,7 @@
 			(uuid "a62cf42f-1aee-45ff-8ab4-cce36264ae94")
 		)
 		(pad "R19" smd circle
-			(at 6.8 3.6)
+			(at 6.8 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13331,7 +13331,7 @@
 			(uuid "3013cf8f-5687-4425-b49d-30d7b1acae2e")
 		)
 		(pad "R20" smd circle
-			(at 7.6 3.6)
+			(at 7.6 3.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_nRAS")
@@ -13342,7 +13342,7 @@
 			(uuid "5ab102af-c712-4284-9773-653af976e937")
 		)
 		(pad "T1" smd circle
-			(at -7.6 4.4)
+			(at -7.6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_F2")
@@ -13353,7 +13353,7 @@
 			(uuid "37bec18c-c8a8-4c43-8611-f711ac04ea2f")
 		)
 		(pad "T2" smd circle
-			(at -6.8 4.4)
+			(at -6.8 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13364,7 +13364,7 @@
 			(uuid "1af1c564-b6d6-4c58-aced-216515385c60")
 		)
 		(pad "T3" smd circle
-			(at -6 4.4)
+			(at -6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13375,7 +13375,7 @@
 			(uuid "b48a8e22-bfde-4cc3-a75f-c110cd84feee")
 		)
 		(pad "T4" smd circle
-			(at -5.2 4.4)
+			(at -5.2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13386,7 +13386,7 @@
 			(uuid "06d4bb67-6a93-4e3b-94a9-e03f34476090")
 		)
 		(pad "T5" smd circle
-			(at -4.4 4.4)
+			(at -4.4 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "JTAG_TCK")
@@ -13397,7 +13397,7 @@
 			(uuid "6ed2d14c-79ff-4640-8cd4-b18bc79b15ef")
 		)
 		(pad "T6" smd circle
-			(at -3.6 4.4)
+			(at -3.6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13408,7 +13408,7 @@
 			(uuid "de556163-1089-4675-96f4-6d49e2e41c55")
 		)
 		(pad "T7" smd circle
-			(at -2.8 4.4)
+			(at -2.8 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13419,7 +13419,7 @@
 			(uuid "c1c20281-d14f-477e-aad8-ede27d2c6833")
 		)
 		(pad "T8" smd circle
-			(at -2 4.4)
+			(at -2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13430,7 +13430,7 @@
 			(uuid "9cf91165-7df3-4066-b659-9fa3a645782f")
 		)
 		(pad "T9" smd circle
-			(at -1.2 4.4)
+			(at -1.2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13441,7 +13441,7 @@
 			(uuid "701801ce-c656-4bbc-acd9-60b40ed312f2")
 		)
 		(pad "T10" smd circle
-			(at -0.4 4.4)
+			(at -0.4 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13452,7 +13452,7 @@
 			(uuid "d9a6cc81-f8e1-4f21-ae8e-ca99807609e0")
 		)
 		(pad "T11" smd circle
-			(at 0.4 4.4)
+			(at 0.4 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13463,7 +13463,7 @@
 			(uuid "525eae08-b820-4783-8056-79fa430720a3")
 		)
 		(pad "T12" smd circle
-			(at 1.2 4.4)
+			(at 1.2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13474,7 +13474,7 @@
 			(uuid "9f9c0a6e-b09b-4ea2-b83f-1155e72f1c25")
 		)
 		(pad "T13" smd circle
-			(at 2 4.4)
+			(at 2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13485,7 +13485,7 @@
 			(uuid "ff4e8254-19aa-46a9-a544-c622be0fa341")
 		)
 		(pad "T14" smd circle
-			(at 2.8 4.4)
+			(at 2.8 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13496,7 +13496,7 @@
 			(uuid "d7aae1e2-671c-477e-b8ad-2e82790cc631")
 		)
 		(pad "T15" smd circle
-			(at 3.6 4.4)
+			(at 3.6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13507,7 +13507,7 @@
 			(uuid "26f73474-5e7b-4663-bf4c-d30799b5580d")
 		)
 		(pad "T16" smd circle
-			(at 4.4 4.4)
+			(at 4.4 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1D-PR77A-PadT16)")
@@ -13518,7 +13518,7 @@
 			(uuid "a1a16b9e-f116-4145-839f-c26c64018177")
 		)
 		(pad "T17" smd circle
-			(at 5.2 4.4)
+			(at 5.2 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D6")
@@ -13529,7 +13529,7 @@
 			(uuid "e6b285c5-7e62-4fc3-b3e1-7904d593a6f8")
 		)
 		(pad "T18" smd circle
-			(at 6 4.4)
+			(at 6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D5")
@@ -13540,7 +13540,7 @@
 			(uuid "d59fcdbe-0e59-4a5c-b132-8e2de1bd34c0")
 		)
 		(pad "T19" smd circle
-			(at 6.8 4.4)
+			(at 6.8 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_nCAS")
@@ -13551,7 +13551,7 @@
 			(uuid "d1ea43eb-567e-44c1-8fc9-2f9887ebb28b")
 		)
 		(pad "T20" smd circle
-			(at 7.6 4.4)
+			(at 7.6 4.4 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_nWE")
@@ -13562,7 +13562,7 @@
 			(uuid "12f3036c-2094-463c-a121-8ca7bf6c4968")
 		)
 		(pad "U1" smd circle
-			(at -7.6 5.2)
+			(at -7.6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_L")
@@ -13573,7 +13573,7 @@
 			(uuid "61990e81-901f-467b-8da7-8aa1f42001d8")
 		)
 		(pad "U2" smd circle
-			(at -6.8 5.2)
+			(at -6.8 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -13584,7 +13584,7 @@
 			(uuid "7e04de75-a975-4ca7-8d2e-1ca09a4bfc6a")
 		)
 		(pad "U3" smd circle
-			(at -6 5.2)
+			(at -6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_SCK")
@@ -13595,7 +13595,7 @@
 			(uuid "c06d06bf-0174-4f06-9c62-fd58484ae98e")
 		)
 		(pad "U4" smd circle
-			(at -5.2 5.2)
+			(at -5.2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13606,7 +13606,7 @@
 			(uuid "24721213-c5da-4d61-97c7-3aab29fb7d11")
 		)
 		(pad "U5" smd circle
-			(at -4.4 5.2)
+			(at -4.4 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "JTAG_TMS")
@@ -13617,7 +13617,7 @@
 			(uuid "f4843fc1-b131-4279-85ec-23ba9d50a351")
 		)
 		(pad "U6" smd circle
-			(at -3.6 5.2)
+			(at -3.6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13628,7 +13628,7 @@
 			(uuid "e48e58eb-b9ab-423b-af82-2453f668d0f7")
 		)
 		(pad "U7" smd circle
-			(at -2.8 5.2)
+			(at -2.8 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13639,7 +13639,7 @@
 			(uuid "0933dcb8-1db3-4062-a41d-1c7c0abb26e9")
 		)
 		(pad "U8" smd circle
-			(at -2 5.2)
+			(at -2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13650,7 +13650,7 @@
 			(uuid "bc1412eb-6fbc-4e78-9521-cb03f984509c")
 		)
 		(pad "U9" smd circle
-			(at -1.2 5.2)
+			(at -1.2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13661,7 +13661,7 @@
 			(uuid "96edd401-2aea-46fc-8d11-7a04300a5e37")
 		)
 		(pad "U10" smd circle
-			(at -0.4 5.2)
+			(at -0.4 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13672,7 +13672,7 @@
 			(uuid "21467cee-4082-4373-8898-294334e8403d")
 		)
 		(pad "U11" smd circle
-			(at 0.4 5.2)
+			(at 0.4 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13683,7 +13683,7 @@
 			(uuid "b30847a4-d684-47b7-ac5b-1c62ea987a39")
 		)
 		(pad "U12" smd circle
-			(at 1.2 5.2)
+			(at 1.2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13694,7 +13694,7 @@
 			(uuid "ab916a55-922e-4633-8054-92aa1ed6c384")
 		)
 		(pad "U13" smd circle
-			(at 2 5.2)
+			(at 2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13705,7 +13705,7 @@
 			(uuid "e9696e0b-a159-4198-a870-6c0d2950bd84")
 		)
 		(pad "U14" smd circle
-			(at 2.8 5.2)
+			(at 2.8 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13716,7 +13716,7 @@
 			(uuid "b9c28745-5f46-468c-b288-beba1a6532db")
 		)
 		(pad "U15" smd circle
-			(at 3.6 5.2)
+			(at 3.6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13727,7 +13727,7 @@
 			(uuid "e2e66ca0-7d91-4ac1-92f5-043819cbb82e")
 		)
 		(pad "U16" smd circle
-			(at 4.4 5.2)
+			(at 4.4 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "ADC_MISO")
@@ -13738,7 +13738,7 @@
 			(uuid "0a87a63a-fe50-4cf1-bb1a-981bc87a33d3")
 		)
 		(pad "U17" smd circle
-			(at 5.2 5.2)
+			(at 5.2 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GN14")
@@ -13749,7 +13749,7 @@
 			(uuid "a06cf828-c15e-410c-a797-3755df46626a")
 		)
 		(pad "U18" smd circle
-			(at 6 5.2)
+			(at 6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GP14")
@@ -13760,7 +13760,7 @@
 			(uuid "454bc08f-37f8-4a67-8f20-1e0be02afd6f")
 		)
 		(pad "U19" smd circle
-			(at 6.8 5.2)
+			(at 6.8 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_DQM0")
@@ -13771,7 +13771,7 @@
 			(uuid "6ee578ae-bcfb-4da4-b9ad-84293a0fd787")
 		)
 		(pad "U20" smd circle
-			(at 7.6 5.2)
+			(at 7.6 5.2 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "SDRAM_D7")
@@ -13782,7 +13782,7 @@
 			(uuid "e4752916-c635-4b6c-b068-88d9cf1af8a7")
 		)
 		(pad "V1" smd circle
-			(at -7.6 6)
+			(at -7.6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "BTN_D")
@@ -13793,7 +13793,7 @@
 			(uuid "914eb044-80f3-4376-92e2-a3ac5f5c6372")
 		)
 		(pad "V2" smd circle
-			(at -6.8 6)
+			(at -6.8 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_MISO")
@@ -13804,7 +13804,7 @@
 			(uuid "93ba1f0c-37a8-40a6-ba6b-44ed1ce944cf")
 		)
 		(pad "V3" smd circle
-			(at -6 6)
+			(at -6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FPGA_INITN")
@@ -13815,7 +13815,7 @@
 			(uuid "01bb0bf2-515f-4511-929a-f4c1a9e8482f")
 		)
 		(pad "V4" smd circle
-			(at -5.2 6)
+			(at -5.2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "JTAG_TDO")
@@ -13826,7 +13826,7 @@
 			(uuid "efbebc3f-1dd3-4d0f-82ec-1f6f99bea543")
 		)
 		(pad "V5" smd circle
-			(at -4.4 6)
+			(at -4.4 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13837,7 +13837,7 @@
 			(uuid "6430ca63-99ef-4ea9-a203-2800ad236816")
 		)
 		(pad "V6" smd circle
-			(at -3.6 6)
+			(at -3.6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13848,7 +13848,7 @@
 			(uuid "0b2448f9-ed25-4f10-bb68-7ad1c8f2ec26")
 		)
 		(pad "V7" smd circle
-			(at -2.8 6)
+			(at -2.8 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13859,7 +13859,7 @@
 			(uuid "5f326e7c-76e1-4975-9c37-9fbfadd8c379")
 		)
 		(pad "V8" smd circle
-			(at -2 6)
+			(at -2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13870,7 +13870,7 @@
 			(uuid "a4209a27-f64f-46d1-8a2a-88a62d9a41ac")
 		)
 		(pad "V9" smd circle
-			(at -1.2 6)
+			(at -1.2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13881,7 +13881,7 @@
 			(uuid "bc828e39-d9ec-4e30-a503-81f1b57e0094")
 		)
 		(pad "V10" smd circle
-			(at -0.4 6)
+			(at -0.4 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13892,7 +13892,7 @@
 			(uuid "77da0d99-1560-4d02-b932-16ca6b64100a")
 		)
 		(pad "V11" smd circle
-			(at 0.4 6)
+			(at 0.4 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13903,7 +13903,7 @@
 			(uuid "ec394cab-79f9-47c7-bfa6-a934fd346a5e")
 		)
 		(pad "V12" smd circle
-			(at 1.2 6)
+			(at 1.2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13914,7 +13914,7 @@
 			(uuid "a92e3aa8-59c5-400c-a0d1-a0ef8ffbe018")
 		)
 		(pad "V13" smd circle
-			(at 2 6)
+			(at 2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13925,7 +13925,7 @@
 			(uuid "8805d722-da9c-4f22-bd96-6c2209e10bb9")
 		)
 		(pad "V14" smd circle
-			(at 2.8 6)
+			(at 2.8 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13936,7 +13936,7 @@
 			(uuid "ccb12ec8-a8fc-44e0-9d21-dfc41bcab917")
 		)
 		(pad "V15" smd circle
-			(at 3.6 6)
+			(at 3.6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13947,7 +13947,7 @@
 			(uuid "0118cec1-d2dd-4040-9326-8ee60b907b5d")
 		)
 		(pad "V16" smd circle
-			(at 4.4 6)
+			(at 4.4 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13958,7 +13958,7 @@
 			(uuid "62155275-5e9c-4685-a411-1b4ca509060b")
 		)
 		(pad "V17" smd circle
-			(at 5.2 6)
+			(at 5.2 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13969,7 +13969,7 @@
 			(uuid "2f38dc88-0753-47b0-ac0b-286de39e52e1")
 		)
 		(pad "V18" smd circle
-			(at 6 6)
+			(at 6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13980,7 +13980,7 @@
 			(uuid "d4571ffa-17bf-4a5b-99c7-2fa45627925f")
 		)
 		(pad "V19" smd circle
-			(at 6.8 6)
+			(at 6.8 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -13991,7 +13991,7 @@
 			(uuid "d6205d97-e6c7-47f8-a575-c64a2a50acd9")
 		)
 		(pad "V20" smd circle
-			(at 7.6 6)
+			(at 7.6 6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14002,7 +14002,7 @@
 			(uuid "cc8f2627-dd27-4565-96d9-4cb22e1fd04a")
 		)
 		(pad "W1" smd circle
-			(at -7.6 6.8)
+			(at -7.6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nHOLD")
@@ -14013,7 +14013,7 @@
 			(uuid "871ee82c-860d-4402-94d9-c07a7a77febb")
 		)
 		(pad "W2" smd circle
-			(at -6.8 6.8)
+			(at -6.8 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_MOSI")
@@ -14024,7 +14024,7 @@
 			(uuid "fb98137f-d978-412f-b17e-c08be1ee46f7")
 		)
 		(pad "W3" smd circle
-			(at -6 6.8)
+			(at -6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FPGA_PROGRAMN")
@@ -14035,7 +14035,7 @@
 			(uuid "15192dd3-39c2-49ba-b24b-7b3108e90823")
 		)
 		(pad "W4" smd circle
-			(at -5.2 6.8)
+			(at -5.2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXP0_D0CH0-PadW4)")
@@ -14046,7 +14046,7 @@
 			(uuid "3f826c1f-30c8-4e2b-a7bd-7195261170ce")
 		)
 		(pad "W5" smd circle
-			(at -4.4 6.8)
+			(at -4.4 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXN0_D0CH0-PadW5)")
@@ -14057,7 +14057,7 @@
 			(uuid "55021b9b-eeed-4ea7-8c9d-fb91d082d7ce")
 		)
 		(pad "W6" smd circle
-			(at -3.6 6.8)
+			(at -3.6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14068,7 +14068,7 @@
 			(uuid "5aab0c57-4ec0-4b24-bfe8-8d8f12a82bcb")
 		)
 		(pad "W7" smd circle
-			(at -2.8 6.8)
+			(at -2.8 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14079,7 +14079,7 @@
 			(uuid "b3bedea0-bf3c-4621-9c04-f54aeefac469")
 		)
 		(pad "W8" smd circle
-			(at -2 6.8)
+			(at -2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXP0_D0CH1-PadW8)")
@@ -14090,7 +14090,7 @@
 			(uuid "9ede7c24-88f4-47b1-bce3-ac8bef4ce40b")
 		)
 		(pad "W9" smd circle
-			(at -1.2 6.8)
+			(at -1.2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXN0_D0CH1-PadW9)")
@@ -14101,7 +14101,7 @@
 			(uuid "bdb59767-6aad-4b28-a3fc-3c3725a6f42d")
 		)
 		(pad "W10" smd circle
-			(at -0.4 6.8)
+			(at -0.4 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(solder_mask_margin 0.05)
@@ -14109,7 +14109,7 @@
 			(uuid "9a387f71-b1df-499f-b01b-76c08247910b")
 		)
 		(pad "W11" smd circle
-			(at 0.4 6.8)
+			(at 0.4 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(solder_mask_margin 0.05)
@@ -14117,7 +14117,7 @@
 			(uuid "4c5e3368-bff9-49f4-a9b5-1caf0bd56122")
 		)
 		(pad "W12" smd circle
-			(at 1.2 6.8)
+			(at 1.2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14128,7 +14128,7 @@
 			(uuid "d77504bd-d593-4e88-9bae-d68f4a05468b")
 		)
 		(pad "W13" smd circle
-			(at 2 6.8)
+			(at 2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXP0_D1CH0-PadW13)")
@@ -14139,7 +14139,7 @@
 			(uuid "9680dd8f-e5e2-44bc-87fd-836cfe547a43")
 		)
 		(pad "W14" smd circle
-			(at 2.8 6.8)
+			(at 2.8 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXN0_D1CH0-PadW14)")
@@ -14150,7 +14150,7 @@
 			(uuid "e24c8cc8-021e-42b6-a959-be78789f361c")
 		)
 		(pad "W15" smd circle
-			(at 3.6 6.8)
+			(at 3.6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14161,7 +14161,7 @@
 			(uuid "4ab9ded2-ca1f-45a5-aabc-62bdc005dbe5")
 		)
 		(pad "W16" smd circle
-			(at 4.4 6.8)
+			(at 4.4 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14172,7 +14172,7 @@
 			(uuid "5b92e407-9dbc-45eb-8707-543b0e2f50a8")
 		)
 		(pad "W17" smd circle
-			(at 5.2 6.8)
+			(at 5.2 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXP0_D1CH1-PadW17)")
@@ -14183,7 +14183,7 @@
 			(uuid "94e3c597-8865-4ad4-9642-0b72112c709d")
 		)
 		(pad "W18" smd circle
-			(at 6 6.8)
+			(at 6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "unconnected-(U1H-HDTXN0_D1CH1-PadW18)")
@@ -14194,7 +14194,7 @@
 			(uuid "e22034a9-2a69-432c-83c0-92da82be12a1")
 		)
 		(pad "W19" smd circle
-			(at 6.8 6.8)
+			(at 6.8 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14205,7 +14205,7 @@
 			(uuid "87966a14-20a3-4b54-8cf2-148e95325f3b")
 		)
 		(pad "W20" smd circle
-			(at 7.6 6.8)
+			(at 7.6 6.8 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14216,55 +14216,55 @@
 			(uuid "4176a4e8-efc6-485f-b603-e950052a36ad")
 		)
 		(pad "X" smd oval
-			(at -8.5 -8.5)
+			(at -8.5 -8.5 180)
 			(size 0.127 0.508)
 			(layers "F.Cu" "F.Mask")
 			(uuid "90bbd11e-b092-4316-bf9f-d1551a5ba9a5")
 		)
 		(pad "X" smd oval
-			(at -8.5 -8.5)
+			(at -8.5 -8.5 180)
 			(size 0.508 0.127)
 			(layers "F.Cu" "F.Mask")
 			(uuid "ba755c6d-05cf-4f3e-9692-0bb78fe440c4")
 		)
 		(pad "X" smd oval
-			(at -8.5 8.5)
+			(at -8.5 8.5 180)
 			(size 0.127 0.508)
 			(layers "F.Cu" "F.Mask")
 			(uuid "4aab5b71-9ff6-4859-ad34-95ff8a48f864")
 		)
 		(pad "X" smd oval
-			(at -8.5 8.5)
+			(at -8.5 8.5 180)
 			(size 0.508 0.127)
 			(layers "F.Cu" "F.Mask")
 			(uuid "f5fb9bc2-7354-4a2b-9f11-10d733419e0c")
 		)
 		(pad "X" smd oval
-			(at 8.5 -8.5)
+			(at 8.5 -8.5 180)
 			(size 0.127 0.508)
 			(layers "F.Cu" "F.Mask")
 			(uuid "729cf90c-b8e8-4c44-a5d5-441b775c3a39")
 		)
 		(pad "X" smd oval
-			(at 8.5 -8.5)
+			(at 8.5 -8.5 180)
 			(size 0.508 0.127)
 			(layers "F.Cu" "F.Mask")
 			(uuid "95ecf106-43ff-44ad-a351-839d2a6e0a49")
 		)
 		(pad "X" smd oval
-			(at 8.5 8.5)
+			(at 8.5 8.5 180)
 			(size 0.127 0.508)
 			(layers "F.Cu" "F.Mask")
 			(uuid "5dd0b0b9-a3d5-42fd-8c61-e741fef9e773")
 		)
 		(pad "X" smd oval
-			(at 8.5 8.5)
+			(at 8.5 8.5 180)
 			(size 0.508 0.127)
 			(layers "F.Cu" "F.Mask")
 			(uuid "1a802bb8-b192-4e4e-b3a7-02a9e34bdc79")
 		)
 		(pad "Y2" smd circle
-			(at -6.8 7.6)
+			(at -6.8 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nWP")
@@ -14275,7 +14275,7 @@
 			(uuid "0ab58672-34f8-4f97-a241-2a8b8f508e3d")
 		)
 		(pad "Y3" smd circle
-			(at -6 7.6)
+			(at -6 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FPGA_DONE")
@@ -14286,7 +14286,7 @@
 			(uuid "11aa6eca-bd4b-4b34-ad98-d433e3c773ed")
 		)
 		(pad "Y5" smd circle
-			(at -4.4 7.6)
+			(at -4.4 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14297,7 +14297,7 @@
 			(uuid "d5c5dc72-10f8-4d4f-b01d-b2e2b5d72718")
 		)
 		(pad "Y6" smd circle
-			(at -3.6 7.6)
+			(at -3.6 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14308,7 +14308,7 @@
 			(uuid "3acf2de6-d3fc-4747-88c2-5e5a70a41eaf")
 		)
 		(pad "Y7" smd circle
-			(at -2.8 7.6)
+			(at -2.8 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14319,7 +14319,7 @@
 			(uuid "439a2116-3bca-4a7f-9e84-31652e9ecf7a")
 		)
 		(pad "Y8" smd circle
-			(at -2 7.6)
+			(at -2 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14330,7 +14330,7 @@
 			(uuid "30286358-ee0f-4d5b-b751-3d1b9f00385a")
 		)
 		(pad "Y11" smd circle
-			(at 0.4 7.6)
+			(at 0.4 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14341,7 +14341,7 @@
 			(uuid "dcf472fa-9c8b-47ed-ab0b-fa053f5b5984")
 		)
 		(pad "Y12" smd circle
-			(at 1.2 7.6)
+			(at 1.2 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14352,7 +14352,7 @@
 			(uuid "012c07b8-e707-4d4c-aed4-5ada6224d842")
 		)
 		(pad "Y14" smd circle
-			(at 2.8 7.6)
+			(at 2.8 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14363,7 +14363,7 @@
 			(uuid "52985e3e-77cc-42ef-b6f4-0ea8ef29d425")
 		)
 		(pad "Y15" smd circle
-			(at 3.6 7.6)
+			(at 3.6 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14374,7 +14374,7 @@
 			(uuid "82b1d1f8-aa6b-4cf6-bfbb-219e109666b3")
 		)
 		(pad "Y16" smd circle
-			(at 4.4 7.6)
+			(at 4.4 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14385,7 +14385,7 @@
 			(uuid "e9b1153e-85f3-4ef3-b80a-a036c1469f3a")
 		)
 		(pad "Y17" smd circle
-			(at 5.2 7.6)
+			(at 5.2 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -14396,7 +14396,7 @@
 			(uuid "4ef67a35-d758-4121-9604-fb6a03655145")
 		)
 		(pad "Y19" smd circle
-			(at 6.8 7.6)
+			(at 6.8 7.6 180)
 			(size 0.4 0.4)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -15057,11 +15057,11 @@
 	(footprint "SOA008-150mil:SOA008-150-208mil"
 		(layer "F.Cu")
 		(uuid "229d69ed-99a6-4fca-963c-814076867ab4")
-		(at 81.745 158.985)
+		(at 107 75.5 180)
 		(descr "Cypress SOA008 SOIC-8 150/208 mil")
 		(tags "SOA008 SOIC-8 1.27 150 208 mil")
 		(property "Reference" "U10"
-			(at 3.175 4.445 270)
+			(at 3.175 4.445 90)
 			(layer "F.SilkS")
 			(uuid "8accb4e1-acd1-4ee5-90d4-02579ab6e957")
 			(effects
@@ -15072,7 +15072,7 @@
 			)
 		)
 		(property "Value" "IS25LP128F-JBLE"
-			(at -0.018 3.668 180)
+			(at -0.018 3.668 0)
 			(layer "F.Fab")
 			(uuid "85b3d395-3043-4ad7-b979-acece1c108af")
 			(effects
@@ -15083,7 +15083,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.issi.com/WW/pdf/25LP-WP128F.pdf"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "400e6021-360a-473e-b744-e4597c92ec4f")
@@ -15094,7 +15094,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "482bd528-478a-4398-819f-78aa114320ed")
@@ -15105,7 +15105,7 @@
 			)
 		)
 		(property "MNF1_URL" "www.issi.com"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15118,7 +15118,7 @@
 			)
 		)
 		(property "MPN" "IS25LP128F-JBLE"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15131,7 +15131,7 @@
 			)
 		)
 		(property "MNF2_URL" "www.issi.com"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15144,7 +15144,7 @@
 			)
 		)
 		(property "Datasheet2" "http://www.issi.com/WW/pdf/25LP-WP032D.pdf"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15157,7 +15157,7 @@
 			)
 		)
 		(property "MPN2" "IS25LP032D-JNLE-TR"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15170,7 +15170,7 @@
 			)
 		)
 		(property "MNF3_URL" "www.issi.com"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15183,7 +15183,7 @@
 			)
 		)
 		(property "MPN3" "IS25LP032D-JNLA3"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15196,7 +15196,7 @@
 			)
 		)
 		(property "Dtasheet4" "https://www.winbond.com/resource-files/w25q128jv%20spi%20revc%2011162016.pdf"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15209,7 +15209,7 @@
 			)
 		)
 		(property "MNF4_URL" "www.winbond.com"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15222,7 +15222,7 @@
 			)
 		)
 		(property "MPN4" "W25Q128JVSIM"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15235,7 +15235,7 @@
 			)
 		)
 		(property "Mouser" "454-W25Q128JVSIMTR"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15248,7 +15248,7 @@
 			)
 		)
 		(property "Mouse_1r" "727-S25FL128LAMFV013"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15261,7 +15261,7 @@
 			)
 		)
 		(property "Mouse_r3" "454-W25Q128JVSIQTR"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15274,7 +15274,7 @@
 			)
 		)
 		(property "Digikey" "W25Q128JVSIQCT-ND "
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15287,7 +15287,7 @@
 			)
 		)
 		(property "Digike_y2" "IS25LP128F-JBLE-ND"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15300,7 +15300,7 @@
 			)
 		)
 		(property "Digike_y3" "706-1607-1-ND"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15313,7 +15313,7 @@
 			)
 		)
 		(property "Newark" "38AC3510"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15326,7 +15326,7 @@
 			)
 		)
 		(property "LCSC" "C113767"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15339,7 +15339,7 @@
 			)
 		)
 		(property "price100_LCSC" "0.7796$"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15352,7 +15352,7 @@
 			)
 		)
 		(property "LowCost" "870-IS25LP032DJBLETR"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15365,7 +15365,7 @@
 			)
 		)
 		(property "Koncar" "FU003"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15390,14 +15390,14 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.635 -2.54)
-			(end -4.318 -2.54)
+			(start 2.286 2.54)
+			(end -2.286 2.54)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4a92a566-8eee-45c1-9e27-f7d97bae4c1a")
+			(uuid "3d605616-4f7d-4a1d-9544-3d8186e7513f")
 		)
 		(fp_line
 			(start 0.635 -2.54)
@@ -15410,14 +15410,14 @@
 			(uuid "2438a36a-5bf8-43a4-b99e-eb8753bbe3fc")
 		)
 		(fp_line
-			(start 2.286 2.54)
-			(end -2.286 2.54)
+			(start -0.635 -2.54)
+			(end -4.318 -2.54)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3d605616-4f7d-4a1d-9544-3d8186e7513f")
+			(uuid "4a92a566-8eee-45c1-9e27-f7d97bae4c1a")
 		)
 		(fp_arc
 			(start 0.635 -2.54)
@@ -15431,24 +15431,14 @@
 			(uuid "eb761a89-2e64-49f7-b371-b7b62927de4c")
 		)
 		(fp_line
-			(start -3.75 -2.75)
-			(end -3.75 2.75)
+			(start 3.75 -2.75)
+			(end 3.75 2.75)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "9b234816-2d9e-4f32-a4fc-2f857de5806b")
-		)
-		(fp_line
-			(start -3.75 -2.75)
-			(end 3.75 -2.75)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "35375918-6858-424e-acdf-2d8093a7eae0")
+			(uuid "12ab0dda-5b2e-459d-8538-6dfafaaff7b1")
 		)
 		(fp_line
 			(start -3.75 2.75)
@@ -15461,44 +15451,34 @@
 			(uuid "a8ae4d2f-d27a-47ed-a018-419d17c836a3")
 		)
 		(fp_line
-			(start 3.75 -2.75)
-			(end 3.75 2.75)
+			(start -3.75 -2.75)
+			(end 3.75 -2.75)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "12ab0dda-5b2e-459d-8538-6dfafaaff7b1")
+			(uuid "35375918-6858-424e-acdf-2d8093a7eae0")
 		)
 		(fp_line
-			(start -1.95 -1.45)
-			(end -0.95 -2.45)
+			(start -3.75 -2.75)
+			(end -3.75 2.75)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "9b234816-2d9e-4f32-a4fc-2f857de5806b")
+		)
+		(fp_line
+			(start 1.95 2.45)
+			(end -1.95 2.45)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "b0cd242a-e5ea-4e6c-8d1d-d34c8238eb09")
-		)
-		(fp_line
-			(start -1.95 2.45)
-			(end -1.95 -1.45)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "af031b41-9247-4d9f-a874-75cdfeecd587")
-		)
-		(fp_line
-			(start -0.95 -2.45)
-			(end 1.95 -2.45)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "d1664e81-07e5-4372-9aed-e4643e4b963a")
+			(uuid "c65d37d5-0f6b-45f0-95af-a7fe2ffc10d5")
 		)
 		(fp_line
 			(start 1.95 -2.45)
@@ -15511,17 +15491,37 @@
 			(uuid "e102f9ac-b154-4f02-840e-7f6b99863945")
 		)
 		(fp_line
-			(start 1.95 2.45)
-			(end -1.95 2.45)
+			(start -0.95 -2.45)
+			(end 1.95 -2.45)
 			(stroke
 				(width 0.15)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "c65d37d5-0f6b-45f0-95af-a7fe2ffc10d5")
+			(uuid "d1664e81-07e5-4372-9aed-e4643e4b963a")
+		)
+		(fp_line
+			(start -1.95 2.45)
+			(end -1.95 -1.45)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "af031b41-9247-4d9f-a874-75cdfeecd587")
+		)
+		(fp_line
+			(start -1.95 -1.45)
+			(end -0.95 -2.45)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "b0cd242a-e5ea-4e6c-8d1d-d34c8238eb09")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(uuid "b23bedb1-da6b-4e94-874c-115ff8d18312")
 			(effects
@@ -15532,7 +15532,7 @@
 			)
 		)
 		(pad "1" smd rect
-			(at -3.302 -1.905)
+			(at -3.302 -1.905 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nCS")
@@ -15541,7 +15541,7 @@
 			(uuid "75ec68c1-5606-4a76-bada-a951792ca3f8")
 		)
 		(pad "2" smd oval
-			(at -3.302 -0.635)
+			(at -3.302 -0.635 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_MISO")
@@ -15550,7 +15550,7 @@
 			(uuid "6458f3f1-b07f-427e-aaf3-df9dbce2b72e")
 		)
 		(pad "3" smd oval
-			(at -3.302 0.635)
+			(at -3.302 0.635 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nWP")
@@ -15559,7 +15559,7 @@
 			(uuid "c115391f-c014-4897-bf84-ad76b4b5c33a")
 		)
 		(pad "4" smd oval
-			(at -3.302 1.905)
+			(at -3.302 1.905 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "GND")
@@ -15568,7 +15568,7 @@
 			(uuid "cd2c3264-c8b4-4067-814c-f2d8f77d2fc9")
 		)
 		(pad "5" smd oval
-			(at 3.302 1.905)
+			(at 3.302 1.905 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_MOSI")
@@ -15577,7 +15577,7 @@
 			(uuid "fbf31af8-d8c8-4061-8b3a-f673d726a170")
 		)
 		(pad "6" smd oval
-			(at 3.302 0.635)
+			(at 3.302 0.635 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_SCK")
@@ -15586,7 +15586,7 @@
 			(uuid "742a6044-97d4-4572-a996-82abac350919")
 		)
 		(pad "7" smd oval
-			(at 3.302 -0.635)
+			(at 3.302 -0.635 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "/flash/FLASH_nHOLD")
@@ -15595,7 +15595,7 @@
 			(uuid "9484e74d-e560-43fa-b0a7-9c174eb53fbf")
 		)
 		(pad "8" smd oval
-			(at 3.302 -1.905)
+			(at 3.302 -1.905 180)
 			(size 2.1 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net "+3V3")
@@ -24045,7 +24045,7 @@
 	(footprint "oscxo:Crystal_SMD_7050_4Pads"
 		(layer "F.Cu")
 		(uuid "46870fd0-1fc9-45ac-b108-efb0fc545419")
-		(at 89.915 240.475)
+		(at 103 103.5)
 		(descr "Crystal oscillator, 7.0x5.0mm, 4 Pads")
 		(tags "crystal oscillator quartz SMD SMT 7050")
 		(property "Reference" "Y1"
@@ -36620,7 +36620,7 @@
 	(footprint "TSOP54:TSOP54"
 		(layer "F.Cu")
 		(uuid "856dac1a-401d-440a-89cb-884e611db15b")
-		(at 84.28 222.145)
+		(at 95 68)
 		(descr "TSOPII-54: Plastic Thin Small Outline Package; 54 leads; body width 10.16mm; (see 128m-as4c4m32s-tsopii.pdf and http://www.infineon.com/cms/packages/SMD_-_Surface_Mounted_Devices/P-PG-TSOPII/P-TSOPII-54-1.html)")
 		(tags "TSOPII 0.8")
 		(property "Reference" "U2"
@@ -38509,7 +38509,7 @@
 	(footprint "RF_Module:ESP32-S3-WROOM-1"
 		(layer "F.Cu")
 		(uuid "8b0625bb-f5c2-4476-b9d5-36d642fec5bc")
-		(at 101.995 287.325)
+		(at 144 68.25)
 		(descr "2.4 GHz Wi-Fi and Bluetooth module  https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf")
 		(tags "2.4 GHz Wi-Fi and Bluetooth module")
 		(property "Reference" "U9"
@@ -39456,7 +39456,7 @@
 			)
 			(polygon
 				(pts
-					(xy 77.995 280.575) (xy 125.995 280.575) (xy 125.995 259.575) (xy 77.995 259.575)
+					(xy 120 61.5) (xy 168 61.5) (xy 168 40.5) (xy 120 40.5)
 				)
 			)
 		)
@@ -45963,11 +45963,11 @@
 	(footprint "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "adb740ac-271e-49f9-99cb-05a9b881e305")
-		(at 82.305 239.145)
+		(at 115 78.5 90)
 		(descr "Through hole straight socket strip, 2x03, 2.54mm pitch, double rows (from Kicad 4.0.7), script generated")
 		(tags "Through hole socket strip THT 2x03 2.54mm double row")
 		(property "Reference" "J4"
-			(at -1.27 -2.77 0)
+			(at -1.27 -2.77 90)
 			(layer "F.SilkS")
 			(uuid "0f895331-1476-4838-890b-b2a1e0622293")
 			(effects
@@ -45978,7 +45978,7 @@
 			)
 		)
 		(property "Value" "CONN_02X03"
-			(at -1.27 7.85 0)
+			(at -1.27 7.85 90)
 			(layer "F.Fab")
 			(uuid "b2c28cb9-6872-4747-84dc-32a0dda884e4")
 			(effects
@@ -45989,7 +45989,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7f4a2422-b5c4-4cfe-8f30-fdcef14c6639")
@@ -46000,7 +46000,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "192519ad-66e0-4486-acca-237a0c7eb16e")
@@ -46011,7 +46011,7 @@
 			)
 		)
 		(property "KiLib_Generator" "connector/pin_header_socket"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e2e1036f-a90e-49f7-aea2-8818207ca7b3")
@@ -46023,7 +46023,7 @@
 			)
 		)
 		(property "Note" "Leave empty"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -46036,7 +46036,7 @@
 			)
 		)
 		(property "Side" "T"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -46061,54 +46061,14 @@
 		(attr through_hole dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -3.87 -1.33)
-			(end -3.87 6.41)
+			(start 1.33 -1.33)
+			(end 1.33 0)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "9e8b611f-7454-4911-8faf-54d2ab5157e8")
-		)
-		(fp_line
-			(start -3.87 -1.33)
-			(end -1.27 -1.33)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "c3134f4f-9ed6-436e-9e6d-934140f0cbfe")
-		)
-		(fp_line
-			(start -3.87 6.41)
-			(end 1.33 6.41)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "c8fa9236-a978-4d7a-be3a-35d0d5229176")
-		)
-		(fp_line
-			(start -1.27 -1.33)
-			(end -1.27 1.27)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "39cc7801-4d24-4c32-acae-f7ee4c856e73")
-		)
-		(fp_line
-			(start -1.27 1.27)
-			(end 1.33 1.27)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "8e772554-624d-40d3-9167-e652689d168d")
+			(uuid "17f9f5d4-f83c-4099-9e0d-4b49e4619544")
 		)
 		(fp_line
 			(start 0 -1.33)
@@ -46121,14 +46081,34 @@
 			(uuid "fb95ffae-5b88-4424-8047-5bcbbeceff70")
 		)
 		(fp_line
-			(start 1.33 -1.33)
-			(end 1.33 0)
+			(start -1.27 -1.33)
+			(end -1.27 1.27)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "17f9f5d4-f83c-4099-9e0d-4b49e4619544")
+			(uuid "39cc7801-4d24-4c32-acae-f7ee4c856e73")
+		)
+		(fp_line
+			(start -3.87 -1.33)
+			(end -1.27 -1.33)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "c3134f4f-9ed6-436e-9e6d-934140f0cbfe")
+		)
+		(fp_line
+			(start -3.87 -1.33)
+			(end -3.87 6.41)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "9e8b611f-7454-4911-8faf-54d2ab5157e8")
 		)
 		(fp_line
 			(start 1.33 1.27)
@@ -46141,24 +46121,24 @@
 			(uuid "982002b4-180a-4d25-bb9a-97e54bb95c76")
 		)
 		(fp_line
-			(start -4.31 -1.77)
-			(end 1.77 -1.77)
+			(start -1.27 1.27)
+			(end 1.33 1.27)
 			(stroke
-				(width 0.05)
+				(width 0.12)
 				(type solid)
 			)
-			(layer "F.CrtYd")
-			(uuid "3119b954-96e5-427d-937c-80a231d8edef")
+			(layer "F.SilkS")
+			(uuid "8e772554-624d-40d3-9167-e652689d168d")
 		)
 		(fp_line
-			(start -4.31 6.85)
-			(end -4.31 -1.77)
+			(start -3.87 6.41)
+			(end 1.33 6.41)
 			(stroke
-				(width 0.05)
+				(width 0.12)
 				(type solid)
 			)
-			(layer "F.CrtYd")
-			(uuid "635d54bd-d4cb-4963-9c75-2973aab1aeca")
+			(layer "F.SilkS")
+			(uuid "c8fa9236-a978-4d7a-be3a-35d0d5229176")
 		)
 		(fp_line
 			(start 1.77 -1.77)
@@ -46171,6 +46151,16 @@
 			(uuid "32533634-7c07-473d-b3c0-28feeb904393")
 		)
 		(fp_line
+			(start -4.31 -1.77)
+			(end 1.77 -1.77)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "3119b954-96e5-427d-937c-80a231d8edef")
+		)
+		(fp_line
 			(start 1.77 6.85)
 			(end -4.31 6.85)
 			(stroke
@@ -46181,24 +46171,14 @@
 			(uuid "58eae6dd-758a-40f6-88cb-579a80a3fd51")
 		)
 		(fp_line
-			(start -3.81 -1.27)
-			(end 0.27 -1.27)
+			(start -4.31 6.85)
+			(end -4.31 -1.77)
 			(stroke
-				(width 0.1)
+				(width 0.05)
 				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "6a74466c-0091-4808-b5f7-c9bdd7c81f46")
-		)
-		(fp_line
-			(start -3.81 6.35)
-			(end -3.81 -1.27)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "fe103cd9-ab0b-46bf-af52-f8faf6c729fa")
+			(layer "F.CrtYd")
+			(uuid "635d54bd-d4cb-4963-9c75-2973aab1aeca")
 		)
 		(fp_line
 			(start 0.27 -1.27)
@@ -46209,6 +46189,16 @@
 			)
 			(layer "F.Fab")
 			(uuid "93211561-1e60-404f-baa6-a6726dacc437")
+		)
+		(fp_line
+			(start -3.81 -1.27)
+			(end 0.27 -1.27)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "6a74466c-0091-4808-b5f7-c9bdd7c81f46")
 		)
 		(fp_line
 			(start 1.27 -0.27)
@@ -46230,8 +46220,18 @@
 			(layer "F.Fab")
 			(uuid "d29aba75-6fe2-4ea2-914b-a29fce67b7e1")
 		)
+		(fp_line
+			(start -3.81 6.35)
+			(end -3.81 -1.27)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "fe103cd9-ab0b-46bf-af52-f8faf6c729fa")
+		)
 		(fp_text user "${REFERENCE}"
-			(at -1.27 2.54 90)
+			(at -1.27 2.54 180)
 			(layer "F.Fab")
 			(uuid "e3e53a7c-6958-47b5-a8a9-b56559caa2a4")
 			(effects
@@ -46242,7 +46242,7 @@
 			)
 		)
 		(pad "1" thru_hole rect
-			(at 0 0)
+			(at 0 0 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -46253,7 +46253,7 @@
 			(uuid "c939c123-82b0-4fa8-a204-fb7020c07299")
 		)
 		(pad "2" thru_hole circle
-			(at -2.54 0)
+			(at -2.54 0 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -46264,7 +46264,7 @@
 			(uuid "f9c16ce6-4066-4643-a453-63dd90ea4de4")
 		)
 		(pad "3" thru_hole circle
-			(at 0 2.54)
+			(at 0 2.54 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -46275,7 +46275,7 @@
 			(uuid "043a1e7e-cf75-48e8-afb6-4b0b3cb8e8e3")
 		)
 		(pad "4" thru_hole circle
-			(at -2.54 2.54)
+			(at -2.54 2.54 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -46286,7 +46286,7 @@
 			(uuid "c14cef0f-6a05-42eb-bf5e-4f81de7c0f5e")
 		)
 		(pad "5" thru_hole circle
-			(at 0 5.08)
+			(at 0 5.08 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -46297,7 +46297,7 @@
 			(uuid "2f6f60ee-0099-40ae-847d-fab33bd43d15")
 		)
 		(pad "6" thru_hole circle
-			(at -2.54 5.08)
+			(at -2.54 5.08 90)
 			(size 1.7 1.7)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
