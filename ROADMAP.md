@@ -516,6 +516,14 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Parked off-board for step 2 (adds to 4.19): B3, B4, C55–C57, R15, R65, RV3, TH2, Y2 and the IMU group.
 - DRC: no clearance / short / hole / edge / keep-out items; courtyard overlaps = reference cap packing + servo gang; dangling = escape stubs and plane vias. Zones unfilled.
 
+#### 4.21 Camera / LCD I/O remap for clean routing (2026-11-08)
+- The J1 (camera) and J7 (LCD) pin-to-ball assignment came from a hand-wired proto board and crossed over itself (J7 is on B, so its pin order was mirrored against the balls). Remapped so each bus leaves U1 in connector pin order:
+  - **LCD (27 signals):** outer three rows of U1's bottom-right corner (A/B/C, x 45–53), in J7 pin order – one via each to B, then a parallel ribbon to J7.
+  - **Camera (16 signals):** U1's bottom-left outer rows (x 38–45) in J1 column order – straight fan-down on F; camera PCLK on the dedicated clock input **PCLKT1_0 (B12)** (short B-layer hop).
+- Same 3.3 V banks (0 / 1 / 7); only pin locations change. Servo PWM balls left as they are – servos are placed last.
+- Schematic: global labels moved on the U1 pins (fpga-io + ram sheets); netlist checked (all 43 nets on their intended balls), ERC unchanged (153). PCB: U1 pad nets updated directly (61 pads), stale stubs/vias on remapped balls removed; schematic parity clean (only the 5 known SD1 pins) – **no re-import needed**.
+- FPGA side: `fpga/CameraToTFTSobel_FCL.ice`, `fpga/main_FCL.lpf`, table in `fpga/IO_REMAP.md`. Add clock constraints (e.g. `FREQUENCY PORT "cmos_pclk" 24 MHZ;`) and check nextpnr timing after rebuilding.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
