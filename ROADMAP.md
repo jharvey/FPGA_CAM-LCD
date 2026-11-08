@@ -490,6 +490,13 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Regulator blocks staged too:** 1V1 (U3, L1, C2–C5, C22, RA1, RB1, RP1) and 3V3 (U5, L3, C6–C9, C24, RA3, RB3, RP3) at their reference positions beside the core; reference copper copied with `+5V` → `VSYS` (the only net difference). RP1/RP3 keep our net-tie footprint (3 solder-mask-bridge items where the reference tracks enter it differently). `ULX3S_CORE` rule area extended over them.
 - DRC: one 0.125 mm hit (C27 GND pad vs a +3V3 via), 8 courtyard overlaps between the reference's tightly packed caps under the BGA, 147 dangling escape stubs (the ULX3S escapes continue outside the copied window). Next: decide where the core goes on the board and integrate.
 
+#### 4.18 Step 1 – ULX3S core placed on the board (2026-11-08)
+- Staged core rotated **90° clockwise** as one unit (parts, copied copper, islands, rule areas): **U1 at board (28, 11.2), U2 below at (28, 37.8)** – SDRAM bank faces down to U2, camera/LCD bank faces right (J1 / IMU), ESP32/SD banks face up.
+- Regulator blocks placed separately on B by search (clear of ribs/springs, switchers ≥ 15 mm from the IMU, near the core): **1V1 block (U3) at (41, 15)**, **3V3 block (U5) at (45, 61)**, each with its copied copper.
+- B0/B1/B2 stay put: the three core parts that would have hit them (R32, R33, C30) and the three on the bay ribs (C16, D28, D29) were parked instead, their copied stubs dropped.
+- **Parked off-board (right of the outline) for step 2:** AE1, BAT1, C1, C14, C16, C30, C48, C51, C52, C54, C84, D12, D14, D15, D28, D29, D53, D54, R7, R11–R13, R18, R27–R29, R32, R33, R66–R70, R75, R80, U7, U8, U10, Y1.
+- Our copper inside the new areas removed; conflicting copied escape stubs removed (policy: ours yields to copied SDRAM/core copper, copied stubs yield to our parts). DRC: no clearance / short / hole / edge / keep-out items; remaining courtyard overlaps are the reference's tight cap packing + the servo gang; dangling items are escape stubs and plane vias (zones unfilled).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
