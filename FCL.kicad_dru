@@ -1,0 +1,19 @@
+(version 1)
+
+# JLCPCB 4-layer, high-reliability defaults live in the net classes (0.15/0.15 mm).
+# Fine-pitch exceptions only where the geometry needs them.
+
+(rule "BGA_U1_fanout"
+  (condition "A.intersectsArea('U1_BGA')")
+  (constraint track_width (min 0.1))
+  (constraint clearance (min 0.1))
+  (constraint via_diameter (min 0.4))
+  (constraint hole_size (min 0.2)))
+
+(rule "fine_pitch_pads"
+  (condition "A.Type == 'Pad' && (A.memberOfFootprint('U2') || A.memberOfFootprint('U21') || A.memberOfFootprint('U22') || A.memberOfFootprint('U23') || A.memberOfFootprint('U24') || A.memberOfFootprint('J7') || A.memberOfFootprint('J17') || A.memberOfFootprint('U12') || A.memberOfFootprint('U14') || A.memberOfFootprint('U16') || A.memberOfFootprint('U18') || A.memberOfFootprint('U19'))")
+  (constraint clearance (min 0.1)))
+
+(rule "fine_pitch_escape"
+  (condition "A.Type == 'Track' && B.Type == 'Pad' && (B.memberOfFootprint('U2') || B.memberOfFootprint('U21') || B.memberOfFootprint('U22') || B.memberOfFootprint('U23') || B.memberOfFootprint('U24') || B.memberOfFootprint('J7') || B.memberOfFootprint('J17') || B.memberOfFootprint('U12') || B.memberOfFootprint('U14') || B.memberOfFootprint('U16') || B.memberOfFootprint('U18') || B.memberOfFootprint('U19'))")
+  (constraint clearance (min 0.1)))

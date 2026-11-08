@@ -71,8 +71,13 @@
       },
       "diff_pair_dimensions": [
         {
-          "gap": 0.25,
-          "via_gap": 0.25,
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        },
+        {
+          "gap": 0.15,
+          "via_gap": 0.2,
           "width": 0.2
         }
       ],
@@ -150,24 +155,24 @@
         "allow_blind_buried_vias": false,
         "allow_microvias": false,
         "max_error": 0.005,
-        "min_clearance": 0.0,
+        "min_clearance": 0.1,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.25,
-        "min_hole_to_hole": 0.25,
+        "min_hole_to_hole": 0.5,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
-        "min_text_thickness": 0.08,
+        "min_text_thickness": 0.15,
         "min_through_hole_diameter": 0.2,
-        "min_track_width": 0.127,
+        "min_track_width": 0.1,
         "min_via_annular_width": 0.1,
-        "min_via_diameter": 0.419,
+        "min_via_diameter": 0.4,
         "solder_mask_clearance": 0.05,
-        "solder_mask_min_width": 0.25,
+        "solder_mask_min_width": 0.1,
         "solder_mask_to_copper_clearance": 0.0,
         "solder_paste_clearance": -0.05,
         "solder_paste_margin_ratio": -0.0,
@@ -221,7 +226,16 @@
         }
       ],
       "track_widths": [
-        0.3
+        0.0,
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.6,
+        0.8,
+        1.0,
+        1.5
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -251,8 +265,20 @@
       },
       "via_dimensions": [
         {
-          "diameter": 0.419,
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.4,
           "drill": 0.2
+        },
+        {
+          "diameter": 0.6,
+          "drill": 0.3
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -520,9 +546,9 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.2,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -530,6 +556,139 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.15,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "ANALOG",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 4,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "FAST",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 6,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.15,
+        "tuning_profile": "",
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_CELL",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.8,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_HIGH",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_RAIL",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 5,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.4,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR_SW",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.6,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.15,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "USB",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 3,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "tuning_profile": "",
@@ -543,7 +702,184 @@
     },
     "net_colors": {},
     "netclass_assignments": {},
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "PWR_HIGH",
+        "pattern": "/usbc_pd/VBUS_C"
+      },
+      {
+        "netclass": "PWR_HIGH",
+        "pattern": "+5V"
+      },
+      {
+        "netclass": "PWR_HIGH",
+        "pattern": "VSYS"
+      },
+      {
+        "netclass": "PWR_HIGH",
+        "pattern": "VBAT_OR"
+      },
+      {
+        "netclass": "PWR_CELL",
+        "pattern": "/power/CELL*_RAW"
+      },
+      {
+        "netclass": "PWR_CELL",
+        "pattern": "/power/VBAT1"
+      },
+      {
+        "netclass": "PWR_CELL",
+        "pattern": "/power/VBAT2"
+      },
+      {
+        "netclass": "PWR_CELL",
+        "pattern": "/power/VBAT3"
+      },
+      {
+        "netclass": "PWR_SW",
+        "pattern": "/power/L1"
+      },
+      {
+        "netclass": "PWR_SW",
+        "pattern": "/power/L2"
+      },
+      {
+        "netclass": "PWR_SW",
+        "pattern": "/power/L3"
+      },
+      {
+        "netclass": "PWR_SW",
+        "pattern": "/display/LCD_BL_SW"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "USB_DP"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "USB_DN"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "/usbc_pd/USB_C_DP"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "/usbc_pd/USB_C_DN"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "USB_FPGA_D+"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "USB_FPGA_D-"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "/power/*_SENSE"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "/power/TEMP_BAT_CELL*"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "/power/VREF_2V5"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "/power/VADC"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "+3V3"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "+1V1"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "+2V5"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "2V5_3V3"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/power/P1V1"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/power/P2V5"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/power/P3V3"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/wifi/SD3V3"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/power/VBAT"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/display/LCD_BL_A"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/display/LCD_BL_K"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/power/RTCVDD"
+      },
+      {
+        "netclass": "PWR_RAIL",
+        "pattern": "/usbc_pd/PD_VDD"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "SDRAM_*"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "SD_CLK"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "SD_CMD"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "SD_D?"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "CLK_25MHz"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "CAM_XCLK"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "/camera/XCLK_J"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "GP*"
+      },
+      {
+        "netclass": "FAST",
+        "pattern": "GN*"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {

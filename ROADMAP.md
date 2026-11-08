@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – placement complete (4.6–4.10, all footprints on board); next: fine-pitch rules, silkscreen, routing |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – placement complete; routing step 1 done (rules, planes, fan-out, decoupling – 4.11); next: high-speed nets |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -427,6 +427,30 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - No test points in the schematic besides AE1; mounting holes unchanged (H1, H3, H4; H2 excluded). Camera-module M2 standoffs still to reserve once the module is measured.
 - DRC: no keep-out, edge, short or inter-part clearance violations; courtyard overlaps only inside the servo gang; remaining mask/clearance items are inside fine-pitch footprints; silkscreen overlaps to clean up. Parity: only the 5 SD1 pins. ERC unchanged.
 
+#### 4.11 Routing step 1 – JLCPCB rules, planes, fan-out, decoupling (2026-11-07)
+**Fab rules (JLCPCB 4-layer, high reliability):** default track/space **0.15 / 0.15 mm**; fine-pitch exceptions in `FCL.kicad_dru` – **0.10 / 0.10 mm** inside rule area `U1_BGA` (ball field + 0.6 mm) and on the pads of the 0.5 mm-pitch parts (U2, U21, U22, U23, U24, J7, J17, LM66100s); mask expansion **0.05 mm**, minimum mask web **0.10 mm** (U22 LGA: footprint mask margin 0 – 0.15 mm pad gap); hole-to-hole **0.5 mm**, copper-to-edge 0.5 mm; vias 0.6/0.3 (default) and 0.4/0.2 (BGA / FAST); text ≥ 0.8 mm / 0.15 mm.
+**Stackup JLC04161H-7628 (1.6 mm):** L1 35 µm · 7628 prepreg 0.2104 mm (εr 4.4) · L2 15.2 µm · core 1.065 mm · L3 15.2 µm · 7628 prepreg 0.2104 mm · L4 35 µm; HASL lead-free. Order with 1 oz inner copper if the price allows (planes carry the rails).
+
+**Net classes (IPC-2152, 1 oz outer, ~10 °C rise):**
+
+| Class | Nets | Track | Clearance | Via |
+|---|---|---|---|---|
+| PWR_HIGH (≈ 3 A) | `VBUS_C`, `+5V`, `VSYS`, `VBAT_OR` | 1.0 mm (or pour) | 0.2 | 0.6/0.3, ≥ 3 per layer change |
+| PWR_CELL (≈ 1–1.5 A) | `CELL*_RAW`, `VBAT1–3` | 0.8 mm | 0.2 | 0.6/0.3, ≥ 2 |
+| PWR_SW | `L1–L3`, `LCD_BL_SW` | 0.6 mm, short | 0.2 | – |
+| USB | `USB_DP/DN`, `USB_C_DP/DN`, `USB_FPGA_D±` | 0.2 mm pair, 0.15 mm gap (≈ 90 Ω) | 0.2 | 0.6/0.3 |
+| ANALOG | `*_SENSE`, `TEMP_BAT_CELL*`, `VREF_2V5`, `VADC` | 0.2 mm | 0.2 | 0.6/0.3 |
+| PWR_RAIL | `+3V3`, `+1V1`, `+2V5`, `2V5_3V3`, `P1V1/P2V5/P3V3`, `SD3V3`, RTC `VBAT`, `LCD_BL_A/K`, `PD_VDD` | 0.4 mm | 0.15 | 0.6/0.3 |
+| FAST | `SDRAM_*`, `SD_CLK/CMD/D0–3`, `CLK_25MHz`, `CAM_XCLK`, `GP*`, `GN*` | 0.15 mm | 0.15 | 0.4/0.2 |
+| Default | everything else | 0.15 mm | 0.15 | 0.6/0.3 |
+
+**Planes:** L2 `GND_L2` solid over the whole board (one island). L3 `3V3_L3` main plane (priority 0) + `1V1_U1_core` island over the 20 core balls (priority 2) + `VSYS_powerpath` band x 66–77.6, y 27.5–66 over the charger / power-path block (priority 1, clear of RP3's +3V3 output, the ESP32 and the ADC's +3V3 cap). **+2V5 has no island:** its four balls (F6, F15, P6, P15) are the corners of the core ring with +3V3 and VCCIO balls between them – an island would cut those off the +3V3 plane, so +2V5 (VCCAUX, low current) and VCCIO `2V5_3V3` are routed as tracks in the power pass. Antenna keep-out stays free of copper.
+
+**U1 fan-out (dogbone, 0.4/0.2 vias, interstitial, outward quadrant first):** 90 power/GND balls with their own via, 55 more power/GND balls joined to a same-net neighbour (B-side decoupling occupies some via sites), 91 inner signal balls with vias, 43 signal balls on the two outer rings left to escape on L1, 68 NC. **Still without a via (for the routing passes):** 16 power balls – VCCIO `2V5_3V3` H6, H7, J6, F9, F10 (fed by tracks), +2V5 F6, +3V3 F11, F12, GND J2, G4, R4, B7, D4, K6, J7, K7 – and 26 inner signal balls (listed in the run log; they need a via site freed or an L1 escape).
+
+**Decoupling / IC fan-out:** every IC power and GND pin that sits on a plane net got a via beside it (U2, U9, U10, U21, U22, regulators, chargers, LM66100s, U23, U24, Y1, J1, J7, SD1, J17), exposed pads got 2 × 2 GND via arrays (TP4056s already carry thermal vias); each cap got its own GND via and a straight / L-shaped / cross-side connection to its pin. **62 of 69 decoupling/bulk caps fully connected.** Open (power pass): C17 (+1V1 bulk), C19/C29/C30 (+2V5), C26 (VCCIO GND side), C51 (+3V3, under U1), C70 (ADC REFIN). Filter / timing caps (sense filters, crystal load caps, RC on SHUT/PWRBTn) are left for the analog pass.
+- Result: 351 vias (223 × 0.4/0.2, 128 × 0.6/0.3), 448 short tracks, all in group `FANOUT_5_1`. DRC: **no clearance, mask-bridge, short, hole or edge violations**; 91 `via_dangling` = U1 signal fan-out vias awaiting routes; silkscreen + 5 servo-gang courtyard items as before. Parity: 5 SD1 pins. ERC unchanged (153).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
@@ -437,7 +461,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - [ ] Measure: NHD TFT outline / FPC (datasheet p.3), OV7670 lens-to-header offset → adjust J1 / J7
 - [x] Battery bay geometry on the PCB: contact pitch 20.5 mm, cell-length window, bay rule areas, NTC thermal pad, IMU quiet zone, stress list (4.4)
 - [ ] Confirm spring free/solid length and contact plate dimensions on the MY-18650-04/05-J drawings; bay CAD (ribs, end walls, J7 bridge, boss)
-- [ ] Fine-pitch design rules (solder-mask web / clearance for 0.5 mm parts: U2, U21, U22, J7, J17; BGA fan-out) before routing
+- [x] Fine-pitch design rules, net classes, JLC stackup, planes, BGA fan-out, decoupling (4.11)
 - [ ] Placement refinement: TP4056 thermal spread, decoupling under the BGA, short CAM_PCLK / LCD_PCLK, silkscreen
 - [ ] 3D-print case concept
 
