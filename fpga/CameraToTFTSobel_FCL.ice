@@ -559,7 +559,7 @@
               {
                 "index": "0",
                 "name": "gn17",
-                "value": "B13"
+                "value": "A12"
               }
             ],
             "virtual": false
@@ -672,7 +672,7 @@
               {
                 "index": "0",
                 "name": "gp17",
-                "value": "A12"
+                "value": "B13"
               }
             ],
             "virtual": false

@@ -623,6 +623,19 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - The FPGA SD balls could move to U1's top-right outer balls (servo PWM today; the servos are now bottom-left).
   - J4 can switch to the TC2030-NL footprint (three small holes, no leg holes) if space gets tight.
 
+#### 4.29 LCD ribbon to J7 hand-routed (2026-11-08)
+- **Camera RESET/PWDN swapped balls** (FPGA remap): RESET `cmos_rst_n` (GN17, J1.17) is now on A12 and PWDN `cmos_pwdn` (GP16, J1.18) on B13. Each takes one via beside U1's corner, then B.Cu into J1, PWDN through the J1.15/J1.17 gap. The `.ice`, `.lpf` and `IO_REMAP.md` are updated.
+- **C19 (2V5 decap) parked for step 2**, together with its dangling GND stub and +2V5 feed. It needs a new spot with a proper GND via.
+- **LCD, rows A and B (18 lines):**
+  - F.Cu, in J7 order, shifted 1.05 mm right with staggered jogs to clear J1.
+  - Run down the lane right of J1 (x 46.2–53.4).
+  - Fan left above J7 on 18 staircase levels (y 55.5–61.5), then drop through vias in two staggered rows at J7's 0.5 mm pitch, with short B stubs into the FPC pads.
+- **LCD, row C (9 lines):** one dogbone via each under U1, a B.Cu fan into a lane right of J1 (x 46.25–49.45), then staircase levels (y 55.8–58.6) and straight down between the F vias into J7.
+- **Stale leftovers removed:** VSYS / LCD_BL_A vias and stubs from parts parked earlier.
+- **Checks:**
+  - All 27 LCD lines and RESET/PWDN are connected; DRC adds nothing new. ERC 153; parity shows only the 5 known SD1 pins.
+  - Still open by design: the camera pull-ups R7/R14/R16/R17 (parked), SD → U1, and J7's power and backlight pins (step 3).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

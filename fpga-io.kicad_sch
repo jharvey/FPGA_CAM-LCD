@@ -21897,7 +21897,7 @@
 			)
 		)
 	)
-	(global_label "GP16"
+	(global_label "GN17"
 		(shape input)
 		(at 351.79 172.72 180)
 		(effects
@@ -22111,7 +22111,7 @@
 			)
 		)
 	)
-	(global_label "GN17"
+	(global_label "GP16"
 		(shape input)
 		(at 351.79 170.18 180)
 		(effects

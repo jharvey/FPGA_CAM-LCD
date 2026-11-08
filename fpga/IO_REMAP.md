@@ -43,8 +43,8 @@ Files: `CameraToTFTSobel_FCL.ice` (Icestudio project with the new pins) and `mai
 | cmos_db | gp24 | C16 | A13 |
 | cmos_href | gp15 | N17 | B18 |
 | cmos_pclk | gp16 | N16 | B12 |
-| cmos_pwdn | gp17 | L16 | A12 |
-| cmos_rst_n | gn17 | L17 | B13 |
+| cmos_pwdn | gp17 | L16 | B13 |
+| cmos_rst_n | gn17 | L17 | A12 |
 | cmos_scl | gn14 | U17 | B20 |
 | cmos_sda | gp14 | U18 | B19 |
 | cmos_vsync | gn15 | P16 | A19 |
@@ -74,3 +74,5 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 | WIFI_GPIO48 (ADC DIN, was GPIO21) | K5 | F3 |
 | WIFI_GPIO35 (ADC SCK, was GPIO8) | L2 | E4 |
 | WIFI_GPIO36 (ADC SDO, was GPIO6) | N4 | E3 |
+
+2026-11-08 (LCD routing): camera RESET (`cmos_rst_n`, net GN17, J1.17) and PWDN (`cmos_pwdn`, net GP16, J1.18) swapped balls to A12 / B13 so both drop straight to the back layer beside J1 and leave the top layer clear for the LCD ribbon.
