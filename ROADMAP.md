@@ -466,6 +466,10 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Unconnected items 447 → 282.
 - **Still open (36):** +2V5 ×5 and VCCIO `2V5_3V3` ×5 (BGA balls F6/F15/P6/P15, H6/H7/J6/F9/F10 with no via site – need the fan-out reworked under U1), GND ×9 / +3V3 ×8 / +1V1 ×1 (mostly balls and caps under U1 with no free via site), `VBUS_C` ×4 and +5V ×2 (J17 / D55 / U16 area), VBAT_OR ×1, P1V1 ×1.
 
+#### 4.14 Routing step 4 – analog and sensing (2026-11-08)
+- Group `ROUTE_4_ANALOG`: RTC crystal (OSCI/OSCO), regulator feedback, ADC reference / supply, part of the cell / VSYS sense dividers and NTC lines, IMU + RTC I²C where space allowed. ANALOG class 0.2 mm / 0.2 mm clearance. DRC clean, planes one island each. Unconnected 282 → ~270.
+- **Still open:** long cross-board runs – `TEMP_BAT_CELL1–3` (NTCs at x 47.6 to U21 on the right), `VBAT1–3_SENSE`, `VSYS_SENSE`, `VREF_SENSE`, `VADC` ×3, `FB1/FB2`, U21 REFIN, IMU I²C / INT and RTC I²C (`FPDI_*`) to U1. These cross the camera/IMU zone and the congested left half; they need the high-speed buses settled first.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
