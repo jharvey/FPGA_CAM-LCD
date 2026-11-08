@@ -691,10 +691,15 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Removed:** 337 GND track segments on F/B under U1 (the copied ULX3S lattice joining dogbones to each other). Each GND ball and each decap GND pad now has one short stub to its own via, and the vias reach the In2 GND plane. This frees the diamonds and gaps between balls for signal escapes.
 - **Vias:** 18 new GND vias added where a pad had none nearby; G10→G9 and P14→N14 linked ball-to-ball.
 - **Still need a GND via:** U1 G11, P11, P12, P13 and C19 pad 2. Every diamond around them is taken by power vias, so they need a hand-placed via or a ball-to-ball link (to fix with the power hookup).
-- **SD → FPGA (in progress, not committed):**
-  - Plan: share SD between the ESP32 (routed) and the FPGA. FPGA SD balls move to the free top-left balls: CD M17, D2 U18, D3 U17, CMD U16, CLK T16, D0 R17, D1 R16. U16/R16/R17/P17 carry the dead old-ULX3S ADC nets.
-  - The first maze-router attempt reached only 2 of 7, before this GND-lattice removal.
-  - Also: move C51 out from under U1's top-left corner (B).
+- **Owner rework (committed with 4.35):** the GND balls in U1's top-left corner were rejoined by the owner with short top-layer runs to GND vias at y 29.3 (x 40.3–42.7), opening lanes between the balls.
+
+#### 4.35 SD shared with the FPGA – routed (2026-11-08)
+- **What:** six SD lines now reach U1 as well as the ESP32 (SD1 → ESP32 route unchanged). The FPGA branch leaves U1's top-left corner, runs north up the cleared back-layer corridor (x 38–40), passes north of TH1 and joins the top-layer SD fan at x 50.0–52.5 through one via per line.
+- **FPGA balls (remapped so the lanes never cross):** D2 U17, D3 U18, CMD R17, CLK T16, D0 U16, D1 R16.
+- **Card detect:** ESP32 only. M17 is now a no-connect; the FPGA can get card-present from the ESP32 over the serial link.
+- **Escape:** 0.1 mm tracks inside the BGA (DRU `BGA_U1_fanout`, opt 0.1). U17 and U16 escape on the top layer at x 40.7 / 41.5 between the GND balls. U18, R17, T16 and R16 drop through diamond vias and run on the back layer. All six pass the GND-via row at y 29.3, then widen to 0.15 mm.
+- **Small moves:** TH1 (NTC, B) moved 0.6 mm down to (44, 8.6) so the six lanes fit between it and the ESP32 antenna keep-out. H3 did not need to move.
+- **Check:** DRC adds no new errors or clearance problems; all SD nets are fully connected; schematic parity count unchanged.
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)

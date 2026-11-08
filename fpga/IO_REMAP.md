@@ -78,3 +78,5 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 2026-11-08 (LCD routing): camera RESET (`cmos_rst_n`, net GN17, J1.17) and PWDN (`cmos_pwdn`, net GP16, J1.18) swapped balls to A12 / B13 so both drop straight to the back layer beside J1 and leave the top layer clear for the LCD ribbon.
 
 2026-11-08 (step 3): ADC SPI moved to U1 outer balls B1 (CNV), C1 (DIN), D1 (SCK), E1 (SDO) facing U21; IMU_INT1 / IMU_INT2 moved from C1 / D1 to F3 / E3 (IMU is top-left, slow signals). Not used by the FPGA design (no .lpf change).
+
+2026-11-08 (step 3, SD shared): FPGA SD balls are D2 U17, D3 U18, CMD R17, CLK T16, D0 U16, D1 R16 (order chosen so the escape lanes do not cross). SD card detect stays on the ESP32 only; M17 is a no-connect. Not used by the current FPGA design (no .lpf change).
