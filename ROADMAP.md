@@ -552,7 +552,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - B2 moved right to (23.2, 11.0), off the cell-1 spring.
   - C35 moved below B2.
   - Removed a stale SERVO_V via under J_SRV3 pin 2.
-- **J4 (JTAG fallback, DNP) changed to SMT:** `PinSocket_2x03_P2.54mm_Vertical_SMD` on F, centred where the through-hole socket was, at (50.5, 21.5), rotated 180°. Same 2.54 mm pitch and pin numbering, so existing JTAG jumper cables still fit, and the back side under J4 is now free.
+- **J4 (JTAG fallback, DNP) is now a Tag-Connect TC2030 pad footprint** (`Connector:Tag-Connect_TC2030-IDC-FP_2x03_P1.27mm_Vertical`, the legged self-retaining version) on F, centred at (50.5, 21.5). No part to fit. The ESP32-S3 is the normal JTAG programmer; J4 is only a backup. Pin numbers are unchanged (1 GND, 2 3V3, 3 TDI, 4 TCK, 5 TMS, 6 TDO). A TC2030-IDC cable brings them out 1:1 to a 2×3 2.54 mm IDC plug, so wire the probe (FT232H or Pico debugprobe with openFPGALoader) to that plug. Keep the back side clear of tall parts at the three leg holes.
 - **Checks:**
   - Netlist verified.
   - ERC 153 (unchanged).

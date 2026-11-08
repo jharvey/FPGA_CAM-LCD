@@ -14838,7 +14838,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical_SMD"
+		(property "Footprint" "Connector:Tag-Connect_TC2030-IDC-FP_2x03_P1.27mm_Vertical"
 			(at 237.49 157.48 0)
 			(hide yes)
 			(show_name no)
