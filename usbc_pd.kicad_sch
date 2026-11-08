@@ -2164,16 +2164,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 137.16) (xy 165.1 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00390ae7-9cc5-4e88-9600-23a0003a1022")
-	)
-	(wire
-		(pts
 			(xy 135.89 87.63) (xy 139.7 87.63)
 		)
 		(stroke
@@ -2244,16 +2234,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 134.62) (xy 160.02 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a35fe7b-19ad-4c46-91b0-d559cf430054")
-	)
-	(wire
-		(pts
 			(xy 167.64 100.33) (xy 165.1 100.33)
 		)
 		(stroke
@@ -2304,6 +2284,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 132.08) (xy 147.32 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66c2fefe-00f0-4b15-93d4-b661a1faef2d")
+	)
+	(wire
+		(pts
 			(xy 132.08 62.23) (xy 143.51 62.23)
 		)
 		(stroke
@@ -2314,7 +2304,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 132.08) (xy 165.1 132.08)
+			(xy 157.48 132.08) (xy 160.02 132.08)
 		)
 		(stroke
 			(width 0)
@@ -2411,6 +2401,16 @@
 			(type default)
 		)
 		(uuid "8c80504a-d307-46cc-b055-2eea03721e2e")
+	)
+	(wire
+		(pts
+			(xy 143.51 134.62) (xy 147.32 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c611cda-ebb1-4dac-8e1b-57c54ec99756")
 	)
 	(wire
 		(pts
@@ -2583,7 +2583,7 @@
 		(uuid "1c2ce6ba-03ae-48b0-89cd-06841f798854")
 	)
 	(label "USB_C_DP"
-		(at 147.32 132.08 180)
+		(at 143.51 134.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2653,7 +2653,7 @@
 		(uuid "9ba9b796-f310-45f4-b1c0-e6d39cec9b6f")
 	)
 	(label "USB_C_DN"
-		(at 147.32 134.62 180)
+		(at 143.51 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2760,7 +2760,7 @@
 	)
 	(global_label "USB_DN"
 		(shape input)
-		(at 165.1 137.16 0)
+		(at 160.02 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2769,7 +2769,7 @@
 		)
 		(uuid "89ad856b-e52e-41f6-b124-420193cd8d07")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.1 137.16 0)
+			(at 160.02 132.08 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2782,7 +2782,7 @@
 	)
 	(global_label "USB_DP"
 		(shape input)
-		(at 165.1 132.08 0)
+		(at 160.02 134.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2791,7 +2791,7 @@
 		)
 		(uuid "93f89a0f-0ad8-4104-a9dd-3853abc8796d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.1 132.08 0)
+			(at 160.02 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
