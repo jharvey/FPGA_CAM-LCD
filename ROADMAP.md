@@ -701,6 +701,12 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Small moves:** TH1 (NTC, B) moved 0.6 mm down to (44, 8.6) so the six lanes fit between it and the ESP32 antenna keep-out. H3 did not need to move.
 - **Check:** DRC adds no new errors or clearance problems; all SD nets are fully connected; schematic parity count unchanged.
 
+#### 4.36 Plane stitching (step 3, 2026-11-08)
+- **What:** every surface-mount pad on GND, +3V3, +1V1, +2V5 and VSYS that had no path to its plane got a short stub and a 0.4/0.2 via (GND to In2; the rest to their In1 plane or island). Twelve U1 centre balls with no free diamond are linked to a neighbouring same-net ball that has a via (U1 G10, G11, K10–K12 and W16 now done).
+- **Method:** a script places each via at the nearest legal spot (no via-in-pad, net-class clearances, hole-to-hole, keep-outs, inside the right plane island), then DRC is run and any via it flags is moved and retried until nothing new is reported.
+- **Result:** no new DRC errors (one copper-sliver warning, F.Cu, to review).
+- **Still to track by hand (outside their plane island):** VSYS pads away from the power-path island, 2V5_3V3 / +2V5 pads around the regulators, R17 / C16 / C47 GND, U1 P9 / P10 (+3V3) and RP1.2 (+1V1).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
