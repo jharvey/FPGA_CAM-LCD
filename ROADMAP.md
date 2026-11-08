@@ -524,6 +524,12 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Schematic: global labels moved on the U1 pins (fpga-io + ram sheets); netlist checked (all 43 nets on their intended balls), ERC unchanged (153). PCB: U1 pad nets updated directly (61 pads), stale stubs/vias on remapped balls removed; schematic parity clean (only the 5 known SD1 pins) – **no re-import needed**.
 - FPGA side: `fpga/CameraToTFTSobel_FCL.ice`, `fpga/main_FCL.lpf`, table in `fpga/IO_REMAP.md`. Add clock constraints (e.g. `FREQUENCY PORT "cmos_pclk" 24 MHZ;`) and check nextpnr timing after rebuilding.
 
+#### 4.22 J1 stays through-hole; camera on the outer ball rows (2026-11-08)
+- **J1 kept through-hole** (decided): the OV7670 is a tall socketed module that gets unplugged during development; a plated barrel through all layers is much stronger than SMT pads, even with anchoring vias, and no standoff holes are needed (the 3D-printed case supports the module). The LCD ribbon still passes J1 on B: 0.84 mm between J1 pads fits two 0.15 mm traces per gap (16 through the pin field), the rest around J1's right end.
+- **Camera remapped onto U1's outer two ball rows (A/B) only**, in J1 column order, so all camera traces route on F without vias: SIOC B20, SIOD B19, VSYNC A19, HREF B18, XCLK A18, D7…D0 A17, B17, B16, A16, B15, A15, A14, A13, RESET B13, PWDN A12; **PCLK stays on PCLKT1_0 (B12)** with one via. FPDI_SDA (RTC I²C) moved B19 → C15 to free an outer ball.
+- Schematic (fpga-io), PCB pad nets and `fpga/` files updated; netlist verified, ERC 153, parity clean.
+- Owner placement in progress (commit d9ead1f6): SD1 + C15 + R86 at the top near the ESP32, servos in a row at the bottom-left, J4 at (49, 24), H3 and B2 moved. Open DRC items from that WIP: SD1 inside a rule area / overlapping the ESP32 courtyard, B2 overlapping BT12 / C35, two hole-to-hole items.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

@@ -519,7 +519,7 @@
               {
                 "index": "0",
                 "name": "gp15",
-                "value": "A18"
+                "value": "B18"
               }
             ],
             "virtual": false,
@@ -539,7 +539,7 @@
               {
                 "index": "0",
                 "name": "gn15",
-                "value": "B18"
+                "value": "A19"
               }
             ],
             "virtual": false,
@@ -598,32 +598,32 @@
               {
                 "index": "7",
                 "name": "gn21",
-                "value": "B17"
+                "value": "A17"
               },
               {
                 "index": "6",
                 "name": "gp21",
-                "value": "B16"
+                "value": "B17"
               },
               {
                 "index": "5",
                 "name": "gn22",
-                "value": "A16"
+                "value": "B16"
               },
               {
                 "index": "4",
                 "name": "gp22",
-                "value": "B15"
+                "value": "A16"
               },
               {
                 "index": "3",
                 "name": "gn23",
-                "value": "A15"
+                "value": "B15"
               },
               {
                 "index": "2",
                 "name": "gp23",
-                "value": "C15"
+                "value": "A15"
               },
               {
                 "index": "1",
@@ -710,7 +710,7 @@
               {
                 "index": "0",
                 "name": "gn16",
-                "value": "A17"
+                "value": "A18"
               }
             ],
             "virtual": false
@@ -805,7 +805,7 @@
               {
                 "index": "0",
                 "name": "gp14",
-                "value": "A19"
+                "value": "B19"
               }
             ],
             "virtual": false

@@ -11073,7 +11073,7 @@
 			)
 		)
 	)
-	(global_label "GP23"
+	(global_label "FPDI_SDA"
 		(shape input)
 		(at 389.89 160.02 0)
 		(effects
@@ -12481,7 +12481,7 @@
 			)
 		)
 	)
-	(global_label "GN21"
+	(global_label "GP21"
 		(shape input)
 		(at 351.79 149.86 180)
 		(effects
@@ -12965,7 +12965,7 @@
 			)
 		)
 	)
-	(global_label "FPDI_SDA"
+	(global_label "GP14"
 		(shape input)
 		(at 389.89 144.78 0)
 		(effects
@@ -13559,7 +13559,7 @@
 			)
 		)
 	)
-	(global_label "GP22"
+	(global_label "GN23"
 		(shape input)
 		(at 351.79 160.02 180)
 		(effects
@@ -22012,7 +22012,7 @@
 			)
 		)
 	)
-	(global_label "GN23"
+	(global_label "GP23"
 		(shape input)
 		(at 351.79 182.88 180)
 		(effects
@@ -22033,7 +22033,7 @@
 			)
 		)
 	)
-	(global_label "GN22"
+	(global_label "GP22"
 		(shape input)
 		(at 351.79 154.94 180)
 		(effects
@@ -22054,7 +22054,7 @@
 			)
 		)
 	)
-	(global_label "GN16"
+	(global_label "GN21"
 		(shape input)
 		(at 351.79 147.32 180)
 		(effects
@@ -22075,7 +22075,7 @@
 			)
 		)
 	)
-	(global_label "GP15"
+	(global_label "GN16"
 		(shape input)
 		(at 351.79 144.78 180)
 		(effects
@@ -22096,7 +22096,7 @@
 			)
 		)
 	)
-	(global_label "GP14"
+	(global_label "GN15"
 		(shape input)
 		(at 351.79 142.24 180)
 		(effects
@@ -22184,7 +22184,7 @@
 			)
 		)
 	)
-	(global_label "GP21"
+	(global_label "GN22"
 		(shape input)
 		(at 389.89 154.94 0)
 		(effects
@@ -22205,7 +22205,7 @@
 			)
 		)
 	)
-	(global_label "GN15"
+	(global_label "GP15"
 		(shape input)
 		(at 389.89 147.32 0)
 		(effects
@@ -22384,4 +22384,5 @@
 		(at 222.25 152.4)
 		(uuid "b7b244b0-68f6-4774-8b6e-6a2bb49c995b")
 	)
+
 )
