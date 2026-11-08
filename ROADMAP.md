@@ -636,6 +636,25 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - All 27 LCD lines and RESET/PWDN are connected; DRC adds nothing new. ERC 153; parity shows only the 5 known SD1 pins.
   - Still open by design: the camera pull-ups R7/R14/R16/R17 (parked), SD → U1, and J7's power and backlight pins (step 3).
 
+#### 4.30 Step 2 – parked parts placed (2026-11-08)
+- **Floating track segments** removed board-wide (129), with re-verification of every routed bus.
+- **Placer:** a placement script (`placer.py`) placed every parked part near what it connects to. It checks courtyards on the part's own side, footprint keep-outs, pads against all existing copper (0.2 mm), through-hole pads inside courtyards, and reserved corridors: SD→U1 / ESP32→U1 between U9 and U1, plus the B strip under U1's right edge for the SD dogbones.
+- **Batch 1:**
+  - Config flash U10 and the 25 MHz oscillator Y1 on B under the USB pair, beside their escape vias.
+  - Flash and DONE/INITN pull-ups; U1 decoupling (C19 back, C30, C48, C51, C52, RV3).
+  - Camera pull-ups and J1 decoupling.
+  - ESP32 EN RC (R35/C81) under U9.
+- **Batch 2:**
+  - U4 beside L2; U8 backlight boost with R18/R19/C38 near L4/D1.
+  - **U5 3V3 buck re-placed part by part on B below J1** (old copied copper dropped, to be re-routed in step 3).
+  - IMU U22 and the RTC U7 + 32 kHz crystal top-left on F.
+  - CR1225 holder BAT1 left of J1.
+  - NTCs TH1–TH3 roughly under the cell centres; ADC dividers near U21.
+- **Batch 3:** soft-power / wake circuit near the power button, user LEDs, button pull-ups, bulk caps, 433 MHz pad AE1, and servo resistors by the servo headers.
+- **Open:**
+  - **B3 / B4** (ESP32 BOOT/RESET, 6×6 mm tact switches) have no room on F near the ESP32, and on B they would sit under the cells. Options: smaller SMD switches (e.g. 3×4 mm), or drop them in favour of USB/serial recovery.
+  - **J7 fan-out with a 45° band** needs J7 about 4 mm right (mechanical decision, TFT FPC).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
