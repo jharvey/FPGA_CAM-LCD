@@ -11435,6 +11435,28 @@
 			)
 		)
 	)
+	(global_label "IMU_INT2"
+		(shape input)
+		(at 222.25 147.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2426d9de-ebbd-487a-9eba-22876c3f4024")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 222.25 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
 	(global_label "GND"
 		(shape input)
 		(at 285.75 105.41 180)
@@ -11997,6 +12019,28 @@
 		(uuid "533b96af-98c6-4ea1-8452-682ea7a2d175")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 222.25 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "IMU_SDA"
+		(shape input)
+		(at 223.52 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5448076d-8012-4c7e-a68f-bc75507d0cad")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 223.52 85.09 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13129,6 +13173,28 @@
 			)
 		)
 	)
+	(global_label "IMU_INT1"
+		(shape input)
+		(at 184.15 147.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b918e511-d661-4727-b550-73b39c70ebbc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 184.15 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
 	(global_label "GND"
 		(shape input)
 		(at 285.75 93.98 180)
@@ -13745,6 +13811,28 @@
 			)
 		)
 	)
+	(global_label "IMU_SCL"
+		(shape input)
+		(at 185.42 85.09 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e68f2514-24fb-451c-ba57-6d7cab8eb606")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 185.42 85.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
 	(global_label "GP22"
 		(shape input)
 		(at 351.79 160.02 180)
@@ -14219,94 +14307,6 @@
 		(uuid "ff782d12-6325-4265-b213-4609c01c0222")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 223.52 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "IMU_SCL"
-		(shape input)
-		(at 185.42 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e68f2514-24fb-451c-ba57-6d7cab8eb606")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 185.42 85.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "IMU_SDA"
-		(shape input)
-		(at 223.52 85.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5448076d-8012-4c7e-a68f-bc75507d0cad")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 223.52 85.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "IMU_INT1"
-		(shape input)
-		(at 184.15 147.32 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b918e511-d661-4727-b550-73b39c70ebbc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "IMU_INT2"
-		(shape input)
-		(at 222.25 147.32 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2426d9de-ebbd-487a-9eba-22876c3f4024")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.25 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
