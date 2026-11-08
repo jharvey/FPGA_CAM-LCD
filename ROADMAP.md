@@ -481,6 +481,14 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **207 refdes on silkscreen** (95 front, 112 back). **45 kept on the Fab layer only** (no free silk area – mostly 0402/0603 caps under U1 and in the dense power block): C8, C10, C11, C25–C29, C31, C32, C37, C47–C53, C59, C61, C66, C68, C70, C72, C82–C84, D3, D11, D12, D53, R1, R43, R45, R51, R55, R60, R66, R67, R71, R83, RA1, RA2, RV3, U14 – use the assembly drawing (Fab) for those.
 - Silk DRC: silk_overlap 199 → 81 (footprint outlines touching neighbours), silk_over_copper 143 → 12, silk_edge 7 → 2.
 
+#### 4.17 ULX3S FPGA/SDRAM core staged off-board (2026-11-08)
+- The ULX3S reference layout (board before Phase 4, commit `7a6d82ec`) has the same U1/U2 parts and an **identical SDRAM pin-to-net mapping (78/78)**. Its core is copied **above-left of the outline** (U1 at page (30, 22)), in the **original orientation**: U1 0°, U2 90°, 26.6 mm to the right of U1.
+- **Moved to the staging area** (same refdes and nets as the reference, so no renames were needed): U1, U2, C16, C17, C19, C20, C25–C34, D28, D29, R31–R33.
+- **Copied (group `ULX3S_CORE_COPY`):** all SDRAM routing, the BGA fan-out / escapes and decoupling connections, the +1V1, +2V5 and 2V5_3V3 islands. Copper only copied where the net exists in our design and lands on a pad of the same net; copper on nets we no longer use (FTDI, ULX3S buttons, unused GP/GN, FPGA USB) dropped.
+- **Stackup now matches the reference:** In1 = +3V3 plane + VSYS / +1V1 / +2V5 / 2V5_3V3 islands, In2 = GND (all inner tracks and zones swapped). Zones unfilled.
+- Our old U1/U2 dogbones, decoupling stubs and the old `1V1_U1_core` island removed. `U1_BGA` rule area moved with U1; new rule area `ULX3S_CORE` + custom rule (clearance 0.127 mm, hole-to-hole 0.3 mm, hole clearance 0.15 mm) for the reference geometry.
+- DRC: one 0.125 mm hit (C27 GND pad vs a +3V3 via), 8 courtyard overlaps between the reference's tightly packed caps under the BGA, 147 dangling escape stubs (the ULX3S escapes continue outside the copied window). Next: decide where the core goes on the board and integrate.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
