@@ -655,6 +655,17 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - **B3 / B4** (ESP32 BOOT/RESET, 6×6 mm tact switches) have no room on F near the ESP32, and on B they would sit under the cells. Options: smaller SMD switches (e.g. 3×4 mm), or drop them in favour of USB/serial recovery.
   - **J7 fan-out with a 45° band** needs J7 about 4 mm right (mechanical decision, TFT FPC).
 
+#### 4.31 Smaller ESP32 buttons, J7 moved toward J1, LCD re-routed (2026-11-08)
+- **B3 / B4** (ESP32 BOOT / RESET) changed to C&K KMR2 SMD tact switches (`Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2`, MPN KMR221GLFS) in the schematic and on the board. **LCSC number left blank — pick one before ordering.** B3 sits on F at the right edge beside the ESP32; B4 on F between SD1 and J4.
+- **Moves:**
+  - **J7 moved 5.0 mm left**, so its centre is now 2.7 mm from J1's (was 7.6 mm). A full 7.62 mm shift would land on the servo headers, and H3 limits how far those can go.
+  - **Servo headers J_SRV1–6** moved 2.05 mm left.
+  - **Reference drawings:** the TFT outline + label moved with J7; the camera keep-out drawings moved with J1 (−7.62 mm).
+- **LCD ribbon regenerated for the new J7.** The B-layer levels were lowered to y 56.35–59.15 to clear R15. All 27 lines and RESET/PWDN are connected; no new DRC items.
+- **U5 3V3 buck group and TH3 re-placed** clear of the new ribbon: U5 group on B left of the ribbon below J1, TH3 on B at (51.5, 60.5).
+- **All parts now on the board.** ERC 153, parity only the 5 known SD1 pins.
+- **Next (step 3, routing):** remap groups so each faces its partner (e.g. the ADC SPI toward U21), then route the short local groups first (ADC SPI, flash, oscillator, regulators) before the long buses.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
