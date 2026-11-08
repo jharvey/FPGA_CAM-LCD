@@ -604,6 +604,14 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - Only the SD 3V3 and GND pins use vias: 3V3 goes on B to C15, GND to the plane.
   - **This board's copy of the U9 antenna keep-out now starts at x 43.6 instead of 42** (owner OK). DRC reports one `lib_footprint_mismatch` warning on U9 for this.
 
+#### 4.27 J4 / JTAG hand-routed (2026-11-08)
+- **Hand-planned, no autorouting.** The TC2030 pads only escape through the gaps between its leg holes: right gap 2 lines (TDO, TMS), top 1 (TCK), bottom 1 (TDI), and the two left gaps (+3V3, GND to vias).
+- **TDO / TMS:** F.Cu straight into ESP32 pads 11/12, plus one via each down to B lanes x 51.1 / 50.3 into U1. TDO gets a new dogbone via at (51.1, 31.1) on its existing V4 stub; TMS uses its existing dogbone.
+- **TCK:** via above J4 to B. It branches down lane x 49.9 into its U1 dogbone, and runs along B under the USB pair to a via at ESP32 pad 17.
+- **TDI:** F.Cu below J4 with a via into U1 (lane x 49.1), then a via to B under the USB pair to ESP32 pad 18.
+- **Cleanup:** removed a leftover JTAG_TMS stub on In2 (the GND plane layer) from an earlier pass.
+- **Checks:** all four JTAG nets connected (J4, U1, U9); DRC adds nothing new.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

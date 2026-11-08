@@ -45,7 +45,7 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 
 ## Routing intent
 - **SD (routed, no vias):** the seven lines leave the top of SD1 at 0.35 mm pitch (card detect wraps over the top as the outermost line). They turn down tight against SD1's right edge, about 1.5 mm into the antenna band (this board's copy of the U9 keep-out starts at x 43.6), then fan straight into ESP32 pads 4–10. **The branch to U1 is not routed yet.**
-- **JTAG (not routed yet):** J4 to ESP32 pads 11/12 (TDO/TMS, left column) and 17/18 (TCK/TDI, bottom row; these must cross the USB pair on the back layer), and J4 down to U1's JTAG dogbone vias.
+- **JTAG (routed, hand-planned):** J4 (TC2030) escapes through the gaps between its leg holes: TDO/TMS on the right, TCK on top, TDI on the bottom, 3V3/GND on the left to vias. TDO/TMS run on F into ESP32 pads 11/12, each with one via to a B lane into U1 (TDO through a new dogbone via at (51.1, 31.1)). TCK runs on B into U1 and under the USB pair to pad 17. TDI runs on F with a via into U1, then drops to B under the USB pair to pad 18.
 - **FPGA links:** a front-layer ribbon from the ESP32 bottom-row pads 19–23 to U1's outer balls L1, L2, K1, K2 and J1, in order. GPIO0 runs from pad 27 to F1.
 - **ADC SPI:** back layer, from pads 24, 25, 28 and 29 past U1's col-3/4 balls F4, F3, E4 and E3 (dogbones) down to U21, which is also on the back.
 
