@@ -507,6 +507,15 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Parked off-board for step 2: AE1, BAT1, C1, C14, C16, C30, C45, C48, C51, C52, C54, C81, C84, D12, D14, D15, D28, D29, D53, D54, J4, R7, R11–R13, R18, R24, R25, R27–R30, R32, R33, R35, R66–R70, R75, R80, TH1, U4, U7, U8, U10, Y1.
 - DRC: no clearance / short / hole / edge / keep-out items; courtyard overlaps are the reference's tight cap packing + servo gang; dangling items are escape stubs and plane vias. Zones unfilled.
 
+#### 4.20 Step 1, final – core lowered between the bay ribs (2026-11-08)
+- Supersedes 4.19. Same orientation, moved down ~one FPGA width: **U1 at (45.5, 37.5) rot 180°, U2 at (18.9, 37.5) rot −90°**. Frees the ESP32's left pin column and the top of the board; the BGA ball field (y ≈ 29–46) sits between bay ribs 1 and 2, no back-side core parts on a rib; the camera bank is ~4 mm above J1.
+- **IMU moved off the optical axis** (owner OK; pins can be swapped later): U22 + C76–C78, R74, R76, R77 parked, to be placed above U1 near (45, 18) in step 2. Regulator search used that spot for the 15 mm switcher quiet zone.
+- Regulators on B: **1V1 block (U3) at (26, 20)** next to the core, **3V3 block (U5) at (45, 61)**.
+- **SDRAM routing re-copied in full from the reference** with the exact 180° transform (U2 position check 0.000 mm): 334 tracks + 24 vias, **all SDRAM nets connected**. (A first attempt lost SDRAM pieces to a bad copper classification; redone from a3929f60.)
+- Orphaned copied copper (pieces touching no pad after the moves) removed. `ULX3S_CORE` rule areas re-split (core / 1V1 / 3V3).
+- Parked off-board for step 2 (adds to 4.19): B3, B4, C55–C57, R15, R65, RV3, TH2, Y2 and the IMU group.
+- DRC: no clearance / short / hole / edge / keep-out items; courtyard overlaps = reference cap packing + servo gang; dangling = escape stubs and plane vias. Zones unfilled.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
