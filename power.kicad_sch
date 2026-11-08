@@ -22162,16 +22162,6 @@
 		)
 		(uuid "11ebb244-c5e7-4ede-8cfe-d43dcf9500a5")
 	)
-	(label "ADC_SDO"
-		(at 387.35 218.44 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "165f5202-72a9-46a7-8483-16a4c1391b11")
-	)
 	(label "BAT1_CE"
 		(at 130.81 207.01 180)
 		(effects
@@ -22261,16 +22251,6 @@
 			(justify right bottom)
 		)
 		(uuid "40e999ac-bf93-4402-a692-d58f11074b75")
-	)
-	(label "ADC_DIN"
-		(at 387.35 220.98 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "44454fc4-5d03-4d38-8d12-462c458ba5c8")
 	)
 	(label "VREF_2V5"
 		(at 346.71 231.14 180)
@@ -22692,16 +22672,6 @@
 		)
 		(uuid "e44ff1b1-3b98-49d6-9c80-57f29aa2ad92")
 	)
-	(label "ADC_SCK"
-		(at 387.35 223.52 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e4667247-19f2-468d-90c9-1399c8d0c24e")
-	)
 	(label "TEMP_BAT_CELL1"
 		(at 171.45 184.15 0)
 		(effects
@@ -22782,16 +22752,6 @@
 		)
 		(uuid "f22a160c-c05e-4ef6-88aa-adc628c517be")
 	)
-	(label "ADC_CNV"
-		(at 387.35 215.9 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f29c2555-8382-4b20-bf82-6dd37a74f869")
-	)
 	(label "LED2_A"
 		(at 27.94 226.06 0)
 		(effects
@@ -22832,7 +22792,7 @@
 		)
 		(uuid "ffe24f79-460e-4e5b-924f-422585e7204d")
 	)
-	(global_label "WIFI_GPIO47"
+	(global_label "ADC_CNV"
 		(shape input)
 		(at 387.35 215.9 0)
 		(effects
@@ -23360,7 +23320,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO48"
+	(global_label "ADC_DIN"
 		(shape input)
 		(at 387.35 220.98 0)
 		(effects
@@ -23382,7 +23342,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO36"
+	(global_label "ADC_SDO"
 		(shape input)
 		(at 387.35 218.44 0)
 		(effects
@@ -23954,7 +23914,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO35"
+	(global_label "ADC_SCK"
 		(shape input)
 		(at 387.35 223.52 0)
 		(effects

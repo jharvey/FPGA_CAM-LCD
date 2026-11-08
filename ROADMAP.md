@@ -678,6 +678,15 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - R8 placement.
 - **BAT1 kept at −35°** (owner decision, for easier cell access). Known DRC item: BAT1's courtyard overlaps J1's courtyard (outline only, no copper). Only 0° fits without it since J1 moved left.
 
+#### 4.33 ADC and SD card wired to the FPGA only (owner decision, 2026-11-08)
+- **Architecture:** the FPGA is the main controller; the ESP32 does monitoring and USB and gets SD/ADC data from the FPGA over the serial link (no low-latency need on the ESP32 side). The SD card and the ADC therefore connect to the FPGA only.
+- **ADC done:**
+  - ESP32 SPI pins (pads 24/25/28/29) disconnected.
+  - Nets renamed `WIFI_GPIO47/48/35/36` → `ADC_CNV/ADC_DIN/ADC_SCK/ADC_SDO`; the redundant local ADC_* labels on the power sheet removed.
+  - The FPGA-side route (4.32) is unchanged and connected.
+  - ERC 152: −4 multiple_net_names, +3 pin_not_driven on U1 B1/C1/D1, the usual input-typed FPGA pin artefact.
+- **SD:** moving from the ESP32 to the FPGA (next).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

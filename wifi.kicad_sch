@@ -6280,90 +6280,6 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO47"
-		(shape input)
-		(at 184.15 115.57 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "b9cdeb9e-9961-4aca-ac4f-d9fd4681a2ba")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 115.57 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "WIFI_GPIO48"
-		(shape input)
-		(at 184.15 118.11 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "939a8742-bd8f-4a3f-9f22-58f5cfff1d21")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 118.11 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "WIFI_GPIO35"
-		(shape input)
-		(at 184.15 90.17 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "7d63ac98-8b1c-44ff-a416-df71720fcf0a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 90.17 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "WIFI_GPIO36"
-		(shape input)
-		(at 184.15 92.71 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "a32e541a-03f6-47d3-83b1-6dfa86de6e27")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 92.71 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(no_connect
 		(at 184.15 102.87)
 		(uuid "3c4f78da-2c6f-4c64-8526-c1acc25fa48e")
@@ -6409,5 +6325,20 @@
 			)
 		)
 	)
-
+	(no_connect
+		(at 184.15 115.57)
+		(uuid "4d8c6475-7296-4369-9b18-3326f038dac8")
+	)
+	(no_connect
+		(at 184.15 118.11)
+		(uuid "84faf1be-628e-4cba-a480-63e1c369908a")
+	)
+	(no_connect
+		(at 184.15 90.17)
+		(uuid "0ae5c640-d6b3-4a7a-8ece-66071cf86c38")
+	)
+	(no_connect
+		(at 184.15 92.71)
+		(uuid "1e4328d0-52b7-4253-a04b-44e26d346e10")
+	)
 )

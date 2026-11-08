@@ -11303,7 +11303,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO35"
+	(global_label "ADC_SCK"
 		(shape input)
 		(at 222.25 147.32 0)
 		(effects
@@ -12865,7 +12865,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO48"
+	(global_label "ADC_DIN"
 		(shape input)
 		(at 184.15 147.32 180)
 		(effects
@@ -22400,7 +22400,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO47"
+	(global_label "ADC_CNV"
 		(shape input)
 		(at 222.25 142.24 0)
 		(effects
@@ -22421,7 +22421,7 @@
 			)
 		)
 	)
-	(global_label "WIFI_GPIO36"
+	(global_label "ADC_SDO"
 		(shape input)
 		(at 222.25 144.78 0)
 		(effects
