@@ -575,6 +575,24 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - **JTAG at J4:** the TC2030's middle pads (TCK/TDI) exit only between the leg holes, and TCK/TDI must cross USB to reach ESP32 pads 17/18.
 - **Checks:** DRC has no clearance or short errors, ERC 153, parity only the 5 known SD1 pins. USB, camera and SD1→ESP32 connectivity verified net by net.
 
+#### 4.25 J1 slid left, U5 block parked, camera ribbon redone (2026-11-08)
+- **Kept from the owner's edits:** B0, B1, B2 and H1 moves. Open DRC item: B0 pad 1 is within 0.5 mm of the board-edge arc.
+- **J1 slid 5.08 mm left** (two pin pitches). Pads now run from x 27.26 to 47.58, which frees a back-layer lane right of J1 (x ≈ 49.5–54) for the LCD ribbon to J7. Not rotated: J1 carries the flat camera module, so rotating it would rotate the image. **The lens moves 5.08 mm left of the optical axis** until the camera mount is reconciled (lens-to-header offset still to be measured).
+- **U5 3V3 regulator block parked off-board, to come back:**
+  - Parts: U5, L3, C6–C9, C24, RA3, RB3, RP3.
+  - Its copied copper (48 items) and its ULX3S_CORE clearance rule area moved with it.
+  - It was moved by exactly **+120 mm in x**, so moving it back is a −120 mm shift. Re-place it after the camera/LCD routing.
+- **Parked for step 2:**
+  - Servo series resistors R78–R83 (servos go last).
+  - J1 decoupling C18/C36 and camera pull-ups R14/R17. Their nets are open until placed; R7 was already parked.
+  - Stale dangling vias around the old J1 spot were removed.
+- **Camera ribbon regenerated for the new J1 position:**
+  - All lines are on F.Cu in J1 column order with no crossings, using the same level scheme as 4.24.
+  - **XCLK** now has its own F lane, then a via above J1.7, then B.Cu through the J1.5/J1.7 gap. **R15 is on B just below J1** at (34.25, 55.6), joined to J1.8 on B.
+  - **PCLK** (B12) uses one dogbone via, then B.Cu, entering J1.7 from the upper right through the J1.7/J1.9 gap.
+- **Still not routed:** the SD branch to U1 and JTAG (see 4.24); owner decision pending on keeping the FPGA↔SD connection.
+- **Checks:** DRC has no clearance, short or keep-out errors (only the B0 edge item). ERC 153, parity only the 5 known SD1 pins. Camera, USB and SD1→ESP32 connectivity verified.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
