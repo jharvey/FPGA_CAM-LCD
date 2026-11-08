@@ -476,6 +476,11 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Test vias on unused FPGA balls:** only 4 fit (group `TESTVIAS_UNUSED_FPGA_IO`, 0.4/0.2, untented). The other 54 NC balls have no free via site – the BGA area is full.
 - **Assessment:** the board does not close with this placement on 4 layers. The decisive problem is U1's orientation (SDRAM bank facing the board edge, U2 above) plus the camera/LCD bus leaving the bottom-left; together they saturate the left half. Recommended next step: restore the 4.1 placement intent (U1 rotated so SDRAM faces down, U2 below U1, camera bank toward J1), redo the U1 fan-out, then re-run steps 2–5 – or finish interactively in KiCad (push-and-shove) starting from this state.
 
+#### 4.16 Step 6 – silkscreen (2026-11-08)
+- Reference designators 0.8 mm (1.0 mm on large parts), 0.15 mm stroke, centred, on the part's own side (mirrored on B), placed at the nearest spot that clears pads, exposed vias, other refdes and the board edge; values hidden.
+- **207 refdes on silkscreen** (95 front, 112 back). **45 kept on the Fab layer only** (no free silk area – mostly 0402/0603 caps under U1 and in the dense power block): C8, C10, C11, C25–C29, C31, C32, C37, C47–C53, C59, C61, C66, C68, C70, C72, C82–C84, D3, D11, D12, D53, R1, R43, R45, R51, R55, R60, R66, R67, R71, R83, RA1, RA2, RV3, U14 – use the assembly drawing (Fab) for those.
+- Silk DRC: silk_overlap 199 → 81 (footprint outlines touching neighbours), silk_over_copper 143 → 12, silk_edge 7 → 2.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
