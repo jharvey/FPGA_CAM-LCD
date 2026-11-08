@@ -48,3 +48,5 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 - **JTAG:** J4 to the ESP32 pads 11/12 (left column) and 17/18 (bottom row), and J4 down to U1's dedicated JTAG balls.
 - **FPGA links:** a front-layer ribbon from the ESP32 bottom-row pads 19–23 to U1's outer balls L1, L2, K1, K2 and J1, in order. GPIO0 runs from pad 27 to F1.
 - **ADC SPI:** back layer, from pads 24, 25, 28 and 29 past U1's col-3/4 balls F4, F3, E4 and E3 (dogbones) down to U21, which is also on the back.
+
+J4 is now an SMT 2×3 2.54 mm socket (DNP) on the front: TMS/TDO on the top row, TDI/TCK in the middle, GND/3V3 at the bottom, with the even-numbered pins on the ESP32 side.

@@ -552,6 +552,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
   - B2 moved right to (23.2, 11.0), off the cell-1 spring.
   - C35 moved below B2.
   - Removed a stale SERVO_V via under J_SRV3 pin 2.
+- **J4 (JTAG fallback, DNP) changed to SMT:** `PinSocket_2x03_P2.54mm_Vertical_SMD` on F, centred where the through-hole socket was, at (50.5, 21.5), rotated 180°. Same 2.54 mm pitch and pin numbering, so existing JTAG jumper cables still fit, and the back side under J4 is now free.
 - **Checks:**
   - Netlist verified.
   - ERC 153 (unchanged).
