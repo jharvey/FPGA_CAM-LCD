@@ -20,7 +20,7 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge parts (4.6) and digital core (4.7) placed; rest staged; not routed |
+| 4 | PCB mechanical outline (monocular form) | **In progress** – fixed/edge (4.6), digital core (4.7), analog/power + NTCs (4.8) placed; decoupling/RTC/support/servo staged; not routed |
 | 5 | BOM / JLCPCB / first prototype | Pending |
 
 ---
@@ -308,7 +308,7 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - The bay's bottom side-wall must **bridge x ≈ 28–57** (no contact with the PCB) where J7 and the TFT FPC pass; J7 sits ≈ 7 mm below the bottom cell's edge.
 - Notes for the bay are on Dwgs.User beside the board outline; bay outline and rib lines on B.Fab.
 
-**NTC (TH1):** moved to (36, 37.5) on B, under the bottom line of the middle cell (cell 2 – the warmest, surrounded by the other two). Thermal coupling through a **2 mm compressible silicone thermal pad** (≈ 3 W/m·K, ≈ 5 × 5 mm) between TH1 and the can; nothing else in a 6 × 6 mm area around it. One NTC = bay temperature only, not per-cell.
+**NTC (TH1):** *(superseded by 4.8 – three NTCs beside the − springs)* moved to (36, 37.5) on B, under the bottom line of the middle cell (cell 2 – the warmest, surrounded by the other two). Thermal coupling through a **2 mm compressible silicone thermal pad** (≈ 3 W/m·K, ≈ 5 × 5 mm) between TH1 and the can; nothing else in a 6 × 6 mm area around it. One NTC = bay temperature only, not per-cell.
 
 **IMU (U22) – confirmed at (42.5, 37.5):**
 - On the optical axis at the board centre: not at an edge, between the three screws and directly over the cell-2 cradle and both ribs, so the stiffest region once the bay is fitted.
@@ -386,6 +386,26 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - No USB bridge chip any more (FT231X excluded in 4.5; the ESP32-S3 native USB is the bridge).
 - **Long nets left (straight-line MST):** SD bus SD_CLK/CMD/D0–D3/CD ≈ 73–90 mm (SD1 is fixed bottom-left, the ESP32 top-right, the FPGA taps the same bus) → route as a grouped bus down the left/centre on one inner-adjacent layer, keep the FPGA tap short or consider moving SD1 later; ESP32↔FPGA UART/SPI/GPIO (`WIFI_*`) ≈ 30–59 mm and JTAG ≈ 31–35 mm (low speed, OK); camera/display `GPn/GNn` ≈ 27–41 mm; SDRAM data ≈ 25–33 mm (length-match the SDRAM group during routing); BTN1n/BTN2n ≈ 41 mm to the top buttons (slow).
 - DRC: no courtyard, keep-out, edge or short violations; parity unchanged (5 SD1 pins).
+
+#### 4.8 Analog + power-management placement (2026-11-07, not routed)
+- Far side = **right half (front) + back**, opposite the digital strip (U1/U2/U10/Y1 left, U9 top-right). Every part placed by minimum ratsnest to the already-placed pins, with: switchers, inductors and TP4056s ≥ 15 mm from the IMU spot; back-side parts under the cells ≤ 1.5 mm (0402–0805, SOT-23/363, TSOT, LFCSP, 1008 / SWPA3015 inductors); nothing on the bay ribs / end walls / boss; through-pad parts (TP4056 EP vias, BT tabs, H3/H4) treated as obstacles on both sides.
+
+| Block | Side | Where (board mm) | Parts |
+|---|---|---|---|
+| Reverse FETs | B | next to each + button, x 75.5, y 15.5 / 36 / 56.5 | Q3/Q4/Q5 + C40/C42/C46 |
+| Chargers | F | right strip below the ESP32, ≥ 3 mm apart for heat: U11 (64, 33.5), U13 (72.5, 37.5), U15 (73, 47) | + PROG R20/R22/R41, LEDs D2–D4 + R21/R23/R42, input caps C39/C41/C43 |
+| Ideal diodes / power path | F | U12 (69, 28.5), U14 (74.5, 31.5), U18 (75, 52), U16 (70.5, 55.5), U19 (73.5, 55.5), C73 (67.5, 40) | + ST 0R links, CE links R71–R73, VSYS caps |
+| USB-C input | F / B | U24 ESD (74.5, 64.5) F and D55 (67, 59.5) F next to J17; CH224K U23 (73.5, 70.5) B under J17 | + C79, C80, R84, R85 |
+| Regulators | B | under cell 1, one column each: U3 (50.5, 13), U4 (56, 13), U5 (66, 10.5) with L1–L3 | + input/output caps, feedback RA/RB/Cff, RP1–RP3 net-tie jumpers |
+| ADC + reference | B | under cell 3: U21 (61, 52), REF U17 (66.5, 52.5), LDO U20 (67, 56.5) – ≥ 6 mm from the J1 camera pins | + VADC/VREF decoupling, cell/VSYS dividers R24–R26, R36, R37, R39, R44, R45 + filter caps, NTC pull-ups R43/R60/R61 + C62/C82/C83 |
+| Backlight boost | B (+F) | right of J7: U8 (53.9, 63.3), L4 (58.2, 63.2), D1 (57.7, 70.8) in the gap J7–H4; C38 (1206, 1.6 mm) on F directly above | + R18, R19, C37, C74, C75 |
+| IMU | F | U22 on the optical axis (42.5, 37.5), rot 0 (X/Y = board X/Y) | C76–C78, R76, R77 ring |
+| Power-on / wake / shutdown logic | F | bottom band below J1, x 38–61 | Q1, Q2, D10–D17, D27, R1–R8, R10, R13, R66, C13, C14, C60, D11, D12 |
+
+**Battery NTCs (TH1–TH3, one per cell, read by U21 via `TEMP_BAT_CELL1–3`):** on the back at x 10, y 23.4 / 43.9 / 64.4 – directly beside each − spring (MY-18650-05-J; its courtyard covers x 3.8–18 so nothing can sit under the coil), 6.5 mm below its own cell axis. The NTC's second pin is GND, the same copper as the spring tab: pour GND from the spring tab to the NTC pad (short and wide) so the cell's − cap heats the NTC through the spring and tab. All three sit left of the U1 ball field (x < 12.7) so FPGA heat does not bias them; TH1 is under the SDRAM edge (low power). This replaces the 4.4 single-NTC thermal-pad spot at (36, 37.5).
+
+- **Still staged off-board:** FPGA/SDRAM decoupling and rail caps (C16, C17, C19, C20, C25–C35, C47–C53, RV2, RV3 – go on B under U1/U2 with the BGA fan-out), RTC group (U7, Y2, C54–C57, R65, BAT1), flash/config, camera, ESP32 support (B3, B4 …), LEDs D53/D54, AE1, servo J_SRV1–6 + R78–R83 (last).
+- DRC: no courtyard, keep-out, edge, short or inter-part clearance violations; remaining items are inside fine-pitch footprints + silkscreen. Parity unchanged (5 SD1 pins).
 
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
