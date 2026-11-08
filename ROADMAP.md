@@ -453,6 +453,14 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - ⚠ **Edit the rules with KiCad closed:** the open project overwrote `FCL.kicad_pro` once (net classes, patterns, pre-defined sizes lost) and was restored from git. Net classes appear in *Board Setup → Net Classes*, the pattern table in *Netclass Assignments*, and the 0.1–1.5 mm track / 0.4–0.8 mm via presets in *Pre-defined Sizes*.
 - Result: 351 vias (223 × 0.4/0.2, 128 × 0.6/0.3), 448 short tracks, all in group `FANOUT_5_1`. DRC: **no clearance, mask-bridge, short, hole or edge violations**; 91 `via_dangling` = U1 signal fan-out vias awaiting routes; silkscreen + 5 servo-gang courtyard items as before. Parity: 5 SD1 pins. ERC unchanged (153).
 
+#### 4.12 Routing step 2 – high-speed nets (partial, 2026-11-08)
+- Routed with a scripted grid maze router (A*, 0.1 mm grid, net-class widths/clearances, BGA 0.1 mm escape, rip-up and re-route) – no autorouter. Copper in group `ROUTE_2_HIGHSPEED`; DRC-pruned (no clearance / hole / short violations).
+- **Fixes made on the way:** `FCL.kicad_dru` was silently ignored by KiCad 10 (rule values need explicit `mm` units) – rewritten, the BGA and fine-pitch exceptions now apply in DRC; ESP32 RESET **B4 moved to (7, 44.5)** to open the corridor left of U1; SDRAM decoupling **C34, C35, C16 moved to the back under U2** (they walled in U2's left pin row) and reconnected.
+- The inner layer In2 (+3V3 plane) is used for some bus segments where F/B ran out; the +3V3 plane is still one island.
+- **Routed:** USB (J17 → U24 → ESP32), 25 MHz clock, part of the SDRAM bus, part of the camera/LCD `GPn/GNn` bus.
+- **Still open (59 nets):** most of the SDRAM bus (A0–A3, A6, A10, A11, BA0/1, CKE, nCS/nRAS/nCAS/nWE, DQM0/1, D1, D3–D6, D9–D11, D13, D15), the SD bus (SD_CLK/CMD/D0–D2) and ~28 camera/LCD `GPn/GNn` nets.
+- **Root cause:** placement. With U1 at 180° all 39 SDRAM balls face **left** (toward the board edge and the spring tabs), while U2 sits above U1 – the bus has to squeeze through a ~3.5 mm corridor (≈ 11 tracks per layer). The original 4.1 plan (U1 rotated so the SDRAM bank faces down, U2 below U1) avoids this. Recommended before finishing these buses: either restore that orientation (and redo the U1 fan-out), or finish the buses with KiCad's interactive push-and-shove router.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
