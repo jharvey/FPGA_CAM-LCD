@@ -470,6 +470,12 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Group `ROUTE_4_ANALOG`: RTC crystal (OSCI/OSCO), regulator feedback, ADC reference / supply, part of the cell / VSYS sense dividers and NTC lines, IMU + RTC I²C where space allowed. ANALOG class 0.2 mm / 0.2 mm clearance. DRC clean, planes one island each. Unconnected 282 → ~270.
 - **Still open:** long cross-board runs – `TEMP_BAT_CELL1–3` (NTCs at x 47.6 to U21 on the right), `VBAT1–3_SENSE`, `VSYS_SENSE`, `VREF_SENSE`, `VADC` ×3, `FB1/FB2`, U21 REFIN, IMU I²C / INT and RTC I²C (`FPDI_*`) to U1. These cross the camera/IMU zone and the congested left half; they need the high-speed buses settled first.
 
+#### 4.15 Routing step 5 – low-speed nets, test vias (2026-11-08)
+- Group `ROUTE_5_LOWSPEED`: second pass over every remaining net (buttons, LEDs, flash/config, JTAG, ESP32 strapping, power-on logic, servo PWM, CC lines, plus retries of earlier failures) with rip-up. DRC clean (no clearance / short / hole violations), planes one island each.
+- **Unconnected items: 492 (before routing) → 197.** 134 nets still have at least one open connection: most of the SDRAM bus, the SD bus, ~26 camera/LCD `GPn/GNn`, ESP32↔FPGA (`WIFI_*`, JTAG), flash/config straps, the long NTC / sense lines to U21, IMU / RTC I²C, servo PWM, and the +2V5 / VCCIO / some GND and +3V3 balls under U1.
+- **Test vias on unused FPGA balls:** only 4 fit (group `TESTVIAS_UNUSED_FPGA_IO`, 0.4/0.2, untented). The other 54 NC balls have no free via site – the BGA area is full.
+- **Assessment:** the board does not close with this placement on 4 layers. The decisive problem is U1's orientation (SDRAM bank facing the board edge, U2 above) plus the camera/LCD bus leaving the bottom-left; together they saturate the left half. Recommended next step: restore the 4.1 placement intent (U1 rotated so SDRAM faces down, U2 below U1, camera bank toward J1), redo the U1 fan-out, then re-run steps 2–5 – or finish interactively in KiCad (push-and-shove) starting from this state.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
