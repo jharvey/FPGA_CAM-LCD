@@ -707,6 +707,11 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Result:** no new DRC errors (one copper-sliver warning, F.Cu, to review).
 - **Still to track by hand (outside their plane island):** VSYS pads away from the power-path island, 2V5_3V3 / +2V5 pads around the regulators, R17 / C16 / C47 GND, U1 P9 / P10 (+3V3) and RP1.2 (+1V1).
 
+#### 4.37 Clean-up before hand routing (step 3, 2026-11-08)
+- **Dead copper removed:** every track end and via KiCad DRC flags as dangling (58 at the start, repeated until none), plus dead-end stubs DRC misses because their segments overlap (e.g. the +2V5 stub under U1 at N16). Each stub removal was checked with KiCad's connectivity count, so no real connection was lost. Unconnected items went from 152 to 141 (dead islands no longer count) and DRC reports no new violations.
+- **Groups removed:** all 27 router/generator groups are gone, so items select one by one for manual editing.
+- **3D models:** paths fixed for U7, U10 (SOIC-8 208 mil), U11 / U13 / U15, U21 and J17. J17 uses the GCT USB4105 model, whose footprint has the same pad and hole layout as the HCTL HC-TYPE-C-16P-01A, which has no stock KiCad model. Still without a model: SD1 (Molex 104031-0811, no stock model). Pads-only parts with no model on purpose: J4, H1/H3/H4, AE1, RP1–RP3 (copper jumpers).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
