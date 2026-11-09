@@ -447,15 +447,15 @@
 		(uuid "2c9d3148-a052-4339-89cb-c8a9d0b7b8a4")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3DMODEL_DIR}/Connector_Card.3dshapes/microSD_HC_Molex_104031-0811.step"
+	(model "${KIPRJMOD}/footprints/fcl_local.3dshapes/microSD_Molex_104031-0811.stp"
 		(offset
-			(xyz 0 0 0)
+			(xyz 44.895 -1.55 0.737)
 		)
 		(scale
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz 0 0 0)
+			(xyz 0 0 180)
 		)
 	)
 )
