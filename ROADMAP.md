@@ -712,6 +712,10 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Groups removed:** all 27 router/generator groups are gone, so items select one by one for manual editing.
 - **3D models:** paths fixed for U7, U10 (SOIC-8 208 mil), U11 / U13 / U15, U21 and J17. J17 uses the GCT USB4105 model, whose footprint has the same pad and hole layout as the HCTL HC-TYPE-C-16P-01A, which has no stock KiCad model. Still without a model: SD1 (Molex 104031-0811, no stock model). Pads-only parts with no model on purpose: J4, H1/H3/H4, AE1, RP1–RP3 (copper jumpers).
 
+#### 4.38 FPGA balls moved closer to their targets (step 3, 2026-11-08)
+- Nine open nets moved to the nearest free ball with a free via spot, in schematic and PCB together (see `fpga/IO_REMAP.md`): IMU_SCL/SDA/INT1 to the left edge (P16, K17, K16), SRV_PWM2–6 to the bottom-left corner (D13–D17), WIFI_EN to N3.
+- Checks: all 379 U1 pins match the schematic netlist; ERC unchanged; DRC shows no new violations.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board

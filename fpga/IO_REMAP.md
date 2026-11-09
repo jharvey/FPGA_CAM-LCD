@@ -80,3 +80,19 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 2026-11-08 (step 3): ADC SPI moved to U1 outer balls B1 (CNV), C1 (DIN), D1 (SCK), E1 (SDO) facing U21; IMU_INT1 / IMU_INT2 moved from C1 / D1 to F3 / E3 (IMU is top-left, slow signals). Not used by the FPGA design (no .lpf change).
 
 2026-11-08 (step 3, SD shared): FPGA SD balls are D2 U17, D3 U18, CMD R17, CLK T16, D0 U16, D1 R16 (order chosen so the escape lanes do not cross). SD card detect stays on the ESP32 only; M17 is a no-connect. Not used by the current FPGA design (no .lpf change).
+
+2026-11-08 (step 3, closest balls): nine nets moved to the nearest free U1 ball that has a free via spot, all on 3.3 V banks. None are used by the current FPGA design (no .lpf change).
+
+| Net | old ball | new ball | why |
+|---|---|---|---|
+| IMU_SCL | E7 | P16 (VREF1_3, used as plain I/O; bank 3 needs no VREF) | left edge, faces the IMU in the top-left corner |
+| IMU_SDA | D7 | K17 | left edge |
+| IMU_INT1 | F3 | K16 | left edge; frees clock-capable F3 |
+| SRV_PWM6 | J4 | D17 | bottom-left corner, faces the servo resistors |
+| SRV_PWM4 | P4 | D16 | bottom-left corner |
+| SRV_PWM2 | P2 | D15 | bottom-left corner |
+| SRV_PWM5 | N2 | D14 | bottom-left corner |
+| SRV_PWM3 | P3 | D13 | bottom-left corner; frees PLL inputs P3 / P4 |
+| WIFI_EN | J5 | N3 | about 4 mm closer to R35 |
+
+The left-edge balls N16, N17, M17 and L17 stay free: the back-side decoupling caps cover every via spot next to them. IMU_INT2, BTN1n, BTN2n and FPDI_SDA stay where they are, because the free balls left are no closer to their targets.

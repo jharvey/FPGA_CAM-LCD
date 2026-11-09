@@ -8846,13 +8846,48 @@
 		(color 0 0 0 0)
 		(uuid "82ee060a-e8f9-4e0d-b70f-ea512e49586f")
 	)
-	(no_connect
-		(at 255.27 102.87)
-		(uuid "af0efa9f-b648-4134-a77c-796529aee3e8")
+	(global_label "IMU_SDA"
+		(shape input)
+		(at 255.27 102.87 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0fcf2a74-dce9-492d-978b-9e80f4183b62")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 255.27 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
-	(no_connect
-		(at 217.17 102.87)
-		(uuid "d59e7cc5-1e18-44ce-b67c-2df26ab7aada")
+	(global_label "IMU_INT1"
+		(shape input)
+		(at 217.17 102.87 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "b42f9a3e-cb1d-433f-a48d-075de50600ee")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 217.17 102.87 180)
+			(hide yes)
+			(show_name no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -15650,9 +15685,27 @@
 		(at 217.17 100.33)
 		(uuid "4516db6d-3e87-4b54-a394-6aa1e8109c57")
 	)
-	(no_connect
-		(at 255.27 100.33)
-		(uuid "7e7ed1ee-ce6a-4e2c-ae37-4d93bcaf6439")
+	(global_label "SRV_PWM6"
+		(shape input)
+		(at 255.27 100.33 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left)
+		)
+		(uuid "fbcb8109-85ce-497e-8334-33841f202115")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 255.27 100.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 217.17 148.59)
@@ -15670,9 +15723,27 @@
 		(at 217.17 138.43)
 		(uuid "bb4f18f9-0011-44ac-bc28-6846b7f74b76")
 	)
-	(no_connect
-		(at 255.27 138.43)
-		(uuid "80612762-03b6-4e01-8f83-19c40af296d8")
+	(global_label "IMU_SCL"
+		(shape input)
+		(at 255.27 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1e89c24e-8471-4269-a486-b1c6bcc32ee0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 255.27 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(global_label "SD_CLK"
 		(shape input)

@@ -11866,27 +11866,9 @@
 			)
 		)
 	)
-	(global_label "SRV_PWM4"
-		(shape input)
-		(at 257.81 69.85 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "3fc54030-1639-4595-a95d-db7934785899")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 257.81 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 257.81 69.85)
+		(uuid "88730a3f-47c6-49b4-9e2d-c003cbb73889")
 	)
 	(global_label "JTAG_TMS"
 		(shape input)
@@ -12108,27 +12090,9 @@
 			)
 		)
 	)
-	(global_label "SRV_PWM3"
-		(shape input)
-		(at 219.71 69.85 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "77d644f0-573d-4234-89ff-6770f755f404")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 219.71 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 219.71 69.85)
+		(uuid "d2bb317f-ec55-42c2-b8cf-83c170e489f2")
 	)
 	(global_label "USB_FPGA_D-"
 		(shape input)
@@ -12350,27 +12314,9 @@
 			)
 		)
 	)
-	(global_label "SRV_PWM6"
-		(shape input)
-		(at 219.71 41.91 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "84dfdaf2-9a16-4ed0-a4bc-4270ba49bec8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 219.71 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 219.71 41.91)
+		(uuid "ddec39d2-a7f7-463d-9086-e4152c2ed991")
 	)
 	(global_label "USB5V"
 		(shape input)
@@ -12438,27 +12384,9 @@
 			)
 		)
 	)
-	(global_label "WIFI_EN"
-		(shape input)
-		(at 257.81 41.91 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "947a6628-997f-4fd5-9374-bc156af6db75")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 257.81 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 257.81 41.91)
+		(uuid "c57d611c-1365-4133-8af4-b5c8c67d909f")
 	)
 	(global_label "FTDI_TXDEN"
 		(shape input)
@@ -12570,27 +12498,9 @@
 			)
 		)
 	)
-	(global_label "SRV_PWM5"
-		(shape input)
-		(at 219.71 67.31 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "aa774a84-6fd2-4fe5-8073-b65e82debd93")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 219.71 67.31 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 219.71 67.31)
+		(uuid "e5f9e18b-7be9-42c8-a577-dcd88842bbb5")
 	)
 	(global_label "FTDI_nTXLED"
 		(shape input)
@@ -12922,27 +12832,9 @@
 			)
 		)
 	)
-	(global_label "SRV_PWM2"
-		(shape input)
-		(at 257.81 72.39 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "f7c544a7-f47a-405b-9087-d1770b124e0e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 257.81 72.39 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 257.81 72.39)
+		(uuid "5f513788-b33e-4ae4-ac1b-dc15ae6c5180")
 	)
 	(symbol
 		(lib_id "Device:D_Schottky_Small")
@@ -19510,9 +19402,27 @@
 		(at 219.71 52.07)
 		(uuid "b49615ba-880f-4fe5-9e53-cad09f2e9f1f")
 	)
-	(no_connect
-		(at 219.71 62.23)
-		(uuid "3c958fe6-0f43-4848-af16-ad4dcd09ad13")
+	(global_label "WIFI_EN"
+		(shape input)
+		(at 219.71 62.23 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "a52859dc-7837-47f5-aa95-06bb15d406f4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 219.71 62.23 180)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 219.71 54.61)

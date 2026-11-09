@@ -10275,9 +10275,27 @@
 		(at 389.89 170.18)
 		(uuid "069711e1-0699-41c0-a4f8-271b0bcc9d53")
 	)
-	(no_connect
-		(at 351.79 167.64)
-		(uuid "07d1fcc7-f3b8-4c14-aa74-f21e9ff8e75d")
+	(global_label "SRV_PWM3"
+		(shape input)
+		(at 351.79 167.64 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "bd63a25f-8e25-4b93-8583-99b7a9040d62")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 351.79 167.64 180)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 389.89 177.8)
@@ -10323,9 +10341,27 @@
 		(at 184.15 134.62)
 		(uuid "7a1dce71-d3d9-4040-a984-330b821639d1")
 	)
-	(no_connect
-		(at 351.79 162.56)
-		(uuid "85af383e-46db-4bcc-84da-feacd34cd751")
+	(global_label "SRV_PWM5"
+		(shape input)
+		(at 351.79 162.56 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "4fb951ca-f996-4c5c-9dbf-a4508522f667")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 351.79 162.56 180)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 285.75 111.76)
@@ -10339,9 +10375,27 @@
 		(at 328.93 111.76)
 		(uuid "8f2f8f89-0f1a-4482-beb5-46435cdb4edb")
 	)
-	(no_connect
-		(at 351.79 157.48)
-		(uuid "93a4dc6d-ae22-437d-bde5-2c2f95ebd982")
+	(global_label "SRV_PWM2"
+		(shape input)
+		(at 351.79 157.48 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "387e862e-fce0-4016-b5ff-8e94702c4a96")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 351.79 157.48 180)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 184.15 149.86)
@@ -11831,27 +11885,9 @@
 			)
 		)
 	)
-	(global_label "IMU_SDA"
-		(shape input)
-		(at 223.52 85.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5448076d-8012-4c7e-a68f-bc75507d0cad")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 223.52 85.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 223.52 85.09)
+		(uuid "95bc1ab1-cf26-40a7-9456-ea070b81c437")
 	)
 	(global_label "GP13"
 		(shape input)
@@ -13481,27 +13517,9 @@
 			)
 		)
 	)
-	(global_label "IMU_SCL"
-		(shape input)
-		(at 185.42 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e68f2514-24fb-451c-ba57-6d7cab8eb606")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 185.42 85.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 185.42 85.09)
+		(uuid "9b60dc05-72aa-45a2-8551-23105fd35388")
 	)
 	(global_label "GN23"
 		(shape input)
@@ -22300,9 +22318,27 @@
 			)
 		)
 	)
-	(no_connect
-		(at 389.89 152.4)
-		(uuid "8735a9b3-3979-406b-8db1-e8934cad3df7")
+	(global_label "SRV_PWM4"
+		(shape input)
+		(at 389.89 152.4 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left)
+		)
+		(uuid "fb8fe1e8-2c4c-41ac-80e9-60cc2a6928c6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 389.89 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 	(no_connect
 		(at 222.25 152.4)
@@ -22337,26 +22373,9 @@
 		(at 223.52 72.39)
 		(uuid "cac2b664-6cee-468f-9ca1-4fff05b1b238")
 	)
-	(global_label "IMU_INT1"
-		(shape input)
-		(at 222.25 157.48 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "7c8c691e-8326-42cf-84c3-b3923c36f629")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.25 157.48 0)
-			(hide yes)
-			(show_name no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 222.25 157.48)
+		(uuid "24441132-aa0c-4367-8cdd-93e7d2e4528b")
 	)
 	(global_label "ADC_CNV"
 		(shape input)
