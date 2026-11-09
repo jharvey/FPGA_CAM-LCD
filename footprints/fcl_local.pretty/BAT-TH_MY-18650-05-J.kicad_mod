@@ -31,7 +31,7 @@
 	(fp_line (start 6.90 -12.43) (end 6.90 1.67) (layer F.CrtYd) (width 0.05))
 	(fp_line (start 6.90 1.67) (end -6.90 1.67) (layer F.CrtYd) (width 0.05))
 	(model "${KIPRJMOD}/footprints/fcl_local.3dshapes/BAT-TH_MY-18650-05-J.step"
-		(offset (xyz 0.000 0.000 0.000))
+		(offset (xyz 0 0.525 8.5))
 		(scale (xyz 1 1 1))
 		(rotate (xyz 0 0 180))
 	)
