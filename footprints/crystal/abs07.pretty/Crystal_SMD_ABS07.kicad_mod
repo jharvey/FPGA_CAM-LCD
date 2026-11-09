@@ -37,9 +37,9 @@
     (solder_paste_margin -0.1))
   (pad 4 smd rect (at 1.4 0 270) (size 1.8 1.4) (layers F.Cu F.Paste F.Mask)
     (solder_paste_margin -0.1))
-  (model ${KISYS3DMOD}/Resistor_SMD.3dshapes/R_1206_3216Metric.wrl
-    (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
+  (model ${KIPRJMOD}/footprints/crystal/abs25.3dshapes/abs25.wrl
+    (at (xyz 0 -0.1102362205 0))
+    (scale (xyz 0.3937 0.3937 0.3937))
+    (rotate (xyz 0 0 90))
   )
 )

@@ -13206,13 +13206,13 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/footprints/fcl_local.3dshapes/microSD_Molex_104031-0811.stp"
 			(offset
-				(xyz 44.895 -1.55 0.737)
+				(xyz 44.395 -1.55 0.737)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 180)
+				(xyz -0 -0 -180)
 			)
 		)
 	)
@@ -15370,15 +15370,15 @@
 			(uuid "0e745497-8a5c-4a1f-989d-f005b6dbc650")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_1206_3216Metric.step"
+		(model "${KIPRJMOD}/footprints/crystal/abs25.3dshapes/abs25.wrl"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 -2.8 0)
 			)
 			(scale
-				(xyz 1 1 1)
+				(xyz 0.3937 0.3937 0.3937)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz 0 0 90)
 			)
 		)
 	)

@@ -449,7 +449,7 @@
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/footprints/fcl_local.3dshapes/microSD_Molex_104031-0811.stp"
 		(offset
-			(xyz 44.895 -1.55 0.737)
+			(xyz 44.395 -1.55 0.737)
 		)
 		(scale
 			(xyz 1 1 1)
