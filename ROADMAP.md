@@ -716,6 +716,11 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Nine open nets moved to the nearest free ball with a free via spot, in schematic and PCB together (see `fpga/IO_REMAP.md`): IMU_SCL/SDA/INT1 to the left edge (P16, K17, K16), SRV_PWM2–6 to the bottom-left corner (D13–D17), WIFI_EN to N3.
 - Checks: all 379 U1 pins match the schematic netlist; ERC unchanged; DRC shows no new violations.
 
+#### 4.39 Low-priority FPGA legs unrouted (step 3, 2026-11-10)
+- Removed the copper between U1 and its partner chip on 20 low-priority nets, so they can be rerouted one chip at a time with free choice of FPGA ball: ADC_CNV/DIN/SCK/SDO, IMU_SDA, BTN_PWRn, LED1, SRV_PWM1, WIFI_GPIO0/21/13/14, WIFI_RXD/TXD, WIFI_EN, SHUTDOWN, USER_PROGRAMN, FPDI_SCL/SDA (BTN2n had no FPGA leg). 369 tracks and vias removed, plus 5 dead stubs left on WIFI_GPIO0 and FPDI_SDA.
+- Kept as is: SDRAM, LCD, camera, clock, flash/config, JTAG, power. The SD-card legs were also kept: a maze-router reroute did worse than the existing hand route (2 of 6 nets, 44 vias).
+- DRC: no new violations; unconnected 140 → 163 (one or more per unrouted net).
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
