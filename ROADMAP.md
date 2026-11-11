@@ -732,6 +732,15 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - **Why:** TCK can only leave the TC2030 northwards, and with ESP32 pad 17 it had to loop north and back south around the TDO/TMS lines (48 mm). On pad 11 it now runs on F.Cu across the top of J4 straight into the ESP32, with one via down to U1.
 - **Routes:** TCK F.Cu y 17.25 → x 49.75 → y 20.19 into pad 11, tee via down B lane x 49.75. TDO F.Cu y 21.35 into pad 12, tee via down B x 51.1. TMS F.Cu y 21.65, via at x 50.3 down to U1, via at x 52.0 to B under the USB pair to pad 17. TDI unchanged in plan. BGA dogbones kept.
 - **Lengths:** TCK 48 → 35 mm (3 → 2 vias), TDO 23 mm, TMS 23 → 32 mm (2 → 4 vias), TDI 34 mm. DRC: no JTAG violations; all four nets connected (J4, U1, U9); schematic and PCB agree on U9/J4.
+
+#### 4.42 Circuits parked off-board for re-placement (step 3, 2026-11-11)
+To clear the board for a placement rethink, these groups were moved off the outline with their copper. Each group moved by one fixed offset, so its local routing stays intact. Copper that ran to unmoved parts (U1 balls, BT holders, ESP32) moved too, and those connections now show as ratsnest.
+- **Power traces up 100 mm** (traces and vias only; parts and In1 planes stay): +3V3, +5V, VSYS, VBAT_OR, SD3V3, P1V1, P2V5, VBUS_C, PD_VDD. GND stays. The FPGA BGA power fanout inside the U1 courtyard and short (≤ 2 mm) pad stubs on U2/U9 stay.
+- **Servo, left 100 and down 100 mm:** J_SRV1–6 and R78–R83. They had no copper; it was torn up earlier.
+- **Battery charge / power path, right 100 mm:** U11–U16, U18, U19, Q3–Q5, C39–C43, C46, C58, C73, D2–D4, R20–R23, R41, R42, R46–R48, R51, R55 and R71–R73. The BT11–BT32 holders stay, along with their holder-to-holder links.
+- **ADC, down 100 mm:** U21, U17 (REF3025), U20 (VADC LDO), the ADC caps, TH1–TH3, R43/R60/R61, the VSYS divider R44/R45 and the battery-sense dividers R24–R26, R36, R37, R39 with C44, C45 and C59.
+- **Flash, left 100 mm:** U10, C84, R11, R12 and R27–R30. The FPGA config pull-ups R31–R33 stay.
+- **Cleanup:** after the move I removed one +3V3 stub at U2, one +3V3 via in U1 and a floating GND stub and via at the old U17 spot. The JTAG_TDI tee via at (49.1, 26.8) was already dangling before the move; it is left for review. The In1 `VSYS_powerpath` zone is now isolated because its parts moved.
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
