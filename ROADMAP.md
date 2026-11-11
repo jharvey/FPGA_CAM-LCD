@@ -721,6 +721,11 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - Kept as is: SDRAM, LCD, camera, clock, flash/config, JTAG, power. The SD-card legs were also kept: a maze-router reroute did worse than the existing hand route (2 of 6 nets, 44 vias).
 - DRC: no new violations; unconnected 140 → 163 (one or more per unrouted net).
 
+#### 4.40 SD card rerouted (step 3, 2026-11-11)
+- All SD copper torn up and re-laid. SD1 → ESP32 (U9 pads 4–10) is unchanged in plan: F.Cu only, no vias, nested lanes over the top of SD1. The ESP32 pin order already matches SD1's pad order, so no ESP32 pins were changed.
+- The FPGA leg now joins the bus at the card instead of at the ESP32 fan-out: a via on each SD1 signal pad's stub drops to B.Cu, and a hand-planned 6-line bus runs straight south (corridor x 38.1–39.85) to the existing BGA escapes. FPGA legs went from about 40 mm to 27–35 mm, the B.Cu run east under TH1 is gone, and each net still has 2 vias.
+- Net totals: 65–76 mm (SD_CD 56 mm, ESP32 side only). DRC: no SD violations; all SD nets connected; unconnected back to 163.
+
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
