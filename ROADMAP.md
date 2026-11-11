@@ -741,6 +741,9 @@ To clear the board for a placement rethink, these groups were moved off the outl
 - **ADC, down 100 mm:** U21, U17 (REF3025), U20 (VADC LDO), the ADC caps, TH1–TH3, R43/R60/R61, the VSYS divider R44/R45 and the battery-sense dividers R24–R26, R36, R37, R39 with C44, C45 and C59.
 - **Flash, left 100 mm:** U10, C84, R11, R12 and R27–R30. The FPGA config pull-ups R31–R33 stay.
 - **Cleanup:** after the move I removed one +3V3 stub at U2, one +3V3 via in U1 and a floating GND stub and via at the old U17 spot. The JTAG_TDI tee via at (49.1, 26.8) was already dangling before the move; it is left for review. The In1 `VSYS_powerpath` zone is now isolated because its parts moved.
+- **Second batch (same day):**
+  - **Bucks U3/U4/U5, right 100 mm:** each moved with its inductor, feedback divider, caps (input caps C5/C9 included) and RP1–RP3, plus their local copper. The P1V1/P2V5 traces parked up earlier came back down onto the bucks, so they are connected again.
+  - **RTC U7, left 100 mm:** moved with Y2, C54–C57 and R65. The WAKEUPn traces moved with it, out to D16/D27/R6. BAT1 stays.
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
