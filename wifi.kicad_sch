@@ -2938,7 +2938,7 @@
 		)
 		(uuid "a02e48d0-ddd2-45d4-99d5-40dafdef449e")
 	)
-	(text "ESP32-S3-WROOM-1-N8R2 (U9, LCSC C2913204) - replaces ESP32-WROOM-32 for native USB on the single USB-C port\nUSB: GPIO19 = USB_DN, GPIO20 = USB_DP -> USBLC6 (usbc_pd sheet) -> USB-C J17. Default: built-in USB-Serial-JTAG\n(CDC console + flashing, no DTR/RTS needed). Application firmware may switch to TinyUSB OTG: CDC + MSC (SD card).\nRecovery: hold BOOT (B3, GPIO0) and press RESET (B4, EN) -> ROM download mode over USB-Serial-JTAG.\nSD card: owned by ESP32-S3 (SDMMC 4-bit, same GPIOs as before: CLK 14, CMD 15, D0 2, D1 4, D2 12, D3 13), card detect\nSD_CD on GPIO10 (pull-up R86, low = card inserted). FPGA bank-6 SD pins stay connected: FPGA must keep them Hi-Z.\nECP5 programming: ESP32-S3 bit-bangs JTAG (TCK 18, TMS 5, TDI 16, TDO 17) to SRAM or the config flash.\nADC SPI: SDO GPIO6, DIN GPIO21, SCK GPIO8, CNV GPIO9. FPGA links: GPIO0/1/40/41, UART0 TXD/RXD.\nR56 pulls GPIO0 high (normal boot); EN has RC delay R34/R35 + C81 1 uF. Strapping pins 3, 45, 46 left unconnected."
+	(text "ESP32-S3-WROOM-1-N8R2 (U9, LCSC C2913204) - replaces ESP32-WROOM-32 for native USB on the single USB-C port\nUSB: GPIO19 = USB_DN, GPIO20 = USB_DP -> USBLC6 (usbc_pd sheet) -> USB-C J17. Default: built-in USB-Serial-JTAG\n(CDC console + flashing, no DTR/RTS needed). Application firmware may switch to TinyUSB OTG: CDC + MSC (SD card).\nRecovery: hold BOOT (B3, GPIO0) and press RESET (B4, EN) -> ROM download mode over USB-Serial-JTAG.\nSD card: owned by ESP32-S3 (SDMMC 4-bit, same GPIOs as before: CLK 14, CMD 15, D0 2, D1 4, D2 12, D3 13), card detect\nSD_CD on GPIO10 (pull-up R86, low = card inserted). FPGA bank-6 SD pins stay connected: FPGA must keep them Hi-Z.\nECP5 programming: ESP32-S3 bit-bangs JTAG (TCK GPIO18, TDO GPIO8, TMS GPIO9, TDI GPIO10) to SRAM or the config flash.\nADC SPI: SDO GPIO6, DIN GPIO21, SCK GPIO8, CNV GPIO9. FPGA links: GPIO0/1/40/41, UART0 TXD/RXD.\nR56 pulls GPIO0 high (normal boot); EN has RC delay R34/R35 + C81 1 uF. Strapping pins 3, 45, 46 left unconnected."
 		(exclude_from_sim no)
 		(at 34.29 170.18 0)
 		(effects
@@ -3440,7 +3440,7 @@
 			)
 		)
 	)
-	(global_label "JTAG_TMS"
+	(global_label "JTAG_TDO"
 		(shape input)
 		(at 153.67 97.79 180)
 		(effects
@@ -3836,7 +3836,7 @@
 			)
 		)
 	)
-	(global_label "JTAG_TDO"
+	(global_label "JTAG_TCK"
 		(shape input)
 		(at 184.15 80.01 0)
 		(effects
@@ -3858,7 +3858,7 @@
 			)
 		)
 	)
-	(global_label "JTAG_TCK"
+	(global_label "JTAG_TMS"
 		(shape input)
 		(at 153.67 100.33 180)
 		(effects

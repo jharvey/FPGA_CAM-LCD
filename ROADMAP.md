@@ -135,7 +135,7 @@
 - **USB data path:** J17 D+/D− (A6/B6, A7/B7 joined) → U24 → `USB_DP`/`USB_DN` → ESP32-S3 GPIO20/19. **CC1/CC2 stay on the CH224K**, which runs in PD-only mode (its DP/DM shorted together, not connected to the bus), so PD and USB data coexist. VBUS still feeds `+5V` only through D55, so the TP4056 chargers are unchanged; no higher-voltage path.
 - **Programming the ESP32-S3:** built-in USB-Serial-JTAG (CDC console + flashing, no DTR/RTS). If application firmware switches the PHY to TinyUSB (CDC + MSC), recover with **BOOT (B3) + RESET (B4)** → ROM download mode.
 - **SD card ownership: ESP32-S3** (SDMMC 4-bit, same GPIO numbers as before: CLK 14, CMD 15, D0 2, D1 4, D2 12, D3 13; card detect `SD_CD` on GPIO10, low = card present). Exposed to the PC as **USB Mass Storage** by the S3 firmware. The FPGA bank-6 SD pins (and N5 for `SD_CD`) remain connected: the FPGA bitstream must keep them Hi-Z while the S3 owns the card.
-- **Programming the ECP5 over the same USB-C:** the ESP32-S3 drives the existing JTAG nets (`JTAG_TCK` GPIO18, `JTAG_TMS` GPIO5, `JTAG_TDI` GPIO16, `JTAG_TDO` GPIO17) to load SRAM or program the config flash through the FPGA (esp32ecp5 / openFPGALoader-style bit-bang, triggered over USB CDC or WiFi). No second USB interface.
+- **Programming the ECP5 over the same USB-C:** the ESP32-S3 drives the existing JTAG nets (current pins, see 4.41: `JTAG_TCK` GPIO18, `JTAG_TDO` GPIO8, `JTAG_TMS` GPIO9, `JTAG_TDI` GPIO10) to load SRAM or program the config flash through the FPGA (esp32ecp5 / openFPGALoader-style bit-bang, triggered over USB CDC or WiFi). No second USB interface.
 - **ESP32-S3 GPIO map:** EN = `WIFIEN`; GPIO0 `WIFI_GPIO0` (BOOT, R56 pull-up, FPGA F1); UART0 TXD/RXD to the FPGA (`WIFI_TXD`/`WIFI_RXD`); ADC SPI SDO 6 / DIN 21 / SCK 8 / CNV 9; FPGA links GPIO1 (E9), GPIO40 (N3), GPIO41 (E6). Nets renamed to the S3 GPIO numbers: `WIFI_GPIO19→6`, `22→8`, `26→9`, `25→1`, `27→40`, `35→41`. Strapping pins 3/45/46 and GPIO35–37 left unconnected. *(Superseded by the 4.23 remap; current table in `fpga/ESP32_PINS.md`.)*
 - **Side benefit:** the ESP32 no longer shares the display SPI pins (`GN12/GP12/GN13/GP13`), so that Phase 3 limitation is gone.
 - **Fallback (DNP):** FT231X bridge U6 with micro-B US1 (the old USB-serial + JTAG path), FPGA-USB micro-B US2 and their parts (D8, D9, R9, R40, R49, R50, R52, R53, R54, R63, R64, D20, D21, D23–D26), and the 2×3 JTAG header **J4**. Populating U6 + US1 restores the original ULX3S programming path (the ESP32-S3 must then release the JTAG lines).
@@ -532,8 +532,8 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 
 #### 4.23 ESP32 ↔ FPGA ↔ SD remap; step 1 redone for the owner's placement (2026-11-08)
 - **ESP32-S3 pads re-assigned to face their partners:**
-  - Left column, facing SD1/J4: SD_D2, D3, CMD, CLK, D0, D1, CD on pads 4–10 (GPIO4–7, 15–17), and JTAG TMS/TDO on pads 11/12 (GPIO18/8).
-  - Bottom row, facing U1: JTAG TCK/TDI on pads 17/18 (GPIO9/10), the FPGA UART TXD/RXD on pads 19/20 (GPIO11/12), and the spare links on pads 21–23 (GPIO13/14/21).
+  - Left column, facing SD1/J4: SD_D2, D3, CMD, CLK, D0, D1, CD on pads 4–10 (GPIO4–7, 15–17), and JTAG TCK/TDO on pads 11/12 (GPIO18/8; swapped in 4.41, was TMS/TDO).
+  - Bottom row, facing U1: JTAG TMS/TDI on pads 17/18 (GPIO9/10; TMS was TCK before 4.41), the FPGA UART TXD/RXD on pads 19/20 (GPIO11/12), and the spare links on pads 21–23 (GPIO13/14/21).
   - ADC SPI: CNV/DIN on pads 24/25 (GPIO47/48), SCK/SDO on pads 28/29 (GPIO35/36).
   - Unchanged: GPIO0 on pad 27 and USB on pads 13/14.
   - Strapping pins 3/45/46, GPIO37–42 and UART0 are left unconnected.
@@ -726,6 +726,12 @@ DRC after placement (mechanical categories): no courtyard overlaps, no keep-out 
 - The FPGA leg now joins the bus at the card instead of at the ESP32 fan-out: a via on each SD1 signal pad's stub drops to B.Cu, and a hand-planned 6-line bus runs straight south (corridor x 38.1–39.85) to the existing BGA escapes. FPGA legs went from about 40 mm to 27–35 mm, the B.Cu run east under TH1 is gone, and each net still has 2 vias.
 - Net totals: 65–76 mm (SD_CD 56 mm, ESP32 side only). DRC: no SD violations; all SD nets connected; unconnected back to 163.
 
+
+#### 4.41 J4 / JTAG re-laid with an ESP32 pin swap (step 3, 2026-11-11)
+- **ESP32-S3 JTAG pins swapped** (schematic `wifi.kicad_sch` labels and PCB pad nets together): TCK → pad 11 (GPIO18), TDO → pad 12 (GPIO8), TMS → pad 17 (GPIO9), TDI stays on pad 18 (GPIO10). **Firmware pin map must match: TCK 18, TDO 8, TMS 9, TDI 10.**
+- **Why:** TCK can only leave the TC2030 northwards, and with ESP32 pad 17 it had to loop north and back south around the TDO/TMS lines (48 mm). On pad 11 it now runs on F.Cu across the top of J4 straight into the ESP32, with one via down to U1.
+- **Routes:** TCK F.Cu y 17.25 → x 49.75 → y 20.19 into pad 11, tee via down B lane x 49.75. TDO F.Cu y 21.35 into pad 12, tee via down B x 51.1. TMS F.Cu y 21.65, via at x 50.3 down to U1, via at x 52.0 to B under the USB pair to pad 17. TDI unchanged in plan. BGA dogbones kept.
+- **Lengths:** TCK 48 → 35 mm (3 → 2 vias), TDO 23 mm, TMS 23 → 32 mm (2 → 4 vias), TDI 34 mm. DRC: no JTAG violations; all four nets connected (J4, U1, U9); schematic and PCB agree on U9/J4.
 #### 4.3 Phase 4 checklist
 - [x] Optical axis, outline, zone placement and edge assignment locked (4.1)
 - [x] Footprint-link issues fixed; BT11–BT32 footprints added; J2/J6/H2 excluded from board
