@@ -15,9 +15,9 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 | SD_CLK | SD CLK | 8 | 15 | H2 → J3 | SD1.5 |
 | SD_D0 | SD DAT0 | 9 | 16 | J3 → H3 | SD1.7 |
 | SD_D1 | SD DAT1 | 10 | 17 | H1 → G3 | SD1.8 |
-| JTAG_TDO | FPGA JTAG | 11 | 18 | V4 (fixed) | J4.6 |
-| JTAG_TMS | FPGA JTAG | 12 | 8 | U5 (fixed) | J4.5 |
-| JTAG_TCK | FPGA JTAG | 17 | 9 | T5 (fixed) | J4.4 |
+| JTAG_TCK | FPGA JTAG | 11 | 18 | T5 (fixed) | J4.4 |
+| JTAG_TDO | FPGA JTAG | 12 | 8 | V4 (fixed) | J4.6 |
+| JTAG_TMS | FPGA JTAG | 17 | 9 | U5 (fixed) | J4.5 |
 | JTAG_TDI | FPGA JTAG | 18 | 10 | R5 (fixed) | J4.3 |
 | WIFI_TXD | UART ESP→FPGA | 19 | 11 | K4 → L1 | |
 | WIFI_RXD | UART FPGA→ESP | 20 | 12 | K3 → L2 | |
@@ -30,7 +30,7 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 
 **Left unconnected:**
 - Strapping pins GPIO3, GPIO45 and GPIO46 (pads 15, 26, 16).
-- GPIO37–42 (pads 30–35), which keeps the ESP32's own JTAG (39–42) free.
+- GPIO39–42 (pads 32–35), which keeps the ESP32's own JTAG free. GPIO35–38 and GPIO47 now carry audio (see below).
 - UART0 RXD0/TXD0 (pads 36/37).
 - GPIO1/GPIO2 (pads 39/38).
 
@@ -46,3 +46,17 @@ Nets that moved were renamed to their new GPIO number: `WIFI_GPIO40→13`, `41�
 - **ADC (U21) is FPGA-only (owner decision 2026-11-08):** nets renamed ADC_CNV / ADC_DIN / ADC_SCK / ADC_SDO on U1 balls B1 / C1 / D1 / E1, routed. The ESP32 gets readings from the FPGA over the UART link; ESP32 pads 24/25/28/29 are now unconnected.
 
 J4 is a Tag-Connect TC2030 pad footprint (legged version, no part fitted), used only as a backup JTAG port. Pin numbers are unchanged: 1 GND, 2 3V3, 3 TDI, 4 TCK, 5 TMS, 6 TDO. A TC2030-IDC cable maps them 1:1 onto a 2×3 2.54 mm IDC plug.
+
+## Audio (added 2026-11-12, peripherals.kicad_sch)
+
+These pads were free (no-connect) before. All are plain GPIO on the WROOM-1-N8R2 (quad PSRAM, so 35–37 are usable). The S3's I2S peripheral is matrix-routed, so any of these can be swapped while routing.
+
+| Net | Function | ESP32 pad | ESP32 GPIO | Other end |
+|---|---|---|---|---|
+| I2S_BCLK | I2S bit clock (shared) | 28 | 35 | MK1 SCK, U28 BCLK |
+| I2S_WS | I2S word select (shared) | 29 | 36 | MK1 WS, U28 LRCLK |
+| I2S_SPK | I2S data out to amp | 30 | 37 | U28 DIN |
+| I2S_MIC | I2S data in from mic | 31 | 38 | MK1 SD |
+| AMP_SD | amp shutdown/enable (low = off) | 24 | 47 | U28 SD_MODE, R87 100k to GND |
+
+Note: the ADC SPI line above (GPIO47/48/35/36) is from an older map. The ADC is now FPGA-only: nets ADC_CNV/DIN/SCK/SDO run U1 B1/C1/D1/E1 ↔ U21 and do not touch the ESP32.

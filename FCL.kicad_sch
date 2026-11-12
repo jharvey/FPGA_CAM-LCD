@@ -1598,6 +1598,51 @@
 			)
 		)
 	)
+	(sheet
+		(at 177.8 194.31)
+		(size 19.05 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6cca61a1-62cb-44b3-b8fc-31abae0affd9")
+		(property "Sheetname" "peripherals"
+			(at 177.8 193.471 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "peripherals.kicad_sch"
+			(at 178.054 206.248 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d"
+					(page "13")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

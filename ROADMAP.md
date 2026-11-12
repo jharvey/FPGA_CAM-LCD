@@ -206,6 +206,16 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
 - [ ] Placement: keep away from L1–L3/L4, charger/power-path and servo current paths and from the 18650 cans as far as the board allows. Nothing high-current under it.
 - [ ] Firmware: hard/soft-iron calibration in the finished case (the steel cells are a large fixed distortion). Take headings while the servos and charger are quiet, or compensate. Record the U25 axes relative to U22 and the camera axis.
 
+### Phase 3e – Barometer, distance, microphone, speaker, test points (2026-11-12)
+New sheet `peripherals.kicad_sch` (page 13). On the PCB, all parts are parked as grouped rows just left of the board's top-left corner (BARO, TOF, MIC, AMP, TP), ready for hand placement. Not routed.
+- [x] **Barometer U26 ST LPS22DF** (HLGA-10 2×2 mm, LCSC C3253714). On the IMU I²C bus, SA0 to GND → address **0x5C** (clear of IMU 0x68, compass 0x1E). CS to +3V3 (I²C mode). INT goes to `BARO_INT` on FPGA **M17**. C90/C91 100 nF at Vdd/Vdd_IO. PCB clearance local 0.12 mm (corner pads 0.133 mm apart).
+- [x] **Time-of-flight distance U27 ST VL53L1X** (LCSC **C190004**, 4 m range). IMU I²C at default **0x29**. `TOF_XSHUT` from FPGA **N16** (10k pull-up R88 keeps it on), `TOF_INT` (GPIO1) to FPGA **N17**, 10k pull-up R89. C92 100 nF + C93 4.7 µF. Needs a clear window/cover glass in the case over the sensor.
+- [x] **Microphone MK1 TDK ICS-43434** (I²S MEMS, LCSC C5656610). L/R to GND (left slot). SCK/WS/SD on `I2S_BCLK`/`I2S_WS`/`I2S_MIC`, which go to ESP32 GPIO35/36/38. C94 100 nF. Bottom-port part: needs a hole through the board under its port, plus a case opening.
+- [x] **Speaker amp U28 Maxim MAX98357A** (I²S class D 3.2 W, LCSC C910544), powered from **VSYS** with C95 100 nF + C96 10 µF. Shares BCLK/WS with the mic; DIN on `I2S_SPK` (GPIO37). SD_MODE on `AMP_SD` (GPIO47) with R87 100k to GND, so it stays off until the ESP32 drives the pin high. GAIN_SLOT open = 9 dB. Speaker on **J8** JST-SH 2-pin (C160388). Keep OUTP/OUTN short and wide, away from the mic and analogue parts.
+- [x] **Test points TP1–TP13** (1 mm pads, not in BOM): GND×2, +3V3, +1V1, +2V5, VSYS, +5V, IMU_SCL, IMU_SDA, FPDI_SCL, FPDI_SDA, WIFI_TXD, WIFI_RXD.
+- [ ] Place and route all of the above; drill the mic port hole; check the I²C bus load (4 devices + pull-ups R76/R77).
+- [ ] .lpf/firmware: add M17/N16/N17 (and L17) to the FPGA constraints when used; ESP32 I2S driver on 35/36/37/38, AMP_SD on 47.
+
 ### Phase 3c – RC servo headers (DNP for first prototype)
 - [x] New sheet `servo.kicad_sch`: 6× 1x3 2.54 mm headers **J_SRV1–J_SRV6** (`PinHeader_1x03_P2.54mm_Vertical`), **all DNP**
 - [x] Pinout (standard RC servo): **1 = Signal** (1–2 ms pulse), **2 = +V (`SERVO_V`)**, **3 = GND**

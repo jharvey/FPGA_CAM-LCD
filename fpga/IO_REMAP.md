@@ -95,4 +95,4 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 | SRV_PWM3 | P3 | D13 | bottom-left corner; frees PLL inputs P3 / P4 |
 | WIFI_EN | J5 | N3 | about 4 mm closer to R35 |
 
-The left-edge balls N16, N17, M17 and L17 stay free: the back-side decoupling caps cover every via spot next to them. IMU_INT2, BTN1n, BTN2n and FPDI_SDA stay where they are, because the free balls left are no closer to their targets.
+The left-edge balls N16, N17, M17 and L17 were left free at first, because the back-side decoupling caps cover every via spot next to them. On 2026-11-12 they were given slow sensor signals (a via can be found when routing, or the caps nudged): **L17** MAG_DRDY (U25 compass), **M17** BARO_INT (U26 barometer), **N16** TOF_XSHUT (U27 distance sensor, FPGA output), **N17** TOF_INT (U27, open-drain with a 10k pull-up R89). None are in the .lpf yet. IMU_INT2, BTN1n, BTN2n and FPDI_SDA stay where they are, because the free balls left are no closer to their targets.
