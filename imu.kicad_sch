@@ -9,6 +9,326 @@
 		(rev "0.1")
 	)
 	(lib_symbols
+		(symbol "Sensor_Magnetic:LIS2MDL"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at -8.89 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LIS2MDL"
+				(at 7.62 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
+				(at 30.48 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.st.com/resource/en/datasheet/lis2mdl.pdf"
+				(at 38.1 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Ultra-low-power, 3-axis digital output magnetometer, LGA-12"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "digital magnetometer"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LGA*2x2mm*P0.5mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LIS2MDL_0_1"
+				(rectangle
+					(start -10.16 10.16)
+					(end 10.16 -10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LIS2MDL_1_1"
+				(pin input line
+					(at -12.7 2.54 0)
+					(length 2.54)
+					(name "SCL/SPC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 5.08 0)
+					(length 2.54)
+					(name "~{CS}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 0 0)
+					(length 2.54)
+					(name "SDA/SDI/SDO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 12.7 -2.54 180)
+					(length 2.54)
+					(name "C1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 5.08 180)
+					(length 2.54)
+					(name "DRDY"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(alternate "INT" output line)
+					(alternate "SDO" output line)
+				)
+				(pin passive line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 12.7 270)
+					(length 2.54)
+					(name "Vdd"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 2.54 12.7 270)
+					(length 2.54)
+					(name "Vdd_IO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -10.16 -7.62 0)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -677,7 +997,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "IMU - TDK InvenSense ICM-42688-P (LCSC C1850418, JLCPCB extended part)\nI2C mode: AP_CS = VDDIO, address 0x68 (AP_AD0 = GND). Bus to FPGA: IMU_SCL E7, IMU_SDA D7,\nIMU_INT1 C1, IMU_INT2 D1 (pin 9 can be INT2 or FSYNC input, e.g. camera frame sync from FPGA).\nDecoupling per DS-000347 Table 10: VDD 0.1 uF + 2.2 uF, VDDIO 10 nF. Pull-ups 4.7k to +3V3."
+	(text "IMU - TDK InvenSense ICM-42688-P (LCSC C1850418, JLCPCB extended part)\nI2C mode: AP_CS = VDDIO, address 0x68 (AP_AD0 = GND). Bus to FPGA: IMU_SCL P16, IMU_SDA K17,\nIMU_INT1 K16, IMU_INT2 E3 (pin 9 can be INT2 or FSYNC input, e.g. camera frame sync from FPGA).\nDecoupling per DS-000347 Table 10: VDD 0.1 uF + 2.2 uF, VDDIO 10 nF. Pull-ups 4.7k to +3V3."
 		(exclude_from_sim no)
 		(at 76.2 50.8 0)
 		(effects
@@ -1834,5 +2154,834 @@
 				)
 			)
 		)
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:LIS2MDL")
+		(at 203.2 101.6 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "55427c1e-fe0f-4133-86f7-921e399f47eb")
+		(property "Reference" "U25"
+			(at 194.31 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LIS2MDL"
+			(at 210.82 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
+			(at 203.2 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lis2mdl.pdf"
+			(at 203.2 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Ultra-low-power, 3-axis digital output magnetometer, LGA-12"
+			(at 203.2 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C919695"
+			(at 203.2 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "802f7c2d-cdf7-40cd-a793-48bd59569496")
+		)
+		(pin "2"
+			(uuid "542ea45b-8d65-4040-a48a-08310664dd1f")
+		)
+		(pin "3"
+			(uuid "d012c448-1476-48ab-9672-dd3ef9c68c23")
+		)
+		(pin "4"
+			(uuid "a8847ff8-0372-46bf-9a36-c2b09c97e5ee")
+		)
+		(pin "5"
+			(uuid "a0ed997b-a775-4345-975e-d511a4d50aea")
+		)
+		(pin "6"
+			(uuid "24333018-4d74-4e3f-b2da-967c7489ea6b")
+		)
+		(pin "7"
+			(uuid "87581a93-0d03-473e-a13b-d1751227659e")
+		)
+		(pin "8"
+			(uuid "6706c971-b3a9-4bea-b2ff-a033eb3afaeb")
+		)
+		(pin "9"
+			(uuid "b3f40fca-7731-42d2-a264-1d129687c10f")
+		)
+		(pin "10"
+			(uuid "add99101-797e-4859-a3ce-628a35c4ddde")
+		)
+		(pin "11"
+			(uuid "3707157d-9d16-40ad-8317-0ae59524fa4b")
+		)
+		(pin "12"
+			(uuid "3c4d7821-a6d8-4d0c-b2a7-9ad784e67ffc")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/a63f1f21-7b45-42d6-bee3-56ce42917714"
+					(reference "U25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 190.5 96.52 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f77c9e3b-b29f-4578-b622-baffc5429c19")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 190.5 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "IMU_SCL"
+		(shape input)
+		(at 190.5 99.05999999999999 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ac58f7c7-b1d4-434d-a7c2-97ebb71b495c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 190.5 99.05999999999999 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "IMU_SDA"
+		(shape bidirectional)
+		(at 190.5 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "43ee6a9c-7ed8-445c-9516-b6bbc6b9f438")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 190.5 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "MAG_DRDY"
+		(shape output)
+		(at 215.89999999999998 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c05dfd1a-4889-4ce6-8938-d64d5ca72e3e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 215.89999999999998 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(label "MAG_C1"
+		(at 215.89999999999998 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "968a9f05-ad78-4a95-b5c4-e95fdb3b0769")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 203.2 114.3 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8e9bd503-d2c0-403b-8976-d948ea16130c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 203.2 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 203.2 88.89999999999999 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6cdcba14-b4b2-4d78-9211-fdf24c90b04a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 203.2 88.89999999999999 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 205.73999999999998 88.89999999999999 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e8cca45c-0ff1-4833-91e4-9fde4db6c67e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 205.73999999999998 88.89999999999999 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 228.6 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "33b52ddc-bfd0-40d7-8ad4-92ff03c91032")
+		(property "Reference" "C86"
+			(at 230.505 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "220nF"
+			(at 230.505 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 228.6 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 228.6 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 228.6 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C326805"
+			(at 228.6 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "597a2fa4-d699-45d5-9db2-835cf22914cb")
+		)
+		(pin "2"
+			(uuid "020daf99-0ada-4a23-b263-a584a2e7cb98")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/a63f1f21-7b45-42d6-bee3-56ce42917714"
+					(reference "C86")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "MAG_C1"
+		(at 228.6 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc7f95e7-4dce-4e89-a6db-544fd4ccd6ef")
+	)
+	(global_label "GND"
+		(shape input)
+		(at 228.6 113.03 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "813dbe26-5511-40c7-acfc-e74f097792ab")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 228.6 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 241.3 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ca98043f-fad3-4891-add7-74a18abf31d5")
+		(property "Reference" "C87"
+			(at 243.205 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 243.205 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 241.3 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 241.3 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 241.3 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
+			(at 241.3 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a4521039-94b1-41ee-887b-4921635ca4bb")
+		)
+		(pin "2"
+			(uuid "fbb64285-2640-4a8f-95e9-da3818e76869")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/a63f1f21-7b45-42d6-bee3-56ce42917714"
+					(reference "C87")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 241.3 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "af164612-de48-408d-ac28-da93e51b50ef")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 241.3 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape input)
+		(at 241.3 113.03 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "257363e1-2c03-4b07-8482-fa2fde696c9f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 241.3 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 251.46 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "770c9a01-7434-4c25-b71d-ec7c29666a80")
+		(property "Reference" "C88"
+			(at 253.365 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 253.365 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 251.46 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 251.46 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 251.46 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C15850"
+			(at 251.46 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dac37454-8b7a-4ec9-a22e-015759598445")
+		)
+		(pin "2"
+			(uuid "62c0f744-bfc5-4fca-bb4c-cb42f1b1c18a")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/a63f1f21-7b45-42d6-bee3-56ce42917714"
+					(reference "C88")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 251.46 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a74c0156-e532-4b87-aaf1-e320149fc09d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 251.46 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape input)
+		(at 251.46 113.03 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fb793c35-7ee9-469e-b940-24f8f12a3ab2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 251.46 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 261.62 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b63e0faa-8fd9-44cc-a9a4-169924b455a0")
+		(property "Reference" "C89"
+			(at 263.525 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 263.525 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 261.62 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 261.62 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 261.62 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
+			(at 261.62 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b66ac925-c5a7-4b44-9584-0f7a661a56dc")
+		)
+		(pin "2"
+			(uuid "339950aa-703a-4bdb-880e-3e123fd5d807")
+		)
+		(instances
+			(project "FCL"
+				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/a63f1f21-7b45-42d6-bee3-56ce42917714"
+					(reference "C89")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(global_label "+3V3"
+		(shape input)
+		(at 261.62 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d5bdc177-0c52-437f-a456-9ab54b34bde1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 261.62 105.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape input)
+		(at 261.62 113.03 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d126ddf8-8dbe-46b1-abca-ec1381df2633")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 261.62 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(text "Magnetometer (compass) - ST LIS2MDL, LCSC C919695 (JLCPCB extended part)\nI2C address 0x1E on the IMU bus (IMU_SCL/IMU_SDA, pull-ups R76/R77).\nCS tied high = I2C. DRDY -> FPGA ball L17 (MAG_DRDY).\nC86 220 nF low-ESR right at pins 5/6 (C1 pulse current).\nC87 100 nF + C88 10 uF at pin 9 (Vdd), C89 100 nF at pin 10 (Vdd_IO).\nPlace away from inductors, battery/charge/servo currents and steel.\nFirmware: hard/soft-iron calibration in the finished case."
+		(exclude_from_sim no)
+		(at 180.34 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "64b67765-df13-49f6-8ad7-232de7e8d311")
 	)
 )

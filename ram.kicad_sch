@@ -8846,6 +8846,28 @@
 		(color 0 0 0 0)
 		(uuid "82ee060a-e8f9-4e0d-b70f-ea512e49586f")
 	)
+	(global_label "MAG_DRDY"
+		(shape input)
+		(at 255.27 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "eabf80a2-3809-4afc-b785-7c708f6efad4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 255.27 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
 	(global_label "IMU_SDA"
 		(shape input)
 		(at 255.27 102.87 0)
@@ -15710,10 +15732,6 @@
 	(no_connect
 		(at 217.17 148.59)
 		(uuid "a43424b9-f5e7-49df-9823-b15462d19fc0")
-	)
-	(no_connect
-		(at 255.27 148.59)
-		(uuid "4b03db3e-a93e-4c15-8fc8-e914cfe866e1")
 	)
 	(no_connect
 		(at 217.17 143.51)

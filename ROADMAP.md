@@ -197,6 +197,15 @@ Local labels (`LCD_*`, `CAM_*`) are descriptive aliases on each sheet; the `GN*`
   (FPGA pins reuse balls freed in Phase 3. INT2 pin can instead be used as FSYNC, e.g. camera frame sync from the FPGA; the ESP32 can reach the IMU through the FPGA.)
 - [ ] Phase 4: place U22 rigidly near the board's centre of mass, away from the boost inductor / switching regulators; record its axis orientation relative to the camera optical axis.
 
+### Phase 3d – Magnetometer / compass (2026-11-12)
+- [x] Part: ST **LIS2MDL** (3-axis, ±50 gauss, LGA-12 2×2 mm, 1.71–3.6 V). LCSC **C919695**, JLCPCB extended part; stock looked thin, so re-check at order time. KiCad library symbol `Sensor_Magnetic:LIS2MDL` and footprint `Package_LGA:LGA-12_2x2mm_P0.5mm`. U25 on `imu.kicad_sch`.
+- [x] Bus: shares the IMU I²C (`IMU_SCL`/`IMU_SDA`, pull-ups R76/R77). Address **0x1E**, which does not clash with the IMU at 0x68. CS (pin 3) tied to +3V3 selects I²C.
+- [x] `MAG_DRDY` (pin 7 INT/DRDY) goes to FPGA ball **L17** (PR50B), the free ball beside IMU_SDA (K17) on the same bank. It can be remapped when routing.
+- [x] Per datasheet DS12144 §5: **C86 220 nF** (C326805) low-ESR right at pins 5/6, which carry high current pulses. **C87 100 nF** (C1525) + **C88 10 µF** (C15850, ceramic instead of the datasheet's aluminium) at pin 9 Vdd. **C89 100 nF** at pin 10 Vdd_IO. NC pins 2/11/12 are left open (datasheet: internally not connected).
+- [x] PCB: footprints added and linked to the schematic, nets set, solder-mask margin 0 like U22. First placement is the nearest free F.Cu spot to U22, about (16.4, 5.0), next to the power-button parts. Not routed.
+- [ ] Placement: keep away from L1–L3/L4, charger/power-path and servo current paths and from the 18650 cans as far as the board allows. Nothing high-current under it.
+- [ ] Firmware: hard/soft-iron calibration in the finished case (the steel cells are a large fixed distortion). Take headings while the servos and charger are quiet, or compensate. Record the U25 axes relative to U22 and the camera axis.
+
 ### Phase 3c – RC servo headers (DNP for first prototype)
 - [x] New sheet `servo.kicad_sch`: 6× 1x3 2.54 mm headers **J_SRV1–J_SRV6** (`PinHeader_1x03_P2.54mm_Vertical`), **all DNP**
 - [x] Pinout (standard RC servo): **1 = Signal** (1–2 ms pulse), **2 = +V (`SERVO_V`)**, **3 = GND**
