@@ -1549,6 +1549,10 @@
     [
       "46e043b3-b829-4991-88bc-d0e611abe5a4",
       "usbc_pd"
+    ],
+    [
+      "6cca61a1-62cb-44b3-b8fc-31abae0affd9",
+      "peripherals"
     ]
   ],
   "text_variables": {},
