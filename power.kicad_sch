@@ -30473,7 +30473,7 @@
 				)
 			)
 		)
-		(property "Value" "PTS645"
+		(property "Value" "PWR"
 			(at 52.07 114.3 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30483,7 +30483,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS645Sx43SMTR92"
+		(property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
 			(at 55.88 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -30494,7 +30494,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "http://www.ckswitches.com/media/1471/pts645.pdf"
+		(property "Datasheet" "~"
 			(at 55.88 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -30505,7 +30505,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Push button"
 			(at 55.88 116.84 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30515,95 +30515,7 @@
 				)
 			)
 		)
-		(property "MNF1_URL" "www.ckswitches.com"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "MPN" "PTS645SL50SMTR92 LFS"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Mouser" "611-PTS645SL50SMTR92"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Digikey" "CKN9088CT-ND"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Newark" "15N4500"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Newar_k2" "79AH5908"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C285463"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "price700_LCSC" "0.09966$"
-			(at 55.88 116.84 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Koncar" "FSW001"
+		(property "LCSC" ""
 			(at 55.88 116.84 0)
 			(hide yes)
 			(show_name no)
