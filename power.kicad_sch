@@ -1881,7 +1881,10 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:Crystal_GND23"
+		(symbol "Device:Crystal"
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -1892,25 +1895,23 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "Y"
-				(at 3.175 5.08 0)
+				(at 0 3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "Crystal_GND23"
-				(at 3.175 3.175 0)
+			(property "Value" "Crystal"
+				(at 0 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
 			(property "Footprint" ""
@@ -1935,31 +1936,9 @@
 					)
 				)
 			)
-			(property "Description" "Four pin crystal, GND on pins 2 and 3"
+			(property "Description" "Two pin crystal"
 				(at 0 0 0)
 				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property private "KLC_S3.3" "The rectangle is not a symbol body but a graphical element"
-				(at 0 -12.7 0)
-				(show_name yes)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property private "KLC_S4.1" "Some pins are on 50mil grid to make the symbol small"
-				(at 0 -15.24 0)
-				(show_name yes)
 				(do_not_autoplace no)
 				(hide yes)
 				(effects
@@ -1990,10 +1969,10 @@
 					)
 				)
 			)
-			(symbol "Crystal_GND23_0_1"
+			(symbol "Crystal_0_1"
 				(polyline
 					(pts
-						(xy -2.54 2.286) (xy -2.54 3.556) (xy 2.54 3.556) (xy 2.54 2.286)
+						(xy -2.54 0) (xy -1.905 0)
 					)
 					(stroke
 						(width 0)
@@ -2005,31 +1984,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.54 0) (xy -2.032 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -2.286) (xy -2.54 -3.556) (xy 2.54 -3.556) (xy 2.54 -2.286)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.032 -1.27) (xy -2.032 1.27)
+						(xy -1.905 -1.27) (xy -1.905 1.27)
 					)
 					(stroke
 						(width 0.508)
@@ -2052,31 +2007,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 -3.81) (xy 0 -3.556)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.032 0) (xy 2.54 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.032 -1.27) (xy 2.032 1.27)
+						(xy 1.905 -1.27) (xy 1.905 1.27)
 					)
 					(stroke
 						(width 0.508)
@@ -2086,8 +2017,20 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 2.54 0) (xy 1.905 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 			)
-			(symbol "Crystal_GND23_1_1"
+			(symbol "Crystal_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 1.27)
@@ -2107,9 +2050,9 @@
 					)
 				)
 				(pin passive line
-					(at 0 -5.08 90)
+					(at 3.81 0 180)
 					(length 1.27)
-					(name "G"
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2117,43 +2060,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 90)
-					(length 1.27)
-					(hide yes)
-					(name "G"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 1.27)
-					(name "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15557,10 +15463,6 @@
 		(uuid "ffdb4040-833f-4f9c-8e13-93d76ea7b944")
 	)
 	(no_connect
-		(at 17.78 92.71)
-		(uuid "69aac668-0e22-4a68-9165-f99e1f002d55")
-	)
-	(no_connect
 		(at 54.61 228.6)
 		(uuid "9be30e58-77ab-4280-a3b4-a7169f5b0527")
 	)
@@ -15571,10 +15473,6 @@
 	(no_connect
 		(at 54.61 191.77)
 		(uuid "dc618082-00b6-4a9e-9b28-399779d032ac")
-	)
-	(no_connect
-		(at 27.94 92.71)
-		(uuid "ea398a65-24b9-4d8c-bcde-18829410e376")
 	)
 	(wire
 		(pts
@@ -29090,7 +28988,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Crystal_GND23")
+		(lib_id "Device:Crystal")
 		(at 22.86 92.71 270)
 		(mirror x)
 		(unit 1)
@@ -29123,7 +29021,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "abs07:Crystal_SMD_ABS07"
+		(property "Footprint" "Crystal:Crystal_SMD_MicroCrystal_CC8V-T1A-2Pin_2.0x1.2mm"
 			(at 22.86 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -29134,7 +29032,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.iqdfrequencyproducts.com/products/pn/LFXTAL016178Reel.pdf"
+		(property "Datasheet" "https://www.microcrystal.com/fileadmin/Media/Products/32kHz/Datasheet/CM8V-T1A.pdf"
 			(at 22.86 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -29145,7 +29043,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "32.768 kHz tuning-fork crystal, 2.0 x 1.2 mm, CL 6 pF, 70 kOhm max ESR"
 			(at 22.86 92.71 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29155,51 +29053,7 @@
 				)
 			)
 		)
-		(property "MNF1_URL" "www.iqdfrequencyproducts.com"
-			(at 22.86 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "MPN" "LFXTAL016178REEL"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN2" "CM7V-T1A-32.768k-9pF-20PPM-TA-QA T3"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet3" "http://www.iqdfrequencyproducts.com/products/pn/LFXTAL003000Reel.pdf"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN3" "LFXTAL003000Reel"
+		(property "MNF1_URL" "www.microcrystal.com"
 			(at 22.86 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -29210,7 +29064,7 @@
 				)
 			)
 		)
-		(property "Mouser" "520-.327-6-34BT"
+		(property "MPN" "CM8V-T1A-32.768kHz-6pF-20PPM-TA-QC"
 			(at 22.86 92.71 90)
 			(hide yes)
 			(show_name no)
@@ -29220,171 +29074,11 @@
 					(size 1.27 1.27)
 				)
 			)
-		)
-		(property "Mouse_r0" "449-LFXTAL016178CUTT"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouse_r1" "449-LFXTAL016178REEL"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouse_r2" "428-201568-MG03"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouse_r3" "815-ABS25-32.768KHZT"
-			(at 22.86 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Mouse_r4" "710-830054236"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouse_r5" "815-ABS0712032.768KT"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Digikey" "535-11937-1-ND"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Digike_y1" "1923-1021-1-ND"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Digike_y2" "1923-1019-1-ND"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Newark" "94X0923"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C252402"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "TME" "32.768K-855MXR"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "price100_TME" "0.30226$"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Koncar" "FQ002"
-			(at 22.86 92.71 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "b44791cf-b9d5-43aa-a0a0-a01d115fb6e1")
 		)
 		(pin "1"
 			(uuid "2dc3f6bc-6771-4619-ad12-c5c3d1119d1b")
 		)
-		(pin "3"
-			(uuid "94daf275-cbcf-47bb-b938-a84a6b4713fd")
-		)
-		(pin "4"
+		(pin "2"
 			(uuid "cefb673f-d634-4c89-af63-2fe376635b5f")
 		)
 		(instances

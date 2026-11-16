@@ -16868,573 +16868,6 @@
 			)
 		)
 	)
-	(footprint "abs07:Crystal_SMD_ABS07"
-		(layer "F.Cu")
-		(uuid "6326b241-9803-48fb-98d5-5ad4546b0f0f")
-		(at -61.145 155.71 180)
-		(descr "Abracon ABS07 Plastic SMD Crystal https://www.mouser.com/datasheet/2/3/ABS07_120_32_768kHz_T-218607.pdf")
-		(tags "plastic smd crystal")
-		(property "Reference" "Y2"
-			(at 0 2.8 90)
-			(layer "F.SilkS")
-			(uuid "1773826c-b0f7-40aa-bbfd-5618077990df")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "32768Hz"
-			(at 0.496 1.478 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "7d31c362-5afd-4f34-9392-3b9d6b54cb3c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.iqdfrequencyproducts.com/products/pn/LFXTAL016178Reel.pdf"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bea63eef-2ef7-4f4a-b04f-de6085d3c280")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8d633072-f299-497c-8c3f-08b75f0a703b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MNF1_URL" "www.iqdfrequencyproducts.com"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "f6023100-431f-42e9-b773-5376b7f620ac")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN" "LFXTAL016178REEL"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d367d787-3266-4238-a542-b0c856f60386")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN2" "CM7V-T1A-32.768k-9pF-20PPM-TA-QA T3"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "407dc248-520c-42c8-be7a-f96342156e12")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet3" "http://www.iqdfrequencyproducts.com/products/pn/LFXTAL003000Reel.pdf"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a0e95073-3d62-425f-aa65-1c8fdc2e3889")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN3" "LFXTAL003000Reel"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b9f44c8c-e245-45ba-a6da-ab4fe1c83c00")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouser" "520-.327-6-34BT"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "95ce836e-b214-454d-99e0-412e9284b930")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r0" "449-LFXTAL016178CUTT"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "485e6cfb-fa71-4d82-a37a-9da996c90e3d")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r1" "449-LFXTAL016178REEL"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b28cff95-d37e-49f8-8dc3-c870d55be7db")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r2" "428-201568-MG03"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "dffed4c8-ba69-4032-9142-4b53656d8799")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r3" "815-ABS25-32.768KHZT"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "caf54da4-c511-40a9-8670-615daf644c4c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r4" "710-830054236"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "67d2f417-c9eb-46f5-bf65-3e4bfeb215c8")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouse_r5" "815-ABS0712032.768KT"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "410924eb-7848-45ed-bcf3-d42056734130")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Digikey" "535-11937-1-ND"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "51d478c1-276e-4c19-a84f-12b773845c63")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Digike_y1" "1923-1021-1-ND"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2e52ab00-270e-4dbe-a645-9000e3535ec8")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Digike_y2" "1923-1019-1-ND"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c7c397dc-64e0-4a15-aac5-0ec4ae1fa053")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Newark" "94X0923"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8967c0a9-fa8e-4177-a16c-35574c0354bd")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" "C252402"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "19a2877f-0f46-4fe6-8c36-f5d30820c1da")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "TME" "32.768K-855MXR"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4da61ffc-b98e-4826-9180-d2859ffce89c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "price100_TME" "0.30226$"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "30d8f6dc-07ce-4881-9d72-0b572da6892c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Koncar" "FQ002"
-			(at 0 0 180)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "963f6238-4ff1-4a59-87fc-407715e55037")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "Crystal*")
-		(path "/00000000-0000-0000-0000-000058d51cad/00000000-0000-0000-0000-000058d85aab")
-		(sheetname "/power/")
-		(sheetfile "power.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4")
-			)
-		)
-		(attr smd)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start 1.8 1)
-			(end 1.8 4.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "428a48a5-25a5-4c31-b91a-4c9648b5093d")
-		)
-		(fp_line
-			(start 0.4 6.4)
-			(end -0.4 6.4)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "8d2fa218-b480-4692-9a45-2a314d76ff01")
-		)
-		(fp_line
-			(start 0.4 0)
-			(end -0.4 0)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "3951c813-de4a-4225-9a0f-e2946288d9d8")
-		)
-		(fp_line
-			(start 0.4 -0.8)
-			(end -0.4 -0.8)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "7dae76c3-5f9d-4a69-9516-17f886ca89df")
-		)
-		(fp_line
-			(start -0.4 -1.2)
-			(end -0.4 -0.8)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "11b46525-4c50-4f9f-9c2f-e95c72293656")
-		)
-		(fp_line
-			(start -1.8 1.2)
-			(end -1.8 4.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "b317fad8-26c3-44ff-875c-8ffe90586563")
-		)
-		(fp_line
-			(start -1.8 1.2)
-			(end -2.4 1.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "98c41bb9-20ab-4f6b-ab94-4ac24c44a246")
-		)
-		(fp_line
-			(start -2.4 1.2)
-			(end -2.4 -1.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "1eb24827-a72c-4504-b228-9e5bc732c324")
-		)
-		(fp_line
-			(start -2.4 -1.2)
-			(end -0.4 -1.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "e707992d-48b6-4463-8722-159322e3e3e5")
-		)
-		(fp_line
-			(start 2.2 7.2)
-			(end -2.2 7.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "a7bb866b-035e-44fa-8ce2-cc4079f9a4e6")
-		)
-		(fp_line
-			(start 2.2 -1.6)
-			(end 2.2 7.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "cf79bd52-16e1-43e1-ae6b-db6a79fc7246")
-		)
-		(fp_line
-			(start 2.2 -1.6)
-			(end -2.2 -1.6)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "4a9ee9d9-6f11-4ea7-9689-ba00d1d3c959")
-		)
-		(fp_line
-			(start -2.2 -1.6)
-			(end -2.2 7.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "ac9b42f7-aaf8-4bbc-b848-756545eb2beb")
-		)
-		(fp_line
-			(start 2.2 6.8)
-			(end 2.2 -1.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "df316484-98af-4455-8fe0-467eee658f49")
-		)
-		(fp_line
-			(start 2.2 -0.2)
-			(end -2.2 -0.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "1be303ac-a310-45e6-b809-b591532716bd")
-		)
-		(fp_line
-			(start 2.2 -1.2)
-			(end -2.2 -1.2)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "2ed2c737-a021-4003-bc4b-78823259b57d")
-		)
-		(fp_line
-			(start -2.2 6.8)
-			(end 2.2 6.8)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "625be732-7f18-4a9d-b4d0-29249e0f805a")
-		)
-		(fp_line
-			(start -2.2 -1.2)
-			(end -2.2 6.8)
-			(stroke
-				(width 0.15)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "ba149eec-bf83-4e7e-bfb9-053624c7d6bb")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "1775fa36-b1fc-4113-af86-bbcf359d4ee2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" smd rect
-			(at -1.4 0 90)
-			(size 1.8 1.4)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "/power/OSCO_32k")
-			(pinfunction "1_1")
-			(pintype "passive")
-			(solder_paste_margin -0.1)
-			(uuid "57d5bb8f-62e2-418a-b3d6-445ee72b0804")
-		)
-		(pad "2" smd rect
-			(at -1.4 5.6 90)
-			(size 1.8 1.4)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(Y2-G-Pad2)_1")
-			(pinfunction "G_2")
-			(pintype "passive+no_connect")
-			(solder_paste_margin -0.1)
-			(uuid "f843f1e5-2fd2-4238-a804-00fc42d8d2d5")
-		)
-		(pad "3" smd rect
-			(at 1.4 5.6 90)
-			(size 1.8 1.4)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "unconnected-(Y2-G-Pad2)")
-			(pinfunction "G_3")
-			(pintype "passive+no_connect")
-			(solder_paste_margin -0.1)
-			(uuid "da29c63e-2ca1-469b-b821-6b68422ec0c1")
-		)
-		(pad "4" smd rect
-			(at 1.4 0 90)
-			(size 1.8 1.4)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "/power/OSCI_32k")
-			(pinfunction "4_4")
-			(pintype "passive")
-			(solder_paste_margin -0.1)
-			(uuid "0e745497-8a5c-4a1f-989d-f005b6dbc650")
-		)
-		(embedded_fonts no)
-		(model "${KIPRJMOD}/footprints/crystal/abs25.3dshapes/abs25.wrl"
-			(offset
-				(xyz 0 -2.8 0)
-			)
-			(scale
-				(xyz 0.3937 0.3937 0.3937)
-			)
-			(rotate
-				(xyz 0 0 90)
-			)
-		)
-	)
 	(footprint "Package_LGA:ST_HLGA-10_2x2mm_P0.5mm_LayoutBorder3x2y"
 		(layer "F.Cu")
 		(uuid "634bd956-818f-4c3d-b757-a8839eb10ea6")
@@ -25638,6 +25071,187 @@
 		)
 		(embedded_fonts no)
 		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "Crystal:Crystal_SMD_MicroCrystal_CC8V-T1A-2Pin_2.0x1.2mm"
+		(layer "F.Cu")
+		(uuid "a8be384f-26c4-4bb3-ac3c-eb1c9d100b67")
+		(at -61.145 155.71 180)
+		(descr "MicroCrystal CC8V-T1A/CM8V-T1A, Crystal, 2.0x1.2mm package, SMD, http://www.microcrystal.com/images/_Product-Documentation/01_TF_ceramic_Packages/01_Datasheet/CC8V-T1A.pdf")
+		(property "Reference" "Y2"
+			(at 0 -1.8 180)
+			(layer "F.SilkS")
+			(uuid "4a1538b9-e927-422f-a58a-d75377eeaaec")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "32768Hz"
+			(at 0 1.8 180)
+			(layer "F.Fab")
+			(uuid "c3977607-17aa-4aa7-b13b-d4e8975038e4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.microcrystal.com/fileadmin/Media/Products/32kHz/Datasheet/CM8V-T1A.pdf"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0b41ea1f-e33e-4604-b70e-896ca3907fb7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "32.768 kHz tuning-fork crystal, 2.0 x 1.2 mm, CL 6 pF, 70 kOhm max ESR"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "388622fe-7402-4675-86a3-43728c8f2028")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "crystal_resonator_oscillator"
+			(at 0 0 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "61a4490b-a111-4a3a-ae01-e68b82599b89")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MNF1_URL" "www.microcrystal.com"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d9b04eb0-3085-4c5e-a413-874d784fdd56")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CM8V-T1A-32.768kHz-6pF-20PPM-TA-QC"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "992a3d03-6dc5-4975-9bd5-219e37542ad3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(path "/00000000-0000-0000-0000-000058d51cad/00000000-0000-0000-0000-000058d85aab")
+		(sheetname "/power/")
+		(sheetfile "power.kicad_sch")
+		(attr smd)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -0.09 0.86)
+			(end 0.09 0.86)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "9d5b60d0-89dd-4b69-850e-3616955c3224")
+		)
+		(fp_line
+			(start -0.09 -0.86)
+			(end 0.09 -0.86)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "fc2e52bd-d61e-4012-8918-90eaf4fca0dd")
+		)
+		(fp_line
+			(start -1.41 -0.75)
+			(end -1.41 0.75)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "5a33f9a0-4865-4085-95b7-9f9fdaea1c00")
+		)
+		(fp_rect
+			(start -1.5 -1.1)
+			(end 1.5 1.1)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "e12635d6-4bb5-4f1c-af73-3c28c30acf3e")
+		)
+		(fp_poly
+			(pts
+				(xy 1 -0.6) (xy 1 0.6) (xy -0.7 0.6) (xy -1 0.3) (xy -1 -0.6)
+			)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "97521ef5-de9d-4c73-a5b4-569776152a28")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 180)
+			(layer "F.Fab")
+			(uuid "44231f2f-570e-4680-84f2-7e55e2085694")
+			(effects
+				(font
+					(size 0.5 0.5)
+					(thickness 0.08)
+				)
+			)
+		)
+		(pad "1" smd roundrect
+			(at -0.75 0 180)
+			(size 0.8 1.5)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "/power/OSCO_32k")
+			(uuid "9df10ba1-c33f-474b-a43f-18d5aa97891b")
+		)
+		(pad "2" smd roundrect
+			(at 0.75 0 180)
+			(size 0.8 1.5)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "/power/OSCI_32k")
+			(uuid "3981fa86-d9ac-4d5c-9f80-6122247b7e32")
+		)
+		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_MicroCrystal_CC8V-T1A-2Pin_2.0x1.2mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
