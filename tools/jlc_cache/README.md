@@ -12,7 +12,11 @@ Footprint data already fetched from JLC's EasyEDA API
 - `easyeda/<LCSC>.json`: `head` (footprint origin) and `pads` as
   `[number, x, y, w, h, ...]`, in EasyEDA units (10 mil) with Y pointing down.
   Pad data was read through WebFetch, so check it before relying on fine detail.
+- `easyeda_raw/<LCSC>.json`: full, unedited API responses (25 parts, contributed by the
+  ESP32S3_Audio_Cam_POE session). Pads are the `PAD~` strings in
+  `result.packageDetail.dataStr.shape`.
 - "(title only)" rows were checked by hand; their pad lists are not saved.
+- The `other projects` column gives offsets other projects found for their own footprints.
 
 ## Rate limit
 
