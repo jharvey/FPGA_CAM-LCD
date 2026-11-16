@@ -15716,16 +15716,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 83.82) (xy 76.2 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "09ca15a5-8838-453e-8f44-573f979479e3")
-	)
-	(wire
-		(pts
 			(xy 93.98 142.24) (xy 96.52 142.24)
 		)
 		(stroke
@@ -16113,16 +16103,6 @@
 			(type default)
 		)
 		(uuid "1cabdd4a-f2dd-43e6-9dbb-ad7112085e2d")
-	)
-	(wire
-		(pts
-			(xy 73.66 93.98) (xy 73.66 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ce36414-f4c6-4854-bf52-6420fe4e35a4")
 	)
 	(wire
 		(pts
@@ -17343,16 +17323,6 @@
 			(type default)
 		)
 		(uuid "47fdffd8-67ca-4690-9af5-626700dd448b")
-	)
-	(wire
-		(pts
-			(xy 73.66 86.36) (xy 73.66 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "47fe14dd-c2da-4107-9a09-284806125e13")
 	)
 	(wire
 		(pts
@@ -19463,6 +19433,16 @@
 			(type default)
 		)
 		(uuid "9b9d2121-c8db-48ec-a490-b515ca7b6a78")
+	)
+	(wire
+		(pts
+			(xy 85.09 105.41) (xy 83.82 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c1f3447-cfc1-4df4-b2f0-c5215af270c6")
 	)
 	(wire
 		(pts
@@ -22816,28 +22796,6 @@
 			)
 		)
 	)
-	(global_label "US2_ID"
-		(shape input)
-		(at 83.82 83.82 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify left)
-		)
-		(uuid "1dc44c58-dc4b-41c4-aebd-f6c6857f3897")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.82 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "VSYS"
 		(shape input)
 		(at 187.96 82.55 90)
@@ -23500,7 +23458,7 @@
 	)
 	(global_label "BTN_PWRn"
 		(shape input)
-		(at 83.82 105.41 0)
+		(at 85.09 105.41 0)
 		(effects
 			(font
 				(size 1.524 1.524)
@@ -23509,7 +23467,7 @@
 		)
 		(uuid "b24baf9c-69da-4ad1-a504-10181044f09c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 83.82 105.41 0)
+			(at 85.09 105.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -37696,160 +37654,6 @@
 			(project "FCL"
 				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
 					(reference "R65")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D")
-		(at 73.66 90.17 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005b203fa2")
-		(property "Reference" "D27"
-			(at 72.39 85.09 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1N914"
-			(at 76.2 90.17 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
-			(at 73.66 90.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 90.17 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 73.66 90.17 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "598f9191-4bac-44f6-b613-c6140e4d6b2b")
-		)
-		(pin "1"
-			(uuid "990addc5-3310-45d3-afc9-a215345b72ae")
-		)
-		(instances
-			(project "FCL"
-				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "D27")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 80.01 83.82 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005b2457c5")
-		(property "Reference" "R66"
-			(at 80.01 85.852 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.1k"
-			(at 80.01 83.82 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 80.01 82.042 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 80.01 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 80.01 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0b4e10e4-277b-4264-bd24-b2deb433bb45")
-		)
-		(pin "2"
-			(uuid "de21f384-79f3-47ac-b282-81a0e75c18fe")
-		)
-		(instances
-			(project "FCL"
-				(path "/4fa0b2cb-19ee-4a85-acaa-86cc12a69b3d/00000000-0000-0000-0000-000058d51cad"
-					(reference "R66")
 					(unit 1)
 				)
 			)
