@@ -5233,6 +5233,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 212.09 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Koncar" "FR001"
 			(at 212.09 129.54 90)
 			(hide yes)
@@ -5618,6 +5629,28 @@
 			)
 		)
 		(property "LCSC" "C585350"
+			(at 252.73 137.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "180"
+			(at 252.73 137.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Position Offset" "0.026,0.138"
 			(at 252.73 137.16 0)
 			(hide yes)
 			(show_name no)
@@ -6014,6 +6047,28 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 168.91 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Position Offset" "0,0.143"
+			(at 168.91 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "MPN" "ESP32-S3-WROOM-1-N8R2"
 			(at 168.91 95.25 0)
 			(hide yes)
@@ -6234,6 +6289,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 127 78.74 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "bbe2c57b-5e48-4aea-85b4-038f85daa722")
 		)
@@ -6316,6 +6382,17 @@
 			)
 		)
 		(property "LCSC" "C25744"
+			(at 275.59 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 275.59 125.73 0)
 			(hide yes)
 			(show_name no)

@@ -9531,6 +9531,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "270"
+			(at 92.71 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "price100_LCSC" "0.7796$"
 			(at 92.71 110.49 0)
 			(hide yes)
@@ -10489,6 +10500,17 @@
 			)
 		)
 		(property "LCSC" "C15401"
+			(at 77.47 59.69 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 77.47 59.69 90)
 			(hide yes)
 			(show_name no)
@@ -13293,6 +13315,17 @@
 			)
 		)
 		(property "LCSC" "C1525"
+			(at 80.01 123.19 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 80.01 123.19 0)
 			(hide yes)
 			(show_name no)

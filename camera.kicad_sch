@@ -2389,6 +2389,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 303.53 123.19 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "7faac83c-9418-4432-9d6f-fd9abbeef27b")
 		)
@@ -2546,6 +2557,17 @@
 			)
 		)
 		(property "LCSC" "C25900"
+			(at 316.23 123.19 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 316.23 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -2725,6 +2747,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 312.42 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "6441368d-0ead-4b93-bca5-b38ceeeff687")
 		)
@@ -2882,6 +2915,17 @@
 			)
 		)
 		(property "LCSC" "C25105"
+			(at 323.85 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 323.85 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -3061,6 +3105,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 299.72 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0dbf1ee8-4570-4fc1-8a22-072bce32a3f6")
 		)
@@ -3151,6 +3206,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 328.93 123.19 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "51edca24-df0f-431e-9765-a17dd759aa1d")
 		)
@@ -3231,6 +3297,17 @@
 			)
 		)
 		(property "LCSC" "C25744"
+			(at 341.63 123.19 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 341.63 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -3475,6 +3552,17 @@
 			)
 		)
 		(property "LCSC" "C71956"
+			(at 297.18 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "270"
 			(at 297.18 93.98 0)
 			(hide yes)
 			(show_name no)

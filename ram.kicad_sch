@@ -12284,6 +12284,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "270"
+			(at 138.43 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "LCS_C1" "C524867"
 			(at 138.43 88.9 0)
 			(hide yes)

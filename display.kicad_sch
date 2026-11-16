@@ -4191,6 +4191,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "180"
+			(at 62.23 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "MPN" "AP3032KTR-G1"
 			(at 62.23 69.85 0)
 			(hide yes)
@@ -4296,6 +4307,17 @@
 			)
 		)
 		(property "LCSC" "C1525"
+			(at 63.5 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 63.5 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -4486,6 +4508,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 81.28 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "MPN" "0603WAF200KT5E"
 			(at 81.28 76.2 0)
 			(hide yes)
@@ -4577,6 +4610,17 @@
 			)
 		)
 		(property "LCSC" "C19398"
+			(at 55.88 59.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "180"
 			(at 55.88 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -4688,6 +4732,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 50.8 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "98292200-e765-49f2-8646-dc98c988a92b")
 		)
@@ -4768,6 +4823,17 @@
 			)
 		)
 		(property "LCSC" "C2480"
+			(at 80.01 55.88 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 80.01 55.88 0)
 			(hide yes)
 			(show_name no)
@@ -4881,6 +4947,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 87.63 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "MPN" "1206B475K500NT"
 			(at 87.63 71.12 0)
 			(hide yes)
@@ -4984,6 +5061,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 71.12 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "d1abbe3a-a7c7-4527-860b-5b789c3685b1")
 		)
@@ -5065,6 +5153,28 @@
 			)
 		)
 		(property "LCSC" "C202114"
+			(at 120.65 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "180"
+			(at 120.65 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Position Offset" "0,0.224"
 			(at 120.65 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -5274,6 +5384,17 @@
 			)
 		)
 		(property "LCSC" "C15850"
+			(at 95.25 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 95.25 50.8 0)
 			(hide yes)
 			(show_name no)

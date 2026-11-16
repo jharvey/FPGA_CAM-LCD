@@ -780,6 +780,7 @@ To clear the board for a placement rethink, these groups were moved off the outl
 ### Phase 5 – Prototype
 - [ ] BOM with LCSC / JLCPCB numbers
 - [ ] Gerbers + CPL
+  - [x] JLC rotation / position offsets (2026-11-16): every part with an LCSC number has `FT Rotation Offset` (and `FT Position Offset` where JLC's origin is ≥ 0.1 mm off our pad centre: J7, U9, MK1, SD1), worked out by matching each part's pads against JLC's own EasyEDA footprint. `scripts/jlc_cpl.py` writes `production/FCL_bom_jlc.csv` + `FCL_cpl_jlc.csv` from those fields (absolute coordinates, like the Gerbers). With the Fabrication Toolkit plugin, turn its auto-translate off or the offsets apply twice. Unverified against JLC data (2-pad passives assumed 0°): all R/C/L, RB1/RB3, TH1–3, RV3. Parts still without an LCSC number (85, incl. U1, U4, U5, B0/B3/B4, Y2) have no offset yet. Check BAT1 (90° and 270° fit equally) and J1 in JLC's placement preview.
 - [ ] First order
 
 ### Later / stretch goals

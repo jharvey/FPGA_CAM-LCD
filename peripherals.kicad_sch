@@ -3516,6 +3516,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "180"
+			(at 60.96 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0b3079b7-49bf-4151-a238-e44ef24e7a19")
 		)
@@ -3716,6 +3727,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "180"
+			(at 238.76 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d317fa05-447d-4142-b2bf-b44530621680")
 		)
@@ -3798,6 +3820,17 @@
 			)
 		)
 		(property "LCSC" "C3253714"
+			(at 60.96 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 60.96 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -4002,6 +4035,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 22.86 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "35f229b9-9b9f-4b87-ac50-50e9eb0f0e08")
 		)
@@ -4162,6 +4206,17 @@
 			)
 		)
 		(property "LCSC" "C1525"
+			(at 106.68 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 106.68 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -4342,6 +4397,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 233.68 177.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "780c2c4f-4f9a-4802-80ab-dc5d9e5efe60")
 		)
@@ -4424,6 +4490,17 @@
 			)
 		)
 		(property "LCSC" "C25744"
+			(at 15.24 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 15.24 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -4682,6 +4759,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 96.52 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "17e97c0c-8a15-441f-ab93-6e75601ea0b0")
 		)
@@ -4764,6 +4852,17 @@
 			)
 		)
 		(property "LCSC" "C1525"
+			(at 96.52 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 96.52 157.48 0)
 			(hide yes)
 			(show_name no)
@@ -5022,6 +5121,28 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "270"
+			(at 203.2 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Position Offset" "0,-0.255"
+			(at 203.2 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "93b5294c-6b71-4c67-a4af-d43d7dcfe970")
 		)
@@ -5126,6 +5247,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "0"
+			(at 243.84 71.12 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d20617d3-1283-43a2-b06c-596b8f7dd014")
 		)
@@ -5208,6 +5340,17 @@
 			)
 		)
 		(property "LCSC" "C15850"
+			(at 243.84 177.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 243.84 177.8 0)
 			(hide yes)
 			(show_name no)
@@ -5378,6 +5521,17 @@
 			)
 		)
 		(property "LCSC" "C25741"
+			(at 177.8 177.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 177.8 177.8 0)
 			(hide yes)
 			(show_name no)
@@ -5636,6 +5790,17 @@
 				)
 			)
 		)
+		(property "FT Rotation Offset" "270"
+			(at 203.2 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "52d0ea28-1929-49d9-83be-6d0501347f21")
 		)
@@ -5841,6 +6006,17 @@
 			)
 		)
 		(property "LCSC" "C19666"
+			(at 106.68 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
 			(at 106.68 157.48 0)
 			(hide yes)
 			(show_name no)
