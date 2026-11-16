@@ -61848,7 +61848,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "aa3665d2-cfc9-407b-837e-7fc2fbe70cba")
-		(at 136.6 104.5)
+		(at 134.4 103.4)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP5"
@@ -73397,14 +73397,6 @@
 		(uuid "232711fa-af03-4bed-b642-4739700e1058")
 	)
 	(segment
-		(start 140.193617 99.867334)
-		(end 140.243617 100.567334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "242f8763-4ed0-4cbb-b543-d7a9f534fbdb")
-	)
-	(segment
 		(start 123.9 87)
 		(end 125.5 88.6)
 		(width 0.13)
@@ -73467,14 +73459,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "2b5dff77-165e-4b5c-b78f-82094bed3ed8")
-	)
-	(segment
-		(start 140.393617 99.367334)
-		(end 140.243617 99.617334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "2c4c9cc0-93c7-4705-b705-5ba17f0d942a")
 	)
 	(segment
 		(start 116.7 89.4)
@@ -73925,14 +73909,6 @@
 		(uuid "6fd3a656-949a-4044-a0c5-df3204cd5dea")
 	)
 	(segment
-		(start 140.243617 99.617334)
-		(end 140.193617 99.867334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "7110ba74-5bad-4234-b958-63bd5831fd39")
-	)
-	(segment
 		(start 126.3 85.4)
 		(end 126.700006 85.8)
 		(width 0.13)
@@ -73987,14 +73963,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "7787baee-d68a-4b4b-b393-ae3438a0f9f8")
-	)
-	(segment
-		(start 140.693617 99.067334)
-		(end 140.393617 99.367334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "78b353ba-adff-499a-901c-19729bf79682")
 	)
 	(segment
 		(start 137.493617 103.592334)
@@ -74605,14 +74573,6 @@
 		(uuid "caceeab3-abb9-4101-919e-5a2f5a165781")
 	)
 	(segment
-		(start 141.293617 99.067334)
-		(end 140.693617 99.067334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "cc1eb003-3945-400b-b291-cbc9a7df2d35")
-	)
-	(segment
 		(start 136.893616 107.567333)
 		(end 137.893618 107.567333)
 		(width 0.3)
@@ -74931,14 +74891,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "ea7b236d-5b2b-49ae-a24d-7af837ce0cbd")
-	)
-	(segment
-		(start 144.643617 99.384702)
-		(end 141.293617 99.067334)
-		(width 0.4)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "eb35be44-fa4d-4453-9f4c-da4e6d35ed0b")
 	)
 	(segment
 		(start 142.893617 105.617334)
@@ -77115,14 +77067,6 @@
 		(layer "B.Cu")
 		(net "VSYS")
 		(uuid "390ccc0f-1c67-40a0-890a-5e33d5b7eeb4")
-	)
-	(segment
-		(start 142.101117 99.622334)
-		(end 141.393617 99.917334)
-		(width 0.6)
-		(layer "B.Cu")
-		(net "VSYS")
-		(uuid "9068a36b-ada5-4bb5-94f0-1c816677a440")
 	)
 	(segment
 		(start 139.743616 104.892333)
@@ -82821,14 +82765,6 @@
 		(uuid "9b01ce2b-0a4c-43f8-ae96-7efbdd737000")
 	)
 	(segment
-		(start 137.45 105.35)
-		(end 136.6 104.5)
-		(width 0.4)
-		(layer "B.Cu")
-		(net "+2V5")
-		(uuid "53c70c91-fbc6-46b8-9574-ad7024408621")
-	)
-	(segment
 		(start 126.725001 96.974999)
 		(end 126.7 97)
 		(width 0.1)
@@ -82851,30 +82787,6 @@
 		(layer "B.Cu")
 		(net "+2V5")
 		(uuid "c9bd9466-9884-4845-a03f-93855b8c23fa")
-	)
-	(segment
-		(start 136.6 104.5)
-		(end 135.544544 104.5)
-		(width 0.4)
-		(layer "B.Cu")
-		(net "+2V5")
-		(uuid "cf8d8c5b-ca37-436b-b6b0-0ecd03324272")
-	)
-	(segment
-		(start 134.527 103.482456)
-		(end 134.527 102.204072)
-		(width 0.4)
-		(layer "B.Cu")
-		(net "+2V5")
-		(uuid "de5df19d-c08b-401f-bf9d-851217b79e44")
-	)
-	(segment
-		(start 135.544544 104.5)
-		(end 134.527 103.482456)
-		(width 0.4)
-		(layer "B.Cu")
-		(net "+2V5")
-		(uuid "e79ff4a5-73c4-41ea-9c66-461bf01cbf73")
 	)
 	(segment
 		(start 128.3 97)
