@@ -114,11 +114,11 @@ Balls moved while routing the remaining FPGA links. None are in `main_FCL.lpf`, 
 | SRV_PWM6 | D17 | D13 | as above |
 | FPDI_SDA | C15 | D12 | beside FPDI_SCL (E12) so the I2C pair runs together, east of the servo bundle |
 | SHUTDOWN | G16 | D11 | east of the servo and FPDI lines, toward D15/R13 |
-| ADC_CNV | B1 | E1 | order reversed so the four lines reach U21's right-hand pins without crossing |
-| ADC_DIN | C1 | D1 | as above |
-| ADC_SCK | D1 | C1 | as above |
-| ADC_SDO | E1 | B1 | as above |
+| ADC_SCK | D1 | E1 | U21's ADC pins face away from U1: SCK and SDO reach them over the top of U21, CNV and DIN around the bottom, so the upper two balls feed the top route |
+| ADC_SDO | E1 | D1 | as above |
+| ADC_CNV | B1 | C1 | as above |
+| ADC_DIN | C1 | B1 | as above |
 
 Routing notes:
 - Sensor, button, servo, FPDI and SHUTDOWN lines leave U1 through a dog-bone via and run on In1, kept out of the +1V1, +2V5, 2V5_3V3 and VSYS fills.
-- **ADC_SDO is not routed.** U21.14 is boxed in: the +3V3 trace from U21.15 to C72 closes the channel above the pins, and the TEMP_BAT_CELL1–3 vias and traces fill the pocket below on every layer. Moving C72 up by about 0.3 mm, or rerouting the U21.15–C72 link, would open a path.
+- **ADC:** to make room for ADC_SDO, C72 (U21 VIO decoupling) moved from (148.61, 103.70) to (148.30, 103.06). It is still fed straight from U21.15, and its GND pad, which had no connection before, now has a trace to a GND via at (147.45, 101.30).

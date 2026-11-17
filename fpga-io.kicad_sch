@@ -22443,16 +22443,16 @@
 			)
 		)
 	)
-	(global_label "ADC_CNV"
+	(global_label "ADC_SCK"
 		(shape input)
 		(at 222.25 144.78 0)
 		(effects
 			(font
-				(size 1.524 1.524)
+				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "b2cc50ae-9980-495c-90c6-5a0f54edd5e4")
+		(uuid "b80880e8-1d45-407d-80f5-dfafc4aa40b4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 222.25 144.78 0)
 			(hide yes)
@@ -22465,16 +22465,16 @@
 			)
 		)
 	)
-	(global_label "ADC_DIN"
+	(global_label "ADC_SDO"
 		(shape input)
 		(at 222.25 147.32 0)
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1.524 1.524)
 			)
 			(justify left)
 		)
-		(uuid "ef587ce4-7490-4389-a935-f032a116d11f")
+		(uuid "5073adfe-4077-446d-a923-60b668013390")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 222.25 147.32 0)
 			(hide yes)
@@ -22487,16 +22487,16 @@
 			)
 		)
 	)
-	(global_label "ADC_SCK"
+	(global_label "ADC_CNV"
 		(shape input)
 		(at 184.15 147.32 180)
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1.524 1.524)
 			)
 			(justify right)
 		)
-		(uuid "4485705f-3a88-4178-82be-26e365a0379d")
+		(uuid "2339744c-98ab-4a8f-b309-d28162026055")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 184.15 147.32 0)
 			(hide yes)
@@ -22509,16 +22509,16 @@
 			)
 		)
 	)
-	(global_label "ADC_SDO"
+	(global_label "ADC_DIN"
 		(shape input)
 		(at 222.25 142.24 0)
 		(effects
 			(font
-				(size 1.524 1.524)
+				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "9b66582d-ac5f-4488-aea6-4f41e23b6415")
+		(uuid "146e9713-510d-4d5b-b35d-7de69a83087f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 222.25 142.24 0)
 			(hide yes)
