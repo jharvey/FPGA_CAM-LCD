@@ -96,3 +96,29 @@ These balls are not used by the FPGA design (no `.lpf` change). They were re-ord
 | WIFI_EN | J5 | N3 | about 4 mm closer to R35 |
 
 The left-edge balls N16, N17, M17 and L17 were left free at first, because the back-side decoupling caps cover every via spot next to them. On 2026-11-12 they were given slow sensor signals (a via can be found when routing, or the caps nudged): **L17** MAG_DRDY (U25 compass), **M17** BARO_INT (U26 barometer), **N16** TOF_XSHUT (U27 distance sensor, FPGA output), **N17** TOF_INT (U27, open-drain with a 10k pull-up R89). None are in the .lpf yet. IMU_INT2, BTN1n, BTN2n and FPDI_SDA stay where they are, because the free balls left are no closer to their targets.
+
+## 2026-11-17 (routing pass 2)
+
+Balls moved while routing the remaining FPGA links. None are in `main_FCL.lpf`, so no FPGA rebuild is needed (but note that the old `.lpf` still names E1, D1 and C1 for another bus). Schematic labels moved with them; the old balls are now no-connects.
+
+| Net | old ball | new ball | why |
+|---|---|---|---|
+| IMU_INT2 | E3 | N4 | E3 sits inside the 2V5_3V3 In1 island; N4 is in the In1 gap between the +2V5 and 2V5_3V3 islands, next to USER_PROGRAMN (M4). L16 was tried first, but all four of its dog-bone spots are taken |
+| BTN1n | E8 | N5 | E8 is inside the 2V5_3V3 island; also moves the button from bank 0 (2V5_3V3) to bank 6 (+3V3) |
+| BTN2n | D8 | M5 | same as BTN1n |
+| SRV_PWM1 | P1 | C18 | P1 is on the far (right) edge; C18 is the west-most free ball in the bottom-left corner |
+| SRV_PWM2 | D15 | D17 | west-to-east ball order now matches R78…R83 left-to-right, so the In1 bundle does not cross |
+| SRV_PWM3 | D13 | D16 | as above |
+| SRV_PWM4 | D16 | D15 | as above |
+| SRV_PWM5 | D14 | D14 | unchanged |
+| SRV_PWM6 | D17 | D13 | as above |
+| FPDI_SDA | C15 | D12 | beside FPDI_SCL (E12) so the I2C pair runs together, east of the servo bundle |
+| SHUTDOWN | G16 | D11 | east of the servo and FPDI lines, toward D15/R13 |
+| ADC_CNV | B1 | E1 | order reversed so the four lines reach U21's right-hand pins without crossing |
+| ADC_DIN | C1 | D1 | as above |
+| ADC_SCK | D1 | C1 | as above |
+| ADC_SDO | E1 | B1 | as above |
+
+Routing notes:
+- Sensor, button, servo, FPDI and SHUTDOWN lines leave U1 through a dog-bone via and run on In1, kept out of the +1V1, +2V5, 2V5_3V3 and VSYS fills.
+- **ADC_SDO is not routed.** U21.14 is boxed in: the +3V3 trace from U21.15 to C72 closes the channel above the pins, and the TEMP_BAT_CELL1–3 vias and traces fill the pocket below on every layer. Moving C72 up by about 0.3 mm, or rerouting the U21.15–C72 link, would open a path.

@@ -10758,10 +10758,6 @@
 		(uuid "3fa8fae6-aa92-44fe-a320-b9de8ef7aa7f")
 	)
 	(no_connect
-		(at 219.71 74.93)
-		(uuid "46935588-dbdc-49d6-ba88-9b2d890ebefa")
-	)
-	(no_connect
 		(at 257.81 39.37)
 		(uuid "4c56744a-d7a6-408c-8fd6-e007c9f9e65b")
 	)
@@ -10778,16 +10774,8 @@
 		(uuid "88730a3f-47c6-49b4-9e2d-c003cbb73889")
 	)
 	(no_connect
-		(at 257.81 57.15)
-		(uuid "9aec4e33-f3cf-4842-bb8a-6c1196c410d9")
-	)
-	(no_connect
 		(at 219.71 34.29)
 		(uuid "a293c49b-c05c-470b-8f7e-fe56ea414dd7")
-	)
-	(no_connect
-		(at 219.71 54.61)
-		(uuid "a45d90f9-70af-451c-984b-0b5305db4da1")
 	)
 	(no_connect
 		(at 219.71 52.07)
@@ -12433,28 +12421,6 @@
 		(uuid "9a95304e-9a44-4d13-9168-f19d37a9db4d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 257.81 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "SRV_PWM1"
-		(shape input)
-		(at 219.71 72.39 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "9e356091-44e8-4802-858c-3d3f73feb44b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 219.71 72.39 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19486,5 +19452,75 @@
 				)
 			)
 		)
+	)
+	(global_label "IMU_INT2"
+		(shape input)
+		(at 219.71 54.61 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "6a65fa70-4112-4570-95cc-c3521cd78f73")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 219.71 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "BTN1n"
+		(shape input)
+		(at 257.81 57.15 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left)
+		)
+		(uuid "f70a564a-b490-4456-87c4-148a68b5d2eb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 257.81 57.15 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(global_label "BTN2n"
+		(shape input)
+		(at 219.71 74.93 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "641b732c-7e78-4178-8ec0-b559b98cc7da")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 219.71 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 219.71 72.39)
+		(uuid "e45c115d-9890-4056-b4fd-7be348a8d6e5")
 	)
 )
