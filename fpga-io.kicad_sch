@@ -12013,28 +12013,6 @@
 			)
 		)
 	)
-	(global_label "GP13"
-		(shape input)
-		(at 184.15 152.4 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "57ff2717-f43b-4020-9ff4-b59e10abe170")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 184.15 152.4 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(global_label "GN3"
 		(shape input)
 		(at 184.15 121.92 180)
@@ -22530,5 +22508,9 @@
 				)
 			)
 		)
+	)
+	(no_connect
+		(at 184.15 152.4)
+		(uuid "f4e03d84-e5d2-4f27-beb0-688a3717bccb")
 	)
 )
