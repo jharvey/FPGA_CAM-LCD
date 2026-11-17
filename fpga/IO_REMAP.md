@@ -114,11 +114,11 @@ Balls moved while routing the remaining FPGA links. None are in `main_FCL.lpf`, 
 | SRV_PWM6 | D17 | D13 | as above |
 | FPDI_SDA | C15 | D12 | beside FPDI_SCL (E12) so the I2C pair runs together, east of the servo bundle |
 | SHUTDOWN | G16 | D11 | east of the servo and FPDI lines, toward D15/R13 |
-| ADC_SCK | D1 | E1 | U21's ADC pins face away from U1: SCK and SDO reach them over the top of U21, CNV and DIN around the bottom, so the upper two balls feed the top route |
-| ADC_SDO | E1 | D1 | as above |
-| ADC_CNV | B1 | C1 | as above |
-| ADC_DIN | C1 | B1 | as above |
+| ADC_DIN | C1 | E1 | U21's ADC pins face away from U1: DIN, SCK and SDO reach them over the top of U21 and CNV around the bottom, so the upper three balls feed the top route in pin order |
+| ADC_SCK | D1 | D1 | as above |
+| ADC_SDO | E1 | C1 | as above |
+| ADC_CNV | B1 | B1 | as above |
 
 Routing notes:
 - Sensor, button, servo, FPDI and SHUTDOWN lines leave U1 through a dog-bone via and run on In1, kept out of the +1V1, +2V5, 2V5_3V3 and VSYS fills.
-- **ADC:** to make room for ADC_SDO, C72 (U21 VIO decoupling) moved from (148.61, 103.70) to (148.30, 103.06). It is still fed straight from U21.15, and its GND pad, which had no connection before, now has a trace to a GND via at (147.45, 101.30).
+- **ADC:** to make room for ADC_SDO, C72 (U21 VIO decoupling) moved from (148.61, 103.70) to (148.30, 103.06). It is still fed straight from U21.15, and its GND pad, which had no connection before, now has a trace to a GND via at (147.45, 101.30). The unrouted battery-sense parts to its right were then nudged right to open a lane: R25/R24 +0.9 mm, C59 +1.2 mm, C44, C45 and R26/R36 +0.6 mm (R37/R39 stay, R23 is in the way on the back).
