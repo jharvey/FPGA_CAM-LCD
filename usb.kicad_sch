@@ -19519,26 +19519,8 @@
 		(at 219.71 72.39)
 		(uuid "e45c115d-9890-4056-b4fd-7be348a8d6e5")
 	)
-	(global_label "GP13"
-		(shape input)
-		(at 219.71 44.45 180)
-		(effects
-			(font
-				(size 1.524 1.524)
-			)
-			(justify right)
-		)
-		(uuid "fa9fa174-003b-4c1b-a4c0-b137819f41de")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 219.71 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
+	(no_connect
+		(at 219.71 44.45)
+		(uuid "993e5346-256b-4440-9bf9-c812e8abd57e")
 	)
 )

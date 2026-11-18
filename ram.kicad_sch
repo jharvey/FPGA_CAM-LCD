@@ -15895,8 +15895,26 @@
 			)
 		)
 	)
-	(no_connect
-		(at 217.17 87.63)
-		(uuid "83470c8d-cc8d-42ba-a548-ddb4675bbd68")
+	(global_label "GP13"
+		(shape input)
+		(at 217.17 87.63 180)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right)
+		)
+		(uuid "d1296feb-a40e-4223-8647-208dee757965")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 217.17 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 	)
 )

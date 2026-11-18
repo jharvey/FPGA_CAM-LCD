@@ -123,3 +123,15 @@ Routing notes:
 - Sensor, button, servo, FPDI and SHUTDOWN lines leave U1 through a dog-bone via and run on In1, kept out of the +1V1, +2V5, 2V5_3V3 and VSYS fills.
 - **ADC:** to make room for ADC_SDO, C72 (U21 VIO decoupling) moved from (148.61, 103.70) to (148.30, 103.06). It is still fed straight from U21.15, and its GND pad, which had no connection before, now has a trace to a GND via at (147.45, 101.30). The unrouted battery-sense parts to its right were then nudged right to open a lane: R25/R24 +0.9 mm, C59 +1.2 mm, C44, C45 and R26/R36 +0.6 mm (R37/R39 stay, R23 is in the way on the back).
 - **GP13 (FPGA port `gp13`, to U8.4 / R18) moved H4 → H1.** H4 is three balls deep and inside the 2V5_3V3 In1 island, with no dog-bone site; H1 is a free outer ball in bank 6 (+3V3). **This one is in the FPGA design:** `main_FCL.lpf` (`v5e972b`) and `CameraToTFTSobel_FCL.ice` were updated, so rebuild the bitstream.
+
+## 2026-11-18 (routing pass 3)
+
+| Net | old ball | new ball | why |
+|---|---|---|---|
+| GP13 | H1 | G16 | H1 has no way out: every layer around it is taken. G16 (PR17C, bank 2, +3V3 like H1's bank 6) is one of only five free balls the router could reach from U8/R18 |
+
+- **GP13 is in the FPGA design** (port `gp13`): `main_FCL.lpf` (`v5e972b`) and `CameraToTFTSobel_FCL.ice` now say G16, so rebuild the bitstream.
+- Schematic: the GP13 label moved from U1E pin H1 (usb sheet, now a no-connect) to U1C pin G16 (ram sheet).
+- Route: dog-bone via at G16, In1 down the west side of the LCD fan-out, a short B.Cu hop at (114.95-119.25, 104.35-108.65), then In1 to a new via at (114.3, 125.2) beside R18.1. In1 is kept out of the strip that feeds C20.1's +3V3 via.
+- **R16** (GN17 pull-up, B side) is flipped end-for-end about its GN17 pad, (123.2, 103.3) -> (122.18, 103.3), so its +3V3 pad is off the 2V5_3V3 island and reaches the +3V3 plane.
+- **VBAT3 to R37.1** is a 0.15-0.2 mm sense tap, not a 0.4 mm power trace: it only feeds the 47k/56k divider.
