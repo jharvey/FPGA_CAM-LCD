@@ -75537,6 +75537,14 @@
 		(uuid "c57be722-beb0-4604-a4e5-ae026f409970")
 	)
 	(segment
+		(start 148.7 103.3)
+		(end 148.4 103.5)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "+3V3")
+		(uuid "c822fb5d-8e25-48a0-8f2a-40fcc93b7c4f")
+	)
+	(segment
 		(start 114.7 62.7)
 		(end 116.5 60.9)
 		(width 0.3)
@@ -76295,6 +76303,14 @@
 		(layers "F.Cu" "B.Cu")
 		(net "+3V3")
 		(uuid "d0756293-a1e7-46dd-80df-acf2e6c4b7df")
+	)
+	(via
+		(at 148.7 103.3)
+		(size 0.45)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "+3V3")
+		(uuid "d0bb9531-4d2f-43fa-b2be-88eaedd0fa08")
 	)
 	(via
 		(at 98.4745 99.6315)
@@ -87633,6 +87649,14 @@
 		(uuid "98a4c5b2-5ab8-4e5f-ae04-cce90e95c5f3")
 	)
 	(segment
+		(start 146.924 102.117)
+		(end 146.924 102.33)
+		(width 0.2)
+		(layer "B.Cu")
+		(net "/power/TEMP_BAT_CELL1")
+		(uuid "a0935c8b-539b-4db0-80ff-d8e71b6a9e34")
+	)
+	(segment
 		(start 83.4 78.9)
 		(end 79.6 82.7)
 		(width 0.2)
@@ -87713,8 +87737,8 @@
 		(uuid "c044a2f6-b53e-43b2-ba85-44d35326d8b3")
 	)
 	(segment
-		(start 146.923616 102.117334)
-		(end 148.893617 104.087335)
+		(start 146.924 102.33)
+		(end 148.894 104.3)
 		(width 0.2)
 		(layer "B.Cu")
 		(net "/power/TEMP_BAT_CELL1")
@@ -87753,7 +87777,7 @@
 		(uuid "fa0a00d0-2403-4120-ab3b-ad76b1c5146a")
 	)
 	(segment
-		(start 148.893617 104.087335)
+		(start 148.894 104.3)
 		(end 148.893617 105.616725)
 		(width 0.2)
 		(layer "B.Cu")
