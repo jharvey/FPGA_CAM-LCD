@@ -85377,6 +85377,14 @@
 		(uuid "4d9c0af7-a44f-4e5e-a90f-daff497ff10d")
 	)
 	(segment
+		(start 150.05 102.75)
+		(end 150.5 102.9)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/power/VBAT1_SENSE")
+		(uuid "6b5dadd9-ac06-4ff0-8ee1-2eb7e7585d22")
+	)
+	(segment
 		(start 146.3 101.8)
 		(end 146.75 101.35)
 		(width 0.2)
