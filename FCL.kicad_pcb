@@ -78257,6 +78257,14 @@
 		(uuid "7fe3b688-9e43-45db-98ce-b1b21ad39005")
 	)
 	(segment
+		(start 138.5 115.35)
+		(end 138.7 115.45)
+		(width 0.25)
+		(layer "F.Cu")
+		(net "GND")
+		(uuid "80eb7341-c628-40c7-8568-d393a4e240a8")
+	)
+	(segment
 		(start 152.35 104.15)
 		(end 153.05 104.85)
 		(width 0.2)
@@ -81559,6 +81567,14 @@
 		(layers "F.Cu" "B.Cu")
 		(net "GND")
 		(uuid "ec5f2cf6-4fbb-47bc-a005-45787834efb2")
+	)
+	(via
+		(at 138.7 115.45)
+		(size 0.45)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "GND")
+		(uuid "edbb0fbb-c19d-452c-bcca-c481d1ac0a51")
 	)
 	(via
 		(at 152.16 104.738)
