@@ -85592,6 +85592,14 @@
 		(net "/power/VBAT2_SENSE")
 		(uuid "372623f7-7ec6-42e8-ac11-ce86cb847b57")
 	)
+	(via
+		(at 153.75 102.7)
+		(size 0.45)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/power/VBAT2_SENSE")
+		(uuid "97e633a6-0526-439e-a91c-5df0c0900102")
+	)
 	(segment
 		(start 154.45 114.4)
 		(end 154.45 114.05)
@@ -88959,6 +88967,14 @@
 		(layer "F.Cu")
 		(net "/power/VBAT3_SENSE")
 		(uuid "ea0f4c54-b352-41ec-9cbc-030a248c22c2")
+	)
+	(via
+		(at 148.4 101.38)
+		(size 0.45)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/power/VBAT3_SENSE")
+		(uuid "a9e01fe1-d94c-4208-bc59-b7aa43f5c5b4")
 	)
 	(via
 		(at 149.7 101.3)
