@@ -38360,7 +38360,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 52.07 121.6152 0)
 			(hide yes)
 			(show_name no)
@@ -38941,7 +38941,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 114.3 265.43 0)
 			(hide yes)
 			(show_name no)
@@ -38974,7 +38974,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C25819"
+		(property "LCSC" ""
 			(at 114.3 265.43 0)
 			(hide yes)
 			(show_name no)
@@ -44463,7 +44463,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 110.49 273.05 0)
 			(hide yes)
 			(show_name no)
@@ -44496,7 +44496,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C23206"
+		(property "LCSC" ""
 			(at 110.49 273.05 0)
 			(hide yes)
 			(show_name no)
@@ -46576,7 +46576,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 24.13 226.06 0)
 			(hide yes)
 			(show_name no)
@@ -46609,7 +46609,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C21190"
+		(property "LCSC" ""
 			(at 24.13 226.06 0)
 			(hide yes)
 			(show_name no)
