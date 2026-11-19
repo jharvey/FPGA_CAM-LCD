@@ -19409,7 +19409,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "F.Cu")
 		(uuid "6835d592-8d26-4d32-ae6f-6c6d1926a331")
-		(at 110.3 139.6)
+		(at 123.83 126.5)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP6"
@@ -37985,7 +37985,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "0c3cb9d1-27f8-4858-957e-335772a842c5")
-		(at 115.8 139.7)
+		(at 96.725862 79.975862)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP8"
@@ -41788,7 +41788,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "22b668e7-f2ee-4813-b167-6a09e163c961")
-		(at 162.4 35)
+		(at 129.95 92.25)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP13"
@@ -44418,7 +44418,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "339b923e-e4bd-494c-a088-82e7915c3570")
-		(at 103.3 139.5)
+		(at 112.695455 110.954545)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP10"
@@ -46105,7 +46105,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "3a777be2-d2db-4906-9e15-829bd641097f")
-		(at 146.4 138.5)
+		(at 140.6 92.4)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP7"
@@ -46399,7 +46399,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "3b153fe9-36a5-4e82-8979-dbcc3a08cc36")
-		(at 134.4 139.4)
+		(at 118.7 61.2)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP2"
@@ -48382,7 +48382,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "4666df72-06dc-41a7-b787-14579eaf924b")
-		(at 160.1 35)
+		(at 132.65 92.05)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP12"
@@ -52145,7 +52145,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "5ca2f118-7077-42c9-b1ad-24e205f6e683")
-		(at 136.7 139.4)
+		(at 111.2 62.65)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP3"
@@ -52807,7 +52807,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "644af943-4608-43ca-af7f-d2c8c8fb6f0d")
-		(at 105.6 139.5)
+		(at 109.473684 112.776316)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP11"
@@ -66002,7 +66002,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "c495b0ef-f059-4d69-ac24-994c0aad8b9f")
-		(at 118.1 139.7)
+		(at 105.65 85.2)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP9"
@@ -71754,7 +71754,7 @@
 	(footprint "TestPoint:TestPoint_Pad_D1.0mm"
 		(layer "B.Cu")
 		(uuid "ecf63add-dfdf-4b4f-a6d8-847f298270fb")
-		(at 132.1 139.4)
+		(at 116.3 86.6)
 		(descr "SMD pad as test Point, diameter 1.0mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP1"
@@ -100369,12 +100369,28 @@
 		(uuid "ce05fac5-855e-411e-b287-aaa936d0ce0c")
 	)
 	(segment
+		(start 132.45 90.75)
+		(end 133.35 90.75)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "WIFI_TXD")
+		(uuid "d34c27d2-f5ad-4bb7-b25a-697f9873d8dd")
+	)
+	(segment
 		(start 131.15 92.45)
 		(end 132.45 91.15)
 		(width 0.15)
 		(layer "F.Cu")
 		(net "WIFI_TXD")
 		(uuid "ff7a7bf5-2dc7-4678-a603-aac1da4c6440")
+	)
+	(via
+		(at 133.35 90.75)
+		(size 0.45)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "34e98598-c270-491b-bc91-a60bf3ca39a9")
 	)
 	(via
 		(at 132.45 89.45)
@@ -100391,6 +100407,22 @@
 		(layers "F.Cu" "B.Cu")
 		(net "WIFI_TXD")
 		(uuid "cbc427de-7cdc-4c59-bb9f-8170d767e049")
+	)
+	(segment
+		(start 132.85 91.25)
+		(end 132.85 91.65)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "84d143b1-9cdb-4dcc-ae97-59e8e5b8fb10")
+	)
+	(segment
+		(start 133.35 90.75)
+		(end 132.85 91.25)
+		(width 0.15)
+		(layer "B.Cu")
+		(net "WIFI_TXD")
+		(uuid "dd942dc6-8361-4ffe-aaa2-9a02014163a3")
 	)
 	(segment
 		(start 140.45 82.7)
