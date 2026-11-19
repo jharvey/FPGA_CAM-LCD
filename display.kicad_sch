@@ -4418,6 +4418,28 @@
 				)
 			)
 		)
+		(property "LCSC" "C107137"
+			(at 80.645 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
+			(at 80.645 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "aff339da-44fb-4854-a352-cdd4efd9bfab")
 		)
