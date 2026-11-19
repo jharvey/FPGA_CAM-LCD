@@ -90,41 +90,6 @@
           }
         },
         {
-          "id": "30912745-d291-4c12-9cb7-aa0b05ecc83b",
-          "type": "basic.output",
-          "data": {
-            "name": "gpdi_dp",
-            "range": "[3:0]",
-            "pins": [
-              {
-                "index": "3",
-                "name": "gpdi_dp3",
-                "value": "A17"
-              },
-              {
-                "index": "2",
-                "name": "gpdi_dp2",
-                "value": "A12"
-              },
-              {
-                "index": "1",
-                "name": "gpdi_dp1",
-                "value": "A14"
-              },
-              {
-                "index": "0",
-                "name": "gpdi_dp0",
-                "value": "A16"
-              }
-            ],
-            "virtual": true
-          },
-          "position": {
-            "x": 1096,
-            "y": 504
-          }
-        },
-        {
           "id": "5377a42c-4167-4b5a-acbe-8ba00cfb2f0f",
           "type": "basic.input",
           "data": {
