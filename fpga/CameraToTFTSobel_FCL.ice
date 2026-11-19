@@ -117,7 +117,7 @@
                 "value": "A16"
               }
             ],
-            "virtual": false
+            "virtual": true
           },
           "position": {
             "x": 1096,
@@ -256,7 +256,7 @@
               {
                 "index": "6",
                 "name": "led_6",
-                "value": "E1"
+                "value": "E4"
               },
               {
                 "index": "5",
@@ -266,7 +266,7 @@
               {
                 "index": "4",
                 "name": "led_4",
-                "value": "D1"
+                "value": "D5"
               },
               {
                 "index": "3",
@@ -276,7 +276,7 @@
               {
                 "index": "2",
                 "name": "led_2",
-                "value": "C1"
+                "value": "D3"
               },
               {
                 "index": "1",
