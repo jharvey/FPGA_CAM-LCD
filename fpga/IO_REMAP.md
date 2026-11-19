@@ -140,7 +140,7 @@ Routing notes:
 
 Every port in `CameraToTFTSobel_FCL.ice` was compared with the net on its U1 ball in `FCL.kicad_pcb`. Two conflicts carried over from the ULX3S original were fixed:
 
-- **`gpdi_dp[3:0]` (HDMI) is now a virtual port.** Its ULX3S balls A17, A12, A14, A16 are camera balls on this board (`cmos_db[7]`, `cmos_rst_n`, `cmos_db[1]`, `cmos_db[4]`), and the board has no HDMI connector.
+- **`gpdi_dp[3:0]` (HDMI) output block removed** (it had no wire into it, so nothing else changes). Its ULX3S balls A17, A12, A14, A16 are camera balls on this board (`cmos_db[7]`, `cmos_rst_n`, `cmos_db[1]`, `cmos_db[4]`), and the board has no HDMI connector.
 - **`led[2]`, `led[4]`, `led[6]` moved C1, D1, E1 -> D3, D5, E4** (unconnected balls). C1/D1/E1 are ADC_SDO/ADC_SCK/ADC_DIN here. Only `led[0]` (B2, LED0) and `led[1]` (C2, LED1) reach real LEDs; `led[3]`, `led[5]`, `led[7]` were already on unconnected balls.
 
 Still open: `debug-OUT` drives C13, which is unconnected (harmless). RV2 and RV3 select the 2V5_3V3 rail (bank VCCIO): fit only one of them.
