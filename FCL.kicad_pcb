@@ -31704,7 +31704,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C25792"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -44501,7 +44501,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C52923"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -53635,7 +53635,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C25796"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -67477,7 +67477,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C16772"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -71657,7 +71657,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C11702"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")

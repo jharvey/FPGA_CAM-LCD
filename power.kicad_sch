@@ -38391,6 +38391,28 @@
 				)
 			)
 		)
+		(property "LCSC" "C16772"
+			(at 57.15 119.38 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
+			(at 57.15 119.38 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ff27fbad-5c0e-4f0a-aa22-3f1fe4f9a1cd")
 		)
@@ -38546,7 +38568,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C52923"
 			(at 288.29 232.41 0)
 			(hide yes)
 			(show_name no)
@@ -38974,7 +38996,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C25792"
 			(at 114.3 265.43 0)
 			(hide yes)
 			(show_name no)
@@ -44496,7 +44518,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C25796"
 			(at 110.49 273.05 0)
 			(hide yes)
 			(show_name no)
@@ -46505,7 +46527,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C11702"
 			(at 24.13 226.06 0)
 			(hide yes)
 			(show_name no)

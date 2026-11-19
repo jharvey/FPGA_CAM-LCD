@@ -62,3 +62,8 @@ C18584,XFMR-SMD_H1102NLT,easyeda/C18584.json,,,ESP32S3 JLCPCB/Wurth footprint: 0
 C19077554,SMA_L4.3-W2.6-LS5.0-RD,easyeda/C19077554.json,,,ESP32S3 JLCPCB/Wurth footprint: 0
 C19666,C0603,easyeda/C19666.json,C_0603_1608Metric,0,ESP32S3 JLCPCB/Wurth footprint: 0
 C21120,C0603,easyeda/C21120.json,,,ESP32S3 JLCPCB/Wurth footprint: 0
+C11702,R0402,(title only),R_0402_1005Metric,0,
+C25792,R0402,(title only),R_0402_1005Metric,0,
+C25796,R0402,(title only),R_0402_1005Metric,0,
+C16772,C0402,(title only),C_0402_1005Metric,0,
+C52923,C0402,(title only),C_0402_1005Metric,0,
