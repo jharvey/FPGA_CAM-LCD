@@ -123703,37 +123703,6 @@
 	)
 	(zone
 		(layer "B.Cu")
-		(uuid "4ed7e999-fa97-4d1e-984b-bd93d92dcad1")
-		(name "BAY_RIB_2")
-		(hatch edge 0.5)
-		(connect_pads
-			(clearance 0)
-		)
-		(min_thickness 0.25)
-		(keepout
-			(tracks allowed)
-			(vias allowed)
-			(pads allowed)
-			(copperpour allowed)
-			(footprints not_allowed)
-		)
-		(placement
-			(enabled no)
-			(sheetname "")
-		)
-		(fill
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 0)
-		)
-		(polygon
-			(pts
-				(xy 97 102.35) (xy 154 102.35) (xy 154 104.15) (xy 97 104.15)
-			)
-		)
-	)
-	(zone
-		(layer "B.Cu")
 		(uuid "5d250c78-4fa9-4b00-8543-ec5d2006450e")
 		(name "CASE_BOSS_TR")
 		(hatch edge 0.5)
@@ -123760,37 +123729,6 @@
 		(polygon
 			(pts
 				(xy 156.45 58.95) (xy 162.65 58.95) (xy 162.65 63.75) (xy 156.45 63.75)
-			)
-		)
-	)
-	(zone
-		(layer "B.Cu")
-		(uuid "5d6ef45b-0c4a-4201-9ddc-7d597fb5cc20")
-		(name "BAY_RIB_1")
-		(hatch edge 0.5)
-		(connect_pads
-			(clearance 0)
-		)
-		(min_thickness 0.25)
-		(keepout
-			(tracks allowed)
-			(vias allowed)
-			(pads allowed)
-			(copperpour allowed)
-			(footprints not_allowed)
-		)
-		(placement
-			(enabled no)
-			(sheetname "")
-		)
-		(fill
-			(thermal_gap 0.5)
-			(thermal_bridge_width 0.5)
-			(island_removal_mode 0)
-		)
-		(polygon
-			(pts
-				(xy 97 81.85) (xy 154 81.85) (xy 154 83.65) (xy 97 83.65)
 			)
 		)
 	)
