@@ -35,7 +35,14 @@ var svc = {};
 var common = {selectedBoard: BOARD};
 var utils = {clone: function(d){return JSON.parse(JSON.stringify(d));},
   digestId: function(id){if(id.indexOf('-')!==-1){id=sha1(id).toString();}return 'v'+id.substring(0,6);}};
-var angular = {module: function(){return {service: function(n, fn){fn.call(svc, common, utils, sha1, {version: VERSION}); return this;}};}};
+var blocks = {BASIC_INPUT: 'basic.input', BASIC_OUTPUT: 'basic.output', BASIC_INPUT_LABEL: 'basic.inputLabel', BASIC_OUTPUT_LABEL: 'basic.outputLabel',
+  BASIC_PAIRED_LABELS: 'basic.pairedLabel', BASIC_CODE: 'basic.code', BASIC_MEMORY: 'basic.memory', BASIC_CONSTANT: 'basic.constant', BASIC_INFO: 'basic.info'};
+// The generator's dependency list differs between Icestudio versions, so hand them over by name.
+var DEPS = {common: common, utils: utils, blocks: blocks, nodeSha1: sha1, _package: {version: VERSION}};
+var angular = {module: function(){return {service: function(n, fn){
+  var names = fn.toString().match(/function\s*\(([^)]*)\)/)[1].split(',').map(function(s){return s.trim();}).filter(function(s){return s;});
+  names.forEach(function(d){if(!(d in DEPS)){throw new Error('Icestudio generator needs an unknown service: ' + d);}});
+  fn.apply(svc, names.map(function(d){return DEPS[d];})); return this;}};}};
 function rule(port, apply){var r=(BOARD.rules.input||[]);for(var i=0;i<r.length;i++){if(r[i].port===port){return {port:r[i].port,pin:r[i].pin,apply:apply};}}return undefined;}
 function prepare(){
   var G = PROJECT.design.graph;
@@ -93,8 +100,10 @@ def generate(ice, out, board_dir):
     if node:
         js = data + SHA1_JS + PRE_JS + src + '\nprocess.stdout.write(JSON.stringify(generate()));\n'
         open(os.path.join(tmp, 'gen.js'), 'w', encoding='utf-8').write(js)
-        files = json.loads(subprocess.run([node, os.path.join(tmp, 'gen.js')], check=True, capture_output=True,
-                                          text=True, encoding='utf-8').stdout)
+        r = subprocess.run([node, os.path.join(tmp, 'gen.js')], capture_output=True, text=True, encoding='utf-8')
+        if r.returncode:
+            sys.exit('Code generation failed:\n' + r.stderr[-2000:])
+        files = json.loads(r.stdout)
     else:
         browser = find([os.environ.get('BROWSER'),
                         r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
@@ -129,6 +138,8 @@ def generate(ice, out, board_dir):
 def run(cmd, cwd, env):
     print('>', ' '.join(cmd))
     sys.stdout.flush()
+    # Windows looks the program up on the parent's PATH, not env's, so resolve it here
+    cmd = [shutil.which(cmd[0], path=env['PATH']) or cmd[0]] + cmd[1:]
     r = subprocess.run(cmd, cwd=cwd, env=env)
     if r.returncode:
         sys.exit('%s failed (exit %d); see the log in %s' % (cmd[0], r.returncode, cwd))
