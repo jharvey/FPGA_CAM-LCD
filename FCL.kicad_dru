@@ -24,3 +24,9 @@
 	(constraint track_width (min 0.1mm) )
 	(condition "A.intersectsArea('ULX3S_CORE') || B.intersectsArea('ULX3S_CORE')" )
 )
+
+# FPGA-to-J7 header fan-out (GP/GN pairs) continues below the core area at the same 5-mil spacing
+(rule "GPIO_header_fanout"
+	(constraint clearance (min 0.127mm) )
+	(condition "(A.NetName == 'GP*' || A.NetName == 'GN*') && (B.NetName == 'GP*' || B.NetName == 'GN*')" )
+)
