@@ -144,3 +144,12 @@ Every port in `CameraToTFTSobel_FCL.ice` was compared with the net on its U1 bal
 - **`led[2]`, `led[4]`, `led[6]` moved C1, D1, E1 -> D3, D5, E4** (unconnected balls). C1/D1/E1 are ADC_SDO/ADC_SCK/ADC_DIN here. Only `led[0]` (B2, LED0) and `led[1]` (C2, LED1) reach real LEDs; `led[3]`, `led[5]`, `led[7]` were already on unconnected balls.
 
 Still open: `debug-OUT` drives C13, which is unconnected (harmless). RV2 and RV3 select the 2V5_3V3 rail (bank VCCIO): fit only one of them.
+
+## 2026-11-19 (building: command line and Icestudio window)
+
+The project now targets its own Icestudio board, **FCL**, defined in `fpga/icestudio/FCL` (154 pins named after the board's nets, generated from `FCL.kicad_pcb`). The stock `ulx3s-85f` board does not list balls A15, C9 and G16, and Icestudio's pin-file step fails on a ball it does not know.
+
+- **Command line:** `python fpga/build.py` runs Icestudio's own code generator on the `.ice`, then yosys, nextpnr-ecp5 and ecppack, and writes `fpga/build/main.bit`. It needs an Icestudio install (for `compiler.js` and the toolchain) and either `node` or a Chromium-based browser. `--gen-only` stops after `main.v` / `main.lpf`.
+- **Icestudio window:** run `fpga\icestudio\install_board.ps1` once from an administrator PowerShell, restart Icestudio and pick Select > Board > FCL. Without that step Icestudio does not know the FCL board and will offer to convert the project to another board: decline, because converting resets the pins.
+- Pin names: B12 is now `gp17` and B13 `gp16`, matching the board nets (the balls did not change).
+- `main_FCL.lpf` is kept as a reference copy; the build regenerates its own pin file.

@@ -8,7 +8,7 @@
     "image": ""
   },
   "design": {
-    "board": "ulx3s-85f",
+    "board": "FCL",
     "graph": {
       "blocks": [
         {
@@ -288,7 +288,7 @@
             "pins": [
               {
                 "index": "0",
-                "name": "gp16",
+                "name": "gp17",
                 "value": "B12"
               }
             ],
@@ -636,7 +636,7 @@
             "pins": [
               {
                 "index": "0",
-                "name": "gp17",
+                "name": "gp16",
                 "value": "B13"
               }
             ],

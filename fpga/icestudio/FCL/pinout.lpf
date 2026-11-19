@@ -1,0 +1,6 @@
+BLOCK RESETPATHS;
+BLOCK ASYNCPATHS;
+# FCL board: pins are assigned by Icestudio from pinout.json
+LOCATE COMP "clk" SITE "G2";
+IOBUF PORT "clk" PULLMODE=NONE IO_TYPE=LVCMOS33;
+FREQUENCY PORT "clk" 25 MHZ;
