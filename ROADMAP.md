@@ -780,13 +780,44 @@ To clear the board for a placement rethink, these groups were moved off the outl
 ### Phase 5 – Prototype
 - [ ] BOM with LCSC / JLCPCB numbers
 - [ ] Gerbers + CPL
-  - [x] JLC rotation / position offsets (2026-11-16): every part with an LCSC number has `FT Rotation Offset` (and `FT Position Offset` where JLC's origin is ≥ 0.1 mm off our pad centre: J7, U9, MK1, SD1), worked out by matching each part's pads against JLC's own EasyEDA footprint. `scripts/jlc_cpl.py` writes `production/FCL_bom_jlc.csv` + `FCL_cpl_jlc.csv` from those fields (absolute coordinates, like the Gerbers). With the Fabrication Toolkit plugin, turn its auto-translate off or the offsets apply twice. Unverified against JLC data (2-pad passives assumed 0°): all R/C/L, RB1/RB3, TH1–3, RV3. Parts still without an LCSC number (85, incl. U1, U4, U5, B0/B3/B4, Y2) have no offset yet. Check BAT1 (90° and 270° fit equally) and J1 in JLC's placement preview.
+  - [x] JLC rotation / position offsets (2026-11-16): every part with an LCSC number has `FT Rotation Offset` (and `FT Position Offset` where JLC's origin is ≥ 0.1 mm off our pad centre: J7, U9, MK1, SD1), worked out by matching each part's pads against JLC's own EasyEDA footprint. `scripts/jlc_cpl.py` writes `production/FCL_bom_jlc.csv` + `FCL_cpl_jlc.csv` from those fields (absolute coordinates, like the Gerbers). With the Fabrication Toolkit plugin, turn its auto-translate off or the offsets apply twice. Unverified against JLC data (2-pad passives assumed 0°): all R/C/L, RB1/RB3, TH1–3, RV3. Parts still without an LCSC number (85, incl. U1, U4, U5, B0/B3/B4, Y2) have no offset yet. *(Update 2026-11-19: all fitted parts now have LCSC numbers except U1 and Y2; the newly numbered ones took offset 0 or the offset of an identical part, see the review list below.)* Check BAT1 (90° and 270° fit equally) and J1 in JLC's placement preview.
 - [ ] First order
 
 ### Later / stretch goals
 - [ ] Higher-voltage / higher-wattage USB-C PD path + switching or multi-cell charger (max charging power)
 - [ ] Firmware-driven cell prioritisation (CE control) using the new 8-ch ADC data
 - [ ] Optional bottom-capacity boost stage
+
+### Cost reductions and room for improvement (review list, 2026-11-20)
+Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnected, 0 clearance at commit `43dccc04`). Nothing here blocks a first prototype unless marked **check before order**.
+
+**Cost reductions**
+- [ ] **Small vias (JLC surcharge).** 72 vias still have a 0.2 mm hole with a pad under 0.45 mm (JLC charges more for these); 157 others were enlarged to 0.45 mm on 2026-11-20. Enlarging the last 72 leaves about 100 gaps of 0.096–0.126 mm, mostly via-to-track in the FPGA core. Options: allow 0.095 mm in `ULX3S_CORE` (JLC multilayer minimum is 0.09 mm), reroute those spots, or keep paying. Get the surcharge from a JLC quote first.
+- [ ] **Extended parts.** JLC adds a loading fee per extended part type. Known extended passives that could become basic parts or be merged with a neighbouring value: 56k 0402 (R39, C25796), 1.1k 0603 (C22764), 130 Ω 0603 (C22796), 549 Ω 0603 (C218072). Also extended: KMR2 buttons (C269272), IMU, compass, barometer, ToF, mic, amp. Count them on the JLC BOM page and decide which are worth changing.
+- [ ] **Fewer distinct parts.** 83 LCSC numbers for 250 placed parts. Same values exist in two packages (for example 1k, 10k, 100 nF, 1 µF in 0402 and 0603) and near-duplicates from the ULX3S side (ARG03 0603 resistors beside UNI-ROYAL ones). Merging lowers feeder count and extended fees.
+- [ ] **FPGA sourcing.** JLC lists only LFE5U-85F-**8**BG381C (C1551826, low stock), not the -6 in the schematic. Decide: supply the -6, or switch to the -8 (same package and pinout). **Check before order.**
+- [ ] **Y2 32.768 kHz crystal.** Micro Crystal CM8V-T1A is not in JLC's catalogue. Pick a JLC-stocked 2.0 × 1.2 mm crystal with matching load capacitance (recheck C56/C57) or supply it. **Check before order.**
+- [ ] **Two-sided assembly.** Parts sit on both sides, which needs JLC's two-sided assembly. Moving the few small B-side groups to F is only worth it if a quote shows a real difference.
+
+**Electrical margin**
+- [ ] **+1V1 core rail** runs on 0.1–0.2 mm tracks since the In1 island was removed. Widen the feed from U3/RP1 to the BGA or give it a small pour. **Check before order.**
+- [ ] **VSYS** runs on 1.0 / 0.6 / 0.4 mm In1 traces instead of an island. Check against the worst-case current (three bucks + backlight boost + speaker amp) and widen the necks.
+- [ ] **In1 +3V3 plane** is cut up to the right of the FPGA by signal and power traces. Move what can go to F/B (or short In2 hops) so return paths and the 3V3 feed are less broken.
+- [ ] FPGA constraints: no clock constraints in `fpga/main_FCL.lpf` yet; RV2 and RV3 must never both be fitted.
+- [ ] Tent the GND stitching vias under the ESP32-S3 module.
+
+**Mechanical**
+- [ ] **Rib keepouts removed.** `BAY_RIB_1` / `BAY_RIB_2` (4.4) were deleted on 2026-11-19 at the owner's request; 15 B-side parts sit where the ribs were drawn (R16, TP5, C58, C47, C69, C71, C61, R60, R61, R43, R24, R36; U12, Q3, C40). The bay design must notch or drop the ribs there, or raise the cells.
+- [ ] **Parts under BT12** (C90–C93, R88, R89, tallest about 0.9 mm) are the 6 remaining courtyard errors. With the 2.5 mm cradle height of 4.4 they clear the cell. Either shrink BT12's courtyard to the clip or exclude the 6 violations; flipping them to F needs the I²C tracks beside U26/U27 re-laid.
+- [ ] Servo header courtyards were narrowed on the board copies only; *Update footprints from library* brings the overlap back.
+
+**Clean-up**
+- [ ] DRC leftovers: J17 shield thermal on one spoke (make it solid or exclude), 8 dangling track ends, 3 dangling vias, two SRV_PWM5 vias 0.36 mm apart.
+- [ ] Silkscreen pass: about 200 silk-overlap and 114 silk-over-copper warnings; references near C64/D54/R70, U20 and the 0402 swaps need moving.
+- [ ] Schematic: C66's wires are still drawn where the symbol was; rerun ERC after the 2026-11-19 edits (C66 removed, R23/R37/R39/C60/C65 to 0402, LCSC fields).
+- [ ] Keep the rule areas `ULX3S_CORE` (two) and `U1_BGA`: `FCL.kicad_dru` selects by those names, and without them DRC shows about 270 clearance errors. Consider locking them.
+- [ ] JLC placement check: rotation offsets are unverified for D11 (LED polarity), B0/B3/B4, and the five 0402 swaps; stock unverified for C22796. Existing LCSC numbers were not re-checked for stock.
+- [ ] FPGA flow: `fpga/icestudio/install_board.ps1` not yet run on the real Icestudio install; the design builds from the command line but has not been opened in the Icestudio window or loaded on hardware.
 
 ---
 
