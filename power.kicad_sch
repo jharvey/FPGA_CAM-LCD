@@ -18574,16 +18574,7 @@
 		)
 		(uuid "79cd58e6-2815-42ca-b1d5-a08b40a0ca8f")
 	)
-	(wire
-		(pts
-			(xy 298.45 234.95) (xy 298.45 227.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "79df5339-a0ba-4b65-add5-2f69c663c46a")
-	)
+
 	(wire
 		(pts
 			(xy 229.87 78.74) (xy 231.14 78.74)
@@ -28498,7 +28489,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 109.22 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -29624,8 +29615,30 @@
 				)
 			)
 		)
-		(property "MPN" "CM8V-T1A-32.768kHz-6pF-20PPM-TA-QC"
+		(property "MPN" "CM8V-T1A-32.768KHZ-9PF-20PPM-TB-QA"
 			(at 22.86 92.71 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C5366546"
+			(at 29.21 90.17 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "FT Rotation Offset" "0"
+			(at 29.21 90.17 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31503,7 +31516,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 276.225 81.28 0)
 			(hide yes)
 			(show_name no)
@@ -31604,7 +31617,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 276.225 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -31705,7 +31718,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 276.225 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -31806,7 +31819,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 267.335 81.28 0)
 			(hide yes)
 			(show_name no)
@@ -31907,7 +31920,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 267.335 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -32008,7 +32021,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 267.335 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -36771,7 +36784,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C87995"
+		(property "LCSC" "C108719"
 			(at 27.94 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -38987,7 +39000,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7pF"
+		(property "Value" "12pF"
 			(at 16.51 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39117,7 +39130,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C314302"
+		(property "LCSC" "C182482"
 			(at 22.86 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -39273,7 +39286,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7pF"
+		(property "Value" "12pF"
 			(at 16.51 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39315,7 +39328,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C314302"
+		(property "LCSC" "C182482"
 			(at 16.51 102.87 0)
 			(hide yes)
 			(show_name no)

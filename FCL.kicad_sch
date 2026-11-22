@@ -504,7 +504,7 @@
 		(in_bom yes)
 		(on_board no)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-000058e6bace")
 		(property "Reference" "H2"
 			(at 105.41 161.29 0)

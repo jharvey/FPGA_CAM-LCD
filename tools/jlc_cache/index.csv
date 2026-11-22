@@ -121,3 +121,6 @@ C45783,,,,,"substitute candidate, not on board",Basic,CL21A226MAQNNNE,0805,,2026
 C49217,,,,,"substitute candidate, not on board",Preferred,0805F225M500NT,0805,,2026-11-22
 C8545,,,,,"substitute candidate, not on board",Basic,2N7002,SOT-23,6122117,2026-11-22
 C87995,,,C_0805_2012Metric,,,Extended,CL21F225ZOFNNNE,0805,,2026-11-22
+C5366546,,,Crystal_SMD_MicroCrystal_CC8V-T1A-2Pin_2.0x1.2mm,0 (not checked),,Extended,CM8V-T1A-32.768KHZ-9PF-20PPM-TB-QA,SMD2012-2P,156,2026-11-22
+C108719,,,C_0805_2012Metric,0,,Extended,0805X225K500NT,0805,46940,2026-11-22
+C182482,,,C_0603_1608Metric,0,,Extended,0603CG120F500NT,0603,13859,2026-11-22

@@ -15893,7 +15893,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "FNETHE025"
+		(property "Value" "SG-8101CA 25MHz"
 			(at 144.78 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
