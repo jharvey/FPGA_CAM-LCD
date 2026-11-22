@@ -58802,7 +58802,7 @@
 			(uuid "cddbe7e6-001e-455d-aa95-1e167512ec74")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm.step"
+		(model "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/TQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -76145,14 +76145,15 @@
 		(uuid "fde0c7d8-91a9-4fc6-b8a9-6cad983577e6")
 	)
 	(gr_text "FCL V0.1"
-		(at 91.674999 96.26625 0)
-		(layer "F.SilkS")
+		(at 90.691667 130.79825 0)
+		(layer "B.SilkS")
 		(uuid "4cd7e757-3e1f-4fce-9ae0-cdeaecb6461f")
 		(effects
 			(font
-				(size 1.5 1.5)
-				(thickness 0.25)
+				(size 1 1)
+				(thickness 0.15)
 			)
+			(justify mirror)
 		)
 	)
 	(gr_text "github.com/jharvey/FPGA_CAM-LCD"
