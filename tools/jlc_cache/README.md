@@ -4,7 +4,7 @@ Footprint data already fetched from JLC's EasyEDA API
 (`https://easyeda.com/api/products/<LCSC>/components?version=6.4.19.5`).
 **Check `index.csv` here before fetching anything from JLC, LCSC or EasyEDA.**
 
-- `index.csv`: LCSC number, EasyEDA footprint name, pad file, and the rotation offset
+- `index.csv`: LCSC number, EasyEDA footprint name, pad file, JLC class (Basic / Preferred / Extended, from the jlcsearch.tscircuit.com mirror, with the date checked and its approximate stock where it gave one), and the rotation offset
   this board uses (degrees, the `FT Rotation Offset` convention).
   **The offset depends on the KiCad footprint as well as the LCSC number.** For example,
   C910544 is 270 on FCL's `TQFN-16-1EP_3x3mm` but 0 on the ESP32S3 project's MAX98357
