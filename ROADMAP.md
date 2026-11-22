@@ -792,12 +792,53 @@ To clear the board for a placement rethink, these groups were moved off the outl
 Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnected, 0 clearance at commit `43dccc04`). Nothing here blocks a first prototype unless marked **check before order**.
 
 **Cost reductions**
-- [ ] **Small vias (JLC surcharge).** 72 vias still have a 0.2 mm hole with a pad under 0.45 mm (JLC charges more for these); 157 others were enlarged to 0.45 mm on 2026-11-20. Enlarging the last 72 leaves about 100 gaps of 0.096–0.126 mm, mostly via-to-track in the FPGA core. Options: allow 0.095 mm in `ULX3S_CORE` (JLC multilayer minimum is 0.09 mm), reroute those spots, or keep paying. Get the surcharge from a JLC quote first.
+- [ ] **Small vias (JLC surcharge).** 84 vias on 2026-11-22 (72 on 2026-11-20, before the latest routing) still have a 0.2 mm hole with a pad under 0.45 mm (JLC charges more for these); 157 others were enlarged to 0.45 mm on 2026-11-20. Enlarging the last 72 leaves about 100 gaps of 0.096–0.126 mm, mostly via-to-track in the FPGA core. Options: allow 0.095 mm in `ULX3S_CORE` (JLC multilayer minimum is 0.09 mm), reroute those spots, or keep paying. Get the surcharge from a JLC quote first.
 - [ ] **Extended parts.** JLC adds a loading fee per extended part type. Known extended passives that could become basic parts or be merged with a neighbouring value: 56k 0402 (R39, C25796), 1.1k 0603 (C22764), 130 Ω 0603 (C22796), 549 Ω 0603 (C218072). Also extended: KMR2 buttons (C269272), IMU, compass, barometer, ToF, mic, amp. Count them on the JLC BOM page and decide which are worth changing.
 - [ ] **Fewer distinct parts.** 83 LCSC numbers for 250 placed parts. Same values exist in two packages (for example 1k, 10k, 100 nF, 1 µF in 0402 and 0603) and near-duplicates from the ULX3S side (ARG03 0603 resistors beside UNI-ROYAL ones). Merging lowers feeder count and extended fees.
 - [ ] **FPGA sourcing.** JLC lists only LFE5U-85F-**8**BG381C (C1551826, low stock), not the -6 in the schematic. Decide: supply the -6, or switch to the -8 (same package and pinout). **Check before order.**
 - [ ] **Y2 32.768 kHz crystal.** Micro Crystal CM8V-T1A is not in JLC's catalogue. Pick a JLC-stocked 2.0 × 1.2 mm crystal with matching load capacitance (recheck C56/C57) or supply it. **Check before order.**
 - [ ] **Two-sided assembly.** Parts sit on both sides, which needs JLC's two-sided assembly. Moving the few small B-side groups to F is only worth it if a quote shows a real difference.
+
+**Cost reduction proposals (2026-11-22, from `doc/jlc_check_2026-11-22.md`; nothing changed on the board)**
+Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 83 part types: 29 Basic, 3 Preferred, 51 Extended. No prices were looked up; savings are counted as Extended part types removed.
+
+*A. Swap to a Basic part, same value and footprint, no circuit effect (11 Extended types removed):*
+- [ ] 22nF 0603 x15 (FPGA decoupling): C107137 is an **0805** part on 0603 pads, must change anyway -> C21122 (22nF 50V X7R 0603).
+- [ ] 220nF 0603 x2 (C14 SHUT delay, C86 LIS2MDL C1): C326805 is an **0805 Y5V** part on 0603 pads, must change anyway -> C21120 (220nF 25V X7R 0603).
+- [ ] 22uF 0805 x13 (buck outputs, VSYS, RTC, SD): C29277 (10 V) -> C45783 (22uF 25V X5R).
+- [ ] 10k 0603 x4 (flash pull-ups): C15401 (5 %) -> C25804 (1 %).
+- [ ] 4.7k 0603 x5 (PWREN, HOLD, WAKE, PWRBTn, FLASH_nCS, one in the 2V5 feedback divider FB2): C218056 (thin film 25 ppm) -> C23162 (thick film 1 %, 100 ppm).
+- [ ] 18k 0603 x2 (RB1 in the 1V1 feedback divider, R2 PWREN pull-down): C425614 (0.5 %) -> C25810 (1 %). Adds about 0.25 % to the 1V1 set-point tolerance.
+- [ ] 3.3k 0603 x1 (RB3, 3V3 feedback divider): C425629 -> C22978.
+- [ ] 100pF 0603 x3 (C2, C6, C10 feed-forward on the bucks): C14665 -> C14858 (C0G).
+- [ ] 2.2M 0603 x1 (R5 SHUT pull-down): C18679 (5 %) -> C22938 (1 %, Preferred).
+- [ ] 2N7002 (Q2): C179727 -> C8545.
+- [ ] 1N914 x7: C258181 (1N914BWS, SOD-323F) -> C2128 (1N4148WS, SOD-323); same small-signal diode.
+
+*B. Needs an owner decision (value, type or part changes; up to 5 more Extended types removed):*
+- [ ] 130R 0603, R10 (FTDI_nSUSPEND to FTDI_nSLEEP): -> 120R C22787 or 150R C22808 (Basic), or DNP with the rest of the FTDI fallback.
+- [ ] 549R 0603, R65 (+3V3 to RTCVDD) and R35 (WIFI_EN series): -> 560R C23204 (Basic), 2 % higher.
+- [ ] 0.47R 0603, R38 (+3V3 to SD3V3): -> 0R C21189 (already on the board) if the inrush limit is not needed, else keep.
+- [ ] 2.2uF 0805 x10 (C87995, **Y5V**, on +1V1, +2V5, +3V3, the buck outputs, WKUP, VSYS): Y5V loses most of its capacitance under bias and cold. Merge into the 10uF 0805 X5R already on the board (C15850, Basic); check C on WKUP, where the value sets a delay.
+- [ ] BC857 (Q1, C181146, Extended): BC857C C20069137 is Preferred; higher gain group.
+- [ ] 1.1k 0603 x3 (C22764, Preferred: R29 FLASH_SCK pull-up, R8 PWREN-SHD, R6 WKn) -> 1k C21190 (on the board) removes a part type; 56k 0402 (R39, C25796, Preferred) is fine as it is.
+- [ ] 4.7pF 0603 x2 (C56, C57, C314302): follows the Y2 crystal choice.
+- Staying Extended (no Basic equivalent): FPGA, SDRAM, flash, ESP32-S3, ADC, IMU, compass, barometer, ToF, mic, amp, RTC, reference, CH224K, LM66100, TLV62569, AP3032, USBLC6, BAT54, NTC, inductors, 100uF 1210, 0R 0805 (RV3), oscillator, connectors, switches, battery contacts: about 35 types.
+
+*C. Same value in two packages (all already Basic, so this saves feeders, not Extended fees; needs footprint changes):*
+- [ ] 1k: 0402 x1 (R23, LED2) and 0603 x17 (LEDs, servo series, PD). Make R23 0603 again or move the rest.
+- [ ] 10k: 0402 x11 (pull-ups, NTC and VREF dividers) and 0603 x4 (flash pull-ups).
+- [ ] 4.7k: 0402 x6 (I2C pull-ups) and 0603 x5.
+- [ ] 100k: 0402 x2 (R18, R87 pull-downs) and 0603 x1 (R44, VSYS divider top).
+- [ ] 47k / 56k cell dividers: cell 3 is 0402 (R37, R39), cells 1 and 2 are 0603 (R24, R26, R25, R36). One package for all three keeps the dividers matched.
+- [ ] 220nF: 0402 x1 (C60 PWRBTn) and 0603 x2. 1uF: 0402 x1 (C65 VADC) and 0603 x3. Red LED: 0603 x5 and 0805 x1 (D11).
+
+*D. Values close enough to combine (owner to judge):*
+- [ ] 1.1k -> 1k (see B). 549R -> 560R (see B). 130R -> 120R or 150R (see B).
+- [ ] VSYS divider 100k / 68k and cell dividers 47k / 56k use four values; one ratio (for example 47k / 56k on VSYS too, if the ADC range allows) would drop 68k and one 100k type. Changes the ADC scaling in firmware.
+- [ ] 5.6k x3 (TP4056 PROG, sets charge current) and 15k, 18k, 3.3k, 4.7k in the feedback dividers set voltages or currents: leave.
+
+*Estimate:* A removes 11 Extended part types (51 -> 40) with no circuit change; B removes up to 5 more (-> 35).
 
 **Electrical margin**
 - [ ] **+1V1 core rail** runs on 0.1–0.2 mm tracks since the In1 island was removed. Widen the feed from U3/RP1 to the BGA or give it a small pour. **Check before order.**
