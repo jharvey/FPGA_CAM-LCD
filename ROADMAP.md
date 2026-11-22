@@ -791,6 +791,13 @@ To clear the board for a placement rethink, these groups were moved off the outl
 ### Cost reductions and room for improvement (review list, 2026-11-20)
 Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnected, 0 clearance at commit `43dccc04`). Nothing here blocks a first prototype unless marked **check before order**.
 
+**JLC quote of 2026-11-22 (5 boards, uploaded files, nothing ordered)**
+- Bare boards $63.52: base $8.00, ENIG $17.50, 0.2 mm via holes $17.48, 4-wire Kelvin test $17.04 and TG155 material $3.50 (both forced by the via tier).
+- Standard two-sided assembly $403.43 with 75 of 83 part types placed: parts $191.10, feeder loading $111.60 (about $1.49 per part type, Basic or Extended alike), setup $51.50, stencil $16.54, fixture $16.54. Total $466.95 before shipping (about $26) and before the parts below.
+- Not placed for lack of stock at JLC (8 types): IMU ICM-42688-P, SDRAM, microphone, LIS2MDL, LPS22DF, CH224K, PTS645 buttons, and REF3025 (3 of 5). Pre-order them into the JLC parts library or supply them. U1 (FPGA) is not in the BOM.
+- **The via surcharge follows the hole size, not the pad size.** JLC's free tier is a 0.3 mm hole with a 0.4/0.45 mm pad; the 0.25 mm and 0.2 mm hole tiers both add about $38 on 5 boards. Enlarging pads to 0.45 mm (done for 174 vias) does not remove it; the 578 vias with 0.2 mm holes would have to be drilled 0.3 mm, which tightens hole-to-track spacing in the FPGA core.
+- In Standard PCBA every part type costs a feeder fee, so merging values and packages (lists C and D below) now saves about $1.49 per type removed.
+
 **Cost reductions**
 - [ ] **Small vias (JLC surcharge).** 84 vias on 2026-11-22 (72 on 2026-11-20, before the latest routing) still have a 0.2 mm hole with a pad under 0.45 mm (JLC charges more for these); 157 others were enlarged to 0.45 mm on 2026-11-20. Enlarging the last 72 leaves about 100 gaps of 0.096–0.126 mm, mostly via-to-track in the FPGA core. Options: allow 0.095 mm in `ULX3S_CORE` (JLC multilayer minimum is 0.09 mm), reroute those spots, or keep paying. Get the surcharge from a JLC quote first.
 - [ ] **Extended parts.** JLC adds a loading fee per extended part type. Known extended passives that could become basic parts or be merged with a neighbouring value: 56k 0402 (R39, C25796), 1.1k 0603 (C22764), 130 Ω 0603 (C22796), 549 Ω 0603 (C218072). Also extended: KMR2 buttons (C269272), IMU, compass, barometer, ToF, mic, amp. Count them on the JLC BOM page and decide which are worth changing.

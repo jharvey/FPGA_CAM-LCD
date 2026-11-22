@@ -98,8 +98,11 @@ for fp in sorted(b.GetFootprints(), key=lambda f: f.GetReference()):
     ro = field(fp, 'FT Rotation Offset')
     rot = (rot + (float(ro) if ro else 0)) % 360
     cpl.append([ref, '%.4f' % mx, '%.4f' % -my, 'Bottom' if bottom else 'Top', '%g' % round(rot, 3)])
-    key = (fp.GetValue(), str(fp.GetFPID().GetLibItemName()), lcsc)
-    bom.setdefault(key, []).append(ref)
+    # one BOM line per LCSC number: JLC leaves lines unselected when several lines match the same part
+    e = bom.setdefault(lcsc, [[], str(fp.GetFPID().GetLibItemName()), []])
+    if fp.GetValue() not in e[0]:
+        e[0].append(fp.GetValue())
+    e[2].append(ref)
 
 with open(os.path.join(out, stem + '_cpl_jlc.csv'), 'w', newline='') as f:
     w = csv.writer(f)
@@ -108,7 +111,7 @@ with open(os.path.join(out, stem + '_cpl_jlc.csv'), 'w', newline='') as f:
 with open(os.path.join(out, stem + '_bom_jlc.csv'), 'w', newline='') as f:
     w = csv.writer(f)
     w.writerow(['Comment', 'Designator', 'Footprint', 'LCSC'])
-    for (val, fpn, lcsc), refs in bom.items():
-        w.writerow([val, ','.join(refs), fpn, lcsc])
+    for lcsc, (vals, fpn, refs) in bom.items():
+        w.writerow(['/'.join(vals), ','.join(refs), fpn, lcsc])
 print('placed %d parts (%d BOM lines) -> %s' % (len(cpl), len(bom), out))
 print('no LCSC number (not in BOM/CPL): %d: %s' % (len(skipped), ' '.join(skipped)))
