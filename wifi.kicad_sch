@@ -4663,7 +4663,7 @@
 				)
 			)
 		)
-		(property "Value" "549"
+		(property "Value" "560"
 			(at 115.57 69.85 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4704,7 +4704,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C218072"
+		(property "LCSC" "C23204"
 			(at 117.602 69.85 90)
 			(hide yes)
 			(show_name no)
@@ -4827,7 +4827,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C29277"
+		(property "LCSC" "C45783"
 			(at 90.805 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -5496,7 +5496,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C29277"
+		(property "LCSC" "C45783"
 			(at 212.725 137.16 0)
 			(hide yes)
 			(show_name no)

@@ -802,6 +802,8 @@ Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnect
 **Cost reduction proposals (2026-11-22, from `doc/jlc_check_2026-11-22.md`; nothing changed on the board)**
 Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 83 part types: 29 Basic, 3 Preferred, 51 Extended. No prices were looked up; savings are counted as Extended part types removed.
 
+**Applied 2026-11-22 (board and schematics, 60 parts, part-number fields only, no copper):** all 11 swaps of group A, plus three from group B: 549R -> 560R (R35, R65, C23204), 1.1k -> 1k (R6, R8, R29, C21190) and R10 130R -> 120R (C22787). Now 82 part types, about 38 Extended. Not applied: 0.47R R38 (inrush limit), 2.2uF Y5V x10 (the Basic/Preferred 2.2uF 0805 found, C49217, is Y5V as well; needs an X5R/X7R number or the 10uF merge), BC857 gain group, 4.7pF (follows Y2), and every item in C (needs footprint and track changes). Check in JLC's placement preview: Q2 (C8545) and the seven 1N4148WS diodes (C2128) kept the rotation offsets of the parts they replaced.
+
 *A. Swap to a Basic part, same value and footprint, no circuit effect (11 Extended types removed):*
 - [ ] 22nF 0603 x15 (FPGA decoupling): C107137 is an **0805** part on 0603 pads, must change anyway -> C21122 (22nF 50V X7R 0603).
 - [ ] 220nF 0603 x2 (C14 SHUT delay, C86 LIS2MDL C1): C326805 is an **0805 Y5V** part on 0603 pads, must change anyway -> C21120 (220nF 25V X7R 0603).

@@ -14996,7 +14996,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C107137"
+		(property "LCSC" "C21122"
 			(at 150.495 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -15256,7 +15256,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C107137"
+		(property "LCSC" "C21122"
 			(at 158.115 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -15516,7 +15516,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C107137"
+		(property "LCSC" "C21122"
 			(at 165.735 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -15776,7 +15776,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C107137"
+		(property "LCSC" "C21122"
 			(at 173.355 147.32 0)
 			(hide yes)
 			(show_name no)
