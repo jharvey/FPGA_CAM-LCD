@@ -23293,7 +23293,7 @@
 			(uuid "0c0ffa17-2030-4e8e-9e96-d9fd4ad63ce7")
 		)
 		(embedded_fonts no)
-		(model "./footprints/sdram/TSOP54.3dshapes/TSOP54.wrl"
+		(model "${KIPRJMOD}/footprints/sdram/TSOP54.3dshapes/TSOP54.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -41709,17 +41709,6 @@
 			(uuid "b027b49a-6108-43a6-9ddb-db490ce2570b")
 		)
 		(embedded_fonts no)
-		(model "${KISYS3DMOD}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl_disabled"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "B.Cu")
@@ -49694,7 +49683,7 @@
 			(uuid "f8fd05de-c2e9-4112-8929-f4affcf99613")
 		)
 		(embedded_fonts no)
-		(model "./footprints/crystal/oscxo.3dshapes/oscxo.wrl"
+		(model "${KIPRJMOD}/footprints/crystal/oscxo.3dshapes/oscxo.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -51083,17 +51072,6 @@
 			(uuid "5ae20ca7-33b3-4bc4-a3de-28cedcab43b2")
 		)
 		(embedded_fonts no)
-		(model "${KISYS3DMOD}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl_disabled"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Package_TO_SOT_SMD:SOT-363_SC-70-6"
 		(layer "B.Cu")
@@ -70990,17 +70968,6 @@
 			(uuid "b884e6de-3a56-4095-bee8-ac980aa25d9c")
 		)
 		(embedded_fonts no)
-		(model "${KISYS3DMOD}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl_disabled"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "B.Cu")
