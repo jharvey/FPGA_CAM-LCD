@@ -826,7 +826,7 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - Staying Extended (no Basic equivalent): FPGA, SDRAM, flash, ESP32-S3, ADC, IMU, compass, barometer, ToF, mic, amp, RTC, reference, CH224K, LM66100, TLV62569, AP3032, USBLC6, BAT54, NTC, inductors, 100uF 1210, 0R 0805 (RV3), oscillator, connectors, switches, battery contacts: about 35 types.
 
 *C. Same value in two packages (all already Basic, so this saves feeders, not Extended fees; needs footprint changes):*
-- [ ] 1k: 0402 x1 (R23, LED2) and 0603 x17 (LEDs, servo series, PD). Make R23 0603 again or move the rest.
+- [ ] 1k: 0402 x1 (R23, LED2) and 0603 x11 (LEDs, servo series, PD; 6 of them DNP). Make R23 0603 again or move the rest.
 - [ ] 10k: 0402 x11 (pull-ups, NTC and VREF dividers) and 0603 x4 (flash pull-ups).
 - [ ] 4.7k: 0402 x6 (I2C pull-ups) and 0603 x5.
 - [ ] 100k: 0402 x2 (R18, R87 pull-downs) and 0603 x1 (R44, VSYS divider top).
