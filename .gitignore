@@ -65,3 +65,5 @@ venv/
 *-rescue.lib
 *-cache.lib
 fp-info-cache
+# 3D assembly outputs (regenerate with case/assembly/build_assembly.py)
+case/build/

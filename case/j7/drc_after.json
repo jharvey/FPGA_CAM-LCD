@@ -1,0 +1,1577 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-25T12:34:49",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error"
+    ],
+    "kicad_version": "10.0.8",
+    "schematic_parity": [],
+    "source": "FCL.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Items shorting two nets (nets GND and /power/WAKEUPn)",
+            "items": [
+                {
+                    "description": "Pad MP [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 123.63,
+                        "y": 121.95
+                    },
+                    "uuid": "8e826ddf-d3f2-4d4a-88e3-1f90bc94dbec"
+                },
+                {
+                    "description": "Track [/power/WAKEUPn] on B.Cu, length 10.8894 mm",
+                    "pos": {
+                        "x": 126.65,
+                        "y": 125.15
+                    },
+                    "uuid": "aada186c-9805-48b4-a1ea-50bcf45e98e6"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Track [GN9] on B.Cu, length 7.1815 mm",
+                    "pos": {
+                        "x": 108.63,
+                        "y": 117.618528
+                    },
+                    "uuid": "bcffac90-95a6-4864-b56d-e17e519fa5b0"
+                },
+                {
+                    "description": "Pad 28 [GP8] of J7 on B.Cu",
+                    "pos": {
+                        "x": 109.13,
+                        "y": 121.8
+                    },
+                    "uuid": "cfa6bfa2-18db-4942-8c60-41683e3b7581"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 34 [GP11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.13,
+                        "y": 121.8
+                    },
+                    "uuid": "52830b68-b5a7-4018-86a2-022d5462cd72"
+                },
+                {
+                    "description": "Track [GN12] on B.Cu, length 5.0300 mm",
+                    "pos": {
+                        "x": 105.63,
+                        "y": 119.77
+                    },
+                    "uuid": "848ce57a-ba76-452d-aac6-b7eaced129a1"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GN5 and /display/LCD_BL_A)",
+            "items": [
+                {
+                    "description": "Track [GN5] on B.Cu, length 9.9087 mm",
+                    "pos": {
+                        "x": 112.63,
+                        "y": 114.89132
+                    },
+                    "uuid": "5f625262-9d6b-46c7-9c87-7533df885762"
+                },
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "de674774-7c48-49a8-b5ed-9e0ce9abc63a"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 14 [GP1] of J7 on B.Cu",
+                    "pos": {
+                        "x": 116.13,
+                        "y": 121.8
+                    },
+                    "uuid": "06fbd2cd-def7-4334-8dcf-fa5bd6be5f67"
+                },
+                {
+                    "description": "Track [GN2] on B.Cu, length 10.2000 mm",
+                    "pos": {
+                        "x": 115.63,
+                        "y": 114.599999
+                    },
+                    "uuid": "34c17d8e-a8a5-4b7f-b085-723364de9030"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Track [GN8] on B.Cu, length 4.1000 mm",
+                    "pos": {
+                        "x": 109.63,
+                        "y": 120.7
+                    },
+                    "uuid": "86350188-62c7-462a-a00e-9fb10009958e"
+                },
+                {
+                    "description": "Pad 28 [GP8] of J7 on B.Cu",
+                    "pos": {
+                        "x": 109.13,
+                        "y": 121.8
+                    },
+                    "uuid": "cfa6bfa2-18db-4942-8c60-41683e3b7581"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GN4 and /display/LCD_BL_A)",
+            "items": [
+                {
+                    "description": "Track [GN4] on B.Cu, length 4.1000 mm",
+                    "pos": {
+                        "x": 113.63,
+                        "y": 120.7
+                    },
+                    "uuid": "68d996df-ee6a-4b01-8ecf-c0e7d50cc843"
+                },
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 113.85,
+                        "y": 123.85
+                    },
+                    "uuid": "894d63d6-e886-458a-8e4a-3d6bfaca5d8a"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 12 [GP0] of J7 on B.Cu",
+                    "pos": {
+                        "x": 117.13,
+                        "y": 121.8
+                    },
+                    "uuid": "5197c171-5713-4dfa-adeb-302dffefed16"
+                },
+                {
+                    "description": "Track [GN1] on B.Cu, length 4.1000 mm",
+                    "pos": {
+                        "x": 116.63,
+                        "y": 120.7
+                    },
+                    "uuid": "8c2dd408-7371-4552-8f1d-4d4039e22e04"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Track [GN11] on B.Cu, length 4.1000 mm",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 120.7
+                    },
+                    "uuid": "b8231c6f-29ae-46cd-a924-4ef77130283d"
+                },
+                {
+                    "description": "Pad 32 [GP10] of J7 on B.Cu",
+                    "pos": {
+                        "x": 107.13,
+                        "y": 121.8
+                    },
+                    "uuid": "c1d75db5-72b7-4353-8e18-8eca7aa2bb70"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Track [GN13] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 104.63,
+                        "y": 119.9
+                    },
+                    "uuid": "46a3f8b8-8df8-4e03-87ab-6d10ac0b9226"
+                },
+                {
+                    "description": "Pad 36 [GP12] of J7 on B.Cu",
+                    "pos": {
+                        "x": 105.13,
+                        "y": 121.8
+                    },
+                    "uuid": "5772581f-b307-4d8b-a960-7c52ef817dd2"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 30 [GP9] of J7 on B.Cu",
+                    "pos": {
+                        "x": 108.13,
+                        "y": 121.8
+                    },
+                    "uuid": "3dc03067-b4e8-4e68-977a-08eb5ca113c0"
+                },
+                {
+                    "description": "Track [GN10] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 107.63,
+                        "y": 119.9
+                    },
+                    "uuid": "b200c6b1-ad75-4a44-8187-6d10fb359a3e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 24 [GP6] of J7 on B.Cu",
+                    "pos": {
+                        "x": 111.13,
+                        "y": 121.8
+                    },
+                    "uuid": "b84e8a97-d189-46bf-b74c-dc3bd0bb2a3e"
+                },
+                {
+                    "description": "Track [GN7] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 110.63,
+                        "y": 119.9
+                    },
+                    "uuid": "def96340-60fd-450f-b82e-630aec4ab665"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Tracks crossing",
+            "items": [
+                {
+                    "description": "Track [GN3] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 119.9
+                    },
+                    "uuid": "7e40fa56-4209-465e-8054-099f998fadf8"
+                },
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 113.85,
+                        "y": 123.85
+                    },
+                    "uuid": "894d63d6-e886-458a-8e4a-3d6bfaca5d8a"
+                }
+            ],
+            "severity": "error",
+            "type": "tracks_crossing"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Pad 24 [GP6] of J7 on B.Cu",
+                    "pos": {
+                        "x": 111.13,
+                        "y": 121.8
+                    },
+                    "uuid": "b84e8a97-d189-46bf-b74c-dc3bd0bb2a3e"
+                },
+                {
+                    "description": "Track [GN6] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 111.63,
+                        "y": 119.9
+                    },
+                    "uuid": "caa20e91-a87a-4c5b-b9bc-84075afb071d"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.1250 mm)",
+            "items": [
+                {
+                    "description": "Track [GN0] on B.Cu, length 4.9000 mm",
+                    "pos": {
+                        "x": 117.63,
+                        "y": 119.9
+                    },
+                    "uuid": "2265a295-2ce9-4703-9a2c-197fd8481728"
+                },
+                {
+                    "description": "Pad 10 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 118.13,
+                        "y": 121.8
+                    },
+                    "uuid": "43d1c682-d57b-4fce-8290-a17d3357da3a"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GN3 and GP13)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Via [GP13] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 125.2
+                    },
+                    "uuid": "c0054a15-bac4-4988-97d9-ce44fb2ed0bd"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'fine_pitch_pads' clearance 0.1000 mm; actual 0.0263 mm)",
+            "items": [
+                {
+                    "description": "Pad 4 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 121.13,
+                        "y": 121.8
+                    },
+                    "uuid": "4618eefa-b2c6-4015-9ef8-aa69784712af"
+                },
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.1314 mm",
+                    "pos": {
+                        "x": 121.3,
+                        "y": 120.6
+                    },
+                    "uuid": "edd79b0b-ff51-4d1d-b615-17cf3478fe2e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GN4 and /display/LCD_BL_A)",
+            "items": [
+                {
+                    "description": "Pad 19 [GN4] of J7 on B.Cu",
+                    "pos": {
+                        "x": 113.63,
+                        "y": 124.8
+                    },
+                    "uuid": "2d16fab8-c0b2-4dd5-b695-e00617a31d7c"
+                },
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.2500 mm",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "c58c5044-ef8f-4c0b-8447-f3458ca72cd4"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GN3 and /display/LCD_BL_A)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 113.85,
+                        "y": 123.85
+                    },
+                    "uuid": "894d63d6-e886-458a-8e4a-3d6bfaca5d8a"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets /display/LCD_BL_A and GND)",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 2.4042 mm",
+                    "pos": {
+                        "x": 124.6,
+                        "y": 122.3
+                    },
+                    "uuid": "6ee7c8f8-070e-4cae-9b9d-e0f4513354f0"
+                },
+                {
+                    "description": "Pad MP [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 123.63,
+                        "y": 121.95
+                    },
+                    "uuid": "8e826ddf-d3f2-4d4a-88e3-1f90bc94dbec"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GN5 and /display/LCD_BL_A)",
+            "items": [
+                {
+                    "description": "Pad 21 [GN5] of J7 on B.Cu",
+                    "pos": {
+                        "x": 112.63,
+                        "y": 124.8
+                    },
+                    "uuid": "830342b8-2ab7-48fc-8815-7ce870583b38"
+                },
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "de674774-7c48-49a8-b5ed-9e0ce9abc63a"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets /display/LCD_BL_A and GN3)",
+            "items": [
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.05,
+                        "y": 125.05
+                    },
+                    "uuid": "25c970f7-750d-4389-8d06-b383a3e9056c"
+                },
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GN11 and GND)",
+            "items": [
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 2.5000 mm",
+                    "pos": {
+                        "x": 103.7,
+                        "y": 124.0
+                    },
+                    "uuid": "fc633506-a0a0-4614-97e8-1d941322c30c"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets GN11 and GND)",
+            "items": [
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 0.1500 mm",
+                    "pos": {
+                        "x": 106.2,
+                        "y": 124.0
+                    },
+                    "uuid": "b0e3bac7-7613-48de-84a3-664868170aad"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.0885 mm)",
+            "items": [
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 0.0707 mm",
+                    "pos": {
+                        "x": 106.2,
+                        "y": 123.85
+                    },
+                    "uuid": "5f046f65-6de4-490a-bf87-b2a9341a6761"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation (rule 'GPIO_header_fanout' clearance 0.1270 mm; actual 0.0375 mm)",
+            "items": [
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 106.25,
+                        "y": 123.8
+                    },
+                    "uuid": "c61c9f28-fd6d-4300-8ff3-eef9014e494c"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets GN3 and GND)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.817,
+                        "y": 123.827
+                    },
+                    "uuid": "7b03bf2a-e7a6-4559-aebd-bb7662aae6f0"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets unconnected-(J7-Pin_5-Pad5) and GND)",
+            "items": [
+                {
+                    "description": "Pad 5 [unconnected-(J7-Pin_5-Pad5)] of J7 on B.Cu",
+                    "pos": {
+                        "x": 120.63,
+                        "y": 124.8
+                    },
+                    "uuid": "0c7e6582-2be0-4f9c-b350-f73befe4deed"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 120.5,
+                        "y": 124.9
+                    },
+                    "uuid": "46423abe-e3cc-429c-b07f-3a020598a12c"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets +3V3 and /display/LCD_BL_K)",
+            "items": [
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 122.4,
+                        "y": 124.9
+                    },
+                    "uuid": "7dc7725c-e06d-4146-a12a-f953b5898c19"
+                },
+                {
+                    "description": "Pad 1 [/display/LCD_BL_K] of J7 on B.Cu",
+                    "pos": {
+                        "x": 122.63,
+                        "y": 124.8
+                    },
+                    "uuid": "d44ac51e-4a4a-46ce-a0cb-ade65e7f31f1"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Clearance violation (rule 'fine_pitch_pads' clearance 0.1000 mm; actual 0.0520 mm)",
+            "items": [
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 104.282,
+                        "y": 125.042
+                    },
+                    "uuid": "47dd8a4e-7633-4dda-9b5b-97a016c82feb"
+                },
+                {
+                    "description": "Pad 39 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 103.63,
+                        "y": 124.8
+                    },
+                    "uuid": "5e995d82-0420-42e5-b8aa-bee48608c4ea"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [/display/LCD_BL_K] of J7 on B.Cu",
+                    "pos": {
+                        "x": 122.63,
+                        "y": 124.8
+                    },
+                    "uuid": "d44ac51e-4a4a-46ce-a0cb-ade65e7f31f1"
+                },
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 122.4,
+                        "y": 124.9
+                    },
+                    "uuid": "7dc7725c-e06d-4146-a12a-f953b5898c19"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 5 [unconnected-(J7-Pin_5-Pad5)] of J7 on B.Cu",
+                    "pos": {
+                        "x": 120.63,
+                        "y": 124.8
+                    },
+                    "uuid": "0c7e6582-2be0-4f9c-b350-f73befe4deed"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 120.5,
+                        "y": 124.9
+                    },
+                    "uuid": "46423abe-e3cc-429c-b07f-3a020598a12c"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1300 mm)",
+            "items": [
+                {
+                    "description": "Pad 15 [GN2] of J7 on B.Cu",
+                    "pos": {
+                        "x": 115.63,
+                        "y": 124.8
+                    },
+                    "uuid": "1f754f87-c03b-4490-b464-be477210f5b5"
+                },
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.05,
+                        "y": 125.05
+                    },
+                    "uuid": "25c970f7-750d-4389-8d06-b383a3e9056c"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.05,
+                        "y": 125.05
+                    },
+                    "uuid": "25c970f7-750d-4389-8d06-b383a3e9056c"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Via [GP13] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 125.2
+                    },
+                    "uuid": "c0054a15-bac4-4988-97d9-ce44fb2ed0bd"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0730 mm)",
+            "items": [
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.817,
+                        "y": 123.827
+                    },
+                    "uuid": "7b03bf2a-e7a6-4559-aebd-bb7662aae6f0"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0500 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GN5] of J7 on B.Cu",
+                    "pos": {
+                        "x": 112.63,
+                        "y": 124.8
+                    },
+                    "uuid": "830342b8-2ab7-48fc-8815-7ce870583b38"
+                },
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "de674774-7c48-49a8-b5ed-9e0ce9abc63a"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1625 mm)",
+            "items": [
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 106.25,
+                        "y": 123.8
+                    },
+                    "uuid": "c61c9f28-fd6d-4300-8ff3-eef9014e494c"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 37 [GN13] of J7 on B.Cu",
+                    "pos": {
+                        "x": 104.63,
+                        "y": 124.8
+                    },
+                    "uuid": "28ee1a90-6f1f-4ee1-bb69-c69d75083596"
+                },
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 104.282,
+                        "y": 125.042
+                    },
+                    "uuid": "47dd8a4e-7633-4dda-9b5b-97a016c82feb"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2020 mm)",
+            "items": [
+                {
+                    "description": "Pad 39 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 103.63,
+                        "y": 124.8
+                    },
+                    "uuid": "5e995d82-0420-42e5-b8aa-bee48608c4ea"
+                },
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 104.282,
+                        "y": 125.042
+                    },
+                    "uuid": "47dd8a4e-7633-4dda-9b5b-97a016c82feb"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint C93",
+                    "pos": {
+                        "x": 87.7,
+                        "y": 71.2
+                    },
+                    "uuid": "2d11c03d-dd9b-4bd7-8fd9-76d0e09a4a57"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint C92",
+                    "pos": {
+                        "x": 87.6,
+                        "y": 70.0
+                    },
+                    "uuid": "39d9f891-cc8e-4ff6-a0e7-bcef90990a40"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint R89",
+                    "pos": {
+                        "x": 89.0,
+                        "y": 69.4
+                    },
+                    "uuid": "3a294d66-995f-4d97-9421-2538da09cb8d"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint R88",
+                    "pos": {
+                        "x": 87.6,
+                        "y": 69.0
+                    },
+                    "uuid": "e7c4527b-8732-4bf0-890c-a782ed7e3316"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint C90",
+                    "pos": {
+                        "x": 88.4575,
+                        "y": 65.855
+                    },
+                    "uuid": "fcdafc35-c28d-45de-ad1a-a50da98db8a0"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint BT12",
+                    "pos": {
+                        "x": 83.5,
+                        "y": 71.0
+                    },
+                    "uuid": "2a8e1b80-a0ba-4b7e-922c-092236f3e436"
+                },
+                {
+                    "description": "Footprint C91",
+                    "pos": {
+                        "x": 87.4575,
+                        "y": 65.855
+                    },
+                    "uuid": "fe33a0c3-82fb-4f56-9f14-18e6752496ed"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 106.25,
+                        "y": 123.8
+                    },
+                    "uuid": "c61c9f28-fd6d-4300-8ff3-eef9014e494c"
+                },
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 104.282,
+                        "y": 125.042
+                    },
+                    "uuid": "47dd8a4e-7633-4dda-9b5b-97a016c82feb"
+                },
+                {
+                    "description": "Pad 37 [GN13] of J7 on B.Cu",
+                    "pos": {
+                        "x": 104.63,
+                        "y": 124.8
+                    },
+                    "uuid": "28ee1a90-6f1f-4ee1-bb69-c69d75083596"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [+3V3] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 122.4,
+                        "y": 124.9
+                    },
+                    "uuid": "7dc7725c-e06d-4146-a12a-f953b5898c19"
+                },
+                {
+                    "description": "Pad 1 [/display/LCD_BL_K] of J7 on B.Cu",
+                    "pos": {
+                        "x": 122.63,
+                        "y": 124.8
+                    },
+                    "uuid": "d44ac51e-4a4a-46ce-a0cb-ade65e7f31f1"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 0.1500 mm",
+                    "pos": {
+                        "x": 106.2,
+                        "y": 124.0
+                    },
+                    "uuid": "b0e3bac7-7613-48de-84a3-664868170aad"
+                },
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 2.5000 mm",
+                    "pos": {
+                        "x": 103.7,
+                        "y": 124.0
+                    },
+                    "uuid": "fc633506-a0a0-4614-97e8-1d941322c30c"
+                },
+                {
+                    "description": "Pad 33 [GN11] of J7 on B.Cu",
+                    "pos": {
+                        "x": 106.63,
+                        "y": 124.8
+                    },
+                    "uuid": "194cce2c-a47f-4fc1-9042-c9b50c451527"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 2.5000 mm",
+                    "pos": {
+                        "x": 103.7,
+                        "y": 124.0
+                    },
+                    "uuid": "fc633506-a0a0-4614-97e8-1d941322c30c"
+                },
+                {
+                    "description": "Pad 35 [GN12] of J7 on B.Cu",
+                    "pos": {
+                        "x": 105.63,
+                        "y": 124.8
+                    },
+                    "uuid": "ab915b17-7dac-43b3-a90c-6b2c92b5057d"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 2.5000 mm",
+                    "pos": {
+                        "x": 103.7,
+                        "y": 124.0
+                    },
+                    "uuid": "fc633506-a0a0-4614-97e8-1d941322c30c"
+                },
+                {
+                    "description": "Pad 37 [GN13] of J7 on B.Cu",
+                    "pos": {
+                        "x": 104.63,
+                        "y": 124.8
+                    },
+                    "uuid": "28ee1a90-6f1f-4ee1-bb69-c69d75083596"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [GP13] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 125.2
+                    },
+                    "uuid": "c0054a15-bac4-4988-97d9-ce44fb2ed0bd"
+                },
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.05,
+                        "y": 125.05
+                    },
+                    "uuid": "25c970f7-750d-4389-8d06-b383a3e9056c"
+                },
+                {
+                    "description": "Pad 15 [GN2] of J7 on B.Cu",
+                    "pos": {
+                        "x": 115.63,
+                        "y": 124.8
+                    },
+                    "uuid": "1f754f87-c03b-4490-b464-be477210f5b5"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.05,
+                        "y": 125.05
+                    },
+                    "uuid": "25c970f7-750d-4389-8d06-b383a3e9056c"
+                },
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [/display/LCD_BL_A] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "de674774-7c48-49a8-b5ed-9e0ce9abc63a"
+                },
+                {
+                    "description": "Pad 21 [GN5] of J7 on B.Cu",
+                    "pos": {
+                        "x": 112.63,
+                        "y": 124.8
+                    },
+                    "uuid": "830342b8-2ab7-48fc-8815-7ce870583b38"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 2.4042 mm",
+                    "pos": {
+                        "x": 124.6,
+                        "y": 122.3
+                    },
+                    "uuid": "6ee7c8f8-070e-4cae-9b9d-e0f4513354f0"
+                },
+                {
+                    "description": "Pad MP [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 123.63,
+                        "y": 121.95
+                    },
+                    "uuid": "8e826ddf-d3f2-4d4a-88e3-1f90bc94dbec"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 113.85,
+                        "y": 123.85
+                    },
+                    "uuid": "894d63d6-e886-458a-8e4a-3d6bfaca5d8a"
+                },
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.6971 mm",
+                    "pos": {
+                        "x": 113.85,
+                        "y": 123.85
+                    },
+                    "uuid": "894d63d6-e886-458a-8e4a-3d6bfaca5d8a"
+                },
+                {
+                    "description": "Pad 19 [GN4] of J7 on B.Cu",
+                    "pos": {
+                        "x": 113.63,
+                        "y": 124.8
+                    },
+                    "uuid": "2d16fab8-c0b2-4dd5-b695-e00617a31d7c"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.2500 mm",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "c58c5044-ef8f-4c0b-8447-f3458ca72cd4"
+                },
+                {
+                    "description": "Pad 19 [GN4] of J7 on B.Cu",
+                    "pos": {
+                        "x": 113.63,
+                        "y": 124.8
+                    },
+                    "uuid": "2d16fab8-c0b2-4dd5-b695-e00617a31d7c"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.2500 mm",
+                    "pos": {
+                        "x": 112.6,
+                        "y": 123.85
+                    },
+                    "uuid": "c58c5044-ef8f-4c0b-8447-f3458ca72cd4"
+                },
+                {
+                    "description": "Pad 21 [GN5] of J7 on B.Cu",
+                    "pos": {
+                        "x": 112.63,
+                        "y": 124.8
+                    },
+                    "uuid": "830342b8-2ab7-48fc-8815-7ce870583b38"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/display/LCD_BL_A] on B.Cu, length 1.1314 mm",
+                    "pos": {
+                        "x": 121.3,
+                        "y": 120.6
+                    },
+                    "uuid": "edd79b0b-ff51-4d1d-b615-17cf3478fe2e"
+                },
+                {
+                    "description": "Pad 4 [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 121.13,
+                        "y": 121.8
+                    },
+                    "uuid": "4618eefa-b2c6-4015-9ef8-aa69784712af"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 120.5,
+                        "y": 124.9
+                    },
+                    "uuid": "46423abe-e3cc-429c-b07f-3a020598a12c"
+                },
+                {
+                    "description": "Pad 5 [unconnected-(J7-Pin_5-Pad5)] of J7 on B.Cu",
+                    "pos": {
+                        "x": 120.63,
+                        "y": 124.8
+                    },
+                    "uuid": "0c7e6582-2be0-4f9c-b350-f73befe4deed"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 114.817,
+                        "y": 123.827
+                    },
+                    "uuid": "7b03bf2a-e7a6-4559-aebd-bb7662aae6f0"
+                },
+                {
+                    "description": "Pad 17 [GN3] of J7 on B.Cu",
+                    "pos": {
+                        "x": 114.63,
+                        "y": 124.8
+                    },
+                    "uuid": "690f4662-65f5-4f7f-bcb9-cc57eea4cc32"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/power/WAKEUPn] on B.Cu, length 10.8894 mm",
+                    "pos": {
+                        "x": 126.65,
+                        "y": 125.15
+                    },
+                    "uuid": "aada186c-9805-48b4-a1ea-50bcf45e98e6"
+                },
+                {
+                    "description": "Pad 2 [/display/LCD_BL_A] of J7 on B.Cu",
+                    "pos": {
+                        "x": 122.13,
+                        "y": 121.8
+                    },
+                    "uuid": "293e7a47-58fa-4949-9233-80cc6c4f1fc6"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Track [/power/WAKEUPn] on B.Cu, length 10.8894 mm",
+                    "pos": {
+                        "x": 126.65,
+                        "y": 125.15
+                    },
+                    "uuid": "aada186c-9805-48b4-a1ea-50bcf45e98e6"
+                },
+                {
+                    "description": "Pad MP [GND] of J7 on B.Cu",
+                    "pos": {
+                        "x": 123.63,
+                        "y": 121.95
+                    },
+                    "uuid": "8e826ddf-d3f2-4d4a-88e3-1f90bc94dbec"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        }
+    ]
+}
