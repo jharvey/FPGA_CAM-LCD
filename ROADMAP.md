@@ -958,7 +958,7 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Board edits:** GND vias at (82.5, 27.48) and (2.98, 61.65) removed (plus the stub to the second one); the VBAT_OR F.Cu leg from the via at (80.15, 28.55) now runs down to y 30.4 and joins x 82.55 at y 32.8, round the right pin hole; rule area BAY_END_WALL_R removed.
 - **DRC:** 0 unconnected, 0 parity, 0 errors outside the J7 area.
 - **Open before ordering:**
-  - J7 area: 62 errors (boost block vias under the lower pad row; fan-out clearances).
+  - [x] J7 area re-routed (2026-11-26, scripts/reroute_j7.py): DRC 0 errors, 0 unconnected on the whole board. Boost-converter vias moved into the strip between the two pad rows (x = n + 0.13) or deleted; LCD_BL_A from C38/U8 to D1 now on F.Cu (R18 turned 180 deg, 0.25 mm track between C38 and R18); J7 pad 2 fed from a 0.45/0.2 via just below the pad; GP13 via moved to (36.8, 71.45) with a new In1 track; WAKEUPn moved right of the J7 mounting pad (GND via at (46.5, 64.25) removed); GN tracks 0.13 mm between the even-row pads. To review: the C38 GND via sits on the edge of the C38 pad, and the LCD_BL_A via touches the end of J7 pad 2.
   - B0 PWR is under cell 3.
   - Right screw head is 0.08 mm from the B3 BOOT pad (same net, GND): check on the first board.
   - **Widen CELL2_RAW where there is room** (user request, 2026-11-26).
