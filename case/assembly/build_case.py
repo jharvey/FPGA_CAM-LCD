@@ -6,6 +6,8 @@ PCB back face = eye side at Z 0, front/camera side at Z +1.6).
 
     python case/assembly/build_case.py            # parts + checks + assembly STEP
     python case/assembly/build_case.py --noassy   # parts + checks only
+    FCL_BATTERY=fixed python case/assembly/build_case.py     # fixed cells: spring contacts BT13 / BT23 / BT33, no blocks
+                                                             # or caps, closed side walls -> FCL_case_rear_fixed / _front_fixed
 
 Outputs
     case/print/FCL_battery_block.step/.stl   metal block (three open bores, cells exit at x < 0)
@@ -33,6 +35,11 @@ MS_DIR = os.environ.get("FCL_MS3181_DIR", os.path.join(A.REPO, "case", "models",
 BLK_ZB = A.CELL_AXIS_Z - 14.0                          # -25.8
 RIGHT_LIFT = 0.3                                       # right block: not fastened yet, drawn 0.3 mm off the PCB
 PARTS = os.path.join(A.BUILD, "case_parts")
+FIXED = os.environ.get("FCL_BATTERY", "") == "fixed"   # cells soldered in between the + contact and the MY-18650-05-J spring
+SUFFIX = "_fixed" if FIXED else ""
+if FIXED:
+    PARTS = os.path.join(A.BUILD, "case_parts_fixed")
+    MS_DIR = ""                                        # no blocks, no MS3181 caps
 
 # ------------------------------------------------------------------ parameters --------
 W, H, T = 85.0, 79.0, A.PCB_T        # board
@@ -81,6 +88,12 @@ TRIPOD_HOLE, TRIPOD_DEPTH = 8.2, 10.5
 TRIPOD_BOSS_D, TRIPOD_BOSS_IN = 13.0, 73.5   # boss reaches in to board y 73.5 (insert fully supported)
 CAM_FRAME_CLR, CAM_FRAME_W, CAM_FRAME_DOWN = 0.2, 1.4, 1.2
 CAM_POST_D, CAM_PRELOAD = 6.0, 0.0
+SPRING_ROOT = 6.8                    # x where the spring leaves its plate (plate back face is at 6.03)
+CRF_X0 = 1.3                         # fixed cells: the PCB-side cradle runs to 0.3 mm from the shell side walls
+RIB_X1 = 5.75                        # ... and its end wall is 0.28 mm behind each contact plate
+RIB_Z1 = -2.0                        # pocket over the solder feet and fillets
+PLATE_HY = 7.3                       # contact plate is 13.8 wide: 0.4 mm each side
+SLOT_HY = 5.0                        # spring coil is 5.9 wide, + bump root 9.0: slot so the cradle drops over them
 CAM_HOLES = ((20.4, 26.5), (49.4, 26.5), (20.4, 56.5), (49.4, 56.5))   # 3.0 mm holes in the OV7670 board (Onshape model)
 INSERT_L = 4.0                       # M2.5 heat-set insert length
 # button plunger snap: barb at the outer end clicks into a counterbore in the eye face
@@ -147,8 +160,15 @@ def classify(board):
     sub, comp, springs, back, front = [], [], [], [], []
     for s in board.Solids():
         x0, y0, x1, y1, z0, z1 = bb(s)
+        yc = (y0 + y1) / 2
+        is_spring = z0 < -4 and ((x1 < 25 and any(abs(yc - r) < 2 for r in LEFT_AXES)) or
+                                 (x0 > 60 and abs(yc - RIGHT_AXIS) < 2))
         if x1 - x0 > 80 and y1 - y0 > 70:
             sub.append(s)
+        elif FIXED and z1 - z0 > 20 and (x0 < -2 or x1 > W + 2):
+            springs.append(("block", s))     # fixed cells: the blocks are not fitted
+        elif is_spring and not (x0 < -2 and z1 - z0 > 20):
+            springs.append(("spring" if FIXED else "bt22", s))   # MY-18650-05-J springs: kept only for fixed cells
         elif x0 < -2 and z1 - z0 > 20:
             springs.append(("block", s))     # left aluminium blocks (footprint 3D models)
         elif z0 < -10 and x0 > 60 and 28 < y0 < 30:
@@ -423,6 +443,42 @@ def make_actuators(back):
     return w
 
 
+def spring_parts(solids):
+    """spring contacts from the board STEP; the spring itself is squeezed along x so it ends on the cell's - end
+    (the model is the free spring, 11.1 mm long; fitted it is about 5.4 mm)"""
+    from OCP.gp import gp_GTrsf, gp_Mat, gp_XYZ
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_GTransform
+    x_end = A.CELL_PLUS_X - A.CELL_L                     # 12.2
+    out = []
+    for sp in solids:
+        b = bb(sp)
+        left = b[0] < W / 2
+        xs = SPRING_ROOT if left else W - SPRING_ROOT    # plate | spring
+        xe = x_end if left else W - x_end
+        f = (xe - xs) / ((b[2] if left else b[0]) - xs)
+        lo, hi = box(-5, -5, xs, H + 5, -40, 10), box(xs, -5, W + 5, H + 5, -40, 10)
+        try:
+            plate = cq.Workplane(obj=sp).intersect(lo if left else hi).val()
+            coil = cq.Workplane(obj=sp).intersect(hi if left else lo).val()
+            g = gp_GTrsf()
+            g.SetVectorialPart(gp_Mat(f, 0, 0, 0, 1, 0, 0, 0, 1))
+            g.SetTranslationPart(gp_XYZ((A.OX + xs) * (1 - f), 0, 0))
+            coil = cq.Shape.cast(BRepBuilderAPI_GTransform(coil.wrapped, g, True).Shape())
+            print(f"  spring at x {b[0]:.1f}..{b[2]:.1f}: squeezed to {f * 100:.0f} % of its free length", flush=True)
+            out += [plate, coil]
+            continue
+        except Exception as e:
+            print("  spring not squeezed:", e, flush=True)
+        out.append(sp)
+    return cq.Compound.makeCompound(out)
+
+
+def is_plus_contact(sol):
+    """MY-18650-04-J: a 0.3 mm plate with a bump, at the + end of each cell"""
+    x0, y0, x1, y1, z0, z1 = bb(sol)
+    return z0 < -10 and x1 - x0 < 6 and z1 - z0 < 25 and any(abs((y0 + y1) / 2 - r) < 2 for r in ROWS)
+
+
 def make_cells2():
     """cells 1 and 3: - end left (block), + nub right; cell 2 reversed: + nub left, - end right (block)"""
     parts = []
@@ -430,6 +486,8 @@ def make_cells2():
     for i, row in enumerate(ROWS, 1):
         X0, Y = A.P(x0, row)
         X1, _ = A.P(x1, row)
+        if FIXED and i == 2:      # fixed: cell 2 sits against its + contact on the left (mirror of cells 1 and 3)
+            X0, Y = A.P(W - A.CELL_PLUS_X, row)
         if i == 2:
             can = cq.Workplane("YZ", origin=(X0 + 0.8, Y, CZ)).circle(A.CELL_D / 2).extrude(A.CELL_L - 0.8)
             nub = cq.Workplane("YZ", origin=(X0, Y, CZ)).circle(4.0).extrude(0.8)
@@ -450,9 +508,28 @@ def ring_cut(y0, side, z0=None, z1=None):
 
 
 def make_cradle(back):
-    c = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], CR_Z, 0)
-    for row in ROWS:
-        c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+    if not FIXED:
+        c = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], CR_Z, 0)
+        for row in ROWS:
+            c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+    else:
+        # fixed cells: the cradle goes on over the soldered contacts and backs up every contact plate, so the push of
+        # the spring is carried from one end wall to the other inside the cradle (not by the solder joints).
+        # Order: cradle onto the PCB, cells in, LCD-side cradle on, then the stack into the rear shell.
+        c = box(CRF_X0, CR_Y[0], W - CRF_X0, CR_Y[1], CR_Z, 0)
+        for i, row in enumerate(ROWS):
+            c = c.cut(xcyl(RIB_X1, W - RIB_X1, row, CZ, CR_BORE / 2))
+            for left in (True, False):
+                spring_end = left == (i != 1)            # cells 1 and 3: spring on the left; cell 2: on the right
+
+                def bx(x0, x1, hy, z0, z1):
+                    if left:
+                        return box(x0, row - hy, x1, row + hy, z0, z1)
+                    return box(W - x1, row - hy, W - x0, row + hy, z0, z1)
+                c = c.cut(bx(RIB_X1, 7.0, PLATE_HY, CR_Z - 1, 0.1))                 # the plate (0.3 mm, with its ribs)
+                c = c.cut(bx(3.0, 7.0, PLATE_HY, RIB_Z1, 0.1))                      # solder feet and fillets
+                c = c.cut(bx(RIB_X1, 13.2 if spring_end else 8.6, SLOT_HY, CR_Z - 1, 0.1))   # coil / bump passes through
+        back = [q for q in back if not (q[4] < -15 and q[2] - q[0] < 6)]            # the + contacts: pockets above
     for (x, y) in BUTTONS:
         c = c.cut(zcyl(x, y, ACT_FLANGE / 2 + 0.4, CR_Z - 1, 1))
     return cut_boxes(c, back, 0.5, 0.4, "cradle")
@@ -484,13 +561,15 @@ def make_rear(back, tft_bb):
         r = r.union(box(x - 0.8, CR_Y[1] + 0.3, x + 0.8, H + CLR + 0.1, Z_REAR_IN - 0.1, -5.0))
     r = r.cut(zcyl(A.AXIS[0], A.AXIS[1], WINDOW_D / 2, Z_REAR_OUT - 1, Z_REAR_IN + 1))    # eye window
     r = r.cut(zcone(A.AXIS[0], A.AXIS[1], WINDOW_D / 2 + 1.2, WINDOW_D / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + 1.2))
-    for y0 in LEFT_AXES:
+    for y0 in () if FIXED else LEFT_AXES:                                        # fixed cells: side walls stay closed
         r = r.cut(ring_cut(y0, "L"))
         r = r.cut(box(-0.5, y0 - 12.8, 7.3, y0 + 12.8, BLK_ZB - 0.3, 0.1))       # flange on the PCB
-    r = r.cut(ring_cut(RIGHT_AXIS, "R"))
+    if not FIXED:
+        r = r.cut(ring_cut(RIGHT_AXIS, "R"))
     if MS_DIR:
         r = r.cut(cap_clear())
-    r = r.cut(box(W - 7.3, RIGHT_AXIS - 12.8, W + 0.5, RIGHT_AXIS + 12.8, BLK_ZB - 0.3, 0.1))
+    if not FIXED:
+        r = r.cut(box(W - 7.3, RIGHT_AXIS - 12.8, W + 0.5, RIGHT_AXIS + 12.8, BLK_ZB - 0.3, 0.1))
     for (x, y) in BUTTONS:
         r = r.cut(zcyl(x, y, ACT_HOLE / 2, Z_REAR_OUT - 1, Z_REAR_IN + 0.5))              # actuator holes
         r = r.cut(zcyl(x, y, ACT_CB_D / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + ACT_CB_DEPTH))
@@ -521,9 +600,10 @@ def make_front(front):
         f = f.cut(zcyl(x, y, HEAD_D / 2, T + 3.0, Z_FRONT_OUT + 1))
     f = f.cut(box(*USB_CUT))
     f = f.cut(box(*SD_CUT))
-    for y0 in LEFT_AXES:
+    for y0 in () if FIXED else LEFT_AXES:
         f = f.cut(ring_cut(y0, "L", z0=-1.0))
-    f = f.cut(ring_cut(RIGHT_AXIS, "R", z0=-1.0))
+    if not FIXED:
+        f = f.cut(ring_cut(RIGHT_AXIS, "R", z0=-1.0))
     if MS_DIR:
         f = f.cut(cap_clear())
     f = cut_boxes(f, front, 0.4, 0.4, "front shell")
@@ -559,23 +639,33 @@ def main():
         left_blocks, caps, slugs = ms3181_parts()
         print("MS3181 blocks + cap stacks from", MS_DIR, flush=True)
 
-    block = make_right_block()
+    spr = None
+    if FIXED:
+        left_blocks = None
+        spr = spring_parts([x[1] for x in springs if x[0] == "spring"])
+        print("fixed cells: spring solids kept:", len([x for x in springs if x[0] == "spring"]), flush=True)
+    block = None if FIXED else make_right_block()
     cradle = make_cradle(back)
     rear = make_rear(back, bb(tft[1]))
     frontshell = make_front(front)
     actuators = make_actuators(back)
     topcradle = make_top_cradle(bb(tft[1]))
     hw = hardware()
+    if FIXED:
+        hw.pop("hw_block_screws")
     printed = (("FCL_battery_block_right", block, (0.62, 0.64, 0.68)), ("FCL_cell_cradle", cradle, (0.95, 0.75, 0.25)),
                ("FCL_case_rear", rear, (0.30, 0.50, 0.85)), ("FCL_case_front", frontshell, (0.35, 0.75, 0.55)),
                ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)),
                ("FCL_cell_cradle_top", topcradle, (0.98, 0.70, 0.20)))
+    printed = tuple(q for q in printed if q[1] is not None)
     for name, w, _ in printed:
         s = w.val()
         b6 = [round(v, 2) for v in bb(s)]
         print(f"{name}: solids {len(s.Solids())}, volume {s.Volume() / 1000:.1f} cm3, bbox {b6}", flush=True)
-        cq.exporters.export(w, os.path.join(PRINT, name + ".step"))
-        cq.exporters.export(w, os.path.join(PRINT, name + ".stl"), tolerance=0.05, angularTolerance=0.2)
+        if FIXED and name not in ("FCL_case_rear", "FCL_case_front", "FCL_cell_cradle"):
+            continue                       # the other printed parts are the same as for removable cells
+        cq.exporters.export(w, os.path.join(PRINT, name + SUFFIX + ".step"))
+        cq.exporters.export(w, os.path.join(PRINT, name + SUFFIX + ".stl"), tolerance=0.05, angularTolerance=0.2)
 
     # ---- interference checks (mm3, should all be ~0)
     solids = {n: w.val() for n, w, _ in printed}
@@ -586,9 +676,20 @@ def main():
     others = {"left_blocks": left_blocks, "PCB": cq.Compound.makeCompound(sub), "TFT": tft_proxy, "camera": cam[1],
               "cells": cq.Compound.makeCompound([c[1] for c in cells]),
               "ribbon": cq.Compound.makeCompound([p[1] for p in fpc])}
+    others = {k: v for k, v in others.items() if v is not None}
+    plus = None
+    if spr is not None:
+        others["springs"] = spr
+        plus = cq.Compound.makeCompound([q for q in comp if is_plus_contact(q)])
+        others["plus_contacts"] = plus
+        rest = cq.Compound.makeCompound([q for q in comp if not is_plus_contact(q)])
+        print(f"  + contacts: {len(plus.Solids())}", flush=True)
+        print(f"  springs x cells: {vol(spr, others['cells'])}   springs x other PCB components: {vol(spr, rest)}", flush=True)
+        print(f"  + contacts x cells: {vol(plus, others['cells'])}", flush=True)
     others["hw_case_screws"] = hw["hw_case_screws"].val()
     others["hw_cam_screws"] = hw["hw_cam_screws"].val()
-    others["hw_block_screws"] = hw["hw_block_screws"].val()
+    if "hw_block_screws" in hw:
+        others["hw_block_screws"] = hw["hw_block_screws"].val()
     if caps is not None:
         others["caps"] = caps
         others["slugs"] = slugs
@@ -603,7 +704,7 @@ def main():
         for b, shp in others.items():
             print(f"  {a} x {b}: {vol(solids[a], shp)}", flush=True)
     compc = cq.Compound.makeCompound(comp)
-    for k in ("hw_cam_screws", "hw_case_screws", "hw_block_screws"):
+    for k in [k for k in ("hw_cam_screws", "hw_case_screws", "hw_block_screws") if k in hw]:
         print(f"  {k} x camera: {vol(hw[k].val(), cam[1])}  x PCB components: {vol(hw[k].val(), compc)}", flush=True)
     print(f"  FCL_cell_cradle_top x FCL_cell_cradle: {vol(topcradle.val(), cradle.val())}", flush=True)
     lim = [f for f in front if f[5] > Z_FRONT_IN and not (17 < f[0] and f[2] < 52)]
@@ -612,6 +713,10 @@ def main():
     # simplified parts for renders
     simple = [("left_blocks", left_blocks), ("PCB", cq.Compound.makeCompound(sub)), ("TFT", tft[1]), ("camera", cam[1]),
               ("cells", others["cells"]), ("ribbon", others["ribbon"])]
+    simple = [q for q in simple if q[1] is not None]
+    if spr is not None:
+        simple.append(("springs", spr))
+        simple.append(("plus_contacts", plus))
     simple += [(k, v.val()) for k, v in hw.items()]
     if caps is not None:
         simple += [("caps", caps), ("slugs", slugs)]
@@ -631,7 +736,10 @@ def main():
     assy = cq.Assembly(name="FCL_monocular_case")
     assy.add(cq.Compound.makeCompound(sub), name="PCB_substrate", color=A.colour(0.18, 0.45, 0.22))
     assy.add(cq.Compound.makeCompound(comp), name="PCB_components", color=A.colour(0.55, 0.57, 0.60))
-    assy.add(left_blocks, name="FCL_battery_blocks_left", color=A.colour(0.62, 0.64, 0.68))
+    if left_blocks is not None:
+        assy.add(left_blocks, name="FCL_battery_blocks_left", color=A.colour(0.62, 0.64, 0.68))
+    if spr is not None:
+        assy.add(spr, name="spring_contacts_MY-18650-05-J", color=A.colour(0.75, 0.75, 0.78))
     if caps is not None:
         assy.add(caps, name="MS3181_cap_stacks", color=A.colour(0.35, 0.38, 0.30))
         assy.add(slugs, name="brass_slugs", color=A.colour(0.85, 0.70, 0.35))
@@ -639,7 +747,7 @@ def main():
         assy.add(s, name=n, color=c)
     for n, w, c in printed:
         assy.add(w.val(), name=n, color=A.colour(*c))
-    out = os.path.join(A.BUILD, "FCL_case_assembly.step")
+    out = os.path.join(A.BUILD, "FCL_case_assembly" + SUFFIX + ".step")
     assy.export(out)
     print("wrote", out, flush=True)
 

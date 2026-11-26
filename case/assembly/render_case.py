@@ -2,13 +2,15 @@
 """Shaded orthographic renders of the case parts (reads case/build/case_parts/*.stl).
 
     python case/assembly/render_case.py        # writes case/renders/case_*.png
+    FCL_BATTERY=fixed python case/assembly/render_case.py     # fixed-cell variant: case/renders/fixed_*.png
 """
 import os
 import vtk
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
-PARTS = os.path.join(REPO, "case", "build", "case_parts")
+FIXED = os.environ.get("FCL_BATTERY", "") == "fixed"
+PARTS = os.path.join(REPO, "case", "build", "case_parts_fixed" if FIXED else "case_parts")
 OUT = os.path.join(REPO, "case", "renders")
 
 COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.40, 0.40, 0.48),
@@ -18,6 +20,8 @@ COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.40, 0.
        "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17),
        "hw_case_inserts": (0.80, 0.62, 0.25), "hw_cam_inserts": (0.80, 0.62, 0.25),
        "caps_L": (0.33, 0.36, 0.28), "caps_R": (0.33, 0.36, 0.28), "slugs_L": (0.88, 0.72, 0.38), "slugs_R": (0.88, 0.72, 0.38)}
+COL["springs"] = (0.80, 0.80, 0.84)
+COL["plus_contacts"] = (0.80, 0.80, 0.84)
 # exploded offsets along Z (eye side is -Z)
 EXPLODE = {"FCL_case_front": 45, "camera": 18, "PCB": 0, "FCL_battery_block_right": -6, "left_blocks": -6, "caps": -6, "slugs": -6, "FCL_cell_cradle": -22,
            "cells": -22, "ribbon": -40, "TFT": -55, "FCL_button_actuators": -70, "FCL_cell_cradle_top": -30, "hw_case_screws": 60, "hw_cam_screws": 30,
@@ -113,6 +117,26 @@ ALL = ["FCL_cell_cradle_top", "hw_case_screws", "hw_cam_screws", "hw_block_screw
 INNER = ["FCL_cell_cradle_top", "hw_case_screws", "hw_cam_screws", "hw_block_screws", "hw_case_inserts", "hw_cam_inserts", "caps", "slugs", "PCB", "camera", "cells", "ribbon", "TFT", "FCL_battery_block_right", "left_blocks", "FCL_cell_cradle"]
 # STEP frame: +X = board x, +Y = board up (toward SD card edge), +Z = camera side, -Z = eye side
 os.makedirs(OUT, exist_ok=True)
+if FIXED:
+    EXPLODE2["springs"] = (0, 0)
+    EXPLODE2["plus_contacts"] = (0, 0)
+    F_INNER = ["FCL_cell_cradle_top", "hw_case_screws", "hw_cam_screws", "hw_case_inserts", "hw_cam_inserts", "PCB", "camera",
+               "cells", "ribbon", "TFT", "springs", "plus_contacts", "FCL_cell_cradle"]
+    F_ALL = F_INNER + ["FCL_button_actuators", "FCL_case_rear", "FCL_case_front"]
+    shot("fixed_1_springs_and_cells.png", ["PCB", "cells", "springs", "plus_contacts"], (-1.0, 0.45, -0.9), (0, 1, 0))
+    shot("fixed_8_contacts_top_view.png", ["PCB", "cells", "springs", "plus_contacts"], (0.0, 0.0, -1.0), (0, 1, 0))
+    shot("fixed_9_cradle_over_contacts.png", ["PCB", "FCL_cell_cradle", "springs", "plus_contacts"], (-0.9, 0.5, -1.0), (0, 1, 0))
+    shot("fixed_10_cradle_top_view.png", ["PCB", "FCL_cell_cradle", "springs", "plus_contacts"], (0.0, 0.0, -1.0), (0, 1, 0))
+    shot("fixed_11_cradle_with_cells.png", ["PCB", "FCL_cell_cradle", "springs", "plus_contacts", "cells"], (-0.9, 0.5, -1.0), (0, 1, 0))
+    shot("fixed_12_cradle_alone_pcb_side.png", ["FCL_cell_cradle"], (0.6, 0.5, 1.0), (0, 1, 0))
+    shot("fixed_13_stack_before_shell.png", ["PCB", "FCL_cell_cradle", "springs", "plus_contacts", "cells", "FCL_cell_cradle_top", "TFT", "ribbon"], (-0.9, 0.5, -1.0), (0, 1, 0))
+    shot("fixed_2_inner_assembly_eye_side.png", F_INNER, (-0.9, 0.5, -1.0), (0, 1, 0))
+    shot("fixed_3_closed_eye_side.png", F_ALL, (-0.9, 0.5, -1.0), (0, 1, 0))
+    shot("fixed_4_closed_camera_side.png", F_ALL, (0.9, 0.5, 1.0), (0, 1, 0))
+    shot("fixed_5_exploded_eye_side.png", F_ALL, (-0.75, 0.55, -0.9), (0, 1, 0), explode=2, size=(2200, 1700), zoom=1.1)
+    shot("fixed_6_rear_shell_inside.png", ["FCL_case_rear"], (-0.5, 0.6, 1.0), (0, 1, 0))
+    shot("fixed_7_closed_left_side.png", F_ALL, (-1.0, 0.2, -0.35), (0, 1, 0))
+    raise SystemExit
 shot("case_1_blocks_and_cells.png", ["PCB", "cells", "caps", "slugs", "FCL_battery_block_right", "left_blocks", "FCL_cell_cradle"], (-1.0, 0.45, -0.9), (0, 1, 0))
 shot("case_2_inner_assembly_eye_side.png", INNER, (-0.9, 0.5, -1.0), (0, 1, 0))
 shot("case_3_closed_eye_side.png", ALL, (-0.9, 0.5, -1.0), (0, 1, 0))

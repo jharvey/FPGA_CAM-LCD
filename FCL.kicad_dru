@@ -30,3 +30,10 @@
 	(constraint clearance (min 0.127mm) )
 	(condition "(A.NetName == 'GP*' || A.NetName == 'GN*') && (B.NetName == 'GP*' || B.NetName == 'GN*')" )
 )
+
+# Spring contact (BT13 / BT23 / BT33) or battery block (BT12 / BT22 / BT32): one or the other is fitted at a cell
+(rule "spring_or_block"
+	(severity ignore)
+	(constraint courtyard_clearance (min 0mm) )
+	(condition "(A.Reference == 'BT?3' && B.Reference == 'BT?2') || (A.Reference == 'BT?2' && B.Reference == 'BT?3')" )
+)
