@@ -950,3 +950,16 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **LCD-side cell cradle** (`FCL_cell_cradle_top`): sits on the PCB-side cradle, encloses the cells, carries the TFT back face (0.05 mm gap) and fills to the rear shell outside the TFT. Replaces the rear-shell saddles of draft 3.
 - **Hardware modelled:** 4 corner case screws (M2.5x10) + inserts, camera screws + inserts, block screws. Shown in the renders and the assembly video.
 - **Checks:** interference 0 except the cap O-ring/pin fits and 0.17 mm3 where a camera post touches a small part on the camera board (relieve after measuring the real module).
+
+### 2026-11-26 – One board (`merged-board`) and one common battery block at all three cells
+- **Merge:** `battery-blocks` + `j7-vertical-wip` merged; the vertical J7 swap was re-applied on the battery-blocks board (`scripts/swap_j7_vertical.py`).
+- **Common block:** A and B are now the same part, also used on the right for cell 2 (turned 180 deg). Holes from the cell axis at the board edge: tapped M2.5 **T1 (4.4, -9.7)** and **T2 (2.6, +9.3)**, 2 mm pin hole **D (3.2, +6.25)**, 3.0 deep. Flat face 0.5 mm off the PCB with no bosses (an idle boss would sit on CELL2_RAW at cell 3 and on thermistor tracks on the right), so one small M2.5 washer (ISO 7092, 4.5 OD x 0.5) goes between block and PCB at each screw.
+- **Footprints** (`scripts/common_block_fp.py`, `scripts/common_block_place.py`): BT12 = `..._MS3181_C1` (two screws T1 + T2), BT32 = `..._MS3181_C3` (T1 + pin), BT22 = `..._MS3181_R` (T2 + pin; 3.6 mm pad so the copper clears the pin hole). The BT22 spring contact is gone.
+- **Board edits:** GND vias at (82.5, 27.48) and (2.98, 61.65) removed (plus the stub to the second one); the VBAT_OR F.Cu leg from the via at (80.15, 28.55) now runs down to y 30.4 and joins x 82.55 at y 32.8, round the right pin hole; rule area BAY_END_WALL_R removed.
+- **DRC:** 0 unconnected, 0 parity, 0 errors outside the J7 area.
+- **Open before ordering:**
+  - J7 area: 62 errors (boost block vias under the lower pad row; fan-out clearances).
+  - B0 PWR is under cell 3.
+  - Right screw head is 0.08 mm from the B3 BOOT pad (same net, GND): check on the first board.
+  - **Widen CELL2_RAW where there is room** (user request, 2026-11-26).
+  - Stale until regenerated: machining drawing, FreeCAD block, case build (still draws the old block with bosses), `production/`.

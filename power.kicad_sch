@@ -40383,7 +40383,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Battery block MS3181 A"
+		(property "Value" "Battery block MS3181"
 			(at 347.98 138.43 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -40394,7 +40394,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_M2.5_Pin2_A"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_C1"
 			(at 345.44 135.89 0)
 			(hide yes)
 			(show_name no)
@@ -42715,7 +42715,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Battery block MS3181 B"
+		(property "Value" "Battery block MS3181"
 			(at 347.98 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42726,7 +42726,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_M2.5_Pin2_B"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_C3"
 			(at 345.44 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -46105,7 +46105,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MY-18650-05-J"
+		(property "Value" "Battery block MS3181"
 			(at 347.98 146.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -46116,7 +46116,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_R"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -46138,7 +46138,7 @@
 				)
 			)
 		)
-		(property "Description" "18650 battery contact, negative (spring), MYOUNG"
+		(property "Description" "Aluminium battery end block mount (common block, right side): M2.5 screw + 2 mm pin"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -46149,7 +46149,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C19184124"
+		(property "LCSC" ""
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -46171,7 +46171,7 @@
 				)
 			)
 		)
-		(property "MPN" "MY-18650-05-J"
+		(property "MPN" ""
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)

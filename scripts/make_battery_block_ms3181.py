@@ -29,11 +29,12 @@ TMP = os.path.join(HERE, "..", "..", "tmp3d")
 
 CZ = -11.8
 # ---- on-board flange (unchanged from the PG16 block)
-FL_X, FL_HALF, RELIEF = (-0.2, 7.0), 12.5, 0.6
+FL_X, FL_HALF, RELIEF = (-0.2, 7.0), 12.5, 0.5     # flat face 0.5 off the PCB: M2.5 washer (0.5) under each used screw
 SCREW, SCREW_DRILL, SCREW_DEPTH, BOSS_SCREW = (4.4, -9.7), 2.05, 5.5, 4.6
-PIN = {"A": (3.0, 9.3), "B": (3.0, 7.5)}
-DOWEL_D, DOWEL_DEPTH, BOSS_DOWEL = 2.0, 3.5, 3.2
-NOTCH = (4.0, 9.9, 4.0)
+SCREW2 = (2.6, 9.3)                           # second tapped hole (used at cell 1 and on the right block)
+PIN = {"A": (3.2, 6.25), "B": (3.2, 6.25)}      # one common block now: A and B are identical (names kept for the file names)
+DOWEL_D, DOWEL_DEPTH, BOSS_DOWEL = 2.0, 3.0, 3.2
+NOTCH = (4.3, 9.9, 4.0)
 BORE = 19.2
 # ---- outboard: shoulder plate + bayonet boss
 PLATE_X, PLATE_HALF = (-3.0, -0.2), 14.0       # flush with the case outside (case wall at x = -3.0)
@@ -81,15 +82,14 @@ def make_block(variant):
     plate = box(*PLATE_X, -PLATE_HALF, PLATE_HALF, Z_BOT, Z_TOP)
     flange = box(*FL_X, -FL_HALF, FL_HALF, Z_BOT, -RELIEF)
     blk = plate.union(flange).union(xcyl(BOSS_TIP, PLATE_X[0] + 0.01, BOSS_D / 2))
-    blk = blk.union(zcyl(*SCREW, BOSS_SCREW, -RELIEF - 0.01, 0.0))
     px, py = PIN[variant]
-    blk = blk.union(zcyl(px, py, BOSS_DOWEL, -RELIEF - 0.01, 0.0))
     blk = blk.cut(box(NOTCH[0], FL_X[1] + 1, NOTCH[1], FL_HALF + 1, -NOTCH[2], 1.0))
     blk = blk.cut(xcyl(BOSS_TIP - 1, FL_X[1] + 1, BORE / 2))
     blk = blk.cut(xring(BOSS_TIP - 0.01, BOSS_TIP + GROOVE[2], GROOVE[1], GROOVE[0]))     # O-ring groove
     for a in PIN_ANG:                                                                     # pin holes through the wall
         blk = blk.cut(radial(PIN_X, a, BORE / 2 - 0.5, BOSS_D / 2 + 0.5, PIN_D - 0.02))
     blk = blk.cut(zcyl(*SCREW, SCREW_DRILL, -SCREW_DEPTH, 0.5))
+    blk = blk.cut(zcyl(*SCREW2, SCREW_DRILL, -SCREW_DEPTH, 0.5))
     blk = blk.cut(zcyl(px, py, DOWEL_D, -DOWEL_DEPTH, 0.5))
     return blk
 
