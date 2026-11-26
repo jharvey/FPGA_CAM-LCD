@@ -57,8 +57,15 @@ PARTS = [
         Category="Printed", Qty="1", Material="PETG or ASA", Source_File="case/print/FCL_case_front.stl")),
     ("MP15", "Cell cradle", dict(
         Category="Printed", Qty="1", Material="PETG or ASA", Source_File="case/print/FCL_cell_cradle.stl")),
-    ("MP16", "Case fasteners", dict(
-        Category="Purchased", Qty="TBD", Notes="Closure of the clamshell not defined yet (corner lobes).")),
+    ("MP19", "Button actuator (x2 in one print)", dict(
+        Category="Printed", Qty="2", Material="PETG or ASA", Source_File="case/print/FCL_button_actuators.stl",
+        Notes="B1/B2 PTS645 plungers, guided by tubes in the rear shell.")),
+    ("MP20", "Heat-set insert 1/4-20 UNC (tripod)", dict(
+        Category="Purchased", Qty="1", Material="Brass", Notes="Bottom face, rear shell. Hole 8.2 x 10.5 deep: check against the insert datasheet. Picatinny adapter later.")),
+    ("MP21", "Heat-set insert M2.5", dict(
+        Category="Purchased", Qty="4", Material="Brass", Notes="Case screws, rear shell corners (hole 3.6).")),
+    ("MP22", "Screw M2.5 x 10, socket head (case)", dict(
+        Category="Purchased", Qty="4", MPN="ISO 4762 M2.5x10 A2", Notes="Head seats 3 mm above the PCB in the front-shell counterbore, about 10 mm to the rear insert.")),
     ("MP17", "Thread locker, medium strength", dict(
         Category="Consumable", Qty="-", MPN="Loctite 243", Notes="Block screws and bayonet pins.")),
     ("MP18", "RTV silicone", dict(
@@ -140,7 +147,7 @@ def write_sheet():
     cat = None
     row = 0
     col_x = [x0, x0 + 190.5]
-    per_col = 13
+    per_col = 11
     for i, (ref, val, f) in enumerate(PARTS):
         cx = col_x[0] if i < per_col else col_x[1]
         cy = y0 + (i if i < per_col else i - per_col) * dy
