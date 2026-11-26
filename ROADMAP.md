@@ -928,3 +928,10 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Tripod:** 1/4-20 brass heat-set insert in a 13 mm boss behind the bottom face at x 62, Z -12 (clear of the LCD ribbon). The bottom face is flat for a later Picatinny adapter.
 - **Assembly video:** `case/renders/FCL_assembly.mp4` (`case/assembly/make_assembly_video.py`). The LCD goes onto the PCB before the case.
 - **Checks:** interference 0 except the intended cap O-ring/pin fits and the 0.05 mm camera preload (0.86 mm3).
+
+### 2026-11-26 – Case draft 4 (branch `j7-vertical-wip`)
+- **Camera screwed to the front shell:** four 6 mm posts at the OV7670 board holes (20.4/49.4, 26.5/56.5) with M2.5 heat-set inserts; 4 x M2.5x6 from the PCB side of the camera board. The edge frame stays for location. The camera goes into the lid first, then the lid plugs the header into J1.
+- **Buttons:** plungers snap in from inside the rear shell. A slotted barb at the outer end clicks into a 5.2 x 1.8 counterbore in the eye face; the flange on the guide tube stops them going out. Captive in both directions, 0.8 mm travel.
+- **LCD-side cell cradle** (`FCL_cell_cradle_top`): sits on the PCB-side cradle, encloses the cells, carries the TFT back face (0.05 mm gap) and fills to the rear shell outside the TFT. Replaces the rear-shell saddles of draft 3.
+- **Hardware modelled:** 4 corner case screws (M2.5x10) + inserts, camera screws + inserts, block screws. Shown in the renders and the assembly video.
+- **Checks:** interference 0 except the cap O-ring/pin fits and 0.17 mm3 where a camera post touches a small part on the camera board (relieve after measuring the real module).

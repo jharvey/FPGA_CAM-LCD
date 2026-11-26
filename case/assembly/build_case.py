@@ -80,7 +80,15 @@ TRIPOD_X, TRIPOD_Z = 62.0, -12.0     # bottom face, rear shell; clear of the LCD
 TRIPOD_HOLE, TRIPOD_DEPTH = 8.2, 10.5
 TRIPOD_BOSS_D, TRIPOD_BOSS_IN = 13.0, 73.5   # boss reaches in to board y 73.5 (insert fully supported)
 CAM_FRAME_CLR, CAM_FRAME_W, CAM_FRAME_DOWN = 0.2, 1.4, 1.2
-CAM_POST_D, CAM_POST_INSET, CAM_PRELOAD = 3.0, 2.0, 0.05
+CAM_POST_D, CAM_PRELOAD = 6.0, 0.0
+CAM_HOLES = ((20.4, 26.5), (49.4, 26.5), (20.4, 56.5), (49.4, 56.5))   # 3.0 mm holes in the OV7670 board (Onshape model)
+INSERT_L = 4.0                       # M2.5 heat-set insert length
+# button plunger snap: barb at the outer end clicks into a counterbore in the eye face
+ACT_CB_D, ACT_CB_DEPTH = 5.2, 1.8    # counterbore in the rear face
+ACT_BARB_D, ACT_BARB_GAP, ACT_SLOT = 4.4, 0.8, 0.9
+# LCD-side cell cradle: between the cells and the TFT, top face supports the TFT back, outside the TFT it fills to the shell
+TOPCR_Z = -17.2                      # meets the PCB-side cradle (which ends at -17.0)
+TFT_SUPPORT_Z = -21.55               # 0.05 below the TFT back face (-21.6)
 CHAMF = 2.0                          # chamfer round the outer (eye / camera) faces
 SEAM = 0.6                           # small chamfer each side of the parting line -> V reveal
 # camera hood / visor (part of the front shell); visor is longer on the top edge (board y = 0 side)
@@ -268,9 +276,9 @@ def cam_support():
     zlo = zt - CAM_FRAME_DOWN
     frame = box(x0 - c - w, y0 - c - w, x1 + c + w, y1 + c + w, zlo, Z_FRONT_IN + 0.01).cut(
         box(x0 - c, y0 - c, x1 + c, y1 + c, zlo - 1, Z_FRONT_IN + 1))
-    i = CAM_POST_INSET + CAM_POST_D / 2
-    for (px, py) in ((x0 + i, y0 + i), (x1 - i, y0 + i), (x0 + i, y1 - i), (x1 - i, y1 - i)):
+    for (px, py) in CAM_HOLES:
         frame = frame.union(zcyl(px, py, CAM_POST_D / 2, zt - CAM_PRELOAD, Z_FRONT_IN + 0.01))
+        frame = frame.cut(zcyl(px, py, INSERT_D / 2, zt - 1, zt + INSERT_L + 0.5))
     return frame
 
 
@@ -286,6 +294,55 @@ def tripod(part):
     part = part.union(ycyl(TRIPOD_X, OUT_Y[1] - 0.5, TRIPOD_BOSS_IN, TRIPOD_Z, TRIPOD_BOSS_D / 2))
     part = part.cut(ycyl(TRIPOD_X, OUT_Y[1] + 1, OUT_Y[1] - TRIPOD_DEPTH, TRIPOD_Z, TRIPOD_HOLE / 2))
     return part.cut(ycyl(TRIPOD_X, OUT_Y[1] + 0.01, OUT_Y[1] - 0.8, TRIPOD_Z, TRIPOD_HOLE / 2 + 0.6))   # lead-in
+
+
+def make_top_cradle(tft_bb):
+    """LCD-side cradle: cells enclosed with the PCB-side cradle; flat top supports the TFT back face; outside the
+    TFT circle it rises to the rear shell so the stack is clamped when the case closes"""
+    tx = (tft_bb[0] + tft_bb[2]) / 2
+    ty = tft_bb[1] + A.TFT_OD / 2
+    c = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], TFT_SUPPORT_Z, TOPCR_Z)
+    outer = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], Z_REAR_IN + 0.2, TFT_SUPPORT_Z + 0.01).cut(
+        zcyl(tx, ty, RET_TFT_CLR, Z_REAR_IN - 1, 1))
+    c = c.union(outer)
+    for row in ROWS:
+        c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+    # crest slots under the TFT (the skin over each cell crest would be 0.2 mm): 8 mm wide, 1 mm into the bore
+    tcyl = zcyl(tx, ty, RET_TFT_CLR - 0.5, Z_REAR_IN - 1, 1)
+    for row in ROWS:
+        slot = box(CR_X[0] - 1, row - 4.0, CR_X[1] + 1, row + 4.0, TFT_SUPPORT_Z - 0.3, CZ - CR_BORE / 2 + 1.0)
+        c = c.cut(slot.intersect(tcyl))
+    # TFT flat tail / ribbon exit (same opening as the locating ring in the rear shell)
+    c = c.cut(box(tx - 18.5, ty + 18.0, tx + 18.5, H, Z_REAR_IN - 1, TFT_SUPPORT_Z))
+    for (x, y) in BUTTONS:
+        c = c.cut(zcyl(x, y, GUIDE_OD / 2 + 0.4, Z_REAR_IN - 1, 1))
+        c = c.cut(zcyl(x, y, ACT_FLANGE / 2 + 0.4, Z_REAR_IN - 1, 1))
+    print("  LCD-side cradle volume", round(c.val().Volume() / 1000, 2), "cm3", flush=True)
+    return c
+
+
+def hardware(back_lobe_z=None):
+    """simplified fasteners: M2.5 socket head screws (head 4.5 x 2.5) and M2.5 heat-set inserts (3.6 x 4.0)"""
+    def screw(x, y, z_head_bottom, length, up):
+        # up=True: head below, shank going +Z; up=False: head above, shank going -Z
+        if up:
+            return zcyl(x, y, 2.25, z_head_bottom - 2.5, z_head_bottom).union(zcyl(x, y, 1.25, z_head_bottom, z_head_bottom + length))
+        return zcyl(x, y, 2.25, z_head_bottom, z_head_bottom + 2.5).union(zcyl(x, y, 1.25, z_head_bottom - length, z_head_bottom))
+
+    def union_all(ws):
+        w = None
+        for x in ws:
+            w = x if w is None else w.union(x)
+        return w
+    out = {}
+    out["hw_case_screws"] = union_all([screw(x, y, T + 3.0, 10.0, False) for (x, y) in LOBES])
+    out["hw_case_inserts"] = union_all([zcyl(x, y, INSERT_D / 2 - 0.05, -5.0, -1.0) for (x, y) in LOBES])
+    zt = CAM_PLATE[5]
+    out["hw_cam_screws"] = union_all([screw(x, y, CAM_PLATE[4], 6.0, True) for (x, y) in CAM_HOLES])
+    out["hw_cam_inserts"] = union_all([zcyl(x, y, INSERT_D / 2 - 0.05, zt + 0.3, zt + 0.3 + INSERT_L) for (x, y) in CAM_HOLES])
+    blk = [(4.4, y0 - 9.7) for y0 in LEFT_AXES]
+    out["hw_block_screws"] = union_all([screw(x, y, T, 6.0, False) for (x, y) in blk])
+    return out
 
 
 def guides():
@@ -355,8 +412,12 @@ def make_actuators(back):
     w = None
     for (x, y), zb in zip(BUTTONS, button_z(back)):
         a = zcyl(x, y, ACT_STEM / 2, Z_REAR_OUT - ACT_PROUD, zb - 0.1)
-        a = a.union(zcyl(x, y, ACT_FLANGE / 2, GUIDE_TOP + 0.2, GUIDE_TOP + 1.0))
         a = a.edges("<Z").fillet(0.6)
+        a = a.union(zcyl(x, y, ACT_FLANGE / 2, GUIDE_TOP + 0.2, GUIDE_TOP + 1.0))
+        zf = Z_REAR_OUT + ACT_CB_DEPTH                       # counterbore floor
+        zs = zf - ACT_BARB_GAP                               # barb catch face (travel ACT_BARB_GAP before it touches)
+        a = a.union(zcone(x, y, ACT_STEM / 2, ACT_BARB_D / 2, zs - 0.9, zs))
+        a = a.cut(box(x - ACT_SLOT / 2, y - 3, x + ACT_SLOT / 2, y + 3, Z_REAR_OUT - ACT_PROUD - 1, zs + 4.0))
         w = a if w is None else w.union(a)
     print("  button plunger tops Z:", [round(z, 2) for z in button_z(back)], flush=True)
     return w
@@ -432,11 +493,11 @@ def make_rear(back, tft_bb):
     r = r.cut(box(W - 7.3, RIGHT_AXIS - 12.8, W + 0.5, RIGHT_AXIS + 12.8, BLK_ZB - 0.3, 0.1))
     for (x, y) in BUTTONS:
         r = r.cut(zcyl(x, y, ACT_HOLE / 2, Z_REAR_OUT - 1, Z_REAR_IN + 0.5))              # actuator holes
-        r = r.cut(zcone(x, y, ACT_HOLE / 2 + 0.5, ACT_HOLE / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + 0.5))
+        r = r.cut(zcyl(x, y, ACT_CB_D / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + ACT_CB_DEPTH))
     for (x, y) in LOBES:
         r = r.cut(zcyl(x, y, INSERT_D / 2, -6.0, T + 1))
     r = r.cut(box(*USB_CUT))
-    r = r.union(guides()).union(retainer(tft_bb))
+    r = r.union(guides())
     r = tripod(r)
     r = cut_boxes(r, back, 0.4, 0.4, "rear shell")
     return knockout(r, USB_CUT, "x", OUT_X[1], +1, (Z_REAR_OUT, T))
@@ -503,9 +564,12 @@ def main():
     rear = make_rear(back, bb(tft[1]))
     frontshell = make_front(front)
     actuators = make_actuators(back)
+    topcradle = make_top_cradle(bb(tft[1]))
+    hw = hardware()
     printed = (("FCL_battery_block_right", block, (0.62, 0.64, 0.68)), ("FCL_cell_cradle", cradle, (0.95, 0.75, 0.25)),
                ("FCL_case_rear", rear, (0.30, 0.50, 0.85)), ("FCL_case_front", frontshell, (0.35, 0.75, 0.55)),
-               ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)))
+               ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)),
+               ("FCL_cell_cradle_top", topcradle, (0.98, 0.70, 0.20)))
     for name, w, _ in printed:
         s = w.val()
         b6 = [round(v, 2) for v in bb(s)]
@@ -522,6 +586,9 @@ def main():
     others = {"left_blocks": left_blocks, "PCB": cq.Compound.makeCompound(sub), "TFT": tft_proxy, "camera": cam[1],
               "cells": cq.Compound.makeCompound([c[1] for c in cells]),
               "ribbon": cq.Compound.makeCompound([p[1] for p in fpc])}
+    others["hw_case_screws"] = hw["hw_case_screws"].val()
+    others["hw_cam_screws"] = hw["hw_cam_screws"].val()
+    others["hw_block_screws"] = hw["hw_block_screws"].val()
     if caps is not None:
         others["caps"] = caps
         others["slugs"] = slugs
@@ -535,12 +602,17 @@ def main():
             print(f"  {a} x {b}: {vol(solids[a], solids[b])}", flush=True)
         for b, shp in others.items():
             print(f"  {a} x {b}: {vol(solids[a], shp)}", flush=True)
+    compc = cq.Compound.makeCompound(comp)
+    for k in ("hw_cam_screws", "hw_case_screws", "hw_block_screws"):
+        print(f"  {k} x camera: {vol(hw[k].val(), cam[1])}  x PCB components: {vol(hw[k].val(), compc)}", flush=True)
+    print(f"  FCL_cell_cradle_top x FCL_cell_cradle: {vol(topcradle.val(), cradle.val())}", flush=True)
     lim = [f for f in front if f[5] > Z_FRONT_IN and not (17 < f[0] and f[2] < 52)]
     print("front parts taller than the shell:", lim)
 
     # simplified parts for renders
     simple = [("left_blocks", left_blocks), ("PCB", cq.Compound.makeCompound(sub)), ("TFT", tft[1]), ("camera", cam[1]),
               ("cells", others["cells"]), ("ribbon", others["ribbon"])]
+    simple += [(k, v.val()) for k, v in hw.items()]
     if caps is not None:
         simple += [("caps", caps), ("slugs", slugs)]
         mid = A.OX + W / 2

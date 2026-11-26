@@ -27,18 +27,22 @@ COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.25, 0.
        "FCL_battery_block_right": (0.72, 0.74, 0.78), "left_blocks": (0.72, 0.74, 0.78),
        "caps_L": (0.33, 0.36, 0.28), "caps_R": (0.33, 0.36, 0.28), "slugs_L": (0.88, 0.72, 0.38), "slugs_R": (0.88, 0.72, 0.38),
        "FCL_cell_cradle": (0.98, 0.80, 0.30), "FCL_case_rear": (0.40, 0.60, 0.95), "FCL_case_front": (0.45, 0.82, 0.62),
-       "FCL_button_actuators": (0.90, 0.28, 0.22)}
+       "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_cell_cradle_top": (0.98, 0.70, 0.20),
+       "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17),
+       "hw_case_inserts": (0.80, 0.62, 0.25), "hw_cam_inserts": (0.80, 0.62, 0.25)}
 
 STEPS = [
-    ("1  PCB: screw the two left aluminium end blocks on (M2.5 screw + dowel), seat the right block", (-0.8, 0.45, -1.0)),
-    ("2  Cell cradle onto the back of the PCB", (-0.8, 0.45, -1.0)),
-    ("3  LCD: ribbon into J7, then lay the TFT on the cradle (LCD goes on before the case)", (-0.6, 0.5, -1.0)),
-    ("4  Camera module onto the J1 header (camera side)", (0.8, 0.45, 1.0)),
-    ("5  Button plungers into the rear shell", (-0.7, 0.55, -1.0)),
-    ("6  PCB + LCD assembly drops into the rear shell", (-0.9, 0.35, -0.6)),
-    ("7  Front shell on (frame + posts clamp the camera); 4 x M2.5 into the heat-set inserts", (0.8, 0.45, 0.9)),
-    ("8  Cells slide in through the blocks: cells 1 and 3 from the left, cell 2 from the right", (0.15, 0.55, 1.0)),
-    ("9  Brass slug + spring, then MS3181 cap: push on and turn 1/4", (0.15, 0.55, 1.0)),
+    ("1  PCB: two left aluminium end blocks, M2.5 screws from the camera side; seat the right block", (-0.8, 0.45, -1.0)),
+    ("2  PCB-side cell cradle onto the back of the PCB", (-0.8, 0.45, -1.0)),
+    ("3  LCD-side cell cradle on top (it also carries the LCD)", (-0.8, 0.45, -1.0)),
+    ("4  LCD: ribbon into J7, lay the TFT on the cradle (LCD goes on before the case)", (-0.6, 0.5, -1.0)),
+    ("5  Rear shell: heat-set inserts in; snap the button plungers in from the inside", (-0.5, 0.6, 1.0)),
+    ("6  PCB + LCD stack drops into the rear shell", (-0.9, 0.35, -0.6)),
+    ("7  Camera into the front shell: 4 x M2.5 screws into the inserts in the posts", (0.9, 0.35, -0.35)),
+    ("8  Front shell + camera on (header plugs into J1)", (0.8, 0.45, 0.9)),
+    ("9  4 x M2.5 x 10 case screws in the corners", (0.8, 0.45, 0.9)),
+    ("10  Cells slide in through the blocks: cells 1 and 3 from the left, cell 2 from the right", (0.15, 0.55, 1.0)),
+    ("11  Brass slug + spring, then MS3181 cap: push on and turn 1/4", (0.15, 0.55, 1.0)),
     ("Done  -  1/4-20 tripod insert on the bottom face", (-0.9, -0.55, 0.6)),
 ]
 # part -> list of (step, start offset, end offset); hidden before its first step
@@ -46,20 +50,26 @@ MOTION = {
     "PCB": [(0, (0, 0, 0), (0, 0, 0))],
     "left_blocks": [(0, (-35, 0, -25), (0, 0, 0))],
     "FCL_battery_block_right": [(0, (35, 0, -25), (0, 0, 0))],
+    "hw_block_screws": [(0, (0, 0, 30), (0, 0, 0))],
     "FCL_cell_cradle": [(1, (0, 0, -45), (0, 0, 0))],
-    "ribbon": [(2, (0, 0, -40), (0, 0, 0))],
-    "TFT": [(2, (0, 0, -60), (0, 0, 0))],
-    "camera": [(3, (0, 0, 45), (0, 0, 0))],
-    "FCL_case_rear": [(4, (0, 0, -75), (0, 0, -75)), (5, (0, 0, -75), (0, 0, 0))],
-    "FCL_button_actuators": [(4, (0, 0, -120), (0, 0, -75)), (5, (0, 0, -75), (0, 0, 0))],
-    "FCL_case_front": [(6, (0, 0, 70), (0, 0, 0))],
-    "cell1": [(7, (-95, 0, 0), (0, 0, 0))],
-    "cell3": [(7, (-95, 0, 0), (0, 0, 0))],
-    "cell2": [(7, (95, 0, 0), (0, 0, 0))],
-    "slugs_L": [(8, (-55, 0, 0), (0, 0, 0))],
-    "slugs_R": [(8, (55, 0, 0), (0, 0, 0))],
-    "caps_L": [(8, (-80, 0, 0), (0, 0, 0))],
-    "caps_R": [(8, (80, 0, 0), (0, 0, 0))],
+    "FCL_cell_cradle_top": [(2, (0, 0, -50), (0, 0, 0))],
+    "ribbon": [(3, (0, 0, -40), (0, 0, 0))],
+    "TFT": [(3, (0, 0, -60), (0, 0, 0))],
+    "FCL_case_rear": [(4, (0, 0, -80), (0, 0, -80)), (5, (0, 0, -80), (0, 0, 0))],
+    "hw_case_inserts": [(4, (0, 0, -60), (0, 0, -80)), (5, (0, 0, -80), (0, 0, 0))],
+    "FCL_button_actuators": [(4, (0, 0, -50), (0, 0, -80)), (5, (0, 0, -80), (0, 0, 0))],
+    "FCL_case_front": [(6, (0, 0, 85), (0, 0, 85)), (7, (0, 0, 85), (0, 0, 0))],
+    "hw_cam_inserts": [(6, (0, 0, 85), (0, 0, 85)), (7, (0, 0, 85), (0, 0, 0))],
+    "camera": [(6, (0, 0, 50), (0, 0, 85)), (7, (0, 0, 85), (0, 0, 0))],
+    "hw_cam_screws": [(6, (0, 0, 35), (0, 0, 85)), (7, (0, 0, 85), (0, 0, 0))],
+    "hw_case_screws": [(8, (0, 0, 35), (0, 0, 0))],
+    "cell1": [(9, (-95, 0, 0), (0, 0, 0))],
+    "cell3": [(9, (-95, 0, 0), (0, 0, 0))],
+    "cell2": [(9, (95, 0, 0), (0, 0, 0))],
+    "slugs_L": [(10, (-55, 0, 0), (0, 0, 0))],
+    "slugs_R": [(10, (55, 0, 0), (0, 0, 0))],
+    "caps_L": [(10, (-80, 0, 0), (0, 0, 0))],
+    "caps_R": [(10, (80, 0, 0), (0, 0, 0))],
 }
 
 
@@ -174,7 +184,7 @@ def main():
     win.AddRenderer(ren)
     cam = ren.GetActiveCamera()
     cam.ParallelProjectionOn()
-    cam.SetParallelScale(95)
+    cam.SetParallelScale(105)
     w2i = vtk.vtkWindowToImageFilter()
     w2i.SetInput(win)
     wr = vtk.vtkPNGWriter()

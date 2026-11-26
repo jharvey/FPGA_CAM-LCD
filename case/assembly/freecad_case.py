@@ -17,7 +17,7 @@ grp_r = doc.addObject("App::DocumentObjectGroup", "Reference_meshes_do_not_edit"
 COL = {"FCL_case_rear": (0.40, 0.60, 0.95), "FCL_case_front": (0.45, 0.82, 0.62), "FCL_cell_cradle": (0.98, 0.80, 0.30),
        "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_battery_block_right": (0.72, 0.74, 0.78)}
 for name, grp in (("FCL_case_rear", grp_p), ("FCL_case_front", grp_p), ("FCL_cell_cradle", grp_p),
-                  ("FCL_button_actuators", grp_p), ("FCL_battery_block_right", grp_m)):
+                  ("FCL_button_actuators", grp_p), ("FCL_cell_cradle_top", grp_p), ("FCL_battery_block_right", grp_m)):
     s = Part.Shape()
     s.read(os.path.join(PRINT, name + ".step"))
     o = doc.addObject("Part::Feature", name)
