@@ -1,0 +1,477 @@
+#!/usr/bin/env python3
+"""FCL monocular - battery end block, cell cradle and clamshell case (draft 1).
+
+Run on top of build_assembly.py (same frame: board (x, y) -> STEP (78 + x, -(55.5 + y)),
+PCB back face = eye side at Z 0, front/camera side at Z +1.6).
+
+    python case/assembly/build_case.py            # parts + checks + assembly STEP
+    python case/assembly/build_case.py --noassy   # parts + checks only
+
+Outputs
+    case/print/FCL_battery_block.step/.stl   metal block (three open bores, cells exit at x < 0)
+    case/print/FCL_cell_cradle.step/.stl     printed cradle between PCB and TFT
+    case/print/FCL_case_rear.step/.stl       eye-side shell (TFT window)
+    case/print/FCL_case_front.step/.stl      camera-side shell (lens turret)
+    case/build/FCL_case_assembly.step        everything together
+"""
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import build_assembly as A  # noqa: E402
+import cadquery as cq  # noqa: E402
+
+PRINT = os.path.join(A.REPO, "case", "print")
+if os.environ.get("FCL_BOARD_STEP"):
+    A.BOARD_STEP = os.environ["FCL_BOARD_STEP"]      # e.g. the battery-blocks board with J7 vertical
+BLOCK_STEP = os.environ.get("FCL_BLOCK_STEP", os.path.join(A.REPO, "case", "models", "ms3181", "blockms_A_boardframe.step"))      # aluminium block, board frame (scripts/make_battery_block_step.py)
+LEFT_AXES = (15.5, 56.5)                               # cells 1 and 3 leave on the left (blocks BT12 / BT32 on the PCB)
+RIGHT_AXIS = 36.0                                      # cell 2 is reversed and leaves on the right
+RING_X, RING_HALF = (-3.0, -0.2), 14.0                 # block shoulder plate (MS3181 bayonet boss sticks out beyond)
+MS_DIR = os.environ.get("FCL_MS3181_DIR", os.path.join(A.REPO, "case", "models", "ms3181"))          # tmp3d with blockms_*_boardframe.step + ms3181_*.step
+BLK_ZB = A.CELL_AXIS_Z - 14.0                          # -25.8
+RIGHT_LIFT = 0.3                                       # right block: not fastened yet, drawn 0.3 mm off the PCB
+PARTS = os.path.join(A.BUILD, "case_parts")
+
+# ------------------------------------------------------------------ parameters --------
+W, H, T = 85.0, 79.0, A.PCB_T        # board
+PCB_R = 3.0                          # board corner radius
+ROWS = A.CELL_ROWS
+CZ = A.CELL_AXIS_Z                   # -11.8
+
+# battery end block (metal, on the common / - side; replaces BT12, BT22, BT32)
+BLK_X = (-3.0, 5.5)                  # flush with the case outside, stops short of the TFT
+BLK_Y = (2.2, 68.5)
+BLK_Z = -23.1                        # 2.0 mm of metal beyond the cells
+BLK_BORE = 19.2                      # generic through bore, 18650 slides out
+H1 = (5.7, 4.1)                      # M3 GND hole -> tapped foot
+H4 = (10.2, 47.9)                    # M3 GND hole -> thin tab under cells 2/3
+
+# cell cradle (printed, sits on the PCB back, open toward the TFT)
+CR_X = (15.0, 75.0)
+CR_Y = (4.4, 67.6)
+CR_Z = -17.0                         # 5.2 mm past the cell axis: lips keep the cells in
+CR_BORE = 19.1
+
+# case
+CLR = 0.5                            # PCB edge -> wall
+WALL = 2.5
+OFF = CLR + WALL                     # 3.0
+LEDGE = 1.0                          # PCB overlap on the rear ledge / front lip
+OUT_R = 4.0
+Z_REAR_IN = -24.2                    # TFT eye face is at -23.87
+Z_REAR_OUT = Z_REAR_IN - 2.0
+Z_FRONT_IN = 19.2                    # camera PCB parts reach 18.6
+Z_FRONT_OUT = Z_FRONT_IN + 2.0
+LENS_C = (34.88, 36.29)              # centre of the lens holder body (24 x 17.5)
+LENS_R_IN = 15.3
+LENS_TOP = 33.2                      # lens reaches 32.6
+WINDOW_D = 54.0                      # TFT active area is 53.28
+LOBES = ((-1.5, -1.5), (86.5, -1.5), (-1.5, 80.5), (86.5, 80.5))   # case screws, now inside the square outline
+LOBE_R = 4.0
+OUT_X, OUT_Y = (-6.0, 91.0), (-6.0, 85.0)  # outer outline (board 85 x 79 + 6 mm all round)
+OUT_RC = 6.5                         # vertical corner radius
+CHAMF = 2.0                          # chamfer round the outer (eye / camera) faces
+SEAM = 0.6                           # small chamfer each side of the parting line -> V reveal
+# camera hood / visor (part of the front shell); visor is longer on the top edge (board y = 0 side)
+HOOD_HI, HOOD_LO = 11.0, 4.0         # above the lens turret top, top / bottom of the slanted lip
+HOOD_WALL = 2.0
+HOOD_HALF_ANGLE = 40.0               # deg: assumed lens half field (stock OV7670 lens ~70 deg diag) + margin
+LENS_AP_R = 4.5                      # lens front glass radius (build_assembly: barrel 12 - 1.5)
+LENS_FRONT = 32.6                    # lens front face Z
+# buttons: B1 / B2 PTS645 on the PCB back (eye side) -> printed actuators through the rear face;
+# B4 RESET / B3 BOOT (KMR2, camera side) -> 1.6 mm pin holes in the front face.  B0 PWR is under cell 3 (see notes).
+ACT_STEM, ACT_HOLE, ACT_FLANGE = 3.4, 3.8, 5.0
+ACT_PROUD = 0.6
+PINHOLES = ((53.2, 12.0), (80.1, 22.1))
+INSERT_D = 3.6                       # M2.5 heat-set insert
+SCREW_D = 2.9
+HEAD_D = 5.2
+USB_CUT = (82.0, 65.9, 92.5, 77.4, -0.2, 6.8)   # J17 mouth is 3.5 mm inside the right edge
+SD_CUT = (28.0, -7.5, 42.0, 1.6, T, T + 2.6)
+BUTTONS = ((16.0, 4.0), (26.5, 4.0))
+
+
+# ------------------------------------------------------------------ helpers -----------
+def box(x0, y0, x1, y1, z0, z1):
+    X0, Y0 = A.P(x0, y0)
+    X1, Y1 = A.P(x1, y1)
+    return (cq.Workplane("XY").box(abs(X1 - X0), abs(Y1 - Y0), abs(z1 - z0), centered=False)
+            .translate((min(X0, X1), min(Y0, Y1), min(z0, z1))))
+
+
+def rrect(x0, y0, x1, y1, z0, z1, r):
+    return box(x0, y0, x1, y1, z0, z1).edges("|Z").fillet(r)
+
+
+def zcyl(x, y, r, z0, z1):
+    X, Y = A.P(x, y)
+    return cq.Workplane("XY").circle(r).extrude(abs(z1 - z0)).translate((X, Y, min(z0, z1)))
+
+
+def xcyl(x0, x1, y, z, r):
+    X0, Y = A.P(x0, y)
+    return cq.Workplane("YZ").circle(r).extrude(x1 - x0).translate((X0, Y, z))
+
+
+def bb(s):
+    b = s.BoundingBox()
+    return (b.xmin - A.OX, -b.ymax - A.OY, b.xmax - A.OX, -b.ymin - A.OY, b.zmin, b.zmax)
+
+
+def classify(board):
+    """-> substrate, kept component solids, removed spring contacts, back boxes, front boxes"""
+    sub, comp, springs, back, front = [], [], [], [], []
+    for s in board.Solids():
+        x0, y0, x1, y1, z0, z1 = bb(s)
+        if x1 - x0 > 80 and y1 - y0 > 70:
+            sub.append(s)
+        elif x0 < -2 and z1 - z0 > 20:
+            springs.append(("block", s))     # left aluminium blocks (footprint 3D models)
+        elif z0 < -10 and x0 > 60 and 28 < y0 < 30:
+            springs.append(("bt22", s))      # BT22 spring: replaced by the right block
+        else:
+            comp.append(s)
+            if z0 < -0.12:
+                back.append((x0, y0, x1, y1, z0, min(z1, 0.0)))
+            if z1 > T + 0.12:
+                front.append((x0, y0, x1, y1, max(z0, T), z1))
+    return sub, comp, springs, back, front
+
+
+def cut_boxes(part, boxes, grow, zgrow, name):
+    """subtract inflated component boxes that touch the part"""
+    px0, py0, px1, py1, pz0, pz1 = bb(part.val())
+    n = 0
+    for (x0, y0, x1, y1, z0, z1) in boxes:
+        if x1 + grow < px0 or x0 - grow > px1 or y1 + grow < py0 or y0 - grow > py1:
+            continue
+        if z1 + zgrow < pz0 or z0 - zgrow > pz1:
+            continue
+        tool = box(x0 - grow, y0 - grow, x1 + grow, y1 + grow, z0 - zgrow, z1 + zgrow)
+        new = part.cut(tool)
+        if abs(new.val().Volume() - part.val().Volume()) > 1e-6:
+            n += 1
+            part = new
+    print(f"  {name}: relieved for {n} components", flush=True)
+    return part
+
+
+# ------------------------------------------------------------------ parts -------------
+def make_right_block():
+    """block part A turned 180 deg about the vertical axis so its ring faces +x, cell-2 axis (board y 36)"""
+    from OCP.gp import gp_Trsf, gp_Ax1, gp_Pnt, gp_Dir
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_Transform
+    blk = cq.importers.importStep(BLOCK_STEP).val()         # board frame: x from the edge, y +down from the axis
+    # board frame -> STEP for a left block on axis y0:  X = OX + x, Y = -(OY + y0 + y)   (a mirror in y, as the PCB frame)
+    t1 = gp_Trsf()
+    t1.SetValues(1, 0, 0, A.OX, 0, -1, 0, -(A.OY + RIGHT_AXIS), 0, 0, 1, 0)
+    left = cq.Shape.cast(BRepBuilderAPI_Transform(blk.wrapped, t1, True).Shape())
+    r = gp_Trsf()
+    r.SetRotation(gp_Ax1(gp_Pnt(A.OX + 42.5, -(A.OY + RIGHT_AXIS), 0), gp_Dir(0, 0, 1)), 3.141592653589793)
+    right = cq.Shape.cast(BRepBuilderAPI_Transform(left.wrapped, r, True).Shape())
+    return cq.Workplane(obj=right.translate(cq.Vector(0, 0, -RIGHT_LIFT)))
+
+
+def place(shape, y0, right=False):
+    """block-frame shape -> assembly STEP frame for a cell axis at board y0 (left side, or right side turned 180 deg)"""
+    from OCP.gp import gp_Trsf, gp_Ax1, gp_Pnt, gp_Dir
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_Transform
+    t1 = gp_Trsf()
+    t1.SetValues(1, 0, 0, A.OX, 0, -1, 0, -(A.OY + y0), 0, 0, 1, 0)
+    out = cq.Shape.cast(BRepBuilderAPI_Transform(shape.wrapped, t1, True).Shape())
+    if right:
+        r = gp_Trsf()
+        r.SetRotation(gp_Ax1(gp_Pnt(A.OX + 42.5, -(A.OY + y0), 0), gp_Dir(0, 0, 1)), 3.141592653589793)
+        out = cq.Shape.cast(BRepBuilderAPI_Transform(out.wrapped, r, True).Shape())
+    return out
+
+
+def ms3181_parts():
+    """left blocks (A at 15.5, B at 56.5) and the three cap stacks (cap, gasket, disc, O-ring, spring, pins, slug)"""
+    imp = lambda n: cq.importers.importStep(os.path.join(MS_DIR, n)).val()
+    blocks = [place(imp("blockms_A_boardframe.step"), 15.5), place(imp("blockms_B_boardframe.step"), 56.5)]
+    common = [imp(f"ms3181_{n}.step") for n in ("cap", "gasket", "disc", "oring", "spring", "pins")]
+    caps, slugs = [], []
+    for y0, right in ((15.5, False), (56.5, False), (RIGHT_AXIS, True)):
+        caps += [place(c, y0, right) for c in common]
+        slugs.append(place(imp("ms3181_slug_R.step" if right else "ms3181_slug_L.step"), y0, right))
+        if right:   # the right block is drawn RIGHT_LIFT off the PCB; its cap stack follows it
+            caps[-6:] = [c.translate(cq.Vector(0, 0, -RIGHT_LIFT)) for c in caps[-6:]]
+            slugs[-1] = slugs[-1].translate(cq.Vector(0, 0, -RIGHT_LIFT))
+    return cq.Compound.makeCompound(blocks), cq.Compound.makeCompound(caps), cq.Compound.makeCompound(slugs)
+
+
+def cap_clear():
+    """clearance for the MS3181 caps (31.8 max OD + 0.7) where they pass the case corner lobes"""
+    c = None
+    for y0 in LEFT_AXES:
+        k = xcyl(-21.0, -2.9, y0, A.CELL_AXIS_Z, 16.6)
+        c = k if c is None else c.union(k)
+    return c.union(xcyl(W + 2.9, W + 21.0, RIGHT_AXIS, A.CELL_AXIS_Z, 16.6))
+
+
+def outline(z0, z1, outer_low):
+    """square outer body with corner radius; CHAMF on the outer face, SEAM on the parting-line face"""
+    o = rrect(OUT_X[0], OUT_Y[0], OUT_X[1], OUT_Y[1], z0, z1, OUT_RC)
+    if outer_low:
+        return o.faces("<Z").chamfer(CHAMF).faces(">Z").chamfer(SEAM)
+    return o.faces(">Z").chamfer(CHAMF).faces("<Z").chamfer(SEAM)
+
+
+def zcone(x, y, r0, r1, z0, z1):
+    X, Y = A.P(x, y)
+    return cq.Workplane(obj=cq.Solid.makeCone(r0, r1, z1 - z0, cq.Vector(X, Y, z0), cq.Vector(0, 0, 1)))
+
+
+def make_hood():
+    """lens turret extension with a slanted visor lip (high on the top edge), inner light-trap grooves"""
+    import math
+    cx, cy = LENS_C
+    r_in, r_out = LENS_R_IN, LENS_R_IN + HOOD_WALL
+    ztop = LENS_TOP + HOOD_HI
+    h = zcyl(cx, cy, r_out, LENS_TOP - 0.01, ztop).cut(zcyl(cx, cy, r_in, LENS_TOP - 1, ztop + 1))
+    # slanted cut: Z = LENS_TOP + HOOD_LO at the bottom side, LENS_TOP + HOOD_HI at the top side (STEP +Y = board top)
+    X, Yc = A.P(cx, cy)
+    zlo, zhi = LENS_TOP + HOOD_LO, LENS_TOP + HOOD_HI
+    m = (zhi - zlo) / (2 * r_out)
+    pts = [(Yc - 40, zlo - m * (40 - r_out)), (Yc + 40, zlo + m * (40 + r_out)), (Yc + 40, 200), (Yc - 40, 200)]
+    wedge = cq.Workplane("YZ", origin=(X - 40, 0, 0)).polyline(pts).close().extrude(80)
+    h = h.cut(wedge)
+    for dz in (1.5, 4.0, 6.5):                                   # light-trap grooves inside
+        h = h.cut(zcyl(cx, cy, r_in + 0.6, LENS_TOP + dz, LENS_TOP + dz + 0.8).cut(zcyl(cx, cy, r_in - 0.01, LENS_TOP, ztop)))
+    # field-of-view check: the highest lip must stay outside the view cone from the lens front glass
+    need = LENS_AP_R + (zhi - LENS_FRONT) * math.tan(math.radians(HOOD_HALF_ANGLE))
+    print(f"  hood: lip {HOOD_LO}..{HOOD_HI} mm above the turret, view cone radius at the top lip {need:.1f} "
+          f"<= bore {r_in:.1f}: {'OK' if need <= r_in else 'VIGNETTES'}", flush=True)
+    return h
+
+
+def button_z(back):
+    """plunger top Z of the PTS645 buttons (lowest Z of the back-side box over each button position)"""
+    zs = []
+    for (bx, by) in BUTTONS:
+        zz = [b[4] for b in back if b[0] <= bx <= b[2] and b[1] <= by <= b[3]]
+        zs.append(min(zz) if zz else -4.3)
+    return zs
+
+
+def make_actuators(back):
+    """printed plungers: flange inside the rear shell (keeps them in), stem out through the eye face"""
+    w = None
+    for (x, y), zb in zip(BUTTONS, button_z(back)):
+        a = zcyl(x, y, ACT_STEM / 2, Z_REAR_OUT - ACT_PROUD, zb - 0.1)
+        a = a.union(zcyl(x, y, ACT_FLANGE / 2, Z_REAR_IN + 0.2, Z_REAR_IN + 1.0))
+        a = a.edges("<Z").fillet(0.6)
+        w = a if w is None else w.union(a)
+    print("  button plunger tops Z:", [round(z, 2) for z in button_z(back)], flush=True)
+    return w
+
+
+def make_cells2():
+    """cells 1 and 3: - end left (block), + nub right; cell 2 reversed: + nub left, - end right (block)"""
+    parts = []
+    x0, x1 = A.CELL_PLUS_X - A.CELL_L, A.CELL_PLUS_X
+    for i, row in enumerate(ROWS, 1):
+        X0, Y = A.P(x0, row)
+        X1, _ = A.P(x1, row)
+        if i == 2:
+            can = cq.Workplane("YZ", origin=(X0 + 0.8, Y, CZ)).circle(A.CELL_D / 2).extrude(A.CELL_L - 0.8)
+            nub = cq.Workplane("YZ", origin=(X0, Y, CZ)).circle(4.0).extrude(0.8)
+        else:
+            can = cq.Workplane("YZ", origin=(X0, Y, CZ)).circle(A.CELL_D / 2).extrude(A.CELL_L - 0.8)
+            nub = cq.Workplane("YZ", origin=(X1 - 0.8, Y, CZ)).circle(4.0).extrude(0.8)
+        parts.append((f"CELL{i}", can.union(nub).val(), A.colour(0.85, 0.45, 0.75)))
+    return parts
+
+
+def ring_cut(y0, side, z0=None, z1=None):
+    """opening in a shell for a block ring (left: x < 0, right: x > 85), 0.3 mm clearance"""
+    zz0 = BLK_ZB - 0.3 if z0 is None else z0
+    zz1 = A.CELL_AXIS_Z + RING_HALF + 0.3 if z1 is None else z1
+    if side == "L":
+        return box(RING_X[0] - 2, y0 - RING_HALF - 0.3, RING_X[1] + 0.3, y0 + RING_HALF + 0.3, zz0, zz1)
+    return box(W - RING_X[1] - 0.3, y0 - RING_HALF - 0.3, W - RING_X[0] + 2, y0 + RING_HALF + 0.3, zz0, zz1)
+
+
+def make_cradle(back):
+    c = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], CR_Z, 0)
+    for row in ROWS:
+        c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+    for (x, y) in BUTTONS:
+        c = c.cut(zcyl(x, y, ACT_STEM / 2 + 0.6, CR_Z - 1, 1))
+    return cut_boxes(c, back, 0.5, 0.4, "cradle")
+
+
+def lobes(z0, z1):
+    w = None
+    for (x, y) in LOBES:
+        c = zcyl(x, y, LOBE_R, z0, z1)
+        w = c if w is None else w.union(c)
+    return w
+
+
+def make_rear(back, tft_bb):
+    r = outline(Z_REAR_OUT, T, outer_low=True)
+    r = r.cut(rrect(LEDGE, LEDGE, W - LEDGE, H - LEDGE, Z_REAR_IN, 0.01, PCB_R - LEDGE))
+    r = r.cut(rrect(-CLR, -CLR, W + CLR, H + CLR, 0, T + 1, PCB_R + CLR))
+    # TFT locating ring (open at the flat tail / ribbon)
+    tx = (tft_bb[0] + tft_bb[2]) / 2
+    ty = tft_bb[1] + A.TFT_OD / 2
+    ring = zcyl(tx, ty, A.TFT_OD / 2 + 1.9, Z_REAR_IN - 0.1, -21.9).cut(
+        zcyl(tx, ty, A.TFT_OD / 2 + 0.4, Z_REAR_IN - 0.2, -21.8))
+    ring = ring.cut(box(tx - 18.5, ty + 18.0, tx + 18.5, H, Z_REAR_IN - 0.2, -21.8))
+    r = r.union(ring)
+    # cradle locating ribs from the top / bottom walls
+    for x in (50.0, 70.0):
+        r = r.union(box(x - 0.8, -CLR - 0.1, x + 0.8, CR_Y[0] - 0.3, Z_REAR_IN - 0.1, -5.0))
+    for x in (56.0, 70.0):
+        r = r.union(box(x - 0.8, CR_Y[1] + 0.3, x + 0.8, H + CLR + 0.1, Z_REAR_IN - 0.1, -5.0))
+    r = r.cut(zcyl(A.AXIS[0], A.AXIS[1], WINDOW_D / 2, Z_REAR_OUT - 1, Z_REAR_IN + 1))    # eye window
+    r = r.cut(zcone(A.AXIS[0], A.AXIS[1], WINDOW_D / 2 + 1.2, WINDOW_D / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + 1.2))
+    for y0 in LEFT_AXES:
+        r = r.cut(ring_cut(y0, "L"))
+        r = r.cut(box(-0.5, y0 - 12.8, 7.3, y0 + 12.8, BLK_ZB - 0.3, 0.1))       # flange on the PCB
+    r = r.cut(ring_cut(RIGHT_AXIS, "R"))
+    if MS_DIR:
+        r = r.cut(cap_clear())
+    r = r.cut(box(W - 7.3, RIGHT_AXIS - 12.8, W + 0.5, RIGHT_AXIS + 12.8, BLK_ZB - 0.3, 0.1))
+    for (x, y) in BUTTONS:
+        r = r.cut(zcyl(x, y, ACT_HOLE / 2, Z_REAR_OUT - 1, Z_REAR_IN + 0.5))              # actuator holes
+        r = r.cut(zcone(x, y, ACT_HOLE / 2 + 0.5, ACT_HOLE / 2, Z_REAR_OUT - 0.01, Z_REAR_OUT + 0.5))
+    for (x, y) in LOBES:
+        r = r.cut(zcyl(x, y, INSERT_D / 2, -6.0, T + 1))
+    r = r.cut(box(*USB_CUT))
+    return cut_boxes(r, back, 0.4, 0.4, "rear shell")
+
+
+def make_front(front):
+    f = outline(T, Z_FRONT_OUT, outer_low=False)
+    f = f.cut(rrect(-CLR, -CLR, W + CLR, H + CLR, T - 1, Z_FRONT_IN, PCB_R + CLR))
+    lip = rrect(-CLR - 0.1, -CLR - 0.1, W + CLR + 0.1, H + CLR + 0.1, T, T + 3.0, PCB_R + CLR).cut(
+        rrect(LEDGE, LEDGE, W - LEDGE, H - LEDGE, T - 1, T + 4, PCB_R - LEDGE))
+    f = f.union(lip)
+    f = f.union(zcyl(LENS_C[0], LENS_C[1], LENS_R_IN + 2.0, Z_FRONT_IN, LENS_TOP))        # lens turret
+    f = f.cut(zcyl(LENS_C[0], LENS_C[1], LENS_R_IN, Z_FRONT_IN - 1, LENS_TOP + 1))
+    f = f.union(make_hood())
+    for (x, y) in PINHOLES:                                                                  # RESET / BOOT pin holes
+        f = f.cut(zcyl(x, y, 0.8, Z_FRONT_IN - 1, Z_FRONT_OUT + 1))
+        f = f.cut(zcone(x, y, 0.8, 1.6, Z_FRONT_OUT - 0.8, Z_FRONT_OUT + 0.01))
+    for (x, y) in LOBES:
+        f = f.cut(zcyl(x, y, SCREW_D / 2, T - 1, Z_FRONT_OUT + 1))
+        f = f.cut(zcyl(x, y, HEAD_D / 2, T + 3.0, Z_FRONT_OUT + 1))
+    f = f.cut(box(*USB_CUT))
+    f = f.cut(box(*SD_CUT))
+    for y0 in LEFT_AXES:
+        f = f.cut(ring_cut(y0, "L", z0=-1.0))
+    f = f.cut(ring_cut(RIGHT_AXIS, "R", z0=-1.0))
+    if MS_DIR:
+        f = f.cut(cap_clear())
+    return cut_boxes(f, front, 0.4, 0.4, "front shell")
+
+
+# ------------------------------------------------------------------ main --------------
+def vol(a, b):
+    try:
+        return round(a.intersect(b).Volume(), 3)
+    except Exception as e:
+        return f"err {e}"
+
+
+def main():
+    os.makedirs(PRINT, exist_ok=True)
+    os.makedirs(PARTS, exist_ok=True)
+    board = A.load_board()
+    sub, comp, springs, back, front = classify(board)
+    print(f"board: {len(comp)} component solids kept, {len(springs)} spring-contact solids removed", flush=True)
+    path, info = A.fpc_path_vertical()
+    real = A.onshape_parts()
+    tft = [p for p in real if p[0].startswith("TFT")][0]
+    cam = [p for p in real if p[0].startswith("OV7670")][0]
+    cells = make_cells2()
+    left_blocks = cq.Compound.makeCompound([x[1] for x in springs if x[0] == "block"])
+    print("left blocks from the board STEP:", len([x for x in springs if x[0] == "block"]),
+          "| BT22 spring solids removed:", len([x for x in springs if x[0] == "bt22"]), flush=True)
+    fpc = A.fpc_parts(path, A.FPC_LEN)
+    caps = slugs = None
+    if MS_DIR:
+        left_blocks, caps, slugs = ms3181_parts()
+        print("MS3181 blocks + cap stacks from", MS_DIR, flush=True)
+
+    block = make_right_block()
+    cradle = make_cradle(back)
+    rear = make_rear(back, bb(tft[1]))
+    frontshell = make_front(front)
+    actuators = make_actuators(back)
+    printed = (("FCL_battery_block_right", block, (0.62, 0.64, 0.68)), ("FCL_cell_cradle", cradle, (0.95, 0.75, 0.25)),
+               ("FCL_case_rear", rear, (0.30, 0.50, 0.85)), ("FCL_case_front", frontshell, (0.35, 0.75, 0.55)),
+               ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)))
+    for name, w, _ in printed:
+        s = w.val()
+        b6 = [round(v, 2) for v in bb(s)]
+        print(f"{name}: solids {len(s.Solids())}, volume {s.Volume() / 1000:.1f} cm3, bbox {b6}", flush=True)
+        cq.exporters.export(w, os.path.join(PRINT, name + ".step"))
+        cq.exporters.export(w, os.path.join(PRINT, name + ".stl"), tolerance=0.05, angularTolerance=0.2)
+
+    # ---- interference checks (mm3, should all be ~0)
+    solids = {n: w.val() for n, w, _ in printed}
+    tb = bb(tft[1])
+    tcx, tcy = (tb[0] + tb[2]) / 2, tb[1] + A.TFT_OD / 2
+    tft_proxy = zcyl(tcx, tcy, A.TFT_OD / 2, tb[4], tb[5]).union(
+        box(tcx - A.TFT_FLAT_W / 2, tcy, tcx + A.TFT_FLAT_W / 2, tb[3], tb[4], tb[5])).val()   # imported TFT is not a clean solid
+    others = {"left_blocks": left_blocks, "PCB": cq.Compound.makeCompound(sub), "TFT": tft_proxy, "camera": cam[1],
+              "cells": cq.Compound.makeCompound([c[1] for c in cells]),
+              "ribbon": cq.Compound.makeCompound([p[1] for p in fpc])}
+    if caps is not None:
+        others["caps"] = caps
+        others["slugs"] = slugs
+        for a, b in (("caps", "PCB"), ("slugs", "PCB"), ("slugs", "cells"), ("caps", "cells"), ("caps", "left_blocks")):
+            print(f"  {a} x {b}: {vol(others[a], others[b])}", flush=True)
+        print(f"  slugs x left_blocks: {vol(slugs, left_blocks)}", flush=True)
+    names = list(solids)
+    print("interference (mm3):")
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            print(f"  {a} x {b}: {vol(solids[a], solids[b])}", flush=True)
+        for b, shp in others.items():
+            print(f"  {a} x {b}: {vol(solids[a], shp)}", flush=True)
+    lim = [f for f in front if f[5] > Z_FRONT_IN and not (17 < f[0] and f[2] < 52)]
+    print("front parts taller than the shell:", lim)
+
+    # simplified parts for renders
+    simple = [("left_blocks", left_blocks), ("PCB", cq.Compound.makeCompound(sub)), ("TFT", tft[1]), ("camera", cam[1]),
+              ("cells", others["cells"]), ("ribbon", others["ribbon"])]
+    if caps is not None:
+        simple += [("caps", caps), ("slugs", slugs)]
+        mid = A.OX + W / 2
+        for nm, comp_ in (("caps", caps), ("slugs", slugs)):
+            sl = comp_.Solids()
+            simple.append((nm + "_L", cq.Compound.makeCompound([x for x in sl if x.Center().x < mid])))
+            simple.append((nm + "_R", cq.Compound.makeCompound([x for x in sl if x.Center().x >= mid])))
+    for n, s in simple:
+        cq.exporters.export(cq.Workplane(obj=s), os.path.join(PARTS, n + ".stl"), tolerance=0.08, angularTolerance=0.3)
+    for n, w, _ in printed:
+        cq.exporters.export(w, os.path.join(PARTS, n + ".stl"), tolerance=0.05, angularTolerance=0.2)
+    print("PARTS_DONE", flush=True)
+
+    if "--noassy" in sys.argv:
+        return
+    assy = cq.Assembly(name="FCL_monocular_case")
+    assy.add(cq.Compound.makeCompound(sub), name="PCB_substrate", color=A.colour(0.18, 0.45, 0.22))
+    assy.add(cq.Compound.makeCompound(comp), name="PCB_components", color=A.colour(0.55, 0.57, 0.60))
+    assy.add(left_blocks, name="FCL_battery_blocks_left", color=A.colour(0.62, 0.64, 0.68))
+    if caps is not None:
+        assy.add(caps, name="MS3181_cap_stacks", color=A.colour(0.35, 0.38, 0.30))
+        assy.add(slugs, name="brass_slugs", color=A.colour(0.85, 0.70, 0.35))
+    for n, s, c in cells + real + fpc:
+        assy.add(s, name=n, color=c)
+    for n, w, c in printed:
+        assy.add(w.val(), name=n, color=A.colour(*c))
+    out = os.path.join(A.BUILD, "FCL_case_assembly.step")
+    assy.export(out)
+    print("wrote", out, flush=True)
+
+
+if __name__ == "__main__":
+    main()
