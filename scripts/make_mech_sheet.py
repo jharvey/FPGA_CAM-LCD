@@ -59,13 +59,18 @@ PARTS = [
         Category="Printed", Qty="1", Material="PETG or ASA", Source_File="case/print/FCL_cell_cradle.stl")),
     ("MP19", "Button actuator (x2 in one print)", dict(
         Category="Printed", Qty="2", Material="PETG or ASA", Source_File="case/print/FCL_button_actuators.stl",
-        Notes="B1/B2 PTS645 plungers, guided by tubes in the rear shell.")),
+        Notes="B1/B2 PTS645 plungers, snap in from inside the rear shell (barb + flange), guided by tubes.")),
     ("MP20", "Heat-set insert 1/4-20 UNC (tripod)", dict(
         Category="Purchased", Qty="1", Material="Brass", Notes="Bottom face, rear shell. Hole 8.2 x 10.5 deep: check against the insert datasheet. Picatinny adapter later.")),
     ("MP21", "Heat-set insert M2.5", dict(
-        Category="Purchased", Qty="4", Material="Brass", Notes="Case screws, rear shell corners (hole 3.6).")),
+        Category="Purchased", Qty="8", Material="Brass", Notes="4 x case corners (rear shell) + 4 x camera posts (front shell); hole 3.6, insert 4 mm long.")),
     ("MP22", "Screw M2.5 x 10, socket head (case)", dict(
         Category="Purchased", Qty="4", MPN="ISO 4762 M2.5x10 A2", Notes="Head seats 3 mm above the PCB in the front-shell counterbore, about 10 mm to the rear insert.")),
+    ("MP23", "Cell cradle, LCD side", dict(
+        Category="Printed", Qty="1", Material="PETG or ASA", Source_File="case/print/FCL_cell_cradle_top.stl",
+        Notes="Sits on the PCB-side cradle; encloses the cells and carries the TFT back face.")),
+    ("MP24", "Screw M2.5 x 6, socket head (camera)", dict(
+        Category="Purchased", Qty="4", MPN="ISO 4762 M2.5x6 A2", Notes="OV7670 board to the front-shell posts (3.0 mm holes in the module).")),
     ("MP17", "Thread locker, medium strength", dict(
         Category="Consumable", Qty="-", MPN="Loctite 243", Notes="Block screws and bayonet pins.")),
     ("MP18", "RTV silicone", dict(
