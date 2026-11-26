@@ -919,3 +919,12 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Camera hood:** the lens turret continues as a hood with a slanted visor, 11 mm above the turret on the top edge and 4 mm on the bottom edge, plus 3 light-trap grooves. Checked against a 40 deg half field from the lens front (14.2 mm needed, 15.3 mm bore).
 - **Buttons:** printed actuators for B1/B2 (PTS645, eye side; 3.4 mm stems, 0.6 mm proud, retaining flange); 1.6 mm pin holes for B4 RESET / B3 BOOT. **Open:** B0 PWR (49, 60.4, back) is under cell 3 (about 1.4 mm gap) and cannot be reached; it needs moving on the PCB.
 - **Checks:** interference 0 except the intended O-ring squeeze and pin press-fit in the cap stacks. Exploded renders: `case/renders/case_8..11_*.png`.
+
+### 2026-11-26 – Case draft 3 (branch `j7-vertical-wip`)
+- **Buttons:** 5.6 mm guide tubes from the rear shell (8.6 mm long, stopping short of cell 1). The actuator flange moved to the top of the tube.
+- **Cells fully captured:** saddles on the rear shell cover the cells where the TFT does not (right-hand end). With the cradle they enclose each cell; plain bores, so cells still slide out along x.
+- **USB / SD:** break-out panels 1.2 mm thick, held by a 0.4 mm skin round a 0.6 mm groove. Closed by default; push them out from the inside. The USB panel is split at the parting line.
+- **Camera rigid:** the front shell has a frame round the OV7670 board edges (0.2 mm clearance) and four corner posts that press it onto the J1 header (0.05 mm preload).
+- **Tripod:** 1/4-20 brass heat-set insert in a 13 mm boss behind the bottom face at x 62, Z -12 (clear of the LCD ribbon). The bottom face is flat for a later Picatinny adapter.
+- **Assembly video:** `case/renders/FCL_assembly.mp4` (`case/assembly/make_assembly_video.py`). The LCD goes onto the PCB before the case.
+- **Checks:** interference 0 except the intended cap O-ring/pin fits and the 0.05 mm camera preload (0.86 mm3).

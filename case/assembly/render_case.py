@@ -122,3 +122,6 @@ shot("case_8_exploded_camera_side.png", EXPL, (0.75, 0.55, 0.9), (0, 1, 0), expl
 shot("case_9_exploded_eye_side.png", EXPL, (-0.75, 0.55, -0.9), (0, 1, 0), explode=2, size=(2200, 1700), zoom=1.1)
 shot("case_10_exploded_side.png", EXPL, (0.15, 1.0, 0.05), (0, 0, 1), explode=2, size=(2200, 1700), zoom=1.1)
 shot("case_11_exploded_low.png", EXPL, (-0.6, -0.8, 0.5), (0, 0, 1), explode=2, size=(2200, 1700), zoom=1.1)
+shot("case_12_bottom_tripod.png", ALL, (-0.4, -1.0, -0.5), (0, 0, -1))
+shot("case_13_front_shell_camera_frame.png", ["FCL_case_front", "camera"], (0.4, 0.5, -1.0), (0, 1, 0))
+shot("case_14_rear_shell_guides_retainer.png", ["FCL_case_rear", "FCL_button_actuators"], (-0.4, 0.6, 1.0), (0, 1, 0))

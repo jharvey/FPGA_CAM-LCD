@@ -68,10 +68,19 @@ LENS_C = (34.88, 36.29)              # centre of the lens holder body (24 x 17.5
 LENS_R_IN = 15.3
 LENS_TOP = 33.2                      # lens reaches 32.6
 WINDOW_D = 54.0                      # TFT active area is 53.28
-LOBES = ((-1.5, -1.5), (86.5, -1.5), (-1.5, 80.5), (86.5, 80.5))   # case screws, now inside the square outline
+LOBES = ((-1.5, -1.5), (86.5, -1.5), (-1.5, 80.5), (86.5, 80.5))   # case screws, inside the square outline
 LOBE_R = 4.0
 OUT_X, OUT_Y = (-6.0, 91.0), (-6.0, 85.0)  # outer outline (board 85 x 79 + 6 mm all round)
 OUT_RC = 6.5                         # vertical corner radius
+# camera: the OV7670 board (34 x 35, from the Onshape model) is located by a frame round its edges and held down
+# onto the J1 header by four corner posts (0.05 mm preload) from the front shell
+CAM_PLATE = (17.88, 24.04, 51.88, 59.04, 12.6, 14.1)
+# tripod: 1/4"-20 UNC heat-set insert (e.g. 9.5 OD x 9.5 long class; check the insert datasheet for the hole)
+TRIPOD_X, TRIPOD_Z = 62.0, -12.0     # bottom face, rear shell; clear of the LCD ribbon (x 18-52)
+TRIPOD_HOLE, TRIPOD_DEPTH = 8.2, 10.5
+TRIPOD_BOSS_D, TRIPOD_BOSS_IN = 13.0, 73.5   # boss reaches in to board y 73.5 (insert fully supported)
+CAM_FRAME_CLR, CAM_FRAME_W, CAM_FRAME_DOWN = 0.2, 1.4, 1.2
+CAM_POST_D, CAM_POST_INSET, CAM_PRELOAD = 3.0, 2.0, 0.05
 CHAMF = 2.0                          # chamfer round the outer (eye / camera) faces
 SEAM = 0.6                           # small chamfer each side of the parting line -> V reveal
 # camera hood / visor (part of the front shell); visor is longer on the top edge (board y = 0 side)
@@ -85,6 +94,11 @@ LENS_FRONT = 32.6                    # lens front face Z
 ACT_STEM, ACT_HOLE, ACT_FLANGE = 3.4, 3.8, 5.0
 ACT_PROUD = 0.6
 PINHOLES = ((53.2, 12.0), (80.1, 22.1))
+GUIDE_OD = 5.6                       # guide tube for the actuators, from the rear inner face toward the PCB
+GUIDE_TOP = -15.6                    # stops short of cell 1 (its can reaches y 6.2 at Z -11.8)
+RET_Z = -17.2                        # cell retainer saddles: from the rear inner face down to 0.2 above the cradle
+RET_TFT_CLR = 31.5                   # keep clear of the TFT + its locating ring (OD/2 + 1.9 + 0.5)
+KO_T, KO_WEB, KO_RIM = 1.2, 0.4, 0.6 # break-out panels: thickness, outer skin left in the groove, groove width
 INSERT_D = 3.6                       # M2.5 heat-set insert
 SCREW_D = 2.9
 HEAD_D = 5.2
@@ -248,6 +262,85 @@ def make_hood():
     return h
 
 
+def cam_support():
+    x0, y0, x1, y1, zb, zt = CAM_PLATE
+    c, w = CAM_FRAME_CLR, CAM_FRAME_W
+    zlo = zt - CAM_FRAME_DOWN
+    frame = box(x0 - c - w, y0 - c - w, x1 + c + w, y1 + c + w, zlo, Z_FRONT_IN + 0.01).cut(
+        box(x0 - c, y0 - c, x1 + c, y1 + c, zlo - 1, Z_FRONT_IN + 1))
+    i = CAM_POST_INSET + CAM_POST_D / 2
+    for (px, py) in ((x0 + i, y0 + i), (x1 - i, y0 + i), (x0 + i, y1 - i), (x1 - i, y1 - i)):
+        frame = frame.union(zcyl(px, py, CAM_POST_D / 2, zt - CAM_PRELOAD, Z_FRONT_IN + 0.01))
+    return frame
+
+
+def ycyl(x, y0, y1, z, r):
+    """cylinder along board y from y0 to y1 (board coords)"""
+    X, Y0 = A.P(x, y0)
+    _, Y1 = A.P(x, y1)
+    d = cq.Vector(0, 1 if Y1 > Y0 else -1, 0)
+    return cq.Workplane(obj=cq.Solid.makeCylinder(r, abs(Y1 - Y0), cq.Vector(X, Y0, z), d))
+
+
+def tripod(part):
+    part = part.union(ycyl(TRIPOD_X, OUT_Y[1] - 0.5, TRIPOD_BOSS_IN, TRIPOD_Z, TRIPOD_BOSS_D / 2))
+    part = part.cut(ycyl(TRIPOD_X, OUT_Y[1] + 1, OUT_Y[1] - TRIPOD_DEPTH, TRIPOD_Z, TRIPOD_HOLE / 2))
+    return part.cut(ycyl(TRIPOD_X, OUT_Y[1] + 0.01, OUT_Y[1] - 0.8, TRIPOD_Z, TRIPOD_HOLE / 2 + 0.6))   # lead-in
+
+
+def guides():
+    w = None
+    for (x, y) in BUTTONS:
+        t = zcyl(x, y, GUIDE_OD / 2, Z_REAR_IN - 0.01, GUIDE_TOP).cut(zcyl(x, y, ACT_HOLE / 2, Z_REAR_IN - 1, GUIDE_TOP + 1))
+        w = t if w is None else w.union(t)
+    return w
+
+
+def retainer(tft_bb):
+    """saddles over the cells where the TFT does not cover them (cells slide out along x, so plain bores)"""
+    import math
+    tx = (tft_bb[0] + tft_bb[2]) / 2
+    ty = tft_bb[1] + A.TFT_OD / 2
+    w = None
+    for row in ROWS:
+        dy = abs(row - ty)
+        x0 = tx + math.sqrt(RET_TFT_CLR ** 2 - dy ** 2) if dy < RET_TFT_CLR else CR_X[0]
+        if x0 > CR_X[1] - 3:
+            continue
+        y0, y1 = max(row - 11.0, CR_Y[0]), min(row + 11.0, CR_Y[1])
+        b = box(x0, y0, CR_X[1], y1, Z_REAR_IN - 0.01, RET_Z)
+        w = b if w is None else w.union(b)
+    for row in ROWS:
+        w = w.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+    w = w.cut(zcyl(tx, ty, RET_TFT_CLR, Z_REAR_IN - 1, 1))
+    print("  retainer saddles volume", round(w.val().Volume() / 1000, 2), "cm3", flush=True)
+    return w
+
+
+def knockout(part, cut, axis, face, sign, zlim):
+    """thin break-out panel filling a port opening: KO_T thick at the outer face, held by a KO_WEB skin
+    around a groove cut from the inside.  axis 'x' or 'y' (board coords), face = outer face coordinate,
+    sign = +1 if the outside is toward +axis.  zlim = (z0, z1) of this shell."""
+    x0, y0, x1, y1, z0, z1 = cut
+    z0, z1 = max(z0, zlim[0]), min(z1, zlim[1])
+    if z1 - z0 < 0.5:
+        return part
+    inner = face - sign * KO_T
+    if axis == "x":
+        a0, a1 = sorted((inner, face))
+        panel = box(a0, y0, a1, y1, z0, z1)
+        g0, g1 = sorted((inner - sign * 0.01, face - sign * KO_WEB))
+        ring = box(g0, y0 - 0.01, g1, y1 + 0.01, z0 - 0.01, z1 + 0.01).cut(
+            box(g0 - 1, y0 + KO_RIM, g1 + 1, y1 - KO_RIM, z0 + KO_RIM, z1 - KO_RIM))
+    else:
+        a0, a1 = sorted((inner, face))
+        panel = box(x0, a0, x1, a1, z0, z1)
+        g0, g1 = sorted((inner - sign * 0.01, face - sign * KO_WEB))
+        ring = box(x0 - 0.01, g0, x1 + 0.01, g1, z0 - 0.01, z1 + 0.01).cut(
+            box(x0 + KO_RIM, g0 - 1, x1 - KO_RIM, g1 + 1, z0 + KO_RIM, z1 - KO_RIM))
+    return part.union(panel.cut(ring))
+
+
 def button_z(back):
     """plunger top Z of the PTS645 buttons (lowest Z of the back-side box over each button position)"""
     zs = []
@@ -262,7 +355,7 @@ def make_actuators(back):
     w = None
     for (x, y), zb in zip(BUTTONS, button_z(back)):
         a = zcyl(x, y, ACT_STEM / 2, Z_REAR_OUT - ACT_PROUD, zb - 0.1)
-        a = a.union(zcyl(x, y, ACT_FLANGE / 2, Z_REAR_IN + 0.2, Z_REAR_IN + 1.0))
+        a = a.union(zcyl(x, y, ACT_FLANGE / 2, GUIDE_TOP + 0.2, GUIDE_TOP + 1.0))
         a = a.edges("<Z").fillet(0.6)
         w = a if w is None else w.union(a)
     print("  button plunger tops Z:", [round(z, 2) for z in button_z(back)], flush=True)
@@ -300,7 +393,7 @@ def make_cradle(back):
     for row in ROWS:
         c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
     for (x, y) in BUTTONS:
-        c = c.cut(zcyl(x, y, ACT_STEM / 2 + 0.6, CR_Z - 1, 1))
+        c = c.cut(zcyl(x, y, ACT_FLANGE / 2 + 0.4, CR_Z - 1, 1))
     return cut_boxes(c, back, 0.5, 0.4, "cradle")
 
 
@@ -343,7 +436,10 @@ def make_rear(back, tft_bb):
     for (x, y) in LOBES:
         r = r.cut(zcyl(x, y, INSERT_D / 2, -6.0, T + 1))
     r = r.cut(box(*USB_CUT))
-    return cut_boxes(r, back, 0.4, 0.4, "rear shell")
+    r = r.union(guides()).union(retainer(tft_bb))
+    r = tripod(r)
+    r = cut_boxes(r, back, 0.4, 0.4, "rear shell")
+    return knockout(r, USB_CUT, "x", OUT_X[1], +1, (Z_REAR_OUT, T))
 
 
 def make_front(front):
@@ -355,6 +451,7 @@ def make_front(front):
     f = f.union(zcyl(LENS_C[0], LENS_C[1], LENS_R_IN + 2.0, Z_FRONT_IN, LENS_TOP))        # lens turret
     f = f.cut(zcyl(LENS_C[0], LENS_C[1], LENS_R_IN, Z_FRONT_IN - 1, LENS_TOP + 1))
     f = f.union(make_hood())
+    f = f.union(cam_support())
     for (x, y) in PINHOLES:                                                                  # RESET / BOOT pin holes
         f = f.cut(zcyl(x, y, 0.8, Z_FRONT_IN - 1, Z_FRONT_OUT + 1))
         f = f.cut(zcone(x, y, 0.8, 1.6, Z_FRONT_OUT - 0.8, Z_FRONT_OUT + 0.01))
@@ -368,7 +465,9 @@ def make_front(front):
     f = f.cut(ring_cut(RIGHT_AXIS, "R", z0=-1.0))
     if MS_DIR:
         f = f.cut(cap_clear())
-    return cut_boxes(f, front, 0.4, 0.4, "front shell")
+    f = cut_boxes(f, front, 0.4, 0.4, "front shell")
+    f = knockout(f, USB_CUT, "x", OUT_X[1], +1, (T, Z_FRONT_OUT))
+    return knockout(f, SD_CUT, "y", OUT_Y[0], -1, (T, Z_FRONT_OUT))
 
 
 # ------------------------------------------------------------------ main --------------
