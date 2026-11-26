@@ -1,7 +1,7 @@
 # Monocular FPGA Vision Device – Roadmap
 
 **Repo**: https://github.com/jharvey/FPGA_CAM-LCD  
-**Branch**: `monocular-strip`  
+**Branch**: `monocular-strip` (newest board and case: `merged-board`, 2026-11-26, not merged back yet)  
 **Base**: ULX3S open hardware (emard)  
 **Goal**: Single-board monocular with ECP5 + OV7670 + Newhaven 2.1" TFT + 3×18650 + USB charging + WiFi + SD
 
@@ -20,8 +20,24 @@
 | – | **Schematic freeze** | **Frozen** – ERC fully classified, see `doc/constraints/schematic_freeze.md` |
 | 3b | IMU (6-axis) | **Done** – ICM-42688-P on I²C to FPGA (schematic) |
 | 3c | RC servo headers | **Done (DNP)** – 6× 1x3 headers on `servo` sheet; SERVO_V source open |
-| 4 | PCB mechanical outline (monocular form) | **In progress** – placement complete; routing step 1 done (rules, planes, fan-out, decoupling – 4.11); next: high-speed nets |
-| 5 | BOM / JLCPCB / first prototype | Pending |
+| 4 | PCB mechanical outline (monocular form) | **Routed** – DRC 0 errors, 0 unconnected on `merged-board` (2026-11-26). Open items below |
+| 4b | Battery end blocks + caps | **In progress** – one common machined block at all three cells, MS3181-16 bayonet caps; hole pattern under review |
+| 4c | Case | **Draft 4 modelled**, not printed; to be rebuilt with the common block |
+| 5 | BOM / JLCPCB / first prototype | Pending – `production/` files are from 2026-11-22 and out of date |
+
+---
+
+## Open before ordering (as of 2026-11-26, branch `merged-board`)
+
+- [ ] **Battery block mounting:** decide the hole pattern. Now: cell 1 has two screws; cell 3 and cell 2 have one screw + a 2 mm pin. Wanted: two screws per site, chosen from three tapped holes in the common block. A second screw fits with no re-routing only at cell 1. At cell 3 it needs J_SRV1 (DNP), its track and R78 moved; at cell 2 it needs USB D+/D−, VBAT_OR and CELL2_RAW shifted along the right edge.
+- [ ] **B0 PWR button** is under cell 3 and cannot be reached from outside the case. Move it.
+- [ ] **Widen CELL2_RAW** where there is room (the long cell-2 trace; voltage drop accepted for now).
+- [ ] **Review two J7 details:** the C38 GND via sits on the edge of the C38 pad, and the LCD_BL_A via touches the end of J7 pad 2.
+- [ ] **J7 at JLC:** stock and placement rotation of C202115 are unverified.
+- [ ] Right block screw head is 0.08 mm from the B3 BOOT pad (same net, GND): check on the first board.
+- [ ] **Regenerate after the block is final:** machining drawing, FreeCAD block, case build / renders / video (all still show the earlier A/B block), then `production/` (Gerbers, BOM, CPL; last generated 2026-11-22).
+- [ ] Measure a real MS3181-16 cap before machining (boss OD, bayonet pin position and angles are provisional).
+- [ ] Merge `merged-board` back into `monocular-strip`.
 
 ---
 
@@ -32,7 +48,7 @@
 - **One USB-C port** for power/charging, SD card (USB MSC) and programming; the ESP32-S3 (native USB) is the USB device and the ECP5 programmer (Phase 2c). FTDI / micro-B kept only as DNP fallback
 - Remove GPDI, large GPIO headers, audio
 - 3 independent 18650 cells with ideal-diode OR-ing (LM66100), hot-swap capable
-- Cell interface: PCB-mounted Keystone-style contacts per cell – positive button **MY-18650-04-J (LCSC C19184125)**, negative spring **MY-18650-05-J (LCSC C19184124)** (MYOUNG); replaces the JST-PH placeholders
+- Cell interface: PCB-mounted Keystone-style contacts per cell – positive button **MY-18650-04-J (LCSC C19184125)**, negative spring **MY-18650-05-J (LCSC C19184124)** (MYOUNG) – *superseded 2026-11-25/26 for the negative end: the three − springs are replaced by machined aluminium end blocks with MS3181-16 bayonet caps (spring in the cap); the + buttons stay*; replaces the JST-PH placeholders
 - Per-cell reverse-polarity protection (AO3401A) + TP4056 chargers
 - **8-channel ADC**: AD7689 (16-bit, SPI) replaced ADS1115; absolute 2.5 V reference so measurements are non-ratiometric
 - ADC channels used for: per-cell voltages, NTC / temperature, +V / VSYS rail sense, and spare channels
@@ -44,8 +60,9 @@
 - Bulk capacitance after ideal-diode OR-ing for contact bounce / vibration
 - Optional later boost stage to recover the bottom ~5–15 % capacity once cells fall below ~3.5 V
 - Camera: OV7670 parallel + SCCB
-- Display: NHD-2.1-480480AF-ASXP (40-pin FFC, RGB + SPI)
-- Case: 3D-printed first → metal later
+- Display: NHD-2.1-480480AF-ASXP (40-pin FFC, RGB + SPI); J7 is the vertical Hirose FH12-40S-0.5SV (C202115) since 2026-11-25
+- Cells are individually hot-swappable through quarter-turn caps: cells 1 and 3 come out on the left, cell 2 is reversed and comes out on the right
+- Case: 3D-printed first → metal later; 1/4-20 tripod thread on the bottom now, Picatinny later
 
 ### Power / charging evolution
 - **Near-term (done, Phase 2b)**: USB-C PD sink / trigger **WCH CH224K (LCSC C970725)** fixed to request **5 V only** on a new USB-C charge port. Keeps existing TP4056 linear chargers.
@@ -169,7 +186,7 @@
 
 **Verify (no schematic change expected)**
 - [ ] U8 uses the `AP3019AKTR` symbol with value AP3032KTR-G1 – confirm identical SOT-23-6 pinout; confirm L4 4.7 µH against the AP3032 datasheet recommendation.
-- [ ] J7 footprint is Hirose FH12-40S-0.5SH; NHD recommends Molex 54104 (datasheet lists both -4031 and -4096). Pick contact side (top/bottom) once the FPC fold direction is fixed in Phase 4.
+- [x] ~~J7 footprint is Hirose FH12-40S-0.5SH; pick contact side once the FPC fold direction is fixed~~ – settled 2026-11-25: vertical FH12-40S-0.5SV (C202115), ribbon contacts toward the odd-pad row. JLC stock / rotation still to check.
 - [ ] LCD VDD = +3V3 is at the panel's 3.3 V maximum (typ 3.0 V) – accepted, note only.
 - [x] ~~ESP32 IO32/IO33 share LCD_SCK/LCD_DC~~ – resolved in Phase 2c (ESP32-S3 no longer connected to the display SPI lines).
 
@@ -775,7 +792,7 @@ To clear the board for a placement rethink, these groups were moved off the outl
 - [ ] Confirm spring free/solid length and contact plate dimensions on the MY-18650-04/05-J drawings; bay CAD (ribs, end walls, J7 bridge, boss)
 - [x] Fine-pitch design rules, net classes, JLC stackup, planes, BGA fan-out, decoupling (4.11)
 - [ ] Placement refinement: TP4056 thermal spread, decoupling under the BGA, short CAM_PCLK / LCD_PCLK, silkscreen
-- [ ] 3D-print case concept
+- [ ] 3D-print case concept – draft 4 is modelled (`case/README.md`); nothing printed yet
 
 ### Phase 5 – Prototype
 - [x] BOM with LCSC / JLCPCB numbers – every fitted part except U1 (FPGA, owner-supplied or switch to the -8 grade C1551826). 2026-11-22: Y2 -> CM8V-T1A 9 pF (C5366546, same footprint) with C56/C57 4.7 pF -> 12 pF C0G (C182482); ten 2.2 µF 0805 Y5V -> X5R (C108719); value text of U10 / U2 / Y1 set to the parts the LCSC numbers place (W25Q128JVSIQ, M12L2561616A-6TG2T, SG-8101CA 25 MHz); H2 and J3 marked DNP; C66 stub wire removed.
@@ -911,7 +928,7 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Footprints:** `fcl_local:FCL_BatteryBlock_Mount_M2.5_Pin2_A` (BT12, cell 1) and `_B` (BT32, cell 3). One M2.5 screw from the camera side into the tapped block (plated 2.7 hole, GND, 4.6 mm boss pad) at (4.4, axis-9.7) and one 2 mm dowel pin (NPTH 2.1) at (3.0, axis+9.3) for A / (3.0, axis+7.5) for B. B moves the pin clear of J_SRV1 and R78. Both are excluded from BOM and position files; schematic symbols updated (footprint, value BLOCK_MOUNT, LCSC/MPN cleared).
 - **Block:** 6061 aluminium, 13.9 g, `scripts/make_battery_block_step.py` -> `footprints/fcl_local.3dshapes/FCL_BatteryBlock_PG16_A/B.step`. PG16 tapped ring outboard of the board edge (tap drill 21.0, 28 mm wide seat for the 26 mm plug head), 19.2 mm plain bore through the on-board flange, flange face relieved 0.6 mm except the two bosses (tracks may run under it), M2.5 tapped 5.0 deep (0.94 mm wall to the cell bore), pocket for the J_SRV1/2 pin tails. Plate (electroless nickel or tin) for the contact to the ENIG pad.
 - **Board changes** (`scripts/place_battery_blocks.py`, `scripts/fix_battery_blocks_routing.py`): H1 removed (the cell-1 block screw replaces it; schematic H1 set "not on board"); 11 GND stitching vias removed; TEMP_BAT_CELL1/2/3 entries on In1 re-routed to clear the new holes; BAY_END_WALL_L rule area removed (the blocks are the end wall); R78 reference moved. DRC vs draft 241ea618: 0 new items, 14 fewer, 0 unconnected; parity only the 5 existing SD1 items.
-- **Open:** cell 2 block on the right is not fastened to the PCB: the right edge (x 77-85, y 23-49) is full of USB, VBAT and charger routing on both outer layers, so no screw or pin fits without re-routing. BT22 (spring) is still on the board. Options: re-route that strip, or hold the block in the case with spring fingers on the BT22 GND pads.
+- **Open at the time (resolved 2026-11-26: BT22 is now a block mount with a screw and a pin):** cell 2 block on the right is not fastened to the PCB: the right edge (x 77-85, y 23-49) is full of USB, VBAT and charger routing on both outer layers, so no screw or pin fits without re-routing. BT22 (spring) is still on the board. Options: re-route that strip, or hold the block in the case with spring fingers on the BT22 GND pads.
 
 ### 2026-11-26 – Battery end caps changed from PG16 plugs to MS3181-16 bayonet dust caps (branch `battery-blocks`)
 - **Cap:** MS3181-16 (MIL-DTL-26482 Series I receptacle cover, shell 16, quarter-turn bayonet, neoprene gasket, rope/chain lanyard), max 31.8 mm OD x 14.3 mm. Amphenol MS3181-16RA (rope) or Glenair MS3181-16C (chain) are about $12-28.
@@ -921,11 +938,11 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Case:** a 33.2 mm clearance recess for each cap. Interference: case 0; block x cap stack 10.95 mm3 = O-ring squeeze + pin press fit (intended). DRC unchanged (301 / 0 unconnected / 5 parity, the same as before).
 - **Mechanical BOM (2026-11-26):** new schematic sheet `mechanical.kicad_sch` with one pinless `fcl_mech:MechPart` symbol per mechanical line item (MP1-MP18: right block, slugs, discs, MS3181 caps, springs, O-rings, pins, dowels, screws, washers, cells, printed shells/cradle, consumables). Each has on_board no, in_bom yes, and the fields Category, Qty (per unit), Manufacturer, MPN, Supplier_Link, Material and Source_File. Generated by `scripts/make_mech_sheet.py`. BT12/BT32 are back in the BOM as "Battery block MS3181 A/B" (machined). H1 is out of the BOM. Export: `kicad-cli sch export bom` with those fields. ERC: 0 on the new sheet. DRC/parity unchanged (301 / 0 / 5).
 
-### 2026-11-25 – J7 changed to a vertical connector (WIP, branch `j7-vertical-wip`, DRC NOT clean)
+### 2026-11-25 – J7 changed to a vertical connector (branch `j7-vertical-wip`; DRC fixed on 2026-11-26, see the `merged-board` entry)
 - **Why:** the NHD ribbon is 27.0 mm (LCM edge to contact end, 5.5 mm stiffened) and the TFT sits 20.5 mm above the PCB on the cells. A flat J7 in either direction leaves a fold radius of about 0.84 mm; wrapping the ribbon around cell 3 needs more than 27 mm. See `case/renders/fpc_options.png`.
 - **Part:** Hirose **FH12-40S-0.5SV(55)**, LCSC **C202115** (vertical ZIF, 3.6 mm tall, staggered lands). New footprint `fcl_local:Hirose_FH12-40S-0.5SV_1x40-1MP_P0.50mm_Vertical` + STEP model. Pad n = ribbon conductor n, same x as the old pad n. Lock lever on the even-pad side (toward cell 3); ribbon contacts face the odd-pad side (bottom edge). JLC assembly stock and placement rotation are unverified.
 - **Board:** J7 centre (34.88, 67.80) on B, done by `scripts/swap_j7_vertical.py`. All 37 track ends re-attached, 0 unconnected.
-- **Open (blocks ordering):** DRC 67 items (was 6). The backlight boost block on F (U8, C38, D1, R18, C74, C75) has vias under the new odd pad row (y 68.55–70.05): +3V3 (44.4, 69.4) and (26.28, 69.54), GND (42.5, 69.4), (25.32, 69.54), (36.82, 68.33), (28.25, 68.3), LCD_BL_A (37.05, 69.55) and (34.6, 68.35), GP13 (36.3, 69.7). The B.Cu LCD_BL_A link (34.6→37.05) and GND strap (25.7→28.2, y 68.5) now cross signal tracks, and the B.Cu VSYS track at y 70.55 is 0.1 mm from the pads. Proposed fix: shift the boost block about 2 mm toward the bottom edge and re-route. `production/` files are stale until this is done.
+- **Open at the time (resolved 2026-11-26 by `scripts/reroute_j7.py`, without moving the boost block):** DRC 67 items (was 6). The backlight boost block on F (U8, C38, D1, R18, C74, C75) has vias under the new odd pad row (y 68.55–70.05): +3V3 (44.4, 69.4) and (26.28, 69.54), GND (42.5, 69.4), (25.32, 69.54), (36.82, 68.33), (28.25, 68.3), LCD_BL_A (37.05, 69.55) and (34.6, 68.35), GP13 (36.3, 69.7). The B.Cu LCD_BL_A link (34.6→37.05) and GND strap (25.7→28.2, y 68.5) now cross signal tracks, and the B.Cu VSYS track at y 70.55 is 0.1 mm from the pads. Proposed fix: shift the boost block about 2 mm toward the bottom edge and re-route. `production/` files are stale until this is done.
 - **3D:** `case/assembly/build_assembly.py vertical` builds PCB + OV7670 + cells + TFT + ribbon (exact 27.0 mm, bend radii 6.1 / 3.5 mm). TFT and lens are coaxial at (34.88, 37.04), using the 15.46 mm lens-to-header offset of the Onshape camera model.
 
 ### 2026-11-26 – Case draft 2 (branch `j7-vertical-wip`; uses the battery-blocks board)
@@ -956,8 +973,8 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Common block:** A and B are now the same part, also used on the right for cell 2 (turned 180 deg). Holes from the cell axis at the board edge: tapped M2.5 **T1 (4.4, -9.7)** and **T2 (2.6, +9.3)**, 2 mm pin hole **D (3.2, +6.25)**, 3.0 deep. Flat face 0.5 mm off the PCB with no bosses (an idle boss would sit on CELL2_RAW at cell 3 and on thermistor tracks on the right), so one small M2.5 washer (ISO 7092, 4.5 OD x 0.5) goes between block and PCB at each screw.
 - **Footprints** (`scripts/common_block_fp.py`, `scripts/common_block_place.py`): BT12 = `..._MS3181_C1` (two screws T1 + T2), BT32 = `..._MS3181_C3` (T1 + pin), BT22 = `..._MS3181_R` (T2 + pin; 3.6 mm pad so the copper clears the pin hole). The BT22 spring contact is gone.
 - **Board edits:** GND vias at (82.5, 27.48) and (2.98, 61.65) removed (plus the stub to the second one); the VBAT_OR F.Cu leg from the via at (80.15, 28.55) now runs down to y 30.4 and joins x 82.55 at y 32.8, round the right pin hole; rule area BAY_END_WALL_R removed.
-- **DRC:** 0 unconnected, 0 parity, 0 errors outside the J7 area.
-- **Open before ordering:**
+- **DRC:** 0 unconnected, 0 parity, 0 errors outside the J7 area (0 errors everywhere after the J7 re-route below).
+- **Open before ordering** (kept current in the list near the top of this file):
   - [x] J7 area re-routed (2026-11-26, scripts/reroute_j7.py): DRC 0 errors, 0 unconnected on the whole board. Boost-converter vias moved into the strip between the two pad rows (x = n + 0.13) or deleted; LCD_BL_A from C38/U8 to D1 now on F.Cu (R18 turned 180 deg, 0.25 mm track between C38 and R18); J7 pad 2 fed from a 0.45/0.2 via just below the pad; GP13 via moved to (36.8, 71.45) with a new In1 track; WAKEUPn moved right of the J7 mounting pad (GND via at (46.5, 64.25) removed); GN tracks 0.13 mm between the even-row pads. To review: the C38 GND via sits on the edge of the C38 pad, and the LCD_BL_A via touches the end of J7 pad 2.
   - B0 PWR is under cell 3.
   - Right screw head is 0.08 mm from the B3 BOOT pad (same net, GND): check on the first board.

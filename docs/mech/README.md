@@ -1,5 +1,19 @@
 # FCL battery end block (MS3181-16 bayonet): drawing and editable models
 
+> **Out of date since 2026-11-26. Do not machine from these files yet.**
+> The drawing, the `_edit` STEP/STL files and the FreeCAD files show the earlier block with two variants (A and B). The board now uses **one common block** at all three cells:
+>
+> | | Earlier A/B block (these files) | Common block (on the board) |
+> |---|---|---|
+> | Mounting face | relieved 0.6 mm, two raised bosses | flat, 0.5 mm off the PCB, no bosses; a small M2.5 washer (4.5 OD x 0.5) at each screw is the spacer |
+> | Tapped M2.5 holes | one, at (4.6, -9.7) | two: T1 (4.4, -9.7) and T2 (2.6, +9.3) |
+> | 2 mm pin hole | (3.2, +9.3) for A, (3.2, +7.5) for B, 3.5 deep | one, D (3.2, +6.25), 3.0 deep |
+> | Pocket | from X 4.2 | from X 4.3 |
+>
+> Positions are (X into the board from the board edge, Y along the edge from the cell axis). The bayonet boss, bore, O-ring groove and bayonet pins are unchanged.
+>
+> The hole pattern is still under review (two screws per site chosen from three tapped holes, instead of a screw and a pin). The current geometry is in `scripts/make_battery_block_ms3181.py`, which also writes the KiCad 3D model. `draw_battery_block.py` and `freecad_battery_block.py` have not been updated to it and will be regenerated when the pattern is final.
+
 | File | Use |
 |---|---|
 | `FCL_BatteryBlock_MS3181_drawing.pdf` | Machining drawing, A3, page 1 = variant A, page 2 = variant B |

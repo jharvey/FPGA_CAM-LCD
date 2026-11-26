@@ -1,5 +1,7 @@
 # FreeCAD models (FreeCAD 1.1)
 
+> **Out of date since 2026-11-26:** these files show the earlier A/B block. See the table at the top of `../README.md` for what changed.
+
 ## Battery block: FCL_BatteryBlock_MS3181_A.FCStd and _B.FCStd (fully parametric)
 - Open the **Params** spreadsheet, change a value (boss_d, pin_from_tip, pin_a1, dowel_y and so on), then press **Recompute** (Ctrl+R).
 - The tree is built from Part primitives driven by expressions on those spreadsheet cells:

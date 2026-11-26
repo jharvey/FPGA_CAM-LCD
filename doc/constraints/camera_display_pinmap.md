@@ -49,6 +49,7 @@ Notes
 - `GP13` has a 100 k pull-down (R18): backlight is off while the FPGA is unconfigured.
 - Backlight current is set in hardware (R19 2R0 -> 100 mA); `GP13` is enable / PWM dimming.
 - J2 (legacy 2x20 header, DNP) also sits on all `GN0..13` / `GP0..13` nets.
+- J7 is the vertical Hirose FH12-40S-0.5SV (since 2026-11-25), on the back of the board. Pin numbers and nets are unchanged. Odd pins are in the row toward the bottom board edge, even pins in the row toward cell 3.
 
 ## Camera - J1 (OV7670 2x9 module)
 
