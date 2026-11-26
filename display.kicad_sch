@@ -5141,7 +5141,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_FFC-FPC:Hirose_FH12-40S-0.5SH_1x40-1MP_P0.50mm_Horizontal"
+		(property "Footprint" "fcl_local:Hirose_FH12-40S-0.5SV_1x40-1MP_P0.50mm_Vertical"
 			(at 120.65 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -5174,7 +5174,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C202114"
+		(property "LCSC" "C202115"
 			(at 120.65 113.03 0)
 			(hide yes)
 			(show_name no)
