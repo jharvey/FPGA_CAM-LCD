@@ -360,7 +360,10 @@ module vc187a2_v32750d (
  wire locked;
  
  (* FREQUENCY_PIN_CLKI="25" *)
- (* FREQUENCY_PIN_CLKOP="142.857" *)
+ // 100 MHz since 2026-11-27 (was 142.857 MHz = 25 x 40 / 7): at 142.857 MHz the logic on this clock did not
+  // meet timing in nextpnr (about 104 MHz possible after the FIFO memories became block RAM).
+  // The camera capture, the SDRAM refresh count and this PLL were changed together; see fpga/IO_REMAP.md.
+  (* FREQUENCY_PIN_CLKOP="100" *)
  (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
  EHXPLLL #(
          .PLLRST_ENA("DISABLED"),
@@ -371,13 +374,13 @@ module vc187a2_v32750d (
          .OUTDIVIDER_MUXB("DIVB"),
          .OUTDIVIDER_MUXC("DIVC"),
          .OUTDIVIDER_MUXD("DIVD"),
-         .CLKI_DIV(7),
+         .CLKI_DIV(1),
          .CLKOP_ENABLE("ENABLED"),
-         .CLKOP_DIV(4),
-         .CLKOP_CPHASE(1),
+         .CLKOP_DIV(6),
+         .CLKOP_CPHASE(2),
          .CLKOP_FPHASE(0),
          .FEEDBK_PATH("CLKOP"),
-         .CLKFB_DIV(40)
+         .CLKFB_DIV(4)
      ) pll_i (
          .RST(1'b0),
          .STDBY(1'b0),
@@ -707,7 +710,7 @@ module vf72cc6_v93ba14 #(
  	 wire full;
  	 
  	 //buffer for all inputs coming from the camera
- 	 reg pclk_1,pclk_2,href_1,href_2,vsync_1,vsync_2;
+ 	 reg pclk_1,pclk_2,href_1,href_2,vsync_1,vsync_2; reg[7:0] db_1; //db_1 (2026-11-27): the data byte registered with PCLK. Before, cmos_db was read one clock after the edge of PCLK was seen, up to two clocks after the edge itself: 14 ns at 142.9 MHz, but 20 ns at 100 MHz, which is where the camera changes the byte (half a 25 MHz period after the edge).
  	 
       initial begin  //read all register configuration values
          if(DATA) $readmemh(DATA,message);
@@ -736,7 +739,7 @@ module vf72cc6_v93ba14 #(
  			delay_q<=delay_d;
  			start_delay_q<=start_delay_d;
  			message_index_q<=message_index_d;			
- 			pclk_1<=cmos_pclk; 
+ 			pclk_1<=cmos_pclk; db_1<=cmos_db; //db_1: taken with the clock edge that first sees PCLK high, in the middle of the byte 
  			pclk_2<=pclk_1;
  			href_1<=cmos_href;
  			href_2<=href_1;
@@ -833,7 +836,7 @@ module vf72cc6_v93ba14 #(
  					 end
  				byte1: begin
  						if(pclk_1==1 && pclk_2==0 && href_1==1 && href_2==1) begin //rising edge of pclk means new pixel data(first byte of 16-bit pixel RGB565) is available at output
- 								pixel_d[15:8]=cmos_db;
+ 								pixel_d[15:8]=db_1;
  								state_d=byte2;
  						 end
  						 else if(vsync_1==1 && vsync_2==1) begin //new frame incoming
@@ -841,7 +844,7 @@ module vf72cc6_v93ba14 #(
  						 end
  					  end
  				byte2: if(pclk_1==1 && pclk_2==0 && href_1==1 && href_2==1) begin //rising edge of pclk means new pixel data(second byte of 16-bit pixel RGB565) is available at output
- 								pixel_d[7:0]=cmos_db;
+ 								pixel_d[7:0]=db_1;
  								state_d=fifo_write;
  								//count_d=(count_q<307200)? (count_q+1'b1):0;
  						 end
@@ -1542,16 +1545,25 @@ module vaa4bf2_v21516f (
  	localparam ADDR_WIDTH=10,
  	               DATA_WIDTH=17;
  	
- 	reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
- 	reg[ADDR_WIDTH-1:0] addr_b_q;
- 	
+ 		// Block RAM: the read is registered (data out one read clock after the address).
+ 	// Until 2026-11-27 the address was registered and the memory was read without a clock.
+ 	// Read and write share a clock here, so synthesis did make block RAM of the old form,
+ 	// but with extra logic to hand a word straight through when it is written and read
+ 	// at once; that logic was on the slowest path of the 142.9 MHz clock.
+ 	// In this FIFO the two forms give the same data: a word is not read before "empty"
+ 	// has passed its two synchronising flip-flops, two read clocks after it was written.
+ 	// no_rw_check: what the read port gives in the very clock in which its address is
+ 	// being written does not matter, for the same reason, so no logic is built for it.
+ 	(* ram_style = "block", no_rw_check *) reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+ 	reg[DATA_WIDTH-1:0] dout_q;
+ 
  	always @(posedge clk_w) begin
  		if(we) ram[addr_a]<=din;
  	end
  	always @(posedge clk_r) begin
- 		addr_b_q<=addr_b;	
+ 		dout_q<=ram[addr_b];
  	end
- 	assign dout=ram[addr_b_q];
+ 	assign dout=dout_q;
 endmodule
 //---- Top entity
 module ve6a150 (
@@ -1794,16 +1806,23 @@ module va3bd66_v21516f (
  	localparam ADDR_WIDTH=11,
  	               DATA_WIDTH=17;
  	
- 	reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
- 	reg[ADDR_WIDTH-1:0] addr_b_q;
- 	
+ 		// Block RAM: the read is registered (data out one read clock after the address).
+ 	// Until 2026-11-27 the address was registered and the memory was read without a clock.
+ 	// With a read clock that is not the write clock, synthesis cannot make block RAM of
+ 	// that, and built these 2048 words from LUTs (about 1500 LUT memories in the design,
+ 	// spread over the chip, which is what kept the 142.9 MHz clock from meeting timing).
+ 	// In this FIFO the two forms give the same data: a word is not read before "empty"
+ 	// has passed its two synchronising flip-flops, two read clocks after it was written.
+ 	(* ram_style = "block" *) reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+ 	reg[DATA_WIDTH-1:0] dout_q;
+ 
  	always @(posedge clk_w) begin
  		if(we) ram[addr_a]<=din;
  	end
  	always @(posedge clk_r) begin
- 		addr_b_q<=addr_b;	
+ 		dout_q<=ram[addr_b];
  	end
- 	assign dout=ram[addr_b_q];
+ 	assign dout=dout_q;
 endmodule
 //---- Top entity
 module v2b8124 (
@@ -2318,16 +2337,23 @@ module v1d9258_v21516f (
  	localparam ADDR_WIDTH=11,
  	               DATA_WIDTH=16;
  	
- 	reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
- 	reg[ADDR_WIDTH-1:0] addr_b_q;
- 	
+ 		// Block RAM: the read is registered (data out one read clock after the address).
+ 	// Until 2026-11-27 the address was registered and the memory was read without a clock.
+ 	// With a read clock that is not the write clock, synthesis cannot make block RAM of
+ 	// that, and built these 2048 words from LUTs (about 1500 LUT memories in the design,
+ 	// spread over the chip, which is what kept the 142.9 MHz clock from meeting timing).
+ 	// In this FIFO the two forms give the same data: a word is not read before "empty"
+ 	// has passed its two synchronising flip-flops, two read clocks after it was written.
+ 	(* ram_style = "block" *) reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+ 	reg[DATA_WIDTH-1:0] dout_q;
+ 
  	always @(posedge clk_w) begin
  		if(we) ram[addr_a]<=din;
  	end
  	always @(posedge clk_r) begin
- 		addr_b_q<=addr_b;	
+ 		dout_q<=ram[addr_b];
  	end
- 	assign dout=ram[addr_b_q];
+ 	assign dout=dout_q;
 endmodule
 //---- Top entity
 module vfb7895 (
@@ -2583,7 +2609,7 @@ module vfb7895_vf775c2 (
  		//refresh every 7.8us or else data will be lost. 
  		refresh_flag_d=refresh_flag_q;
  		refresh_ctr_d=refresh_ctr_q+1'b1;
- 		if(refresh_ctr_q==1070) begin //7.7 us
+ 		if(refresh_ctr_q==750) begin //7.5 us at 100 MHz (64 ms / 8192 rows = 7.8 us is the limit)
  			refresh_ctr_d=0;
  			refresh_flag_d=1;
  		end
@@ -3775,16 +3801,23 @@ module v9da8cd_v21516f (
  	localparam ADDR_WIDTH=11,
  	               DATA_WIDTH=9;
  	
- 	reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
- 	reg[ADDR_WIDTH-1:0] addr_b_q;
- 	
+ 		// Block RAM: the read is registered (data out one read clock after the address).
+ 	// Until 2026-11-27 the address was registered and the memory was read without a clock.
+ 	// With a read clock that is not the write clock, synthesis cannot make block RAM of
+ 	// that, and built these 2048 words from LUTs (about 1500 LUT memories in the design,
+ 	// spread over the chip, which is what kept the 142.9 MHz clock from meeting timing).
+ 	// In this FIFO the two forms give the same data: a word is not read before "empty"
+ 	// has passed its two synchronising flip-flops, two read clocks after it was written.
+ 	(* ram_style = "block" *) reg[DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
+ 	reg[DATA_WIDTH-1:0] dout_q;
+ 
  	always @(posedge clk_w) begin
  		if(we) ram[addr_a]<=din;
  	end
  	always @(posedge clk_r) begin
- 		addr_b_q<=addr_b;	
+ 		dout_q<=ram[addr_b];
  	end
- 	assign dout=ram[addr_b_q];
+ 	assign dout=dout_q;
 endmodule
 
 module main_v5ec133 (
@@ -4647,14 +4680,47 @@ module main_v9df384 (
  output clkout_18MHz,
  output locked
 );
-  // 32-bit phase accumulator
-     reg [31:0] accumulator = 32'd0;
- 
-     always @(posedge clkin) begin
-         // Add the calculated tuning word every clock cycle
-         accumulator <= accumulator + 32'd3092376453;
-     end
- 
-     // Use the Most Significant Bit (MSB) as the output clock
-     assign clkout_18MHz = accumulator[31];
+  // Pixel clock for the TFT from a PLL: 25 MHz * 5 / 7 = 17.857 MHz (55.1 pictures per second).
+  //
+  // Until 2026-11-27 this block was a 32-bit phase accumulator stepping by 18/25 of its
+  // range each 25 MHz clock. A step above one half aliases: the top bit toggled at
+  // 25 * (1 - 18/25) = 7 MHz with uneven pulses (measured in the whole-design simulation,
+  // fpga/full/test_full.py), so the panel ran at 21.6 pictures per second and every
+  // wait counted in pixel clocks was 2.6 times too long.
+  // 18.000 MHz cannot be made from 25 MHz within the PLL's limits; 17.857 is 0.8 % low.
+  (* FREQUENCY_PIN_CLKI="25" *)
+  (* FREQUENCY_PIN_CLKOP="17.857" *)
+  (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
+  EHXPLLL #(
+          .PLLRST_ENA("DISABLED"),
+          .INTFB_WAKE("DISABLED"),
+          .STDBY_ENABLE("DISABLED"),
+          .DPHASE_SOURCE("DISABLED"),
+          .OUTDIVIDER_MUXA("DIVA"),
+          .OUTDIVIDER_MUXB("DIVB"),
+          .OUTDIVIDER_MUXC("DIVC"),
+          .OUTDIVIDER_MUXD("DIVD"),
+          .CLKI_DIV(7),
+          .CLKOP_ENABLE("ENABLED"),
+          .CLKOP_DIV(32),
+          .CLKOP_CPHASE(15),
+          .CLKOP_FPHASE(0),
+          .FEEDBK_PATH("CLKOP"),
+          .CLKFB_DIV(5)
+      ) pll_pix (
+          .RST(1'b0),
+          .STDBY(1'b0),
+          .CLKI(clkin),
+          .CLKOP(clkout_18MHz),
+          .CLKFB(clkout_18MHz),
+          .CLKINTFB(),
+          .PHASESEL0(1'b0),
+          .PHASESEL1(1'b0),
+          .PHASEDIR(1'b1),
+          .PHASESTEP(1'b1),
+          .PHASELOADREG(1'b1),
+          .PLLWAKESYNC(1'b0),
+          .ENCLKOP(1'b0),
+          .LOCK(locked)
+      );
 endmodule

@@ -1,6 +1,6 @@
 Info: 	          TRELLIS_IO:    97/  365    26%
-Info: 	          TRELLIS_FF:   968/83640     1%
-Info: 	        TRELLIS_COMB: 20203/83640    24%
-clock $glbnet$v40f83b$TRELLIS_IO_IN              50.56 MHz possible, PASS at 25.00 MHz
-clock $glbnet$v79e9a8$TRELLIS_IO_OUT             96.41 MHz possible, PASS at 12.00 MHz
-clock $glbnet$w25                                73.93 MHz possible, FAIL at 142.86 MHz
+Info: 	          TRELLIS_FF:   893/83640     1%
+Info: 	        TRELLIS_COMB:  3708/83640     4%
+clock $glbnet$v40f83b$TRELLIS_IO_IN              58.16 MHz possible, PASS at 25.00 MHz
+clock $glbnet$v79e9a8$TRELLIS_IO_OUT             77.10 MHz possible, PASS at 17.86 MHz
+clock $glbnet$w25                                97.13 MHz possible, FAIL at 100.00 MHz

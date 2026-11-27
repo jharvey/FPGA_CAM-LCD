@@ -1,8 +1,8 @@
 Info: constraining clock net 'clk_25mhz' to 25.00 MHz
 
 Info: Logic utilisation before packing:
-Info:     Total LUT4s:      2764/83640     3%
-Info:         logic LUTs:   2100/83640     2%
+Info:     Total LUT4s:      2732/83640     3%
+Info:         logic LUTs:   2068/83640     2%
 Info:         carry LUTs:    538/83640     0%
 Info:           RAM LUTs:     84/10455     0%
 Info:          RAMW LUTs:     42/20910     0%
@@ -44,11 +44,11 @@ Info: Packing carries...
 Info: Packing LUTs...
 Info: Packing LUT5-7s...
 Info: Packing FFs...
-Info:     383 FFs paired with LUTs.
+Info:     394 FFs paired with LUTs.
 Info: Generating derived timing constraints...
 Info: Promoting globals...
 Info:     promoting clock net clk_25mhz$TRELLIS_IO_IN to global network
-Info: Checksum: 0xfd2e3ee1
+Info: Checksum: 0x21b9fcd6
 
 Info: Device utilisation:
 Info: 	          TRELLIS_IO:    27/  365     7%
@@ -77,344 +77,319 @@ Info: 	     TRELLIS_ECLKBUF:     0/    8     0%
 Info: 	        ECLKBRIDGECS:     0/    2     0%
 Info: 	                DCSC:     0/    2     0%
 Info: 	          TRELLIS_FF:   964/83640     1%
-Info: 	        TRELLIS_COMB:  2944/83640     3%
+Info: 	        TRELLIS_COMB:  2912/83640     3%
 Info: 	        TRELLIS_RAMW:    21/10455     0%
 
 Info: Placed 27 cells based on constraints.
-Info: Creating initial analytic placement for 2119 cells, random placement wirelen = 250105.
-Info:     at initial placer iter 0, wirelen = 5635
-Info:     at initial placer iter 1, wirelen = 3708
-Info:     at initial placer iter 2, wirelen = 3263
-Info:     at initial placer iter 3, wirelen = 3072
-Info: Running main analytical placer, max placement attempts per cell = 1958220.
-Info:     at iteration #1, type ALL: wirelen solved = 3059, spread = 18705, legal = 19942; time = 0.19s
-Info:     at iteration #2, type ALL: wirelen solved = 4363, spread = 13614, legal = 14891; time = 0.15s
-Info:     at iteration #3, type ALL: wirelen solved = 5018, spread = 11699, legal = 13192; time = 0.14s
-Info:     at iteration #4, type ALL: wirelen solved = 5537, spread = 10884, legal = 12429; time = 0.15s
-Info:     at iteration #5, type ALL: wirelen solved = 5910, spread = 10852, legal = 12528; time = 0.14s
-Info:     at iteration #6, type ALL: wirelen solved = 6082, spread = 10823, legal = 12388; time = 0.11s
-Info:     at iteration #7, type ALL: wirelen solved = 6330, spread = 10877, legal = 12636; time = 0.14s
-Info:     at iteration #8, type ALL: wirelen solved = 6561, spread = 10593, legal = 12410; time = 0.14s
-Info:     at iteration #9, type ALL: wirelen solved = 6719, spread = 11996, legal = 13481; time = 0.14s
-Info:     at iteration #10, type ALL: wirelen solved = 7570, spread = 11691, legal = 13235; time = 0.14s
-Info:     at iteration #11, type ALL: wirelen solved = 7810, spread = 11686, legal = 13050; time = 0.13s
-Info: HeAP Placer Time: 2.72s
-Info:   of which solving equations: 1.39s
-Info:   of which spreading cells: 0.30s
-Info:   of which strict legalisation: 0.21s
+Info: Creating initial analytic placement for 2085 cells, random placement wirelen = 245874.
+Info:     at initial placer iter 0, wirelen = 5181
+Info:     at initial placer iter 1, wirelen = 3692
+Info:     at initial placer iter 2, wirelen = 3233
+Info:     at initial placer iter 3, wirelen = 3193
+Info: Running main analytical placer, max placement attempts per cell = 1926684.
+Info:     at iteration #1, type ALL: wirelen solved = 3026, spread = 19047, legal = 20187; time = 0.18s
+Info:     at iteration #2, type ALL: wirelen solved = 4615, spread = 14647, legal = 15817; time = 0.15s
+Info:     at iteration #3, type ALL: wirelen solved = 5109, spread = 11490, legal = 12921; time = 0.13s
+Info:     at iteration #4, type ALL: wirelen solved = 5482, spread = 11317, legal = 13028; time = 0.13s
+Info:     at iteration #5, type ALL: wirelen solved = 5716, spread = 12308, legal = 13579; time = 0.15s
+Info:     at iteration #6, type ALL: wirelen solved = 6524, spread = 12254, legal = 13543; time = 0.14s
+Info:     at iteration #7, type ALL: wirelen solved = 6739, spread = 11847, legal = 13208; time = 0.14s
+Info:     at iteration #8, type ALL: wirelen solved = 6946, spread = 10871, legal = 12645; time = 0.13s
+Info:     at iteration #9, type ALL: wirelen solved = 6987, spread = 11252, legal = 12670; time = 0.15s
+Info:     at iteration #10, type ALL: wirelen solved = 7336, spread = 11253, legal = 12526; time = 0.14s
+Info:     at iteration #11, type ALL: wirelen solved = 7481, spread = 11842, legal = 12882; time = 0.14s
+Info:     at iteration #12, type ALL: wirelen solved = 7938, spread = 12412, legal = 13184; time = 0.15s
+Info:     at iteration #13, type ALL: wirelen solved = 8543, spread = 12433, legal = 13165; time = 0.14s
+Info:     at iteration #14, type ALL: wirelen solved = 8877, spread = 11817, legal = 12668; time = 0.14s
+Info:     at iteration #15, type ALL: wirelen solved = 8610, spread = 13510, legal = 14082; time = 0.13s
+Info: HeAP Placer Time: 3.45s
+Info:   of which solving equations: 1.65s
+Info:   of which spreading cells: 0.43s
+Info:   of which strict legalisation: 0.27s
 
 Info: Running simulated annealing placer for refinement.
-Info:   at iteration #1: temp = 0.000000, timing cost = 287, wirelen = 12388
-Info:   at iteration #5: temp = 0.000000, timing cost = 272, wirelen = 10938
-Info:   at iteration #10: temp = 0.000000, timing cost = 234, wirelen = 10462
-Info:   at iteration #15: temp = 0.000000, timing cost = 205, wirelen = 10255
-Info:   at iteration #20: temp = 0.000000, timing cost = 195, wirelen = 10137
-Info:   at iteration #22: temp = 0.000000, timing cost = 193, wirelen = 10131 
-Info: SA placement time 10.15s
+Info:   at iteration #1: temp = 0.000000, timing cost = 403, wirelen = 12526
+Info:   at iteration #5: temp = 0.000000, timing cost = 369, wirelen = 11095
+Info:   at iteration #10: temp = 0.000000, timing cost = 320, wirelen = 10623
+Info:   at iteration #10: temp = 0.000000, timing cost = 297, wirelen = 10636 
+Info: SA placement time 5.15s
 
-Info: Max frequency for clock '$glbnet$clk_25mhz$TRELLIS_IO_IN': 89.82 MHz (PASS at 25.00 MHz)
+Info: Max frequency for clock '$glbnet$clk_25mhz$TRELLIS_IO_IN': 92.82 MHz (PASS at 25.00 MHz)
 
-Info: Max delay <async>                                 -> posedge $glbnet$clk_25mhz$TRELLIS_IO_IN: 13.44 ns
-Info: Max delay posedge $glbnet$clk_25mhz$TRELLIS_IO_IN -> <async>                                : 15.88 ns
+Info: Max delay <async>                                 -> posedge $glbnet$clk_25mhz$TRELLIS_IO_IN: 14.28 ns
+Info: Max delay posedge $glbnet$clk_25mhz$TRELLIS_IO_IN -> <async>                                : 16.12 ns
 
 Info: Slack histogram:
-Info:  legend: * represents 4 endpoint(s)
-Info:          + represents [1,4) endpoint(s)
-Info: [ 28867,  29386) |+
-Info: [ 29386,  29905) |***+
-Info: [ 29905,  30424) |*****+
-Info: [ 30424,  30943) |*****+
-Info: [ 30943,  31462) |***************+
-Info: [ 31462,  31981) |********************************+
-Info: [ 31981,  32500) |*************************************+
-Info: [ 32500,  33019) |********************************+
-Info: [ 33019,  33538) |*********************************************+
-Info: [ 33538,  34057) |****************************************************+
-Info: [ 34057,  34576) |************************************************************ 
-Info: [ 34576,  35095) |*******************************+
-Info: [ 35095,  35614) |***********************************************+
-Info: [ 35614,  36133) |**************************+
-Info: [ 36133,  36652) |**********************************+
-Info: [ 36652,  37171) |***************************************+
-Info: [ 37171,  37690) |***************************************************+
-Info: [ 37690,  38209) |***************************+
-Info: [ 38209,  38728) |**************************************+
-Info: [ 38728,  39247) |************************+
-Info: Checksum: 0x4be7f644
+Info:  legend: * represents 3 endpoint(s)
+Info:          + represents [1,3) endpoint(s)
+Info: [ 29227,  29728) |+
+Info: [ 29728,  30229) |********+
+Info: [ 30229,  30730) |**********+
+Info: [ 30730,  31231) |*******************+
+Info: [ 31231,  31732) |****************************************+
+Info: [ 31732,  32233) |************************************************************ 
+Info: [ 32233,  32734) |***********************************+
+Info: [ 32734,  33235) |******************************************+
+Info: [ 33235,  33736) |************************************************** 
+Info: [ 33736,  34237) |********************************************+
+Info: [ 34237,  34738) |***********************************************+
+Info: [ 34738,  35239) |********************************************************+
+Info: [ 35239,  35740) |*************************************+
+Info: [ 35740,  36241) |************************************+
+Info: [ 36241,  36742) |*********************************+
+Info: [ 36742,  37243) |************************************************+
+Info: [ 37243,  37744) |******************************************+
+Info: [ 37744,  38245) |********************************+
+Info: [ 38245,  38746) |**************************************** 
+Info: [ 38746,  39247) |***********************+
+Info: Checksum: 0xf7780eb0
 Info: Routing globals...
 Info:     routing clock net $glbnet$clk_25mhz$TRELLIS_IO_IN using global 0
 
 Info: Routing..
 Info: Setting up routing queue.
-Info: Routing 10438 arcs.
+Info: Routing 10334 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      173        826 |  173   826 |      9656|       0.50       0.50|
-Info:       2000 |      351       1648 |  178   822 |      8929|       0.24       0.74|
-Info:       3000 |      503       2496 |  152   848 |      8183|       0.23       0.97|
-Info:       4000 |      684       3315 |  181   819 |      7395|       0.26       1.24|
-Info:       5000 |      909       4081 |  225   766 |      6646|       0.27       1.51|
-Info:       6000 |     1189       4774 |  280   693 |      5977|       0.26       1.77|
-Info:       7000 |     1428       5483 |  239   709 |      5291|       0.25       2.02|
-Info:       8000 |     1666       6160 |  238   677 |      4630|       0.32       2.34|
-Info:       9000 |     1883       6827 |  217   667 |      3931|       0.23       2.57|
-Info:      10000 |     2130       7499 |  247   672 |      3221|       0.23       2.80|
-Info:      11000 |     2336       8160 |  206   661 |      2499|       0.26       3.06|
-Info:      12000 |     2641       8750 |  305   590 |      1870|       0.31       3.37|
-Info:      13000 |     2828       9466 |  187   716 |      1087|       0.25       3.61|
-Info:      14000 |     2992      10220 |  164   754 |       291|       0.29       3.90|
-Info:      14293 |     2995      10444 |    3   224 |         0|       0.08       3.98|
+Info:       1000 |      162        837 |  162   837 |      9571|       0.50       0.50|
+Info:       2000 |      337       1662 |  175   825 |      8849|       0.26       0.76|
+Info:       3000 |      528       2471 |  191   809 |      8082|       0.25       1.00|
+Info:       4000 |      764       3235 |  236   764 |      7394|       0.26       1.26|
+Info:       5000 |     1025       3974 |  261   739 |      6705|       0.28       1.54|
+Info:       6000 |     1288       4684 |  263   710 |      6032|       0.29       1.83|
+Info:       7000 |     1554       5379 |  266   695 |      5375|       0.27       2.10|
+Info:       8000 |     1815       6033 |  261   654 |      4684|       0.27       2.38|
+Info:       9000 |     2034       6701 |  219   668 |      3943|       0.22       2.60|
+Info:      10000 |     2262       7362 |  228   661 |      3192|       0.25       2.85|
+Info:      11000 |     2528       7992 |  266   630 |      2527|       0.25       3.10|
+Info:      12000 |     2751       8648 |  223   656 |      1813|       0.27       3.38|
+Info:      13000 |     2982       9335 |  231   687 |      1075|       0.24       3.62|
+Info:      14000 |     3130      10079 |  148   744 |       251|       0.25       3.87|
+Info:      14279 |     3152      10285 |   22   206 |         0|       0.08       3.95|
 Info: Routing complete.
-Info: Router1 time 3.98s
-Info: Checksum: 0xbdb83da7
+Info: Router1 time 3.95s
+Info: Checksum: 0x17a2a7e3
 
 Info: Critical path report for clock '$glbnet$clk_25mhz$TRELLIS_IO_IN' (posedge -> posedge):
 Info: curr total
-Info:  0.5  0.5  Source bridge.s_pend_TRELLIS_FF_Q_2.Q
-Info:  0.9  1.5    Net bridge.s_pend[1] (87,35) -> (86,36)
-Info:                Sink bridge.first_slot_LUT4_Z.D
+Info:  0.5  0.5  Source bridge.s_pend_TRELLIS_FF_Q_1.Q
+Info:  0.9  1.4    Net bridge.s_pend[2] (76,25) -> (76,27)
+Info:                Sink bridge.first_slot_LUT4_Z_1.C
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
-Info:  0.2  1.7  Source bridge.first_slot_LUT4_Z.F
-Info:  0.9  2.6    Net bridge.first_slot[1] (86,36) -> (86,37)
-Info:                Sink bridge.first_slot_CCU2C_B0$CCU2_COMB1.B
+Info:  0.2  1.7  Source bridge.first_slot_LUT4_Z_1.F
+Info:  1.2  2.9    Net bridge.first_slot[0] (76,27) -> (82,27)
+Info:                Sink bridge.first_slot_CCU2C_B0$CCU2_COMB0.B
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:346.16-346.26
-Info:  0.4  3.0  Source bridge.first_slot_CCU2C_B0$CCU2_COMB1.FCO
-Info:  0.0  3.0    Net bridge.first_slot_CCU2C_B0_COUT[2] (86,37) -> (86,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S1$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.1  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S1$CCU2_COMB0.FCO
-Info:  0.0  3.1    Net bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S1$CCU2_FCI_INT (86,37) -> (86,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S1$CCU2_COMB1.FCI
-Info:  0.0  3.1  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S1$CCU2_COMB1.FCO
-Info:  0.0  3.1    Net bridge.first_slot_CCU2C_B0_COUT[4] (86,37) -> (86,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.2  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0$CCU2_COMB0.FCO
-Info:  0.0  3.2    Net bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0$CCU2_FCI_INT (86,37) -> (86,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0$CCU2_COMB1.FCI
-Info:  0.0  3.2  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0$CCU2_COMB1.FCO
-Info:  0.0  3.2    Net bridge.first_slot_CCU2C_B0_COUT[6] (86,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.2  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB0.FCO
-Info:  0.0  3.2    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_FCI_INT (87,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB1.FCI
-Info:  0.0  3.2  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB1.FCO
-Info:  0.0  3.2    Net bridge.first_slot_CCU2C_B0_COUT[8] (87,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.3  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB0.FCO
-Info:  0.0  3.3    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_FCI_INT (87,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB1.FCI
-Info:  0.0  3.3  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB1.FCO
-Info:  0.0  3.3    Net bridge.first_slot_CCU2C_B0_COUT[10] (87,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.4  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB0.FCO
-Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_FCI_INT (87,37) -> (87,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB1.FCI
-Info:  0.0  3.4  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB1.FCO
-Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_COUT[12] (87,37) -> (87,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_2$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.4  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_2$CCU2_COMB0.FCO
-Info:  0.0  3.4    Net bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_2$CCU2_FCI_INT (87,37) -> (87,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_2$CCU2_COMB1.FCI
-Info:  0.0  3.4  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_2$CCU2_COMB1.FCO
-Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_COUT[14] (87,37) -> (88,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_1$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.5  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_1$CCU2_COMB0.FCO
-Info:  0.0  3.5    Net bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_1$CCU2_FCI_INT (88,37) -> (88,37)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_1$CCU2_COMB1.FCI
-Info:  0.0  3.5  Source bridge.s_clear_TRELLIS_FF_Q_DI_PFUMX_Z_C0_CCU2C_S0_1$CCU2_COMB1.FCO
-Info:  0.0  3.5    Net bridge.first_slot_CCU2C_B0_COUT[16] (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB0.FCO
-Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_FCI_INT (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB1.FCI
-Info:  0.0  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB1.FCO
-Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_COUT[18] (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB0.FCO
-Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_FCI_INT (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB1.FCI
-Info:  0.0  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB1.FCO
-Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_COUT[20] (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB0.FCO
-Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_FCI_INT (88,37) -> (88,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB1.FCI
-Info:  0.0  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB1.FCO
-Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_COUT[22] (88,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_5$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.8  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_5$CCU2_COMB0.FCO
-Info:  0.0  3.8    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_5$CCU2_FCI_INT (89,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_5$CCU2_COMB1.FCI
-Info:  0.0  3.8  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_5$CCU2_COMB1.FCO
-Info:  0.0  3.8    Net bridge.first_slot_CCU2C_B0_COUT[24] (89,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4$CCU2_COMB0.FCO
-Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4$CCU2_FCI_INT (89,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4$CCU2_COMB1.FCI
-Info:  0.0  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4$CCU2_COMB1.FCO
-Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_COUT[26] (89,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB0.FCI
-Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
-Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  3.9  Source bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB0.FCO
-Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_FCI_INT (89,37) -> (89,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB1.FCI
-Info:  0.0  3.9  Source bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB1.FCO
-Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_COUT[28] (89,37) -> (89,37)
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:350.16-350.26
+Info:  0.4  3.4  Source bridge.first_slot_CCU2C_B0$CCU2_COMB0.FCO
+Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0$CCU2_FCI_INT (82,27) -> (82,27)
+Info:                Sink bridge.first_slot_CCU2C_B0$CCU2_COMB1.FCI
+Info:  0.0  3.4  Source bridge.first_slot_CCU2C_B0$CCU2_COMB1.FCO
+Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_COUT[2] (82,27) -> (82,27)
 Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB0.FCI
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
 Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
-Info:  0.1  4.0  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB0.FCO
-Info:  0.0  4.0    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_FCI_INT (89,37) -> (89,37)
+Info:  0.1  3.4  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB0.FCO
+Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_FCI_INT (82,27) -> (82,27)
 Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB1.FCI
-Info:  0.4  4.4  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB1.F
-Info:  0.8  5.2    Net bridge.first_slot_CCU2C_B0_S1[29] (89,37) -> (90,37)
-Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4_S1_LUT4_Z_1.C
+Info:  0.0  3.4  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_3$CCU2_COMB1.FCO
+Info:  0.0  3.4    Net bridge.first_slot_CCU2C_B0_COUT[4] (82,27) -> (82,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB0.FCI
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.5  Source bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0  3.5    Net bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_FCI_INT (82,27) -> (82,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0  3.5  Source bridge.first_slot_CCU2C_B0_COUT_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0  3.5    Net bridge.first_slot_CCU2C_B0_COUT[6] (82,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_FCI_INT (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_COUT[8] (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_FCI_INT (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  3.6  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  3.6    Net bridge.first_slot_CCU2C_B0_COUT[10] (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_10$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_10$CCU2_COMB0.FCO
+Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_10$CCU2_FCI_INT (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_10$CCU2_COMB1.FCI
+Info:  0.0  3.7  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_10$CCU2_COMB1.FCO
+Info:  0.0  3.7    Net bridge.first_slot_CCU2C_B0_COUT[12] (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S1_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.8  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S1_1$CCU2_COMB0.FCO
+Info:  0.0  3.8    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S1_1$CCU2_FCI_INT (83,27) -> (83,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S1_1$CCU2_COMB1.FCI
+Info:  0.0  3.8  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S1_1$CCU2_COMB1.FCO
+Info:  0.0  3.8    Net bridge.first_slot_CCU2C_B0_COUT[14] (83,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S1$CCU2_COMB0.FCO
+Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S1$CCU2_FCI_INT (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S1$CCU2_COMB1.FCI
+Info:  0.0  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S1$CCU2_COMB1.FCO
+Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_COUT[16] (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB0.FCO
+Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_FCI_INT (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB1.FCI
+Info:  0.0  3.9  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_9$CCU2_COMB1.FCO
+Info:  0.0  3.9    Net bridge.first_slot_CCU2C_B0_COUT[18] (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  4.0  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB0.FCO
+Info:  0.0  4.0    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_FCI_INT (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB1.FCI
+Info:  0.0  4.0  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_8$CCU2_COMB1.FCO
+Info:  0.0  4.0    Net bridge.first_slot_CCU2C_B0_COUT[20] (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  4.1  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB0.FCO
+Info:  0.0  4.1    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_FCI_INT (84,27) -> (84,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB1.FCI
+Info:  0.0  4.1  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_7$CCU2_COMB1.FCO
+Info:  0.0  4.1    Net bridge.first_slot_CCU2C_B0_COUT[22] (84,27) -> (85,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  4.1  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB0.FCO
+Info:  0.0  4.1    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_FCI_INT (85,27) -> (85,27)
+Info:                Sink bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB1.FCI
+Info:  0.4  4.5  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_6$CCU2_COMB1.F
+Info:  1.1  5.7    Net bridge.first_slot_CCU2C_B0_S1[23] (85,27) -> (84,28)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A_LUT4_Z_3_B_LUT4_Z.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
 Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:34.26-34.27
-Info:  0.2  5.5  Source bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4_S1_LUT4_Z_1.F
-Info:  0.7  6.2    Net bridge.first_slot_CCU2C_B0_S1_CCU2C_S0_4_S1[0] (90,37) -> (89,36)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_2_A_PFUMX_Z_1_BLUT_LUT4_Z.B
+Info:  0.2  5.9  Source bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A_LUT4_Z_3_B_LUT4_Z.F
+Info:  0.4  6.3    Net bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A_LUT4_Z_3_B[2] (84,28) -> (84,28)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A_LUT4_Z_3.D
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
-Info:  0.4  6.6  Source bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_2_A_PFUMX_Z_1_BLUT_LUT4_Z.OFX
-Info:  0.4  7.0    Net bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_2_A[3] (89,36) -> (88,36)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_2.D
+Info:  0.2  6.6  Source bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A_LUT4_Z_3.F
+Info:  1.0  7.6    Net bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3_A[3] (84,28) -> (83,25)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3.D
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
-Info:  0.2  7.2  Source bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_2.F
-Info:  0.4  7.7    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z_D[2] (88,36) -> (89,35)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.C
+Info:  0.2  7.8  Source bridge.s_clear_TRELLIS_FF_Q_DI_LUT4_Z_A_LUT4_Z_3.F
+Info:  0.9  8.7    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z_D[0] (83,25) -> (84,25)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_ALUT_LUT4_Z.A
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
-Info:  0.2  7.9  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.F
-Info:  0.0  7.9    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT (89,35) -> (89,35)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:  0.2  8.9  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0  8.9    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_ALUT (84,25) -> (84,25)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_BLUT_LUT4_Z.F1
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.30-141.32
-Info:  0.2  8.1  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
-Info:  0.0  8.1    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1 (89,35) -> (89,35)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:  0.2  9.1  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0  9.1    Net bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1 (84,25) -> (84,25)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
 Info:                Defined in:
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.38-141.40
-Info:  0.2  8.3  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
-Info:  0.7  9.0    Net bridge.s_clear_TRELLIS_FF_Q_DI[3] (89,35) -> (89,33)
-Info:                Sink bridge.s_clear_TRELLIS_FF_Q.M
+Info:  0.2  9.3  Source bridge.s_clear_TRELLIS_FF_Q_DI_L6MUX21_Z_1_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  0.2  9.6    Net bridge.s_clear_TRELLIS_FF_Q_DI[1] (84,25) -> (84,25)
+Info:                Sink bridge.s_clear_TRELLIS_FF_Q_2.M
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
 Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:0.0-0.0
 Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/techmap.v:137.23-137.24
-Info:  0.0  9.0  Setup bridge.s_clear_TRELLIS_FF_Q.M
-Info: 4.1 ns logic, 4.9 ns routing
+Info:  0.0  9.6  Setup bridge.s_clear_TRELLIS_FF_Q_2.M
+Info: 3.7 ns logic, 5.8 ns routing
 
 Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$clk_25mhz$TRELLIS_IO_IN':
 Info: curr total
-Info:  0.0  0.0  Source esp_rx$tr_io.O
-Info:  5.8  5.8    Net esp_rx$TRELLIS_IO_IN (0,89) -> (54,44)
-Info:                Sink bridge.rx_sync_TRELLIS_FF_Q_2.M
+Info:  0.0  0.0  Source imu_int2$tr_io.O
+Info:  5.9  5.9    Net imu_int2$TRELLIS_IO_IN (0,83) -> (52,38)
+Info:                Sink bridge.int_s0_TRELLIS_FF_Q_3.M
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:6.17-6.23
-Info:  0.0  5.8  Setup bridge.rx_sync_TRELLIS_FF_Q_2.M
-Info: 0.0 ns logic, 5.8 ns routing
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:18.17-18.25
+Info:  0.0  5.9  Setup bridge.int_s0_TRELLIS_FF_Q_3.M
+Info: 0.0 ns logic, 5.9 ns routing
 
 Info: Critical path report for cross-domain path 'posedge $glbnet$clk_25mhz$TRELLIS_IO_IN' -> '<async>':
 Info: curr total
 Info:  0.5  0.5  Source bridge.tx_sr_TRELLIS_FF_Q.Q
-Info:  0.7  1.2    Net bridge.tx_sr[0] (63,41) -> (61,41)
+Info:  0.7  1.2    Net bridge.tx_sr[0] (58,35) -> (57,35)
 Info:                Sink esp_tx_LUT4_Z.C
 Info:                Defined in:
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.91
-Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:167.16-167.21
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:45.52-51.99
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge.v:171.16-171.21
 Info:  0.2  1.4  Source esp_tx_LUT4_Z.F
-Info:  6.3  7.8    Net esp_tx$TRELLIS_IO_OUT (61,41) -> (0,86)
+Info:  6.7  8.2    Net esp_tx$TRELLIS_IO_OUT (57,35) -> (0,86)
 Info:                Sink esp_tx$tr_io.I
 Info:                Defined in:
 Info:                  M:/FPGA_CAM-LCD-merged/fpga/bridge/fcl_bridge_top.v:7.17-7.23
-Info: 0.8 ns logic, 7.0 ns routing
+Info: 0.8 ns logic, 7.4 ns routing
 
-Info: Max frequency for clock '$glbnet$clk_25mhz$TRELLIS_IO_IN': 111.07 MHz (PASS at 25.00 MHz)
+Info: Max frequency for clock '$glbnet$clk_25mhz$TRELLIS_IO_IN': 104.64 MHz (PASS at 25.00 MHz)
 
-Info: Max delay <async>                                 -> posedge $glbnet$clk_25mhz$TRELLIS_IO_IN: 5.84 ns
-Info: Max delay posedge $glbnet$clk_25mhz$TRELLIS_IO_IN -> <async>                                : 7.76 ns
+Info: Max delay <async>                                 -> posedge $glbnet$clk_25mhz$TRELLIS_IO_IN: 5.93 ns
+Info: Max delay posedge $glbnet$clk_25mhz$TRELLIS_IO_IN -> <async>                                : 8.15 ns
 
 Info: Slack histogram:
-Info:  legend: * represents 5 endpoint(s)
-Info:          + represents [1,5) endpoint(s)
-Info: [ 30997,  31400) |+
-Info: [ 31400,  31803) |+
-Info: [ 31803,  32206) |***+
-Info: [ 32206,  32609) |******+
-Info: [ 32609,  33012) |*****+
-Info: [ 33012,  33415) |**********************************+
-Info: [ 33415,  33818) |***********************************************+
-Info: [ 33818,  34221) |*******************************+
-Info: [ 34221,  34624) |*******************************+
-Info: [ 34624,  35027) |****************************+
-Info: [ 35027,  35430) |*********************************+
-Info: [ 35430,  35833) |*********************+
-Info: [ 35833,  36236) |****************+
-Info: [ 36236,  36639) |******************************+
-Info: [ 36639,  37042) |**************************************+
-Info: [ 37042,  37445) |******************+
-Info: [ 37445,  37848) |*****************************+
-Info: [ 37848,  38251) |************************************************************ 
-Info: [ 38251,  38654) |*********************************************+
-Info: [ 38654,  39057) |*****************+
+Info:  legend: * represents 4 endpoint(s)
+Info:          + represents [1,4) endpoint(s)
+Info: [ 30443,  30874) |+
+Info: [ 30874,  31305) |***+
+Info: [ 31305,  31736) |****+
+Info: [ 31736,  32167) |*+
+Info: [ 32167,  32598) |****+
+Info: [ 32598,  33029) |******************+
+Info: [ 33029,  33460) |******************************+
+Info: [ 33460,  33891) |*************************************+
+Info: [ 33891,  34322) |*************************************************+
+Info: [ 34322,  34753) |**************************+
+Info: [ 34753,  35184) |*************************************+
+Info: [ 35184,  35615) |**********************************+
+Info: [ 35615,  36046) |**********************+
+Info: [ 36046,  36477) |*******************************+
+Info: [ 36477,  36908) |**************************************+
+Info: [ 36908,  37339) |**************************+
+Info: [ 37339,  37770) |***********************************************+
+Info: [ 37770,  38201) |************************************************************ 
+Info: [ 38201,  38632) |**************************************** 
+Info: [ 38632,  39063) |******************+
 
 Info: Program finished normally.

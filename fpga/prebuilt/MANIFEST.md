@@ -2,7 +2,7 @@
 
 Written by `python fpga/make_prebuilt.py` on 2026-11-27. Check your own build against these with `python fpga/make_prebuilt.py --check`.
 
-Built from commit `c8ac71c995ac6a8ef37bd2f2042c59b666f54a9e`.
+Built from commit `2fa5235527c29d387670f3fe8069dee0e3b01312`.
 
 | Design | Bitstream | What it is |
 |---|---|---|
@@ -18,14 +18,14 @@ From nextpnr, after routing. A FAIL is the tool's estimate for the slowest path,
 
 | Design | Clock | Result |
 |---|---|---|
-| full | `$glbnet$cam.m.w25` | 69.53 MHz possible, FAIL at 142.86 MHz (SDRAM clock of the camera design) |
-| full | `$glbnet$cmos_xclk$TRELLIS_IO_OUT` | 47.62 MHz possible, PASS at 25.00 MHz (25 MHz board clock: bridge, overlay text memory, camera set-up) |
-| full | `$glbnet$pix_clk_out$TRELLIS_IO_OUT` | 60.46 MHz possible, PASS at 18.00 MHz (LCD pixel clock) |
-| camera | `$glbnet$v40f83b$TRELLIS_IO_IN` | 50.56 MHz possible, PASS at 25.00 MHz |
-| camera | `$glbnet$v79e9a8$TRELLIS_IO_OUT` | 96.41 MHz possible, PASS at 12.00 MHz |
-| camera | `$glbnet$w25` | 73.93 MHz possible, FAIL at 142.86 MHz |
+| full | `$glbnet$cam.m.w25` | 103.44 MHz possible, PASS at 100.00 MHz (SDRAM clock of the camera design) |
+| full | `$glbnet$cmos_xclk$TRELLIS_IO_OUT` | 57.27 MHz possible, PASS at 25.00 MHz (25 MHz board clock: bridge, overlay text memory, camera set-up) |
+| full | `$glbnet$pix_clk_out$TRELLIS_IO_OUT` | 73.41 MHz possible, PASS at 17.86 MHz (LCD pixel clock, 25 MHz x 5 / 7) |
+| camera | `$glbnet$v40f83b$TRELLIS_IO_IN` | 58.16 MHz possible, PASS at 25.00 MHz |
+| camera | `$glbnet$v79e9a8$TRELLIS_IO_OUT` | 77.10 MHz possible, PASS at 17.86 MHz |
+| camera | `$glbnet$w25` | 97.13 MHz possible, FAIL at 100.00 MHz |
 
-The SDRAM clock of the camera design (142.9 MHz) does not meet timing by this estimate, in both designs that contain it. Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every clock against 12 MHz and reported a pass.
+**A clock does not meet timing in: camera.** Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every clock against 12 MHz; with the frequencies given, the camera design's memory clock failed at 142.9 MHz, and the project was changed (`fpga/IO_REMAP.md`, section Clocks).
 
 ## Tools
 
@@ -43,29 +43,29 @@ The SDRAM clock of the camera design (142.9 MHz) does not meet timing by this es
 
 | File | Bytes | SHA-256 |
 |---|---|---|
-| `full/fcl_full.bit` | 636668 | `39ab6479e5122697c75d64974642775e24532d94b498a212a37795d37864a966` |
+| `full/fcl_full.bit` | 443582 | `ff0b27bcb73d6781988eaa03fd7b46f60d14c7db76dc09f13bd4a5351c30d118` |
 | `full/fcl_top.lpf` | 11802 | `10992c4cc77cf57c9c054e6190b81e532e92ba2bd0e683c41a5422dfc3602094` |
-| `full/main.v` | 119325 | `ef06d07dca38be0d72e572ea2295dbbe4e5dd3010e67015121ddb825e8fcb1ea` |
+| `full/main.v` | 124081 | `0d9911166a8bbe6d9728416d01aac0af42b27b381e841a735c3908f1172e53e3` |
 | `full/fcl_cam.v` | 3080 | `4851a4d02128caad0086373edf6325697fc74d635439b5090018696dea04a8fe` |
-| `full/nextpnr.log` | 90724 | `91b10183ef4b16e1917a97b633adaddb650cfa7b102f10d2391e6a1771c99997` |
-| `full/build_summary.txt` | 583 | `b7a42595c04f7fc9772e66a57679840fb6cd7f575345b91981f5ccd77fefb353` |
-| `full/fcl_full.json` | 23978168 | `2562d0551de9305305c29202ae9e9735be5bb38e3fa055449f0884d7c63a8bfc` |
-| `full/fcl_full.config` | 8144440 | `9ce029a559a27430529405b58bca002e2feeda66e77c9cec2bfe23c4fdef9ed0` |
-| `full/yosys.log` | 1966004 | `ab159ae6ba3d9678a0be7b47524db995d48e30e3b032907b3948cd6f4cfef541` |
-| `bridge/fcl_bridge.bit` | 324485 | `8027f0eeff3073a2caf9cc32b9e0c48ae70cf0dad6f1a8fce0c8a9677e8f9789` |
+| `full/nextpnr.log` | 77501 | `f8b557f15038d994868b9b4092af58e563d9857a99722144f5516072345def06` |
+| `full/build_summary.txt` | 599 | `bf09daf8cf110d9cdb2408ef8594c22c68119da12e0578db5d130f0bd5b8a00f` |
+| `full/fcl_full.json` | 13718618 | `f966f2db97a4580992bb7fbbae73afc44e257b336d5dfa85e108984769de47c7` |
+| `full/fcl_full.config` | 3523359 | `6856bf833e50c595566385e081cc255036a7718c7f8df7fb98cbfe57c418b5e4` |
+| `full/yosys.log` | 1507023 | `8288d8135d8ef41b4600b271e1c753ecbd03996afa2badc34704039bb5f60daf` |
+| `bridge/fcl_bridge.bit` | 324119 | `0719793059990eb3f01721f05227f3e3d01819f1ec7d224d7353351a64b65d01` |
 | `bridge/fcl_bridge_top.lpf` | 2745 | `583b6d25d4d0bb5cfabe8622aab4d0f0aaa113bb0e6557727431a5b55d83af64` |
-| `bridge/nextpnr.log` | 27893 | `8df3e0d548eb8b048133aff4605e48ba0c9fe035cd285660c96cee93c7a8f723` |
-| `bridge/fcl_bridge.json` | 5108412 | `8c9eab633fccd5e0addaef7c5d59b55e92f0378f2d263a5709517fc580f62da0` |
-| `bridge/fcl_bridge.config` | 1219080 | `07ecdc235331460c582ca3517c7c5cc78f7e358085c6841621292343bd9694b3` |
-| `bridge/yosys.log` | 683722 | `b9ea0382bcfe5e2bbeb46b3309673481b85b9c3b1d8bacb0bf963a4572ede151` |
-| `camera/main.bit` | 575250 | `a0aad79018d92f4f216a66e2e71e1e93229a5fc29534fcb2fea0a79c383361b1` |
+| `bridge/nextpnr.log` | 25887 | `02a036bd66f1798f2843c59e5cb709a2e4e23346abb6b9b01b63fe2749cb8667` |
+| `bridge/fcl_bridge.json` | 5066730 | `61388b1775d2a0f1048c08f501ec9d359f68bd9e80b13b7c2761a09621d46547` |
+| `bridge/fcl_bridge.config` | 1225696 | `1cdede4b11b904a340572a2cb41c21a7937c7c0244f30bac4d3967d99258b7bb` |
+| `bridge/yosys.log` | 683531 | `ed049942c267a4ab7627fce5cae3a843e6196273f76a55c800e2af1ab0d20918` |
+| `camera/main.bit` | 367164 | `43274a8a2ad52fa3a943639827d9343fa41a3665f298a024b457b472e632f5c2` |
 | `camera/main.lpf` | 9806 | `5f13dfae7fc105284d2d3e25cb5d9586c5827c8dea76dd732956789483e166da` |
-| `camera/main.v` | 119325 | `ef06d07dca38be0d72e572ea2295dbbe4e5dd3010e67015121ddb825e8fcb1ea` |
-| `camera/nextpnr.log` | 75339 | `d6a4c6e9bdd98f64f737d1138a24487202a794fcf0e52d33ea9a705b1f992a30` |
-| `camera/build_summary.txt` | 406 | `6643dd9fdfc13c09675e4b007b3b54d28984152690d059fdf93a90f86a025c7a` |
-| `camera/main.json` | 20929656 | `e9612bb300663cbcc5181b17d1e0a0dd057f92e86ea0aab7a422e7df7dcc0f80` |
-| `camera/main.config` | 6788962 | `b845adce415c43de32102492520345bf5d5ba8613444c5ea31fb396106042ccb` |
-| `camera/yosys.log` | 1283429 | `850d031f9062690e74277391bffb109f6c27878e5d36b8f37a1075b7619270f6` |
+| `camera/main.v` | 124081 | `0d9911166a8bbe6d9728416d01aac0af42b27b381e841a735c3908f1172e53e3` |
+| `camera/nextpnr.log` | 62453 | `4b5cc1c23be899903c987de101e78c1c789902dce30afd8b90d1e9d3bf265da0` |
+| `camera/build_summary.txt` | 406 | `0cef4229a0c4d6ffcf157ed2b729b4eb0385d35a3e6eaf606c9fb8b6a8a23035` |
+| `camera/main.json` | 6174680 | `fa634bc99b5f6da9b47673042adfcb51d3a5f5b81128013414f6b16a814451b1` |
+| `camera/main.config` | 1615191 | `e37764d4d5258fe986ae58896c6cd094f650add7c99733383494ba6a4013cea1` |
+| `camera/yosys.log` | 530608 | `069ae0dd398c9a986c388b0153a1b959e357293b10ebe42dfc4799f2d391c5b6` |
 
 ## Tests at build time
 
@@ -79,5 +79,8 @@ Full output in `test_results.txt`.
 | `firmware/sim/test_app.py` | 0 | ALL CHECKS PASSED |
 | `firmware/sim/test_web.py` | 0 | ALL CHECKS PASSED |
 | `firmware/sim/test_calibrate.py` | 0 | ALL CHECKS PASSED |
+| `firmware/sim/test_tools.py` | 0 | ALL CHECKS PASSED |
+| `firmware/sim/test_lessons.py` | 0 | ALL CHECKS PASSED |
+| `firmware/sim/test_mpy.py` | 0 | SKIPPED: no micropython program (set MICROPYTHON=/path/to/micropython); nothing was tested |
 | `fpga/bridge/test_bridge.py` | 0 | ALL CHECKS PASSED |
 | `fpga/osd/test_osd.py` | 0 | ALL FRAMES IDENTICAL |

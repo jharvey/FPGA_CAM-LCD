@@ -297,7 +297,7 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 |---|---|---|
 | 0-2 | none | ready |
 | 3 | MicroPython + `firmware/esp32/` (esp32ecp5 + FCL pins) | ready; the FCL files run under MicroPython 1.24 on a PC (`test_mpy.py`), not yet on an ESP32 |
-| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds and meets timing on all clocks (memory clock 100 MHz with a 3 % margin; `fpga/IO_REMAP.md`, Clocks); a camera picture reaches the panel pins pixel for pixel in simulation; not run on hardware |
+| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds. In the full design (`fcl_full.bit`) all clocks meet timing, the 100 MHz memory clock by 3 %. In this camera-only build the same clock comes out 3 % short (97 MHz possible by nextpnr's estimate): the margin is that thin and depends on the placement (`fpga/IO_REMAP.md`, Clocks). Not run on hardware |
 | 6 | external I2C adapter | ready |
 | 7 | none (meters) | ready; the ADC readings are stage 9.2 |
 | 8 | MicroPython I2S snippets; `fcl_bridge.bit` for servos and power-off | ready, not yet run on hardware |

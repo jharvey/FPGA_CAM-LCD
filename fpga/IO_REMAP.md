@@ -186,6 +186,11 @@ block comments in the project say the same as this section.
 Result (nextpnr, the full design): memory clock 103 MHz possible at 100 MHz, pixel clock 73 at 17.86, board clock 57
 at 25. All pass; the memory clock by 3 %.
 
+The camera-only build (`python fpga/build.py`, `fpga/prebuilt/camera/main.bit`) places the same logic differently
+and comes out at 97 MHz possible for the memory clock: a FAIL by 3 %. So the margin at 100 MHz is about zero, in
+either direction, by this tool's estimate. If the first board shows trouble here, the next step down is 87.5 MHz
+(25 x 7 / 2): the capture and the refresh count (656) allow it, and the SDRAM has spare throughput.
+
 Things that follow from the 100 MHz clock and were left as they are:
 - the camera set-up bus now really runs at 100 kHz (its divider was written for 100 MHz; at 142.857 it ran at 143 kHz);
 - the waits written as `delay_q[26]` are 0.67 s as their comments say (0.47 s before), `delay_q[16]` 0.66 ms;
