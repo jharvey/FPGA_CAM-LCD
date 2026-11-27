@@ -7,7 +7,7 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 - Three 18650 cells, each hot-swappable through its own quarter-turn cap, plus USB-C charging
 - 3D-printed case with a 1/4-20 tripod thread
 
-## Where things stand (2026-11-26)
+## Where things stand (2026-11-27)
 
 | Area | State |
 |---|---|
@@ -16,6 +16,10 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 | Battery end blocks | One common machined aluminium block at all three cells, MS3181-16 bayonet caps. Mounting-hole pattern still under review |
 | Case | Draft 4 modelled (not printed yet): two shells, two cell cradles, snap-in buttons, camera screwed to the lid |
 | Ordering | **Not ready.** See "Open before ordering" in `ROADMAP.md` |
+| FPGA and software | Written and tested in simulation only, no board exists. One bitstream (camera to TFT, overlay with text and graphics, sensor bridge) that meets timing; the ESP32 software (hub, pages, phone page) runs under MicroPython on a PC. `doc/DEVELOPER_GUIDE.md` |
+
+**Try it without hardware** (Python 3): `python firmware/sim/fcl_sim.py --web 8080`, then open `http://127.0.0.1:8080`.
+Start reading at `doc/QUICK_START.md`.
 
 ## Branches
 
@@ -35,16 +39,19 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 | `docs/mech/freecad/README.md`, `case/freecad/README.md` | The FreeCAD files |
 | `doc/constraints/camera_display_pinmap.md` | FPGA pins for the display, camera and user I/O |
 | `doc/constraints/schematic_freeze.md` | Schematic freeze record and what changed after it |
-| `doc/BRINGUP.md` | First power-up checklist (first article): test points, rails, programming, stage-by-stage checks |
+| `doc/BRINGUP.md` (`.pdf`) | First power-up checklist (first article): test points, rails, programming, stage-by-stage checks |
 | `doc/PRODUCTION_TEST.md` | Short per-board check once the design is validated, compared with BRINGUP golden values |
-| `doc/USER_MANUAL.md` | Using the unit: buttons, the screen, the Level / Height / Bearing pages, menu, phone page, logging, calibration (pictures in `doc/manual/`) |
-| `doc/DEVELOPER_GUIDE.md` | Software layers, writing a page of your own, calibration values, FPGA builds, tests |
+| `doc/QUICK_START.md` (`.pdf`) | One page: buttons, pages, first use, the PC tools |
+| `doc/USER_MANUAL.md` | Using the unit: buttons, the screen and its graphics, the Level / Height / Bearing / Survey pages, menu, phone page, updates over Wi-Fi, logging, calibration (pictures in `doc/manual/`) |
+| `doc/TROUBLESHOOTING.md` | What to look at, by symptom |
+| `doc/DEVELOPER_GUIDE.md` | Software layers, writing a page of your own, graphics, scripting from a PC, the phone page's addresses, FPGA builds and clocks, tests |
+| `doc/lessons/README.md` | Six lessons with the simulator: readings, slopes, heights, the compass, a room plan, a page of your own |
 | `doc/FIRMWARE_GUIDE.md` | Reference made from a simulator run: USB stream, dashboard, LCD overlay, commands (pictures in `doc/fw/`) |
-| `fpga/prebuilt/` | Stored build outputs: both bitstreams, intermediates, checksums, tool versions, test logs. `python fpga/make_prebuilt.py --check` compares your build with them |
-| `fpga/bridge/`, `fpga/osd/` | FPGA bridge to the ESP32 (sensors, ADC, servos, buttons) and the LCD overlay, with their simulation tests |
+| `fpga/prebuilt/` | Stored build outputs: the three bitstreams, intermediates, checksums, tool versions, timing, test logs. `python fpga/make_prebuilt.py --check` compares your build with them |
+| `fpga/bridge/`, `fpga/osd/`, `fpga/full/` | FPGA bridge to the ESP32 (sensors, ADC, servos, buttons), the LCD overlay, and the full design with its whole-design simulation |
 | `doc/PROBE_POINTS.md` | Bare-copper probe vias on the back: spare FPGA balls, spare ESP32 pins, key nets (map: `doc/probe_points.png`) |
 | `doc/jlc_check_2026-11-22.md` | JLCPCB build check (a dated snapshot; see the note at its top) |
-| `fpga/IO_REMAP.md`, `fpga/ESP32_PINS.md` | FPGA and ESP32 pin maps |
+| `fpga/IO_REMAP.md`, `fpga/ESP32_PINS.md` | FPGA and ESP32 pin maps; the camera project's clocks and what was changed in it |
 | `mechanical.kicad_sch` | Mechanical bill of materials (screws, caps, springs, printed and machined parts) |
 
 `doc/MANUAL.md`, `doc/MINIMAL.md`, `doc/TODO.txt` and the other files in `doc/` come from the original ULX3S project and describe that board, not this one.

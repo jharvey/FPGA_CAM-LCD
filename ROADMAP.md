@@ -1031,3 +1031,41 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - The simulator's demo loop no longer presses B1 by itself (it would walk through the pages). The tour video `doc/fw/fcl_sim_tour.mp4` predates the pages: in it B1 only changes a mode number.
 - **Open:** nothing on hardware; the full design is built but not simulated as a whole; soft iron not corrected; the phone page has no password; SD card use by the ESP32 while the FPGA runs is untested; the Height page's accuracy on a real unit is unknown.
 - **Found while building the full design: the camera design's SDRAM clock does not meet timing by nextpnr's estimate.** The Icestudio pin file carries no clock frequencies, so every earlier build was checked against nextpnr's 12 MHz default and passed. `fpga/build.py` and `fpga/full/build_full.py` now give the 25 MHz board clock and the camera pixel clock; nextpnr derives 142.9 MHz for the SDRAM PLL and reports about 70 MHz possible on its slowest path (FIFO pointers to the SDRAM controller: 2 ns logic, 12 ns routing), in the full design and in the camera design alone. The 25 MHz domain (bridge) and the 18 MHz pixel clock (overlay) pass. Not changed here: it is in the camera project. To settle on the first board (wrong pixels in the picture would be the sign); the fixes to try are a lower SDRAM clock with the controller's wait counts adjusted, or placement constraints.
+
+### 2026-11-27 – Checks before hardware, a graphics layer, survey, updates over Wi-Fi, lessons
+
+Three checks that could be made without a board, and what they found:
+
+- **The ESP32 files under real MicroPython** (Unix port 1.24.1, built on the Linux VM; `firmware/sim/test_mpy.py`).
+  A 40 s session gives the same 750 lines as under ordinary Python, and the real main loop `fcl_usbdev.run()` runs
+  with stand-ins for pins, I2S, UART and Wi-Fi. Found and fixed: the bridge driver deleted slices of a bytearray,
+  which MicroPython cannot do (it would have stopped at the first frame from the FPGA); a number above 2^30 in the
+  attitude filter's viper code (not a native integer on a 32-bit MicroPython); a log file that could not be opened
+  stopped the main loop. Not covered: the Unix port is 64-bit; the ESP32's own modules and memory.
+- **The whole FPGA design in one simulation** (`fpga/full/test_full.py`: camera model, SDRAM model, a script as the
+  ESP32; every pixel to the panel compared). Found: the pixel clock was 7.00 MHz, not 18 (a phase accumulator
+  stepping by more than half its range). The run on the final sources is reported in `fpga/prebuilt/` when stored.
+- **Timing with the clock frequencies given to the tool.** The memory clock failed at 142.857 MHz (70 MHz possible).
+  Cause: three FIFO memories could not become block RAM as written and were built from about 1500 LUT memories.
+
+Changes inside the camera project that follow from these (`fpga/IO_REMAP.md`, section Clocks): FIFO memories read
+through a register (22649 -> about 8400 logic cells); memory clock 100 MHz with the camera byte registered alongside
+PCLK and the refresh count adjusted; pixel clock from a PLL, 17.857 MHz. All three clocks now pass in nextpnr, the
+memory clock by 3 %.
+
+New:
+
+- **Graphics** drawn by the FPGA under the text: reticle, horizon line, compass tape (`fcl_osd.v`, bridge command
+  0x29; `hud` command, menu item, per page). Checked pixel for pixel against the Python model.
+- **Survey page**: points from heading, pitch and distance; sides, area; `firmware/tools/fcl_survey.py` draws the plan.
+- **Phone page**: PIN for protected actions (set on USB: `webpin`), files up with a checksum and down in pieces,
+  height chart, graphics preview, log list. **Updates over Wi-Fi**: `firmware/tools/fcl_update.py`.
+- **`firmware/tools/fcl.py`**: the unit from a Python script; a stepped simulator for scripts and tests.
+- **Documents**: `doc/QUICK_START.md` (and .pdf), `doc/TROUBLESHOOTING.md`, `doc/BRINGUP.pdf`, `doc/lessons/` (six
+  lessons with scripts), updates to the manual and the developer guide. `index.md` and `_config.yml` at the top are
+  for GitHub Pages (to switch on: repository Settings, Pages, branch `master`, folder `/`).
+- Tests added: `test_mpy.py`, `test_tools.py` (15), `test_lessons.py` (6), `test_full.py`; `test_web.py` now 22
+  checks, `test_osd.py` 14 frames.
+- **Open:** nothing on hardware. The memory clock's 3 % margin and the SDRAM's pin timing are to be watched on the
+  first board. The three changed blocks of the camera project should be looked at in Icestudio by its author. The
+  viper code has only run as 64-bit code. A 32-bit MicroPython build on the VM would need `gcc-multilib`.

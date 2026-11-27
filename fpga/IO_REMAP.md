@@ -14,7 +14,8 @@ Every port of `CameraToTFTSobel_FCL.ice` was checked against the net on its ball
 - `main_FCL.lpf` regenerated; `python fpga/build.py` builds the bitstream (24 % of the LUTs). **Correction, 2026-11-27:**
   "timing met" was wrong. The pin file had no clock frequencies, so nextpnr checked against 12 MHz. With the
   frequencies given (`build.py` now adds them), the SDRAM clock (142.9 MHz) is estimated at about 70 MHz for its
-  slowest path; the 25 MHz and 18 MHz clocks pass. See `fpga/prebuilt/MANIFEST.md`.
+  slowest path; the 25 MHz and 18 MHz clocks pass. See `fpga/prebuilt/MANIFEST.md`. **Later the same day** the
+  project was changed so that all clocks pass: section Clocks at the end of this file.
 
 Camera (J1, through-hole, front layer): the 16 camera signals sit on U1's two outer ball rows (A/B) of the bottom-left edge in J1 column order, so every camera trace routes on the top layer without vias; the camera pixel clock is on the dedicated clock input **PCLKT1_0 (B12)** (one via). LCD (J7, back side): outer three rows of the bottom-right corner in J7 pin order, one dogbone via each, then a back-layer ribbon. Only pin locations changed; the Verilog is untouched. All new balls are general I/O in the 3.3 V banks 0/1/7.
 
@@ -169,3 +170,31 @@ The project now targets its own Icestudio board, **FCL**, defined in `fpga/icest
 - **Icestudio window:** run `fpga\icestudio\install_board.ps1` once from an administrator PowerShell, restart Icestudio and pick Select > Board > FCL. Without that step Icestudio does not know the FCL board and will offer to convert the project to another board: decline, because converting resets the pins.
 - Pin names: B12 is now `gp17` and B13 `gp16`, matching the board nets (the balls did not change).
 - `main_FCL.lpf` is kept as a reference copy; the build regenerates its own pin file.
+
+## Clocks (2026-11-27): three changes inside the camera project
+
+Made in `CameraToTFTSobel_FCL.ice` (its code blocks; no wires or pins changed), found and checked with the
+whole-design simulation `fpga/full/test_full.py`. Each is a few lines in one block and can be undone there; the
+block comments in the project say the same as this section.
+
+| | Before | After | Why |
+|---|---|---|---|
+| Pixel clock | a 32-bit phase accumulator on 25 MHz, step 18/25 of its range | a PLL (`EHXPLLL`), 25 x 5 / 7 = **17.857 MHz** | A step above half the range aliases: the top bit toggled at 25 x (1 - 18/25) = **7.00 MHz** with uneven pulses (measured in simulation). The panel would have run at 21.6 pictures per second and every wait counted in pixel clocks would have been 2.6 times too long. 18.000 MHz cannot be made from 25 MHz within the PLL's limits. |
+| FIFO memories (4 blocks `dual_port_ram`: 1024 x 17, 2048 x 17, 2048 x 16, 2048 x 9) | address registered, memory read without a clock | data registered: `dout_q <= ram[addr_b]`, with `ram_style = "block"` | With different read and write clocks Yosys cannot make block RAM of the old form and built three of them from LUTs: about 1500 LUT memories and their read multiplexers, spread over the chip. The design went from 22649 logic cells to about 8400, and the memory clock's slowest path from 14.4 ns to 9.6 ns. In a FIFO the two forms give the same data: a word is not read until "empty" has passed two synchronising flip-flops. The fourth (one clock for both sides) also carries `no_rw_check`. The six line buffers of the edge filter are unchanged. |
+| Memory clock (SDRAM, capture, FIFOs, edge filter) | PLL 25 x 40 / 7 = 142.857 MHz | PLL 25 x 4 = **100 MHz** | After the FIFO change nextpnr estimates 104 MHz possible; 142.857 could not be met without rewriting the handshake between the SDRAM controller and the FIFOs. Two things were changed with it: the camera's data byte is now registered together with PCLK (`db_1`), because the old capture read the byte up to two clocks after the PCLK edge, 14 ns at 142.857 MHz but 20 ns at 100 MHz, where the camera changes it; and the SDRAM refresh count is 750 clocks instead of 1070 (7.5 us in both cases). |
+
+Result (nextpnr, the full design): memory clock 103 MHz possible at 100 MHz, pixel clock 73 at 17.86, board clock 57
+at 25. All pass; the memory clock by 3 %.
+
+Things that follow from the 100 MHz clock and were left as they are:
+- the camera set-up bus now really runs at 100 kHz (its divider was written for 100 MHz; at 142.857 it ran at 143 kHz);
+- the waits written as `delay_q[26]` are 0.67 s as their comments say (0.47 s before), `delay_q[16]` 0.66 ms;
+- the SDRAM's start-up wait of 30000 clocks is 300 us (200 us needed);
+- the SDRAM's timing counts (precharge, refresh, CAS latency 3) are in clocks and only become more generous.
+
+Not checked by any tool here: the SDRAM's own set-up and hold times at the pins. Its clock is the memory clock
+inverted (an `ODDRX1F`), as before. If the first board shows wrong pixels, that phase is the thing to move.
+
+Also noticed, not changed: the camera register list (`v15a1ce.list`) is written as `16'h12_80;` with comments.
+Yosys skips what is not a hex digit, reads `16_12_80`, and the design uses the low 16 bits, so it works; Icarus
+Verilog refuses the file. Plain `1280` lines would be read the same by every tool.

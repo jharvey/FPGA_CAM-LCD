@@ -1,0 +1,12 @@
+# GitHub Pages: switch it on in the repository's Settings, Pages, branch master, folder / (root)
+title: FCL monocular
+description: A hand-held FPGA monocular with a round TFT, sensors and a phone page. Hardware, FPGA, firmware, documents.
+theme: jekyll-theme-minimal
+markdown: kramdown
+exclude:
+  - production
+  - case
+  - docs
+  - fpga/prebuilt
+  - "*.kicad_pcb"
+  - "*.kicad_sch"

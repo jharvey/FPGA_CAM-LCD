@@ -492,6 +492,11 @@ class Sim:
             self.name = "MicroPython hub over the FPGA bridge"
             self.sensors_found = self.hubpy.start()
             if user:                                                # a module with setup(apps), as fcl_user.py on the unit
+                if user.endswith(".py"):                            # given as a file: my_page.py, or a path to it
+                    sys.path.insert(0, os.path.dirname(os.path.abspath(user)))
+                    user = os.path.basename(user)[:-3]
+                elif os.getcwd() not in sys.path:
+                    sys.path.append(os.getcwd())                    # a module in the folder you are in
                 __import__(user).setup(self.hubpy.apps)
         else:
             exe = find_live() if backend == "c" else None
@@ -629,6 +634,6 @@ if __name__ == "__main__":
     ap.add_argument("--hub", choices=("auto", "bridge", "c", "python"), default="auto",
                     help="auto / bridge: MicroPython hub over the FPGA bridge; c: the C hub (needs fcl_sim_live); python: its stand-in")
     ap.add_argument("--web", type=int, default=0, metavar="PORT", help="serve the unit's web page on this port")
-    ap.add_argument("--user", metavar="MODULE", help="load your own pages: a module with setup(apps), e.g. fcl_user_example")
+    ap.add_argument("--user", metavar="MODULE", help="load your own pages: a file or module with setup(apps), e.g. my_page.py or fcl_user_example")
     a = ap.parse_args()
     serve(a.port, a.hub, a.web, a.user)

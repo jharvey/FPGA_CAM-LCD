@@ -53,6 +53,13 @@ module fcl_top_tb;
     ov7670_model cam (.xclk(cmos_xclk), .pclk(cmos_pclk), .href(cmos_href), .vsync(cmos_vsync), .db(cmos_db),
                       .scl(cmos_scl), .sda(cmos_sda));
 
+    // The camera design's two bidirectional pins (camera SDA, SDRAM data) reach its ports through one-way "assign"
+    // statements in the generated Verilog.  Synthesis merges those into one net; a simulator does not, so what the
+    // models drive at the ports would never arrive inside.  The models therefore also drive the nets at the pin
+    // buffers themselves.  (The instance names are Icestudio's; they change only if those blocks are replaced.)
+    assign dut.cam.m.v50aef8.vbdbe11.vf775c2.s_dq = ram.dq_oe ? ram.dq_o : 16'hzzzz;
+    assign (pull0, highz1) dut.cam.m.vc07f95.v385830.vb70907.sda = cam.ack ? 1'b0 : 1'bz;
+
     // ---------------------------------------------------------------- one I2C device for the bridge: 0x68, 8-bit registers
     reg [7:0]  mem8 [0:255];
     integer    i;

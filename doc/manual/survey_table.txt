@@ -1,0 +1,7 @@
+  n  heading  pitch   dist      x east  y north    z up   side to next
+     deg      deg     m         m       m          m      m
+  1    51.4   -32.0   2.265     1.500    1.199   -1.200   2.399
+  2   128.7   -32.0   2.265     1.500   -1.200   -1.200   2.998
+  3   231.2   -32.0   2.265    -1.498   -1.202   -1.200   2.379
+  4   307.8   -32.0   2.265    -1.518    1.177   -1.200   3.019
+area on the ground 7.19 m2, around 10.79 m, heights -1.20 to -1.20 m from the unit

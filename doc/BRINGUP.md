@@ -211,8 +211,10 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 | 4.4 | Backlight boost | `LCD_BL_A` at D1 cathode; `LCD_BL_K` probe via or R19 | A: several volts above VSYS (record); K: about 0.2 V (100 mA x 2 Ω) | |
 | 4.5 | Backlight current | USB-C meter, before / after 4.1 | rises by roughly 100 mA x V_LED / VSYS / 0.85 | |
 | 4.6 | Panel lights | look at the TFT | backlight on, then picture (the panel is initialised over SPI by the design) | |
-| 4.7 | Camera clock | J1 pin 8 (`XCLK_J`, after R15) | clock present (record frequency) | |
-| 4.8 | Camera picture | | live image on the TFT | |
+| 4.6a | Pixel clock | scope on the `pix_clk_out` via (ball C13), full design only | 17.86 MHz, even pulses; the panel's frame rate is then 55.1 Hz (`LCD_VS`) | |
+| 4.7 | Camera clock | J1 pin 8 (`XCLK_J`, after R15) | 25 MHz | |
+| 4.7a | SDRAM clock | scope on the SDRAM's CLK pin | 100 MHz | |
+| 4.8 | Camera picture | look closely at flat areas and edges | live image on the TFT, no sparkle, no shifted columns (wrong pixels: `doc/TROUBLESHOOTING.md`, The picture) | |
 | 4.9 | B1 | press | toggles raw camera / Sobel edge view | |
 | 4.10 | B2 | press several times in edge view | edge sensitivity steps, wraps after about 50 presses | |
 | 4.11 | B0 short press | press briefly while on | video design restarts (B0 is its reset; also reloads the FPGA via PROGRAMN) | |
@@ -281,20 +283,25 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 | 9.2 | Readings | dashboard | cells within 2 % of a multimeter, temperatures near the room's, pressure plausible, distance follows your hand | |
 | 9.3 | Buttons | press B1, B2, B0 briefly | `$B` lines; BUTTONS panel lights | |
 | 9.4 | Full design | FTP `put fcl_full.bit` (`fpga/prebuilt/full/`, or `python fpga/full/build_full.py`) | camera picture as in stage 4, with the heading, attitude, distance, height and battery rows and the down dot over it | |
-| 9.5 | Pages and menu | B1: Level, Height, Bearing; hold B1: menu; `View` in the menu | pages change; the menu's View switches camera / edges (if it shows the opposite of its label, the FPGA and the ESP32 disagree about the view: select it once more after an FPGA reload) | |
+| 9.4a | Graphics | `hud all` on the USB port; tilt and roll the unit, turn it | a cross at the centre, a line that stays on the real horizon, ticks at the top that slide as you turn; `hud off` removes them | |
+| 9.5 | Pages and menu | B1: Level, Height, Bearing, Survey; hold B1: menu; `View` in the menu | pages change; the menu's View switches camera / edges (if it shows the opposite of its label, the FPGA and the ESP32 disagree about the view: select it once more after an FPGA reload) | |
 | 9.6 | Calibration | `python firmware/tools/fcl_calibrate.py --port <port>` (`doc/USER_MANUAL.md`) | every step ok; note the values it stores. A FAIL in the axes step means a sign in `firmware/esp32/fcl_fix.py` / `fcl_hubpy.py` is wrong for the real sensor orientation | |
 | 9.7 | Phone page | `wifi <name> <password>` on the USB port, then open the address from the `$W` line | the page of `doc/USER_MANUAL.md`, live | |
+| 9.8 | PIN and update | `webpin 1234`; `python firmware/tools/fcl_update.py <address> --pin 1234 --dry`, then without `--dry` | the dry run lists nothing or the changed files; the real run sends them and the unit restarts and streams again within about 10 s | |
+| 9.9 | Bitstream over Wi-Fi | `... --bit fpga/prebuilt/full/fcl_full.bit` (add `--flash` only when 9.4 is good) | the picture comes back after the load. **Watch the ESP32's free memory** (`import gc; gc.mem_free()` at the prompt before and after): a 440 kB upload next to the running stream has only been tried on a PC | |
+| 9.10 | Survey | page Survey in a room, four corners | area within about 5 % of a tape measurement | |
 
 ## What is ready to test with, today (2026-11-27)
 
 | Stage | Firmware / file | State |
 |---|---|---|
 | 0-2 | none | ready |
-| 3 | MicroPython + `firmware/esp32/` (esp32ecp5 + FCL pins) | ready, not yet run on hardware |
-| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds; its SDRAM clock (142.9 MHz) does not meet timing by nextpnr's estimate (about 70 MHz), so watch for wrong pixels in the camera picture; not run on hardware |
+| 3 | MicroPython + `firmware/esp32/` (esp32ecp5 + FCL pins) | ready; the FCL files run under MicroPython 1.24 on a PC (`test_mpy.py`), not yet on an ESP32 |
+| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds and meets timing on all clocks (memory clock 100 MHz with a 3 % margin; `fpga/IO_REMAP.md`, Clocks); a camera picture reaches the panel pins pixel for pixel in simulation; not run on hardware |
 | 6 | external I2C adapter | ready |
 | 7 | none (meters) | ready; the ADC readings are stage 9.2 |
 | 8 | MicroPython I2S snippets; `fcl_bridge.bit` for servos and power-off | ready, not yet run on hardware |
-| 9 | `fpga/prebuilt/bridge/fcl_bridge.bit`, `fpga/prebuilt/full/fcl_full.bit`, `firmware/esp32/` (hub, pages, phone page), `firmware/tools/fcl_calibrate.py` | built and tested in simulation only; the MicroPython files have never run on an ESP32 |
+| 9 | `fpga/prebuilt/bridge/fcl_bridge.bit`, `fpga/prebuilt/full/fcl_full.bit`, `firmware/esp32/` (hub, pages, graphics, phone page), `firmware/tools/` (calibration, survey, update) | built and tested in simulation only; the MicroPython files have never run on an ESP32 |
 
-Record anything unexpected in `ROADMAP.md` with the board number and the step.
+Record anything unexpected in `ROADMAP.md` with the board number and the step. A printable copy of this checklist:
+`doc/BRINGUP.pdf` (`python firmware/tools/make_pdf.py`). What to look at by symptom: `doc/TROUBLESHOOTING.md`.

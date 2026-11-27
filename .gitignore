@@ -83,3 +83,5 @@ doc/manual/_profile/
 fpga/full/sim/
 firmware/sim/unit_files/
 mpy_fs_*/
+doc/_*.html
+doc/_pdf_profile/

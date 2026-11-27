@@ -17,7 +17,14 @@ What is checked
 What is changed for the simulation (in a copy, main_sim.v; nothing else is touched)
     the camera design's start-up waits (0.5 s before and after the camera set-up, the panel's reset and sleep-out
     waits, 120 test-pattern frames -> 2) are shortened, as they would take hours to simulate; fcl_top's 42 ms
-    power-on reset is 10 us (its POR_BITS parameter).
+    power-on reset is 10 us (its POR_BITS parameter).  The camera's register list is rewritten as plain
+    hexadecimal numbers: the project writes it as 16'h12_80; with comments, which Yosys reads (it skips what is
+    not a hex digit, so that entry becomes 16_12_80 and the design uses the low 16 bits) and Icarus Verilog does not.
+    Two outputs are written as one expression each instead of being set inside a larger always @* block: the
+    camera bus's "ack" and the SDRAM controller's "ready".  Same values at every clock; but as written, each of
+    those blocks first clears the signal and then sets it, the block that reads it answers with a signal the first
+    block reads, and an event-driven simulator goes round that for ever at one instant.  Hardware has no such loop.
+    The test bench also drives the two bidirectional pins at their buffers (see fcl_top_tb.v).
 What it cannot show: timing (the models have no delays), the real camera, panel and SDRAM, and the clock speeds
 the FPGA can reach.
 """
@@ -49,6 +56,8 @@ SPEEDUPS = (        # (text in main.v, replacement, how often it must occur, wha
     ("RESET_WAIT_TICKS = 24'd360000;", "RESET_WAIT_TICKS = 24'd360;", 1, "panel reset wait, 1/1000"),
     ("DELAY_120MS      = 24'd2160000;", "DELAY_120MS      = 24'd2160;", 1, "panel sleep-out wait, 1/1000"),
     ("DELAY_10MS       = 24'd180000;", "DELAY_10MS       = 24'd180;", 1, "panel 10 ms waits, 1/1000"),
+    ("assign ack_q=ack;", "assign ack_q=(state_q==ack_servant && scl_hi)? {1'b1,!sda_in}:2'b00;", 1, "ack as one expression"),
+    ("assign ready_q=ready;", "assign ready_q=(state_q==idle) && !rw_en_q;", 1, "ready as one expression"),
 )
 PALETTE = (0xF800, 0x07E0, 0x001F, 0xFFFF, 0x0000, 0xFFE0, 0xF81F, 0x07FF, 0x8410, 0x4208, 0xA145, 0x39C7, 0x5ACB, 0xC618,
            0x2D7F, 0xD2A6)                                  # as in sim_models.v
@@ -153,6 +162,9 @@ def main():
             raise SystemExit("main.v has changed: '%s' occurs %d times, expected %d" % (a, v.count(a), n))
         v = v.replace(a, b)
     open(os.path.join(build, "main_sim.v"), "w", encoding="utf-8", newline="\n").write(v)
+    listed = re.findall(r"16'h([0-9a-fA-F]{2})_([0-9a-fA-F]{2})", open(os.path.join(build, "v15a1ce.list")).read())
+    want = [(int(a, 16), int(b, 16)) for a, b in listed][:78]
+    open(os.path.join(build, "v15a1ce.list"), "w", newline="\n").write("".join("16%s%s\n" % ab for ab in listed))      # as Yosys reads it
     stim, grid = stimulus(end_ms * 1000)
     open(os.path.join(build, "tb_stim.txt"), "w", newline="\n").write("\n".join(stim) + "\n")
     src = [os.path.join(HERE, "fcl_top_tb.v"), os.path.join(HERE, "sim_models.v"), "main_sim.v", "fcl_cam.v",
@@ -182,8 +194,6 @@ def main():
     print("pictures: %d, one every %.1f ms (%.1f per second)" % (len(frames), frames[-1]["period"] / 1000.0 if frames else 0, rate))
 
     # ---- camera set-up
-    want = [(int(a, 16), int(b, 16)) for a, b in re.findall(r"16'h([0-9a-fA-F]{2})_([0-9a-fA-F]{2})",
-                                                              open(os.path.join(build, "v15a1ce.list")).read())][:78]
     got = [tuple(int(x, 16) for x in line.split()) for line in open(os.path.join(build, "tb_sccb.txt")) if line.strip()]
     check(got == want and len(got) == 78, "camera set-up: %d register writes reach the camera model, equal to the project's list" % len(got))
 
