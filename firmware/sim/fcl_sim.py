@@ -16,6 +16,7 @@ Extra commands (simulator only):
     sim set <heading|pitch|roll|alt|dist|cell1|cell2|cell3|temp1|temp2|temp3> <value>     hold a value
     sim auto                                          back to the demo loop
     sim press <PWR|B1|B2> [ms]                        press a button (default 300 ms)
+    sim hardiron <x> <y> <z>                          add a constant field to the compass, in counts (1.5 mG each)
 """
 import math
 import os
@@ -280,6 +281,9 @@ class SimPlat:
         if a[0] == "set" and a[1] in KEYS:
             sc.hold[a[1]] = float(a[2])
             return "sim set %s %s" % (a[1], a[2])
+        if a[0] == "hardiron" and getattr(self.sim, "bridge_mode", False):
+            self.sim.world.hardiron = [float(a[1]), float(a[2]), float(a[3])]
+            return "sim hardiron %s %s %s" % (a[1], a[2], a[3])
         if a[0] == "press" and a[1].upper() in fcl_usb.BUTTONS:
             ms = int(a[2]) if len(a) > 2 else 300
             sc.press[fcl_usb.BUTTONS.index(a[1].upper())] = self.sim.t + ms / 1000.0
@@ -293,6 +297,19 @@ def find_live():
         if os.path.isfile(p):
             return p
     return None
+
+
+class MemStore:
+    """where the simulated unit keeps its compass calibration (the ESP32 uses a file)"""
+
+    def __init__(self):
+        self.d = None
+
+    def load(self):
+        return self.d
+
+    def save(self, d):
+        self.d = dict(d)
 
 
 class SensorWorld:
@@ -309,6 +326,7 @@ class SensorWorld:
         self.gyro = (0.0, 0.0, 0.0)
         self.tof_clear = -1.0
         self.hist = [0, 0]
+        self.hardiron = [0.0, 0.0, 0.0]     # counts added to the compass: `sim hardiron x y z`
 
     def now(self, t):
         if t > self.t:
@@ -358,7 +376,7 @@ class SensorWorld:
             if reg == 0x68 and rlen:
                 R = self.rot(s)
                 m = [R[0][i] * 0.20 + R[2][i] * -0.43 + self.n(0.002) for i in range(3)]       # 0.2 G north, 0.43 G down
-                return struct.pack("<3H", *[self._s16(x / 0.0015) for x in m])[:rlen], 0
+                return struct.pack("<3H", *[self._s16(m[i] / 0.0015 + self.hardiron[i]) for i in range(3)])[:rlen], 0
             return bytes(rlen), 0
         if addr == 0x5C:
             if reg == 0x0F:
@@ -402,7 +420,7 @@ class Sim:
     """backend 'bridge' (default): sensor models -> FPGA bridge model -> the ESP32's MicroPython hub (fcl_bridge.py,
     fcl_fix.py, fcl_hubpy.py) -> fcl_usb.py.   'c' / 'python': the earlier C hub or its stand-in over the hub link."""
 
-    def __init__(self, backend="auto"):
+    def __init__(self, backend="auto", store=None):
         self.scenario = Scenario()
         self.t = 0.0
         self.lines = []
@@ -418,10 +436,11 @@ class Sim:
             self.model = bridge_model.BridgeModel(self.world)
             self.pending = bytearray()
             self.br = fcl_bridge.Bridge(self.model.feed, self._take)
-            self.hubpy = fcl_hubpy.Hub(self.br)
+            self.hubpy = fcl_hubpy.Hub(self.br, store=store if store is not None else MemStore())
             self.bridge = fcl_usb.Bridge(self.hubpy, self.lines.append, self.plat)
             self.hubpy.on_telemetry = self.bridge.on_telemetry
             self.hubpy.on_event = self.bridge.on_event
+            self.hubpy.on_info = self.lines.append
             self.hub = self                                         # for .name
             self.name = "MicroPython hub over the FPGA bridge"
             self.sensors_found = self.hubpy.start()

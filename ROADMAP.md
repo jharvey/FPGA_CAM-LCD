@@ -1012,3 +1012,9 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
 - **Filter:** complementary filter on an up vector and a north vector in 32-bit integers. Simulator, with sensor noise and 0.5 deg/s gyro bias: heading within 0.3 deg and pitch / roll within 0.1 deg while turning 18 deg/s and tilting; under 0.3 deg drift in two minutes still.
 - **Tests:** `fpga/bridge/test_bridge.py` (Verilog against the Python model, 26 checks), `firmware/sim/test_filter.py` (8), `firmware/sim/test_usb.py` (20 on the bridge path).
 - **Open:** viper has not compiled `fcl_fix.py` yet (no MicroPython here) and its speed on the ESP32-S3 is unmeasured; the bridge and overlay are not merged into the camera design (D6 / B2 / C2 are shared with it); ST's VL53L1X configuration block is still missing.
+
+### 2026-11-27 – Compass calibration, automatic and manual
+- `firmware/esp32/fcl_magcal.py`: hard-iron offset by a sphere fit on readings kept 45 counts apart (10 per second looked at, 60 kept). Automatic by default: a fit is accepted when the field strength is 0.18-0.72 G, the fit error is under 8 % and the readings span 180 counts; directions the readings do not cover keep the present offset (regularised fit, repeated 4 times). Manual: `magcal start`, finishes when up, down and the four sides have been seen. Stored in `magcal.json`; applied inside the viper `mag_step`.
+- Simulator (`sim hardiron`): heading wrong by up to 115 deg with a 225 / -150 / 120 mG field; within 2 deg after a minute of the demo loop or two level turns; manual offset within 1 count. `firmware/sim/test_magcal.py`, 11 checks.
+- **Open:** soft iron is not corrected; behaviour next to the three cells in the real case is unknown; the fit runs in floats about once a second while readings come in (cost on the ESP32 unmeasured).
+- Standing instruction from 2026-11-27: finished, tested work is committed and pushed to GitHub without asking.

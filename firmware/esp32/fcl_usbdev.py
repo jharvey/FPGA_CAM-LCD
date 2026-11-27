@@ -37,6 +37,20 @@ def _s32_to_s16(src, dst, n: int):
         i += 1
 
 
+class CalStore:
+    """compass calibration in a file on the ESP32's flash"""
+
+    def load(self):
+        import json
+        with open("magcal.json") as f:
+            return json.load(f)
+
+    def save(self, d):
+        import json
+        with open("magcal.json", "w") as f:
+            json.dump(d, f)
+
+
 class Plat:
     def __init__(self):
         self.sta = network.WLAN(network.STA_IF)
@@ -140,10 +154,11 @@ def run():
         return uart.read() if uart.any() else b""
 
     br = fcl_bridge.Bridge(uart.write, rd, time.sleep_ms)
-    hub = fcl_hubpy.Hub(br)
+    hub = fcl_hubpy.Hub(br, store=CalStore())
     bridge = fcl_usb.Bridge(hub, lambda s: out.write(s + "\r\n"), plat)
     hub.on_telemetry = bridge.on_telemetry
     hub.on_event = bridge.on_event
+    hub.on_info = bridge.out
     poll = select.poll()
     poll.register(sys.stdin, select.POLLIN)
     micropython.kbd_intr(-1)

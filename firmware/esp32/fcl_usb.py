@@ -8,6 +8,8 @@
 #   $S,<us1>,...,<us6>     servo pulse widths last commanded over USB (0 = off / not set)
 #   $W,<state>,<ssid>,<ip>,<rssi>     Wi-Fi: off | connecting | connected | failed
 #   $A,<seq>,<rate>,<base64>          microphone audio, 16-bit little-endian mono PCM
+#   $M,<state>,<x>,<y>,<z>,<field>,<error %>,<readings>,<directions>,<auto|fixed>     compass calibration:
+#                          state none | auto | manual | manual-running | stored; offset and field in milligauss
 #   $R,ok|err,<text>       reply to a command
 #   $I,<text>              information (help text, scan results, version)
 #
@@ -33,6 +35,9 @@ HELP = (
     "mode <0-3>                display mode (same as B1)",
     "overlay <items>|<mask>    LCD overlay: dot heading attitude baro dist batt | all | none | number",
     "zero                      make the present height 0",
+    "magcal                    compass calibration status ($M line)",
+    "magcal start | stop       calibrate by hand: point the unit up, down and to the four sides",
+    "magcal auto on|off        keep refining the calibration in use (default on);  magcal reset",
     "wifi <ssid> <password>    save the network and connect;  wifi status | scan | off",
     "mic on|off [rate]         microphone to $A lines (8000 or 16000 Hz)",
     "spk <rate> <base64>       play 16-bit mono PCM on the speaker;  spk off",
@@ -200,6 +205,11 @@ class Bridge:
         elif c == "zero":
             hub.zero_alt()
             self._ok("zero")
+        elif c == "magcal":
+            f = getattr(hub, "magcal", None)
+            if f is None:
+                return self._err("magcal not available with this hub")
+            self._ok(f(a))
         elif c == "wifi":
             if not a or a[0] == "status":
                 self.wifi_line()

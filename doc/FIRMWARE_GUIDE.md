@@ -92,6 +92,7 @@ $B,B1,0
 | `$S,<us1>..<us6>` | servo pulse widths last commanded over USB, 0 = off |
 | `$W,<state>,<ssid>,<ip>,<rssi>` | Wi-Fi: off, connecting, connected, failed; sent every 5 s and on change |
 | `$A,<seq>,<rate>,<base64>` | microphone audio: 16-bit little-endian mono PCM, 50 ms per line in the simulator |
+| `$M,<state>,<x>,<y>,<z>,<field>,<error %>,<readings>,<directions>,<auto/fixed>` | compass calibration: state none, auto, manual, manual-running or stored; offset and field strength in milligauss |
 | `$R,ok/err,<text>` | reply to a command |
 | `$I,<text>` | information: version, help, scan results |
 
@@ -136,6 +137,9 @@ $B,B1,0
 | `mode <0-3>` | display mode (same as B1) |
 | `overlay <items>|<mask>` | LCD overlay: dot heading attitude baro dist batt | all | none | number |
 | `zero` | make the present height 0 |
+| `magcal` | compass calibration status ($M line) |
+| `magcal start | stop` | calibrate by hand: point the unit up, down and to the four sides |
+| `magcal auto on|off` | keep refining the calibration in use (default on);  magcal reset |
 | `wifi <ssid> <password>` | save the network and connect;  wifi status | scan | off |
 | `mic on|off [rate]` | microphone to $A lines (8000 or 16000 Hz) |
 | `spk <rate> <base64>` | play 16-bit mono PCM on the speaker;  spk off |
@@ -147,6 +151,18 @@ $B,B1,0
 **Audio over USB.** Sound travels inside the serial stream as base64 text (`$A` lines out, `spk` lines in). The unit is not a USB sound card: MicroPython on the ESP32 has no USB audio class. The microphone and the speaker amplifier share their clock pins, so one runs at a time.
 
 **Wi-Fi over USB.** `wifi <ssid> <password>` writes the network into `wifiman.conf` (the file esp32ecp5 already uses) and connects; the `$W` line shows the address for FTP and bitstream upload.
+
+## Compass calibration
+
+The batteries, the speaker magnet and steel screws add a constant field to the compass ("hard iron"). Uncorrected, that can turn the heading by tens of degrees. The unit finds and removes it:
+
+- **Automatic (default).** It collects compass readings whenever it is used and fits a sphere to them. A level pan of a quarter turn or more is enough to correct the heading for level use; the more ways the unit gets pointed (up, down, tilted), the more complete the correction. A fit is used only when the readings lie on a sphere of a believable field strength, and it is refined as more readings come in.
+- **Manual.** `magcal start`, then point the unit up, down, north, south, east and west in any order. It reports progress once a second and finishes by itself when it has seen all six, or on `magcal stop`.
+- The result is stored on the ESP32 (`magcal.json`) and used from the next start. `magcal auto off` freezes it, `magcal reset` clears it, `magcal` shows it (the `$M` line and the Compass line of the dashboard).
+
+In the simulator, with an added field half as strong as the earth's (heading up to 115 degrees wrong), automatic calibration brings the heading within 2 degrees after a minute of the demo loop or two level turns, and manual calibration finds the offset within 1 count. `sim hardiron <x> <y> <z>` adds such a field in the simulator.
+
+Not corrected: "soft iron" (the field bent rather than shifted, which leaves an error that changes with direction), and fields that change with time, such as a servo motor running next to the sensor. How well the automatic fit works inside the real case, next to three 18650 cells, has to be tried on the first unit.
 
 ## How the pieces fit
 
@@ -187,6 +203,7 @@ In the simulator the left column is replaced by sensor models and the FPGA by a 
 |---|---|---|
 | `test_usb.py` | the USB stream end to end on the bridge path: every command, buttons, Wi-Fi, audio, overlay (20 checks; also run on the C hub paths) | `python firmware/sim/test_usb.py` |
 | `test_filter.py` | the integer filter: accuracy while turning and tilting, straight down, two minutes still, gyro bias, no overflow (8 checks) | `python firmware/sim/test_filter.py` |
+| `test_magcal.py` | compass calibration with an added hard-iron field: automatic in the demo loop and in a level pan, manual, storing and reloading, no false correction (11 checks) | `python firmware/sim/test_magcal.py` |
 | `test_bridge.py` | `fcl_bridge.v` in Icarus Verilog against the Python model, frame by frame; servo pulses, outputs, overlay writes; logic size (26 checks) | `python fpga/bridge/test_bridge.py` |
 | `test_osd.py` | `fcl_osd.v` pixel for pixel against the Python overlay, 5 frames | `python fpga/osd/test_osd.py` |
 | `fcl_sim`, `test_link_py.py` | the earlier C hub against sensor models (21 + 6 checks) | `make -C firmware/sim test` (needs a C compiler) |

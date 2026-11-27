@@ -12,6 +12,7 @@ from array import array
 import fcl_fix
 import fcl_calc
 import fcl_bridge as fb
+import fcl_magcal
 
 A_IMU, A_MAG, A_BARO, A_TOF = 0x68, 0x1E, 0x5C, 0x29
 ADC_CFG = 1 << 13 | 7 << 10 | 1 << 6 | 1 << 3 | 1          # AD7689: unipolar to GND, internal 2.5 V reference  CHECK
@@ -26,10 +27,15 @@ FIELDS = ("t_ms", "heading", "pitch", "roll", "alt_m", "press_pa", "tof_mm", "ce
 
 
 class Hub:
-    def __init__(self, bridge, on_telemetry=None, on_event=None):
+    def __init__(self, bridge, on_telemetry=None, on_event=None, store=None):
         self.br = bridge
         self.on_telemetry, self.on_event = on_telemetry, on_event
+        self.on_info = None              # f(line): extra lines for the USB stream ($M compass calibration)
         self.st = fcl_fix.new_state()
+        self.cal = fcl_magcal.MagCal(store)
+        self._cal_apply()
+        self.n_mag = 0
+        self._cal_t = 0
         self.last = {}
         self.sensors = 0
         self.t24 = -1                    # time stamp of the previous IMU sample (24 bits of microseconds)
@@ -123,6 +129,39 @@ class Hub:
             self.servo_us = 0
             self.br.servo(0, 0)
 
+    # ---- compass calibration
+    def _cal_apply(self):
+        for i in range(3):
+            self.st[16 + i] = int(round(self.cal.off[i]))
+
+    def _cal_report(self):
+        if self.on_info:
+            self.on_info("$M," + self.cal.status())
+
+    def magcal(self, a):
+        """the USB command: magcal [start | stop | auto on|off | reset]; returns the reply text"""
+        cal = self.cal
+        c = a[0] if a else "status"
+        if c == "start":
+            cal.manual_start()
+            r = "magcal started: point the unit up, down, north, south, east and west"
+        elif c == "stop":
+            r = "magcal stored" if cal.manual_stop() else "magcal stopped: not enough directions, nothing changed"
+        elif c == "auto":
+            cal.auto = a[1] == "on"
+            cal.save()
+            r = "magcal auto " + ("on" if cal.auto else "off")
+        elif c == "reset":
+            cal.reset()
+            r = "magcal reset"
+        elif c == "status":
+            r = "magcal"
+        else:
+            raise ValueError
+        self._cal_apply()
+        self._cal_report()
+        return r
+
     def _event(self, code):
         if self.on_event:
             self.on_event(EVENTS[code])
@@ -143,6 +182,12 @@ class Hub:
                                                             # happen while the bridge is still handing out frames
         elif slot == 1:
             fcl_fix.mag_step(self.st, data)
+            self.n_mag += 1
+            if self.n_mag % 10 == 0:                        # calibration looks at 10 readings a second
+                x, y, z = data[0] | data[1] << 8, data[2] | data[3] << 8, data[4] | data[5] << 8
+                if self.cal.add(x - 65536 if x > 32767 else x, y - 65536 if y > 32767 else y, z - 65536 if z > 32767 else z):
+                    self._cal_apply()
+                    self._cal_report()
         elif slot == 2:
             raw = data[0] | data[1] << 8 | data[2] << 16
             if raw & 0x800000:
@@ -211,6 +256,9 @@ class Hub:
         if self.tele_due:
             self.tele_due = False
             self._telemetry()
+        if self.cal.manual and now_ms - self._cal_t >= 1000:     # progress once a second while calibrating by hand
+            self._cal_t = now_ms
+            self._cal_report()
         if self.pwr_t is not None and not self.power_off and now_ms - self.pwr_t >= 2000:
             self.power_off = True
             self._event(4)

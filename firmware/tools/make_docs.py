@@ -162,6 +162,7 @@ def main():
                  ("`$S,<us1>..<us6>`", "servo pulse widths last commanded over USB, 0 = off"),
                  ("`$W,<state>,<ssid>,<ip>,<rssi>`", "Wi-Fi: off, connecting, connected, failed; sent every 5 s and on change"),
                  ("`$A,<seq>,<rate>,<base64>`", "microphone audio: 16-bit little-endian mono PCM, 50 ms per line in the simulator"),
+                 ("`$M,<state>,<x>,<y>,<z>,<field>,<error %>,<readings>,<directions>,<auto/fixed>`", "compass calibration: state none, auto, manual, manual-running or stored; offset and field strength in milligauss"),
                  ("`$R,ok/err,<text>`", "reply to a command"), ("`$I,<text>`", "information: version, help, scan results")):
         w("| %s | %s |" % (a, b))
     w("")
@@ -193,6 +194,13 @@ def main():
       "speaker amplifier share their clock pins, so one runs at a time.\n")
     w("**Wi-Fi over USB.** `wifi <ssid> <password>` writes the network into `wifiman.conf` (the file esp32ecp5 already "
       "uses) and connects; the `$W` line shows the address for FTP and bitstream upload.\n")
+    w("## Compass calibration\n")
+    w("The batteries, the speaker magnet and steel screws add a constant field to the compass (\"hard iron\"). Uncorrected, that can turn the heading by tens of degrees. The unit finds and removes it:\n")
+    w("- **Automatic (default).** It collects compass readings whenever it is used and fits a sphere to them. A level pan of a quarter turn or more is enough to correct the heading for level use; the more ways the unit gets pointed (up, down, tilted), the more complete the correction. A fit is used only when the readings lie on a sphere of a believable field strength, and it is refined as more readings come in.")
+    w("- **Manual.** `magcal start`, then point the unit up, down, north, south, east and west in any order. It reports progress once a second and finishes by itself when it has seen all six, or on `magcal stop`.")
+    w("- The result is stored on the ESP32 (`magcal.json`) and used from the next start. `magcal auto off` freezes it, `magcal reset` clears it, `magcal` shows it (the `$M` line and the Compass line of the dashboard).\n")
+    w("In the simulator, with an added field half as strong as the earth's (heading up to 115 degrees wrong), automatic calibration brings the heading within 2 degrees after a minute of the demo loop or two level turns, and manual calibration finds the offset within 1 count. `sim hardiron <x> <y> <z>` adds such a field in the simulator.\n")
+    w("Not corrected: \"soft iron\" (the field bent rather than shifted, which leaves an error that changes with direction), and fields that change with time, such as a servo motor running next to the sensor. How well the automatic fit works inside the real case, next to three 18650 cells, has to be tried on the first unit.\n")
     w("## How the pieces fit\n")
     w("```\n"
       " wired to the FPGA                 FPGA (ECP5): no CPU                ESP32-S3 (MicroPython)            PC\n"
@@ -234,6 +242,7 @@ def main():
     w("| Test | Covers | Run |\n|---|---|---|")
     w("| `test_usb.py` | the USB stream end to end on the bridge path: every command, buttons, Wi-Fi, audio, overlay (20 checks; also run on the C hub paths) | `python firmware/sim/test_usb.py` |")
     w("| `test_filter.py` | the integer filter: accuracy while turning and tilting, straight down, two minutes still, gyro bias, no overflow (8 checks) | `python firmware/sim/test_filter.py` |")
+    w("| `test_magcal.py` | compass calibration with an added hard-iron field: automatic in the demo loop and in a level pan, manual, storing and reloading, no false correction (11 checks) | `python firmware/sim/test_magcal.py` |")
     w("| `test_bridge.py` | `fcl_bridge.v` in Icarus Verilog against the Python model, frame by frame; servo pulses, outputs, overlay writes; logic size (26 checks) | `python fpga/bridge/test_bridge.py` |")
     w("| `test_osd.py` | `fcl_osd.v` pixel for pixel against the Python overlay, 5 frames | `python fpga/osd/test_osd.py` |")
     w("| `fcl_sim`, `test_link_py.py` | the earlier C hub against sensor models (21 + 6 checks) | `make -C firmware/sim test` (needs a C compiler) |\n")

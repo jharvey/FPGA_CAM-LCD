@@ -70,6 +70,7 @@ class Dash:
         self.log = collections.deque(maxlen=7)
         self.servos = [0] * 6
         self.wifi = ["off", "", "", "0"]
+        self.mag = None
         self.info = ""
         self.buttons = 0
         self.lines = 0
@@ -113,6 +114,8 @@ class Dash:
                 self.note("        " + v[0])
         elif kind == "S":
             self.servos = [int(x) for x in v[:6]]
+        elif kind == "M":
+            self.mag = v
         elif kind == "W":
             self.wifi = (v + ["", "", "", "0"])[:4]
         elif kind == "A":
@@ -241,7 +244,16 @@ class Dash:
         audio = "Audio  mic %d Hz, %d samples, peak %d%s" % (self.audio_rate, self.audio_n, self.audio_peak,
                                                              ", %d lost" % self.audio_lost if self.audio_lost else "") \
             if self.audio_n else "Audio  mic off  (mic on | tone <hz> <ms>)"
-        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none"), audio):
+        m = self.mag
+        if not m or len(m) < 9:
+            mag = "Compass  calibration: no report yet (magcal)"
+        elif m[0] == "none":
+            mag = "Compass  not calibrated yet: it calibrates itself as the unit is turned (%s readings so far)" % m[6]
+        elif m[0] == "manual-running":
+            mag = "Compass  calibrating by hand: %s of 6 directions seen (up, down, 4 sides), %s readings" % (m[7], m[6])
+        else:
+            mag = "Compass  calibrated (%s): offset %s, %s, %s mG, field %s mG, fit error %s %%, %s" % (m[0], m[1], m[2], m[3], m[4], m[5], m[8])
+        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none"), audio, mag):
             out.append("│ " + s[:FULL - 1].ljust(FULL - 1) + "│")
         out.append("├─ LOG " + "─" * (FULL - 6) + "┤")
         log = list(self.log)

@@ -9,9 +9,10 @@
 # Turning a world-fixed vector v seen from a body rotating at w:  v += (v x w) dt.
 # Heading, pitch and roll are worked out from the two vectors at the telemetry rate (fcl_hubpy.py), in floats.
 #
-# State layout (array('i'), 16 words):
+# State layout (array('i'), 20 words):
 #   0..2 up (Q28)   3..5 north (Q16)   6..8 gyro bias (raw counts)   9..11 bias sum   12 bias samples
 #   13 gain shift for the accelerometer pull   14 samples seen   15 magnetometer started
+#   16..18 compass offset in counts (hard iron, from fcl_magcal.py), subtracted from every reading
 from array import array
 try:
     import micropython                   # the decorator must be spelled @micropython.viper for the compiler to see it
@@ -27,7 +28,7 @@ except ImportError:                      # CPython: plain functions, arrays inst
     def ptr8(x):
         return x
 
-ST_WORDS = 16
+ST_WORDS = 20
 ACC_1G = 8192                            # ICM-42688-P at +-4 g: counts per g
 BIAS_SAMPLES = 200                       # gyro bias: mean of the first second, if the unit is still
 
@@ -147,6 +148,9 @@ def mag_step(st_o, buf_o) -> int:
         mz -= 65536
     if mx > 8000 or mx < -8000 or my > 8000 or my < -8000 or mz > 8000 or mz < -8000:
         return 0                                          # over 12 gauss: not the earth's field
+    mx -= st[16]
+    my -= st[17]
+    mz -= st[18]
     if st[15] == 0:
         st[3] = mx << 16
         st[4] = my << 16

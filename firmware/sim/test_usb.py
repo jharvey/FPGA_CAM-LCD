@@ -38,7 +38,7 @@ def run(backend):
             for line in sim.step():
                 r = fcl_usb.parse_line(line)
                 if r:
-                    seen[r[0]].append(r[1])
+                    seen.setdefault(r[0], []).append(r[1])
             if sim.last and sim.state["power_hold"]:
                 n_osd += 1
                 osd_same &= sim.state["osd"] == fcl_osd.osd_compose(sim.last)
