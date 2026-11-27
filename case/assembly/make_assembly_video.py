@@ -64,7 +64,7 @@ if FIXED:
     # caption, scene, mode ("" / "cut" / "flip"), groups shown
     STEPS = [
         ("1  Lid (rear shell) face down on the desk, like a cup: heat-set inserts in the four corners", "lid", "cut", (LID,)),
-        ("2  Snap the two button plungers in from the inside", "lid", "", (LID,)),
+        ("2  Snap the three button plungers in from the inside (B0 power, B1, B2)", "lid", "", (LID,)),
         ("3  PCB face down on the desk. The springs and + plates are already soldered on", "pcb", "cut", (STACK,)),
         ("4  Battery spacer down over the contacts: it backs up every plate", "pcb", "", (STACK,)),
         ("5  Cells in: + end against its plate, press down against the spring", "pcb", "", (STACK,)),
@@ -104,7 +104,7 @@ else:
     LATE = ["cell1", "cell2", "cell3", "slugs_L", "slugs_R", "caps_L", "caps_R"]
     STEPS = [
         ("1  Lid (rear shell) face down on the desk, like a cup: heat-set inserts in the four corners", "lid", "cut", (LID,)),
-        ("2  Snap the two button plungers in from the inside", "lid", "", (LID,)),
+        ("2  Snap the three button plungers in from the inside (B0 power, B1, B2)", "lid", "", (LID,)),
         ("3  PCB camera side down on the desk: a 0.5 mm washer on each block screw hole, then the three blocks", "pcb", "cut", (STACK,)),
         ("4  Hold the blocks and turn the board over: it stands on its three blocks", "feet", "turn", (STACK,)),
         ("5  Two M1.6 x 5 screws per block, from the camera side through the PCB into the block", "feet", "", (STACK,)),
@@ -149,7 +149,7 @@ else:
     }
 
 STEPS[2:2] = [("Turn the lid face up: it rests on its rim", "lidup", "turn", (LID,)),
-              ("Press the two button caps on from outside: their tongue locks the plunger", "lidup", "", (LID,)),
+              ("Press the three button caps on from outside: their tongue locks the plunger", "lidup", "", (LID,)),
               ("Turn the lid back over", "lid", "turn", (LID,))]
 
 

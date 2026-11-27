@@ -130,7 +130,11 @@ SCREW_D = 2.9
 HEAD_D = 5.2
 USB_CUT = (82.0, 65.9, 92.5, 77.4, -0.2, 6.8)   # J17 mouth is 3.5 mm inside the right edge
 SD_CUT = (28.0, -7.5, 42.0, 1.6, T, T + 2.6)
-BUTTONS = ((16.0, 4.0), (26.5, 4.0))
+BUTTONS = ((16.0, 4.0), (26.5, 4.0), (9.0, 4.0))       # B1, B2, B0 (power, KMR2, moved here 2026-11-26)
+BLK_KEEP = (-10.0, 2.7, 7.3, 29.0)        # cell-1 block flange (x <= 7.0 from y 3.0): plunger / guide of B0 cut clear
+# ports: fully open for the prototype; the wall around them is pocketed from outside so the plug / card reaches
+USB_POCKET = (87.0, 65.2, 92.0, 78.1, -1.0, 7.6)   # USB-C overmold (12.4 x 7 typ.): wall left 1.5 mm, plug reaches J17
+SD_SCOOP = (26.5, -7.0, 43.5, -3.0, 0.4, 6.0)      # finger scoop in front of the microSD slot
 
 
 # ------------------------------------------------------------------ helpers -----------
@@ -381,7 +385,7 @@ def guides():
     for (x, y) in BUTTONS:
         t = zcyl(x, y, GUIDE_OD / 2, Z_REAR_IN - 0.01, GUIDE_TOP).cut(zcyl(x, y, ACT_HOLE / 2, Z_REAR_IN - 1, GUIDE_TOP + 1))
         w = t if w is None else w.union(t)
-    return w
+    return w.cut(box(*BLK_KEEP, Z_REAR_IN - 1, 2.0))
 
 
 def retainer(tft_bb):
@@ -451,6 +455,7 @@ def make_actuators(back):
         zs = zf - ACT_BARB_GAP                               # barb catch face (travel ACT_BARB_GAP before it touches)
         a = a.union(zcone(x, y, ACT_STEM / 2, ACT_BARB_D / 2, zs - 0.9, zs))
         a = a.cut(box(x - ACT_SLOT / 2, y - 3, x + ACT_SLOT / 2, y + 3, z_seat - 1, zs + 4.0))
+        a = a.cut(box(*BLK_KEEP, Z_REAR_IN - 1, 2.0))              # B0: flange flattened beside the cell-1 block
         w = a if w is None else w.union(a)
         c = zcyl(x, y, CAP_D / 2, Z_REAR_OUT - CAP_PROUD, z_seat).edges("<Z").fillet(0.3)
         c = c.union(box(x - TONGUE_W / 2, y - TONGUE_L / 2, x + TONGUE_W / 2, y + TONGUE_L / 2, z_seat - 0.01, z_seat + TONGUE_D))
@@ -595,7 +600,7 @@ def make_rear(back, tft_bb):
     r = r.union(guides())
     r = tripod(r)
     r = cut_boxes(r, back, 0.4, 0.4, "rear shell")
-    return knockout(r, USB_CUT, "x", OUT_X[1], +1, (Z_REAR_OUT, T))
+    return r.cut(box(*USB_POCKET))
 
 
 def make_front(front):
@@ -623,8 +628,7 @@ def make_front(front):
     if MS_DIR:
         f = f.cut(cap_clear())
     f = cut_boxes(f, front, 0.4, 0.4, "front shell")
-    f = knockout(f, USB_CUT, "x", OUT_X[1], +1, (T, Z_FRONT_OUT))
-    return knockout(f, SD_CUT, "y", OUT_Y[0], -1, (T, Z_FRONT_OUT))
+    return f.cut(box(*USB_POCKET)).cut(box(*SD_SCOOP))
 
 
 # ------------------------------------------------------------------ main --------------

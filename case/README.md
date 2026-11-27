@@ -40,7 +40,7 @@ mounting holes are final. On a board for removable cells the three springs are u
 | Cell cradle, LCD side | `print/FCL_cell_cradle_top.stl` | 1 |
 | Button plungers (two in one print) | `print/FCL_button_actuators.stl` | 1 print |
 
-Material: PETG or ASA. The USB and SD openings are closed by break-out panels (1.2 mm thick, held by a 0.4 mm skin); push them out from the inside if you need the port.
+Material: PETG or ASA. The USB-C and microSD openings are open (prototype). The side wall around the USB opening is pocketed from outside to 1.5 mm so a USB-C plug reaches J17, and there is a finger scoop in front of the SD slot.
 
 ## Hardware
 
