@@ -1,0 +1,1024 @@
+
+
+Info: Logic utilisation before packing:
+Info:     Total LUT4s:     19887/83640    23%
+Info:         logic LUTs:   9755/83640    11%
+Info:         carry LUTs:    916/83640     1%
+Info:           RAM LUTs:   6144/10455    58%
+Info:          RAMW LUTs:   3072/20910    14%
+
+Info:      Total DFFs:       968/83640     1%
+
+Info: Packing IOs..
+Info: pin 'vff1368$tr_io' constrained to Bel 'X0/Y14/PIOB'.
+Info: pin 'vfd491d$tr_io' constrained to Bel 'X4/Y95/PIOA'.
+Info: pin 'vfca177$tr_io' constrained to Bel 'X126/Y89/PIOA'.
+Info: pin 'vfae28c$tr_io' constrained to Bel 'X0/Y11/PIOA'.
+Info: pin 'vef8052[7]$tr_io' constrained to Bel 'X116/Y0/PIOA'.
+Info: pin 'vef8052[6]$tr_io' constrained to Bel 'X114/Y0/PIOA'.
+Info: pin 'vef8052[5]$tr_io' constrained to Bel 'X110/Y0/PIOB'.
+Info: pin 'vef8052[4]$tr_io' constrained to Bel 'X110/Y0/PIOA'.
+Info: pin 'vef8052[3]$tr_io' constrained to Bel 'X105/Y0/PIOA'.
+Info: pin 'vef8052[2]$tr_io' constrained to Bel 'X103/Y0/PIOA'.
+Info: pin 'vef8052[1]$tr_io' constrained to Bel 'X83/Y0/PIOA'.
+Info: pin 'vef8052[0]$tr_io' constrained to Bel 'X76/Y0/PIOB'.
+Info: pin 've02eae$tr_io' constrained to Bel 'X11/Y0/PIOA'.
+Info: pin 'vd36543$tr_io' constrained to Bel 'X60/Y0/PIOB'.
+Info: vd005a1[15] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[15].u0, removing $nextpnr_obuf vd005a1[15].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[15].u0' constrained to Bel 'X126/Y20/PIOC'.
+Info: vd005a1[14] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[14].u0, removing $nextpnr_obuf vd005a1[14].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[14].u0' constrained to Bel 'X126/Y41/PIOC'.
+Info: vd005a1[13] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[13].u0, removing $nextpnr_obuf vd005a1[13].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[13].u0' constrained to Bel 'X126/Y14/PIOD'.
+Info: vd005a1[12] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[12].u0, removing $nextpnr_obuf vd005a1[12].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[12].u0' constrained to Bel 'X126/Y14/PIOC'.
+Info: vd005a1[11] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[11].u0, removing $nextpnr_obuf vd005a1[11].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[11].u0' constrained to Bel 'X126/Y35/PIOA'.
+Info: vd005a1[10] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[10].u0, removing $nextpnr_obuf vd005a1[10].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[10].u0' constrained to Bel 'X126/Y35/PIOB'.
+Info: vd005a1[9] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[9].u0, removing $nextpnr_obuf vd005a1[9].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[9].u0' constrained to Bel 'X126/Y35/PIOC'.
+Info: vd005a1[8] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[8].u0, removing $nextpnr_obuf vd005a1[8].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[8].u0' constrained to Bel 'X126/Y35/PIOD'.
+Info: vd005a1[7] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[7].u0, removing $nextpnr_obuf vd005a1[7].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[7].u0' constrained to Bel 'X126/Y86/PIOD'.
+Info: vd005a1[6] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[6].u0, removing $nextpnr_obuf vd005a1[6].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[6].u0' constrained to Bel 'X126/Y92/PIOD'.
+Info: vd005a1[5] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[5].u0, removing $nextpnr_obuf vd005a1[5].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[5].u0' constrained to Bel 'X126/Y89/PIOD'.
+Info: vd005a1[4] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[4].u0, removing $nextpnr_obuf vd005a1[4].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[4].u0' constrained to Bel 'X126/Y83/PIOD'.
+Info: vd005a1[3] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[3].u0, removing $nextpnr_obuf vd005a1[3].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[3].u0' constrained to Bel 'X126/Y53/PIOC'.
+Info: vd005a1[2] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[2].u0, removing $nextpnr_obuf vd005a1[2].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[2].u0' constrained to Bel 'X126/Y50/PIOD'.
+Info: vd005a1[1] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[1].u0, removing $nextpnr_obuf vd005a1[1].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[1].u0' constrained to Bel 'X126/Y50/PIOC'.
+Info: vd005a1[0] feeds TRELLIS_IO v50aef8.vbdbe11.vf775c2.genblk1[0].u0, removing $nextpnr_obuf vd005a1[0].
+Info: pin 'v50aef8.vbdbe11.vf775c2.genblk1[0].u0' constrained to Bel 'X126/Y20/PIOD'.
+Info: pin 'vc62482$tr_io' constrained to Bel 'X15/Y0/PIOA'.
+Info: pin 'vc31fac$tr_io' constrained to Bel 'X63/Y0/PIOA'.
+Info: pin 'vb5062e$tr_io' constrained to Bel 'X126/Y38/PIOB'.
+Info: pin 'vaf4940$tr_io' constrained to Bel 'X0/Y14/PIOC'.
+Info: pin 'vacb7ea$tr_io' constrained to Bel 'X4/Y0/PIOB'.
+Info: pin 'vac2304$tr_io' constrained to Bel 'X78/Y0/PIOA'.
+Info: pin 'vab4d84$tr_io' constrained to Bel 'X0/Y83/PIOB'.
+Info: pin 'vaa23fa$tr_io' constrained to Bel 'X126/Y86/PIOB'.
+Info: pin 'va9a6e1$tr_io' constrained to Bel 'X0/Y35/PIOA'.
+Info: pin 'va43c74$tr_io' constrained to Bel 'X15/Y0/PIOB'.
+Info: pin 'v9e17cc[1]$tr_io' constrained to Bel 'X126/Y38/PIOA'.
+Info: pin 'v9e17cc[0]$tr_io' constrained to Bel 'X126/Y89/PIOC'.
+Info: pin 'v9c221b$tr_io' constrained to Bel 'X63/Y0/PIOB'.
+Info: pin 'v964db6$tr_io' constrained to Bel 'X0/Y11/PIOD'.
+Info: pin 'v850fc7$tr_io' constrained to Bel 'X0/Y14/PIOA'.
+Info: pin 'v80d23e$tr_io' constrained to Bel 'X126/Y86/PIOC'.
+Info: v7ff59b feeds TRELLIS_IO vc07f95.v385830.vb70907.tristate, removing $nextpnr_obuf v7ff59b.
+Info: pin 'vc07f95.v385830.vb70907.tristate' constrained to Bel 'X119/Y0/PIOB'.
+Info: pin 'v7b1797$tr_io' constrained to Bel 'X76/Y0/PIOA'.
+Info: pin 'v79e9a8$tr_io' constrained to Bel 'X78/Y0/PIOB'.
+Info: pin 'v74a75f$tr_io' constrained to Bel 'X126/Y86/PIOA'.
+Info: pin 'v73df1b$tr_io' constrained to Bel 'X0/Y14/PIOD'.
+Info: pin 'v692cf8$tr_io' constrained to Bel 'X60/Y0/PIOA'.
+Info: pin 'v666f4e$tr_io' constrained to Bel 'X116/Y0/PIOB'.
+Info: pin 'v624bb1$tr_io' constrained to Bel 'X65/Y0/PIOA'.
+Info: pin 'v5fccc7$tr_io' constrained to Bel 'X11/Y0/PIOB'.
+Info: pin 'v5e972b$tr_io' constrained to Bel 'X126/Y17/PIOC'.
+Info: pin 'v5dce43[12]$tr_io' constrained to Bel 'X126/Y41/PIOA'.
+Info: pin 'v5dce43[11]$tr_io' constrained to Bel 'X126/Y38/PIOD'.
+Info: pin 'v5dce43[10]$tr_io' constrained to Bel 'X126/Y83/PIOA'.
+Info: pin 'v5dce43[9]$tr_io' constrained to Bel 'X126/Y41/PIOB'.
+Info: pin 'v5dce43[8]$tr_io' constrained to Bel 'X126/Y44/PIOA'.
+Info: pin 'v5dce43[7]$tr_io' constrained to Bel 'X126/Y44/PIOC'.
+Info: pin 'v5dce43[6]$tr_io' constrained to Bel 'X126/Y41/PIOD'.
+Info: pin 'v5dce43[5]$tr_io' constrained to Bel 'X126/Y44/PIOB'.
+Info: pin 'v5dce43[4]$tr_io' constrained to Bel 'X126/Y44/PIOD'.
+Info: pin 'v5dce43[3]$tr_io' constrained to Bel 'X126/Y47/PIOC'.
+Info: pin 'v5dce43[2]$tr_io' constrained to Bel 'X126/Y47/PIOA'.
+Info: pin 'v5dce43[1]$tr_io' constrained to Bel 'X126/Y47/PIOD'.
+Info: pin 'v5dce43[0]$tr_io' constrained to Bel 'X126/Y47/PIOB'.
+Info: pin 'v58a987$tr_io' constrained to Bel 'X6/Y0/PIOB'.
+Info: pin 'v542abd$tr_io' constrained to Bel 'X4/Y0/PIOA'.
+Info: pin 'v4f201b$tr_io' constrained to Bel 'X58/Y0/PIOA'.
+Info: pin 'v4de6bf$tr_io' constrained to Bel 'X0/Y11/PIOC'.
+Info: pin 'v48748a$tr_io' constrained to Bel 'X58/Y0/PIOB'.
+Info: pin 'v483418$tr_io' constrained to Bel 'X65/Y0/PIOB'.
+Info: pin 'v43545c$tr_io' constrained to Bel 'X0/Y77/PIOA'.
+Info: pin 'v40f83b$tr_io' constrained to Bel 'X0/Y47/PIOA'.
+Info: pin 'v3a3c3b$tr_io' constrained to Bel 'X54/Y0/PIOA'.
+Info: pin 'v34add1$tr_io' constrained to Bel 'X0/Y17/PIOC'.
+Info: pin 'v2b4127$tr_io' constrained to Bel 'X71/Y0/PIOA'.
+Info: pin 'v26f936[1]$tr_io' constrained to Bel 'X126/Y83/PIOB'.
+Info: pin 'v26f936[0]$tr_io' constrained to Bel 'X126/Y83/PIOC'.
+Info: pin 'v24f7b7$tr_io' constrained to Bel 'X18/Y0/PIOB'.
+Info: pin 'v244572$tr_io' constrained to Bel 'X121/Y0/PIOA'.
+Info: pin 'v22789a$tr_io' constrained to Bel 'X121/Y0/PIOB'.
+Info: pin 'v115c4a[7]$tr_io' constrained to Bel 'X0/Y41/PIOD'.
+Info: pin 'v115c4a[6]$tr_io' constrained to Bel 'X0/Y17/PIOA'.
+Info: pin 'v115c4a[5]$tr_io' constrained to Bel 'X0/Y44/PIOD'.
+Info: pin 'v115c4a[4]$tr_io' constrained to Bel 'X0/Y17/PIOB'.
+Info: pin 'v115c4a[3]$tr_io' constrained to Bel 'X0/Y38/PIOC'.
+Info: pin 'v115c4a[2]$tr_io' constrained to Bel 'X0/Y17/PIOD'.
+Info: pin 'v115c4a[1]$tr_io' constrained to Bel 'X0/Y35/PIOD'.
+Info: pin 'v115c4a[0]$tr_io' constrained to Bel 'X0/Y35/PIOC'.
+Info: pin 'v094fae$tr_io' constrained to Bel 'X126/Y38/PIOC'.
+Info: pin 'v039554$tr_io' constrained to Bel 'X119/Y0/PIOA'.
+Info: pin 'v03151a$tr_io' constrained to Bel 'X0/Y11/PIOB'.
+Info: pin 'v00924b$tr_io' constrained to Bel 'X18/Y0/PIOA'.
+Info: IOLOGIC component v50aef8.vbdbe11.vf775c2.oddr_primitive connected to PIO Bel X126/Y38/PIOB
+Info: Packing constants..
+Info: Packing carries...
+Info: Packing LUTs...
+Info: Packing LUT5-7s...
+Info: Packing FFs...
+Info:     638 FFs paired with LUTs.
+Info: Generating derived timing constraints...
+Info: Promoting globals...
+Info:     promoting clock net w25 to global network
+Info:     promoting clock net v40f83b$TRELLIS_IO_IN to global network
+Info:     promoting clock net v79e9a8$TRELLIS_IO_OUT to global network
+Info: Checksum: 0xd2bb9b68
+
+Info: Device utilisation:
+Info: 	          TRELLIS_IO:    97/  365    26%
+Info: 	                DCCA:     3/   56     5%
+Info: 	              DP16KD:     8/  208     3%
+Info: 	          MULT18X18D:     0/  156     0%
+Info: 	              ALU54B:     0/   78     0%
+Info: 	             EHXPLLL:     1/    4    25%
+Info: 	             EXTREFB:     0/    2     0%
+Info: 	                DCUA:     0/    2     0%
+Info: 	           PCSCLKDIV:     0/    2     0%
+Info: 	             IOLOGIC:     1/  224     0%
+Info: 	            SIOLOGIC:     0/  141     0%
+Info: 	                 GSR:     0/    1     0%
+Info: 	               JTAGG:     0/    1     0%
+Info: 	                OSCG:     0/    1     0%
+Info: 	               SEDGA:     0/    1     0%
+Info: 	                 DTR:     0/    1     0%
+Info: 	             USRMCLK:     0/    1     0%
+Info: 	             CLKDIVF:     0/    4     0%
+Info: 	           ECLKSYNCB:     0/   10     0%
+Info: 	             DLLDELD:     0/    8     0%
+Info: 	              DDRDLL:     0/    4     0%
+Info: 	             DQSBUFM:     0/   14     0%
+Info: 	     TRELLIS_ECLKBUF:     0/    8     0%
+Info: 	        ECLKBRIDGECS:     0/    2     0%
+Info: 	                DCSC:     0/    2     0%
+Info: 	          TRELLIS_FF:   968/83640     1%
+Info: 	        TRELLIS_COMB: 20203/83640    24%
+Info: 	        TRELLIS_RAMW:  1536/10455    14%
+
+Info: Placed 99 cells based on constraints.
+Info: Creating initial analytic placement for 6929 cells, random placement wirelen = 943327.
+Info:     at initial placer iter 0, wirelen = 11967
+Info:     at initial placer iter 1, wirelen = 9050
+Info:     at initial placer iter 2, wirelen = 8627
+Info:     at initial placer iter 3, wirelen = 8253
+Info: Running main analytical placer, max placement attempts per cell = 65076936.
+Info:     at iteration #1, type ALL: wirelen solved = 7913, spread = 129465, legal = 132125; time = 0.92s
+Info:     at iteration #2, type ALL: wirelen solved = 17135, spread = 77877, legal = 80484; time = 0.78s
+Info:     at iteration #3, type ALL: wirelen solved = 20464, spread = 81333, legal = 84204; time = 0.90s
+Info:     at iteration #4, type ALL: wirelen solved = 27752, spread = 66879, legal = 71797; time = 1.13s
+Info:     at iteration #5, type ALL: wirelen solved = 28323, spread = 75685, legal = 78418; time = 1.10s
+Info:     at iteration #6, type ALL: wirelen solved = 32732, spread = 74559, legal = 77593; time = 0.77s
+Info:     at iteration #7, type ALL: wirelen solved = 35536, spread = 73779, legal = 76855; time = 0.70s
+Info:     at iteration #8, type ALL: wirelen solved = 36423, spread = 71979, legal = 75129; time = 0.68s
+Info:     at iteration #9, type ALL: wirelen solved = 38067, spread = 73452, legal = 76211; time = 0.75s
+Info: HeAP Placer Time: 13.72s
+Info:   of which solving equations: 8.78s
+Info:   of which spreading cells: 0.95s
+Info:   of which strict legalisation: 0.41s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 15679, wirelen = 71797
+Info:   at iteration #5: temp = 0.000000, timing cost = 12205, wirelen = 57681
+Info:   at iteration #10: temp = 0.000000, timing cost = 13889, wirelen = 55482
+Info:   at iteration #15: temp = 0.000000, timing cost = 11309, wirelen = 53922
+Info:   at iteration #15: temp = 0.000000, timing cost = 10215, wirelen = 54032 
+Info: SA placement time 46.61s
+
+Info: Max frequency for clock                    '$glbnet$w25': 45.46 MHz (PASS at 12.00 MHz)
+Info: Max frequency for clock  '$glbnet$v40f83b$TRELLIS_IO_IN': 36.84 MHz (PASS at 12.00 MHz)
+Info: Max frequency for clock '$glbnet$v79e9a8$TRELLIS_IO_OUT': 53.96 MHz (PASS at 12.00 MHz)
+
+Info: Max delay <async>                                -> <async>                               : 1.32 ns
+Info: Max delay <async>                                -> posedge $glbnet$v40f83b$TRELLIS_IO_IN : 17.34 ns
+Info: Max delay <async>                                -> posedge $glbnet$v79e9a8$TRELLIS_IO_OUT: 12.42 ns
+Info: Max delay <async>                                -> posedge $glbnet$w25                   : 22.74 ns
+Info: Max delay posedge $glbnet$v40f83b$TRELLIS_IO_IN  -> <async>                               : 15.68 ns
+Info: Max delay posedge $glbnet$v40f83b$TRELLIS_IO_IN  -> posedge $glbnet$w25                   : 16.88 ns
+Info: Max delay posedge $glbnet$v79e9a8$TRELLIS_IO_OUT -> <async>                               : 33.83 ns
+Info: Max delay posedge $glbnet$v79e9a8$TRELLIS_IO_OUT -> posedge $glbnet$w25                   : 2.08 ns
+Info: Max delay posedge $glbnet$w25                    -> <async>                               : 10.48 ns
+Info: Max delay posedge $glbnet$w25                    -> posedge $glbnet$v40f83b$TRELLIS_IO_IN : 5.80 ns
+Info: Max delay posedge $glbnet$w25                    -> posedge $glbnet$v79e9a8$TRELLIS_IO_OUT: 2.32 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 102 endpoint(s)
+Info:          + represents [1,102) endpoint(s)
+Info: [ 56185,  57505) |+
+Info: [ 57505,  58825) |*+
+Info: [ 58825,  60145) |****+
+Info: [ 60145,  61465) |****+
+Info: [ 61465,  62785) |***+
+Info: [ 62785,  64105) |***+
+Info: [ 64105,  65425) |****+
+Info: [ 65425,  66745) |******+
+Info: [ 66745,  68065) |*******+
+Info: [ 68065,  69385) |**********+
+Info: [ 69385,  70705) |***************+
+Info: [ 70705,  72025) |******************+
+Info: [ 72025,  73345) |***********************+
+Info: [ 73345,  74665) |*************************************+
+Info: [ 74665,  75985) |*******************************************************+
+Info: [ 75985,  77305) |************************************************************ 
+Info: [ 77305,  78625) |********************************************************+
+Info: [ 78625,  79945) |***************************************+
+Info: [ 79945,  81265) |***********+
+Info: [ 81265,  82585) |**+
+Info: Checksum: 0x5123958b
+Info: Routing globals...
+Info:     routing clock net $glbnet$v79e9a8$TRELLIS_IO_OUT using global 0
+Info:     routing clock net $glbnet$v40f83b$TRELLIS_IO_IN using global 1
+Info:     routing clock net $glbnet$w25 using global 2
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 90232 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       90        909 |   90   909 |     89470|       2.00       2.00|
+Info:       2000 |      159       1840 |   69   931 |     88755|       0.31       2.31|
+Info:       3000 |      207       2792 |   48   952 |     87940|       0.29       2.61|
+Info:       4000 |      253       3746 |   46   954 |     87174|       0.29       2.90|
+Info:       5000 |      342       4657 |   89   911 |     86573|       0.30       3.19|
+Info:       6000 |      436       5563 |   94   906 |     85898|       0.30       3.49|
+Info:       7000 |      488       6511 |   52   948 |     85288|       0.28       3.78|
+Info:       8000 |      566       7433 |   78   922 |     84565|       0.30       4.08|
+Info:       9000 |      695       8304 |  129   871 |     84007|       0.28       4.36|
+Info:      10000 |      815       9184 |  120   880 |     83602|       0.29       4.65|
+Info:      11000 |      991      10008 |  176   824 |     82999|       0.28       4.92|
+Info:      12000 |     1082      10917 |   91   909 |     82980|       0.31       5.23|
+Info:      13000 |     1195      11804 |  113   887 |     82328|       0.26       5.49|
+Info:      14000 |     1268      12731 |   73   927 |     81493|       0.25       5.75|
+Info:      15000 |     1364      13635 |   96   904 |     80913|       0.30       6.05|
+Info:      16000 |     1481      14518 |  117   883 |     80316|       0.30       6.35|
+Info:      17000 |     1584      15415 |  103   897 |     79985|       0.29       6.64|
+Info:      18000 |     1763      16236 |  179   821 |     79550|       0.26       6.90|
+Info:      19000 |     1855      17144 |   92   908 |     78986|       0.30       7.20|
+Info:      20000 |     1938      18061 |   83   917 |     78616|       0.26       7.46|
+Info:      21000 |     2056      18943 |  118   882 |     78247|       0.31       7.76|
+Info:      22000 |     2158      19841 |  102   898 |     77852|       0.28       8.04|
+Info:      23000 |     2295      20704 |  137   863 |     77332|       0.27       8.31|
+Info:      24000 |     2435      21564 |  140   860 |     76876|       0.26       8.58|
+Info:      25000 |     2584      22415 |  149   851 |     76172|       0.28       8.86|
+Info:      26000 |     2724      23275 |  140   860 |     75971|       0.29       9.15|
+Info:      27000 |     2818      24181 |   94   906 |     75924|       0.36       9.51|
+Info:      28000 |     2891      25108 |   73   927 |     75462|       0.25       9.77|
+Info:      29000 |     3051      25948 |  160   840 |     75097|       0.33      10.09|
+Info:      30000 |     3129      26870 |   78   922 |     74564|       0.27      10.36|
+Info:      31000 |     3264      27735 |  135   865 |     74216|       0.32      10.68|
+Info:      32000 |     3357      28642 |   93   907 |     73557|       0.25      10.93|
+Info:      33000 |     3526      29473 |  169   831 |     73037|       0.32      11.25|
+Info:      34000 |     3627      30372 |  101   899 |     72498|       0.28      11.53|
+Info:      35000 |     3654      31345 |   27   973 |     72373|       0.24      11.77|
+Info:      36000 |     3792      32207 |  138   862 |     71861|       0.31      12.08|
+Info:      37000 |     3938      33061 |  146   854 |     71780|       0.30      12.38|
+Info:      38000 |     4051      33948 |  113   887 |     71573|       0.34      12.72|
+Info:      39000 |     4180      34819 |  129   871 |     70960|       0.29      13.01|
+Info:      40000 |     4331      35668 |  151   849 |     70825|       0.32      13.33|
+Info:      41000 |     4464      36535 |  133   867 |     70308|       0.30      13.64|
+Info:      42000 |     4604      37395 |  140   860 |     69711|       0.35      13.98|
+Info:      43000 |     4658      38341 |   54   946 |     69649|       0.31      14.29|
+Info:      44000 |     4749      39250 |   91   909 |     69158|       0.26      14.55|
+Info:      45000 |     4899      40100 |  150   850 |     68729|       0.33      14.88|
+Info:      46000 |     5038      40961 |  139   861 |     68087|       0.33      15.20|
+Info:      47000 |     5180      41819 |  142   858 |     67768|       0.30      15.50|
+Info:      48000 |     5341      42658 |  161   839 |     67561|       0.35      15.85|
+Info:      49000 |     5441      43558 |  100   900 |     67332|       0.29      16.14|
+Info:      50000 |     5576      44423 |  135   865 |     66741|       0.27      16.42|
+Info:      51000 |     5749      45250 |  173   827 |     66453|       0.33      16.75|
+Info:      52000 |     5852      46147 |  103   897 |     65634|       0.30      17.05|
+Info:      53000 |     6008      46991 |  156   844 |     65316|       0.29      17.33|
+Info:      54000 |     6154      47845 |  146   854 |     64837|       0.32      17.65|
+Info:      55000 |     6302      48697 |  148   852 |     64192|       0.32      17.97|
+Info:      56000 |     6466      49533 |  164   836 |     63703|       0.38      18.35|
+Info:      57000 |     6605      50394 |  139   861 |     63213|       0.33      18.68|
+Info:      58000 |     6769      51230 |  164   836 |     62568|       0.31      18.99|
+Info:      59000 |     6930      52069 |  161   839 |     62052|       0.32      19.31|
+Info:      60000 |     7070      52929 |  140   860 |     61896|       0.35      19.66|
+Info:      61000 |     7292      53707 |  222   778 |     61545|       0.34      20.00|
+Info:      62000 |     7459      54540 |  167   833 |     61264|       0.37      20.36|
+Info:      63000 |     7649      55350 |  190   810 |     60685|       0.33      20.69|
+Info:      64000 |     7831      56168 |  182   818 |     60316|       0.32      21.01|
+Info:      65000 |     8011      56988 |  180   820 |     59864|       0.36      21.37|
+Info:      66000 |     8172      57827 |  161   839 |     59837|       0.33      21.71|
+Info:      67000 |     8301      58698 |  129   871 |     60521|       0.40      22.11|
+Info:      68000 |     8374      59625 |   73   927 |     60395|       0.33      22.43|
+Info:      69000 |     8475      60524 |  101   899 |     59717|       0.31      22.74|
+Info:      70000 |     8663      61336 |  188   812 |     59454|       0.34      23.08|
+Info:      71000 |     8868      62131 |  205   795 |     59028|       0.35      23.43|
+Info:      72000 |     9133      62866 |  265   735 |     58551|       0.36      23.79|
+Info:      73000 |     9348      63651 |  215   785 |     57907|       0.34      24.13|
+Info:      74000 |     9553      64446 |  205   795 |     57350|       0.35      24.49|
+Info:      75000 |     9772      65227 |  219   781 |     57277|       0.36      24.85|
+Info:      76000 |     9958      66041 |  186   814 |     56760|       0.33      25.18|
+Info:      77000 |    10223      66776 |  265   735 |     56262|       0.33      25.52|
+Info:      78000 |    10420      67579 |  197   803 |     55965|       0.32      25.84|
+Info:      79000 |    10803      68196 |  383   617 |     55720|       0.37      26.21|
+Info:      80000 |    11116      68883 |  313   687 |     55308|       0.33      26.54|
+Info:      81000 |    11394      69605 |  278   722 |     54840|       0.36      26.90|
+Info:      82000 |    11671      70328 |  277   723 |     54434|       0.36      27.26|
+Info:      83000 |    11941      71058 |  270   730 |     53962|       0.33      27.59|
+Info:      84000 |    12231      71768 |  290   710 |     53424|       0.33      27.92|
+Info:      85000 |    12525      72474 |  294   706 |     53035|       0.35      28.26|
+Info:      86000 |    12711      73275 |  186   801 |     53063|       0.34      28.61|
+Info:      87000 |    12931      74039 |  220   764 |     52539|       0.38      28.98|
+Info:      88000 |    13136      74761 |  205   722 |     51926|       0.32      29.31|
+Info:      89000 |    13331      75503 |  195   742 |     51250|       0.27      29.58|
+Info:      90000 |    13583      76160 |  252   657 |     50568|       0.25      29.83|
+Info:      91000 |    13760      76889 |  177   729 |     49854|       0.27      30.10|
+Info:      92000 |    13922      77649 |  162   760 |     49210|       0.28      30.38|
+Info:      93000 |    14058      78373 |  136   724 |     48399|       0.24      30.62|
+Info:      94000 |    14252      79023 |  194   650 |     47634|       0.25      30.87|
+Info:      95000 |    14439      79647 |  187   624 |     46875|       0.26      31.13|
+Info:      96000 |    14585      80328 |  146   681 |     46192|       0.30      31.43|
+Info:      97000 |    14789      81006 |  204   678 |     46397|       0.37      31.80|
+Info:      98000 |    14973      81822 |  184   816 |     46149|       0.47      32.27|
+Info:      99000 |    15165      82630 |  192   808 |     45947|       0.48      32.75|
+Info:     100000 |    15331      83336 |  166   706 |     45205|       0.29      33.04|
+Info:     101000 |    15510      83976 |  179   640 |     44493|       0.28      33.32|
+Info:     102000 |    15743      84656 |  233   680 |     44166|       0.34      33.66|
+Info:     103000 |    15936      85439 |  193   783 |     43791|       0.37      34.02|
+Info:     104000 |    16056      86267 |  120   828 |     42926|       0.24      34.27|
+Info:     105000 |    16168      87125 |  112   858 |     42058|       0.22      34.49|
+Info:     106000 |    16273      87995 |  105   870 |     41193|       0.22      34.71|
+Info:     107000 |    16396      88853 |  123   858 |     41121|       0.34      35.06|
+Info:     108000 |    16612      89637 |  216   784 |     40895|       0.49      35.55|
+Info:     109000 |    16761      90488 |  149   851 |     40372|       0.37      35.92|
+Info:     110000 |    16820      91392 |   59   904 |     39440|       0.20      36.12|
+Info:     111000 |    16874      92311 |   54   919 |     38502|       0.20      36.32|
+Info:     112000 |    16921      93237 |   47   926 |     37550|       0.19      36.52|
+Info:     113000 |    16972      94161 |   51   924 |     36609|       0.20      36.72|
+Info:     114000 |    17026      95081 |   54   920 |     35665|       0.19      36.91|
+Info:     115000 |    17052      96034 |   26   953 |     34693|       0.20      37.11|
+Info:     116000 |    17094      96956 |   42   922 |     33742|       0.20      37.30|
+Info:     117000 |    17131      97912 |   37   956 |     32779|       0.21      37.51|
+Info:     118000 |    17154      98860 |   23   948 |     31802|       0.18      37.69|
+Info:     119000 |    17188      99816 |   34   956 |     30840|       0.19      37.88|
+Info:     120000 |    17224     100772 |   36   956 |     29876|       0.21      38.09|
+Info:     121000 |    17238     101744 |   14   972 |     28890|       0.18      38.27|
+Info:     122000 |    17261     102707 |   23   963 |     27913|       0.19      38.46|
+Info:     123000 |    17305     103648 |   44   941 |     26959|       0.20      38.66|
+Info:     124000 |    17354     104580 |   49   932 |     26011|       0.19      38.85|
+Info:     125000 |    17387     105526 |   33   946 |     25044|       0.21      39.06|
+Info:     126000 |    17420     106472 |   33   946 |     24077|       0.20      39.26|
+Info:     127000 |    17470     107396 |   50   924 |     23155|       0.22      39.48|
+Info:     128000 |    17541     108300 |   71   904 |     22402|       0.34      39.82|
+Info:     129000 |    17629     109128 |   88   828 |     21525|       0.36      40.18|
+Info:     130000 |    17718     109977 |   89   849 |     20741|       0.39      40.58|
+Info:     131000 |    17836     110822 |  118   845 |     20741|       0.45      41.03|
+Info:     132000 |    17983     111675 |  147   853 |     20458|       0.45      41.48|
+Info:     133000 |    18133     112501 |  150   826 |     20117|       0.44      41.92|
+Info:     134000 |    18206     113385 |   73   884 |     19254|       0.45      42.37|
+Info:     135000 |    18333     114247 |  127   862 |     19097|       0.54      42.90|
+Info:     136000 |    18395     115127 |   62   880 |     18216|       0.40      43.30|
+Info:     137000 |    18503     115948 |  108   821 |     17364|       0.38      43.68|
+Info:     138000 |    18605     116790 |  102   842 |     16621|       0.43      44.11|
+Info:     139000 |    18686     117646 |   81   856 |     15837|       0.39      44.50|
+Info:     140000 |    18818     118471 |  132   825 |     15272|       0.49      44.99|
+Info:     141000 |    18880     119336 |   62   865 |     14362|       0.42      45.41|
+Info:     142000 |    18979     120174 |   99   838 |     13638|       0.40      45.81|
+Info:     143000 |    19055     121033 |   76   859 |     12805|       0.43      46.24|
+Info:     144000 |    19129     121883 |   74   850 |     11937|       0.38      46.61|
+Info:     145000 |    19209     122730 |   80   847 |     11067|       0.42      47.03|
+Info:     146000 |    19292     123583 |   83   853 |     10296|       0.42      47.45|
+Info:     147000 |    19361     124452 |   69   869 |      9468|       0.42      47.87|
+Info:     148000 |    19463     125309 |  102   857 |      8698|       0.42      48.30|
+Info:     149000 |    19518     126178 |   55   869 |      7781|       0.42      48.72|
+Info:     150000 |    19637     127009 |  119   831 |      7101|       0.47      49.18|
+Info:     151000 |    19750     127839 |  113   830 |      6334|       0.47      49.65|
+Info:     152000 |    19827     128688 |   77   849 |      5556|       0.45      50.10|
+Info:     153000 |    19887     129547 |   60   859 |      4631|       0.43      50.53|
+Info:     154000 |    19965     130404 |   78   857 |      3753|       0.49      51.03|
+Info:     155000 |    20117     131215 |  152   811 |      3303|       0.91      51.93|
+Info:     156000 |    20244     132050 |  127   835 |      2598|       0.56      52.49|
+Info:     157000 |    20384     132851 |  140   801 |      1865|       0.46      52.95|
+Info:     158000 |    20511     133676 |  127   825 |      1092|       0.51      53.46|
+Info:     159000 |    20620     134522 |  109   846 |       252|       0.48      53.94|
+Info:     159284 |    20644     134763 |   24   241 |         0|       0.31      54.25|
+Info: Routing complete.
+Info: Router1 time 54.25s
+Info: Checksum: 0x71c96b52
+
+Info: Critical path report for clock '$glbnet$w25' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source v32ef04.veb1519.v95f545.v21516f.addr_b_q_TRELLIS_FF_Q_7.Q
+Info:  2.1  2.6    Net v32ef04.veb1519.v95f545.v21516f.addr_b_q[3] (102,26) -> (105,17)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.ram.0.192$DPRAM_COMB1.A
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3582.10-3590.3
+Info:                  main.v:3779.23-3779.31
+Info:                  main.v:3749.18-3757.3
+Info:                  main.v:3153.10-3162.3
+Info:  0.2  2.8  Source v32ef04.veb1519.v95f545.v21516f.ram.0.192$DPRAM_COMB1.F
+Info:  0.9  3.7    Net v32ef04.veb1519.v95f545.v21516f.ram.0.192_DO_2[1] (105,17) -> (105,15)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.ram.0.198_DO_2_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  4.0  Source v32ef04.veb1519.v95f545.v21516f.ram.0.198_DO_2_LUT4_Z.F
+Info:  0.7  4.7    Net v32ef04.veb1519.v95f545.v21516f.ram.0.198_DO_2[2] (105,15) -> (105,18)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.ram.0.198_DO_2_LUT4_D.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  5.1  Source v32ef04.veb1519.v95f545.v21516f.ram.0.198_DO_2_LUT4_D.OFX
+Info:  1.4  6.5    Net v32ef04.veb1519.v95f545.v21516f.ram.0.204_DO_2_LUT4_D_Z_PFUMX_ALUT_Z[1] (105,18) -> (107,14)
+Info:                Sink vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z_C_LUT4_Z_1.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  6.8  Source vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z_C_LUT4_Z_1.F
+Info:  0.8  7.5    Net vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z_C[2] (107,14) -> (110,12)
+Info:                Sink vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  7.9  Source vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0  7.9    Net vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D0 (110,12) -> (110,12)
+Info:                Sink vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXA
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.34-141.36
+Info:  0.2  8.2  Source vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  2.5 10.7    Net vc07f95.v41db97.vac59aa.v21516f.ram.0.0_DOB1_LUT4_A_Z[2] (110,12) -> (97,28)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2 10.9  Source v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0 10.9    Net v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT (97,28) -> (97,28)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.30-157.32
+Info:  0.2 11.1  Source v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0 11.1    Net v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1 (97,28) -> (97,28)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.54-157.56
+Info:  0.2 11.3  Source v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  0.0 11.3    Net v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D0 (97,28) -> (97,28)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.FXA
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.66-157.68
+Info:  0.2 11.6  Source v50aef8.vbdbe11.vf775c2.f2s_data_L6MUX21_Z_7_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  2.0 13.5    Net v50aef8.w35[14] (97,28) -> (113,37)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f2s_data_q_TRELLIS_FF_Q_14.M
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:1869.14-1869.17
+Info:  0.0 13.5  Setup v50aef8.vbdbe11.vf775c2.f2s_data_q_TRELLIS_FF_Q_14.M
+Info: 3.2 ns logic, 10.4 ns routing
+
+Info: Critical path report for clock '$glbnet$v40f83b$TRELLIS_IO_IN' (posedge -> posedge):
+Info: curr total
+Info:  5.8  5.8  Source v32ef04.vfa02b8.v21516f.ram.0.0.DOB0
+Info:  2.1  7.9    Net v32ef04.vfa02b8.v21516f.ram.0.0_DOB0[0] (105,22) -> (108,4)
+Info:                Sink v32ef04.v10bcc8.v21516f.ram.0.0_DOB0_LUT4_Z_1.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/brams_map.v:46.13-46.16
+Info:  0.2  8.2  Source v32ef04.v10bcc8.v21516f.ram.0.0_DOB0_LUT4_Z_1.F
+Info:  0.6  8.8    Net v32ef04.v10bcc8.v21516f.ram.0.0_DOB0[2] (108,4) -> (108,4)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_PFUMX_Z_6_BLUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  9.2  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_PFUMX_Z_6_BLUT_LUT4_Z.OFX
+Info:  1.3 10.5    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z[0] (108,4) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3$CCU2_COMB0.A
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/techmap.v:200.24-200.25
+Info:  0.4 11.0  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3$CCU2_COMB0.FCO
+Info:  0.0 11.0    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3$CCU2_FCI_INT (110,6) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3$CCU2_COMB1.FCI
+Info:  0.0 11.0  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3$CCU2_COMB1.FCO
+Info:  0.0 11.0    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3_COUT[2] (110,6) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_2$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 11.0  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_2$CCU2_COMB0.FCO
+Info:  0.0 11.0    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_2$CCU2_FCI_INT (110,6) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_2$CCU2_COMB1.FCI
+Info:  0.0 11.0  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_2$CCU2_COMB1.FCO
+Info:  0.0 11.0    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3_COUT[4] (110,6) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 11.1  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_1$CCU2_COMB0.FCO
+Info:  0.0 11.1    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_1$CCU2_FCI_INT (110,6) -> (110,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_1$CCU2_COMB1.FCI
+Info:  0.0 11.1  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_1$CCU2_COMB1.FCO
+Info:  0.0 11.1    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_3_COUT[6] (110,6) -> (111,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 11.2  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0$CCU2_COMB0.FCO
+Info:  0.0 11.2    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0$CCU2_FCI_INT (111,6) -> (111,6)
+Info:                Sink v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0$CCU2_COMB1.FCI
+Info:  0.4 11.6  Source v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0$CCU2_COMB1.F
+Info:  1.2 12.8    Net v32ef04.v22f959.v21516f.ram.0.0_DOB7_LUT4_B_Z_CCU2C_A0_S0[7] (111,6) -> (110,8)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_A0_LUT4_Z_5.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:34.26-34.27
+Info:  0.2 13.0  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_A0_LUT4_Z_5.F
+Info:  1.1 14.1    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_A0[1] (110,8) -> (110,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_3$CCU2_COMB1.A
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3432.19-3432.22
+Info:                  main.v:3172.18-3198.3
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:30.22-30.23
+Info:  0.4 14.5  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_3$CCU2_COMB1.FCO
+Info:  0.0 14.5    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_3_COUT[2] (110,9) -> (110,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_2$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3432.19-3432.22
+Info:                  main.v:3172.18-3198.3
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 14.6  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0 14.6    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_2$CCU2_FCI_INT (110,9) -> (110,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0 14.6  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0 14.6    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_3_COUT[4] (110,9) -> (110,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3432.19-3432.22
+Info:                  main.v:3172.18-3198.3
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 14.7  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0 14.7    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_1$CCU2_FCI_INT (110,9) -> (110,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0 14.7  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0 14.7    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0_3_COUT[6] (110,9) -> (111,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3432.19-3432.22
+Info:                  main.v:3172.18-3198.3
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 14.7  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0 14.7    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0$CCU2_FCI_INT (111,9) -> (111,9)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.4 15.1  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.F
+Info:  1.9 17.1    Net v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_D[7] (111,9) -> (109,29)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z.D
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3432.19-3432.22
+Info:                  main.v:3172.18-3198.3
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:34.26-34.27
+Info:  0.2 17.3  Source v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z.F
+Info:  2.4 19.7    Net v32ef04.w51[1] (109,29) -> (114,13)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.ram.0.232$RAMW_SLICE.B1
+Info:                Defined in:
+Info:                  main.v:271.10-286.3
+Info:                  main.v:2829.13-2829.16
+Info:  0.0 19.7  Source v32ef04.veb1519.v95f545.v21516f.ram.0.232$RAMW_SLICE.WDO3
+Info:  0.1 19.8    Net v32ef04.veb1519.v95f545.v21516f.ram.0.232$RAMW_SLICE$conn$WDO3 (114,13) -> (114,13)
+Info:                Sink v32ef04.veb1519.v95f545.v21516f.ram.0.232$DPRAM_COMB3.WD
+Info:  0.0 19.8  Setup v32ef04.veb1519.v95f545.v21516f.ram.0.232$DPRAM_COMB3.WD
+Info: 9.1 ns logic, 10.7 ns routing
+
+Info: Critical path report for clock '$glbnet$v79e9a8$TRELLIS_IO_OUT' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source v5ec133.y_TRELLIS_FF_Q_8.Q
+Info:  1.4  2.0    Net v5ec133.y[1] (9,13) -> (13,12)
+Info:                Sink va9a6e1_LUT4_Z_A_LUT4_Z_1_D_LUT4_Z_1.B
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:3899.12-3899.13
+Info:  0.2  2.2  Source va9a6e1_LUT4_Z_A_LUT4_Z_1_D_LUT4_Z_1.F
+Info:  0.5  2.7    Net va9a6e1_LUT4_Z_A_LUT4_Z_1_D[2] (13,12) -> (13,13)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_1_Z_LUT4_Z_A_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  3.0  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_1_Z_LUT4_Z_A_LUT4_Z.F
+Info:  1.1  4.1    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_1_Z_LUT4_Z_A[1] (13,13) -> (14,12)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_1_Z_LUT4_Z.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  4.3  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_1_Z_LUT4_Z.F
+Info:  3.8  8.1    Net vaf4940_LUT4_Z_A[3] (14,12) -> (39,40)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_grey_nxt_LUT4_A_Z_LUT4_A_Z_PFUMX_Z_2_BLUT_LUT4_Z.M
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.3  8.3  Source v50aef8.vb01cee.v65c4d4.r_grey_nxt_LUT4_A_Z_LUT4_A_Z_PFUMX_Z_2_BLUT_LUT4_Z.OFX
+Info:  1.1  9.4    Net v50aef8.vb01cee.v65c4d4.r_grey_nxt_LUT4_A_Z_LUT4_A_Z[3] (39,40) -> (38,44)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_ptr_LUT4_Z_7.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  9.7  Source v50aef8.vb01cee.v65c4d4.r_ptr_LUT4_Z_7.F
+Info:  0.7 10.4    Net v50aef8.vb01cee.w9[7] (38,44) -> (38,42)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_8.M
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2102.14-2102.16
+Info:                  main.v:1903.10-1913.3
+Info:  0.0 10.4  Setup v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_8.M
+Info: 1.7 ns logic, 8.6 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> '<async>':
+Info: curr total
+Info:  0.0  0.0  Source v40f83b$tr_io.O
+Info:  0.2  0.2    Net v40f83b$TRELLIS_IO_IN (0,47) -> (3,46)
+Info:                Sink $gbuf$v40f83b$TRELLIS_IO_IN.CLKI
+Info:                Defined in:
+Info:                  main.v:71.7-71.9
+Info:  0.0  0.2  Source $gbuf$v40f83b$TRELLIS_IO_IN.CLKO
+Info:  0.0  0.2    Net $glbnet$v40f83b$TRELLIS_IO_IN (3,46) -> (119,0)
+Info:                Sink v039554$tr_io.I
+Info: 0.0 ns logic, 0.2 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$v40f83b$TRELLIS_IO_IN':
+Info: curr total
+Info:  0.0  0.0  Source v58a987$tr_io.O
+Info:  7.3  7.3    Net v58a987$TRELLIS_IO_IN (6,0) -> (84,42)
+Info:                Sink v32ef04.veb1519.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7_LSR_LUT4_Z.D
+Info:                Defined in:
+Info:                  main.v:106.7-106.10
+Info:  0.2  7.6  Source v32ef04.veb1519.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7_LSR_LUT4_Z.F
+Info:  0.5  8.0    Net v32ef04.veb1519.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7_LSR (84,42) -> (84,42)
+Info:                Sink v32ef04.veb1519.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7.LSR
+Info:  0.4  8.5  Setup v32ef04.veb1519.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7.LSR
+Info: 0.7 ns logic, 7.8 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$v79e9a8$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.0  0.0  Source v58a987$tr_io.O
+Info:  5.1  5.1    Net v58a987$TRELLIS_IO_IN (6,0) -> (40,43)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_LSR_LUT4_Z.D
+Info:                Defined in:
+Info:                  main.v:106.7-106.10
+Info:  0.2  5.3  Source v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_LSR_LUT4_Z.F
+Info:  0.6  5.9    Net v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_LSR (40,43) -> (40,42)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q.LSR
+Info:  0.4  6.3  Setup v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q.LSR
+Info: 0.7 ns logic, 5.7 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$w25':
+Info: curr total
+Info:  0.0  0.0  Source v58a987$tr_io.O
+Info:  9.7  9.7    Net v58a987$TRELLIS_IO_IN (6,0) -> (119,55)
+Info:                Sink v50aef8.vbdbe11.vf775c2.refresh_ctr_q_TRELLIS_FF_Q_2_LSR_LUT4_Z.D
+Info:                Defined in:
+Info:                  main.v:106.7-106.10
+Info:  0.2 10.0  Source v50aef8.vbdbe11.vf775c2.refresh_ctr_q_TRELLIS_FF_Q_2_LSR_LUT4_Z.F
+Info:  0.3 10.3    Net v50aef8.vbdbe11.vf775c2.refresh_ctr_q_TRELLIS_FF_Q_2_LSR (119,55) -> (119,55)
+Info:                Sink v50aef8.vbdbe11.vf775c2.refresh_ctr_q_TRELLIS_FF_Q_2.LSR
+Info:  0.4 10.7  Setup v50aef8.vbdbe11.vf775c2.refresh_ctr_q_TRELLIS_FF_Q_2.LSR
+Info: 0.7 ns logic, 10.1 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$v40f83b$TRELLIS_IO_IN' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source v32ef04.v2d8c02.threshold_TRELLIS_FF_Q.Q
+Info:  1.4  1.9    Net w46[6] (17,13) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.A
+Info:                Defined in:
+Info:                  main.v:108.13-108.16
+Info:  0.4  2.4  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0  2.4    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0  2.4  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0  2.4    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[2] (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  2.4  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0  2.4    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0  2.4  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0  2.4    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[4] (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  2.5  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  2.5    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  2.5  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  2.5    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[6] (19,14) -> (20,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  2.6  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0  2.6    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_FCI_INT (20,14) -> (20,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0  2.6  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0  2.6    Net $nextpnr_CCU2C_38$CIN (20,14) -> (20,14)
+Info:                Sink $nextpnr_CCU2C_38$CCU2_COMB0.FCI
+Info:  0.4  3.0  Source $nextpnr_CCU2C_38$CCU2_COMB0.F
+Info:  1.1  4.1    Net v00924b_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z_A[1] (20,14) -> (24,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  4.4  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D.F
+Info:  2.4  6.7    Net v24f7b7_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z_B[2] (24,14) -> (47,11)
+Info:                Sink v692cf8_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  7.1  Source v692cf8_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0  7.1    Net v692cf8_L6MUX21_Z_D1 (47,11) -> (47,11)
+Info:                Sink v692cf8_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.38-141.40
+Info:  0.2  7.4  Source v692cf8_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  2.2  9.5    Net v692cf8$TRELLIS_IO_OUT (47,11) -> (60,0)
+Info:                Sink v692cf8$tr_io.I
+Info:                Defined in:
+Info:                  main.v:129.7-129.10
+Info: 2.5 ns logic, 7.0 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$v40f83b$TRELLIS_IO_IN' -> 'posedge $glbnet$w25':
+Info: curr total
+Info:  0.5  0.5  Source v32ef04.v2d8c02.sobel_TRELLIS_FF_Q.Q
+Info:  5.3  5.8    Net v00924b_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z_A[3] (21,42) -> (117,42)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT_LUT4_Z_D_LUT4_Z.C
+Info:                Defined in:
+Info:                  main.v:107.7-107.10
+Info:  0.2  6.0  Source v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT_LUT4_Z_D_LUT4_Z.F
+Info:  0.6  6.6    Net v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT_LUT4_Z_D[2] (117,42) -> (117,42)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  6.9  Source v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0  6.9    Net v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_ALUT (117,42) -> (117,42)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:133.22-133.24
+Info:  0.2  7.0  Source v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  1.3  8.3    Net v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10_D[2] (117,42) -> (122,45)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  8.6  Source v50aef8.vbdbe11.vf775c2.f_addr_LUT4_Z_10.F
+Info:  0.1  8.7    Net v50aef8.w34[10] (122,45) -> (122,45)
+Info:                Sink v50aef8.vbdbe11.vf775c2.f_addr_q_TRELLIS_FF_Q_10.DI
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:1868.14-1868.17
+Info:  0.0  8.7  Setup v50aef8.vbdbe11.vf775c2.f_addr_q_TRELLIS_FF_Q_10.DI
+Info: 1.4 ns logic, 7.3 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$v79e9a8$TRELLIS_IO_OUT' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source v50aef8.vb01cee.vebffa0.v21516f.addr_b_q_TRELLIS_FF_Q_9.Q
+Info:  3.8  4.3    Net v50aef8.vb01cee.vebffa0.v21516f.addr_b_q[1] (38,44) -> (33,14)
+Info:                Sink v50aef8.vb01cee.vebffa0.v21516f.ram.0.336$DPRAM_COMB0.B
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2124.10-2132.3
+Info:                  main.v:2322.23-2322.31
+Info:                  main.v:2292.18-2300.3
+Info:                  main.v:1903.10-1913.3
+Info:  0.2  4.6  Source v50aef8.vb01cee.vebffa0.v21516f.ram.0.336$DPRAM_COMB0.F
+Info:  0.9  5.5    Net v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3[2] (33,14) -> (32,15)
+Info:                Sink v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_3.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  5.9  Source v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_3.OFX
+Info:  0.0  5.9    Net v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_2_Z_PFUMX_ALUT_Z (32,15) -> (32,15)
+Info:                Sink v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D.FXA
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.34-141.36
+Info:  0.2  6.2  Source v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D.OFX
+Info:  0.9  7.1    Net v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_Z_PFUMX_ALUT_Z_L6MUX21_D1_Z[0] (32,15) -> (32,18)
+Info:                Sink v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_Z_PFUMX_ALUT_Z_L6MUX21_D1_Z_LUT4_A.A
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  7.3  Source v50aef8.vb01cee.vebffa0.v21516f.ram.0.336_DO_3_LUT4_D_Z_PFUMX_ALUT_Z_L6MUX21_D1_Z_LUT4_A.F
+Info:  1.5  8.8    Net v50aef8.vb01cee.vebffa0.v21516f.ram.0.272_DO_3_LUT4_D_Z_PFUMX_ALUT_Z_L6MUX21_D1_Z_LUT4_A_Z[3] (32,18) -> (29,23)
+Info:                Sink v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D_PFUMX_Z_2_ALUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  9.1  Source v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D_PFUMX_Z_2_ALUT_LUT4_Z.F
+Info:  0.0  9.1    Net v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D_PFUMX_Z_2_ALUT (29,23) -> (29,23)
+Info:                Sink v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D_PFUMX_Z_2_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:133.22-133.24
+Info:  0.2  9.2  Source v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D_PFUMX_Z_2_BLUT_LUT4_Z.OFX
+Info:  1.9 11.1    Net v5ec133.din_L6MUX21_Z_3_D0_PFUMX_Z_BLUT_LUT4_Z_D[1] (29,23) -> (24,33)
+Info:                Sink v5ec133.din_L6MUX21_Z_3_D1_PFUMX_Z_BLUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4 11.5  Source v5ec133.din_L6MUX21_Z_3_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0 11.5    Net v5ec133.din_L6MUX21_Z_3_D1 (24,33) -> (24,33)
+Info:                Sink v5ec133.din_L6MUX21_Z_3_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.38-141.40
+Info:  0.2 11.8  Source v5ec133.din_L6MUX21_Z_3_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  2.4 14.2    Net w41[15] (24,33) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.B
+Info:                Defined in:
+Info:                  main.v:103.14-103.17
+Info:  0.4 14.6  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0 14.6    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0 14.6  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0 14.6    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[2] (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 14.7  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0 14.7    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0 14.7  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0 14.7    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[4] (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 14.7  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0 14.7    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_FCI_INT (19,14) -> (19,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0 14.7  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0 14.7    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT_S0_CCU2C_S0_COUT[6] (19,14) -> (20,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4017.20-4017.40
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 14.8  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0 14.8    Net v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_FCI_INT (20,14) -> (20,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0 14.8  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D_Z_LUT4_Z_B_LUT4_C_1_Z_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0 14.8    Net $nextpnr_CCU2C_38$CIN (20,14) -> (20,14)
+Info:                Sink $nextpnr_CCU2C_38$CCU2_COMB0.FCI
+Info:  0.4 15.3  Source $nextpnr_CCU2C_38$CCU2_COMB0.F
+Info:  1.1 16.4    Net v00924b_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z_A[1] (20,14) -> (24,14)
+Info:                Sink v50aef8.vb01cee.v65c4d4.empty_LUT4_D.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2 16.6  Source v50aef8.vb01cee.v65c4d4.empty_LUT4_D.F
+Info:  2.4 19.0    Net v24f7b7_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z_B[2] (24,14) -> (47,11)
+Info:                Sink v692cf8_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4 19.4  Source v692cf8_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0 19.4    Net v692cf8_L6MUX21_Z_D1 (47,11) -> (47,11)
+Info:                Sink v692cf8_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.38-141.40
+Info:  0.2 19.6  Source v692cf8_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  2.2 21.8    Net v692cf8$TRELLIS_IO_OUT (47,11) -> (60,0)
+Info:                Sink v692cf8$tr_io.I
+Info:                Defined in:
+Info:                  main.v:129.7-129.10
+Info: 4.7 ns logic, 17.1 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$v79e9a8$TRELLIS_IO_OUT' -> 'posedge $glbnet$w25':
+Info: curr total
+Info:  0.5  0.5  Source v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q_7.Q
+Info:  1.2  1.7    Net v50aef8.vb01cee.v65c4d4.r_ptr_q[4] (39,40) -> (40,43)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_grey_LUT4_Z_3.C
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2133.18-2146.3
+Info:                  main.v:2215.28-2215.35
+Info:                  main.v:1903.10-1913.3
+Info:  0.2  2.0  Source v50aef8.vb01cee.v65c4d4.r_grey_LUT4_Z_3.F
+Info:  0.1  2.1    Net v50aef8.vb01cee.v65c4d4.r_grey[4] (40,43) -> (40,43)
+Info:                Sink v50aef8.vb01cee.v65c4d4.r_grey_sync_temp_TRELLIS_FF_Q_7.DI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.0  2.1  Setup v50aef8.vb01cee.v65c4d4.r_grey_sync_temp_TRELLIS_FF_Q_7.DI
+Info: 0.8 ns logic, 1.3 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$w25' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source vc07f95.v385830.vb70907.state_q_TRELLIS_FF_Q.Q
+Info:  1.2  1.7    Net vc07f95.w12[1] (66,5) -> (65,4)
+Info:                Sink vc07f95.v385830.vb70907.temp_LUT4_Z_C_LUT4_Z.B
+Info:                Defined in:
+Info:                  main.v:225.10-245.3
+Info:                  main.v:439.13-439.16
+Info:  0.2  1.9  Source vc07f95.v385830.vb70907.temp_LUT4_Z_C_LUT4_Z.F
+Info:  0.4  2.4    Net vc07f95.v385830.vb70907.sda_q_LUT4_A_Z_PFUMX_ALUT_Z[1] (65,4) -> (65,4)
+Info:                Sink vc07f95.v385830.vb70907.temp_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  2.6  Source vc07f95.v385830.vb70907.temp_LUT4_Z.F
+Info:  3.6  6.2    Net vc07f95.v385830.vb70907.temp (65,4) -> (119,0)
+Info:                Sink vc07f95.v385830.vb70907.tristate.T
+Info:                Defined in:
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1084.4-1096.3
+Info:                  main.v:1284.9-1284.13
+Info:                  main.v:571.10-581.3
+Info: 1.0 ns logic, 5.2 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$w25' -> 'posedge $glbnet$v40f83b$TRELLIS_IO_IN':
+Info: curr total
+Info:  0.5  0.5  Source vc07f95.vdb3cff.v65c4d4.w_ptr_q_TRELLIS_FF_Q_7.Q
+Info:  1.2  1.7    Net vc07f95.vdb3cff.w10[6] (100,5) -> (99,3)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C_LUT4_Z_1_C_LUT4_Z_1.A
+Info:                Defined in:
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1580.14-1580.17
+Info:                  main.v:592.10-601.3
+Info:  0.2  1.9  Source vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C_LUT4_Z_1_C_LUT4_Z_1.F
+Info:  0.6  2.5    Net vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C_LUT4_Z_1_C[2] (99,3) -> (99,3)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C_LUT4_Z_1.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  2.8  Source vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C_LUT4_Z_1.F
+Info:  0.7  3.5    Net vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1_C[2] (99,3) -> (101,4)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  3.7  Source vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A_LUT4_Z_1.F
+Info:  0.6  4.3    Net vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z_A[1] (101,4) -> (101,4)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  4.6  Source vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D_LUT4_Z.F
+Info:  0.7  5.3    Net vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_LUT4_Z_D[2] (101,4) -> (102,2)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  5.6  Source vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_LUT4_Z.F
+Info:  0.1  5.7    Net vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI (102,2) -> (102,2)
+Info:                Sink vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9.DI
+Info:                Defined in:
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1610.18-1623.3
+Info:                  main.v:1704.4-1717.7
+Info:                  main.v:592.10-601.3
+Info:  0.0  5.7  Setup vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9.DI
+Info: 1.7 ns logic, 4.0 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$w25' -> 'posedge $glbnet$v79e9a8$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.5  0.5  Source v50aef8.vb01cee.v65c4d4.w_ptr_q_TRELLIS_FF_Q_3.Q
+Info:  1.2  1.7    Net v50aef8.vb01cee.w8[2] (45,41) -> (42,43)
+Info:                Sink v50aef8.vb01cee.v65c4d4.w_grey_LUT4_Z_10.D
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2101.14-2101.16
+Info:                  main.v:1903.10-1913.3
+Info:  0.2  2.0  Source v50aef8.vb01cee.v65c4d4.w_grey_LUT4_Z_10.F
+Info:  0.1  2.1    Net v50aef8.vb01cee.v65c4d4.w_grey[7] (42,43) -> (42,43)
+Info:                Sink v50aef8.vb01cee.v65c4d4.w_grey_sync_temp_TRELLIS_FF_Q_4.DI
+Info:                Defined in:
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2133.18-2146.3
+Info:                  main.v:2184.29-2184.35
+Info:                  main.v:1903.10-1913.3
+Info:  0.0  2.1  Setup v50aef8.vb01cee.v65c4d4.w_grey_sync_temp_TRELLIS_FF_Q_4.DI
+Info: 0.8 ns logic, 1.3 ns routing
+
+Info: Max frequency for clock                    '$glbnet$w25': 73.93 MHz (PASS at 12.00 MHz)
+Info: Max frequency for clock  '$glbnet$v40f83b$TRELLIS_IO_IN': 50.56 MHz (PASS at 12.00 MHz)
+Info: Max frequency for clock '$glbnet$v79e9a8$TRELLIS_IO_OUT': 96.41 MHz (PASS at 12.00 MHz)
+
+Info: Max delay <async>                                -> <async>                               : 0.25 ns
+Info: Max delay <async>                                -> posedge $glbnet$v40f83b$TRELLIS_IO_IN : 8.47 ns
+Info: Max delay <async>                                -> posedge $glbnet$v79e9a8$TRELLIS_IO_OUT: 6.35 ns
+Info: Max delay <async>                                -> posedge $glbnet$w25                   : 10.72 ns
+Info: Max delay posedge $glbnet$v40f83b$TRELLIS_IO_IN  -> <async>                               : 9.54 ns
+Info: Max delay posedge $glbnet$v40f83b$TRELLIS_IO_IN  -> posedge $glbnet$w25                   : 8.68 ns
+Info: Max delay posedge $glbnet$v79e9a8$TRELLIS_IO_OUT -> <async>                               : 21.78 ns
+Info: Max delay posedge $glbnet$v79e9a8$TRELLIS_IO_OUT -> posedge $glbnet$w25                   : 2.10 ns
+Info: Max delay posedge $glbnet$w25                    -> <async>                               : 6.22 ns
+Info: Max delay posedge $glbnet$w25                    -> posedge $glbnet$v40f83b$TRELLIS_IO_IN : 5.68 ns
+Info: Max delay posedge $glbnet$w25                    -> posedge $glbnet$v79e9a8$TRELLIS_IO_OUT: 2.09 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 161 endpoint(s)
+Info:          + represents [1,161) endpoint(s)
+Info: [ 63554,  64497) |**+
+Info: [ 64497,  65440) |***+
+Info: [ 65440,  66383) |+
+Info: [ 66383,  67326) |+
+Info: [ 67326,  68269) |+
+Info: [ 68269,  69212) |+
+Info: [ 69212,  70155) |*+
+Info: [ 70155,  71098) |***+
+Info: [ 71098,  72041) |****+
+Info: [ 72041,  72984) |+
+Info: [ 72984,  73927) |***+
+Info: [ 73927,  74870) |*********+
+Info: [ 74870,  75813) |*********+
+Info: [ 75813,  76756) |*******+
+Info: [ 76756,  77699) |**********+
+Info: [ 77699,  78642) |************************+
+Info: [ 78642,  79585) |****************************************************+
+Info: [ 79585,  80528) |************************************************************ 
+Info: [ 80528,  81471) |************************************+
+Info: [ 81471,  82414) |***+
+
+Info: Program finished normally.

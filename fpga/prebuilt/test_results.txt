@@ -1,0 +1,108 @@
+===== python firmware/sim/test_usb.py   (exit code 0)
+---- hub: MicroPython hub over the FPGA bridge
+PASS  telemetry at 10 lines per second: 40 lines in 4 s
+PASS  heading follows the scene: 77.8 deg at 4 s (truth 78.0)
+PASS  charge and temperature: 84 % / 77 % / 23 %, 25.0 C
+PASS  button B1 press and release reported: [['B1', '1'], ['B1', '0']], event [['B1']]
+PASS  sim press B2: reported, recording flag set
+PASS  servo 3 -> 1700 us on the hub; servo 9 refused: servo 1-6, 500-2500 us or off
+PASS  follow on: servo 1 at 1298 us for 20 deg pitch (1300)
+PASS  pointing straight down: dot at (4, 2), inside
+PASS  level: dot on the rim at the bottom (1, 226)
+PASS  overlay dot batt: mask 0x21, heading row empty, charge row '84% 76% 18%'
+PASS  zero: height 1.99 m -> 0.00 m
+PASS  stream 2: 6 lines in 3 s; stream off: none
+PASS  wifi <ssid> <password>: connecting -> connected HomeNet 192.168.1.57
+PASS  wifi scan lists networks
+PASS  mic on: 16000 samples in 1 s, peak 3999, sequence unbroken
+PASS  spk: 3200 bytes reached the speaker, level 8000; tone 880 Hz 200 ms
+PASS  unknown command refused; help lists the commands
+PASS  link: 14851 frames, 0 CRC errors
+PASS  overlay text and dot from the hub equal the Python layout (fcl_osd.py) on 702 frames
+PASS  holding the power button 2 s: PWR_OFF event, power released
+---- hub: Python stand-in
+PASS  telemetry at 10 lines per second: 40 lines in 4 s
+PASS  heading follows the scene: 78.0 deg at 4 s (truth 78.0)
+PASS  charge and temperature: 84 % / 77 % / 23 %, 25.0 C
+PASS  button B1 press and release reported: [['B1', '1'], ['B1', '0']], event [['B1']]
+PASS  sim press B2: reported, recording flag set
+PASS  servo 3 -> 1700 us on the hub; servo 9 refused: servo 1-6, 500-2500 us or off
+PASS  follow on: servo 1 at 1300 us for 20 deg pitch (1300)
+PASS  pointing straight down: dot at (0, 0), inside
+PASS  level: dot on the rim at the bottom (0, 226)
+PASS  overlay dot batt: mask 0x21, heading row empty, charge row '84% 76% 18%'
+PASS  zero: height 2.00 m -> 0.00 m
+PASS  stream 2: 6 lines in 3 s; stream off: none
+PASS  wifi <ssid> <password>: connecting -> connected HomeNet 192.168.1.57
+PASS  wifi scan lists networks
+PASS  mic on: 16000 samples in 1 s, peak 3999, sequence unbroken
+PASS  spk: 3200 bytes reached the speaker, level 8000; tone 880 Hz 200 ms
+PASS  unknown command refused; help lists the commands
+PASS  link: 702 frames, 0 CRC errors
+PASS  overlay text and dot from the hub equal the Python layout (fcl_osd.py) on 702 frames
+PASS  holding the power button 2 s: PWR_OFF event, power released
+---- C hub not built here (make -C firmware/sim all): only the Python stand-in was tested
+ALL CHECKS PASSED
+
+===== python firmware/sim/test_filter.py   (exit code 0)
+PASS  heading error while turning 18 deg/s and tilting: max 1.27 deg (limit 5)
+PASS  pitch / roll error: max 0.03 / 0.03 deg (limit 3)
+PASS  height after a 3 m climb: 3.00 m
+PASS  gyro bias learned in the first second: 0.40 -0.31 0.50 deg/s (true 0.40 -0.30 0.50)
+PASS  up vector stays at unit length: 1.00005
+PASS  demo loop (swing to straight down and back): heading 2.21, pitch 0.24, roll 1.20 deg max
+PASS  pitch while pointing straight down: within 0.31 deg of the truth
+PASS  two minutes still: heading / pitch / roll stay within 0.23 / 0.03 / 0.05 deg
+ALL CHECKS PASSED
+
+===== python firmware/sim/test_magcal.py   (exit code 0)
+PASS  uncalibrated, with a hard-iron field of half the earth's: heading up to 115 deg wrong
+PASS  automatic, demo loop: after a minute the heading is within 1.5 deg
+PASS  offset found 152 -100 79 counts (true 150 -100 80)
+PASS  automatic, level pan only: heading within 2.0 deg after two turns (was up to 179)
+PASS  level pan: the offset across the pan is found (150 -101); the vertical part is left alone (2, not seen)
+PASS  manual: progress lines while turning, then finished by itself: $M,manual,226,-150,120,475,0.4,60,6,fixed
+PASS  manual: offset 150 -100 80 counts (true 150 -100 80), heading within 1.3 deg
+PASS  calibration stored: {'off': [150.4, -99.8, 79.9], 'radius': 316.4, 'auto': False}
+PASS  after a restart the stored calibration is used at once: heading within 0.6 deg from the start
+PASS  no hard iron: automatic calibration leaves it alone (offset 2 0 -1, heading within 2.2 deg)
+PASS  magcal auto off stops the automatic fit; reset clears it; a bad argument is refused
+ALL CHECKS PASSED
+
+===== python fpga/bridge/test_bridge.py   (exit code 0)
+PASS  Verilog sent 44 frames, 0 with a bad CRC
+PASS  frames of type 0x20: 1 (model 1), contents equal
+PASS  frames of type 0x21: 11 (model 11), contents equal
+PASS  frames of type 0x22: 4 (model 4), contents equal
+PASS  frames of type 0x23: 1 (model 1), contents equal
+PASS  frames of type 0x24: 3 (model 3), contents equal
+PASS  frames of type 0x25: 1 (model 1), contents equal
+PASS  frames of type 0x26: 1 (model 1), contents equal
+PASS  frames of type 0x27: 1 (model 1), contents equal
+PASS  frames of type 0x2A: 1 (model 1), contents equal
+PASS  scheduled read slot 0: 7 frames (model 7), contents equal
+PASS  scheduled read slot 1: 5 frames (model 5), contents equal
+PASS  scheduled read slot 2: 2 frames (model 2), contents equal
+PASS  frames of type 0x31: 3 (model 3), contents equal
+PASS  frames of type 0x32: 3 (model 3), contents equal
+PASS  I2C: WHO_AM_I register read, a written register reads back (0x0F)
+PASS  I2C: missing device reports status 1 with zero data
+PASS  I2C: 16-bit register addresses (read, write, read back 0x40)
+PASS  IMU read every 5 ms: periods 5000..5000 us from the time stamps
+PASS  ADC scan: the 8 inputs arrive in order (0123 1123 2123 3123 4123 5123 6123 7123)
+PASS  buttons: asked once, then B1 pressed and released reported
+PASS  servo pulses: channel 2 [1500] us, channel 5 [2000] us, others off
+PASS  outputs: LED0 on, LED1 off, ranger enabled, shutdown low
+PASS  overlay text written at cells 45..53: 'HELLO 123'
+PASS  overlay dot set to (250, 380), on, inside
+PASS  logic size (Yosys, ECP5): about 2556 LUT4 (3.1 % of the 85F's 83640), 995 flip-flops, 1 block RAM
+ALL CHECKS PASSED
+
+===== python fpga/osd/test_osd.py   (exit code 0)
+PASS  all items, dot in view             230400 pixels, 28955 drawn by the overlay, 0 differ
+PASS  level, dot on the rim, low cell    230400 pixels, 28689 drawn by the overlay, 0 differ
+PASS  dot over the text, empty slot      230400 pixels, 28160 drawn by the overlay, 0 differ
+PASS  dot off, text only                 230400 pixels, 28672 drawn by the overlay, 0 differ
+PASS  dot only                           230400 pixels, 2065 drawn by the overlay, 0 differ
+ALL FRAMES IDENTICAL
+
