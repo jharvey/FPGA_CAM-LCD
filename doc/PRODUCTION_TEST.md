@@ -18,6 +18,8 @@ Multimeter, lab supply with current limit and a USB-C plug breakout, a USB-C cab
 
 ## Checks
 
+Probe points (bare vias on the back) are listed in `doc/PROBE_POINTS.md`.
+
 | # | Check | How | Golden | Pass | Result |
 |---|---|---|---|---|---|
 | P1 | Visual | JLC's AOI / X-ray report for the batch; look over J17, U9, U23, the battery contacts; RV2 empty, RV3 fitted | | nothing odd | |
@@ -27,6 +29,7 @@ Multimeter, lab supply with current limit and a USB-C plug breakout, a USB-C cab
 | P5 | On current | limit 300 mA, press B0 | | near golden, flat, D11 lit | |
 | P6 | Rails | TP3, TP5, TP4 | 3.33 / 2.51 / 1.10 V | ± 3 % | |
 | P7 | ESP32 | USB-C to the PC (charger / PC port from here on); flash MicroPython, copy `firmware/esp32/`, read `ecp5.idcode()` | `0x41113043` | ID matches | |
+| P7a | If P7 fails | ESP32 console on the `TXD0` probe via (`BRINGUP.md` 3.0); `FPGA_DONE` / `FPGA_INITN` / `FLASH_SCK` vias for P8 | | boot messages / config activity seen | |
 | P8 | FPGA flash | write the release bitstream to the config flash; unplug, plug, press B0 | | `FPGA_DONE` high without the ESP32 loading anything | |
 | P9 | Display and camera | look | | backlight on, live picture | |
 | P10 | Buttons and LEDs | B1 toggles the edge view, B2 steps the threshold, D53 / D54 follow the design | | all work | |

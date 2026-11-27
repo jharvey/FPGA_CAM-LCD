@@ -37,6 +37,7 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 | `doc/constraints/schematic_freeze.md` | Schematic freeze record and what changed after it |
 | `doc/BRINGUP.md` | First power-up checklist (first article): test points, rails, programming, stage-by-stage checks |
 | `doc/PRODUCTION_TEST.md` | Short per-board check once the design is validated, compared with BRINGUP golden values |
+| `doc/PROBE_POINTS.md` | Bare-copper probe vias on the back: spare FPGA balls, spare ESP32 pins, key nets (map: `doc/probe_points.png`) |
 | `doc/jlc_check_2026-11-22.md` | JLCPCB build check (a dated snapshot; see the note at its top) |
 | `fpga/IO_REMAP.md`, `fpga/ESP32_PINS.md` | FPGA and ESP32 pin maps |
 | `mechanical.kicad_sch` | Mechanical bill of materials (screws, caps, springs, printed and machined parts) |

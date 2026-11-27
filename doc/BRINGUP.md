@@ -54,6 +54,9 @@ Locations are board coordinates in mm from the top-left corner of the PCB (x to 
 | B3 / B4 | ESP32 BOOT / RESET (paperclip holes in the front shell) | (80.1, 22.1) / (53.2, 12.0) front |
 | J4 | backup JTAG pads (Tag-Connect TC2030) | (44.6, 21.5) front |
 
+More probe points (bare vias on the back: CLK_25MHz, PWREN, SHUTDOWN, VBAT_OR, WIFIEN, ESP32 console TXD0 / RXD0, spare
+FPGA balls and ESP32 pins): `doc/PROBE_POINTS.md`.
+
 ### How power-on works (ULX3S circuit)
 
 B0 pulls `PWRBTn` low -> through D16 it pulls `WAKEUPn` low -> Q1 (PNP from VSYS) switches `WKUP` -> D10 / R1 drive
@@ -162,7 +165,7 @@ Only after 1A passes move to a USB charger (Stage 1) and the PC.
 | 1.2 | Input current, off | USB-C meter | a few mA (chargers idle, no cells) | |
 | 1.3 | +5V | TP7 | 4.5-4.8 V | |
 | 1.4 | VSYS | TP6 (front) | about TP7 minus 0.1 V | |
-| 1.5 | Rails off | TP3, TP5, TP4; D11 dark | 0 V (PWREN low until B0) | |
+| 1.5 | Rails off | TP3, TP5, TP4; D11 dark; `PWREN` probe via | 0 V (PWREN low until B0) | |
 | 1.6 | VADC / REF | U20 output (C69), U17 output (`VREF_SENSE`, R43) | 3.3 V / 2.50 V (these run from VSYS, always on) | |
 | 1.7 | Charge LEDs | D2-D4 | undefined with no cells (may flicker): ignore for now | |
 
@@ -170,17 +173,18 @@ Only after 1A passes move to a USB charger (Stage 1) and the PC.
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
-| 2.1 | Press B0 briefly | | D11 lights and stays lit after release | |
+| 2.1 | Press B0 briefly; scope on the `PWRBTn` and `PWREN` probe vias | | `PWRBTn` low while pressed; `PWREN` goes high and stays high after release; D11 lit | |
 | 2.2 | +3V3 | TP3 | 3.30-3.36 V | |
 | 2.3 | +2V5 | TP5 | 2.48-2.55 V | |
 | 2.4 | +1V1 | TP4 | 1.08-1.12 V | |
 | 2.5 | Bank 0/7 supply | `2V5_3V3` at C47 | 3.3 V (RV3) | |
 | 2.6 | Current, blank FPGA + ESP32 idle | USB-C meter | record (expect roughly 100-250 mA at 5 V) | |
 | 2.7 | Nothing hot | finger / thermal camera on U1, U3-U5, U9, U23 | warm at most | |
-| 2.8 | 25 MHz clock | scope on Y1 output (`CLK_25MHz`) | 25.000 MHz, 3.3 V swing | |
+| 2.8 | 25 MHz clock | scope on the `CLK_25MHz` probe via (52.65, 40.65), ground spring to TP1 | 25.000 MHz, 3.3 V swing | |
 | 2.9 | Rail ripple | scope on TP3 / TP4, 20 MHz BW | < 30 mV pk-pk | |
-| 2.10 | FPGA not configured yet | `FPGA_DONE` (R32, ball Y3) | low (flash empty) | |
-| 2.11 | SD supply | `SD3V3` at C15 | 3.3 V (through R38 0.47 Ω) | |
+| 2.10 | FPGA not configured yet | `FPGA_DONE` probe via (45.6, 27.7) or R32 | low (flash empty) | |
+| 2.10a | FPGA tries its flash | scope on the `FLASH_SCK` / `FLASH_nCS` probe vias right after B0; `FPGA_INITN` via | SPI clock bursts as the FPGA reads the empty flash; `INITN` record (it drops low when the read fails) | |
+| 2.11 | SD supply | `SD3V3` probe via or C15 | 3.3 V (through R38 0.47 Ω) | |
 
 To switch off before the firmware can: unplug USB (and remove the cell in later stages).
 
@@ -188,6 +192,7 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
+| 3.0 | ESP32 console | 3.3 V USB-serial adapter: its RX to the `TXD0` probe via, GND to TP2; 115200 baud; tap B4. `WIFIEN` probe via | ROM boot messages appear (they also show when USB does not enumerate); `WIFIEN` 3.3 V, low while B4 is held | |
 | 3.1 | USB enumerates | PC device list | Espressif USB JTAG/serial debug unit (303A:1001), a COM / ttyACM port | |
 | 3.2 | Enter download mode if needed | hold B3 (BOOT), tap B4 (RESET), release B3 | port re-appears in download mode | |
 | 3.3 | Flash MicroPython | `esptool.py --chip esp32s3 erase_flash`, then `write_flash 0 <ESP32_GENERIC_S3-SPIRAM .bin>` | completes, reset, REPL on the port | |
@@ -200,10 +205,10 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
-| 4.1 | Load the video design to SRAM | FTP `put main.bit` (from `python fpga/build.py`) | completes; `FPGA_DONE` goes high | |
+| 4.1 | Load the video design to SRAM | FTP `put main.bit` (from `python fpga/build.py`) | completes; `FPGA_DONE` probe via goes high | |
 | 4.2 | Board stays on | | D11 still lit. If the board switches off when the design loads, `SHUTDOWN` (D11 ball) is floating high: drive it low in the design | |
-| 4.3 | Backlight enable | `GP13` (R18 / U8 pin 4) | 3.3 V (the design holds it at 1) | |
-| 4.4 | Backlight boost | `LCD_BL_A` at D1 cathode; `LCD_BL_K` at R19 | A: several volts above VSYS (record); K: about 0.2 V (100 mA x 2 Ω) | |
+| 4.3 | Backlight enable | `GP13` probe via (41.25, 53.15) or R18 | 3.3 V (the design holds it at 1) | |
+| 4.4 | Backlight boost | `LCD_BL_A` at D1 cathode; `LCD_BL_K` probe via or R19 | A: several volts above VSYS (record); K: about 0.2 V (100 mA x 2 Ω) | |
 | 4.5 | Backlight current | USB-C meter, before / after 4.1 | rises by roughly 100 mA x V_LED / VSYS / 0.85 | |
 | 4.6 | Panel lights | look at the TFT | backlight on, then picture (the panel is initialised over SPI by the design) | |
 | 4.7 | Camera clock | J1 pin 8 (`XCLK_J`, after R15) | clock present (record frequency) | |
@@ -217,10 +222,10 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
-| 5.1 | SD card | insert card; REPL `import uftpd; uftpd.mount(); import os; os.listdir('/sd')` | card files listed (4-bit SDMMC) | |
+| 5.1 | SD card | insert card; REPL `import uftpd; uftpd.mount(); import os; os.listdir('/sd')`; scope on the `SD_CLK` / `SD_CMD` / `SD_D0` probe vias if it fails | card files listed (4-bit SDMMC) | |
 | 5.2 | Card detect | REPL `from machine import Pin; Pin(4, Pin.IN).value()` with / without card | changes (R86 pull-up) | |
 | 5.3 | Bitstream to config flash | FTP `put main.bit flash@0` (see `firmware/esp32/upstream_docs`) | write + verify OK | |
-| 5.4 | Boot from flash | unplug, plug, press B0 | picture appears without the ESP32 loading anything; `FPGA_DONE` high | |
+| 5.4 | Boot from flash | unplug, plug, press B0; scope on the `FLASH_SCK` probe via | a burst of SPI clock, then `FPGA_DONE` high and the picture, without the ESP32 loading anything | |
 
 ## Stage 6 - sensors and RTC (before the hub CPU exists)
 
@@ -236,6 +241,8 @@ while the FPGA is **not configured** (unplug and replug, do not load a bitstream
 | 6.5 | RTC crystal | after setting ST bit in RTCSEC, read seconds twice | seconds count | |
 | 6.6 | RTC backup | fit BAT1, check `VBAT` at C54 | about 3.0 V | |
 
+Interrupt lines have probe vias (`IMU_INT1`, `MAG_DRDY`, `BARO_INT`, `TOF_INT`): a scope shows each sensor's data-ready pulses once the hub CPU configures them. The ADC bus has `ADC_SDO` / `ADC_DIN` vias.
+
 With the hub CPU built later: the same values come out in `fcl_hub.last` on the ESP32 (heading, tilt, altitude, distance).
 
 ## Stage 7 - batteries (one cell, then all three)
@@ -247,12 +254,12 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
 | 7.1 | Reverse protection | supply **reversed** on cell 1 contacts for one second, limit 0.1 A | ~0 mA, nothing warm (Q3 AO3401A) | |
-| 7.2 | Cell path | supply correct way on cell 1 | `VBAT1` ≈ 3.7 V; `VBAT_OR` and TP6 (VSYS) ≈ 3.7 V | |
+| 7.2 | Cell path | supply correct way on cell 1; `VBAT1` probe via (cell 3: `VBAT3` via; cell 2: Q4 drain) | `VBAT1` ≈ 3.7 V; `VBAT_OR` and TP6 (VSYS) ≈ 3.7 V | |
 | 7.3 | Power on from battery | press B0 | rails as in stage 2; record supply current | |
 | 7.4 | Lowest working voltage | lower the supply in 0.05 V steps | +3V3 stays in regulation down to about 3.4-3.5 V on VSYS (ROADMAP); record where it drops | |
 | 7.5 | Ideal-diode OR | supply on cell 1 at 3.7 V and cell 2 at 4.0 V | VSYS follows the higher one; no current from cell 2 into cell 1 | |
-| 7.6 | Charging | plug USB, real cell in slot 1 | D2 lights; cell voltage rises toward 4.2 V; charge current at the cell (record; set by R-PROG) | |
-| 7.7 | Repeat for cells 2 and 3 | | D3 / D4, same results | |
+| 7.6 | Charging | plug USB, real cell in slot 1; `CHG1_CHRGn` probe via | D2 lights, `CHG1_CHRGn` low; cell voltage rises toward 4.2 V; charge current at the cell (record; set by R-PROG) | |
+| 7.7 | Repeat for cells 2 and 3 | `CHG2_CHRGn` / `CHG3_CHRGn` probe vias; `PROG3` probe via on cell 3 | D3 / D4, same results; `PROG3` voltage is proportional to the charge current (1.0 V = the full set current of the TP4056) | |
 | 7.8 | USB + cells | all three cells, USB in | VSYS from USB (+5V path, U16) | |
 | 7.9 | Cell sense dividers | `VBAT1_SENSE`..`VBAT3_SENSE` at U21 | 0.544 x cell voltage (47k / 56k) | |
 | 7.10 | NTCs | `TEMP_BAT_CELL1..3` at U21 | about 1.25 V at 25 C (10k / 10k from 2.5 V) | |
@@ -261,8 +268,8 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
-| 8.1 | Speaker | speaker on J8; REPL: enable `AMP_SD` (GPIO47 high), play a tone over I2S (BCLK 35, WS 36, DOUT 37) | tone heard | |
-| 8.2 | Microphone | I2S read on GPIO38 | samples change when you speak | |
+| 8.1 | Speaker | speaker on J8; REPL: enable `AMP_SD` (GPIO47 high), play a tone over I2S (BCLK 35, WS 36, DOUT 37) | tone heard; scope shows clocks on the `I2S_BCLK` / `I2S_WS` probe vias, data on `I2S_SPK`, `AMP_SD` high | |
+| 8.2 | Microphone | I2S read on GPIO38 | samples change when you speak (data on the `I2S_MIC` probe via) | |
 | 8.3 | Servo outputs | needs the hub CPU or a test bitstream: 1-2 ms pulse on J_SRV1..6 pin 1 | 50 Hz pulses | |
 | 8.4 | Power off | needs `SHUTDOWN` driven high by the FPGA (hub CPU: hold B0 2 s) | D11 goes dark, rails 0 V, < 1 mA from the cell | |
 
