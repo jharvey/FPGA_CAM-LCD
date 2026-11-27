@@ -88,7 +88,8 @@ def svg(pts, size=640):
         mx, my = P((a["x"] + b["x"]) / 2, (a["y"] + b["y"]) / 2)
         ox, oy = mx - size / 2, my - size / 2                    # push the label away from the middle of the drawing
         d = math.hypot(ox, oy) or 1.0
-        o.append('<text x="%.1f" y="%.1f" text-anchor="middle" fill="#1c2321">%.2f m</text>' % (mx + 22 * ox / d, my + 22 * oy / d + 5, length))
+        off = 22 + 20 * abs(ox) / d                              # further out sideways: the text is wider than it is high
+        o.append('<text x="%.1f" y="%.1f" text-anchor="middle" fill="#1c2321">%.2f m</text>' % (mx + off * ox / d, my + off * oy / d + 5, length))
     ux, uy = P(0, 0)
     o.append('<circle cx="%.1f" cy="%.1f" r="5" fill="none" stroke="#66706c" stroke-width="2"/>'
              '<text x="%.1f" y="%.1f" fill="#66706c">unit</text>' % (ux, uy, ux + 9, uy + 5))

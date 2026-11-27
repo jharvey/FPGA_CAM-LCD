@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" font-family="system-ui,sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#fff"/>
 <polygon points="570.0,121.1 569.9,518.5 73.4,518.9 70.0,124.9" fill="#e6f2ec" stroke="#0a7d5a" stroke-width="2.5" stroke-linejoin="round"/>
-<text x="591.9" y="324.8" text-anchor="middle" fill="#1c2321">2.40 m</text>
-<text x="321.8" y="545.7" text-anchor="middle" fill="#1c2321">3.00 m</text>
-<text x="49.7" y="327.0" text-anchor="middle" fill="#1c2321">2.38 m</text>
+<text x="611.9" y="324.8" text-anchor="middle" fill="#1c2321">2.40 m</text>
+<text x="321.8" y="545.9" text-anchor="middle" fill="#1c2321">3.00 m</text>
+<text x="29.7" y="327.2" text-anchor="middle" fill="#1c2321">2.38 m</text>
 <text x="320.0" y="106.0" text-anchor="middle" fill="#1c2321">3.02 m</text>
 <circle cx="321.5" cy="319.7" r="5" fill="none" stroke="#66706c" stroke-width="2"/><text x="330.5" y="324.7" fill="#66706c">unit</text>
 <circle cx="570.0" cy="121.1" r="4.5" fill="#0a7d5a"/><text x="578.0" y="113.1" font-weight="700" fill="#0a7d5a">1</text>
