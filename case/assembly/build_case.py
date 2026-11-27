@@ -171,6 +171,8 @@ def classify(board):
             springs.append(("spring" if FIXED else "bt22", s))   # MY-18650-05-J springs: kept only for fixed cells
         elif x0 < -2 and z1 - z0 > 20:
             springs.append(("block", s))     # left aluminium blocks (footprint 3D models)
+        elif x1 > W + 2 and z1 - z0 > 20:
+            springs.append(("blockR", s))    # right block model on the board: drawn by make_right_block() instead
         elif z0 < -10 and x0 > 60 and 28 < y0 < 30:
             springs.append(("bt22", s))      # BT22 spring: replaced by the right block
         else:
