@@ -7,8 +7,8 @@ that talk over a UART.
 |---|---|---|---|
 | `common/` | both (portable C) | sensor drivers, attitude / heading fusion, battery monitor, buttons, power-off, link protocol | simulated: all checks pass |
 | `hub/` | soft RISC-V CPU inside the ECP5 (LiteX) | glue from `common/` to the FPGA's I2C, SPI, GPIO, PWM, UART | draft, not built (needs a LiteX SoC) |
-| `esp32/` | ESP32-S3 (U9) | link to the hub, Wi-Fi status page, SD logging, speaker beeps | **builds** with PlatformIO, not run |
-| `sim/` | your PC / the VM | runs `common/` against modelled sensors with a scripted 32 s scenario | 12 checks, all pass |
+| `esp32/` | ESP32-S3 (U9) | **emard's esp32ecp5** (ECP5 JTAG programmer over Wi-Fi FTP, MicroPython) set to this board's pins, plus `fcl_hub.py` for the hub link | not run; see `esp32/README.md` |
+| `sim/` | your PC / the VM | runs `common/` against modelled sensors with a scripted 32 s scenario; `test_link_py.py` decodes the hub's link bytes with `esp32/fcl_hub.py` | 12 + 5 checks, all pass |
 
 Why two halves: the IMU (ICM-42688-P), compass (LIS2MDL), barometer (LPS22DF), distance sensor (VL53L1X), battery ADC
 (AD7689), buttons, LEDs and servo outputs all wire to the FPGA (`fpga/IO_REMAP.md`,
@@ -27,8 +27,7 @@ Why two halves: the IMU (ICM-42688-P), compass (LIS2MDL), barometer (LPS22DF), d
 - **Servo 1:** follows pitch to keep a camera level (demo), until the ESP32 sends a servo command.
 - **Link** (`common/link.h`): framed, CRC-checked messages. Telemetry 20 Hz hub -> ESP32; events (buttons, low cell,
   power-off); commands (servo, mode) ESP32 -> hub.
-- **ESP32:** Wi-Fi access point `FCL-xxxx` (password `monocular`, change it) with a live status page and servo / mode
-  controls; CSV log on the microSD card while recording; beeps on the speaker for buttons, low cell and power-off.
+- **ESP32:** keeps the ULX3S programmer role (esp32ecp5: load or flash the FPGA over Wi-Fi FTP); `fcl_hub.py` adds the telemetry, events and commands.
 
 ## Run the simulator
 
@@ -43,13 +42,9 @@ Needs gcc and Python with matplotlib. The scenario: 2 s still, then turning at 1
 rolling +-10 deg, a 3 m climb, a moving target for the distance sensor, cell 3 running down past 3.4 V, B1 / B2
 presses, a mode and a servo command from the ESP32, and B0 held 2 s.
 
-## Build the ESP32 firmware
+## ESP32 firmware
 
-```
-cd firmware/esp32
-pio run                 # build
-pio run -t upload       # flash through the USB-C port
-```
+MicroPython files; see `esp32/README.md` for install.
 
 ## Before it runs on the board (CHECK items)
 

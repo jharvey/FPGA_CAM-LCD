@@ -5,7 +5,7 @@
  * a cell running down, button presses, a command from the ESP32, and a long press on the power button.
  * The ESP32 side of the link is played by a frame parser here.
  *
- *     make -C firmware/sim && ./firmware/sim/fcl_sim out.csv      (exit code 0 = all checks pass)
+ *     make -C firmware/sim && ./firmware/sim/fcl_sim out.csv [link.bin]   (exit code 0 = all checks pass)
  */
 #include "../common/app.h"
 #include "../common/board.h"
@@ -189,8 +189,10 @@ static link_parser_t esp;
 static telemetry_t esp_last;
 static int n_telem, ev_seen[8];
 static double ev_time[8];
+static FILE *link_dump;                                  /* optional: every byte the hub sends (argv[2]) */
 void hal_link_tx(const uint8_t *d, size_t n)
 {
+    if (link_dump) fwrite(d, 1, n, link_dump);
     for (size_t i = 0; i < n; i++)
         if (link_parser_feed(&esp, d[i]))
         {
@@ -218,6 +220,7 @@ int main(int argc, char **argv)
     FILE *csv = fopen(argc > 1 ? argv[1] : "fcl_sim.csv", "w");
     fprintf(csv, "t,hd_true,hd_est,pt_true,pt_est,rl_true,rl_est,alt_true,alt_est,tof_true,tof_mm,cell3_v,flags,mode,servo1_us,power_hold\n");
     static app_t a;
+    if (argc > 2) link_dump = fopen(argv[2], "wb");
     link_parser_init(&esp);
     app_init(&a);
     float e_hd = 0, e_pt = 0, e_rl = 0;
@@ -244,6 +247,7 @@ int main(int argc, char **argv)
                     s.alt, a.alt_m, s.tof_mm, a.tof_mm, a.cell_v[2], a.flags, a.mode, servo[0], power_hold);
     }
     fclose(csv);
+    if (link_dump) fclose(link_dump);
 
     int fail = 0;
 #define CHECK(cond, ...) do { int ok_ = (cond); printf("%s  ", ok_ ? "PASS" : "FAIL"); printf(__VA_ARGS__); printf("\n"); fail += !ok_; } while (0)
