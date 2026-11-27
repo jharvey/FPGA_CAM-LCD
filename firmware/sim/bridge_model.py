@@ -30,6 +30,8 @@ class BridgeModel:
         self.a_cnt = 0
         self.servo = [0] * 6
         self.led, self.tof_xshut, self.shutdown = 0, 0, 0
+        self.aux = 0                        # OUT bits 4..7: video keys view / threshold up / down, ESP32 owns B1 B2
+        self.edges, self.threshold = False, 0       # what the camera design's key logic would have done with them
         self.osd = [" "] * 450
         self.dot = (240, 240, 0, 0)
         self.btn = self.btn_sent = 0
@@ -89,6 +91,9 @@ class BridgeModel:
                     self.tof_xshut = v >> 2 & 1
                 if m & 8:
                     self.shutdown = v >> 3 & 1
+                new = (self.aux & ~(m >> 4)) | (v >> 4 & m >> 4)
+                self._video_keys(new & ~self.aux)
+                self.aux = new
                 self._send(typ, b"\x00")
             elif typ == OSD_TEXT:
                 a = p[0] | (p[1] & 1) << 8
@@ -103,6 +108,15 @@ class BridgeModel:
                 self._send(INPUT_DATA, self._t() + bytes((self.btn, self.ints)))
             else:
                 self._send(typ, b"\xff")
+
+    def _video_keys(self, pressed):
+        """the full design's video keys act on a press: view toggle, edge threshold +4 / -4 (wrapping)"""
+        if pressed & 1:
+            self.edges = not self.edges
+        if pressed & 2:
+            self.threshold = (self.threshold + 4) & 0xFF
+        if pressed & 4:
+            self.threshold = (self.threshold - 4) & 0xFF
 
     def _adc_scan(self):
         cfg = self.adc[1]
@@ -138,6 +152,8 @@ class BridgeModel:
                     self.a_cnt = self.adc[0]
                     self._send(ADC_DATA, self._t() + self._adc_scan())
             if buttons is not None and buttons != self.btn:
+                if not self.aux & 8:                                # B1 / B2 go straight to the video keys
+                    self._video_keys((buttons & ~self.btn) >> 1 & 3)
                 self.btn = buttons
             if self.btn != self.btn_sent:
                 self.btn_sent = self.btn

@@ -1,6 +1,6 @@
 // Bridge-only FPGA design: fcl_bridge.v on the board's pins, nothing else (no camera, no LCD).
-// For first bring-up of the sensors, buttons, ADC and servos from the ESP32, before the bridge is merged
-// into the camera design.  Pins: fcl_bridge_top.lpf.   Build: python fpga/bridge/build_bridge.py
+// For first bring-up of the sensors, buttons, ADC and servos from the ESP32.  The unit itself runs the full
+// design (fpga/full/fcl_top.v).  Pins: fcl_bridge_top.lpf.   Build: python fpga/bridge/build_bridge.py
 module fcl_bridge_top (
     input  wire clk_25mhz,
     input  wire esp_rx,          // WIFI_TXD: from the ESP32 (GPIO11)

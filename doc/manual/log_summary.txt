@@ -1,0 +1,11 @@
+710 telemetry lines over 70.9 s (10.0 per second)
+pitch       -89.80 ..    12.18 deg
+roll       -174.26 ..   176.81 deg
+height       -0.11 ..     3.03 m
+pressure   1012.87 ..  1013.27 hPa
+distance      0.60 ..     2.40 m   (in range on 710 of 710 lines)
+cell 1     85 % ->  82 %   4050 -> 4022 mV   25 .. 25 C
+cell 2     77 % ->  74 %   3980 -> 3952 mV   26 .. 26 C
+cell 3     25 % ->   8 %   3700 -> 3558 mV   27 .. 29 C
+turned    1152 deg in all
+events    B2 at 29.9 s, PWR_SHORT at 45.0 s

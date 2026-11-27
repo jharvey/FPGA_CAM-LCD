@@ -78,3 +78,5 @@ firmware/sim/link.bin
 fpga/osd/build/
 fpga/bridge/build/
 abc.history
+fpga/full/build/
+doc/manual/_profile/

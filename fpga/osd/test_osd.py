@@ -37,14 +37,16 @@ def env():
     return e
 
 
-def frame(build, t):
+def frame(build, t, vvp="tb.vvp"):
     grid = fcl_osd.osd_compose(t)
     with open(os.path.join(build, "tb_text.hex"), "w") as f:
         f.write("\n".join("%02x" % ord(c) for row in grid for c in row) + "\n")
     inside = 1 if t["flags"] & fcl_osd.TF_DOT_INSIDE else 0
     on = 1 if t["overlay"] & fcl_osd.OV_DOT else 0
-    subprocess.check_call([tool("vvp"), "-n", "tb.vvp", "+dx=%d" % (240 + t["dot_x"]), "+dy=%d" % (240 + t["dot_y"]),
-                           "+on=%d" % on, "+inside=%d" % inside], cwd=build, stdout=subprocess.DEVNULL, env=env())
+    out = subprocess.check_output([tool("vvp"), "-n", vvp, "+dx=%d" % (240 + t["dot_x"]), "+dy=%d" % (240 + t["dot_y"]),
+                                   "+on=%d" % on, "+inside=%d" % inside], cwd=build, env=env()).decode(errors="replace")
+    if "sync errors" in out and "sync errors: 0" not in out:
+        raise SystemExit("hs / vs are not delayed by 3 clocks: " + out.strip())
     v = open(os.path.join(build, "tb_frame.ppm")).read().split()[4:]
     hw = [(int(v[i]), int(v[i + 1]), int(v[i + 2])) for i in range(0, len(v), 3)]
     dot = (240 + t["dot_x"], 240 + t["dot_y"], bool(on), bool(inside))
@@ -58,6 +60,9 @@ def main():
     shutil.copy(os.path.join(HERE, "font16x32.hex"), build)
     subprocess.check_call([tool("iverilog"), "-g2005", "-o", os.path.join(build, "tb.vvp"),
                            os.path.join(HERE, "fcl_osd_tb.v"), os.path.join(HERE, "fcl_osd.v")], env=env())
+    # the same overlay behind fcl_osd_stream.v: position recovered from de / vs, text written from another clock
+    subprocess.check_call([tool("iverilog"), "-g2005", "-o", os.path.join(build, "tbs.vvp"), os.path.join(HERE, "fcl_osd_stream_tb.v"),
+                           os.path.join(HERE, "fcl_osd_stream.v"), os.path.join(HERE, "fcl_osd.v")], env=env())
     base = {"heading": 123.4, "pitch": -78.0, "roll": 4.0, "alt_m": 2.96, "press_pa": 101290, "tof_mm": 1870,
             "soc1": 87, "soc2": 85, "soc3": 23, "temp1_c": 25.0, "temp2_c": 26.1, "temp3_c": 31.4, "overlay": 0x3F,
             "flags": fcl_osd.TF_TOF_VALID | fcl_osd.TF_RECORDING}
@@ -72,11 +77,12 @@ def main():
         t.update(dot_x=x, dot_y=y, flags=(t["flags"] & ~32) | (32 if inside else 0))
         cases.append((name, t))
     fail = 0
-    for name, t in cases:
-        hw, sw = frame(build, t)
+    runs = [(n, t, "tb.vvp") for n, t in cases] + [("video stream: " + n, t, "tbs.vvp") for n, t in cases[:3]]
+    for name, t, vvp in runs:
+        hw, sw = frame(build, t, vvp)
         bad = sum(1 for a, b in zip(hw, sw) if a != b) + abs(len(hw) - len(sw))
         changed = sum(1 for p in sw if p != BG)
-        print("%s  %-34s %d pixels, %d drawn by the overlay, %d differ" % ("PASS" if not bad and len(hw) == 230400 else "FAIL",
+        print("%s  %-48s %d pixels, %d drawn by the overlay, %d differ" % ("PASS" if not bad and len(hw) == 230400 else "FAIL",
                                                                           name, len(hw), changed, bad))
         fail += bool(bad) or len(hw) != 230400
     print("ALL FRAMES IDENTICAL" if not fail else "MISMATCH")

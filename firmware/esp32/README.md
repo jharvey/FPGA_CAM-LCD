@@ -17,6 +17,10 @@ files on the ESP32 or the SD card, through Wi-Fi FTP (`uftpd`) or the REPL. Upst
 | `fcl_fix.py` | new | attitude filter in 32-bit integer arithmetic, written for the viper compiler (native code, no heap use at 200 Hz) |
 | `fcl_hubpy.py` | new | the sensor hub: sensor set-up, battery, buttons, down dot, overlay, telemetry |
 | `fcl_magcal.py` | new | compass calibration (hard iron): automatic sphere fit in use, manual mode, stored in `magcal.json` |
+| `fcl_app.py` | new | the layer above the hub: pages (Level, Height, Bearing, your own), the menu on B1 held, the `Unit` calls a page uses. `doc/DEVELOPER_GUIDE.md` |
+| `fcl_cfg.py` | new | calibration values of one unit (`cal.json`): lens angle, mounting error, cell gains, temperature / distance / heading offsets, servo travel |
+| `fcl_web.py` | new | the phone page over Wi-Fi (port 80): LCD text, readings, buttons. No password, so everyday commands only. Not run on hardware |
+| `fcl_user_example.py` | new | an example page (a climb meter). Copy as `fcl_user.py` to load your own pages at start |
 | `fcl_calc.py` | new | charge table, down dot, overlay text (also used by the PC tools) |
 | `fcl_usb.py` | new | the USB text protocol (telemetry lines, commands); also runs on a PC, tested in the simulator |
 | `fcl_usbdev.py` | new | the ESP32 side of it: USB serial port, Wi-Fi setup into `wifiman.conf`, I2S microphone / speaker as base64 lines. Not run on hardware |

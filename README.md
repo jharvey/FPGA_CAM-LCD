@@ -37,7 +37,9 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 | `doc/constraints/schematic_freeze.md` | Schematic freeze record and what changed after it |
 | `doc/BRINGUP.md` | First power-up checklist (first article): test points, rails, programming, stage-by-stage checks |
 | `doc/PRODUCTION_TEST.md` | Short per-board check once the design is validated, compared with BRINGUP golden values |
-| `doc/FIRMWARE_GUIDE.md` | Firmware user guide made from a simulator run: USB stream, dashboard, LCD overlay, commands (pictures in `doc/fw/`) |
+| `doc/USER_MANUAL.md` | Using the unit: buttons, the screen, the Level / Height / Bearing pages, menu, phone page, logging, calibration (pictures in `doc/manual/`) |
+| `doc/DEVELOPER_GUIDE.md` | Software layers, writing a page of your own, calibration values, FPGA builds, tests |
+| `doc/FIRMWARE_GUIDE.md` | Reference made from a simulator run: USB stream, dashboard, LCD overlay, commands (pictures in `doc/fw/`) |
 | `fpga/prebuilt/` | Stored build outputs: both bitstreams, intermediates, checksums, tool versions, test logs. `python fpga/make_prebuilt.py --check` compares your build with them |
 | `fpga/bridge/`, `fpga/osd/` | FPGA bridge to the ESP32 (sensors, ADC, servos, buttons) and the LCD overlay, with their simulation tests |
 | `doc/PROBE_POINTS.md` | Bare-copper probe vias on the back: spare FPGA balls, spare ESP32 pins, key nets (map: `doc/probe_points.png`) |

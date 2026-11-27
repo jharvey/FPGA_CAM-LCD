@@ -10,6 +10,9 @@
 #   $A,<seq>,<rate>,<base64>          microphone audio, 16-bit little-endian mono PCM
 #   $M,<state>,<x>,<y>,<z>,<field>,<error %>,<readings>,<directions>,<auto|fixed>     compass calibration:
 #                          state none | auto | manual | manual-running | stored; offset and field in milligauss
+#   $L,<row>,<text>        LCD row 0-14 as written by the page or the menu (leading spaces kept); empty text:
+#                          the row is back to the standard overlay
+#   $C,<name>=<value>,...  calibration values (fcl_cfg.py)
 #   $R,ok|err,<text>       reply to a command
 #   $I,<text>              information (help text, scan results, version)
 #
@@ -32,12 +35,17 @@ HELP = (
     "stream on|off|<hz>        telemetry lines per second (1-20), default 10",
     "servo <1-6> <us|off>      servo pulse 500-2500 us; servo 1 stops following pitch",
     "follow on|off             servo 1 holds the camera level (pitch)",
-    "mode <0-3>                display mode (same as B1)",
+    "mode <n>                  LCD page: 0 overview, 1 level, 2 height, 3 bearing (B1 steps through them)",
+    "key B1|B2|B1L             press a button from here (B1L = B1 held: menu)",
+    "view camera|edges         LCD picture;  threshold up|down: edge threshold one step",
+    "pan <deg>|here|off        servo 2 holds a compass heading",
     "overlay <items>|<mask>    LCD overlay: dot heading attitude baro dist batt | all | none | number",
     "zero                      make the present height 0",
     "magcal                    compass calibration status ($M line)",
     "magcal start | stop       calibrate by hand: point the unit up, down and to the four sides",
     "magcal auto on|off        keep refining the calibration in use (default on);  magcal reset",
+    "cal                       calibration values ($C line);  cal set <name> <value>;  cal reset",
+    "log on|off                record the stream on the unit;  log shows the state",
     "wifi <ssid> <password>    save the network and connect;  wifi status | scan | off",
     "mic on|off [rate]         microphone to $A lines (8000 or 16000 Hz)",
     "spk <rate> <base64>       play 16-bit mono PCM on the speaker;  spk off",
@@ -91,7 +99,9 @@ class Bridge:
     """
 
     def __init__(self, hub, out, plat=None):
-        self.hub, self.out, self.plat = hub, out, plat
+        self.hub, self._out, self.plat = hub, out, plat
+        self.log = None                  # f(line): where telemetry, events and buttons are recorded
+        self.capture = None              # a list: lines are collected here instead of being sent (web page commands)
         self.rate = 10
         self.streaming = True
         self.exit = False
@@ -99,6 +109,14 @@ class Bridge:
         self._div = 0
         self._btn = 0
         self._aseq = 0
+
+    def out(self, s):
+        if self.capture is not None:
+            self.capture.append(s)
+            return
+        self._out(s)
+        if self.log and s[1] in "EBLM":
+            self.log(s)
 
     # ---- hub -> USB
     def on_telemetry(self, t):
@@ -109,11 +127,14 @@ class Bridge:
                     self.out("$B,%s,%d" % (name, b >> i & 1))
             self._btn = b
         self._div += self.rate
-        if self.streaming and self._div >= 20:          # the hub sends 20 frames per second
+        if self._div >= 20:                              # the hub sends 20 frames per second
             self._div -= 20
-            self.out(telemetry_line(t))
-        elif self._div >= 20:
-            self._div -= 20
+            if self.streaming or self.log:
+                line = telemetry_line(t)
+                if self.streaming:
+                    self._out(line)
+                if self.log:
+                    self.log(line)
 
     def on_event(self, name):
         self.out("$E," + name)
@@ -191,8 +212,9 @@ class Bridge:
             self._ok("follow " + ("on" if on else "off"))
         elif c == "mode":
             m = int(a[0])
-            if not 0 <= m <= 3:
-                return self._err("mode 0-3")
+            n = getattr(hub, "n_modes", 4)
+            if not 0 <= m < n:
+                return self._err("mode 0-%d" % (n - 1))
             hub.mode(m)
             self._ok("mode %d" % m)
         elif c == "overlay":
@@ -210,6 +232,58 @@ class Bridge:
             if f is None:
                 return self._err("magcal not available with this hub")
             self._ok(f(a))
+        elif c in ("key", "view", "threshold", "pan", "cal") and not hasattr(hub, "cfg"):
+            self._err(c + " not available with this hub")
+        elif c == "key":
+            k = a[0].upper()
+            if k not in ("B1", "B2", "B1L"):
+                return self._err("key B1, B2 or B1L")
+            hub.key(k)
+            self._ok("key " + k)
+        elif c == "view":
+            if a[0] not in ("camera", "edges"):
+                return self._err("view camera or edges")
+            hub.view(a[0] == "edges")
+            self._ok("view " + a[0])
+        elif c == "threshold":
+            if a[0] not in ("up", "down"):
+                return self._err("threshold up or down")
+            hub.threshold(1 if a[0] == "up" else -1)
+            self._ok("threshold " + a[0])
+        elif c == "pan":
+            if a[0] == "off":
+                hub.pan(None)
+            elif a[0] == "here":
+                if not hub.last:
+                    return self._err("no heading yet")
+                hub.pan(hub.last["heading"])
+            else:
+                hub.pan(float(a[0]))
+            self._ok("pan " + a[0])
+        elif c == "cal":
+            if a and a[0] == "set":
+                v = float(a[2])
+                try:
+                    hub.cfg.set(a[1], v)
+                except ValueError as e:
+                    return self._err(str(e))
+            elif a and a[0] == "reset":
+                hub.cfg.reset()
+            elif a:
+                raise ValueError
+            self.out("$C," + hub.cfg.line())
+            self._ok("cal")
+        elif c == "log":
+            apps = getattr(hub, "apps", None)
+            if apps is None:
+                return self._err("log not available with this hub")
+            if a:
+                r = apps.log(a[0] == "on")
+                if r is None:
+                    return self._err("log not available here")
+                self._ok("log %s %s" % ("on" if apps.log_on else "off", r))
+            else:
+                self._ok("log " + ("on" if apps.log_on else "off"))
         elif c == "wifi":
             if not a or a[0] == "status":
                 self.wifi_line()

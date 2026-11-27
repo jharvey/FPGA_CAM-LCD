@@ -270,8 +270,20 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 |---|---|---|---|---|
 | 8.1 | Speaker | speaker on J8; REPL: enable `AMP_SD` (GPIO47 high), play a tone over I2S (BCLK 35, WS 36, DOUT 37) | tone heard; scope shows clocks on the `I2S_BCLK` / `I2S_WS` probe vias, data on `I2S_SPK`, `AMP_SD` high | |
 | 8.2 | Microphone | I2S read on GPIO38 | samples change when you speak (data on the `I2S_MIC` probe via) | |
-| 8.3 | Servo outputs | needs the hub CPU or a test bitstream: 1-2 ms pulse on J_SRV1..6 pin 1 | 50 Hz pulses | |
-| 8.4 | Power off | needs `SHUTDOWN` driven high by the FPGA (hub CPU: hold B0 2 s) | D11 goes dark, rails 0 V, < 1 mA from the cell | |
+| 8.3 | Servo outputs | load `fcl_bridge.bit` (stage 9.1), then `servo 1 1500` .. `servo 6 1500` on the USB port: 1.5 ms pulse on J_SRV1..6 pin 1 | 50 Hz pulses of the width asked for | |
+| 8.4 | Power off | with `fcl_bridge.bit` or `fcl_full.bit` and the ESP32 running: hold B0 2 s (`SHUTDOWN` goes high). With the ESP32 stopped: hold B0 8 s | D11 goes dark, rails 0 V, < 1 mA from the cell | |
+
+## Stage 9 - sensors through the FPGA, then the whole unit
+
+| # | Check | How | Expected | Result |
+|---|---|---|---|---|
+| 9.1 | Bridge alone | FTP `put fcl_bridge.bit` (`fpga/prebuilt/bridge/`, or `python fpga/bridge/build_bridge.py`); `python firmware/tools/fcl_dash.py --port <port>` | `$I,sensors found 0x1F`: IMU, compass, barometer, ranger and ADC all answer; telemetry 10 lines per second | |
+| 9.2 | Readings | dashboard | cells within 2 % of a multimeter, temperatures near the room's, pressure plausible, distance follows your hand | |
+| 9.3 | Buttons | press B1, B2, B0 briefly | `$B` lines; BUTTONS panel lights | |
+| 9.4 | Full design | FTP `put fcl_full.bit` (`fpga/prebuilt/full/`, or `python fpga/full/build_full.py`) | camera picture as in stage 4, with the heading, attitude, distance, height and battery rows and the down dot over it | |
+| 9.5 | Pages and menu | B1: Level, Height, Bearing; hold B1: menu; `View` in the menu | pages change; the menu's View switches camera / edges (if it shows the opposite of its label, the FPGA and the ESP32 disagree about the view: select it once more after an FPGA reload) | |
+| 9.6 | Calibration | `python firmware/tools/fcl_calibrate.py --port <port>` (`doc/USER_MANUAL.md`) | every step ok; note the values it stores. A FAIL in the axes step means a sign in `firmware/esp32/fcl_fix.py` / `fcl_hubpy.py` is wrong for the real sensor orientation | |
+| 9.7 | Phone page | `wifi <name> <password>` on the USB port, then open the address from the `$W` line | the page of `doc/USER_MANUAL.md`, live | |
 
 ## What is ready to test with, today (2026-11-27)
 
@@ -279,9 +291,10 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 |---|---|---|
 | 0-2 | none | ready |
 | 3 | MicroPython + `firmware/esp32/` (esp32ecp5 + FCL pins) | ready, not yet run on hardware |
-| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds, timing met; not run on hardware |
-| 6 | external I2C adapter | ready; the hub CPU (`firmware/hub/`) is not built yet |
-| 7 | none (meters) | ready; the ADC readings need the hub CPU |
-| 8 | MicroPython I2S snippets; hub CPU for servos and power-off | audio ready; servos and soft power-off wait for the hub CPU |
+| 4-5 | `fpga/CameraToTFTSobel_FCL.ice`, `python fpga/build.py` -> `main.bit` | builds; its SDRAM clock (142.9 MHz) does not meet timing by nextpnr's estimate (about 70 MHz), so watch for wrong pixels in the camera picture; not run on hardware |
+| 6 | external I2C adapter | ready |
+| 7 | none (meters) | ready; the ADC readings are stage 9.2 |
+| 8 | MicroPython I2S snippets; `fcl_bridge.bit` for servos and power-off | ready, not yet run on hardware |
+| 9 | `fpga/prebuilt/bridge/fcl_bridge.bit`, `fpga/prebuilt/full/fcl_full.bit`, `firmware/esp32/` (hub, pages, phone page), `firmware/tools/fcl_calibrate.py` | built and tested in simulation only; the MicroPython files have never run on an ESP32 |
 
 Record anything unexpected in `ROADMAP.md` with the board number and the step.

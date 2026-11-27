@@ -11,7 +11,7 @@ engine: `node` if it is on PATH, otherwise a headless Edge/Chrome/Chromium.
 Environment overrides: ICESTUDIO_DIR (folder holding scripts/services/compiler.js),
 OSS_CAD_SUITE (folder holding bin/yosys), BROWSER (browser executable).
 """
-import argparse, base64, json, os, re, shutil, subprocess, sys, tempfile
+import argparse, base64, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HOME = os.path.expanduser('~')
@@ -64,6 +64,9 @@ function generate(){
   return files;
 }
 """
+
+
+CLOCKS_MHZ = {'clk': 25.0, 'cmos_pclk': 24.0}       # input port name in the .ice file -> frequency
 
 
 def find(paths, what):
@@ -130,6 +133,18 @@ def generate(ice, out, board_dir):
         files = json.loads(base64.b64decode(m.group(1)).decode('utf-8'))
     shutil.rmtree(tmp, ignore_errors=True)
     os.makedirs(out, exist_ok=True)
+    # Icestudio's pin file has no clock constraints, and nextpnr then checks every clock against 12 MHz only.
+    # Give it the board clock (the PLL outputs follow from it) and the camera's pixel clock.
+    extra = []
+    for blk in project['design']['graph']['blocks']:
+        d = blk.get('data') or {}
+        mhz = CLOCKS_MHZ.get(d.get('name')) if blk['type'] == 'basic.input' else None
+        if mhz:
+            port = 'v' + (hashlib.sha1(blk['id'].encode()).hexdigest() if '-' in blk['id'] else blk['id'])[:6]
+            extra.append('FREQUENCY PORT "%s" %g MHZ;  # %s' % (port, mhz, d['name']))
+    for name in files:
+        if name.endswith('.lpf') and extra:
+            files[name] = files[name].rstrip('\n') + '\n\n# -- clocks (added by fpga/build.py)\n' + '\n'.join(extra) + '\n'
     for name, content in files.items():
         open(os.path.join(out, name), 'w', encoding='utf-8', newline='\n').write(content)
     print('generated:', ', '.join(sorted(files)))
@@ -166,9 +181,15 @@ def main():
     run(['nextpnr-ecp5', '--85k', '--package', 'CABGA381', '--json', 'main.json', '--lpf', 'main.lpf',
          '--textcfg', 'main.config', '--timing-allow-fail', '-q', '-l', 'nextpnr.log'], a.out, env)
     run(['ecppack', '--compress', 'main.config', 'main.bit'], a.out, env)
+    last = {}
     for line in open(os.path.join(a.out, 'nextpnr.log'), encoding='utf-8', errors='replace'):
-        if 'Max frequency for clock' in line or re.search(r'TRELLIS_(IO|COMB|FF):', line):
+        m = re.search(r"Max frequency for clock\s+'([^']+)': ([\d.]+) MHz \((PASS|FAIL) at ([\d.]+) MHz\)", line)
+        if m:
+            last[m.group(1)] = m.groups()[1:]
+        elif re.search(r'TRELLIS_(IO|COMB|FF):', line):
             print(line.rstrip())
+    for clk, (mhz, res, want) in sorted(last.items()):         # the figures after routing
+        print('clock %-40s %7s MHz possible, %s at %s MHz' % (clk[-40:], mhz, res, want))
     print('bitstream:', os.path.join(a.out, 'main.bit'))
 
 

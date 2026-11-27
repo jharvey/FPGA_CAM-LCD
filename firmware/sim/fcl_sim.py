@@ -3,6 +3,7 @@
 
     python firmware/sim/fcl_sim.py                 serve the stream on TCP 127.0.0.1:7007
     python firmware/tools/fcl_dash.py --sim        or run it inside the dashboard, no socket
+    python firmware/sim/fcl_sim.py --web 8080      also serve the unit's web page: http://127.0.0.1:8080
 
 What is real and what is simulated
     ESP32      the files the unit runs: fcl_bridge.py (FPGA bridge driver), fcl_fix.py (attitude filter),
@@ -10,13 +11,18 @@ What is real and what is simulated
     FPGA       a Python model of the bridge (bridge_model.py), checked frame by frame against the Verilog
     sensors    register-level models of the IMU, compass, barometer, ranger and battery ADC
     --hub c / python   the earlier design instead: the C hub (firmware/common) or its stand-in over the hub link
-    the world  a 60 s demo loop: pan, look straight down, tilt, climb 3 m, button presses, cells running down
+    the world  a 60 s demo loop: pan, look straight down, tilt, climb 3 m, B2 and power button presses, cells
+               running down
 
 Extra commands (simulator only):
     sim set <heading|pitch|roll|alt|dist|cell1|cell2|cell3|temp1|temp2|temp3> <value>     hold a value
     sim auto                                          back to the demo loop
     sim press <PWR|B1|B2> [ms]                        press a button (default 300 ms)
+    sim buttons on|off                                the demo loop's own button presses (default on)
     sim hardiron <x> <y> <z>                          add a constant field to the compass, in counts (1.5 mG each)
+    sim error <cell1|cell2|cell3|temp1|temp2|temp3|dist|pitch|roll> <value>
+                                                      give the hardware an error for the calibration to find: cell gain
+                                                      (1.02 = reads 2 % high), temperature / distance / mounting offset
 """
 import math
 import os
@@ -55,6 +61,7 @@ class Scenario:
         self.cur = {}           # where the held values are now: they move at a hand's speed, not in one step
         self.press = {}         # button index -> release time
         self.last_t = 0.0
+        self.demo_buttons = True    # the demo loop presses B1, B2 and the power button now and then
 
     def at(self, t):
         m = t % 60.0
@@ -92,8 +99,8 @@ class Scenario:
                 c += max(-rate * dt, min(rate * dt, target - c))
             self.cur[k] = s[k] = c
         btn = 0
-        for i, (a, b) in enumerate(((45.0, 45.2), (5.0, 5.3), (30.0, 30.3))):       # PWR short, B1, B2
-            if a <= m < b:
+        for i, (a, b) in enumerate(((45.0, 45.2), (0.0, 0.0), (30.0, 30.3))):       # PWR short, (B1: never), B2
+            if a <= m < b and self.demo_buttons:
                 btn |= 1 << i
         for i, until in list(self.press.items()):
             if t < until:
@@ -247,6 +254,20 @@ class SimPlat:
     def wifi_off(self):
         self.wifi = ["off", "", "", 0]
 
+    def wifi_on(self):
+        self.wifi_set("HomeNet", "")
+
+    # ---- log: kept in memory (the unit writes a file)
+    def log_start(self):
+        self.log_n = getattr(self, "log_n", 0) + 1
+        self.log_lines = []
+        self.sim.bridge.log = self.log_lines.append
+        return "fcl%03d.log" % self.log_n
+
+    def log_stop(self):
+        self.sim.bridge.log = None
+        return "%d lines" % len(getattr(self, "log_lines", ()))
+
     def mic(self, on, rate):
         self.mic_on, self.mic_rate = on, rate
 
@@ -284,6 +305,12 @@ class SimPlat:
         if a[0] == "hardiron" and getattr(self.sim, "bridge_mode", False):
             self.sim.world.hardiron = [float(a[1]), float(a[2]), float(a[3])]
             return "sim hardiron %s %s %s" % (a[1], a[2], a[3])
+        if a[0] == "buttons":
+            sc.demo_buttons = a[1] == "on"
+            return "sim buttons " + a[1]
+        if a[0] == "error" and getattr(self.sim, "bridge_mode", False) and a[1] in self.sim.world.err:
+            self.sim.world.err[a[1]] = float(a[2])
+            return "sim error %s %s" % (a[1], a[2])
         if a[0] == "press" and a[1].upper() in fcl_usb.BUTTONS:
             ms = int(a[2]) if len(a) > 2 else 300
             sc.press[fcl_usb.BUTTONS.index(a[1].upper())] = self.sim.t + ms / 1000.0
@@ -327,6 +354,9 @@ class SensorWorld:
         self.tof_clear = -1.0
         self.hist = [0, 0]
         self.hardiron = [0.0, 0.0, 0.0]     # counts added to the compass: `sim hardiron x y z`
+        # hardware errors for the calibration to find: `sim error <name> <value>`
+        self.err = {"cell1": 1.0, "cell2": 1.0, "cell3": 1.0, "temp1": 0.0, "temp2": 0.0, "temp3": 0.0,
+                    "dist": 0.0, "pitch": 0.0, "roll": 0.0}
 
     def now(self, t):
         if t > self.t:
@@ -353,6 +383,8 @@ class SensorWorld:
 
     def i2c(self, addr, nreg, reg, wdata, rlen):
         s = self.s
+        if addr in (0x68, 0x1E) and (self.err["pitch"] or self.err["roll"]):       # the sensor board sits at an angle
+            s = dict(s, pitch=s["pitch"] + self.err["pitch"], roll=s["roll"] + self.err["roll"])
         if addr == 0x68:
             if reg == 0x75:
                 return b"\x47", 0
@@ -392,7 +424,7 @@ class SensorWorld:
             if reg == 0x0031 and rlen:
                 return bytes((0 if self.t - self.tof_clear >= 0.05 else 1,)), 0
             if reg == 0x0096 and rlen:
-                return struct.pack(">H", int(max(0, min(65535, s["dist"]))))[:rlen], 0
+                return struct.pack(">H", int(max(0, min(65535, s["dist"] + self.err["dist"]))))[:rlen], 0
             if reg == 0x0086 and wdata:
                 self.tof_clear = self.t
             return bytes(rlen), 0
@@ -404,13 +436,14 @@ class SensorWorld:
         ch = old >> 7 & 7
         s = self.s
         if ch <= 2:
-            v = s["cell%d" % (ch + 1)] / ((47.0 + 56.0) / 56.0)
+            v = s["cell%d" % (ch + 1)] * self.err["cell%d" % (ch + 1)] / ((47.0 + 56.0) / 56.0)
         elif ch == 4:
             v = 2.5
         elif ch == 5:
             v = (max(s["cell1"], s["cell2"], s["cell3"]) - 0.05) / ((100.0 + 68.0) / 68.0)
         else:
-            tc = s["temp%d" % {3: 1, 6: 2, 7: 3}[ch]]
+            k = {3: 1, 6: 2, 7: 3}[ch]
+            tc = s["temp%d" % k] + self.err["temp%d" % k]
             r = 10000.0 * math.exp(3435.0 * (1.0 / (tc + 273.15) - 1.0 / 298.15))
             v = 2.5 * r / (r + 10000.0)
         return int(max(0, min(65535, v / 2.5 * 65536.0 + self.n(2.0))))
@@ -420,7 +453,7 @@ class Sim:
     """backend 'bridge' (default): sensor models -> FPGA bridge model -> the ESP32's MicroPython hub (fcl_bridge.py,
     fcl_fix.py, fcl_hubpy.py) -> fcl_usb.py.   'c' / 'python': the earlier C hub or its stand-in over the hub link."""
 
-    def __init__(self, backend="auto", store=None):
+    def __init__(self, backend="auto", store=None, cfg_store=None, user=None):
         self.scenario = Scenario()
         self.t = 0.0
         self.lines = []
@@ -436,14 +469,17 @@ class Sim:
             self.model = bridge_model.BridgeModel(self.world)
             self.pending = bytearray()
             self.br = fcl_bridge.Bridge(self.model.feed, self._take)
-            self.hubpy = fcl_hubpy.Hub(self.br, store=store if store is not None else MemStore())
+            self.hubpy = fcl_hubpy.Hub(self.br, store=store if store is not None else MemStore(),
+                                       cfg_store=cfg_store if cfg_store is not None else MemStore(), plat=self.plat)
             self.bridge = fcl_usb.Bridge(self.hubpy, self.lines.append, self.plat)
             self.hubpy.on_telemetry = self.bridge.on_telemetry
             self.hubpy.on_event = self.bridge.on_event
-            self.hubpy.on_info = self.lines.append
+            self.hubpy.on_info = self.bridge.out
             self.hub = self                                         # for .name
             self.name = "MicroPython hub over the FPGA bridge"
             self.sensors_found = self.hubpy.start()
+            if user:                                                # a module with setup(apps), as fcl_user.py on the unit
+                __import__(user).setup(self.hubpy.apps)
         else:
             exe = find_live() if backend == "c" else None
             if backend == "c" and not exe:
@@ -489,7 +525,8 @@ class Sim:
                 self.hubpy.tick_ms(int(self.t * 1000))
             off = m.shutdown or m.force_off
             self.state = {"servo": [0] * 6 if off else list(m.servo), "led": [m.led & 1, m.led >> 1], "power_hold": 0 if off else 1,
-                          "dot": (m.dot[0] - 240, m.dot[1] - 240, m.dot[2]), "osd": m.osd_rows()}
+                          "dot": (m.dot[0] - 240, m.dot[1] - 240, m.dot[2]), "osd": m.osd_rows(),
+                          "edges": m.edges, "threshold": m.threshold}
         else:
             self.t += STEP_S
             s, btn = self.scenario.at(self.t)
@@ -510,8 +547,13 @@ class Sim:
             self.hub.close()
 
 
-def serve(port, backend):
-    sim = Sim(backend)
+def serve(port, backend, web_port=0, user=None):
+    sim = Sim(backend, user=user)
+    web = None
+    if web_port and sim.bridge_mode:
+        import fcl_web
+        web = fcl_web.Web(sim.bridge, sim.hubpy, sim.plat, web_port)
+        print("web page: http://127.0.0.1:%d" % web_port)
     srv = socket.socket()
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     srv.bind(("127.0.0.1", port))
@@ -522,7 +564,7 @@ def serve(port, backend):
     nxt = time.time()
     try:
         while True:
-            wait = max(0.0, nxt - time.time())
+            wait = max(0.0, min(0.01, nxt - time.time()) if web else nxt - time.time())
             r, _, _ = select.select([srv] + ([client] if client else []), [], [], wait)
             for s in r:
                 if s is srv:
@@ -545,6 +587,8 @@ def serve(port, backend):
                     while b"\n" in buf:
                         line, buf = buf.split(b"\n", 1)
                         sim.command(line.decode("utf-8", "replace"))
+            if web:
+                web.poll()
             if time.time() >= nxt:
                 nxt += STEP_S
                 if nxt < time.time() - 1:
@@ -568,5 +612,7 @@ if __name__ == "__main__":
     ap.add_argument("--port", type=int, default=7007)
     ap.add_argument("--hub", choices=("auto", "bridge", "c", "python"), default="auto",
                     help="auto / bridge: MicroPython hub over the FPGA bridge; c: the C hub (needs fcl_sim_live); python: its stand-in")
+    ap.add_argument("--web", type=int, default=0, metavar="PORT", help="serve the unit's web page on this port")
+    ap.add_argument("--user", metavar="MODULE", help="load your own pages: a module with setup(apps), e.g. fcl_user_example")
     a = ap.parse_args()
-    serve(a.port, a.hub)
+    serve(a.port, a.hub, a.web, a.user)

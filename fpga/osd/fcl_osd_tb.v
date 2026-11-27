@@ -18,7 +18,7 @@ module fcl_osd_tb;
 
     fcl_osd #(.BITS(8), .FONT_FILE("font16x32.hex")) dut (
         .clk(clk), .x(x), .y(y), .de(de), .rgb_in(24'h586478), .rgb_out(rgb_out), .de_out(de_out),
-        .char_we(we), .char_addr(wa), .char_data(wd),
+        .wclk(clk), .char_we(we), .char_addr(wa), .char_data(wd),
         .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside));
 
     always @(posedge clk) if (de_out) begin

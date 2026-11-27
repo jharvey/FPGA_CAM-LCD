@@ -23,6 +23,7 @@ import fcl_usb
 
 I2S_BCLK, I2S_WS, I2S_SPK, I2S_MIC, AMP_SD = 35, 36, 37, 38, 47
 CONF = "wifiman.conf"
+LOG_FLASH_MAX = 2000000
 
 
 @micropython.viper
@@ -38,16 +39,19 @@ def _s32_to_s16(src, dst, n: int):
 
 
 class CalStore:
-    """compass calibration in a file on the ESP32's flash"""
+    """a small JSON file on the ESP32's flash: magcal.json (compass), cal.json (fcl_cfg.py)"""
+
+    def __init__(self, name="magcal.json"):
+        self.name = name
 
     def load(self):
         import json
-        with open("magcal.json") as f:
+        with open(self.name) as f:
             return json.load(f)
 
     def save(self, d):
         import json
-        with open("magcal.json", "w") as f:
+        with open(self.name, "w") as f:
             json.dump(d, f)
 
 
@@ -61,6 +65,8 @@ class Plat:
         self.amp = Pin(AMP_SD, Pin.OUT, value=0)
         self.raw = bytearray(4 * 320)       # 20 ms at 16 kHz
         self.pcm = bytearray(2 * 320)
+        self.usb = None                     # fcl_usb.Bridge, set by run()
+        self.logf, self.log_name, self.log_bytes = None, "", 0
 
     # ---- Wi-Fi
     def wifi_set(self, ssid, pw):
@@ -97,6 +103,58 @@ class Plat:
 
     def wifi_off(self):
         self.sta.active(False)
+
+    def wifi_on(self):
+        """connect to the first network saved in wifiman.conf"""
+        try:
+            with open(CONF) as f:
+                ssid, pw = f.readline().strip().split(":", 1)
+        except (OSError, ValueError):
+            return
+        self.ssid = ssid
+        self.sta.active(True)
+        self.sta.connect(ssid, pw)
+
+    # ---- log: the stream's telemetry, events and buttons into a file.  On the SD card when it is mounted at /sd,
+    # else in the ESP32's flash, where it stops at LOG_FLASH_MAX bytes (the flash is small and wears).
+    def log_start(self):
+        import os
+        self.log_stop()
+        base = "/sd" if "sd" in os.listdir("/") else ""
+        n = 1
+        names = os.listdir(base or "/")
+        while "fcl%03d.log" % n in names:
+            n += 1
+        self.log_name = "%s/fcl%03d.log" % (base, n)
+        self.log_max = 0 if base else LOG_FLASH_MAX
+        self.log_bytes = self.log_n = 0
+        self.logf = open(self.log_name, "w")
+        if self.usb:
+            self.usb.log = self.log_write
+        return self.log_name
+
+    def log_write(self, line):
+        if self.logf is None:
+            return
+        self.logf.write(line)
+        self.logf.write("\n")
+        self.log_bytes += len(line) + 1
+        self.log_n += 1
+        if self.log_n % 50 == 0:
+            self.logf.flush()            # at most 5 s are lost if the power goes
+        if self.log_max and self.log_bytes >= self.log_max:
+            self.log_stop()
+            if self.usb:
+                self.usb.hub.apps.log_on = False
+                self.usb.out("$I,log stopped: %d bytes in the flash is the limit; put an SD card in for long logs" % self.log_bytes)
+
+    def log_stop(self):
+        if self.usb:
+            self.usb.log = None
+        if self.logf is not None:
+            self.logf.close()
+            self.logf = None
+        return "%s %d bytes" % (self.log_name, self.log_bytes)
 
     # ---- audio
     def _i2s(self, direction, rate):
@@ -154,8 +212,22 @@ def run():
         return uart.read() if uart.any() else b""
 
     br = fcl_bridge.Bridge(uart.write, rd, time.sleep_ms)
-    hub = fcl_hubpy.Hub(br, store=CalStore())
+    hub = fcl_hubpy.Hub(br, store=CalStore("magcal.json"), cfg_store=CalStore("cal.json"), plat=plat)
     bridge = fcl_usb.Bridge(hub, lambda s: out.write(s + "\r\n"), plat)
+    plat.usb = bridge
+    try:                                     # your own pages: fcl_user.py with setup(apps), see doc/DEVELOPER_GUIDE.md
+        import fcl_user
+        fcl_user.setup(hub.apps)
+    except ImportError:
+        pass
+    except Exception as e:
+        out.write("$I,fcl_user.py stopped: %s\r\n" % e)
+    web = None
+    try:                                     # the web page (fcl_web.py); the unit works without it
+        import fcl_web
+        web = fcl_web.Web(bridge, hub, plat, 80)
+    except Exception as e:
+        out.write("$I,web page not started: %s\r\n" % e)
     hub.on_telemetry = bridge.on_telemetry
     hub.on_event = bridge.on_event
     hub.on_info = bridge.out
@@ -177,6 +249,8 @@ def run():
                 if line:
                     bridge.command(line)
             plat.pump(bridge)
+            if web:
+                web.poll()
             if time.ticks_diff(time.ticks_ms(), last_w) > 5000:
                 last_w = time.ticks_ms()
                 bridge.wifi_line()
@@ -185,3 +259,6 @@ def run():
     finally:
         micropython.kbd_intr(3)
         plat._i2s(None, plat.rate)
+        plat.log_stop()
+        if web:
+            web.close()

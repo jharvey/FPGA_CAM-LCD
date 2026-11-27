@@ -10,8 +10,9 @@ Stored per design: the bitstream, the pin file, the generated Verilog (camera de
 with the intermediates (Yosys netlist .json, nextpnr .config, Yosys log) so a difference can be traced stage by stage.
 MANIFEST.md lists the tool versions, the source commit and a SHA-256 for every file.
 
-Designs:  bridge  fpga/bridge (fcl_bridge_top.v): the sensor bridge alone, for bring-up
-          camera  fpga/CameraToTFTSobel_FCL.ice: camera to TFT with the Sobel view (no bridge, no overlay yet)
+Designs:  full    fpga/full (fcl_top.v): camera to TFT + LCD overlay + sensor bridge: the unit's bitstream
+          bridge  fpga/bridge (fcl_bridge_top.v): the sensor bridge alone, for bring-up
+          camera  fpga/CameraToTFTSobel_FCL.ice: camera to TFT with the Sobel view alone (no bridge, no overlay)
 """
 import datetime
 import hashlib
@@ -29,6 +30,7 @@ sys.path.insert(0, os.path.join(HERE, "osd"))
 from test_osd import tool, env        # noqa: E402
 
 TESTS = [("firmware/sim/test_usb.py", []), ("firmware/sim/test_filter.py", []), ("firmware/sim/test_magcal.py", []),
+         ("firmware/sim/test_app.py", []), ("firmware/sim/test_web.py", []), ("firmware/sim/test_calibrate.py", []),
          ("fpga/bridge/test_bridge.py", []), ("fpga/osd/test_osd.py", [])]
 
 
@@ -55,13 +57,25 @@ def build(work):
     code, out2 = run([sys.executable, "fpga/build.py", "--out", cam])
     if code:
         raise SystemExit("camera build failed:\n" + out2[-2000:])
+    open(os.path.join(cam, "build_summary.txt"), "w", newline="\n").write(
+        "\n".join(x for x in out2.replace("\r\n", "\n").split("\n") if x.startswith("clock ") or "TRELLIS_" in x) + "\n")
+    full = os.path.join(work, "full")
+    code, out3 = run([sys.executable, "fpga/full/build_full.py", "--out", full])
+    if code and not os.path.isfile(os.path.join(full, "fcl_full.bit")):
+        raise SystemExit("full build failed:\n" + out3[-2000:])
+    open(os.path.join(full, "build_summary.txt"), "w", newline="\n").write(out3.replace("\r\n", "\n").replace(work, "<build>"))
     return {
+        "full": {"fcl_full.bit": os.path.join(full, "fcl_full.bit"), "fcl_top.lpf": os.path.join(full, "fcl_top.lpf"),
+                 "main.v": os.path.join(full, "main.v"), "fcl_cam.v": os.path.join(full, "fcl_cam.v"),
+                 "nextpnr.log": os.path.join(full, "nextpnr.log"), "build_summary.txt": os.path.join(full, "build_summary.txt"),
+                 "_zip": {"fcl_full.json": os.path.join(full, "fcl_full.json"), "fcl_full.config": os.path.join(full, "fcl_full.config"),
+                          "yosys.log": os.path.join(full, "yosys.log")}},
         "bridge": {"fcl_bridge.bit": os.path.join(b, "fcl_bridge.bit"), "fcl_bridge_top.lpf": os.path.join(b, "fcl_bridge_top.lpf"),
                    "nextpnr.log": os.path.join(b, "nextpnr.log"),
                    "_zip": {"fcl_bridge.json": os.path.join(b, "fcl_bridge.json"), "fcl_bridge.config": os.path.join(b, "fcl_bridge.config"),
                             "yosys.log": os.path.join(b, "yosys.log")}},
         "camera": {"main.bit": os.path.join(cam, "main.bit"), "main.lpf": os.path.join(cam, "main.lpf"), "main.v": os.path.join(cam, "main.v"),
-                   "nextpnr.log": os.path.join(cam, "nextpnr.log"),
+                   "nextpnr.log": os.path.join(cam, "nextpnr.log"), "build_summary.txt": os.path.join(cam, "build_summary.txt"),
                    "_zip": {"main.json": os.path.join(cam, "main.json"), "main.config": os.path.join(cam, "main.config"),
                             "yosys.log": os.path.join(cam, "yosys.log")}},
     }
@@ -96,7 +110,7 @@ def main():
                 stored[p[0]] = p[2]
         bad = 0
         for k in sorted(hashes):
-            if k.endswith(".log"):
+            if k.endswith(".log") or k.endswith("build_summary.txt"):
                 continue                                   # logs carry run times and paths
             same = stored.get(k) == hashes[k]
             print("%s  %s" % ("SAME     " if same else "DIFFERENT", k))
@@ -134,9 +148,20 @@ def main():
                 "`python fpga/make_prebuilt.py --check`.\n\n" % datetime.date.today().isoformat())
         f.write("Built from commit `%s`%s.\n\n" % (commit, " plus uncommitted changes in fpga/ or firmware/" if dirty else ""))
         f.write("| Design | Bitstream | What it is |\n|---|---|---|\n")
+        f.write("| full | `full/fcl_full.bit` | camera to TFT with the LCD overlay and the sensor bridge (`fpga/full/fcl_top.v`): the bitstream the unit runs. Timing and size: `full/build_summary.txt`. |\n")
         f.write("| bridge | `bridge/fcl_bridge.bit` | the sensor bridge alone (`fpga/bridge/fcl_bridge_top.v`): sensors, ADC, buttons, servos from the ESP32. No camera or LCD. For first bring-up. |\n")
-        f.write("| camera | `camera/main.bit` | camera to TFT with the Sobel view (`fpga/CameraToTFTSobel_FCL.ice`). No bridge and no overlay yet. |\n\n")
-        f.write("Neither has been loaded into a real board. nextpnr runs with a fixed seed, so the same tool versions should give the same files.\n\n")
+        f.write("| camera | `camera/main.bit` | camera to TFT with the Sobel view alone (`fpga/CameraToTFTSobel_FCL.ice`): no bridge, no overlay. |\n\n")
+        f.write("None has been loaded into a real board. nextpnr runs with a fixed seed, so the same tool versions should give the same files.\n\n")
+        f.write("## Timing\n\nFrom nextpnr, after routing. A FAIL is the tool's estimate for the slowest path, not a measurement.\n\n"
+                "| Design | Clock | Result |\n|---|---|---|\n")
+        for design in ("full", "camera"):
+            for line in open(fresh[design]["build_summary.txt"]):
+                if line.startswith("clock "):
+                    p = line.split()
+                    f.write("| %s | `%s` | %s |\n" % (design, p[1], " ".join(p[2:])))
+        f.write("\nThe SDRAM clock of the camera design (142.9 MHz) does not meet timing by this estimate, in both designs "
+                "that contain it. Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every "
+                "clock against 12 MHz and reported a pass.\n\n")
         f.write("## Tools\n\n| Tool | Version |\n|---|---|\n")
         for t, v in versions():
             f.write("| %s | %s |\n" % (t, v))

@@ -48,7 +48,7 @@ def script():
         f(bm.SERVO, struct.pack("<BH", 1, 1500)),
         f(bm.SERVO, struct.pack("<BH", 4, 2000)),
         f(bm.SERVO, struct.pack("<BH", 9, 1000)),                      # no such channel
-        f(bm.OUT, bytes((0x0F, 0x05))),
+        f(bm.OUT, bytes((0xAF, 0xA5))),             # LED0, ranger on; aux bits 1 and 3 (mask 0xA0)
         f(bm.OSD_TEXT, struct.pack("<H", 45) + b"HELLO 123"),
         f(bm.OSD_DOT, struct.pack("<HHB", 250, 380, 3)),
         f(0x2A, b"\x01\x02"),                                          # unknown command
@@ -170,6 +170,8 @@ def main():
           not [c for c, u in servo if c not in "14"], "servo pulses: channel 2 %s us, channel 5 %s us, others off" % (w1[:1], w4[:1]))
     outs = re.findall(r"OUT \d+ (\d) (\d) (\d)", log)
     check(outs and outs[-1] == ("1", "1", "0"), "outputs: LED0 on, LED1 off, ranger enabled, shutdown low")
+    aux = re.findall(r"AUX (\d+)", log)
+    check(aux and aux[-1] == "10" and m.aux == 10, "aux outputs (video keys in the full design): bits 1 and 3 set, as in the model")
     osd = re.findall(r"OSD (\d+) (\d+)", log)
     text = "".join(chr(int(c)) for a, c in osd)
     check(text == "HELLO 123" and [int(a) for a, c in osd] == list(range(45, 54)) and "".join(m.osd[45:54]) == "HELLO 123",

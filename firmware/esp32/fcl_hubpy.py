@@ -13,6 +13,8 @@ import fcl_fix
 import fcl_calc
 import fcl_bridge as fb
 import fcl_magcal
+import fcl_cfg
+import fcl_app
 
 A_IMU, A_MAG, A_BARO, A_TOF = 0x68, 0x1E, 0x5C, 0x29
 ADC_CFG = 1 << 13 | 7 << 10 | 1 << 6 | 1 << 3 | 1          # AD7689: unipolar to GND, internal 2.5 V reference  CHECK
@@ -20,14 +22,15 @@ DIV_CELL = (47.0 + 56.0) / 56.0
 DIV_VSYS = (100.0 + 68.0) / 68.0
 NTC_R25, NTC_BETA, NTC_PULLUP, VREF = 10000.0, 3435.0, 10000.0, 2.5
 CELL_LOW_MV, CELL_CUTOFF_MV, CELL_HOT_C = 3400, 3200, 55.0
-EVENTS = {1: "B1", 2: "B2", 3: "PWR_SHORT", 4: "PWR_OFF", 5: "CELL_LOW", 6: "CELL_CUTOFF"}
+EVENTS = {1: "B1", 2: "B2", 3: "PWR_SHORT", 4: "PWR_OFF", 5: "CELL_LOW", 6: "CELL_CUTOFF", 7: "B1_LONG"}
+OUT_KEY_VIEW, OUT_KEY_INC, OUT_KEY_DEC, OUT_OWN_KEYS = 0x10, 0x20, 0x40, 0x80      # full FPGA design: video keys
 FIELDS = ("t_ms", "heading", "pitch", "roll", "alt_m", "press_pa", "tof_mm", "cell1_mv", "cell2_mv", "cell3_mv",
           "vsys_mv", "temp1_c", "temp2_c", "temp3_c", "mode", "flags", "soc1", "soc2", "soc3", "buttons", "dot_x", "dot_y",
           "overlay", "sensors")
 
 
 class Hub:
-    def __init__(self, bridge, on_telemetry=None, on_event=None, store=None):
+    def __init__(self, bridge, on_telemetry=None, on_event=None, store=None, cfg_store=None, plat=None):
         self.br = bridge
         self.on_telemetry, self.on_event = on_telemetry, on_event
         self.on_info = None              # f(line): extra lines for the USB stream ($M compass calibration)
@@ -66,6 +69,13 @@ class Hub:
         self.servo_us = -1
         self.leds = -1
         self._tof_due = 0
+        self.cfg = fcl_cfg.Cfg(cfg_store)        # calibration values of this unit (cal.json)
+        self.keys = []                   # keys waiting for tick_ms: "B1", "B2", "B1L"
+        self.b1_t, self.b1_long = None, False
+        self.edges = False               # the LCD shows the edge view (the FPGA starts with the camera view)
+        self._vk, self._vk_on, self._vk_t = [], 0, 0     # video keys: waiting, held now, time of the last change
+        self.pan_target, self.pan_us = None, -1
+        self.apps = fcl_app.Apps(self, plat)     # pages and menu (fcl_app.py)
         bridge.on_sample, bridge.on_adc, bridge.on_inputs = self._sample, self._adc, self._inputs
 
     # ---- sensor set-up (the register values of firmware/common/sensors.c)
@@ -73,7 +83,8 @@ class Hub:
         br = self.br
         w, r = br.i2c_write, br.i2c_read
         ok = 0
-        br.out(fb.OUT_TOF_XSHUT | fb.OUT_SHUTDOWN | fb.OUT_LED0, fb.OUT_TOF_XSHUT | fb.OUT_LED0)
+        # ranger on, power held, LED0 on; video keys released and B1 / B2 taken over from the FPGA's video logic
+        br.out(fb.OUT_TOF_XSHUT | fb.OUT_SHUTDOWN | fb.OUT_LED0 | 0xF0, fb.OUT_TOF_XSHUT | fb.OUT_LED0 | OUT_OWN_KEYS)
         w(A_IMU, 0x76, b"\x00")
         if r(A_IMU, 0x75, 1) == b"\x47":
             w(A_IMU, 0x11, b"\x01")                         # soft reset
@@ -112,10 +123,40 @@ class Hub:
         if ch == 0:
             self.follow_on = False
             self.servo_us = us
+        if ch == 1:
+            self.pan_target = None
+            self.pan_us = us
         self.br.servo(ch, us)
 
+    @property
+    def n_modes(self):
+        return len(self.apps.pages)
+
     def mode(self, m):
-        self.mode_n = m
+        self.apps.select(m)
+
+    def view(self, edges):
+        """LCD picture: camera (False) or edges (True).  The FPGA's video logic only has a toggle key, so this
+        keeps count; `view` again after an FPGA reload if the two disagree."""
+        if bool(edges) != self.edges:
+            self.edges = bool(edges)
+            self._vk.append(OUT_KEY_VIEW)
+
+    def threshold(self, step):
+        """edge threshold one step up (+1) or down (-1)"""
+        self._vk.append(OUT_KEY_INC if step > 0 else OUT_KEY_DEC)
+
+    def pan(self, heading):
+        """servo 2 holds this compass heading (degrees); None = stop"""
+        if heading is None:
+            self.pan_target, self.pan_us = None, 0
+            self.br.servo(1, 0)
+        else:
+            self.pan_target = heading % 360.0
+
+    def key(self, name):
+        """press a key from outside (USB, web page): B1, B2 or B1L"""
+        self.keys.append(name)
 
     def overlay(self, mask):
         self.overlay_mask = mask & 0x3F
@@ -206,12 +247,12 @@ class Hub:
         old = self.flags
         fl = 0
         for i in range(3):
-            mv = int(c[i] * VREF / 65536.0 * DIV_CELL * 1000.0 + 0.5)
+            mv = int(c[i] * VREF / 65536.0 * DIV_CELL * 1000.0 * self.cfg.v[("cell1", "cell2", "cell3")[i]] + 0.5)
             self.cell_mv[i] = mv
             v = c[(3, 6, 7)[i]] * VREF / 65536.0
             if 0.001 < v < VREF - 0.001:
                 rr = NTC_PULLUP * v / (VREF - v)
-                tc = 1.0 / (1.0 / 298.15 + math.log(rr / NTC_R25) / NTC_BETA) - 273.15
+                tc = 1.0 / (1.0 / 298.15 + math.log(rr / NTC_R25) / NTC_BETA) - 273.15 + self.cfg.v[("temp1", "temp2", "temp3")[i]]
             else:
                 tc = -99.0
             self.temp_c[i] = tc
@@ -236,12 +277,17 @@ class Hub:
     def _inputs(self, t24, buttons, ints):
         ch = buttons ^ self.buttons
         self.buttons = buttons
-        if ch & 2 and buttons & 2:
-            self.mode_n = (self.mode_n + 1) % 4
-            self._event(1)
+        # keys are only noted here; tick_ms acts on them (acting may send commands, which must not happen while
+        # the bridge is still handing out frames).  B1 acts on release, so that holding it can mean something else.
+        if ch & 2:
+            if buttons & 2:
+                self.b1_t, self.b1_long = self.now_ms, False
+            else:
+                if self.b1_t is not None and not self.b1_long:
+                    self.keys.append("B1")
+                self.b1_t = None
         if ch & 4 and buttons & 4:
-            self.recording = not self.recording
-            self._event(2)
+            self.keys.append("B2")
         if ch & 1:
             if buttons & 1:
                 self.pwr_t = self.now_ms
@@ -250,9 +296,32 @@ class Hub:
                 if not self.power_off:
                     self._event(3)
 
+    def _key(self, k):
+        if self.power_off:
+            return
+        self._event({"B1": 1, "B2": 2, "B1L": 7}[k])
+        if self.apps.key(k):
+            return
+        if k == "B1":
+            self.mode_n = (self.mode_n + 1) % 4
+        elif k == "B2":
+            self.recording = not self.recording
+
     def tick_ms(self, now_ms):
         """call every few milliseconds from the main loop, with a millisecond clock"""
         self.now_ms = now_ms
+        if self.b1_t is not None and not self.b1_long and now_ms - self.b1_t >= fcl_app.LONG_MS:
+            self.b1_long = True
+            self.keys.append("B1L")
+        while self.keys:
+            self._key(self.keys.pop(0))
+        if self._vk_on:                                             # a video key is held for 100 ms, then 100 ms pause
+            if now_ms - self._vk_t >= 100:
+                self.br.out(self._vk_on, 0)
+                self._vk_on, self._vk_t = 0, now_ms
+        elif self._vk and now_ms - self._vk_t >= 100:
+            self._vk_on, self._vk_t = self._vk.pop(0), now_ms
+            self.br.out(self._vk_on, self._vk_on)
         if self.tele_due:
             self.tele_due = False
             self._telemetry()
@@ -271,8 +340,9 @@ class Hub:
             if s is not None and not s[0] & 1:
                 d = br.i2c_read(A_TOF, 0x0096, 2, True)
                 if d is not None:
-                    self.tof_mm = d[0] << 8 | d[1]
-                    self.tof_valid = 0 < self.tof_mm < 4000
+                    raw = d[0] << 8 | d[1]
+                    self.tof_valid = 0 < raw < 4000
+                    self.tof_mm = max(0, raw + int(self.cfg.v["dist0"]))
                 br.i2c_write(A_TOF, 0x0086, b"\x01", True)
 
     # ---- 20 times a second: angles, dot, overlay, servo, telemetry
@@ -293,10 +363,13 @@ class Hub:
         if self.power_off:
             return
         br = self.br
+        cfg = self.cfg.v
         hd, pt, rl = self.angles()
-        dx, dy, inside = fcl_calc.down_dot(pt, rl)
+        hd, pt, rl = (hd + cfg["head0"]) % 360.0, pt - cfg["pitch0"], rl - cfg["roll0"]     # small trims: plain subtraction
+        dx, dy, inside = fcl_calc.down_dot(pt, rl, cfg["hfov"])
         fl = self.flags | (fcl_calc.TF_RECORDING if self.recording else 0) | (fcl_calc.TF_TOF_VALID if self.tof_valid else 0) \
-            | (fcl_calc.TF_DOT_INSIDE if inside else 0)
+            | (fcl_calc.TF_DOT_INSIDE if inside else 0) | (fcl_calc.TF_EDGES if self.edges else 0) \
+            | (fcl_calc.TF_MENU if self.apps.menu_open else 0) | (fcl_calc.TF_LOG if self.apps.log_on else 0)
         soc = [fcl_calc.SOC_NO_CELL if s < 0 else int(s + 0.5) for s in self.soc]
         t = {"t_ms": self.t_us // 1000, "heading": hd, "pitch": pt, "roll": rl, "alt_m": self.alt - self.alt_zero,
              "press_pa": int(self.p_pa + 0.5), "tof_mm": self.tof_mm,
@@ -306,7 +379,7 @@ class Hub:
              "dot_x": dx, "dot_y": dy, "overlay": self.overlay_mask, "sensors": self.sensors}
         self.last = t
         # overlay: send only the part of a row that changed
-        grid = fcl_calc.osd_compose(t)
+        grid = self.apps.compose(t)                                 # standard overlay + the page or the menu
         for r in range(15):
             a, b = self.osd[r], grid[r]
             if a != b:
@@ -317,15 +390,23 @@ class Hub:
                     j -= 1
                 br.osd_text(r * 30 + i, b[i:j])
         self.osd = grid
-        dot = (240 + dx, 240 + dy, bool(self.overlay_mask & 1), inside)
+        if self.on_info:
+            self.apps.report(self.now_ms, self.on_info)
+        dot = (240 + dx, 240 + dy, bool(self.overlay_mask & 1) and not self.apps.menu_open, inside)
         if dot != self.dot:
             self.dot = dot
             br.osd_dot(*dot)
         if self.follow_on:                                          # servo 1 holds the camera level
-            us = int(min(2000, max(1000, 1500 - 10 * pt)))
+            us = int(min(2000, max(1000, 1500 + cfg["tilt_us"] * pt)))
             if us != self.servo_us:
                 self.servo_us = us
                 br.servo(0, us)
+        if self.pan_target is not None:                             # servo 2 holds a compass heading
+            e = (self.pan_target - hd + 180.0) % 360.0 - 180.0
+            us = int(min(2000, max(1000, 1500 + cfg["pan_us"] * e)))
+            if us != self.pan_us:
+                self.pan_us = us
+                br.servo(1, us)
         leds = 1 | (2 if ((self.n_imu // 50) & 1 if fl & fcl_calc.TF_CELL_LOW else self.recording) else 0)
         if leds != self.leds:
             self.leds = leds

@@ -47,7 +47,7 @@ KEYS = [
     (31.0, 150, -90, 0, 0.0, "Moving a few degrees off and around: the dot follows."),
     (36.0, 150, -90, 0, 0.0, "Back up to level, turning to the north-west."),
     (42.0, 315, 0, 0, 0.0, "North-west, level. Raising the unit 2 m: height and pressure change."),
-    (47.0, 315, 0, 0, 2.0, "Button B2: recording on (REC). Button B1: next display mode."),
+    (47.0, 315, 0, 0, 2.0, "Button B2: recording mark (REC). Button B1: next page, Level."),
     (51.0, 315, 0, 0, 2.0, "Commands over USB: servo 2 to 1800 us, then the overlay reduced to dot and charge."),
     (56.0, 330, 0, 0, 2.0, "Cell 3 runs low and warm: LOW on the LCD and in the dashboard."),
     (62.0, 330, 0, 0, 2.0, ""),

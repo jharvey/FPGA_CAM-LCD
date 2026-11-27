@@ -5,10 +5,11 @@
 //   * a character cell that holds a character: glyph pixels white, the rest of the cell at half brightness
 //   * the dot: filled centre (r <= 3) and ring (8 <= r <= 11) in the dot colour, black edge out to r = 13
 //
-// The hub CPU writes the text through the char_* port (address = row * 30 + col, ASCII) and sets the dot
-// registers (screen pixels, 0..479).  Not yet instantiated in the camera design: that needs the hub CPU.
+// The bridge (fpga/bridge/fcl_bridge.v) writes the text through the char_* port (address = row * 30 + col,
+// ASCII) on its own clock wclk, and sets the dot registers (screen pixels, 0..479).  fcl_osd_stream.v wraps
+// this module for a de / hs / vs video stream; fpga/full/fcl_top.v puts it in the camera design.
 //
-// Latency: 2 clocks.  Delay hsync / vsync / de by 2 clocks alongside (de_out is provided).
+// Latency: 3 clocks.  Delay hsync / vsync by 3 clocks alongside (de_out is provided).
 module fcl_osd #(
     parameter BITS = 6,                          // bits per colour: 6 for the RGB666 panel
     parameter FONT_FILE = "font16x32.hex"
@@ -20,7 +21,8 @@ module fcl_osd #(
     input  wire [3*BITS-1:0] rgb_in,             // {r, g, b}
     output reg  [3*BITS-1:0] rgb_out,
     output reg               de_out,
-    // text memory, written by the hub
+    // text memory, written by the bridge on wclk
+    input  wire              wclk,
     input  wire              char_we,
     input  wire [8:0]        char_addr,          // 0..449
     input  wire [6:0]        char_data,
@@ -39,7 +41,7 @@ module fcl_osd #(
         for (i = 0; i < 450; i = i + 1) text[i] = 7'd32;
         $readmemh(FONT_FILE, font);
     end
-    always @(posedge clk) if (char_we && char_addr < 450) text[char_addr] <= char_data;
+    always @(posedge wclk) if (char_we && char_addr < 450) text[char_addr] <= char_data;
 
     // stage 1: character at this cell
     wire [4:0] col = x[8:4];

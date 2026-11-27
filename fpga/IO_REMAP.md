@@ -11,7 +11,10 @@ Every port of `CameraToTFTSobel_FCL.ice` was checked against the net on its ball
 - The output on `GP13` is renamed `LCD_BL_EN`: on this board GP13 is the backlight boost enable (U8). The design holds
   it at 1, so the backlight is on.
 - `rst_n` is still B0 (`BTN_PWRn`, D6): a press of the power button also resets the video pipeline.
-- `main_FCL.lpf` regenerated; `python fpga/build.py` builds the bitstream (24 % of the LUTs, timing met).
+- `main_FCL.lpf` regenerated; `python fpga/build.py` builds the bitstream (24 % of the LUTs). **Correction, 2026-11-27:**
+  "timing met" was wrong. The pin file had no clock frequencies, so nextpnr checked against 12 MHz. With the
+  frequencies given (`build.py` now adds them), the SDRAM clock (142.9 MHz) is estimated at about 70 MHz for its
+  slowest path; the 25 MHz and 18 MHz clocks pass. See `fpga/prebuilt/MANIFEST.md`.
 
 Camera (J1, through-hole, front layer): the 16 camera signals sit on U1's two outer ball rows (A/B) of the bottom-left edge in J1 column order, so every camera trace routes on the top layer without vias; the camera pixel clock is on the dedicated clock input **PCLKT1_0 (B12)** (one via). LCD (J7, back side): outer three rows of the bottom-right corner in J7 pin order, one dogbone via each, then a back-layer ribbon. Only pin locations changed; the Verilog is untouched. All new balls are general I/O in the 3.3 V banks 0/1/7.
 

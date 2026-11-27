@@ -12,7 +12,9 @@
 //                  nreg, reg_hi, reg_lo, rlen(1-16)                 -> status      (periodic I2C read, see 0x30)
 //   0x23 ADC       period(2, x100 us, 0 = off), cfg(2)              -> status      (AD7689 scan of 8 inputs, see 0x31)
 //   0x24 SERVO     channel(0-5), pulse_us(2, 0 = off)               -> status
-//   0x25 OUT       mask, value   bit 0 LED0, 1 LED1, 2 TOF_XSHUT, 3 SHUTDOWN   -> status
+//   0x25 OUT       mask, value   bit 0 LED0, 1 LED1, 2 TOF_XSHUT, 3 SHUTDOWN,
+//                  4-7 aux[0-3] (in the full design: video keys view / threshold up / threshold down,
+//                  and bit 7 = the ESP32 owns B1 and B2)             -> status
 //   0x26 OSD_TEXT  address(2) = row * 30 + col, characters          -> status
 //   0x27 OSD_DOT   x(2), y(2), flags (bit 0 on, bit 1 inside)       -> status
 //   0x28 INPUTS    -                                              -> as 0x32
@@ -50,6 +52,7 @@ module fcl_bridge #(
     output reg         tof_xshut,
     output wire        shutdown,
     output reg  [5:0]  servo,
+    output reg  [3:0]  aux,              // OUT bits 4..7, free for the design around the bridge
     // LCD overlay
     output reg         osd_we,
     output reg  [8:0]  osd_addr,
@@ -365,7 +368,7 @@ module fcl_bridge #(
         fb_we <= 0;
         if (rst) begin
             e <= E_IDLE; op_on <= 0; snd_busy <= 0; adc_cnv <= 1; adc_sck <= 0; adc_din <= 0;
-            led <= 0; tof_xshut <= 0; out_shutdown <= 0; dot_on <= 0; dot_inside <= 0; dot_x <= 240; dot_y <= 240;
+            led <= 0; aux <= 0; tof_xshut <= 0; out_shutdown <= 0; dot_on <= 0; dot_inside <= 0; dot_x <= 240; dot_y <= 240;
             for (ci = 0; ci < 6; ci = ci + 1) sv_us[ci] <= 0;
         end else begin
             // ---- frame sender: A5 5A type len prefix data crc
@@ -418,6 +421,7 @@ module fcl_bridge #(
                         if (hd[0][1]) led[1] <= hd[1][1];
                         if (hd[0][2]) tof_xshut <= hd[1][2];
                         if (hd[0][3]) out_shutdown <= hd[1][3];
+                        aux <= (aux & ~hd[0][7:4]) | (hd[1][7:4] & hd[0][7:4]);
                     end
                     8'h26: begin o_i <= 2; e <= E_OSD; end
                     8'h27: begin dot_x <= {hd[1][1:0], hd[0]}; dot_y <= {hd[3][1:0], hd[2]}; dot_on <= hd[4][0]; dot_inside <= hd[4][1]; end

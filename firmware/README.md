@@ -14,6 +14,10 @@ The sensors, buttons, battery ADC and servo outputs are wired to the FPGA; the E
 | `esp32/fcl_fix.py` | ESP32, viper native code | attitude filter in 32-bit integers, 200 times a second, no heap use |
 | `esp32/fcl_hubpy.py`, `fcl_calc.py` | ESP32 | hub: sensor set-up, battery and charge, buttons, down dot, overlay text, telemetry |
 | `esp32/fcl_usb.py`, `fcl_usbdev.py` | ESP32 | USB serial stream, Wi-Fi setup, audio |
+| `esp32/fcl_app.py`, `fcl_cfg.py` | ESP32 | the layer above the hub: pages (Level, Height, Bearing, your own), menu, calibration values. `doc/USER_MANUAL.md`, `doc/DEVELOPER_GUIDE.md` |
+| `esp32/fcl_web.py` | ESP32 | the phone page over Wi-Fi |
+| `fpga/full/fcl_top.v` | FPGA | camera design + LCD overlay + bridge in one bitstream (`python fpga/full/build_full.py`) |
+| `tools/fcl_calibrate.py`, `fcl_log.py` | PC | guided calibration of a unit; summary / CSV / plot of a recorded stream |
 
 MicroPython is the plan for the long run: speed comes from viper (integer native code) for the fast path, not from a
 later move to C. The soft-CPU design below (`common/`, `hub/`) is kept as a tested reference and for the simulator's
@@ -22,7 +26,7 @@ later move to C. The soft-CPU design below (`common/`, `hub/`) is kept as a test
 Video of the simulated unit (dashboard beside the LCD overlay, a 62 s tour): `doc/fw/fcl_sim_tour.mp4`, made by
 `python firmware/tools/make_video.py`.
 
-Tests: `python firmware/sim/test_usb.py`, `python firmware/sim/test_filter.py`, `python fpga/bridge/test_bridge.py`,
+Tests: `python firmware/sim/test_usb.py`, `test_app.py`, `test_web.py`, `test_calibrate.py`, `test_filter.py`, `test_magcal.py` (all in `firmware/sim/`), `python fpga/bridge/test_bridge.py`,
 `python fpga/osd/test_osd.py`. Bridge-only bitstream for bring-up: `python fpga/bridge/build_bridge.py`.
 
 ## The earlier design: C hub on a soft CPU

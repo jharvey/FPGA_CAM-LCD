@@ -48,9 +48,9 @@ SCENES = [
     ("down", "Pointing straight down", 17.5, [(2.0, "servo 2 1800"), (3.0, "wifi HomeNet secretpass"), (12.0, "mic on")],
      "Pointed at the ground, the dot turns green and moves into the picture; when it sits on the centre cross the "
      "lens points exactly down."),
-    ("tilted", "Tilted, recording", 33.0, [(31.0, "sim press B1 3000")],
-     "B2 was pressed at 30 s (recording on, REC on the LCD); B1 is being held, which the BUTTONS panel and the "
-     "$B lines show."),
+    ("tilted", "Tilted, recording", 33.0, [(31.5, "sim press PWR 1900")],
+     "B2 was pressed at 30 s (recording mark on, REC on the LCD); the power button is being held (under 2 s, so "
+     "no switch-off), which the BUTTONS panel and the $B lines show."),
     ("lowcell", "A low cell, a hot cell, an empty slot", 12.0,
      [(1.0, "sim set cell3 3.35"), (1.0, "sim set temp3 57"), (1.0, "sim set cell2 0"), (1.0, "sim set pitch -78"),
       (2.0, "servo 1 1200"), (2.0, "servo 4 2100")],
@@ -108,6 +108,9 @@ def main():
     w("**Status.** Everything here runs today in the simulator and passes its tests. Nothing has run on a real board: the "
       "boards are not built, and the ESP32 code is written against the MicroPython documentation only (the files run "
       "here under ordinary Python). See \"What is tested and what is not\" at the end.\n")
+    w("Using the unit (buttons, pages, menu, phone page, calibration) is in [USER_MANUAL.md](USER_MANUAL.md); adding "
+      "your own pages and the software layers are in [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md). This guide is the "
+      "reference for the USB stream, the dashboard and the overlay.\n")
     w("## Try it without hardware\n")
     w("```\npython firmware/tools/fcl_dash.py --sim\n```\n")
     w("That starts a simulated unit and the dashboard on it. It needs Python 3 only. Type commands at the bottom "
@@ -126,8 +129,10 @@ def main():
     w("| BUTTONS | the three buttons, lit while held |")
     w("| SERVOS | the pulse width last commanded over USB for each of the six outputs |")
     w("| Wi-Fi / Audio | connection state and address; microphone stream statistics |")
+    w("| LCD | the page that is showing and the lines it wrote on the LCD (or the menu) |")
     w("| LOG | replies to commands, button presses, events from the hub |\n")
-    w("Local commands of the dashboard: `!log file.csv` writes the telemetry to a CSV file, `!wav file.wav` records "
+    w("Local commands of the dashboard: `!log file.csv` writes the telemetry to a CSV file, `!log file.log` records the "
+      "stream as it is (for `--replay file.log` and `firmware/tools/fcl_log.py`), `!wav file.wav` records "
       "the microphone stream, `!play file.wav` sends a 16-bit mono WAV file to the speaker.\n")
     w("## The LCD overlay and the down dot\n")
     w("The same data can be drawn over the camera picture on the round LCD. The pictures below are the overlay "
@@ -139,10 +144,12 @@ def main():
     w("**The down dot.** The hub works out where \"straight down\" is from the accelerometer, gyro and compass, and "
       "marks that point in the picture. Green with a ring: the point is in view. Amber on the rim: it is outside "
       "the picture, in that direction. On the centre: the lens points straight down. The picture is assumed to span "
-      "%.0f degrees across the LCD (`CAM_HFOV_DEG` in `firmware/esp32/fcl_calc.py`): measure the real lens and set it, "
-      "or the dot will be off away from the centre.\n" % fcl_osd.CAM_HFOV_DEG)
+      "%.0f degrees across the LCD until the real lens is measured: the `lens` step of the calibration "
+      "(`firmware/tools/fcl_calibrate.py`) does that and stores it (`cal set hfov`); until then the dot is off away "
+      "from the centre.\n" % fcl_osd.CAM_HFOV_DEG)
     w("**Text rows.** Heading and compass point; REC while recording; pitch and roll; distance; height and pressure; "
-      "charge of the three cells (with LOW or OFF); cell temperatures (with HOT). `overlay` chooses the items:\n")
+      "charge of the three cells (with LOW or OFF); cell temperatures (with HOT). This is the Overview page; the other "
+      "pages and the menu add their own rows (see the user manual). `overlay` chooses the items:\n")
     w("| Item | Bit | Shows |\n|---|---|---|")
     for n, d in (("dot", "the down dot"), ("heading", "heading row"), ("attitude", "pitch / roll row"),
                  ("baro", "height and pressure row"), ("dist", "distance row"), ("batt", "charge and temperature rows")):
@@ -150,14 +157,18 @@ def main():
     w("")
     w("In the FPGA the overlay is `fpga/osd/fcl_osd.v` (30 x 15 characters of 16 x 32 pixels, font in "
       "`font16x32.hex`). `python fpga/osd/test_osd.py` checks that it produces the same pixels as these pictures. "
-      "The FPGA bridge has the port that writes its text and dot. Neither is merged into the camera design yet.\n")
+      "The FPGA bridge has the port that writes its text and dot. In the full design (`fpga/full/fcl_top.v`, "
+      "`python fpga/full/build_full.py`) the overlay sits between the camera design and the panel, through "
+      "`fcl_osd_stream.v`, which the same test runs with video timing.\n")
     w("## The USB serial stream\n")
     w("The unit appears as a serial port. It sends text lines; each starts with `$` and a letter. Commands are plain "
       "words, one per line. An excerpt (`>` marks lines sent to the unit):\n")
     w("```\n" + "\n".join(ex) + "\n```\n")
     w("| Line | Meaning |\n|---|---|")
     for a, b in (("`$T,...`", "telemetry, fields below; 10 per second by default (`stream`)"),
-                 ("`$E,<name>`", "event from the hub: B1, B2, PWR_SHORT, PWR_OFF, CELL_LOW, CELL_CUTOFF"),
+                 ("`$E,<name>`", "event from the hub: B1, B2, B1_LONG (B1 held 0.7 s), PWR_SHORT, PWR_OFF, CELL_LOW, CELL_CUTOFF"),
+                 ("`$L,<row>,<text>`", "LCD row 0-14 as the page or the menu wrote it (leading spaces kept); empty text: the row is back to the Overview text. At most 5 times a second, only on change"),
+                 ("`$C,<name>=<value>,...`", "calibration values, after `cal`"),
                  ("`$B,<button>,<0/1>`", "button released / pressed: PWR, B1, B2"),
                  ("`$S,<us1>..<us6>`", "servo pulse widths last commanded over USB, 0 = off"),
                  ("`$W,<state>,<ssid>,<ip>,<rssi>`", "Wi-Fi: off, connecting, connected, failed; sent every 5 s and on change"),
@@ -174,8 +185,8 @@ def main():
              "cell3_mv": "mV", "vsys_mv": "mV", "temp1_c": "C, cell 1", "temp2_c": "C, cell 2", "temp3_c": "C, cell 3",
              "soc1": "percent, from the cell voltage; 255 = no cell", "soc2": "percent", "soc3": "percent",
              "buttons": "bit 0 PWR, bit 1 B1, bit 2 B2 (1 = held)", "dot_x": "LCD pixels from the centre, + right",
-             "dot_y": "LCD pixels from the centre, + down", "mode": "display mode 0-3 (B1 steps it)",
-             "overlay": "overlay item bits", "flags": "1 REC, 2 cell low, 4 cutoff, 8 distance valid, 16 hot, 32 dot in view",
+             "dot_y": "LCD pixels from the centre, + down", "mode": "LCD page: 0 overview, 1 level, 2 height, 3 bearing, 4.. your own (B1 steps it)",
+             "overlay": "overlay item bits", "flags": "1 REC, 2 cell low, 4 cutoff, 8 distance valid, 16 hot, 32 dot in view, 64 edge view, 128 menu open, 256 logging",
              "sensors": "bit 0 IMU, 1 compass, 2 barometer, 3 distance, 4 ADC answered"}
     for i, k in enumerate(fcl_usb.T_FIELDS, 1):
         w("| %d | `%s` | %s |" % (i, k, units[k]))
@@ -234,17 +245,25 @@ def main():
         ("6", "LCD overlay in the FPGA (`fcl_osd.v`) | Verilog simulated, identical pixels to the Python overlay; not in the camera design yet"),
         ("7", "FPGA bridge (`fcl_bridge.v`): I2C, ADC, servos, buttons, overlay port over the serial link | Verilog simulated against the Python model; builds alone into a bitstream (`build_bridge.py`), timing met; not on hardware"),
         ("8", "Hub in MicroPython (`fcl_bridge.py`, `fcl_fix.py`, `fcl_hubpy.py`) with the integer filter | simulated end to end, tested; viper compilation and speed on the ESP32 not checked"),
-        ("9", "Merge the bridge and the overlay into the camera design | not started"),
-        ("10", "Bring-up on the real board: sensor axes, lens angle, NTC constants, charge table against real cells, filter speed | waits for boards")):
+        ("9", "Bridge and overlay merged into the camera design (`fpga/full/fcl_top.v`); B1 / B2 handed to the ESP32, video keys driven through the bridge | builds into one bitstream (27 % of the logic); overlay stage simulated with video timing; the whole design not simulated together, not on hardware. The bridge's 25 MHz clock and the overlay's 18 MHz pixel clock pass timing; the camera design's own SDRAM clock (142.9 MHz) does not by nextpnr's estimate (about 70 MHz): see `fpga/prebuilt/MANIFEST.md`"),
+        ("10", "App layer (`fcl_app.py`): pages Level, Height, Bearing, your own pages, menu on B1 held | simulated, tested"),
+        ("11", "Calibration values (`fcl_cfg.py`, `cal`) and the guided calibration (`fcl_calibrate.py`) | simulated against hardware with errors built in, tested"),
+        ("12", "Second servo axis: `pan` holds a compass heading on servo 2 | simulated, tested; direction and travel per degree are calibration values to set on the real mount"),
+        ("13", "Log on the unit (`log on`), replay and plots on the PC (`fcl_dash.py --replay`, `fcl_log.py`) | simulated, tested; file writing on the ESP32 not run"),
+        ("14", "Phone page over Wi-Fi (`fcl_web.py`) | tested over real sockets against the simulator; not run on the ESP32"),
+        ("15", "Bring-up on the real board: sensor axes, lens angle, NTC constants, charge table against real cells, filter speed | waits for boards; the calibration tool covers axes, lens, cells, temperatures, distance, heading")):
         w("| %s | %s |" % (a, b))
     w("")
     w("## What is tested and what is not\n")
     w("| Test | Covers | Run |\n|---|---|---|")
     w("| `test_usb.py` | the USB stream end to end on the bridge path: every command, buttons, Wi-Fi, audio, overlay (20 checks; also run on the C hub paths) | `python firmware/sim/test_usb.py` |")
+    w("| `test_app.py` | pages, the Level / Height / Bearing tools, the menu, `$L` lines, logging, calibration values, pan hold, a page of your own (26 checks) | `python firmware/sim/test_app.py` |")
+    w("| `test_web.py` | the phone page over real sockets: page, state, commands, refused commands, a silent client (8 checks) | `python firmware/sim/test_web.py` |")
+    w("| `test_calibrate.py` | the guided calibration on simulated hardware with errors built in: every error found, readings right afterwards, wrong measurements refused (12 checks) | `python firmware/sim/test_calibrate.py` |")
     w("| `test_filter.py` | the integer filter: accuracy while turning and tilting, straight down, two minutes still, gyro bias, no overflow (8 checks) | `python firmware/sim/test_filter.py` |")
     w("| `test_magcal.py` | compass calibration with an added hard-iron field: automatic in the demo loop and in a level pan, manual, storing and reloading, no false correction (11 checks) | `python firmware/sim/test_magcal.py` |")
     w("| `test_bridge.py` | `fcl_bridge.v` in Icarus Verilog against the Python model, frame by frame; servo pulses, outputs, overlay writes; logic size (26 checks) | `python fpga/bridge/test_bridge.py` |")
-    w("| `test_osd.py` | `fcl_osd.v` pixel for pixel against the Python overlay, 5 frames | `python fpga/osd/test_osd.py` |")
+    w("| `test_osd.py` | `fcl_osd.v` pixel for pixel against the Python overlay, 5 frames, and 3 more behind `fcl_osd_stream.v` with the LCD driver's timing and the text written from a second clock | `python fpga/osd/test_osd.py` |")
     w("| `fcl_sim`, `test_link_py.py` | the earlier C hub against sensor models (21 + 6 checks) | `make -C firmware/sim test` (needs a C compiler) |\n")
     w("Not tested, because it needs hardware: the ESP32 code that touches pins (I2S audio, Wi-Fi, the UART to the FPGA, "
       "USB serial timing), whether MicroPython's viper compiler accepts `fcl_fix.py` as written and how fast it runs, real "

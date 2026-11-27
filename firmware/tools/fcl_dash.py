@@ -4,11 +4,14 @@
     python firmware/tools/fcl_dash.py --sim                 built-in simulator, no hardware
     python firmware/tools/fcl_dash.py --port COM7           the unit on USB (Linux: /dev/ttyACM0); needs pyserial
     python firmware/tools/fcl_dash.py --tcp 127.0.0.1:7007  a running firmware/sim/fcl_sim.py
+    python firmware/tools/fcl_dash.py --replay trip.log     play a recorded stream again (--speed 4: four times as fast)
 
 Type a command and press Enter (help lists them); Esc or Ctrl-C quits.  Local commands start with "!":
     !wav <file.wav>     record the microphone stream to a WAV file (send "mic on" first); !wav stops
     !play <file.wav>    send a 16-bit mono WAV file to the speaker
     !log <file.csv>     write every telemetry line to a CSV file; !log stops
+    !log <file.log>     write the whole stream as it is (telemetry, events, buttons, LCD rows): this can be
+                        replayed with --replay and read with firmware/tools/fcl_log.py
 
 No curses needed: it draws with ANSI escape codes (Windows Terminal, PowerShell, cmd on Windows 10+, any
 Linux / macOS terminal).  --snapshot prints one frame as plain text and exits (used for the documentation).
@@ -30,7 +33,8 @@ import fcl_usb      # noqa: E402
 W1, W2, W3 = 38, 25, 41                 # inner widths of the three columns
 FULL = W1 + W2 + W3 + 2
 CARD = ("N", "NE", "E", "SE", "S", "SW", "W", "NW")
-FLAGS = ((1, "REC"), (2, "LOW"), (4, "CUTOFF"), (16, "HOT"))
+FLAGS = ((1, "REC"), (2, "LOW"), (4, "CUTOFF"), (16, "HOT"), (64, "EDGES"), (128, "MENU"), (256, "LOG"))
+PAGES = ("overview", "level", "height", "bearing")
 SENSORS = ("IMU", "compass", "baro", "dist", "ADC")
 OVERLAY = ("dot", "heading", "attitude", "baro", "dist", "batt")
 
@@ -81,6 +85,8 @@ class Dash:
         self.input = ""
         self.wav = None
         self.csv = None
+        self.raw = None                  # !log <file.log>: the stream as it is
+        self.lcd = {}                    # LCD rows written by the unit's page or menu ($L lines)
         self.source = ""
 
     def note(self, text):
@@ -92,6 +98,8 @@ class Dash:
             return
         kind, v = r
         self.lines += 1
+        if self.raw and kind in "TEBLMSWC":
+            self.raw.write(line.strip() + "\n")
         if kind == "T":
             self.t = v
             self.buttons = v["buttons"]
@@ -114,6 +122,17 @@ class Dash:
                 self.note("        " + v[0])
         elif kind == "S":
             self.servos = [int(x) for x in v[:6]]
+        elif kind == "L":
+            text = line.strip().split(",", 2)[2] if line.count(",") >= 2 else ""
+            try:
+                if text.strip():
+                    self.lcd[int(v[0])] = text
+                else:
+                    self.lcd.pop(int(v[0]), None)
+            except ValueError:
+                pass
+        elif kind == "C":
+            self.note("cal     " + " ".join(v))
         elif kind == "M":
             self.mag = v
         elif kind == "W":
@@ -138,6 +157,17 @@ class Dash:
                 if self.wav.getnframes() == 0:
                     self.wav.setframerate(rate)
                 self.wav.writeframes(pcm)
+
+    def lcd_grid(self):
+        """the 15 LCD text rows as the unit shows them: the standard overlay (empty while the menu is open)
+        with the rows of the page or the menu on top"""
+        import fcl_calc
+        t = dict(self.t, press_pa=int(self.t["press_hpa"] * 100 + 0.5), tof_mm=self.t["dist_mm"])
+        grid = [" " * 30] * 15 if t["flags"] & 128 else fcl_calc.osd_compose(t)
+        for r, text in self.lcd.items():
+            if 0 <= r < 15:
+                grid[r] = text[:30].ljust(30)
+        return grid
 
     # ---------------------------------------------------------------- drawing
     def _attitude(self):
@@ -229,8 +259,9 @@ class Dash:
 
         fl = [n for b, n in FLAGS if t["flags"] & b]
         ov = [n for i, n in enumerate(OVERLAY) if t["overlay"] >> i & 1]
-        head = " FCL monocular   %s   t %.1f s   %.0f lines/s   mode %d   %s" % (
-            self.source, t["t_ms"] / 1000.0, self.rate, t["mode"], " ".join(fl) if fl else "")
+        page = PAGES[t["mode"]] if t["mode"] < len(PAGES) else "page %d" % t["mode"]
+        head = " FCL monocular   %s   t %.1f s   %.0f lines/s   page %d %s   %s" % (
+            self.source, t["t_ms"] / 1000.0, self.rate, t["mode"], page, " ".join(fl) if fl else "")
         out = ["┌" + "─" * FULL + "┐", "│" + head[:FULL].ljust(FULL) + "│",
                rule("├", "┬", "┤", "ATTITUDE", "DOWN DOT (LCD view)", "BATTERY")]
         for a, b, c in zip(self._attitude(), self._dot(), self._battery()):
@@ -253,7 +284,10 @@ class Dash:
             mag = "Compass  calibrating by hand: %s of 6 directions seen (up, down, 4 sides), %s readings" % (m[7], m[6])
         else:
             mag = "Compass  calibrated (%s): offset %s, %s, %s mG, field %s mG, fit error %s %%, %s" % (m[0], m[1], m[2], m[3], m[4], m[5], m[8])
-        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none"), audio, mag):
+        shown = "  |  ".join(self.lcd[r].strip() for r in sorted(self.lcd))
+        lcd = "LCD    " + (("menu: " if t["flags"] & 128 else page + ": ") + shown if shown else
+                         page + " (B1 or 'key B1': next page; hold B1 or 'key B1L': menu)")
+        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none"), audio, mag, lcd):
             out.append("│ " + s[:FULL - 1].ljust(FULL - 1) + "│")
         out.append("├─ LOG " + "─" * (FULL - 6) + "┤")
         log = list(self.log)
@@ -284,11 +318,15 @@ class Dash:
                     self.wav.setframerate(16000)
                     self.note("local   recording the microphone stream to " + a[1])
             elif a[0] == "!log":
-                if self.csv:
-                    self.csv.close()
-                    self.csv = None
-                    self.note("local   CSV closed")
-                if len(a) > 1:
+                for f in (self.csv, self.raw):
+                    if f:
+                        f.close()
+                        self.note("local   log closed")
+                self.csv = self.raw = None
+                if len(a) > 1 and a[1].lower().endswith(".log"):
+                    self.raw = open(a[1], "w")
+                    self.note("local   recording the stream to " + a[1])
+                elif len(a) > 1:
                     self.csv = open(a[1], "w")
                     self.csv.write(",".join(fcl_usb.T_FIELDS) + "\n")
                     self.note("local   logging telemetry to " + a[1])
@@ -377,7 +415,41 @@ class StreamSource:
         self._close()
 
 
+class ReplaySource:
+    """a recorded stream (.log) played back at the speed it was recorded, or faster"""
+
+    def __init__(self, path, speed=1.0):
+        self.name = "replay " + os.path.basename(path)
+        self.lines = [x.rstrip("\r\n") for x in open(path, encoding="utf-8", errors="replace")]
+        self.q = queue.Queue()
+        self.run = True
+        self.speed = max(0.01, speed)
+        threading.Thread(target=self._loop, daemon=True).start()
+
+    def _loop(self):
+        t0 = w0 = None
+        for line in self.lines:
+            if not self.run:
+                return
+            r = fcl_usb.parse_line(line)
+            if r and r[0] == "T":
+                t = r[1]["t_ms"] / 1000.0
+                if t0 is None:
+                    t0, w0 = t, time.time()
+                time.sleep(max(0.0, min(2.0, (t - t0) / self.speed - (time.time() - w0))))
+            self.q.put(line)
+        self.q.put("$I,end of the recording")
+
+    def send(self, line):
+        self.q.put("$R,err,this is a recording: commands go nowhere")
+
+    def close(self):
+        self.run = False
+
+
 def open_source(a):
+    if a.replay:
+        return ReplaySource(a.replay, a.speed)
     if a.sim:
         return SimSource(a.hub)
     if a.tcp:
@@ -475,7 +547,7 @@ def interactive(a):
         keys.close()
         sys.stdout.write("\x1b[?25h\n")
         src.close()
-        for f in (dash.wav, dash.csv):
+        for f in (dash.wav, dash.csv, dash.raw):
             if f:
                 f.close()
 
@@ -504,6 +576,8 @@ if __name__ == "__main__":
     g.add_argument("--sim", action="store_true", help="run the built-in simulator")
     g.add_argument("--port", help="serial port of the unit, e.g. COM7 or /dev/ttyACM0")
     g.add_argument("--tcp", help="host:port of a running fcl_sim.py")
+    g.add_argument("--replay", metavar="FILE", help="a recorded stream (.log) to play back")
+    ap.add_argument("--speed", type=float, default=1.0, help="with --replay: playback speed")
     ap.add_argument("--hub", choices=("auto", "bridge", "c", "python"), default="auto", help="simulator hub back end")
     ap.add_argument("--ascii", action="store_true", help="plain ASCII frame characters")
     ap.add_argument("--snapshot", type=float, metavar="SECONDS", help="with --sim: print one frame after this time and exit")

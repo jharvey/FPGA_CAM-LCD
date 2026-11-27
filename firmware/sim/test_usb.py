@@ -41,7 +41,9 @@ def run(backend):
                     seen.setdefault(r[0], []).append(r[1])
             if sim.last and sim.state["power_hold"]:
                 n_osd += 1
-                osd_same &= sim.state["osd"] == fcl_osd.osd_compose(sim.last)
+                # the hub's own layout for this frame (standard overlay + page), against what reached the overlay memory
+                want = sim.hubpy.apps.compose(sim.last) if sim.bridge_mode else fcl_osd.osd_compose(sim.last)
+                osd_same &= sim.state["osd"] == want
                 dot_same &= sim.state["dot"][:2] == (sim.last["dot_x"], sim.last["dot_y"])
 
     go(4.0)
@@ -51,9 +53,11 @@ def run(backend):
           "heading follows the scene: %.1f deg at 4 s (truth 78.0)" % t["heading"])
     check(t["soc1"] > 80 and t["soc3"] < 30 and 20 < t["temp1_c"] < 30,
           "charge and temperature: %d %% / %d %% / %d %%, %.1f C" % (t["soc1"], t["soc2"], t["soc3"], t["temp1_c"]))
-    go(2.0)                                           # demo presses B1 at 5.0-5.3 s
+    sim.command("sim press B1 300")
+    go(2.0)
     check(["B1", "1"] in seen["B"] and ["B1", "0"] in seen["B"] and ["B1"] in seen["E"],
           "button B1 press and release reported: %s, event %s" % (seen["B"], seen["E"]))
+    sim.command("mode 0")                             # B2 marks a recording on the overview page
     sim.command("sim press B2 400")
     go(1.0)
     check(["B2", "1"] in seen["B"] and seen["T"][-1]["flags"] & 1, "sim press B2: reported, recording flag set")
@@ -138,7 +142,7 @@ def run(backend):
           "unknown command refused; help lists the commands")
     fr, bad = sim.link_stats()
     check(bad == 0 and n_osd > 300, "link: %d frames, %d CRC errors" % (fr, bad))
-    check(osd_same and dot_same, "overlay text and dot from the hub equal the Python layout (fcl_osd.py) on %d frames" % n_osd)
+    check(osd_same and dot_same, "overlay text and dot in the overlay memory equal the hub's layout on %d frames" % n_osd)
 
     sim.command("sim press PWR 2500")
     go(3.0)

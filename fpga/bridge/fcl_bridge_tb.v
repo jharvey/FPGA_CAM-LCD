@@ -25,6 +25,7 @@ module fcl_bridge_tb;
     reg  [4:0] ints = 0;
     wire [1:0] led;
     wire       tof_xshut, shutdown;
+    wire [3:0] aux;
     wire [5:0] servo;
     wire       osd_we;
     wire [8:0] osd_addr;
@@ -35,7 +36,7 @@ module fcl_bridge_tb;
     fcl_bridge dut (.clk(clk), .rst(rst), .uart_rx(host_tx), .uart_tx(dut_tx),
         .scl_i(scl), .scl_oe(scl_oe), .sda_i(sda), .sda_oe(sda_oe),
         .adc_cnv(adc_cnv), .adc_sck(adc_sck), .adc_din(adc_din), .adc_sdo(adc_sdo),
-        .btn_n(~btn), .int_in(ints), .led(led), .tof_xshut(tof_xshut), .shutdown(shutdown), .servo(servo),
+        .btn_n(~btn), .int_in(ints), .led(led), .tof_xshut(tof_xshut), .shutdown(shutdown), .servo(servo), .aux(aux),
         .osd_we(osd_we), .osd_addr(osd_addr), .osd_data(osd_data),
         .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside));
 
@@ -125,6 +126,7 @@ module fcl_bridge_tb;
         always @(negedge servo[g]) if ($realtime > 1000) $display("SERVO %0d %0d", g, $rtoi(($realtime - sv_t[g]) / 1000.0 + 0.5));
     end endgenerate
     always @(led or tof_xshut or shutdown) if (!rst) $display("OUT %0d %0d %0d %0d", $rtoi($realtime / 1000.0), led, tof_xshut, shutdown);
+    always @(aux) if (!rst) $display("AUX %0d", aux);
     always @(dot_x or dot_y or dot_on or dot_inside) if (!rst) $display("DOT %0d %0d %0d %0d", dot_x, dot_y, dot_on, dot_inside);
 
     // ---------------------------------------------------------------- stimulus

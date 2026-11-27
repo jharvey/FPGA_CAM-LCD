@@ -1,0 +1,69 @@
+$ python firmware/tools/fcl_calibrate.py --sim --demo
+
+COMPASS. Away from steel: point the lens up, down, and level to north, east, south and west,
+about two seconds each, any order. Then two more directions of your choice.
+  (simulated user: done)
+
+AXES 1/4. Hold the unit level, lens pointing at the horizon, buttons on top.
+  (simulated user: done)
+
+AXES 2/4. Point the lens straight down at the floor.
+  (simulated user: done)
+
+AXES 3/4. Level again, then tip the unit about 45 degrees to the right (clockwise, seen from behind).
+  (simulated user: done)
+
+AXES 4/4. Level again, then turn a quarter turn to the right (clockwise, seen from above).
+  (simulated user: done)
+
+LEVEL. Put the unit on a table you know to be level, the way it will be used (lens at the horizon).
+  (simulated user: done)
+
+LENS 1/2. Aim so that a small, distant mark sits exactly in the centre of the screen. Keep the unit upright.
+  (simulated user: done)
+
+LENS 2/2. Tilt the unit up slowly until the same mark just touches the bottom edge of the round screen.
+  (simulated user: done)
+
+DISTANCE. Aim at a plain wall, the front of the ranger window 1 to 3 m from it, at right angles.
+  (simulated user: done)
+
+Distance from the ranger window to the wall, in metres, with a tape measure.
+  (simulated user: 1.000)
+
+CELLS. Voltage of cell 1 in volts, with a multimeter across its holder contacts.
+  (simulated user: 4.014)
+
+CELLS. Voltage of cell 2 in volts, with a multimeter across its holder contacts.
+  (simulated user: 3.943)
+
+CELLS. Voltage of cell 3 in volts, with a multimeter across its holder contacts.
+  (simulated user: 3.512)
+
+TEMPS. Room temperature in degrees C. The unit must have been off, or idle and cool, for 30 minutes.
+  (simulated user: 24.000)
+
+NORTH. Aim at a landmark whose true bearing you know (from a map), away from cars and steel.
+  (simulated user: done)
+
+True bearing of the landmark, in degrees (0 = north, 90 = east).
+  (simulated user: 45.000)
+
+RESULT
+  ok    compass                    offset 225, -153, 120 mG, field 475 mG, left over 0.5 % of the field (rough guide: 1 % is 1 to 2 degrees of heading).
+  ok    axes: level                pitch +3.0, roll -2.0 (both near 0)
+  ok    axes: lens down            pitch -87.0 (near -90)
+  ok    axes: tipped right         roll +43.0 (near +45)
+  ok    axes: quarter turn right   heading changed by +89 (near +90)
+  ok    level                      sensor board sits +3.00 deg in pitch and -2.00 deg in roll; stored
+  ok    lens                       the screen shows 48.0 deg across; stored
+  ok    distance                   ranger read +35 mm against the tape; stored
+  ok    cell 1                     unit read +3.0 % against the meter; stored
+  ok    cell 2                     unit read -1.5 % against the meter; stored
+  ok    cell 3                     unit read -0.0 % against the meter; stored
+  ok    temp 1                     sensor read -0.0 C against the room; stored
+  ok    temp 2                     sensor read +4.0 C against the room; stored
+  ok    temp 3                     sensor read -2.5 C against the room; stored
+  ok    north                      heading read -4.4 deg against the map; stored
+
+Stored on the unit: cell1=0.97097, cell2=1.0153, cell3=1.0004, dist0=-35, head0=4.412, hfov=48.008, pan_us=10, pitch0=3.0033, roll0=-2.0043, temp1=0, temp2=-4, temp3=2.5, tilt_us=-10

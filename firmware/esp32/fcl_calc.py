@@ -5,6 +5,7 @@ import math
 OSD_COLS, OSD_ROWS = 30, 15
 CAM_HFOV_DEG, LCD_HALF_PX, DOT_RIM_PX = 40.0, 240, 226      # CHECK the lens angle on the real camera
 TF_RECORDING, TF_CELL_LOW, TF_CUTOFF, TF_TOF_VALID, TF_HOT, TF_DOT_INSIDE = 1, 2, 4, 8, 16, 32
+TF_EDGES, TF_MENU, TF_LOG = 64, 128, 256            # edge view on the LCD, menu open, logging
 OV_DOT, OV_HEADING, OV_ATTITUDE, OV_BARO, OV_DIST, OV_BATT = 1, 2, 4, 8, 16, 32
 SOC_NO_CELL = 255
 SOC_TABLE = ((3300, 0), (3450, 5), (3600, 10), (3680, 20), (3720, 30), (3760, 40), (3800, 50), (3850, 60), (3920, 70),
@@ -26,12 +27,12 @@ def soc_from_mv(mv):
     return 100
 
 
-def down_dot(pitch_deg, roll_deg):
+def down_dot(pitch_deg, roll_deg, hfov_deg=CAM_HFOV_DEG):
     """-> (x, y, inside): where straight down appears, pixels from the screen centre (+x right, +y down)"""
     p, r = math.radians(pitch_deg), math.radians(roll_deg)
     sp, cp, sr, cr = math.sin(p), math.cos(p), math.sin(r), math.cos(r)
     dx, u, v = -sp, cp * sr, cp * cr
-    f = LCD_HALF_PX / math.tan(math.radians(CAM_HFOV_DEG / 2))
+    f = LCD_HALF_PX / math.tan(math.radians(hfov_deg / 2))
     if dx > 0.05:
         px, py = f * u / dx, f * v / dx
         if px * px + py * py <= DOT_RIM_PX * DOT_RIM_PX:
