@@ -1,0 +1,3 @@
+
+# stored build outputs: keep the bytes exactly as built, so their checksums match MANIFEST.md
+fpga/prebuilt/** -text
