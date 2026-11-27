@@ -120,15 +120,21 @@ class Plat:
     def log_start(self):
         import os
         self.log_stop()
-        base = "/sd" if "sd" in os.listdir("/") else ""
-        n = 1
-        names = os.listdir(base or "/")
-        while "fcl%03d.log" % n in names:
-            n += 1
-        self.log_name = "%s/fcl%03d.log" % (base, n)
-        self.log_max = 0 if base else LOG_FLASH_MAX
         self.log_bytes = self.log_n = 0
-        self.logf = open(self.log_name, "w")
+        try:
+            base = "/sd/" if "sd" in os.listdir("/") else ""
+            n = 1
+            names = os.listdir(base or ".")
+            while "fcl%03d.log" % n in names:
+                n += 1
+            self.log_name = "%sfcl%03d.log" % (base, n)
+            self.log_max = 0 if base else LOG_FLASH_MAX
+            self.logf = open(self.log_name, "w")
+        except OSError as e:             # no room, card gone: the unit carries on without a log
+            self.logf = None
+            if self.usb:
+                self.usb.out("$I,log not started: %s" % e)
+            return None
         if self.usb:
             self.usb.log = self.log_write
         return self.log_name
@@ -136,12 +142,19 @@ class Plat:
     def log_write(self, line):
         if self.logf is None:
             return
-        self.logf.write(line)
-        self.logf.write("\n")
-        self.log_bytes += len(line) + 1
-        self.log_n += 1
-        if self.log_n % 50 == 0:
-            self.logf.flush()            # at most 5 s are lost if the power goes
+        try:
+            self.logf.write(line)
+            self.logf.write("\n")
+            self.log_bytes += len(line) + 1
+            self.log_n += 1
+            if self.log_n % 50 == 0:
+                self.logf.flush()        # at most 5 s are lost if the power goes
+        except OSError as e:             # flash or card full, card pulled out
+            self.logf = None
+            self.usb.log = None
+            self.usb.hub.apps.log_on = False
+            self.usb.out("$I,log stopped: %s" % e)
+            return
         if self.log_max and self.log_bytes >= self.log_max:
             self.log_stop()
             if self.usb:
@@ -152,7 +165,10 @@ class Plat:
         if self.usb:
             self.usb.log = None
         if self.logf is not None:
-            self.logf.close()
+            try:
+                self.logf.close()
+            except OSError:
+                pass
             self.logf = None
         return "%s %d bytes" % (self.log_name, self.log_bytes)
 
@@ -246,8 +262,9 @@ def run():
             hub.tick_ms(time.ticks_ms())
             while poll.poll(0):
                 line = sys.stdin.readline()
-                if line:
-                    bridge.command(line)
+                if not line:
+                    break                # end of input (a PC test with a pipe); never on the USB port
+                bridge.command(line)
             plat.pump(bridge)
             if web:
                 web.poll()

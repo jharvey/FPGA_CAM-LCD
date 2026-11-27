@@ -163,7 +163,7 @@ class BridgeModel:
                 if self.hold_ms >= 8000:
                     self.force_off = True
         out = bytes(self.out)
-        del self.out[:]
+        self.out[:] = b""
         return out
 
     def osd_rows(self):

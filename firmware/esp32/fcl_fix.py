@@ -45,6 +45,10 @@ def imu_step(st_o, buf_o, dt_us: int) -> int:
     """one ICM-42688-P sample: buf = 14 bytes from register 0x1D (temperature, accel xyz, gyro xyz, big-endian)"""
     st = ptr32(st_o)
     b = ptr8(buf_o)
+    one = 1
+    s = 0                                # ptr32 reads are signed on the 32-bit ESP32 but unsigned on a 64-bit PC
+    if (one << 31) > 0:                  # (MicroPython Unix port): there, sign-extend every word that is read
+        s = 32
     # ---- unpack
     ax = (b[2] << 8) | b[3]
     ay = (b[4] << 8) | b[5]
@@ -64,27 +68,27 @@ def imu_step(st_o, buf_o, dt_us: int) -> int:
         gy -= 65536
     if gz >= 32768:
         gz -= 65536
-    n = st[14]
+    n = ((st[14] << s) >> s)
     st[14] = n + 1
     # ---- gyro bias from the first second, while the rates are small (under about 6 deg/s)
     if n < 200:                          # BIAS_SAMPLES (viper wants the literal)
         if gx > -400 and gx < 400 and gy > -400 and gy < 400 and gz > -400 and gz < 400:
-            st[9] = st[9] + gx
-            st[10] = st[10] + gy
-            st[11] = st[11] + gz
-            st[12] = st[12] + 1
+            st[9] = ((st[9] << s) >> s) + gx
+            st[10] = ((st[10] << s) >> s) + gy
+            st[11] = ((st[11] << s) >> s) + gz
+            st[12] = ((st[12] << s) >> s) + 1
     elif n == 200:
-        k = st[12]
+        k = ((st[12] << s) >> s)
         if k > 20:
             # rounded division by a positive count, written with shifts and a loop-free reciprocal
             r = 65536 // k
-            st[6] = (st[9] * r + 32768) >> 16
-            st[7] = (st[10] * r + 32768) >> 16
-            st[8] = (st[11] * r + 32768) >> 16
+            st[6] = (((st[9] << s) >> s) * r + 32768) >> 16
+            st[7] = (((st[10] << s) >> s) * r + 32768) >> 16
+            st[8] = (((st[11] << s) >> s) * r + 32768) >> 16
         st[13] = 7                       # accelerometer pull: 1/128 per sample from now on
-    gx -= st[6]
-    gy -= st[7]
-    gz -= st[8]
+    gx -= ((st[6] << s) >> s)
+    gy -= ((st[7] << s) >> s)
+    gz -= ((st[8] << s) >> s)
     # ---- rotation this step, Q21 radians:  counts / 65.5 deg/s * pi/180 * dt
     #      = counts * dt_us * 5.588e-4   ->  ((counts * dt_us) >> 9) * 586 >> 11        (586 / 2^20 = 5.588e-4)
     if dt_us > 20000:
@@ -95,9 +99,9 @@ def imu_step(st_o, buf_o, dt_us: int) -> int:
     # ---- turn both vectors:  v += v x w      (products Q(v) * Q21 >> 21, in three 10-bit limbs of v)
     i = 0
     while i < 6:
-        v0 = st[i]
-        v1 = st[i + 1]
-        v2 = st[i + 2]
+        v0 = ((st[i] << s) >> s)
+        v1 = ((st[i + 1] << s) >> s)
+        v2 = ((st[i + 2] << s) >> s)
         c0 = ((((v1 >> 20) * wz) >> 1) + ((((v1 >> 10) & 1023) * wz) >> 11) + (((v1 & 1023) * wz) >> 21)
               - (((v2 >> 20) * wy) >> 1) - ((((v2 >> 10) & 1023) * wy) >> 11) - (((v2 & 1023) * wy) >> 21))
         c1 = ((((v2 >> 20) * wx) >> 1) + ((((v2 >> 10) & 1023) * wx) >> 11) + (((v2 & 1023) * wx) >> 21)
@@ -111,24 +115,24 @@ def imu_step(st_o, buf_o, dt_us: int) -> int:
     # ---- pull "up" toward the accelerometer when it reads 0.85 .. 1.15 g
     a2 = ax * ax + ay * ay + az * az                      # up to 3 * 2^30: keep it in range
     if a2 < 0:
-        a2 = 0x7FFFFFFF
+        a2 = 1000000000                                   # (a literal above 2^30 is not a viper int on a 32-bit MicroPython)
     if a2 > 48486605 and a2 < 88752129:                   # (0.85 g)^2 .. (1.15 g)^2 in counts^2
-        sh = st[13]
-        st[0] = st[0] + ((((ax << 15) - st[0])) >> sh)
-        st[1] = st[1] + ((((ay << 15) - st[1])) >> sh)
-        st[2] = st[2] + ((((az << 15) - st[2])) >> sh)
+        sh = ((st[13] << s) >> s)
+        st[0] = ((st[0] << s) >> s) + ((((ax << 15) - ((st[0] << s) >> s))) >> sh)
+        st[1] = ((st[1] << s) >> s) + ((((ay << 15) - ((st[1] << s) >> s))) >> sh)
+        st[2] = ((st[2] << s) >> s) + ((((az << 15) - ((st[2] << s) >> s))) >> sh)
     # ---- keep "up" at unit length:  v += v * (1 - |v|^2) / 2, a small step each sample
-    x = st[0] >> 14
-    y = st[1] >> 14
-    z = st[2] >> 14
+    x = ((st[0] << s) >> s) >> 14
+    y = ((st[1] << s) >> s) >> 14
+    z = ((st[2] << s) >> s) >> 14
     e = (1 << 28) - (x * x + y * y + z * z)
     if e > 65535:
         e = 65535
     if e < -65535:
         e = -65535
-    st[0] = st[0] + ((x * e) >> 15)
-    st[1] = st[1] + ((y * e) >> 15)
-    st[2] = st[2] + ((z * e) >> 15)
+    st[0] = ((st[0] << s) >> s) + ((x * e) >> 15)
+    st[1] = ((st[1] << s) >> s) + ((y * e) >> 15)
+    st[2] = ((st[2] << s) >> s) + ((z * e) >> 15)
     return n
 
 
@@ -137,6 +141,10 @@ def mag_step(st_o, buf_o) -> int:
     """one LIS2MDL sample: buf = 6 bytes from register 0x68 (x, y, z little-endian), 1.5 mG per count"""
     st = ptr32(st_o)
     b = ptr8(buf_o)
+    one = 1
+    s = 0                                # ptr32 reads are signed on the 32-bit ESP32 but unsigned on a 64-bit PC
+    if (one << 31) > 0:                  # (MicroPython Unix port): there, sign-extend every word that is read
+        s = 32
     mx = b[0] | (b[1] << 8)
     my = b[2] | (b[3] << 8)
     mz = b[4] | (b[5] << 8)
@@ -148,19 +156,19 @@ def mag_step(st_o, buf_o) -> int:
         mz -= 65536
     if mx > 8000 or mx < -8000 or my > 8000 or my < -8000 or mz > 8000 or mz < -8000:
         return 0                                          # over 12 gauss: not the earth's field
-    mx -= st[16]
-    my -= st[17]
-    mz -= st[18]
-    if st[15] == 0:
+    mx -= ((st[16] << s) >> s)
+    my -= ((st[17] << s) >> s)
+    mz -= ((st[18] << s) >> s)
+    if ((st[15] << s) >> s) == 0:
         st[3] = mx << 16
         st[4] = my << 16
         st[5] = mz << 16
         st[15] = 1
         return 1
     sh = 2
-    if st[14] > 200:
+    if ((st[14] << s) >> s) > 200:
         sh = 5                                            # 1/32 per sample at 100 Hz
-    st[3] = st[3] + (((mx << 16) - st[3]) >> sh)
-    st[4] = st[4] + (((my << 16) - st[4]) >> sh)
-    st[5] = st[5] + (((mz << 16) - st[5]) >> sh)
+    st[3] = ((st[3] << s) >> s) + (((mx << 16) - ((st[3] << s) >> s)) >> sh)
+    st[4] = ((st[4] << s) >> s) + (((my << 16) - ((st[4] << s) >> s)) >> sh)
+    st[5] = ((st[5] << s) >> s) + (((mz << 16) - ((st[5] << s) >> s)) >> sh)
     return 1

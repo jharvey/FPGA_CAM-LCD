@@ -498,8 +498,8 @@ class Sim:
 
     def _take(self):
         d = bytes(self.pending) + bytes(self.model.out)
-        del self.pending[:]
-        del self.model.out[:]
+        self.pending[:] = b""
+        self.model.out[:] = b""
         return d
 
     @property
@@ -531,7 +531,7 @@ class Sim:
             self.t += STEP_S
             s, btn = self.scenario.at(self.t)
             rx = bytes(self.rx)
-            del self.rx[:]
+            self.rx[:] = b""
             tx, self.state = self.hub.step(s, btn, rx)
             fcl_hub.handle(tx)
         self.plat.pump(self.bridge)

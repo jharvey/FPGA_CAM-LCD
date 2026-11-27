@@ -78,15 +78,15 @@ class Bridge:
             while i < n - 1 and not (buf[i] == 0xA5 and buf[i + 1] == 0x5A):
                 i += 1
             if i:
-                del buf[:i]
+                buf[:i] = b""
                 n -= i
             if n < 4 or buf[0] != 0xA5:
                 if n == 1 and buf[0] != 0xA5:
-                    del buf[:]
+                    buf[:] = b""
                 return
             ln = buf[3]
             if ln > 40:
-                del buf[:2]
+                buf[:2] = b""
                 continue
             if n < ln + 6:
                 return
@@ -95,11 +95,11 @@ class Bridge:
                 self.frames += 1
                 self._dispatch(buf[2], mv[4:4 + ln])
                 mv = None
-                del buf[:ln + 6]
+                buf[:ln + 6] = b""
             else:
                 mv = None
                 self.crc_errors += 1
-                del buf[:2]
+                buf[:2] = b""
 
     def _dispatch(self, typ, p):
         if typ == SAMPLE:
