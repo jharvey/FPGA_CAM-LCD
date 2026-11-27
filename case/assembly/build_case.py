@@ -131,6 +131,10 @@ HEAD_D = 5.2
 USB_CUT = (82.0, 65.9, 92.5, 77.4, -0.2, 6.8)   # J17 mouth is 3.5 mm inside the right edge
 SD_CUT = (28.0, -7.5, 42.0, 1.6, T, T + 2.6)
 BUTTONS = ((16.0, 4.0), (26.5, 4.0), (9.0, 4.0))       # B1, B2, B0 (power, KMR2, moved here 2026-11-26)
+# engraved labels (board x, y of the text centre, text, height): read from outside
+REAR_LABELS = ((9.0, 8.1, "PWR", 1.8), (16.0, 8.1, "B1", 1.8), (26.5, 8.1, "B2", 1.8))
+FRONT_LABELS = ((53.2, 15.2, "RST", 1.8), (80.1, 25.3, "BOOT", 1.8))
+ENGRAVE = 0.4
 BLK_KEEP = (-10.0, 2.7, 7.3, 29.0)        # cell-1 block flange (x <= 7.0 from y 3.0): plunger / guide of B0 cut clear
 # ports: fully open for the prototype; the wall around them is pocketed from outside so the plug / card reaches
 USB_POCKET = (87.0, 65.2, 92.0, 78.1, -1.0, 7.6)   # USB-C overmold (12.4 x 7 typ.): wall left 1.5 mm, plug reaches J17
@@ -564,6 +568,19 @@ def lobes(z0, z1):
     return w
 
 
+def engrave(part, labels, z_face, outward):
+    """cut text ENGRAVE deep into a face at Z z_face whose outside is toward outward (+1 / -1 in Z); text reads
+    upright (board top edge up) for someone looking at that face from outside"""
+    for (x, y, txt, hgt) in labels:
+        X, Y = A.P(x, y)
+        n = cq.Vector(0, 0, outward)
+        xd = cq.Vector(1, 0, 0) if outward > 0 else cq.Vector(-1, 0, 0)
+        pl = cq.Plane(origin=(X, Y, z_face + outward * 0.01), xDir=xd, normal=n)
+        t = cq.Workplane(pl).text(txt, hgt, -(ENGRAVE + 0.01), combine=False, halign="center", valign="center")
+        part = part.cut(t)
+    return part
+
+
 def make_rear(back, tft_bb):
     r = outline(Z_REAR_OUT, T, outer_low=True)
     r = r.cut(rrect(LEDGE, LEDGE, W - LEDGE, H - LEDGE, Z_REAR_IN, 0.01, PCB_R - LEDGE))
@@ -600,6 +617,7 @@ def make_rear(back, tft_bb):
     r = r.union(guides())
     r = tripod(r)
     r = cut_boxes(r, back, 0.4, 0.4, "rear shell")
+    r = engrave(r, REAR_LABELS, Z_REAR_OUT, -1)
     return r.cut(box(*USB_POCKET))
 
 
@@ -628,6 +646,7 @@ def make_front(front):
     if MS_DIR:
         f = f.cut(cap_clear())
     f = cut_boxes(f, front, 0.4, 0.4, "front shell")
+    f = engrave(f, FRONT_LABELS, Z_FRONT_OUT, +1)
     return f.cut(box(*USB_POCKET)).cut(box(*SD_SCOOP))
 
 
