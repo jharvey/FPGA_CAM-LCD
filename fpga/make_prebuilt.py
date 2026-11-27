@@ -141,7 +141,7 @@ def main():
                 logs.append((t, code, out.strip().splitlines()[-1] if out.strip() else ""))
                 print(t, "->", logs[-1][2])
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, stdout=subprocess.PIPE).stdout.decode().strip()
-    dirty = subprocess.run(["git", "status", "--porcelain", "-uno", "--", "fpga", "firmware"], cwd=ROOT, stdout=subprocess.PIPE).stdout.decode().strip()
+    dirty = subprocess.run(["git", "status", "--porcelain", "-uno", "--", "fpga", "firmware", ":(exclude)fpga/prebuilt"], cwd=ROOT, stdout=subprocess.PIPE).stdout.decode().strip()
     with open(os.path.join(OUT, "MANIFEST.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("# Stored build outputs\n\n")
         f.write("Written by `python fpga/make_prebuilt.py` on %s. Check your own build against these with "

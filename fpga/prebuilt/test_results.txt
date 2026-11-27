@@ -17,8 +17,8 @@ PASS  wifi scan lists networks
 PASS  mic on: 16000 samples in 1 s, peak 3999, sequence unbroken
 PASS  spk: 3200 bytes reached the speaker, level 8000; tone 880 Hz 200 ms
 PASS  unknown command refused; help lists the commands
-PASS  link: 14851 frames, 0 CRC errors
-PASS  overlay text and dot from the hub equal the Python layout (fcl_osd.py) on 702 frames
+PASS  link: 14921 frames, 0 CRC errors
+PASS  overlay text and dot in the overlay memory equal the hub's layout on 702 frames
 PASS  holding the power button 2 s: PWR_OFF event, power released
 ---- hub: Python stand-in
 PASS  telemetry at 10 lines per second: 40 lines in 4 s
@@ -39,7 +39,7 @@ PASS  mic on: 16000 samples in 1 s, peak 3999, sequence unbroken
 PASS  spk: 3200 bytes reached the speaker, level 8000; tone 880 Hz 200 ms
 PASS  unknown command refused; help lists the commands
 PASS  link: 702 frames, 0 CRC errors
-PASS  overlay text and dot from the hub equal the Python layout (fcl_osd.py) on 702 frames
+PASS  overlay text and dot in the overlay memory equal the hub's layout on 702 frames
 PASS  holding the power button 2 s: PWR_OFF event, power released
 ---- C hub not built here (make -C firmware/sim all): only the Python stand-in was tested
 ALL CHECKS PASSED
@@ -69,6 +69,61 @@ PASS  no hard iron: automatic calibration leaves it alone (offset 2 0 -1, headin
 PASS  magcal auto off stops the automatic fit; reset clears it; a bad argument is refused
 ALL CHECKS PASSED
 
+===== python firmware/sim/test_app.py   (exit code 0)
+PASS  key B1: page 1, LCD shows 'LEVEL' / '== LEVEL =='
+PASS  the page's rows are reported as $L lines; the heading row stays
+PASS  level page at 10 deg up: 'UP 10.0  R 0.0', 'SLOPE +17.6%'
+PASS  slope shown as +17.6% (17.6 % for 10 deg)
+PASS  height page: 'AIM AT THE FOOT', 'B2 = MARK'
+PASS  height from two sightings: 1.56 m (1.56), 'AT 1.88m', reported 'height 1.56 m at 1.88 m'
+PASS  foot out of the ranger's reach: 'OUT OF RANGE'
+PASS  bearing page: 30 deg left of the mark 'TURN R 30', back on it 'ON MARK', 'MARK 100  +1.4m'
+PASS  a page added with apps.add(): page 4 shows '2 PRESSES'
+PASS  B1 on the last page: back to the overview, rows given back
+PASS  B1 held 0.9 s: menu open, '> View: camera', page unchanged, dot hidden
+PASS  the ESP32 owns B1 / B2: holding B1 did not switch the FPGA's view
+PASS  menu, View: video key pressed, LCD picture = edges
+PASS  menu, Edges + twice: threshold up by 8
+PASS  menu, Overlay: mask 0x01, '> Overlay: dot'
+PASS  menu: overlay all, level servo off, compass calibration started, '> WiFi 192.168.1.57', logging
+PASS  menu, Exit: closed, overlay and dot back
+PASS  log: 33 telemetry lines in about 3 s, every line readable; 'log off 46 lines'
+PASS  cell 1 reading 3 % high: 4156 mV, after cal set cell1: 4033 mV (truth 4033)
+PASS  temperature and distance offsets: 30.0 -> 26.0 C, 2035 -> 2000 mm
+PASS  sensor board mounted 3 deg off: pitch 3.0 -> 0.0
+PASS  camera angle 40 -> 60 deg: down dot 7 deg off axis moves from 81 to 51 px (81, 51)
+PASS  bad values refused: 'hfov must be 20..90', 'no calibration value named nothing'
+PASS  calibration values are stored and loaded at the next start
+PASS  pan 100: servo 2 at 1599 us when heading 90 (1600), 1350 us at 115 (1350), off after pan off
+PASS  example page CLIMB: 'B2 = START' -> '+2.0m  0:05', '+20.0 m/min'; reported 'climb +2.0 m in 6 s'
+ALL CHECKS PASSED
+
+===== python firmware/sim/test_web.py   (exit code 0)
+PASS  GET /: the page, 6189 bytes
+PASS  GET /s: telemetry and the 15 LCD rows; heading 66, page OVERVIEW
+PASS  POST /c key B1: next page, LCD row 4 'LEVEL'
+PASS  POST /c view edges: reaches the FPGA's video key
+PASS  Wi-Fi settings and the Python prompt are refused on the web page: '$R,err,not available on the web page: wifi'
+PASS  unknown path: 404
+PASS  answers to web commands do not leak into the USB stream
+PASS  a silent client does not block the others (11 requests served)
+ALL CHECKS PASSED
+
+===== python firmware/sim/test_calibrate.py   (exit code 0)
+PASS  all 15 steps of the calibration succeed
+PASS  axes: level, lens down, tipped right and a quarter turn all read the right way round
+PASS  level: mounting error found +3.00 / -2.00 deg (built in: +3.0 / -2.0)
+PASS  lens: 48.0 deg across the screen (built in: 48)
+PASS  distance: offset -35 mm (built in: +35)
+PASS  cells: gains 0.9710, 1.0153, 1.0004 (built in: 1 / 1.030, 1 / 0.985, 1)
+PASS  temps: offsets +0.0, -4.0, +2.5 C (built in: 0, +4.0, -2.5)
+PASS  north: heading offset +4.4 deg (built in: +5.0)
+PASS  compass: hard-iron offset [225, -153, 120] mG (built in: [225, -150, 120])
+PASS  afterwards: pitch 10.0, roll -5.0, heading 123.9 (truth 10, -5, 125 true)
+PASS  afterwards: distance 1500 mm, cell 1 4005 mV, cell 2 at 24.0 C (truth 1500, 4005, 24.0)
+PASS  a meter reading 2.0 V on a 4 V cell and a wall 1.5 m further than measured are refused; nothing stored for them
+ALL CHECKS PASSED
+
 ===== python fpga/bridge/test_bridge.py   (exit code 0)
 PASS  Verilog sent 44 frames, 0 with a bad CRC
 PASS  frames of type 0x20: 1 (model 1), contents equal
@@ -93,16 +148,20 @@ PASS  ADC scan: the 8 inputs arrive in order (0123 1123 2123 3123 4123 5123 6123
 PASS  buttons: asked once, then B1 pressed and released reported
 PASS  servo pulses: channel 2 [1500] us, channel 5 [2000] us, others off
 PASS  outputs: LED0 on, LED1 off, ranger enabled, shutdown low
+PASS  aux outputs (video keys in the full design): bits 1 and 3 set, as in the model
 PASS  overlay text written at cells 45..53: 'HELLO 123'
 PASS  overlay dot set to (250, 380), on, inside
-PASS  logic size (Yosys, ECP5): about 2556 LUT4 (3.1 % of the 85F's 83640), 995 flip-flops, 1 block RAM
+PASS  logic size (Yosys, ECP5): about 2552 LUT4 (3.1 % of the 85F's 83640), 999 flip-flops, 1 block RAM
 ALL CHECKS PASSED
 
 ===== python fpga/osd/test_osd.py   (exit code 0)
-PASS  all items, dot in view             230400 pixels, 28955 drawn by the overlay, 0 differ
-PASS  level, dot on the rim, low cell    230400 pixels, 28689 drawn by the overlay, 0 differ
-PASS  dot over the text, empty slot      230400 pixels, 28160 drawn by the overlay, 0 differ
-PASS  dot off, text only                 230400 pixels, 28672 drawn by the overlay, 0 differ
-PASS  dot only                           230400 pixels, 2065 drawn by the overlay, 0 differ
+PASS  all items, dot in view                           230400 pixels, 28955 drawn by the overlay, 0 differ
+PASS  level, dot on the rim, low cell                  230400 pixels, 28689 drawn by the overlay, 0 differ
+PASS  dot over the text, empty slot                    230400 pixels, 28160 drawn by the overlay, 0 differ
+PASS  dot off, text only                               230400 pixels, 28672 drawn by the overlay, 0 differ
+PASS  dot only                                         230400 pixels, 2065 drawn by the overlay, 0 differ
+PASS  video stream: all items, dot in view             230400 pixels, 28955 drawn by the overlay, 0 differ
+PASS  video stream: level, dot on the rim, low cell    230400 pixels, 28689 drawn by the overlay, 0 differ
+PASS  video stream: dot over the text, empty slot      230400 pixels, 28160 drawn by the overlay, 0 differ
 ALL FRAMES IDENTICAL
 
