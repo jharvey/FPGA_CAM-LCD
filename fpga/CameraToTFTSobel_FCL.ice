@@ -97,8 +97,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "btn_2",
-                "value": "T1"
+                "name": "btn2n",
+                "value": "M5"
               }
             ],
             "virtual": false,
@@ -175,8 +175,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "btn_3",
-                "value": "R18"
+                "name": "btn1n",
+                "value": "N5"
               }
             ],
             "virtual": false,
@@ -1252,7 +1252,7 @@
           "id": "aed17da5-3fe2-4dc7-87b7-fa20192c129c",
           "type": "basic.output",
           "data": {
-            "name": "LCD_IM0",
+            "name": "LCD_BL_EN",
             "virtual": false,
             "pins": [
               {
@@ -8272,7 +8272,7 @@
                   ]
                 },
                 "params": [],
-                "code": "\nreg [7:0] threshold = 8'd48;\nreg sobel = 1'b0;\n\nreg key1_prev = 1'b0;\nreg key2_prev = 1'b0;\nreg key3_prev = 1'b0;\n\nwire key1_rise;\nwire key2_rise;\nwire key3_rise;\n\nassign key1_rise = key1 && !key1_prev;\nassign key2_rise = key2 && !key2_prev;\nassign key3_rise = key3 && !key3_prev;\n\nalways @(posedge clk or negedge rst_n) begin\n    if (!rst_n) begin\n        threshold <= 8'd48;\n        sobel <= 1'b0;\n        key1_prev <= 1'b0;\n        key2_prev <= 1'b0;\n        key3_prev <= 1'b0;\n    end\n    else begin\n        key1_prev <= key1;\n        key2_prev <= key2;\n        key3_prev <= key3;\n\n        // Raise threshold in useful steps, reducing sensitivity.\n        if (key1_rise) begin\n            if (threshold <= 8'd251)\n                threshold <= threshold + 8'd4;\n            else\n                threshold <= 8'd255;\n        end\n        // Lower threshold, increasing sensitivity.\n        else if (key2_rise) begin\n            if (threshold >= 8'd4)\n                threshold <= threshold - 8'd4;\n            else\n                threshold <= 8'd0;\n        end\n\n        // Toggle raw camera versus Sobel display.\n        if (key3_rise)\n            sobel <= ~sobel;\n    end\nend\n\nassign sobel_q = sobel;\nassign threshold_q = threshold;\n"
+                "code": "\nreg [7:0] threshold = 8'd48;\nreg sobel = 1'b0;\n\nreg key1_prev = 1'b0;\nreg key2_prev = 1'b0;\nreg key3_prev = 1'b0;\n\nwire key1_rise;\nwire key2_rise;\nwire key3_rise;\n\nassign key1_rise = !key1 && key1_prev;   // FCL: active-low buttons, act on press\nassign key2_rise = !key2 && key2_prev;\nassign key3_rise = !key3 && key3_prev;\n\nalways @(posedge clk or negedge rst_n) begin\n    if (!rst_n) begin\n        threshold <= 8'd48;\n        sobel <= 1'b0;\n        key1_prev <= 1'b0;\n        key2_prev <= 1'b0;\n        key3_prev <= 1'b0;\n    end\n    else begin\n        key1_prev <= key1;\n        key2_prev <= key2;\n        key3_prev <= key3;\n\n        // Raise threshold in useful steps, reducing sensitivity.\n        if (key1_rise) begin\n            if (threshold <= 8'd251)\n                threshold <= threshold + 8'd4;\n            else\n                threshold <= 8'd0;   // FCL: wrap (one threshold button)\n        end\n        // Lower threshold, increasing sensitivity.\n        else if (key2_rise) begin\n            if (threshold >= 8'd4)\n                threshold <= threshold - 8'd4;\n            else\n                threshold <= 8'd0;\n        end\n\n        // Toggle raw camera versus Sobel display.\n        if (key3_rise)\n            sobel <= ~sobel;\n    end\nend\n\nassign sobel_q = sobel;\nassign threshold_q = threshold;\n"
               },
               "position": {
                 "x": -496,

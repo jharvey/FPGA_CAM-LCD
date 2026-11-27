@@ -1,5 +1,18 @@
 # FPGA I/O remap for the FCL board (camera + LCD)
 
+## Pin check against the routed board (2026-11-27)
+
+Every port of `CameraToTFTSobel_FCL.ice` was checked against the net on its ball in `FCL.kicad_pcb`, and the display
+(J7) and camera (J1) nets against their connector pins: all match. Changes for this board (`fpga/fcl_buttons.py`):
+
+- The design's three buttons were the ULX3S `BTN_F1` / `BTN_F2` / `BTN_U`, which have no switch here. Now **B1**
+  (`BTN1n`, N5) toggles raw camera / Sobel view and **B2** (`BTN2n`, M5) steps the edge threshold up by 4, wrapping
+  to 0. The key logic acts on a press of these active-low buttons. Threshold-down stays on R1 (no switch), pulled up.
+- The output on `GP13` is renamed `LCD_BL_EN`: on this board GP13 is the backlight boost enable (U8). The design holds
+  it at 1, so the backlight is on.
+- `rst_n` is still B0 (`BTN_PWRn`, D6): a press of the power button also resets the video pipeline.
+- `main_FCL.lpf` regenerated; `python fpga/build.py` builds the bitstream (24 % of the LUTs, timing met).
+
 Camera (J1, through-hole, front layer): the 16 camera signals sit on U1's two outer ball rows (A/B) of the bottom-left edge in J1 column order, so every camera trace routes on the top layer without vias; the camera pixel clock is on the dedicated clock input **PCLKT1_0 (B12)** (one via). LCD (J7, back side): outer three rows of the bottom-right corner in J7 pin order, one dogbone via each, then a back-layer ribbon. Only pin locations changed; the Verilog is untouched. All new balls are general I/O in the 3.3 V banks 0/1/7.
 
 Files: `CameraToTFTSobel_FCL.ice` (Icestudio project with the new pins) and `main_FCL.lpf`. Add clock constraints, e.g. `FREQUENCY PORT "cmos_pclk" 24 MHZ;`, and check nextpnr timing.

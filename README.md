@@ -35,6 +35,7 @@ A hand-held monocular on one PCB, based on a stripped ULX3S:
 | `docs/mech/freecad/README.md`, `case/freecad/README.md` | The FreeCAD files |
 | `doc/constraints/camera_display_pinmap.md` | FPGA pins for the display, camera and user I/O |
 | `doc/constraints/schematic_freeze.md` | Schematic freeze record and what changed after it |
+| `doc/BRINGUP.md` | First power-up checklist: test points, rails, programming, stage-by-stage checks |
 | `doc/jlc_check_2026-11-22.md` | JLCPCB build check (a dated snapshot; see the note at its top) |
 | `fpga/IO_REMAP.md`, `fpga/ESP32_PINS.md` | FPGA and ESP32 pin maps |
 | `mechanical.kicad_sch` | Mechanical bill of materials (screws, caps, springs, printed and machined parts) |

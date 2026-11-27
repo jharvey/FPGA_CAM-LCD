@@ -1,0 +1,59 @@
+# FCL sensor-hub I/O, taken from the routed board (U1 pad -> net in FCL.kicad_pcb), 2026-11-27.
+# For the LiteX SoC of ../hub (or any design that adds the hub). All banks at 3.3 V.
+
+LOCATE COMP "i2c_scl" SITE "P16";  # IMU_SCL: IMU / compass / barometer / ToF I2C clock (R76 4.7k pull-up)
+IOBUF  PORT "i2c_scl" IO_TYPE=LVCMOS33;
+LOCATE COMP "i2c_sda" SITE "K17";  # IMU_SDA: same bus, data (R77 4.7k pull-up)
+IOBUF  PORT "i2c_sda" IO_TYPE=LVCMOS33;
+LOCATE COMP "imu_int1" SITE "K16";  # IMU_INT1: ICM-42688-P INT1
+IOBUF  PORT "imu_int1" IO_TYPE=LVCMOS33;
+LOCATE COMP "imu_int2" SITE "N4";  # IMU_INT2: ICM-42688-P INT2 / FSYNC
+IOBUF  PORT "imu_int2" IO_TYPE=LVCMOS33;
+LOCATE COMP "mag_drdy" SITE "L17";  # MAG_DRDY: LIS2MDL data ready
+IOBUF  PORT "mag_drdy" IO_TYPE=LVCMOS33;
+LOCATE COMP "baro_int" SITE "M17";  # BARO_INT: LPS22DF INT
+IOBUF  PORT "baro_int" IO_TYPE=LVCMOS33;
+LOCATE COMP "tof_int" SITE "N17";  # TOF_INT: VL53L1X GPIO1 (R89 10k pull-up)
+IOBUF  PORT "tof_int" IO_TYPE=LVCMOS33;
+LOCATE COMP "tof_xshut" SITE "N16";  # TOF_XSHUT: VL53L1X shutdown, high = on (R88 10k pull-up)
+IOBUF  PORT "tof_xshut" IO_TYPE=LVCMOS33;
+LOCATE COMP "adc_cnv" SITE "B1";  # ADC_CNV: AD7689 CNV (SPI chip select, active high)
+IOBUF  PORT "adc_cnv" IO_TYPE=LVCMOS33;
+LOCATE COMP "adc_din" SITE "E1";  # ADC_DIN: AD7689 DIN (SPI MOSI)
+IOBUF  PORT "adc_din" IO_TYPE=LVCMOS33;
+LOCATE COMP "adc_sck" SITE "D1";  # ADC_SCK: AD7689 SCK
+IOBUF  PORT "adc_sck" IO_TYPE=LVCMOS33;
+LOCATE COMP "adc_sdo" SITE "C1";  # ADC_SDO: AD7689 SDO (SPI MISO)
+IOBUF  PORT "adc_sdo" IO_TYPE=LVCMOS33;
+LOCATE COMP "btn_pwr_n" SITE "D6";  # BTN_PWRn: B0 power button, active low
+IOBUF  PORT "btn_pwr_n" IO_TYPE=LVCMOS33 PULLMODE=UP;
+LOCATE COMP "btn1_n" SITE "N5";  # BTN1n: B1, active low (R67 10k pull-up)
+IOBUF  PORT "btn1_n" IO_TYPE=LVCMOS33;
+LOCATE COMP "btn2_n" SITE "M5";  # BTN2n: B2, active low (R68 10k pull-up)
+IOBUF  PORT "btn2_n" IO_TYPE=LVCMOS33;
+LOCATE COMP "led0" SITE "B2";  # LED0: D53, active high
+IOBUF  PORT "led0" IO_TYPE=LVCMOS33;
+LOCATE COMP "led1" SITE "C2";  # LED1: D54, active high
+IOBUF  PORT "led1" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm1" SITE "C18";  # SRV_PWM1: J_SRV1 signal (R78 1k)
+IOBUF  PORT "srv_pwm1" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm2" SITE "D17";  # SRV_PWM2: J_SRV2
+IOBUF  PORT "srv_pwm2" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm3" SITE "D16";  # SRV_PWM3: J_SRV3
+IOBUF  PORT "srv_pwm3" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm4" SITE "D15";  # SRV_PWM4: J_SRV4
+IOBUF  PORT "srv_pwm4" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm5" SITE "D14";  # SRV_PWM5: J_SRV5
+IOBUF  PORT "srv_pwm5" IO_TYPE=LVCMOS33;
+LOCATE COMP "srv_pwm6" SITE "D13";  # SRV_PWM6: J_SRV6
+IOBUF  PORT "srv_pwm6" IO_TYPE=LVCMOS33;
+LOCATE COMP "esp_rx" SITE "L1";  # WIFI_TXD: UART from the ESP32 (its GPIO11 TX)
+IOBUF  PORT "esp_rx" IO_TYPE=LVCMOS33;
+LOCATE COMP "esp_tx" SITE "L2";  # WIFI_RXD: UART to the ESP32 (its GPIO12 RX)
+IOBUF  PORT "esp_tx" IO_TYPE=LVCMOS33;
+LOCATE COMP "shutdown" SITE "D11";  # SHUTDOWN: soft power-off, high = switch off (ULX3S path: Q2 / SHUT, R5 2.2M pull-down)
+IOBUF  PORT "shutdown" IO_TYPE=LVCMOS33;
+LOCATE COMP "rtc_scl" SITE "E12";  # FPDI_SCL: MCP7940N RTC I2C clock
+IOBUF  PORT "rtc_scl" IO_TYPE=LVCMOS33;
+LOCATE COMP "rtc_sda" SITE "D12";  # FPDI_SDA: MCP7940N RTC I2C data
+IOBUF  PORT "rtc_sda" IO_TYPE=LVCMOS33;

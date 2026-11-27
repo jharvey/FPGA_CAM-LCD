@@ -1,13 +1,15 @@
 /* HAL for the sensor hub running on a soft RISC-V CPU (VexRiscv) in the ECP5, built with LiteX.  DRAFT, not built.
  *
- * Assumed LiteX SoC cores (names as they appear in the generated csr.h; see ../README.md):
- *   i2c0     LiteX I2C bit-bang core on IMU_SCL (P16) / IMU_SDA (K17)
- *   adc      LiteX SPIMaster, 16 bits, on ADC_SCK D1 / ADC_DIN E1 / ADC_SDO C1, ADC_CNV B1 as its chip select
- *   gpio_in  BTN_PWRn, BTN1n (N5), BTN2n (M5)        active low
- *   gpio_out LED0 (B2), LED1 (C2), TOF_XSHUT (N16), HOLD / power latch
- *   pwm0..5  LiteX PWM on SRV_PWM1..6, period 20 ms
- *   uart_esp second UART on WIFI_TXD (L1) / WIFI_RXD (L2)
+ * Pins: fcl_hub_pins.lpf (generated from the routed board, 2026-11-27).  Assumed LiteX SoC cores (names as they
+ * appear in the generated csr.h):
+ *   i2c0     LiteX I2C bit-bang core on i2c_scl P16 / i2c_sda K17 (IMU_SCL / IMU_SDA)
+ *   adc      LiteX SPIMaster, 16 bits: adc_sck D1, adc_din E1, adc_sdo C1; adc_cnv B1 as its chip select
+ *   gpio_in  bit 0 btn_pwr_n D6, bit 1 btn1_n N5, bit 2 btn2_n M5      active low
+ *   gpio_out bit 0 led0 B2, bit 1 led1 C2, bit 2 tof_xshut N16, bit 3 shutdown D11 (high = switch off)
+ *   pwm0..5  LiteX PWM on srv_pwm1..6 (C18, D17, D16, D15, D14, D13), period 20 ms
+ *   uart_esp second UART: rx esp_rx L1 (WIFI_TXD), tx esp_tx L2 (WIFI_RXD)
  *   timer0   1 kHz tick for hal_millis
+ * The camera-to-TFT design also uses D6 (as its reset), B2 and C2: give them to one design or the other when merging.
  */
 #include "../common/hal.h"
 #include <generated/csr.h>
@@ -75,7 +77,7 @@ static uint32_t outs;
 static void out(int bit, bool on) { outs = on ? (outs | 1u << bit) : (outs & ~(1u << bit)); gpio_out_out_write(outs); }
 void hal_led(int i, bool on) { out(i & 1, on); }
 void hal_tof_xshut(bool on) { out(2, on); }
-void hal_power_hold(bool h) { out(3, h); }
+void hal_power_hold(bool h) { out(3, !h); }     /* SHUTDOWN: high = the soft-shutdown path cuts power */
 void hal_servo_us(int ch, uint16_t us)       /* pwm width in system clocks; 0 = off */
 {
     uint32_t w = (uint32_t)us * (CONFIG_CLOCK_FREQUENCY / 1000000);

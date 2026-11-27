@@ -33,7 +33,7 @@ and `fcl_hub.mode(2)` send commands, `fcl_hub.log("/sd/fcl.csv")` logs while rec
 
 ## Not yet
 
-- Not run on the board. The JTAG and SD pin numbers are from the pin map; the SDMMC call needs MicroPython 1.21 or
+- Not run on the board. The JTAG, SD and UART pins were checked pad by pad against U9 in the routed board (2026-11-27); the SDMMC call needs MicroPython 1.21 or
   later on the S3 (CHECK).
 - The ROADMAP also wants USB mass storage for the SD card over the same USB-C port; MicroPython does not provide that.
   It needs either a native ESP-IDF / TinyUSB build later, or the card read through FTP meanwhile.

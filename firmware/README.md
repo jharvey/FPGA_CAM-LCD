@@ -48,6 +48,9 @@ MicroPython files; see `esp32/README.md` for install.
 
 ## Before it runs on the board (CHECK items)
 
+- Done 2026-11-27: the ESP32 JTAG / SD / UART pins (`esp32/jtagpin.py`, `sdpin.py`, `fcl_hub.py`) and the hub's FPGA
+  pins (`hub/fcl_hub_pins.lpf`) were checked against the routed board, pad by pad.
+
 - Sensor axis orientation on the PCB (`AXES_IMU`, `AXES_MAG` in `common/board.h` are identity for now), and a compass
   hard-iron / soft-iron calibration once it is in the case.
 - AD7689 channels for the NTCs of cells 2 and 3 (assumed IN6 / IN7), the NTC beta value, the reference setting.
