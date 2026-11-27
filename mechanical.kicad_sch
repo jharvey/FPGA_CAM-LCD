@@ -1835,7 +1835,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Block screws from the camera side, two per block (cell 1: T1 + T2, cell 3: T1 + T3, cell 2: T2 + T3). About 2.9 mm thread engagement. 1.8 mm holes in the PCB."
+		(property "Notes" "Block screws from the camera side, two per block, S1 and S2, one each side of the cell. About 2.9 mm thread engagement. 1.8 mm holes in the PCB."
 			(at 30.48 142.24 0)
 			(hide yes)
 			(show_name no)

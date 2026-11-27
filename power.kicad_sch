@@ -40394,7 +40394,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_C1"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181"
 			(at 345.44 135.89 0)
 			(hide yes)
 			(show_name no)
@@ -40692,7 +40692,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J_LM"
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
 			(at 386.08 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -40835,7 +40835,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J_LM"
+		(property "Footprint" "fcl_local:BAT-TH_MY-18650-05-J"
 			(at 386.08 143.51 0)
 			(hide yes)
 			(show_name no)
@@ -43155,7 +43155,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_C3"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181"
 			(at 345.44 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -46545,7 +46545,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181_R"
+		(property "Footprint" "fcl_local:FCL_BatteryBlock_Mount_MS3181"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)

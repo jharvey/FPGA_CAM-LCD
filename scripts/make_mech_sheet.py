@@ -42,7 +42,7 @@ PARTS = [
     ("MP9", "Dowel pin ISO 8734 2 x 5", dict(
         Category="Purchased", Qty="0", Material="Stainless", Notes="Not used any more: the blocks are held by two M1.6 screws each, no locating pin.")),
     ("MP10", "Screw M1.6 x 5, socket head", dict(
-        Category="Purchased", Qty="6", MPN="ISO 4762 M1.6x5 A2", Notes="Block screws from the camera side, two per block (cell 1: T1 + T2, cell 3: T1 + T3, cell 2: T2 + T3). About 2.9 mm thread engagement. 1.8 mm holes in the PCB.")),
+        Category="Purchased", Qty="6", MPN="ISO 4762 M1.6x5 A2", Notes="Block screws from the camera side, two per block, S1 and S2, one each side of the cell. About 2.9 mm thread engagement. 1.8 mm holes in the PCB.")),
     ("MP25", "Washer M2.5 small, 4.5 OD x 0.5 (spacer)", dict(
         Category="Purchased", Qty="6", Notes="Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact at T1 / T2. Loose on an M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer.")),
     ("MP11", "Washer M1.6", dict(
