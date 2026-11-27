@@ -1,24 +1,12 @@
 # FCL battery end block (MS3181-16 bayonet): drawing and editable models
 
-> **Out of date since 2026-11-26. Do not machine from these files yet.**
-> The drawing, the `_edit` STEP/STL files and the FreeCAD files show the earlier block with two variants (A and B). The board now uses **one common block** at all three cells:
->
-> | | Earlier A/B block (these files) | Common block (on the board) |
-> |---|---|---|
-> | Mounting face | relieved 0.6 mm, two raised bosses | flat, 0.5 mm off the PCB, no bosses; a small M2.5 washer (4.5 OD x 0.5) at each screw is the spacer |
-> | Tapped M2.5 holes | one, at (4.6, -9.7) | two: T1 (4.4, -9.7) and T2 (2.6, +9.3) |
-> | 2 mm pin hole | (3.2, +9.3) for A, (3.2, +7.5) for B, 3.5 deep | one, D (3.2, +6.25), 3.0 deep |
-> | Pocket | from X 4.2 | from X 4.3 |
->
-> Positions are (X into the board from the board edge, Y along the edge from the cell axis). The bayonet boss, bore, O-ring groove and bayonet pins are unchanged.
->
-> The hole pattern is still under review (two screws per site chosen from three tapped holes, instead of a screw and a pin). The current geometry is in `scripts/make_battery_block_ms3181.py`, which also writes the KiCad 3D model. `draw_battery_block.py` and `freecad_battery_block.py` have not been updated to it and will be regenerated when the pattern is final.
+> **Updated 2026-11-26 (rev 0.2): one block for all three cells.** Flat flange 7 x 25 mm, 0.5 mm off the PCB on a spacer washer at each screw; two M1.6 tapped holes S1 (3.4, -10.3) and S2 (3.7, +9.3) from datum B and the bore centre plane (in the board frame: 3.2 / 3.5 mm in from the board edge); no dowel hole, no pocket. Cell 2 uses the same block turned 180 deg. The FreeCAD files in `freecad/` still show the earlier A/B block.
 
 | File | Use |
 |---|---|
-| `FCL_BatteryBlock_MS3181_drawing.pdf` | Machining drawing, A3, page 1 = variant A, page 2 = variant B |
-| `FCL_BatteryBlock_MS3181_A_edit.step`, `_B_edit.step` | Solid for editing or CAM. Origin is at datums A, B and C: Z = 0 on the mounting face A (block at negative Z), X = 0 on the plate face B (+X toward the board), Y = 0 on the bore centre plane C |
-| `FCL_BatteryBlock_MS3181_A_edit.stl`, `_B_edit.stl` | Viewing only |
+| `FCL_BatteryBlock_MS3181_drawing.pdf` / `.png` | Machining drawing, A3, one page |
+| `FCL_BatteryBlock_MS3181_edit.step` | Solid for editing or CAM. Origin is at datums A, B and C: Z = 0 on the mounting face A (block at negative Z), X = 0 on the plate face B (+X toward the board), Y = 0 on the bore centre plane C |
+| `FCL_BatteryBlock_MS3181_edit.stl` | Viewing only |
 | `../../scripts/make_battery_block_ms3181.py` | Parametric source: every dimension is a named constant at the top |
 | `../../scripts/draw_battery_block.py` | Regenerates the drawing and the edit STEPs from those constants |
 

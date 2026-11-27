@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Dimensioned machining drawing (PDF + PNG) of the MS3181 battery end block, variants A and B.
+"""Dimensioned machining drawing (PDF + PNG) of the MS3181 battery end block (one part for all three cells).
 All numbers come from make_battery_block_ms3181.py, so the drawing follows the model.
 
-Drawing frame (datums):  A = mounting face (the two bosses that sit on the PCB),
+Drawing frame (datums):  A = PCB back face when mounted (0.5 above the flange face, set by the spacer washers),
 B = inner face of the shoulder plate (faces the PCB edge), C = centre plane through the cell axis.
 X from datum B (+ toward the board), Y from C, depth Z from A.
 
@@ -142,45 +142,35 @@ def end_view(ax):
 
 
 def face_view(ax, v):
-    """view on mounting face A (from the PCB side): X right (into the board), Y up"""
+    """view on the flange face (from the PCB side): X right (into the board), Y up"""
     h, fh = M.PLATE_HALF, M.FL_HALF
     xt, xp0, xf1 = X(M.BOSS_TIP), X(M.PLATE_X[0]), X(M.FL_X[1])
     ax.add_patch(Rectangle((xp0, -h), -xp0, 2 * h, fill=False, lw=LW))                       # plate
     ax.add_patch(Rectangle((xt, -M.BOSS_D / 2), xp0 - xt, M.BOSS_D, fill=False, lw=LW))       # boss (silhouette)
-    nx0, ny0 = X(M.NOTCH[0]), M.NOTCH[1]
-    ax.add_patch(Polygon([(0, -fh), (xf1, -fh), (xf1, ny0), (nx0, ny0), (nx0, fh), (0, fh)], closed=True, fill=False, lw=LW))
-    ax.add_patch(Rectangle((nx0, ny0), xf1 - nx0, fh - ny0, fill=False, lw=THIN, ls="--"))
-    # flip: drawing Y = -model y so that variant A matches the PCB view from the camera side? keep model y, label it.
-    sx, sy = X(M.SCREW[0]), M.SCREW[1]
-    px, py = X(M.PIN[v][0]), M.PIN[v][1]
-    ax.add_patch(Circle((sx, sy), M.BOSS_SCREW / 2, fill=False, lw=THIN))
-    ax.add_patch(Circle((sx, sy), M.SCREW_DRILL / 2, fill=False, lw=LW))
-    ax.add_patch(Circle((sx, sy), 1.25, fill=False, lw=THIN, ls=(0, (3, 1.5))))
-    ax.add_patch(Circle((px, py), M.BOSS_DOWEL / 2, fill=False, lw=THIN))
-    ax.add_patch(Circle((px, py), M.DOWEL_D / 2, fill=False, lw=LW))
-    for (cx, cy) in ((sx, sy), (px, py)):
-        center(ax, cx - 3.5, cy, cx + 3.5, cy)
-        center(ax, cx, cy - 3.5, cx, cy + 3.5)
+    ax.add_patch(Rectangle((0, -fh), xf1, 2 * fh, fill=False, lw=LW))                          # flange
+    holes = [(X(M.SCREW[0]), M.SCREW[1], "S1"), (X(M.SCREW2[0]), M.SCREW2[1], "S2")]
+    for (cx, cy, nm) in holes:
+        ax.add_patch(Circle((cx, cy), M.SCREW_DRILL / 2, fill=False, lw=LW))
+        ax.add_patch(Circle((cx, cy), 0.8, fill=False, lw=THIN, ls=(0, (3, 1.5))))            # M1.6 major diameter
+        center(ax, cx - 3.0, cy, cx + 3.0, cy)
+        center(ax, cx, cy - 3.0, cx, cy + 3.0)
+        ax.text(cx + 1.4, cy + (1.2 if cy > 0 else -1.6), nm, fontsize=6.5, fontweight="bold")
     center(ax, xt - 2, 0, xf1 + 2, 0)
-    # dims from datum B (X = 0) and centre plane C (Y = 0)
-    dim_h(ax, 0, sx, sy, -h - 3, f"{sx:.1f}", above=False)
-    dim_h(ax, 0, px, py, h + 3, f"{px:.1f}")
+    (s1x, s1y, _), (s2x, s2y, _) = holes
+    dim_h(ax, 0, s1x, s1y, -h - 3, f"{s1x:.1f}", above=False)
+    dim_h(ax, 0, s2x, s2y, h + 3, f"{s2x:.1f}")
     dim_h(ax, 0, xf1, -fh, -h - 7, f"{xf1:.1f}", above=False)
-    dim_h(ax, 0, nx0, fh, h + 7, f"{nx0:.1f}")
-    dim_v(ax, 0, sy, sx, xf1 + 4, f"{abs(sy):.1f}")
-    dim_v(ax, 0, py, px, xf1 + 4, f"{py:.1f}")
+    dim_v(ax, 0, s1y, s1x, xf1 + 4, f"{abs(s1y):.1f}")
+    dim_v(ax, 0, s2y, s2x, xf1 + 4, f"{s2y:.1f}")
     dim_v(ax, -fh, fh, xf1, xf1 + 10, f"{2 * fh:.1f}")
-    dim_v(ax, ny0, fh, xf1, xf1 + 15.5, f"{fh - ny0:.1f}")
-    leader(ax, (sx + 0.9, sy - 0.9), (sx + 9, sy - 9.5),
-           f"M2.5x0.45 - 6H, DRILL ⌀{M.SCREW_DRILL:.2f} x {M.SCREW_DEPTH:.1f} DP\nTHREAD {M.SCREW_DEPTH - 0.5:.1f} MIN, BOSS ⌀{M.BOSS_SCREW:.1f}")
-    leader(ax, (px + 0.7, py + 0.7), (px + 9, py + 8.5),
-           f"⌀{M.DOWEL_D:.1f} H7 x {M.DOWEL_DEPTH:.1f} DP (dowel press)\nBOSS ⌀{M.BOSS_DOWEL:.1f}")
-    leader(ax, ((nx0 + xf1) / 2, (ny0 + fh) / 2), (xf1 + 3, h + 12),
-           f"POCKET {xf1 - nx0:.1f} x {fh - ny0:.1f}, {M.NOTCH[2]:.1f} DP FROM A\n(clears header pin tails)")
-    ax.text(xt, -h - 12, f"FACE A RELIEVED {M.RELIEF:.1f} EXCEPT THE 2 BOSSES (tracks may run under it)", fontsize=5.5, ha="left", color=DIMC)
+    leader(ax, (s1x + 0.6, s1y - 0.6), (s1x - 14, s1y - 13.5),
+           f"2x M1.6x0.35 - 6H (S1, S2)\nDRILL ⌀{M.SCREW_DRILL:.2f} x {M.SCREW_DEPTH:.1f} DP FROM THE FLANGE FACE\n"
+           f"THREAD {M.SCREW_DEPTH - 1.0:.1f} MIN.  S2 MUST NOT BREAK INTO THE BORE")
+    ax.text(xt, -h - 17, f"FLANGE FACE PLAIN, {M.RELIEF:.1f} BELOW DATUM A (0.5 SPACER WASHER AT EACH SCREW)",
+            fontsize=5.5, ha="left", color=DIMC)
     ax.text(-2.6, -h - 3.4, "B", fontsize=7, fontweight="bold", bbox=dict(boxstyle="square,pad=0.15", fc="w", lw=0.6))
     ax.text(xt - 1.5, 0.9, "C", fontsize=7, fontweight="bold", bbox=dict(boxstyle="square,pad=0.15", fc="w", lw=0.6))
-    ax.set_title(f"VIEW ON MOUNTING FACE A  -  VARIANT {v}", fontsize=8, loc="left")
+    ax.set_title("VIEW ON THE FLANGE FACE (PCB SIDE)", fontsize=8, loc="left")
 
 
 def setup(ax, xlim, ylim):
@@ -194,20 +184,22 @@ NOTES = """NOTES
 1. MATERIAL: ALUMINIUM 6061-T6.  FINISH: ELECTROLESS NICKEL 5-8 um (conductive, solderable to ENIG pad contact).
    NO ANODIZE.  Boss end face (inside O-ring groove and outside it) is the GND contact face: Ra 0.8, flat 0.02, no burrs.
 2. GENERAL TOLERANCES ISO 2768-mK.  Break all edges 0.2 x 45 deg except the boss end face (sharp, deburred).
-3. DATUMS: A = mounting face (top of the 2 bosses), B = inner face of the shoulder plate, C = centre plane of the cell bore.
+3. DATUMS: A = PCB back face when mounted (flange face + 0.5, spacer washers), B = inner face of the shoulder plate,
+   C = centre plane of the cell bore.
    Bore, boss and groove coaxial within 0.05 to each other.  Bore axis parallel to A within 0.05.
 4. DIMENSIONS MARKED *  (red) ARE PROVISIONAL: verify against a real MS3181-16 cap / MS3112-16 receptacle front shell
    before machining (boss OD, bayonet pin axial position, angles, diameter and protrusion).
 5. BAYONET PINS: 3x stainless dowel, pressed from outside, inner end flush with (or 0.1 below) the bore. Retain with
    Loctite 638 if a slip fit is used.
-6. VARIANT A and B differ ONLY in the dowel hole Y position (A: +9.3, B: +7.5 from C). A is used twice
-   (cell 1 on the left and, turned 180 deg, cell 2 on the right).  Mark the variant letter on face B.
-7. 3D MODELS: FCL_BatteryBlock_MS3181_A_edit.step / _B_edit.step (origin = A n B n C).  Model governs if in doubt,
+6. ONE PART FOR ALL THREE CELLS (cells 1 and 3 on the left, cell 2 on the right turned 180 deg).  Held by two
+   M1.6 x 5 socket head screws from the camera side of the PCB into S1 / S2; the screw heads on the PCB's GND rings
+   are the electrical connection.  No dowel, no pocket.
+7. 3D MODEL: FCL_BatteryBlock_MS3181_edit.step (origin = A n B n C).  Model governs if in doubt,
    except provisional dims (note 4).
 """
 
 
-def sheet(variants=("A", "B")):
+def sheet(variants=("A",)):
     os.makedirs(OUT, exist_ok=True)
     pdf_pages = []
     from matplotlib.backends.backend_pdf import PdfPages
@@ -229,25 +221,26 @@ def sheet(variants=("A", "B")):
         tb = fig.add_axes([0.70, 0.03, 0.28, 0.22])
         tb.axis("off")
         tb.add_patch(Rectangle((0, 0), 1, 1, fill=False, lw=1.2, transform=tb.transAxes))
-        rows = [("PART", f"FCL battery end block, MS3181-16 bayonet - VARIANT {v}"),
-                ("PART No.", f"FCL-MECH-BLK-MS3181-{v}"),
-                ("QTY / UNIT", "2 (A: cell 1 + cell 2 right)" if v == "A" else "1 (B: cell 3)"),
+        mass = M.make_block(v).val().Volume() / 1000 * 2.70
+        rows = [("PART", "FCL battery end block, MS3181-16 bayonet"),
+                ("PART No.", "FCL-MECH-BLK-MS3181"),
+                ("QTY / UNIT", "3 (cells 1, 2, 3; cell 2 turned 180 deg)"),
                 ("MATERIAL", "6061-T6 Al, electroless Ni"),
-                ("MASS", "14.6 g"),
+                ("MASS", f"{mass:.1f} g"),
                 ("UNITS / SCALE", "mm  /  NTS (dimensions govern)"),
-                ("PROJECT", "FPGA_CAM-LCD monocular (branch battery-blocks)"),
+                ("PROJECT", "FPGA_CAM-LCD monocular (master)"),
                 ("SOURCE", "scripts/make_battery_block_ms3181.py"),
-                ("REV / DATE", "0.1 PROVISIONAL / 2026-11-26")]
+                ("REV / DATE", "0.2 PROVISIONAL / 2026-11-26")]
         for i, (k, val) in enumerate(rows):
             y = 1 - (i + 0.5) / len(rows)
             tb.text(0.02, y, k, fontsize=6.5, va="center", transform=tb.transAxes, color="0.35")
             tb.text(0.27, y, val, fontsize=7.2, va="center", transform=tb.transAxes, fontweight="bold" if i == 0 else None)
             if i:
                 tb.plot([0, 1], [1 - i / len(rows)] * 2, lw=0.3, color="0.6", transform=tb.transAxes)
-        fig.text(0.03, 0.975, f"FCL battery end block (MS3181-16 bayonet) - variant {v}  -  dimensions in mm",
+        fig.text(0.03, 0.975, "FCL battery end block (MS3181-16 bayonet), one part for all three cells  -  dimensions in mm",
                  fontsize=11, fontweight="bold", va="top")
         pdf.savefig(fig)
-        fig.savefig(os.path.join(OUT, f"FCL_BatteryBlock_MS3181_{v}_drawing.png"), dpi=110)
+        fig.savefig(os.path.join(OUT, "FCL_BatteryBlock_MS3181_drawing.png"), dpi=110)
         plt.close(fig)
     pdf.close()
     print("wrote", os.path.abspath(OUT))
@@ -257,10 +250,9 @@ def export_edit_models():
     """STEP for editing in Onshape / IronCAD / Fusion: origin at A n B n C, X toward the board, Z up = away from A? no:
     Z = 0 on A, block below (negative Z), same as the drawing."""
     import cadquery as cq
-    for v in ("A", "B"):
-        blk = M.make_block(v).translate((-B0, 0, 0))
-        cq.exporters.export(blk, os.path.join(OUT, f"FCL_BatteryBlock_MS3181_{v}_edit.step"))
-        cq.exporters.export(blk, os.path.join(OUT, f"FCL_BatteryBlock_MS3181_{v}_edit.stl"), tolerance=0.02, angularTolerance=0.1)
+    blk = M.make_block("A").translate((-B0, 0, 0))
+    cq.exporters.export(blk, os.path.join(OUT, "FCL_BatteryBlock_MS3181_edit.step"))
+    cq.exporters.export(blk, os.path.join(OUT, "FCL_BatteryBlock_MS3181_edit.stl"), tolerance=0.02, angularTolerance=0.1)
     print("edit models written")
 
 
