@@ -1835,7 +1835,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Block screws from the camera side, two per block, S1 and S2, one each side of the cell. About 2.9 mm thread engagement. 1.8 mm holes in the PCB."
+		(property "Notes" "Block screws, two per block (S1 and S2, one each side of the cell). They go in from the camera side and thread into the block; the screw head on the GND ring is the electrical connection to the block. 1.8 mm holes, 3.0 mm GND pads. Thread length to be set with the new block (PCB 1.6 + tape)."
 			(at 30.48 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -1878,7 +1878,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Washer M2.5 small, 4.5 OD x 0.5 (spacer)"
+		(property "Value" "Kapton (polyimide) tape, about 0.06 mm"
 			(at 43.18 151.13 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1936,7 +1936,7 @@
 				(justify left)
 			)
 		)
-		(property "Qty" "6"
+		(property "Qty" "1"
 			(at 60.96 154.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1959,7 +1959,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "ISO 7092 M2.5 A2"
+		(property "MPN" ""
 			(at 76.20 154.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2018,7 +2018,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact at T1 / T2. Loose on an M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer."
+		(property "Notes" "Between each block and the PCB, for insulation over the tracks under the block; cut out at the two screws. Replaces the 0.5 mm spacer washers."
 			(at 30.48 154.94 0)
 			(hide yes)
 			(show_name no)

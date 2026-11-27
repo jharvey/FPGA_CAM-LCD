@@ -42,9 +42,9 @@ PARTS = [
     ("MP9", "Dowel pin ISO 8734 2 x 5", dict(
         Category="Purchased", Qty="0", Material="Stainless", Notes="Not used any more: the blocks are held by two M1.6 screws each, no locating pin.")),
     ("MP10", "Screw M1.6 x 5, socket head", dict(
-        Category="Purchased", Qty="6", MPN="ISO 4762 M1.6x5 A2", Notes="Block screws from the camera side, two per block, S1 and S2, one each side of the cell. About 2.9 mm thread engagement. 1.8 mm holes in the PCB.")),
-    ("MP25", "Washer M2.5 small, 4.5 OD x 0.5 (spacer)", dict(
-        Category="Purchased", Qty="6", Notes="Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact at T1 / T2. Loose on an M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer.")),
+        Category="Purchased", Qty="6", MPN="ISO 4762 M1.6x5 A2", Notes="Block screws, two per block (S1 and S2, one each side of the cell). They go in from the camera side and thread into the block; the screw head on the GND ring is the electrical connection to the block. 1.8 mm holes, 3.0 mm GND pads. Thread length to be set with the new block (PCB 1.6 + tape).")),
+    ("MP25", "Kapton (polyimide) tape, about 0.06 mm", dict(
+        Category="Purchased", Qty="1", MPN="", Notes="Between each block and the PCB, for insulation over the tracks under the block; cut out at the two screws. Replaces the 0.5 mm spacer washers.")),
     ("MP11", "Washer M1.6", dict(
         Category="Purchased", Qty="0", Notes="Not used: no room for a washer under the screw head at cell 3 and cell 2 (3.0 mm head only).")),
     ("MP12", "Li-ion cell 18650", dict(
