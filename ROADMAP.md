@@ -815,6 +815,15 @@ To clear the board for a placement rethink, these groups were moved off the outl
 ### Cost reductions and room for improvement (review list, 2026-11-20)
 Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnected, 0 clearance at commit `43dccc04`). Nothing here blocks a first prototype unless marked **check before order**.
 
+**0 Ω links to drop after the first article passes (2026-11-27)**
+All are fitted for the prototype so a function can be cut off or changed while it is validated. After `doc/BRINGUP.md` passes:
+- R46, R47, R48, R51, R55 (0603, LM66100 `ST` status pin to GND on U12 / U14 / U18 / U16 / U19): `ST` is an open-drain output nobody reads; remove the parts and leave `ST` unconnected (allowed by the datasheet), or wire `ST` to spare FPGA balls if the hub firmware should see which source is active.
+- R71, R72, R73 (0603, LM66100 `CE` to VBAT_OR on the three cells): sets the ideal-diode OR mode. Replace with copper.
+- R57 (0603, U21 ADS7038 `COM` to GND): replace with copper.
+- RV3 / RV2 (0805, bank 0/7 supply select): RV3 fitted (3.3 V), RV2 DNP. Replace RV3 with copper and delete RV2 once 3.3 V on the camera / LCD banks is final.
+- Keep RP1 / RP2 / RP3: they are net-tie jumpers in copper (no part, not in the BOM); cutting one isolates a regulator from its rail for fault-finding.
+Saves one Basic part type (C21189) and RV3 (C112378, one more type): about $3 in feeder loading on a JLC order plus 10 placements; small, so do it with the next real board revision, not on its own.
+
 **JLC quote of 2026-11-22 (5 boards, uploaded files, nothing ordered)**
 - Bare boards $63.52: base $8.00, ENIG $17.50, 0.2 mm via holes $17.48, 4-wire Kelvin test $17.04 and TG155 material $3.50 (both forced by the via tier).
 - Standard two-sided assembly $403.43 with 75 of 83 part types placed: parts $191.10, feeder loading $111.60 (about $1.49 per part type, Basic or Extended alike), setup $51.50, stencil $16.54, fixture $16.54. Total $466.95 before shipping (about $26) and before the parts below.

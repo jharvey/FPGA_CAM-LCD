@@ -1,15 +1,20 @@
 # First power-up and bring-up checklist
 
-For the first boards back from JLC. Work top to bottom: each stage only adds one new thing, so a failure points at
-that one thing. Write the measured value in the **Result** column.
+For the first boards back from JLC (first article: the design itself is being validated). Work top to bottom: each
+stage only adds one new thing, so a failure points at that one thing. Write the measured value in the **Result**
+column: the first good board's results become the golden values for the short per-board check in
+`doc/PRODUCTION_TEST.md`.
 
 Locations are board coordinates in mm from the top-left corner of the PCB (x to the right, y down) as seen from the
 **front** (camera side). "back" means the part is on the eye side. All test points are on the back except TP6.
 
 ## What you need
 
-- Multimeter, a USB-C meter (shows V and mA), a scope (for the 25 MHz clock and backlight), a lab supply with current
-  limit (3.0-4.2 V, for the battery stages), a USB-C PD charger (for the 5 V check), a USB-C cable to a PC.
+- Multimeter, a USB-C meter (shows V and mA), a scope (for the 25 MHz clock and backlight), a USB-C PD charger (for
+  the 5 V check), a USB-C cable to a PC.
+- A lab supply with an adjustable **current limit** and an output on/off button (0-5.5 V, at least 0.5 A), and a plain
+  USB-C plug breakout (a USB-C male plug with VBUS / GND solder pads or screw terminals) so the supply can feed J17.
+  The first power-ups use this supply, not a charger: a charger will push amps into a short.
 - One 18650 cell (charged to about 3.7 V) and a cell holder with leads, for the battery stages.
 - A microSD card, a CR1225 coin cell (BAT1, RTC backup).
 - Optional: a USB-I2C adapter (Bus Pirate, CH341A, etc.) for the sensor stage before the hub CPU exists.
@@ -63,11 +68,91 @@ The RTC alarm (`WAKEUPn`) can do the same. To switch off, the FPGA drives `SHUTD
 |---|---|---|---|---|
 | 0.1 | Visual | Look for missing / rotated parts, bridges on U9, U21, U23, J17, J7 | nothing odd | |
 | 0.2 | Board-variant parts | RV2 empty, RV3 fitted; RP1-RP3 fitted; springs BT13/23/33 fitted only on the fixed-cell build | as listed | |
-| 0.3 | No shorts to GND | Ohms from TP1 to TP7, TP6, TP3, TP5, TP4 (both probe polarities) | none near 0 Ω. The core rail TP4 reads lowest; write all five down to compare with the next board | |
-| 0.4 | No rail-to-rail short | Ohms TP3-TP5, TP5-TP4, TP6-TP3 | not near 0 Ω | |
-| 0.5 | Cells out | No cells, no coin cell for now | | |
+| 0.3 | Cells out | No 18650s, no coin cell, nothing plugged in | | |
+| 0.4 | Shorts to GND | the resistance table below, every row | above the "stop" value | |
+| 0.5 | Rail-to-rail shorts | the rail-to-rail table below | above the "stop" value | |
+| 0.6 | Cell contacts | each slot's + contact to its - contact, both ways | above the "stop" value | |
 
-If 0.3 shows a short on +1V1 / +2V5 / +3V3: lift RP1 / RP2 / RP3 to tell regulator from load.
+### How to measure resistance for shorts
+
+- Board fully unpowered: no USB, no cells, no coin cell. An ohmmeter on a live circuit reads nonsense and can damage
+  the meter. Touch the meter leads to TP1 and the rail first if the board was just powered, to let the capacitors drain.
+- Set the meter to ohms, 200 Ω range (or auto). Touch the two probe tips together and note the reading (usually
+  0.1-0.3 Ω): that is the lead resistance; subtract it from every reading.
+- **Black probe on GND** (TP1, TP2, or the USB-C shell), **red probe on the rail's test point**. Hold the tips still on the
+  pad for 3-5 s. Then swap the probes (red on GND, black on the rail) and read again. The two directions differ because
+  of the diodes inside the chips; both are normal.
+- A reading that **climbs** over a few seconds is the rail's capacitors charging from the meter: a good sign, write down
+  where it settles (or "> 10 kΩ, climbing"). A reading that sits **steady near 0** is a short.
+- Do not rely on the continuity beeper: most meters beep below 30-50 Ω, and the 1.1 V core rail can be that low on a good
+  board. Read the number.
+- Diode mode is a second opinion: red on GND, black on the rail shows the chips' protection diodes, about 0.3-0.7 V on a
+  healthy rail; 0.000 V is a short.
+- These expected values are estimates from the parts on each rail. The first good board sets the real reference:
+  write every number down and compare the next boards with it. A rail that reads much lower than on the other boards is
+  suspect even if it is above the stop value.
+
+| Rail | Red probe on | Black probe on | Typical (estimate) | **Stop if below** | Result (red on rail) | Result (swapped) |
+|---|---|---|---|---|---|---|
+| VBUS_C (USB input) | USB-C plug breakout VBUS pad, plugged into J17 | breakout GND | > 10 kΩ | 100 Ω | | |
+| +5V | TP7 | TP1 | > 1 kΩ, climbing | 50 Ω | | |
+| VSYS | TP6 (front) | TP1 | > 1 kΩ, climbing | 50 Ω | | |
+| +3V3 | TP3 | TP2 | 200 Ω - a few kΩ (74 parts on it) | 20 Ω | | |
+| +2V5 | TP5 | TP1 | > 200 Ω | 10 Ω | | |
+| +1V1 (FPGA core) | TP4 | TP1 | 5-100 Ω (the ECP5 core reads low) | 1 Ω | | |
+| VBAT (RTC) | C54 | TP1 | > 10 kΩ | 1 kΩ | | |
+| SERVO_V | any J_SRVx centre pin | TP1 | open (no source fitted) | 1 kΩ | | |
+| Cell 1 + | BT11 contact (79.5, 15.5) | BT13 / BT12 - contact (5.5, 15.5) | > 10 kΩ | 1 kΩ | | |
+| Cell 2 + | BT21 contact (5.5, 36.0) | BT23 / BT22 - contact (79.5, 36.0) | > 10 kΩ | 1 kΩ | | |
+| Cell 3 + | BT31 contact (79.5, 56.5) | BT33 / BT32 - contact (5.5, 56.5) | > 10 kΩ | 1 kΩ | | |
+
+The cell rows matter most: an 18650 can deliver tens of amps into a short, enough to burn a trace or a part. **Never
+fit a cell into a slot that fails its row.**
+
+| Between | Probes on | **Stop if below** | Result |
+|---|---|---|---|
+| VSYS and +3V3 | TP6 - TP3 | 50 Ω | |
+| +3V3 and +2V5 | TP3 - TP5 | 50 Ω | |
+| +2V5 and +1V1 | TP5 - TP4 | 10 Ω | |
+| +3V3 and +1V1 | TP3 - TP4 | 10 Ω | |
+| +5V and +3V3 | TP7 - TP3 | 50 Ω | |
+| SERVO_V and +5V | J_SRVx centre pin - TP7 | 1 kΩ | |
+
+**If a rail fails:** for +1V1 / +2V5 / +3V3, lift RP1 / RP2 / RP3 (the 0 Ω link between regulator and rail) and measure
+both sides: that tells a regulator fault from a fault on the load side. Then look for solder bridges near the parts on
+that rail (U1's BGA needs an X-ray; ask JLC for their X-ray image of U1). With a lab supply set to a low voltage
+(0.5-1 V) and the current limit at 0.5-1 A on the shorted rail, the shorted part gets warm first: find it with a
+thermal camera, freeze spray or a fingertip.
+
+## Stage 1A - first power, current limited, a fraction of a second
+
+The goal is to catch a short or a wrong part before it burns, so the first power-ups are short and current limited.
+Watch the supply's **current display** (and its CC / current-limit light) the whole time, and switch the **output
+button** off, not the cable: the button is faster and always reachable.
+
+Feed the board through the USB-C plug breakout in J17: supply + to VBUS, supply - to GND. (At a pinch, clip leads to
+TP7 (+5V) and TP1 (GND) instead; that skips the USB input diode D55.)
+
+| # | Step | Supply setting | Expected | Stop (output off at once) if | Result |
+|---|---|---|---|---|---|
+| 1A.1 | Set up with the output **off** | 5.0 V, current limit 50 mA | | | |
+| 1A.2 | Output on for **about 0.5 s**, then off | | a short spike while the capacitors charge (may touch the limit for a few ms), then a few mA | the current stays at the limit, the CC light stays on, or the voltage display drops below 5 V | |
+| 1A.3 | On for 2 s, off. Feel U23, U16, U11, U13, U15 | | steady few mA, nothing warm | current climbs over the 2 s, anything warm | |
+| 1A.4 | On for 10 s, then leave it on | | current flat; D11 dark (the board is not switched on yet) | current creeping up (something heating = runaway) | |
+| 1A.5 | Raise the limit to 300 mA. Output on, press B0 once, watch for **0.5 s**, output off | 5.0 V, 300 mA | D11 lights, current jumps to roughly 100-250 mA and settles | at the 300 mA limit, voltage sagging, D11 flickering | |
+| 1A.6 | Repeat 1A.5 for 2 s, then 10 s; touch U1, U3, U4, U5, U9 | | current flat; parts at most slightly warm | current creeping up, any part hot to touch | |
+| 1A.7 | Measure the rails now (Stage 2 rows 2.2-2.5) with the supply still limited | | as Stage 2 | a rail at 0 V or above its range: output off | |
+
+What the numbers mean:
+- **Stays at the limit** with the voltage pulled down: a short or a part fitted backwards. Go back to the Stage 0 tables.
+- **Creeps up** over seconds: something is getting hot (a regulator in trouble, a part with an internal fault, a solder
+  bridge through a few ohms). Find it by touch or thermal camera with a short power-on.
+- **A rail above its range** (for example +1V1 reading 2 V or more): a wrong feedback resistor or a missing RP link.
+  Switch off at once; the FPGA core does not survive overvoltage for long.
+- Write down the off current (1A.4) and the on current (1A.6). They are the reference for every later stage: any later
+  jump over these with nothing new added is a fault.
+
+Only after 1A passes move to a USB charger (Stage 1) and the PC.
 
 ## Stage 1 - USB-C power, board still off
 
@@ -106,7 +191,7 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 | 3.1 | USB enumerates | PC device list | Espressif USB JTAG/serial debug unit (303A:1001), a COM / ttyACM port | |
 | 3.2 | Enter download mode if needed | hold B3 (BOOT), tap B4 (RESET), release B3 | port re-appears in download mode | |
 | 3.3 | Flash MicroPython | `esptool.py --chip esp32s3 erase_flash`, then `write_flash 0 <ESP32_GENERIC_S3-SPIRAM .bin>` | completes, reset, REPL on the port | |
-| 3.4 | PSRAM / flash size | REPL: `import esp, gc; esp.flash_size(); gc.mem_free()` | 8 MB flash; more than 2 MB free with PSRAM | |
+| 3.4 | PSRAM / flash size | REPL: `import esp, gc; esp.flash_size(); gc.mem_free()` | 8 MB flash; about 2 MB free (N8R2: 2 MB quad PSRAM) | |
 | 3.5 | Copy esp32ecp5 + FCL files | `mpremote cp firmware/esp32/*.py :` and a `wifiman.conf` with your Wi-Fi | files listed by `mpremote ls` | |
 | 3.6 | Wi-Fi + FTP | reset, read the IP in the REPL, `ftp <ip>` | FTP login works | |
 | 3.7 | JTAG to the FPGA | REPL: `import ecp5; ecp5.idcode()` | `0x41113043` (LFE5U-85F). If 0 or 0xFFFFFFFF: check JTAG pins / J4 / U1 | |
@@ -155,8 +240,9 @@ With the hub CPU built later: the same values come out in `fcl_hub.last` on the 
 
 ## Stage 7 - batteries (one cell, then all three)
 
-Use a lab supply set to 3.7 V, current limit 0.5 A, in place of the first real cell. **USB unplugged** unless the
-step says otherwise.
+Use a lab supply set to 3.7 V in place of the first real cell. **USB unplugged** unless the step says otherwise.
+Repeat the Stage 1A method on each slot first: limit 50 mA, output on for 0.5 s, then 2 s, then 10 s, then press B0
+with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again before the first real cell goes in.
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|
