@@ -40,13 +40,13 @@ PARTS = [
         Category="Purchased", Qty="9", Material="Stainless dowel, 3/32 in (2.38) or ISO 8734 2.5 cut to length",
         Notes="3 per block, pressed through the boss wall, flush with the cell bore. Match to the cap slots.")),
     ("MP9", "Dowel pin ISO 8734 2 x 5", dict(
-        Category="Purchased", Qty="2", Material="Stainless", Notes="Block locating pin at cell 3 and at the right block (NPTH 2.1); slip fit + retaining compound in the block.")),
-    ("MP10", "Screw M2.5 x 6, socket head", dict(
-        Category="Purchased", Qty="4", MPN="ISO 4762 M2.5x6 A2", Notes="Block screws from the camera side: 2 at cell 1, 1 at cell 3, 1 at the right block. 3.9 mm thread engagement.")),
+        Category="Purchased", Qty="0", Material="Stainless", Notes="Not used any more: the blocks are held by two M1.6 screws each, no locating pin.")),
+    ("MP10", "Screw M1.6 x 5, socket head", dict(
+        Category="Purchased", Qty="6", MPN="ISO 4762 M1.6x5 A2", Notes="Block screws from the camera side, two per block (cell 1: T1 + T2, cell 3: T1 + T3, cell 2: T2 + T3). About 2.9 mm thread engagement. 1.8 mm holes in the PCB.")),
     ("MP25", "Washer M2.5 small, 4.5 OD x 0.5 (spacer)", dict(
-        Category="Purchased", Qty="4", MPN="ISO 7092 M2.5 A2", Notes="Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact.")),
-    ("MP11", "Washer M2.5", dict(
-        Category="Purchased", Qty="4", MPN="ISO 7092 M2.5 A2", Notes="Under the head of each block screw.")),
+        Category="Purchased", Qty="6", Notes="Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact at T1 / T2. Loose on an M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer.")),
+    ("MP11", "Washer M1.6", dict(
+        Category="Purchased", Qty="0", Notes="Not used: no room for a washer under the screw head at cell 3 and cell 2 (3.0 mm head only).")),
     ("MP12", "Li-ion cell 18650", dict(
         Category="Purchased", Qty="3", Notes="Flat-top or button-top; length 65.0-65.3 (unprotected). Longer protected cells need shorter slugs.")),
     ("MP13", "Case rear shell", dict(

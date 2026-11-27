@@ -1570,7 +1570,7 @@
 				(justify left)
 			)
 		)
-		(property "Qty" "2"
+		(property "Qty" "0"
 			(at 60.96 129.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1652,7 +1652,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Block locating pin at cell 3 and at the right block (NPTH 2.1); slip fit + retaining compound in the block."
+		(property "Notes" "Not used any more: the blocks are held by two M1.6 screws each, no locating pin."
 			(at 30.48 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -1695,7 +1695,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Screw M2.5 x 6, socket head"
+		(property "Value" "Screw M1.6 x 5, socket head"
 			(at 43.18 138.43 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1753,7 +1753,7 @@
 				(justify left)
 			)
 		)
-		(property "Qty" "4"
+		(property "Qty" "6"
 			(at 60.96 142.24 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1776,7 +1776,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "ISO 4762 M2.5x6 A2"
+		(property "MPN" "ISO 4762 M1.6x5 A2"
 			(at 76.20 142.24 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1835,7 +1835,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Block screws from the camera side: 2 at cell 1, 1 at cell 3, 1 at the right block. 3.9 mm thread engagement."
+		(property "Notes" "Block screws from the camera side, two per block (cell 1: T1 + T2, cell 3: T1 + T3, cell 2: T2 + T3). About 2.9 mm thread engagement. 1.8 mm holes in the PCB."
 			(at 30.48 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -1936,7 +1936,7 @@
 				(justify left)
 			)
 		)
-		(property "Qty" "4"
+		(property "Qty" "6"
 			(at 60.96 154.94 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2018,7 +2018,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact."
+		(property "Notes" "Between block and PCB at every block screw: sets the 0.5 mm gap and makes the GND contact at T1 / T2. Loose on an M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer."
 			(at 30.48 154.94 0)
 			(hide yes)
 			(show_name no)
@@ -2061,7 +2061,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Washer M2.5"
+		(property "Value" "Washer M1.6"
 			(at 43.18 163.83 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2119,7 +2119,7 @@
 				(justify left)
 			)
 		)
-		(property "Qty" "4"
+		(property "Qty" "0"
 			(at 60.96 167.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2201,7 +2201,7 @@
 				(justify left)
 			)
 		)
-		(property "Notes" "Under the head of each block screw."
+		(property "Notes" "Not used: no room for a washer under the screw head at cell 3 and cell 2 (3.0 mm head only)."
 			(at 30.48 167.64 0)
 			(hide yes)
 			(show_name no)
