@@ -67,3 +67,12 @@ venv/
 fp-info-cache
 # 3D assembly outputs (regenerate with case/assembly/build_assembly.py)
 case/build/
+
+# firmware simulator and overlay test outputs
+__pycache__/
+firmware/sim/fcl_sim
+firmware/sim/fcl_sim_live
+firmware/sim/*.exe
+firmware/sim/out.csv
+firmware/sim/link.bin
+fpga/osd/build/

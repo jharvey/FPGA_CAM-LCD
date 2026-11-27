@@ -1,6 +1,7 @@
 #include "app.h"
 #include "board.h"
 #include "hal.h"
+#include "osd.h"
 #include <math.h>
 #include <string.h>
 
@@ -25,6 +26,8 @@ void app_init(app_t *a)
     a->sensors_ok[3] = vl53l1x_init() == 0;
     a->sensors_ok[4] = true;
     a->servo_follow = true;
+    a->overlay = OV_ALL;
+    for (int i = 0; i < 3; i++) a->soc_f[i] = -1.0f;
     hal_power_hold(true);
     hal_led(0, true);
 }
@@ -36,6 +39,44 @@ static float ntc_c(uint16_t code)
         return -99.0f;
     float r = NTC_PULLUP * v / (ADC_VREF_V - v);
     return 1.0f / (1.0f / 298.15f + logf(r / NTC_R25) / NTC_BETA) - 273.15f;
+}
+
+/* Li-ion rest voltage -> percent (typical 18650, 25 C). Under load the cell reads lower, so this is a
+ * conservative gauge, not a coulomb counter. */
+uint8_t soc_from_mv(int mv)
+{
+    static const struct { int mv, pct; } T[] = { {3300, 0}, {3450, 5}, {3600, 10}, {3680, 20}, {3720, 30}, {3760, 40},
+        {3800, 50}, {3850, 60}, {3920, 70}, {4000, 80}, {4100, 90}, {4200, 100} };
+    const int n = (int)(sizeof T / sizeof T[0]);
+    if (mv < 2500) return SOC_NO_CELL;
+    if (mv <= T[0].mv) return 0;
+    for (int i = 1; i < n; i++)
+        if (mv <= T[i].mv)
+            return (uint8_t)(T[i - 1].pct + (T[i].pct - T[i - 1].pct) * (mv - T[i - 1].mv) / (T[i].mv - T[i - 1].mv));
+    return 100;
+}
+
+bool down_dot(float pitch_deg, float roll_deg, int *x, int *y)
+{
+    const float D2R = 0.01745329252f;
+    float sp = sinf(pitch_deg * D2R), cp = cosf(pitch_deg * D2R), sr = sinf(roll_deg * D2R), cr = cosf(roll_deg * D2R);
+    /* "down" in the device frame (x along the lens, y left, z up) */
+    float dx = -sp, dy = -cp * sr, dz = -cp * cr;
+    float f = LCD_HALF_PX / tanf(0.5f * CAM_HFOV_DEG * D2R);       /* pixels per unit tangent */
+    float u = -dy, v = -dz;                                        /* screen right, screen down */
+    if (dx > 0.05f)
+    {
+        float px = f * u / dx, py = f * v / dx;
+        if (px * px + py * py <= (float)DOT_RIM_PX * DOT_RIM_PX)
+        {
+            *x = (int)lrintf(px); *y = (int)lrintf(py);
+            return true;
+        }
+    }
+    float m = sqrtf(u * u + v * v);
+    if (m < 1e-6f) { u = 0; v = 1; m = 1; }                        /* looking straight up: park it at the bottom */
+    *x = (int)lrintf(DOT_RIM_PX * u / m); *y = (int)lrintf(DOT_RIM_PX * v / m);
+    return false;
 }
 
 static void battery(app_t *a)
@@ -54,6 +95,9 @@ static void battery(app_t *a)
         if (mv > 2500 && mv < CELL_LOW_MV) a->flags |= TF_CELL_LOW;      /* < 2.5 V: slot empty */
         if (mv > 2500 && mv < CELL_CUTOFF_MV) a->flags |= TF_CUTOFF;
         if (a->cell_temp_c[i] * 10 > CELL_HOT_DC) a->flags |= TF_HOT;
+        uint8_t soc = soc_from_mv(mv);
+        if (soc == SOC_NO_CELL) a->soc_f[i] = -1.0f;
+        else a->soc_f[i] = a->soc_f[i] < 0 ? soc : a->soc_f[i] + 0.1f * (soc - a->soc_f[i]);   /* about 2 s at 5 Hz */
     }
     a->vsys_v = a->adc[ADC_CH_VSYS] * ADC_VREF_V / 65536.0f * DIV_VSYS;
     if ((a->flags & TF_CELL_LOW) && !(old & TF_CELL_LOW)) event(EV_CELL_LOW);
@@ -98,6 +142,15 @@ static void commands(app_t *a)
                 }
                 else if (lp.type == MSG_CMD_MODE && lp.len == 1)
                     a->mode = lp.buf[0];
+                else if (lp.type == MSG_CMD_OVERLAY && lp.len == 1)
+                    a->overlay = lp.buf[0] & OV_ALL;
+                else if (lp.type == MSG_CMD_ZERO_ALT)
+                    a->zero_alt = true;
+                else if (lp.type == MSG_CMD_FOLLOW && lp.len == 1)
+                {
+                    a->servo_follow = lp.buf[0] != 0;
+                    if (!a->servo_follow) hal_servo_us(0, 0);
+                }
             }
 }
 
@@ -134,6 +187,7 @@ void app_tick(app_t *a)
         }
         float alt = baro_altitude_m(a->p_hpa, a->p0_hpa);
         a->alt_m += 0.2f * (alt - a->alt_m);    /* light low-pass */
+        if (a->zero_alt) { a->alt_zero = a->alt_m; a->zero_alt = false; }   /* from the filtered value, not one noisy sample */
     }
     if (a->sensors_ok[3] && a->tick % TOF_DIV == 0)
     {
@@ -164,7 +218,7 @@ void app_tick(app_t *a)
         t.heading_cd = (int16_t)lrintf(hd * 100 > 32767 ? hd * 100 - 36000 : hd * 100);
         t.pitch_cd = (int16_t)lrintf(pt * 100);
         t.roll_cd = (int16_t)lrintf(rl * 100);
-        t.alt_cm = (int32_t)lrintf(a->alt_m * 100);
+        t.alt_cm = (int32_t)lrintf((a->alt_m - a->alt_zero) * 100);
         t.press_pa = (uint32_t)lrintf(a->p_hpa * 100);
         t.tof_mm = a->tof_mm;
         for (int i = 0; i < 3; i++)
@@ -175,6 +229,17 @@ void app_tick(app_t *a)
         t.vsys_mv = (uint16_t)lrintf(a->vsys_v * 1000);
         t.mode = a->mode;
         t.flags = (uint8_t)(a->flags | (a->recording ? TF_RECORDING : 0) | (a->tof_valid ? TF_TOF_VALID : 0));
+        for (int i = 0; i < 3; i++)
+            t.soc[i] = a->soc_f[i] < 0 ? SOC_NO_CELL : (uint8_t)lrintf(a->soc_f[i]);
+        t.buttons = (uint8_t)(a->btn_last[BTN_PWR] | a->btn_last[BTN_1] << 1 | a->btn_last[BTN_2] << 2);
+        int dx, dy;
+        if (down_dot(pt, rl, &dx, &dy)) t.flags |= TF_DOT_INSIDE;
+        t.dot_x = (int16_t)dx; t.dot_y = (int16_t)dy;
+        t.overlay = a->overlay;
+        for (int i = 0; i < 5; i++) t.sensors |= (uint8_t)(a->sensors_ok[i] << i);
+        static char grid[OSD_ROWS][OSD_COLS + 1];
+        osd_compose(&t, grid);
+        hal_osd(grid, dx, dy, (a->overlay & OV_DOT) != 0);
         uint8_t p[TELEMETRY_LEN];
         send(MSG_TELEMETRY, p, (uint8_t)telemetry_pack(&t, p));
         a->last = t;

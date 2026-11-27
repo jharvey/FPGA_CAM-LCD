@@ -15,7 +15,9 @@ checks = [
     (fcl_hub.frames == 600, "telemetry frames decoded: %d" % fcl_hub.frames),
     (fcl_hub.crc_errors == 0, "CRC errors: %d" % fcl_hub.crc_errors),
     (t["mode"] == 2 and t["flags"] & fcl_hub.TF_RECORDING, "last frame: mode %d, recording %s" % (t["mode"], bool(t["flags"] & 1))),
-    (abs(t["alt_m"] - 3.0) < 0.3, "last altitude %.2f m" % t["alt_m"]),
+    (abs(t["alt_m"]) < 0.15, "last height %.2f m (re-zeroed at 20 s by command)" % t["alt_m"]),
+    (t["soc1"] in range(70, 78) and t["soc3"] <= 2 and t["overlay"] == 0x2F and t["sensors"] == 0x1F,
+     "charge %d %% / %d %% / %d %%, overlay 0x%02X, sensors 0x%02X" % (t["soc1"], t["soc2"], t["soc3"], t["overlay"], t["sensors"])),
     (all(e in fcl_hub.events for e in ("B1", "B2", "CELL_LOW", "PWR_OFF")), "events: %s" % ", ".join(fcl_hub.events)),
 ]
 fail = 0

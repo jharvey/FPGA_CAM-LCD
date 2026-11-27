@@ -1,0 +1,103 @@
+Supplier,Ref,Item,Qty,Manufacturer / source,Part number,File,Notes
+JLC PCB (bare board),PCB,FCL V0.1 4-layer board,1,JLCPCB,FCL_gerbers_V0.1.zip,production/FCL_gerbers_V0.1.zip,Same board for both battery variants.
+JLC PCB assembly,"B0,B3,B4",PWR/BOOT/RESET,3,LCSC,C269272,,
+JLC PCB assembly,BAT1,CR1225,1,LCSC,C238097,,
+JLC PCB assembly,"BT11,BT21,BT31",MY-18650-04-J,3,LCSC,C19184125,,Through-hole: JLC through-hole service or hand solder.
+JLC PCB assembly,"BT13,BT23,BT33",MY-18650-05-J,3,LCSC,C19184124,,Through-hole: JLC through-hole service or hand solder.
+JLC PCB assembly,"C1,C11,C12,C15,C21,C3,C4,C5,C54,C55,C7,C8,C9",22uF,13,LCSC,C45783,,
+JLC PCB assembly,"C10,C2,C6",100pF,3,LCSC,C14858,,
+JLC PCB assembly,"C13,C16,C17,C19,C20,C22,C23,C24,C47,C77",2.2uF,10,LCSC,C108719,,
+JLC PCB assembly,"C14,C86",220nF,2,LCSC,C21120,,
+JLC PCB assembly,"C18,C44,C45,C59,C61,C62,C67,C70,C71,C72,C74,C76,C82,C83,C84,C85,C87,C89,C90,C91,C92,C94,C95",100nF,23,LCSC,C1525,,
+JLC PCB assembly,"C25,C27,C28,C29,C30,C31,C32,C33,C34,C35,C48,C49,C50,C51,C52",22nF,15,LCSC,C21122,,
+JLC PCB assembly,"C36,C37,C39,C40,C41,C42,C43,C46,C58,C63,C68,C69,C75,C80,C88,C96",10uF,16,LCSC,C15850,,
+JLC PCB assembly,C38,4.7uF 50V,1,LCSC,C29823,,
+JLC PCB assembly,"C56,C57",12pF,2,LCSC,C182482,,
+JLC PCB assembly,C60,220nF,1,LCSC,C16772,,
+JLC PCB assembly,"C64,C79,C81",1uF,3,LCSC,C15849,,
+JLC PCB assembly,C65,1uF,1,LCSC,C52923,,
+JLC PCB assembly,C73,100uF 10V,1,LCSC,C23742,,
+JLC PCB assembly,C78,10nF,1,LCSC,C15195,,
+JLC PCB assembly,C93,4.7uF,1,LCSC,C19666,,
+JLC PCB assembly,D1,SS14,1,LCSC,C2480,,
+JLC PCB assembly,"D10,D13,D14,D16,D17,D28,D29",1N914,7,LCSC,C2128,,
+JLC PCB assembly,D11,RED,1,LCSC,C84256,,
+JLC PCB assembly,"D12,D15",BAT54W,2,LCSC,C12744,,
+JLC PCB assembly,"D2,D3,D4,D53,D54",RED,5,LCSC,C2286,,
+JLC PCB assembly,D55,SS34,1,LCSC,C8678,,
+JLC PCB assembly,J1,OV7670_2x9,1,LCSC,C71956,,Through-hole: JLC through-hole service or hand solder.
+JLC PCB assembly,J17,"USB-C (USB 2.0, power + data)",1,LCSC,C2894897,,
+JLC PCB assembly,J7,NHD-2.1-480480AF-ASXP,1,LCSC,C202115,,
+JLC PCB assembly,J8,Speaker,1,LCSC,C160388,,
+JLC PCB assembly,"L1,L2,L3",2.2uH,3,LCSC,C285758,,
+JLC PCB assembly,L4,4.7uH,1,LCSC,C19398,,
+JLC PCB assembly,Q1,BC857,1,LCSC,C181146,,
+JLC PCB assembly,Q2,2N7002,1,LCSC,C8545,,
+JLC PCB assembly,"Q3,Q4,Q5",AO3401A,3,LCSC,C15127,,
+JLC PCB assembly,"R1,R3,R30,R4,RB2",4.7k,5,LCSC,C23162,,
+JLC PCB assembly,R10,120,1,LCSC,C22787,,
+JLC PCB assembly,"R11,R12,R27,R28",10k,4,LCSC,C25804,,
+JLC PCB assembly,"R13,R31,R32,R33,R34,R56,RA1,RA2,RA3",15k,9,LCSC,C22809,,
+JLC PCB assembly,"R14,R7,R74,R75,R76,R77",4.7k,6,LCSC,C25900,,
+JLC PCB assembly,R15,33R,1,LCSC,C25105,,
+JLC PCB assembly,"R16,R17,R43,R60,R61,R67,R68,R85,R86,R88,R89",10k,11,LCSC,C25744,,
+JLC PCB assembly,"R18,R87",100k,2,LCSC,C25741,,
+JLC PCB assembly,R19,2R0,1,LCSC,C22977,,
+JLC PCB assembly,"R2,RB1",18k,2,LCSC,C25810,,
+JLC PCB assembly,"R20,R22,R41",5.6k,3,LCSC,C23189,,
+JLC PCB assembly,"R21,R29,R42,R6,R69,R70,R8,R84",1k,8,LCSC,C21190,,
+JLC PCB assembly,R23,1k,1,LCSC,C11702,,
+JLC PCB assembly,"R24,R26",47k,2,LCSC,C25819,,
+JLC PCB assembly,"R25,R36",56k,2,LCSC,C23206,,
+JLC PCB assembly,"R35,R65",560,2,LCSC,C23204,,
+JLC PCB assembly,R37,47k,1,LCSC,C25792,,
+JLC PCB assembly,R38,0.47,1,LCSC,C158884,,
+JLC PCB assembly,R39,56k,1,LCSC,C25796,,
+JLC PCB assembly,R44,100k,1,LCSC,C25803,,
+JLC PCB assembly,R45,68k,1,LCSC,C23231,,
+JLC PCB assembly,"R46,R47,R48,R51,R55,R57,R71,R72,R73",0R,9,LCSC,C21189,,
+JLC PCB assembly,R5,2.2M,1,LCSC,C22938,,
+JLC PCB assembly,RB3,3.3k,1,LCSC,C22978,,
+JLC PCB assembly,RV3,0,1,LCSC,C112378,,
+JLC PCB assembly,SD1,104031-0811,1,LCSC,C585350,,
+JLC PCB assembly,"TH1,TH2,TH3",NTC 10k,3,LCSC,C13564,,
+JLC PCB assembly,U10,W25Q128JVSIQ,1,LCSC,C113767,,
+JLC PCB assembly,"U11,U13,U15",TP4056,3,LCSC,C16581,,
+JLC PCB assembly,"U12,U14,U16,U18,U19",LM66100DCKR,5,LCSC,C2869734,,
+JLC PCB assembly,U20,XC6206P332MR-G,1,LCSC,C5446,,
+JLC PCB assembly,U21,AD7689BCPZRL7,1,LCSC,C706705,,
+JLC PCB assembly,U24,USBLC6-2SC6,1,LCSC,C7519,,
+JLC PCB assembly,U27,VL53L1CXV0FY/1,1,LCSC,C190004,,
+JLC PCB assembly,U28,MAX98357A,1,LCSC,C910544,,
+JLC PCB assembly,"U3,U4,U5",TLV62569DBV,3,LCSC,C141836,,
+JLC PCB assembly,U7,MCP7940NT,1,LCSC,C148052,,
+JLC PCB assembly,U8,AP3032KTR-G1,1,LCSC,C264086,,
+JLC PCB assembly,U9,ESP32-S3-WROOM-1-N8R2,1,LCSC,C2913204,,
+JLC PCB assembly,Y1,SG-8101CA 25MHz,1,LCSC,C390569,,
+JLC PCB assembly,Y2,32768Hz,1,LCSC,C5366546,,
+"JLC assembly, check","B1,B2",PTS645,2,LCSC,C285463,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",MK1,ICS-43434,1,LCSC,C5656610,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U17,REF3025,1,LCSC,C96625,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U2,M12L2561616A-6TG2T,1,LCSC,C492195,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U22,ICM-42688-P,1,LCSC,C1850418,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U23,CH224K,1,LCSC,C970725,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U25,LIS2MDL,1,LCSC,C919695,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+"JLC assembly, check",U26,LPS22DF,1,LCSC,C3253714,,Not in stock at JLC on 2026-11-22: pre-order or supply.
+You supply to JLC,U1,FPGA LFE5U-85F-6BG381C (caBGA-381),1,Lattice,LFE5U-85F-6BG381C,,"Not in the JLC BOM / CPL (no LCSC number). Consign it to JLC for BGA placement, or add an LCSC number to the schematic and regenerate. -6 or faster; a 45F / 25F also fits the footprint."
+JLC 3D printing,MP13,Case rear shell,1,,,case/print/FCL_case_rear_fixed.step / .stl,
+JLC 3D printing,MP14,Case front shell,1,,,case/print/FCL_case_front_fixed.step / .stl,
+JLC 3D printing,MP15,Cell cradle,1,,,case/print/FCL_cell_cradle_fixed.step / .stl,
+JLC 3D printing,MP19,Button actuator (x2 in one print),2,,,case/print/FCL_button_actuators.step / .stl,"B1/B2 PTS645 plungers, snap in from inside the rear shell; the button cap (MP26) goes on from outside."
+JLC 3D printing,MP23,"Cell cradle, LCD side",1,,,case/print/FCL_cell_cradle_top.step / .stl,Sits on the PCB-side cradle; encloses the cells and carries the TFT back face.
+JLC 3D printing,MP26,Button cap (x2 in one print),2,,,case/print/FCL_button_caps.step / .stl,Pressed onto the plunger from outside; its tongue fills the plunger's split and locks it.
+Buy: electronics,DS1,"Round TFT 2.1 in 480x480, 40-pin FFC",1,Newhaven,NHD-2.1-480480AF-ASXP,,Plugs into J7.
+Buy: electronics,CAM1,"OV7670 camera module, 2x9 pin header, no FIFO",1,,OV7670 (18-pin),,Plugs into J1; four M2.5 x 6 screws (MP24).
+Buy: electronics,LS1,"Speaker 8 ohm, 1 W or more, with JST-SH 1.0 mm 2-pin lead",1,,,,Plugs into J8. Size not fixed yet: the case has no speaker pocket.
+Buy: electronics,BAT1 cell,Coin cell CR1225 3 V,1,,CR1225,,RTC backup; the holder BAT1 is fitted by JLC.
+Buy: electronics,SD card,"microSD card, 32 GB or less (FAT32)",1,,,,In SD1.
+Buy: electronics,USB cable,USB-C cable + 5 V supply / PC port,1,,,,"Charging, programming, data."
+Buy: hardware,MP12,Li-ion cell 18650,3,,,,Held between the soldered + contact and spring (BT13 / BT23 / BT33). Changing a cell needs the case opened (screwdriver). Flat-top or button-top; length 65.0-65.3 (unprotected). Longer protected cells need shorter slugs.
+Buy: hardware,MP20,Heat-set insert 1/4-20 UNC (tripod),1,,,,"Bottom face, rear shell. Hole 8.2 x 10.5 deep: check against the insert datasheet. Picatinny adapter later."
+Buy: hardware,MP21,Heat-set insert M2.5,8,,,,"4 x case corners (rear shell) + 4 x camera posts (front shell); hole 3.6, insert 4 mm long."
+Buy: hardware,MP22,"Screw M2.5 x 10, socket head (case)",4,,ISO 4762 M2.5x10 A2,,"Head seats 3 mm above the PCB in the front-shell counterbore, about 10 mm to the rear insert."
+Buy: hardware,MP24,"Screw M2.5 x 6, socket head (camera)",4,,ISO 4762 M2.5x6 A2,,OV7670 board to the front-shell posts (3.0 mm holes in the module).

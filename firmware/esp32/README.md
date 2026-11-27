@@ -13,7 +13,9 @@ files on the ESP32 or the SD card, through Wi-Fi FTP (`uftpd`) or the REPL. Upst
 | `jtagpin.py` | new | JTAG pins of U9: TCK 18, TMS 9, TDI 10, TDO 8 (`fpga/ESP32_PINS.md`); GPIO2 / GPIO1 (unconnected) for the SPI workaround and the LED |
 | `sdpin.py` | new | microSD on SDMMC: CLK 15, CMD 7, D0 16, D1 17, D2 5, D3 6, card detect 4 |
 | `fcl_hub.py` | new | UART1 (TX 11 -> FPGA L1, RX 12 <- FPGA L2, 921600): decodes the sensor hub's telemetry and events, sends servo / mode commands, optional CSV log |
-| `main.py` | upstream + | also starts `fcl_hub` |
+| `fcl_usb.py` | new | the USB text protocol (telemetry lines, commands); also runs on a PC, tested in the simulator |
+| `fcl_usbdev.py` | new | the ESP32 side of it: USB serial port, Wi-Fi setup into `wifiman.conf`, I2S microphone / speaker as base64 lines. Not run on hardware |
+| `main.py` | upstream + | also starts `fcl_hub`, then the USB stream (`fcl_usbdev.run()`). The command `repl` on the port, or a file named `nostream`, gives the Python prompt back |
 
 ## Install
 
@@ -39,3 +41,9 @@ and `fcl_hub.mode(2)` send commands, `fcl_hub.log("/sd/fcl.csv")` logs while rec
   It needs either a native ESP-IDF / TinyUSB build later, or the card read through FTP meanwhile.
 - `fcl_hub` needs the FPGA's soft CPU and its UART (`../hub/`), which do not exist yet. Until then it simply receives
   nothing.
+
+## USB stream
+
+See `doc/FIRMWARE_GUIDE.md` for the line format and commands. While the stream runs the USB port is not a Python
+prompt: `mpremote` and Thonny need it stopped first (send `repl`, or create `nostream` and reset). Loading the FPGA
+over Wi-Fi (FTP) is not affected.

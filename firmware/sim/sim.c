@@ -6,10 +6,13 @@
  * The ESP32 side of the link is played by a frame parser here.
  *
  *     make -C firmware/sim && ./firmware/sim/fcl_sim out.csv [link.bin]   (exit code 0 = all checks pass)
+ *
+ * sim_live.c includes this file with SIM_LIVE defined: the same models, stepped by fcl_sim.py over stdin / stdout.
  */
 #include "../common/app.h"
 #include "../common/board.h"
 #include "../common/hal.h"
+#include "../common/osd.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +26,7 @@ static double now_s;                                    /* simulation time */
 
 typedef struct { float hd, pt, rl, alt, tof_mm, cell[3], temp[3]; } truth_t;
 
-static truth_t truth(double t)
+static truth_t truth_script(double t)
 {
     truth_t s;
     double u = t < 2 ? 0 : (t > 22 ? 20 : t - 2);
@@ -37,6 +40,26 @@ static truth_t truth(double t)
     s.temp[0] = 25; s.temp[1] = 26; s.temp[2] = (float)(27 + 0.2 * t);
     return s;
 }
+
+#ifdef SIM_LIVE
+/* live mode: the truth moves in a straight line from the previous target to the new one over each step */
+static truth_t live_a, live_b;
+static double live_t0, live_t1 = 1;
+static int live_btn;
+static truth_t truth(double t)
+{
+    double k = (t - live_t0) / (live_t1 - live_t0);
+    truth_t s;
+    const float *a = (const float *)&live_a, *b = (const float *)&live_b;
+    float *o = (float *)&s;
+    for (size_t i = 0; i < sizeof(truth_t) / sizeof(float); i++) o[i] = (float)(a[i] + (b[i] - a[i]) * k);
+    s.hd = (float)fmod(fmod(s.hd, 360.0) + 360.0, 360.0);
+    (void)truth_script;
+    return s;
+}
+#else
+#define truth truth_script
+#endif
 
 /* body -> earth rotation; earth x north, y west, z up; body x forward, y left, z up */
 static void rot(float hd, float pt, float rl, float R[3][3])
@@ -173,6 +196,9 @@ static bool power_hold, led[2];
 static uint16_t servo[6];
 bool hal_button(btn_t b)
 {
+#ifdef SIM_LIVE
+    return (live_btn >> b) & 1;
+#endif
     if (b == BTN_1) return now_s >= 5.0 && now_s < 5.2;
     if (b == BTN_2) return now_s >= 6.0 && now_s < 6.3;
     return now_s >= 28.0 && now_s < 31.0;                 /* power: long press */
@@ -180,6 +206,9 @@ bool hal_button(btn_t b)
 void hal_led(int i, bool on) { led[i & 1] = on; }
 void hal_servo_us(int ch, uint16_t us) { if (ch >= 0 && ch < 6) servo[ch] = us; }
 void hal_tof_xshut(bool on) { (void)on; }
+static char osd[OSD_ROWS][OSD_COLS + 1];
+static int osd_x, osd_y, osd_on;
+void hal_osd(const char g[OSD_ROWS][OSD_COLS + 1], int x, int y, bool on) { memcpy(osd, g, sizeof osd); osd_x = x; osd_y = y; osd_on = on; }
 void hal_power_hold(bool h) { power_hold = h; }
 uint32_t hal_millis(void) { return (uint32_t)lrint(now_s * 1000); }
 void hal_delay_ms(uint32_t ms) { (void)ms; }
@@ -190,8 +219,15 @@ static telemetry_t esp_last;
 static int n_telem, ev_seen[8];
 static double ev_time[8];
 static FILE *link_dump;                                  /* optional: every byte the hub sends (argv[2]) */
+#ifdef SIM_LIVE
+static uint8_t live_tx[4096];
+static size_t live_txn;
+#endif
 void hal_link_tx(const uint8_t *d, size_t n)
 {
+#ifdef SIM_LIVE
+    if (live_txn + n <= sizeof live_tx) { memcpy(live_tx + live_txn, d, n); live_txn += n; }
+#endif
     if (link_dump) fwrite(d, 1, n, link_dump);
     for (size_t i = 0; i < n; i++)
         if (link_parser_feed(&esp, d[i]))
@@ -200,7 +236,7 @@ void hal_link_tx(const uint8_t *d, size_t n)
             if (esp.type == MSG_EVENT && esp.len == 1 && esp.buf[0] < 8) { if (!ev_seen[esp.buf[0]]) ev_time[esp.buf[0]] = now_s; ev_seen[esp.buf[0]]++; }
         }
 }
-static uint8_t rxq[64];
+static uint8_t rxq[1024];
 static size_t rxn;
 int hal_link_rx(uint8_t *d, size_t max)
 {
@@ -215,6 +251,7 @@ static void esp_send(uint8_t type, const uint8_t *p, uint8_t len) { rxn += link_
 /* ---------------------------------------------------------------- run */
 static float wrap(float d) { while (d > 180) d -= 360; while (d < -180) d += 360; return d; }
 
+#ifndef SIM_LIVE
 int main(int argc, char **argv)
 {
     FILE *csv = fopen(argc > 1 ? argv[1] : "fcl_sim.csv", "w");
@@ -224,14 +261,27 @@ int main(int argc, char **argv)
     link_parser_init(&esp);
     app_init(&a);
     float e_hd = 0, e_pt = 0, e_rl = 0;
-    bool sent_mode = false, sent_servo = false;
+    bool sent_mode = false, sent_servo = false, sent_ov = false, sent_zero = false, sent_follow = false;
+    float alt_before_zero = 0, alt_after_zero = 99;
+    uint8_t soc1_at_10 = 0, btn_at_5 = 0, btn_at_8 = 0xFF;
+    char row10_before[OSD_COLS + 1] = "", row10_after[OSD_COLS + 1] = "x", row1[OSD_COLS + 1] = "", row2[OSD_COLS + 1] = "";
+    uint16_t servo_follow_off = 99;
     uint16_t servo_at_27 = 0;
     for (int k = 1; now_s < 32.0; k++)
     {
         now_s = k / (double)HUB_RATE_HZ;
         if (!sent_mode && now_s >= 15.0) { uint8_t m = 2; esp_send(MSG_CMD_MODE, &m, 1); sent_mode = true; }
         if (!sent_servo && now_s >= 26.0) { uint8_t p[3] = { 0, 1234 & 0xFF, 1234 >> 8 }; esp_send(MSG_CMD_SERVO, p, 3); sent_servo = true; }
+        if (!sent_ov && now_s >= 16.0) { memcpy(row10_before, osd[10], sizeof row10_before); uint8_t m = OV_ALL & ~OV_DIST; esp_send(MSG_CMD_OVERLAY, &m, 1); sent_ov = true; }
+        if (!sent_zero && now_s >= 20.0) { alt_before_zero = esp_last.alt_cm / 100.0f; esp_send(MSG_CMD_ZERO_ALT, NULL, 0); sent_zero = true; }
+        if (!sent_follow && now_s >= 24.0) { uint8_t f = 0; esp_send(MSG_CMD_FOLLOW, &f, 1); sent_follow = true; }
         app_tick(&a);
+        if (k == 10 * HUB_RATE_HZ) soc1_at_10 = esp_last.soc[0];
+        if (k == 5 * HUB_RATE_HZ + 30) btn_at_5 = esp_last.buttons;
+        if (k == 8 * HUB_RATE_HZ) btn_at_8 = esp_last.buttons;
+        if (k == 17 * HUB_RATE_HZ) { memcpy(row10_after, osd[10], sizeof row10_after); memcpy(row1, osd[1], sizeof row1); memcpy(row2, osd[2], sizeof row2); }
+        if (k == 22 * HUB_RATE_HZ) alt_after_zero = esp_last.alt_cm / 100.0f;
+        if (k == 25 * HUB_RATE_HZ) servo_follow_off = servo[0];
         if (k == 27 * HUB_RATE_HZ) servo_at_27 = servo[0];
         truth_t s = truth(now_s);
         float hd, pt, rl;
@@ -254,7 +304,18 @@ int main(int argc, char **argv)
     CHECK(a.sensors_ok[0] && a.sensors_ok[1] && a.sensors_ok[2] && a.sensors_ok[3], "all sensors found (IMU, compass, barometer, ToF)");
     CHECK(e_hd < 5.0f, "heading error while turning 18 deg/s: max %.2f deg (limit 5)", e_hd);
     CHECK(e_pt < 3.0f && e_rl < 3.0f, "pitch / roll error while tilting: max %.2f / %.2f deg (limit 3)", e_pt, e_rl);
-    CHECK(fabsf(esp_last.alt_cm / 100.0f - 3.0f) < 0.3f, "altitude after a 3 m climb: %.2f m", esp_last.alt_cm / 100.0f);
+    CHECK(fabsf(alt_before_zero - 3.0f) < 0.3f, "altitude after a 3 m climb: %.2f m", alt_before_zero);
+    CHECK(fabsf(alt_after_zero) < 0.15f, "height re-zeroed by command: %.2f m", alt_after_zero);
+    CHECK(fabsf(alt_after_zero) < 0.08f, "re-zero uses the filtered height (within 8 cm)");
+    CHECK(soc1_at_10 >= 72 && soc1_at_10 <= 76 && esp_last.soc[2] <= 2, "charge gauge: cell 1 (3.95 V) %u %%, cell 3 at the end (3.30 V) %u %%", soc1_at_10, esp_last.soc[2]);
+    CHECK(soc_from_mv(4200) == 100 && soc_from_mv(3800) == 50 && soc_from_mv(3000) == 0 && soc_from_mv(100) == SOC_NO_CELL, "charge table: 4.20 V 100 %%, 3.80 V 50 %%, 3.00 V 0 %%, empty slot flagged");
+    CHECK((btn_at_5 & 2) && btn_at_8 == 0, "button states in telemetry: B1 held at 5.15 s (0x%02X), none at 8 s (0x%02X)", btn_at_5, btn_at_8);
+    { int x, y, x2, y2, x3, y3; bool in1 = down_dot(-90, 0, &x, &y), in2 = down_dot(-80, 0, &x2, &y2), in3 = down_dot(0, 10, &x3, &y3);
+      CHECK(in1 && x == 0 && y == 0 && in2 && x2 == 0 && y2 > 100 && y2 < 130 && !in3 && y3 > 200 && x3 > 20,
+            "down dot: straight down (0,0); 10 deg short of down (%d,%d) inside; level with 10 deg roll (%d,%d) on the rim", x2, y2, x3, y3); }
+    CHECK(strstr(row10_before, "D ") && !strstr(row10_after, "D ") && esp_last.overlay == (OV_ALL & ~OV_DIST), "overlay mask from the ESP32: distance row \"%.12s...\" removed", strstr(row10_before, "D ") ? strstr(row10_before, "D ") : "?");
+    CHECK(strlen(row1) == OSD_COLS && strstr(row2, "REC") && strpbrk(row1, "NESW"), "overlay text: heading row and REC shown");
+    CHECK(servo_follow_off == 0, "servo follow switched off by command");
     CHECK(ev_seen[EV_CELL_LOW] == 1, "cell 3 low warning sent once, at %.1f s (cell crosses %.2f V at %.1f s)", ev_time[EV_CELL_LOW], CELL_LOW_MV / 1000.0, (3.62 - CELL_LOW_MV / 1000.0) / 0.01);
     CHECK(ev_seen[EV_B1] == 1 && ev_seen[EV_B2] == 1, "B1 and B2 presses reported");
     CHECK(esp_last.mode == 2 && (esp_last.flags & TF_RECORDING), "mode set to 2 by the ESP32, recording on from B2");
@@ -266,3 +327,4 @@ int main(int argc, char **argv)
     printf("%s\n", fail ? "SOME CHECKS FAILED" : "ALL CHECKS PASSED");
     return fail != 0;
 }
+#endif

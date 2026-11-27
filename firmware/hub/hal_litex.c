@@ -9,6 +9,7 @@
  *   pwm0..5  LiteX PWM on srv_pwm1..6 (C18, D17, D16, D15, D14, D13), period 20 ms
  *   uart_esp second UART: rx esp_rx L1 (WIFI_TXD), tx esp_tx L2 (WIFI_RXD)
  *   timer0   1 kHz tick for hal_millis
+ *   osd      text and dot registers of fpga/osd/fcl_osd.v (see hal_osd below)
  * The camera-to-TFT design also uses D6 (as its reset), B2 and C2: give them to one design or the other when merging.
  */
 #include "../common/hal.h"
@@ -90,6 +91,26 @@ void hal_servo_us(int ch, uint16_t us)       /* pwm width in system clocks; 0 = 
     case 4: pwm4_width_write(w); break;
     case 5: pwm5_width_write(w); break;
     }
+}
+
+/* ---------------------------------------------------------------- LCD overlay (fpga/osd/fcl_osd.v)
+ * Assumed CSRs: osd_char (bits 15:7 address = row * 30 + col, bits 6:0 character; a write strobes char_we),
+ * osd_dot (bits 9:0 x, 19:10 y, 20 on, 21 inside), screen pixels 0..479. Only changed cells are written. */
+void hal_osd(const char grid[OSD_ROWS][OSD_COLS + 1], int dot_x, int dot_y, bool dot_on)
+{
+    static char shadow[OSD_ROWS][OSD_COLS];
+    for (int r = 0; r < OSD_ROWS; r++)
+        for (int c = 0; c < OSD_COLS; c++)
+        {
+            char ch = grid[r][c] ? grid[r][c] : ' ';
+            if (ch != shadow[r][c])
+            {
+                shadow[r][c] = ch;
+                osd_char_write((uint32_t)(r * OSD_COLS + c) << 7 | (uint32_t)(ch & 0x7F));
+            }
+        }
+    int inside = dot_x * dot_x + dot_y * dot_y < 226 * 226;      /* on the rim = radius 226 */
+    osd_dot_write((uint32_t)(240 + dot_x) | (uint32_t)(240 + dot_y) << 10 | (uint32_t)dot_on << 20 | (uint32_t)inside << 21);
 }
 
 /* ---------------------------------------------------------------- link UART */

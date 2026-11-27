@@ -25,6 +25,12 @@ void hal_servo_us(int ch, uint16_t pulse_us);   /* ch 0..5, 0 = off */
 void hal_tof_xshut(bool on);                    /* TOF_XSHUT */
 void hal_power_hold(bool hold);                 /* false = let the soft-shutdown path cut power */
 
+/* LCD overlay in the FPGA: OSD_ROWS x OSD_COLS characters of 16 x 32 px (text is 0-terminated per row, ' ' = clear)
+ * and the down dot at (x, y) px from the screen centre; dot_on false hides it. Called at the telemetry rate. */
+#define OSD_COLS 30
+#define OSD_ROWS 15
+void hal_osd(const char grid[OSD_ROWS][OSD_COLS + 1], int dot_x, int dot_y, bool dot_on);
+
 /* link to the ESP32-S3 (FPGA L1/L2 <-> ESP32 GPIO11/12) */
 void hal_link_tx(const uint8_t *data, size_t len);
 int  hal_link_rx(uint8_t *data, size_t max);   /* bytes read, 0 if none */

@@ -38,6 +38,10 @@ size_t telemetry_pack(const telemetry_t *t, uint8_t *p0)
     p = put16(p, t->vsys_mv);
     for (int i = 0; i < 3; i++) p = put16(p, (uint16_t)t->cell_temp_dc[i]);
     *p++ = t->mode; *p++ = t->flags;
+    for (int i = 0; i < 3; i++) *p++ = t->soc[i];
+    *p++ = t->buttons;
+    p = put16(p, (uint16_t)t->dot_x); p = put16(p, (uint16_t)t->dot_y);
+    *p++ = t->overlay; *p++ = t->sensors;
     return (size_t)(p - p0);
 }
 
@@ -50,7 +54,11 @@ void telemetry_unpack(const uint8_t *p, telemetry_t *t)
     for (int i = 0; i < 3; i++, p += 2) t->cell_mv[i] = get16(p);
     t->vsys_mv = get16(p); p += 2;
     for (int i = 0; i < 3; i++, p += 2) t->cell_temp_dc[i] = (int16_t)get16(p);
-    t->mode = p[0]; t->flags = p[1];
+    t->mode = p[0]; t->flags = p[1]; p += 2;
+    for (int i = 0; i < 3; i++) t->soc[i] = *p++;
+    t->buttons = *p++;
+    t->dot_x = (int16_t)get16(p); t->dot_y = (int16_t)get16(p + 2); p += 4;
+    t->overlay = p[0]; t->sensors = p[1];
 }
 
 void link_parser_init(link_parser_t *p) { memset(p, 0, sizeof *p); }

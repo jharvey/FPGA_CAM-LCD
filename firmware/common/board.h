@@ -36,6 +36,11 @@
 #define AXES_IMU            { {1,0,0}, {0,1,0}, {0,0,1} }
 #define AXES_MAG            { {1,0,0}, {0,1,0}, {0,0,1} }
 
+/* down dot: the camera picture fills the round LCD; CAM_HFOV_DEG is the angle across the 480 px width.  CHECK with the lens */
+#define CAM_HFOV_DEG        40.0f
+#define LCD_HALF_PX         240
+#define DOT_RIM_PX          226     /* radius of the rim position */
+
 #define HUB_RATE_HZ         200     /* IMU + fusion */
 #define MAG_DIV             2       /* magnetometer every 2nd tick (100 Hz) */
 #define BARO_DIV            8       /* 25 Hz */

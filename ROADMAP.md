@@ -819,7 +819,7 @@ Collected after the DRC clean-up of 2026-11-19 (KiCad DRC: 7 errors, 0 unconnect
 All are fitted for the prototype so a function can be cut off or changed while it is validated. After `doc/BRINGUP.md` passes:
 - R46, R47, R48, R51, R55 (0603, LM66100 `ST` status pin to GND on U12 / U14 / U18 / U16 / U19): `ST` is an open-drain output nobody reads; remove the parts and leave `ST` unconnected (allowed by the datasheet), or wire `ST` to spare FPGA balls if the hub firmware should see which source is active.
 - R71, R72, R73 (0603, LM66100 `CE` to VBAT_OR on the three cells): sets the ideal-diode OR mode. Replace with copper.
-- R57 (0603, U21 ADS7038 `COM` to GND): replace with copper.
+- R57 (0603, U21 AD7689 `COM` to GND): replace with copper.
 - RV3 / RV2 (0805, bank 0/7 supply select): RV3 fitted (3.3 V), RV2 DNP. Replace RV3 with copper and delete RV2 once 3.3 V on the camera / LCD banks is final.
 - Keep RP1 / RP2 / RP3: they are net-tie jumpers in copper (no part, not in the BOM); cutting one isolates a regulator from its rail for fault-finding.
 Saves one Basic part type (C21189) and RV3 (C112378, one more type): about $3 in feeder loading on a JLC order plus 10 placements; small, so do it with the next real board revision, not on its own.
@@ -996,3 +996,12 @@ Class data is from a third-party mirror of JLC's list; confirm on a JLC quote. 8
   - Right screw head is 0.08 mm from the B3 BOOT pad (same net, GND): check on the first board.
   - **Widen CELL2_RAW where there is room** (user request, 2026-11-26).
   - Stale until regenerated: machining drawing, FreeCAD block, case build (still draws the old block with bosses), `production/`.
+
+### 2026-11-27 – Firmware increments 2-6, simulator, dashboard, full BOM
+- **BOM:** `production/<variant>/FCL_full_bom.csv` lists every part of a finished unit with a Supplier column (JLC PCB assembly, JLC assembly out of stock on 2026-11-22, consigned to JLC, JLC 3D printing, JLC CNC, buy: electronics / hardware, consumable). `scripts/full_bom.py`, run by `make_production.sh`.
+- **Hub firmware:** charge percent per cell (voltage table), button states, the down dot (`down_dot`), overlay text grid (`osd.c`), commands for overlay items, height re-zero and servo follow; telemetry frame grows from 36 to 46 bytes.
+- **USB stream:** `firmware/esp32/fcl_usb.py` (text lines: telemetry, buttons, servo, Wi-Fi setup, audio as base64) and `fcl_usbdev.py` (ESP32 side, not run on hardware).
+- **Simulator:** `firmware/sim/fcl_sim.py` is a whole unit on the PC (real hub code through `fcl_sim_live` when built, else a Python stand-in); `firmware/tools/fcl_dash.py` is the terminal dashboard.
+- **LCD overlay:** `fpga/osd/fcl_osd.v` (30 x 15 characters, down dot), pixel-identical to the Python overlay in Icarus Verilog; not yet in the camera design.
+- **Docs:** `doc/FIRMWARE_GUIDE.md` and `doc/fw/` are generated from a simulator run by `firmware/tools/make_docs.py`.
+- **Open:** the hub CPU in the FPGA (increment 7) is still the blocker for running any of this on a board. `CAM_HFOV_DEG` (40 degrees) and the charge table are assumptions to check on hardware. Audio over USB is base64 inside the serial stream, not a USB sound card.

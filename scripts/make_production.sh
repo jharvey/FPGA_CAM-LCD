@@ -1,7 +1,7 @@
 #!/bin/bash
 # Order files for both battery variants.   bash scripts/make_production.sh     (repo root)
 #   production/FCL_gerbers_V0.1.zip     one board for both variants (Gerbers + PTH / NPTH drill)
-#   production/removable/  production/fixed/      FCL_bom_jlc.csv, FCL_cpl_jlc.csv, FCL_mech_bom.csv
+#   production/removable/  production/fixed/      FCL_bom_jlc.csv, FCL_cpl_jlc.csv, FCL_mech_bom.csv, FCL_full_bom.csv
 # KiCad 10 (flatpak on the VM; on Windows run kicad-cli / KiCad's python.exe the same way).
 set -e
 KCLI="flatpak run --command=kicad-cli org.kicad.KiCad"
@@ -22,4 +22,5 @@ rm -rf $TMP
 for v in removable fixed; do
   $KPY scripts/jlc_cpl.py FCL.kicad_pcb $OUT/$v $v 2>&1 | grep -v "Debug:\|WARN"
   python3 scripts/mech_bom.py $v $OUT/$v/FCL_mech_bom.csv
+  python3 scripts/full_bom.py $v $OUT/$v
 done
