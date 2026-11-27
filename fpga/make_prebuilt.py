@@ -31,7 +31,9 @@ from test_osd import tool, env        # noqa: E402
 
 TESTS = [("firmware/sim/test_usb.py", []), ("firmware/sim/test_filter.py", []), ("firmware/sim/test_magcal.py", []),
          ("firmware/sim/test_app.py", []), ("firmware/sim/test_web.py", []), ("firmware/sim/test_calibrate.py", []),
+         ("firmware/sim/test_tools.py", []), ("firmware/sim/test_lessons.py", []), ("firmware/sim/test_mpy.py", []),
          ("fpga/bridge/test_bridge.py", []), ("fpga/osd/test_osd.py", [])]
+# fpga/full/test_full.py (the whole design, about an hour) is run by hand; its output is kept as fpga/prebuilt/test_full.txt
 
 
 def sha(path):
@@ -159,9 +161,18 @@ def main():
                 if line.startswith("clock "):
                     p = line.split()
                     f.write("| %s | `%s` | %s |\n" % (design, p[1], " ".join(p[2:])))
-        f.write("\nThe SDRAM clock of the camera design (142.9 MHz) does not meet timing by this estimate, in both designs "
-                "that contain it. Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every "
-                "clock against 12 MHz and reported a pass.\n\n")
+        fails = [d for d in ("full", "camera") for line in open(fresh[d]["build_summary.txt"]) if line.startswith("clock ") and "FAIL" in line]
+        f.write("\n%s Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every clock against "
+                "12 MHz; with the frequencies given, the camera design's memory clock failed at 142.9 MHz, and the project was "
+                "changed (`fpga/IO_REMAP.md`, section Clocks).\n\n" %
+                ("**A clock does not meet timing in: %s.**" % ", ".join(sorted(set(fails))) if fails else
+                 "All clocks pass by this estimate; the memory clock (100 MHz) has the smallest margin."))
+        full_sim = os.path.join(OUT, "test_full.txt")
+        if os.path.exists(full_sim):
+            last = [x for x in open(full_sim, encoding="utf-8").read().strip().split("\n") if x.strip()]
+            f.write("## Whole-design simulation\n\n`python fpga/full/test_full.py` takes about an hour and is run by hand, not by this "
+                    "script. Its last stored output is `test_full.txt`: first line `%s`, last line `%s`. Check that the commit named "
+                    "there is the one these bitstreams were built from, or that no FPGA source changed in between.\n\n" % (last[0], last[-1]))
         f.write("## Tools\n\n| Tool | Version |\n|---|---|\n")
         for t, v in versions():
             f.write("| %s | %s |\n" % (t, v))
