@@ -17,7 +17,7 @@ COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.40, 0.
        "cells": (0.90, 0.50, 0.78), "ribbon": (0.95, 0.62, 0.20),
        "FCL_battery_block_right": (0.70, 0.72, 0.76), "left_blocks": (0.70, 0.72, 0.76), "caps": (0.33, 0.36, 0.28), "slugs": (0.88, 0.72, 0.38), "FCL_cell_cradle": (0.98, 0.80, 0.30),
        "FCL_case_rear": (0.40, 0.60, 0.95), "FCL_case_front": (0.45, 0.82, 0.62), "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_cell_cradle_top": (0.98, 0.70, 0.20),
-       "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17),
+       "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17), "hw_block_washers": (0.75, 0.75, 0.78),
        "hw_case_inserts": (0.80, 0.62, 0.25), "hw_cam_inserts": (0.80, 0.62, 0.25),
        "caps_L": (0.33, 0.36, 0.28), "caps_R": (0.33, 0.36, 0.28), "slugs_L": (0.88, 0.72, 0.38), "slugs_R": (0.88, 0.72, 0.38)}
 COL["springs"] = (0.80, 0.80, 0.84)

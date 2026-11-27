@@ -3,7 +3,7 @@
 
 Replaces the PG16-threaded ring of make_battery_block_step.py by a bayonet boss that copies the front shell
 of an MS3112-16 receptacle: a 24.0 mm tube with three 2.4 mm pins, an O-ring in its end face, and the 19.2 mm
-cell bore through it.  The on-board flange (M2.5 screw + 2 mm dowel, footprints *_A / *_B) is unchanged.
+cell bore through it.  On-board flange 7 x 25 mm, two M1.6 tapped holes S1 / S2 (footprint FCL_BatteryBlock_Mount_MS3181), no dowel.
 
 Contact stack inside the cap (outboard -> cell):  cap top | cap's own neoprene gasket (left whole) |
 brass contact disc 24 x 0.8 (RTV-dotted to the gasket so it comes off with the cap) | Keystone 5220 coil spring
@@ -29,9 +29,9 @@ TMP = os.path.join(HERE, "..", "..", "tmp3d")
 
 CZ = -11.8
 # ---- on-board flange (unchanged from the PG16 block)
-FL_X, FL_HALF, RELIEF = (-0.2, 7.0), 12.5, 0.5     # flat face 0.5 off the PCB: M2.5 washer (0.5) under each used screw
-SCREW, SCREW_DRILL, SCREW_DEPTH, BOSS_SCREW = (4.4, -9.7), 2.05, 5.5, 4.6
-SCREW2 = (2.6, 9.3)                           # second tapped hole (used at cell 1 and on the right block)
+FL_X, FL_HALF, RELIEF = (-0.2, 7.0), 12.5, 0.5     # flat face 0.5 off the PCB: one 0.5 mm washer at each screw
+SCREW, SCREW_DRILL, SCREW_DEPTH, BOSS_SCREW = (3.2, -10.3), 1.25, 5.5, 4.6     # S1: M1.6 tap drill 1.25
+SCREW2 = (3.5, 9.3)                           # S2 (3.4 mm of metal over the cell bore at this depth)
 PIN = {"A": (3.2, 6.25), "B": (3.2, 6.25)}      # one common block now: A and B are identical (names kept for the file names)
 DOWEL_D, DOWEL_DEPTH, BOSS_DOWEL = 2.0, 3.0, 3.2
 NOTCH = (4.3, 9.9, 4.0)
@@ -83,14 +83,12 @@ def make_block(variant):
     flange = box(*FL_X, -FL_HALF, FL_HALF, Z_BOT, -RELIEF)
     blk = plate.union(flange).union(xcyl(BOSS_TIP, PLATE_X[0] + 0.01, BOSS_D / 2))
     px, py = PIN[variant]
-    blk = blk.cut(box(NOTCH[0], FL_X[1] + 1, NOTCH[1], FL_HALF + 1, -NOTCH[2], 1.0))
     blk = blk.cut(xcyl(BOSS_TIP - 1, FL_X[1] + 1, BORE / 2))
     blk = blk.cut(xring(BOSS_TIP - 0.01, BOSS_TIP + GROOVE[2], GROOVE[1], GROOVE[0]))     # O-ring groove
     for a in PIN_ANG:                                                                     # pin holes through the wall
         blk = blk.cut(radial(PIN_X, a, BORE / 2 - 0.5, BOSS_D / 2 + 0.5, PIN_D - 0.02))
     blk = blk.cut(zcyl(*SCREW, SCREW_DRILL, -SCREW_DEPTH, 0.5))
     blk = blk.cut(zcyl(*SCREW2, SCREW_DRILL, -SCREW_DEPTH, 0.5))
-    blk = blk.cut(zcyl(px, py, DOWEL_D, -DOWEL_DEPTH, 0.5))
     return blk
 
 

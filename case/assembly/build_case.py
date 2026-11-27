@@ -33,7 +33,7 @@ RIGHT_AXIS = 36.0                                      # cell 2 is reversed and 
 RING_X, RING_HALF = (-3.0, -0.2), 14.0                 # block shoulder plate (MS3181 bayonet boss sticks out beyond)
 MS_DIR = os.environ.get("FCL_MS3181_DIR", os.path.join(A.REPO, "case", "models", "ms3181"))          # tmp3d with blockms_*_boardframe.step + ms3181_*.step
 BLK_ZB = A.CELL_AXIS_Z - 14.0                          # -25.8
-RIGHT_LIFT = 0.3                                       # right block: not fastened yet, drawn 0.3 mm off the PCB
+RIGHT_LIFT = 0.0                                       # right block: screwed down like the others
 PARTS = os.path.join(A.BUILD, "case_parts")
 FIXED = os.environ.get("FCL_BATTERY", "") == "fixed"   # cells soldered in between the + contact and the MY-18650-05-J spring
 SUFFIX = "_fixed" if FIXED else ""
@@ -54,6 +54,7 @@ BLK_Z = -23.1                        # 2.0 mm of metal beyond the cells
 BLK_BORE = 19.2                      # generic through bore, 18650 slides out
 H1 = (5.7, 4.1)                      # M3 GND hole -> tapped foot
 H4 = (10.2, 47.9)                    # M3 GND hole -> thin tab under cells 2/3
+BLK_S1, BLK_S2 = (3.2, -10.3), (3.5, 9.3)   # block screws, block frame (x in from the edge, y along it, from the cell axis)
 
 # cell cradle (printed, sits on the PCB back, open toward the TFT)
 CR_X = (15.0, 75.0)
@@ -362,8 +363,11 @@ def hardware(back_lobe_z=None):
     zt = CAM_PLATE[5]
     out["hw_cam_screws"] = union_all([screw(x, y, CAM_PLATE[4], 6.0, True) for (x, y) in CAM_HOLES])
     out["hw_cam_inserts"] = union_all([zcyl(x, y, INSERT_D / 2 - 0.05, zt + 0.3, zt + 0.3 + INSERT_L) for (x, y) in CAM_HOLES])
-    blk = [(4.4, y0 - 9.7) for y0 in LEFT_AXES]
-    out["hw_block_screws"] = union_all([screw(x, y, T, 6.0, False) for (x, y) in blk])
+    # block screws: M1.6 x 5 socket head from the camera side, two per block (S1, S2); 0.5 mm washer under the block
+    loc = (BLK_S1, BLK_S2)
+    blk = [(x, y0 + y) for y0 in LEFT_AXES for (x, y) in loc] + [(W - x, RIGHT_AXIS - y) for (x, y) in loc]
+    out["hw_block_screws"] = union_all([zcyl(x, y, 1.5, T, T + 1.6).union(zcyl(x, y, 0.8, T - 5.0, T)) for (x, y) in blk])
+    out["hw_block_washers"] = union_all([zcyl(x, y, 2.25, -0.5, 0.0).cut(zcyl(x, y, 0.85, -1, 1)) for (x, y) in blk])
     return out
 
 
@@ -655,6 +659,7 @@ def main():
     hw = hardware()
     if FIXED:
         hw.pop("hw_block_screws")
+        hw.pop("hw_block_washers")
     printed = (("FCL_battery_block_right", block, (0.62, 0.64, 0.68)), ("FCL_cell_cradle", cradle, (0.95, 0.75, 0.25)),
                ("FCL_case_rear", rear, (0.30, 0.50, 0.85)), ("FCL_case_front", frontshell, (0.35, 0.75, 0.55)),
                ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)),

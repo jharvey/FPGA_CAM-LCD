@@ -34,7 +34,7 @@ for name, fn, grp in solids:
     grp.addObject(o)
     print(name, "solids", len(s.Solids), "volume cm3", round(s.Volume / 1000, 1))
 for name in ("left_blocks", "PCB", "cells", "TFT", "camera", "ribbon", "caps", "slugs", "springs", "plus_contacts",
-             "hw_case_screws", "hw_case_inserts", "hw_cam_screws", "hw_cam_inserts", "hw_block_screws"):
+             "hw_case_screws", "hw_case_inserts", "hw_cam_screws", "hw_cam_inserts", "hw_block_screws", "hw_block_washers"):
     fn = os.path.join(PARTS, name + ".stl")
     if not os.path.exists(fn):
         continue

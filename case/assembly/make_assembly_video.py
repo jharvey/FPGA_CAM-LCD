@@ -8,6 +8,7 @@ Reads case/build/case_parts[_fixed]/*.stl (written by build_case.py).  Three des
   lid    rear shell lying eye-face down like a cup, parts go in from above
   pcb    PCB lying camera-side down, the battery / display stack is built on it
   front  front shell lying face down, the camera goes in
+  feet   (removable cells) PCB camera side up, standing on its three blocks, block screws go in from above
 Between them the part in hand is turned over (the view turns about the board's up axis).
 """
 import math
@@ -37,7 +38,8 @@ Z0 = (0, 0, 0)
 # scene: view (from the centre toward the camera), up, desk surface z, focal z
 SCENES = {"lid": ((0.35, -0.8, 0.75), (0, 0, 1), -26.5, 2.0),
           "pcb": ((-0.35, -0.8, -0.75), (0, 0, -1), 2.0, -10.0),
-          "front": ((-0.35, -0.8, -0.75), (0, 0, -1), 44.6, 22.0)}
+          "front": ((-0.35, -0.8, -0.75), (0, 0, -1), 44.6, 22.0),
+          "feet": ((0.35, -0.8, 0.75), (0, 0, 1), -25.85, -8.0)}
 
 COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.25, 0.35, 0.75), "ribbon": (0.95, 0.62, 0.20),
        "cell1": (0.90, 0.50, 0.78), "cell2": (0.90, 0.50, 0.78), "cell3": (0.90, 0.50, 0.78),
@@ -46,7 +48,7 @@ COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.25, 0.
        "caps_L": (0.33, 0.36, 0.28), "caps_R": (0.33, 0.36, 0.28), "slugs_L": (0.88, 0.72, 0.38), "slugs_R": (0.88, 0.72, 0.38),
        "FCL_cell_cradle": (0.98, 0.80, 0.30), "FCL_case_rear": (0.40, 0.60, 0.95), "FCL_case_front": (0.45, 0.82, 0.62),
        "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_cell_cradle_top": (0.98, 0.70, 0.20),
-       "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17),
+       "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17), "hw_block_washers": (0.75, 0.75, 0.78),
        "hw_case_inserts": (0.80, 0.62, 0.25), "hw_cam_inserts": (0.80, 0.62, 0.25)}
 
 LID = ["FCL_case_rear", "hw_case_inserts", "FCL_button_actuators"]
@@ -72,7 +74,7 @@ if FIXED:
         ("11  Turn the front shell over", "lid", "flip", (FRONT,)),
         ("12  Front shell onto the lid: the camera header plugs into J1", "lid", "", (LID, STACK, FRONT)),
         ("13  4 x M2.5 x 10 case screws in the corners", "lid", "", (LID, STACK, FRONT, SCREWS)),
-        ("Done.  To change a cell: 4 screws out, lift the stack out of the lid", "lid", "", (LID, STACK, FRONT, SCREWS)),
+        ("Done.  To change a cell you need a screwdriver: 4 case screws out, lift the stack out of the lid", "lid", "", (LID, STACK, FRONT, SCREWS)),
     ]
     S_FLIP, S_IN, F_FLIP, F_ON = 7, 8, 10, 11
 
@@ -95,26 +97,30 @@ if FIXED:
     }
 else:
     TITLE = "FCL monocular - assembly, removable cells (blocks + bayonet caps)"
-    STACK = ["PCB", "left_blocks", "FCL_battery_block_right", "hw_block_screws", "FCL_cell_cradle", "FCL_cell_cradle_top", "ribbon", "TFT"]
+    STACK = ["PCB", "hw_block_washers", "left_blocks", "FCL_battery_block_right", "hw_block_screws", "FCL_cell_cradle",
+             "FCL_cell_cradle_top", "ribbon", "TFT"]
     LATE = ["cell1", "cell2", "cell3", "slugs_L", "slugs_R", "caps_L", "caps_R"]
     STEPS = [
         ("1  Lid (rear shell) face down on the desk, like a cup: heat-set inserts in the four corners", "lid", "cut", (LID,)),
         ("2  Snap the two button plungers in from the inside", "lid", "", (LID,)),
-        ("3  PCB: three aluminium end blocks, M2.5 screws from the camera side", "pcb", "cut", (STACK,)),
-        ("4  PCB face down on the desk: battery spacer onto the back of the PCB", "pcb", "", (STACK,)),
-        ("5  LCD-side battery support on top", "pcb", "", (STACK,)),
-        ("6  LCD: ribbon into J7, lay the display on the support", "pcb", "", (STACK,)),
-        ("7  Pick the stack up and turn it over", "lid", "flip", (STACK,)),
-        ("8  Lower the stack into the lid, display first", "lid", "", (LID, STACK)),
-        ("9  Front shell face down: camera in, 4 x M2.5 screws into the inserts in the posts", "front", "cut", (FRONT,)),
-        ("10  Turn the front shell over", "lid", "flip", (FRONT,)),
-        ("11  Front shell onto the lid: the camera header plugs into J1", "lid", "", (LID, STACK, FRONT)),
-        ("12  4 x M2.5 x 10 case screws in the corners", "lid", "", (LID, STACK, FRONT, SCREWS)),
-        ("13  Cells slide in through the blocks: cells 1 and 3 from the left, cell 2 from the right", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
-        ("14  Brass slug + spring, then the bayonet cap: push on and turn 1/4", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
-        ("Done.  Cells change from outside: 1/4 turn on a cap", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
+        ("3  PCB camera side down on the desk: a 0.5 mm washer on each block screw hole, then the three blocks", "pcb", "cut", (STACK,)),
+        ("4  Hold the blocks and turn the board over: it stands on its three blocks", "feet", "turn", (STACK,)),
+        ("5  Two M1.6 x 5 screws per block, from the camera side through the PCB into the block", "feet", "", (STACK,)),
+        ("6  Turn it back over, camera side down", "pcb", "turn", (STACK,)),
+        ("7  Battery spacer onto the back of the PCB, between the blocks", "pcb", "", (STACK,)),
+        ("8  LCD-side battery support on top", "pcb", "", (STACK,)),
+        ("9  LCD: ribbon into J7, lay the display on the support", "pcb", "", (STACK,)),
+        ("10  Pick the stack up and turn it over", "lid", "flip", (STACK,)),
+        ("11  Lower the stack into the lid, display first", "lid", "", (LID, STACK)),
+        ("12  Front shell face down: camera in, 4 x M2.5 screws into the inserts in the posts", "front", "cut", (FRONT,)),
+        ("13  Turn the front shell over", "lid", "flip", (FRONT,)),
+        ("14  Front shell onto the lid: the camera header plugs into J1", "lid", "", (LID, STACK, FRONT)),
+        ("15  4 x M2.5 x 10 case screws in the corners", "lid", "", (LID, STACK, FRONT, SCREWS)),
+        ("16  Cells slide in through the blocks: cells 1 and 3 from the left, cell 2 from the right", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
+        ("17  Brass slug + spring, then the bayonet cap: push on and turn 1/4", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
+        ("Done.  Cells change from outside, no tools: 1/4 turn on a cap", "lid", "", (LID, STACK, FRONT, SCREWS, LATE)),
     ]
-    S_FLIP, S_IN, F_FLIP, F_ON = 6, 7, 9, 10
+    S_FLIP, S_IN, F_FLIP, F_ON = 9, 10, 12, 13
 
     def stack(*first):
         return list(first) + [(S_FLIP, Z0, UP), (S_IN, UP, Z0)]
@@ -122,28 +128,29 @@ else:
         "FCL_case_rear": [(0, Z0, Z0)],
         "hw_case_inserts": [(0, (0, 0, 45), Z0)],
         "FCL_button_actuators": [(1, (0, 0, 45), Z0)],
-        "PCB": stack((2, (0, 0, -30), (0, 0, -30)), (3, (0, 0, -30), Z0, 0.0, 0.4)),
-        "left_blocks": stack((2, (-35, 0, -60), (0, 0, -30), 0.0, 0.6), (3, (0, 0, -30), Z0, 0.0, 0.4)),
-        "FCL_battery_block_right": stack((2, (35, 0, -60), (0, 0, -30), 0.0, 0.6), (3, (0, 0, -30), Z0, 0.0, 0.4)),
-        "hw_block_screws": stack((2, (0, 0, 5), (0, 0, -30), 0.5, 1.0), (3, (0, 0, -30), Z0, 0.0, 0.4)),
-        "FCL_cell_cradle": stack((3, (0, 0, -70), Z0, 0.4, 1.0)),
-        "FCL_cell_cradle_top": stack((4, (0, 0, -55), Z0)),
-        "ribbon": stack((5, (0, 0, -40), Z0, 0.0, 0.6)),
-        "TFT": stack((5, (0, 0, -60), Z0, 0.3, 1.0)),
-        "cell1": [(12, (-95, 0, 0), Z0)],
-        "cell3": [(12, (-95, 0, 0), Z0)],
-        "cell2": [(12, (95, 0, 0), Z0)],
-        "slugs_L": [(13, (-55, 0, 0), Z0, 0.0, 0.6)],
-        "slugs_R": [(13, (55, 0, 0), Z0, 0.0, 0.6)],
-        "caps_L": [(13, (-80, 0, 0), Z0, 0.3, 1.0)],
-        "caps_R": [(13, (80, 0, 0), Z0, 0.3, 1.0)],
+        "PCB": stack((2, Z0, Z0)),
+        "hw_block_washers": stack((2, (0, 0, -30), Z0, 0.0, 0.35)),
+        "left_blocks": stack((2, (0, 0, -65), Z0, 0.3, 1.0)),
+        "FCL_battery_block_right": stack((2, (0, 0, -65), Z0, 0.3, 1.0)),
+        "hw_block_screws": stack((4, (0, 0, 40), Z0)),
+        "FCL_cell_cradle": stack((6, (0, 0, -70), Z0)),
+        "FCL_cell_cradle_top": stack((7, (0, 0, -55), Z0)),
+        "ribbon": stack((8, (0, 0, -40), Z0, 0.0, 0.6)),
+        "TFT": stack((8, (0, 0, -60), Z0, 0.3, 1.0)),
+        "cell1": [(15, (-95, 0, 0), Z0)],
+        "cell3": [(15, (-95, 0, 0), Z0)],
+        "cell2": [(15, (95, 0, 0), Z0)],
+        "slugs_L": [(16, (-55, 0, 0), Z0, 0.0, 0.6)],
+        "slugs_R": [(16, (55, 0, 0), Z0, 0.0, 0.6)],
+        "caps_L": [(16, (-80, 0, 0), Z0, 0.3, 1.0)],
+        "caps_R": [(16, (80, 0, 0), Z0, 0.3, 1.0)],
     }
 
 ZOOM_NEAR, ZOOM_FAR = 76.0, 100.0            # half picture height: close for desk work, wide while a part is held above
 HOVER_FOCAL = 42.0                           # look higher while the part is held above the lid
 # exploded view (dx, dz) per part for the opening shot
 EXPLODE = {"FCL_case_front": (0, 62), "hw_cam_inserts": (0, 62), "camera": (0, 28), "hw_cam_screws": (0, 14),
-           "hw_case_screws": (0, 92), "hw_block_screws": (0, 12), "left_blocks": (-16, 0), "FCL_battery_block_right": (16, 0),
+           "hw_case_screws": (0, 92), "hw_block_screws": (0, 12), "hw_block_washers": (0, -6), "left_blocks": (-16, 0), "FCL_battery_block_right": (16, 0),
            "slugs_L": (-34, 0), "slugs_R": (34, 0), "caps_L": (-52, 0), "caps_R": (52, 0),
            "FCL_cell_cradle": (0, -30), "cell1": (0, -30), "cell2": (0, -30), "cell3": (0, -30),
            "FCL_cell_cradle_top": (0, -48), "ribbon": (0, -58), "TFT": (0, -74), "FCL_button_actuators": (0, -98),
@@ -347,7 +354,9 @@ def main():
         shown = {n for g in show for n in g}
         last = si == len(STEPS) - 1
         hover_in = si > 0 and STEPS[si - 1][2] == "flip"     # the step that lowers the part held above the lid
-        if mode == "flip":
+        if mode == "turn":
+            ts = ZOOM_NEAR
+        elif mode == "flip":
             tf, ts = HOVER_FOCAL, ZOOM_FAR
         else:
             ts = ZOOM_NEAR
@@ -356,7 +365,7 @@ def main():
             t = k / MOVE
             if mode == "cut":
                 v, u, f, sc = tv, tu, tf, ts
-            elif mode == "flip":                     # the part in hand turns over: the view turns about the board's up axis
+            elif mode in ("flip", "turn"):           # the part in hand turns over: the view turns about the board's up axis
                 ang = math.pi * ease(t)
                 v, u = rot_y(pv, ang), rot_y(pu, ang)
                 f = pf + (tf - pf) * ease(t)
@@ -375,7 +384,7 @@ def main():
             cam.SetViewUp(*u)
             cam.OrthogonalizeViewUp()
             cam.SetParallelScale(sc)
-            desk.SetVisibility(mode != "flip")
+            desk.SetVisibility(mode not in ("flip", "turn"))
             desk.SetPosition(CX, CY, desk_z - 2.0 * tu[2])
             for nm, segs in MOTION.items():
                 o = offset(segs, si, t) if nm in shown else None
