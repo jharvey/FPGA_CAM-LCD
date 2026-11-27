@@ -119,15 +119,44 @@ def font():
 DOT_INSIDE_RGB, DOT_RIM_RGB = (40, 255, 80), (255, 176, 0)
 
 
-def overlay_pixel(x, y, rgb, grid, dot):
-    """one output pixel, exactly as fcl_osd.v computes it. dot = (x, y, on, inside) in screen pixels (0..479)"""
+def hud_pixel(x, y, rgb, hud, white=255):
+    """the graphics under the text, exactly as fcl_osd.v: hud = (flags, a, b, c, tape), see fcl_calc.hud_values"""
+    flags, a, b, c, tape = hud
+    dx, dy = x - 240, y - 240
+    adx, ady = abs(dx), abs(dy)
+    if flags & 4:
+        band = 152 <= x <= 327 and 18 <= y <= 29
+        tv = (x + 16 + tape) & 31
+        if band:
+            rgb = (rgb[0] >> 1, rgb[1] >> 1, rgb[2] >> 1)
+        if (band and (tv < 2 or (tv in (16, 17) and y >= 24))) or (adx <= 1 and 10 <= y <= 15):
+            rgb = (white, white, white)
+    if flags & 2 and 48 <= max(adx, ady) <= 176:
+        e = a * dx + b * dy + c * 128
+        if -512 <= e <= 512:
+            rgb = (white, white, white)
+        elif -1100 <= e <= 1100:
+            rgb = (0, 0, 0)
+    if flags & 1:
+        if (dy == 0 and adx <= 28 and (adx >= 6 or adx == 0)) or (dx == 0 and 6 <= ady <= 28):
+            rgb = (white, white, white)
+        elif (ady <= 1 and adx <= 29 and (adx >= 5 or adx <= 1)) or (adx <= 1 and 5 <= ady <= 29):
+            rgb = (0, 0, 0)
+    return rgb
+
+
+def overlay_pixel(x, y, rgb, grid, dot, hud=None, white=255):
+    """one output pixel, exactly as fcl_osd.v computes it. dot = (x, y, on, inside) in screen pixels (0..479);
+    hud = (flags, a, b, c, tape) or None; white = 255 for 8 bits per colour, 63 for the panel's 6"""
+    if hud is not None and hud[0]:
+        rgb = hud_pixel(x, y, rgb, hud, white)
     col, row = x >> 4, y >> 5
     ch = ord(grid[row][col]) if row < OSD_ROWS and col < OSD_COLS else 32
     if ch < 32 or ch > 127:
         ch = 32
     if ch != 32:
         if font()[ch - 32][y & 31] >> (15 - (x & 15)) & 1:
-            rgb = (255, 255, 255)
+            rgb = (white, white, white)
         else:
             rgb = (rgb[0] >> 1, rgb[1] >> 1, rgb[2] >> 1)        # darken the cell behind a character
     dx, dy, on, inside = dot
@@ -135,6 +164,8 @@ def overlay_pixel(x, y, rgb, grid, dot):
         d2 = (x - dx) * (x - dx) + (y - dy) * (y - dy)
         if d2 <= 9 or 64 <= d2 <= 121:
             rgb = DOT_INSIDE_RGB if inside else DOT_RIM_RGB
+            if white != 255:
+                rgb = (rgb[0] >> 2, rgb[1] >> 2, rgb[2] >> 2)
         elif d2 <= 169:
             rgb = (0, 0, 0)                                       # black edge so it shows on any picture
     return rgb
@@ -164,8 +195,9 @@ def scene(t, x, y):
     return tuple(int(c * fade + 110 * (1 - fade)) for c in base)
 
 
-def render(t, grid=None, background=None, round_mask=True):
-    """-> PIL image 480 x 480. background: None = synthetic scene, or an (r, g, b) tuple for a flat colour."""
+def render(t, grid=None, background=None, round_mask=True, hud=None):
+    """-> PIL image 480 x 480. background: None = synthetic scene, or an (r, g, b) tuple for a flat colour.
+    hud: (flags, a, b, c, tape) as the FPGA has it, or None"""
     from PIL import Image
     if grid is None:
         grid = osd_compose(t)
@@ -179,7 +211,7 @@ def render(t, grid=None, background=None, round_mask=True):
                 px[x, y] = (20, 20, 20)
                 continue
             bg = background if background is not None else scene(t, x, y)
-            px[x, y] = overlay_pixel(x, y, bg, grid, dot)
+            px[x, y] = overlay_pixel(x, y, bg, grid, dot, hud)
     return img
 
 

@@ -123,8 +123,8 @@ def main():
         last[clk] = (mhz, res, want)
     for clk, (mhz, res, want) in sorted(last.items()):
         note = ""
-        if "pix_clk" in clk:                             # nextpnr does not follow this PLL: the pixel clock is 18 MHz
-            res, want, note = ("PASS" if float(mhz) >= 18.0 else "FAIL"), "18.00", "  (LCD pixel clock)"
+        if "pix_clk" in clk:
+            note = "  (LCD pixel clock, 25 MHz x 5 / 7)"
         elif "w25" in clk:
             note = "  (SDRAM clock of the camera design)"
         elif "xclk" in clk or "clk_25mhz" in clk:

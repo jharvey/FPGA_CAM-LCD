@@ -34,7 +34,7 @@ W1, W2, W3 = 38, 25, 41                 # inner widths of the three columns
 FULL = W1 + W2 + W3 + 2
 CARD = ("N", "NE", "E", "SE", "S", "SW", "W", "NW")
 FLAGS = ((1, "REC"), (2, "LOW"), (4, "CUTOFF"), (16, "HOT"), (64, "EDGES"), (128, "MENU"), (256, "LOG"))
-PAGES = ("overview", "level", "height", "bearing")
+PAGES = ("overview", "level", "height", "bearing", "survey")
 SENSORS = ("IMU", "compass", "baro", "dist", "ADC")
 OVERLAY = ("dot", "heading", "attitude", "baro", "dist", "batt")
 
@@ -98,7 +98,7 @@ class Dash:
             return
         kind, v = r
         self.lines += 1
-        if self.raw and kind in "TEBLMSWC":
+        if self.raw and kind in "TEBLMSWCHP":
             self.raw.write(line.strip() + "\n")
         if kind == "T":
             self.t = v
@@ -133,6 +133,13 @@ class Dash:
                 pass
         elif kind == "C":
             self.note("cal     " + " ".join(v))
+        elif kind == "H":
+            try:
+                self.hud = int(v[0])
+            except ValueError:
+                pass
+        elif kind == "P" and len(v) == 7:
+            self.note("point   %s: heading %s, pitch %s, %s m  ->  east %s, north %s, up %s m" % tuple(v))
         elif kind == "M":
             self.mag = v
         elif kind == "W":
@@ -287,7 +294,8 @@ class Dash:
         shown = "  |  ".join(self.lcd[r].strip() for r in sorted(self.lcd))
         lcd = "LCD    " + (("menu: " if t["flags"] & 128 else page + ": ") + shown if shown else
                          page + " (B1 or 'key B1': next page; hold B1 or 'key B1L': menu)")
-        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none"), audio, mag, lcd):
+        gfx = [n for i, n in enumerate(("reticle", "horizon", "tape")) if getattr(self, "hud", 0) >> i & 1]
+        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none") + ("    graphics: " + " ".join(gfx) if gfx else ""), audio, mag, lcd):
             out.append("│ " + s[:FULL - 1].ljust(FULL - 1) + "│")
         out.append("├─ LOG " + "─" * (FULL - 6) + "┤")
         log = list(self.log)

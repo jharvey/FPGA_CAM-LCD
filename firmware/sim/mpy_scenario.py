@@ -1,4 +1,4 @@
-"""One fixed session with the simulated unit, printed line by line.  test_mpy.py runs this file under ordinary
+"""One fixed session with the simulated unit (about 40 s of its time), printed line by line.  test_mpy.py runs this file under ordinary
 Python and under MicroPython (Unix port) and compares the two outputs.
 
     python firmware/sim/mpy_scenario.py
@@ -13,6 +13,7 @@ if MPY:
 sys.path.insert(0, HERE + "/../esp32")
 sys.path.insert(0, HERE)
 import json         # noqa: E402
+import os           # noqa: E402
 import socket       # noqa: E402
 import fcl_sim      # noqa: E402
 import fcl_web      # noqa: E402
@@ -53,7 +54,15 @@ cmd("key B2", "key B1")                              # second sighting; Bearing
 go(0.6)
 cmd("key B2", "sim set heading 300")
 go(2.0)
-cmd("key B2", "key B1", "key B2")                    # user page (Climb): start
+cmd("key B2", "key B1", "sim set heading 40", "sim set pitch -30", "sim set dist 1800")      # Survey
+go(3.0)
+cmd("key B2", "sim set heading 130")
+go(3.0)
+cmd("key B2", "sim set heading 220")
+go(3.0)
+cmd("key B2", "points", "hud all")
+go(1.0)
+cmd("hud off", "key B1", "key B2")                   # user page (Climb): start
 go(1.0)
 cmd("sim set alt 4.0")
 go(3.0)
@@ -68,20 +77,27 @@ cmd("pan off", "follow off", "view camera", "magcal", "sim set pitch -88", "sim 
 go(3.0)
 cmd("sim error cell1 1.03", "sim set cell3 3.35", "sim set temp2 61", "sim press PWR 300")
 go(3.0)
-cmd("log off", "wifi", "tone 880 100", "status", "nonsense", "cal reset")
+cmd("log off", "wifi", "tone 880 100", "status", "nonsense", "cal reset", "hud bogus", "points clear", "webpin 1234", "reboot")
 go(1.0)
 
 # ---- the web page over real sockets
 PORT = 18473
-web = fcl_web.Web(sim.bridge, sim.hubpy, sim.plat, PORT)
+ROOT = HERE + "/mpy_fs_" + ("m" if MPY else "c") + "/"       # the unit's flash for this run
+try:
+    os.mkdir(ROOT[:-1])
+except OSError:
+    pass
+for name in os.listdir(ROOT[:-1]):
+    os.remove(ROOT + name)
+web = fcl_web.Web(sim.bridge, sim.hubpy, sim.plat, PORT, ROOT)
 
 
-def ask(path, body=None):
+def ask(path, body=None, put=False, pin="1357"):
     c = socket.socket()
     c.connect(socket.getaddrinfo("127.0.0.1", PORT)[0][-1])
     c.settimeout(3)
-    req = ("POST %s HTTP/1.1\r\nContent-Length: %d\r\n\r\n%s" % (path, len(body), body)) if body is not None else \
-        "GET %s HTTP/1.1\r\n\r\n" % path
+    req = ("%s %s HTTP/1.1\r\nX-Pin: %s\r\nContent-Length: %d\r\n\r\n%s" % ("PUT" if put else "POST", path, pin, len(body), body)) \
+        if body is not None else "GET %s HTTP/1.1\r\n\r\n" % path
     c.send(req.encode())
     data = b""
     for _ in range(200):
@@ -116,6 +132,22 @@ st, body = ask("/c", "repl")
 print("web /c repl:", st, json.loads(body)["ok"])
 st, body = ask("/nothing")
 print("web /nothing:", st)
+st, body = ask("/files")
+print("web /files:", st, sorted(f["name"] for f in json.loads(body))[:3])
+sim.command("webpin 1357")
+del sim.lines[:]
+data = "x = 1\n" * 300
+st, body = ask("/f/mpy_up.py", data, put=True)
+print("web PUT:", st, json.loads(body)["ok"])
+st, body = ask("/f/mpy_up.py")
+print("web GET file:", st, len(body), body == data)
+st, body = ask("/c", "cal set hfov 55", pin="1357")
+print("web cal with PIN:", st, json.loads(body)["ok"], sim.hubpy.cfg.get("hfov"))
+st, body = ask("/c", "cal set hfov 60", pin="1111")
+print("web cal with a wrong PIN:", st, json.loads(body)["ok"], sim.hubpy.cfg.get("hfov"))
 web.close()
+for name in os.listdir(ROOT[:-1]):
+    os.remove(ROOT + name)
+os.rmdir(ROOT[:-1])
 print("frames %d crc errors %d" % sim.link_stats())
 print("END")

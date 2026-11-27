@@ -48,5 +48,5 @@ module fcl_bridge_top (
         .adc_cnv(adc_cnv), .adc_sck(adc_sck), .adc_din(adc_din), .adc_sdo(adc_sdo),
         .btn_n({btn2_n, btn1_n, btn_pwr_n}), .int_in({tof_int, baro_int, mag_drdy, imu_int2, imu_int1}),
         .led(led), .tof_xshut(tof_xshut), .shutdown(shutdown), .servo(servo),
-        .osd_we(), .osd_addr(), .osd_data(), .dot_x(), .dot_y(), .dot_on(), .dot_inside());
+        .osd_we(), .osd_addr(), .osd_data(), .dot_x(), .dot_y(), .dot_on(), .dot_inside(), .hud());
 endmodule

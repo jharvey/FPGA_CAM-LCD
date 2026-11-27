@@ -32,13 +32,14 @@ module fcl_bridge_tb;
     wire [6:0] osd_data;
     wire [9:0] dot_x, dot_y;
     wire       dot_on, dot_inside;
+    wire [40:0] hud;
 
     fcl_bridge dut (.clk(clk), .rst(rst), .uart_rx(host_tx), .uart_tx(dut_tx),
         .scl_i(scl), .scl_oe(scl_oe), .sda_i(sda), .sda_oe(sda_oe),
         .adc_cnv(adc_cnv), .adc_sck(adc_sck), .adc_din(adc_din), .adc_sdo(adc_sdo),
         .btn_n(~btn), .int_in(ints), .led(led), .tof_xshut(tof_xshut), .shutdown(shutdown), .servo(servo), .aux(aux),
         .osd_we(osd_we), .osd_addr(osd_addr), .osd_data(osd_data),
-        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside));
+        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside), .hud(hud));
 
     // ---------------------------------------------------------------- I2C devices
     reg [7:0]  mem8 [0:767];                             // three devices x 256 registers
@@ -127,6 +128,7 @@ module fcl_bridge_tb;
     end endgenerate
     always @(led or tof_xshut or shutdown) if (!rst) $display("OUT %0d %0d %0d %0d", $rtoi($realtime / 1000.0), led, tof_xshut, shutdown);
     always @(aux) if (!rst) $display("AUX %0d", aux);
+    always @(hud) if (!rst) $display("HUD %0d %0d %0d %0d %0d", hud[2:0], $signed(hud[13:3]), $signed(hud[24:14]), $signed(hud[35:25]), hud[40:36]);
     always @(dot_x or dot_y or dot_on or dot_inside) if (!rst) $display("DOT %0d %0d %0d %0d", dot_x, dot_y, dot_on, dot_inside);
 
     // ---------------------------------------------------------------- stimulus

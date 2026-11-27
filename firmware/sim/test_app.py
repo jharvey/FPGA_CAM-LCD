@@ -114,7 +114,7 @@ class Count(fcl_app.App):
 n = r.sim.hubpy.apps.add(Count())
 r.cmd("mode %d" % n, "key B2", "key B2")
 r.go(0.5)
-check(n == 4 and r.row(5) == "2 PRESSES", "a page added with apps.add(): page %d shows '%s'" % (n, r.row(5)))
+check(n == 5 and r.row(5) == "2 PRESSES", "a page added with apps.add(): page %d shows '%s'" % (n, r.row(5)))
 r.cmd("key B1")
 r.go(0.3)
 check(r.t["mode"] == 0 and r.row(4) == "" and r.lcd.get(4) == "", "B1 on the last page: back to the overview, rows given back")
@@ -151,7 +151,13 @@ check(r.t["overlay"] == 0x3F and not foll and cal and wifi and "192.168" in wifi
       "menu: overlay all, level servo off, compass calibration started, '%s', logging" % (wifi[0].strip() if wifi else ""))
 r.cmd("key B1", "key B2")
 r.go(0.3)
+check(r.sim.hubpy.hud_mask == 1 and m.hud[0] == 0 and any("Graphics: reticle" in x for x in r.sim.state["osd"]),
+      "menu, Graphics: reticle chosen; no graphics drawn while the menu is open")
+r.cmd("key B1", "key B1", "key B2")
+r.go(0.3)
 check(not r.t["flags"] & 128 and r.row(3) != "MENU" and r.sim.state["dot"][2] == 1, "menu, Exit: closed, overlay and dot back")
+check(m.hud[0] == 1 and ["1", "0", "0", "0", "0"] in r.seen["H"], "reticle on the overview after the menu closes; $H,1,0,0,0,0 sent")
+r.cmd("hud off")
 
 # ---- logging
 r.go(2.0)
@@ -200,9 +206,65 @@ r.go(0.2)
 check(abs(a - 1600) <= 15 and abs(b - 1350) <= 15 and r.sim.state["servo"][1] == 0,
       "pan 100: servo 2 at %d us when heading 90 (1600), %d us at 115 (1350), off after pan off" % (a, b))
 
+# ---- graphics drawn by the FPGA: reticle, horizon, compass tape
+import math      # noqa: E402
+r.cmd("mode 1", "sim set pitch 5", "sim set roll 20", "sim set heading 123")
+r.go(3.0)
+f, a, b, c, tape = m.hud
+check(f == 3 and abs(a - 512 * math.sin(math.radians(20))) <= 6 and abs(b - 512 * math.cos(math.radians(20))) <= 6
+      and abs(c + 4 * 5 * 480 / r.sim.hubpy.cfg.get("hfov")) <= 10,
+      "Level page: reticle and horizon on; line a %d b %d c %d for roll 20, pitch 5" % (a, b, c))
+r.cmd("sim set pitch 40")
+r.go(2.5)
+check(m.hud[0] == 1 and m.hud[1:4] == (0, 0, 0), "horizon switched off when it has left the picture (pitch 40)")
+r.cmd("mode 3", "sim set pitch 0", "sim set roll 0")
+r.go(2.5)
+want = int(round(r.t["heading"] * 3.2)) & 31
+check(m.hud[0] == 5 and (m.hud[4] - want + 16) % 32 - 16 in (-1, 0, 1), "Bearing page: reticle and compass tape, tape at %d for heading %.1f"
+      % (m.hud[4], r.t["heading"]))
+r.cmd("mode 0", "hud horizon tape")
+r.go(0.5)
+got = m.hud[0]
+r.cmd("hud bogus", "hud")
+r.go(0.3)
+check(got == 6 and r.seen["R"][-2][0] == "err" and r.seen["R"][-1] == ["ok", "hud 6"] and any(h[0] == "6" for h in r.seen["H"]),
+      "hud horizon tape: on every page; a wrong word is refused; $H line sent")
+r.cmd("hud off")
+r.go(0.5)
+check(m.hud == (0, 0, 0, 0, 0), "hud off: nothing drawn on the overview")
+
+# ---- Survey: the four corners of a room 3.0 m (east-west) by 2.4 m, the unit 1.2 m above the floor at its centre
+r.cmd("mode 4", "points clear")
+corners = ((1.5, 1.2), (1.5, -1.2), (-1.5, -1.2), (-1.5, 1.2))            # (east, north) of each corner, going round
+for e, nn in corners:
+    g = math.hypot(e, nn)
+    r.cmd("sim set heading %.2f" % (math.degrees(math.atan2(e, nn)) % 360), "sim set pitch %.2f" % -math.degrees(math.atan2(1.2, g)),
+          "sim set dist %d" % round(1000 * math.hypot(g, 1.2)))
+    r.go(4.0)
+    r.cmd("key B2")
+    r.go(0.3)
+sv = r.sim.hubpy.apps.survey
+area, around = sv.area()
+err = max(math.hypot(p[3] - c[0], p[4] - c[1]) for p, c in zip(sv.pts, corners)) if len(sv.pts) == 4 else 9
+check(len(sv.pts) == 4 and err < 0.12 and abs(area - 7.2) < 0.3 and abs(around - 10.8) < 0.25 and all(abs(p[5] + 1.2) < 0.06 for p in sv.pts),
+      "Survey: 4 corners within %.0f mm, area %.2f m2 (7.20), around %.2f m (10.80), floor %.2f m below" % (1000 * err, area, around, -sv.pts[0][5]))
+check(len(r.seen.get("P", [])) == 4 and r.seen["P"][-1][0] == "4" and "AREA 7." in r.row(8) and r.row(4) == "SURVEY  4 PT",
+      "Survey: $P line per point; LCD '%s' / '%s'" % (r.row(4), r.row(8)))
+r.cmd("sim set dist 9000")
+r.go(2.0)
+r.cmd("key B2")
+r.go(0.3)
+r.cmd("points")
+r.go(0.2)
+check(len(sv.pts) == 4 and r.row(9) == "OUT OF RANGE" and len(r.seen["P"]) == 8 and r.seen["R"][-1] == ["ok", "points 4"],
+      "Survey: no point when the ranger sees nothing; 'points' lists them again")
+r.cmd("points clear", "sim set dist 2000", "mode 0")
+r.go(0.3)
+check(not sv.pts, "points clear")
+
 # ---- the example of a page of your own (fcl_user_example.py), loaded as fcl_user.py would be on the unit
 r3 = Rig(user="fcl_user_example")
-r3.cmd("sim buttons off", "sim set alt 0", "mode 4")
+r3.cmd("sim buttons off", "sim set alt 0", "mode 5")
 r3.go(3.0)
 first = r3.row(5)
 r3.cmd("key B2", "sim set alt 2")

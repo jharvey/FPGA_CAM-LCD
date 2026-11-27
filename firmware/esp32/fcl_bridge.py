@@ -10,7 +10,7 @@
 #   br.poll()                         handle what has arrived: calls on_sample / on_adc / on_inputs
 from struct import pack, unpack
 
-PING, I2C, SCHED, ADC, SERVO, OUT, OSD_TEXT, OSD_DOT, INPUTS = 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28
+PING, I2C, SCHED, ADC, SERVO, OUT, OSD_TEXT, OSD_DOT, INPUTS, OSD_HUD = 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29
 SAMPLE, ADC_DATA, INPUT_DATA = 0x30, 0x31, 0x32
 OUT_LED0, OUT_LED1, OUT_TOF_XSHUT, OUT_SHUTDOWN = 1, 2, 4, 8
 
@@ -165,6 +165,11 @@ class Bridge:
 
     def osd_dot(self, x, y, on, inside):
         return self.request(OSD_DOT, pack("<HHB", x, y, (1 if on else 0) | (2 if inside else 0))) is not None
+
+    def osd_hud(self, flags, a, b, c, tape):
+        """graphics: flags bit 0 reticle, 1 horizon, 2 compass tape; a, b, c the horizon line; tape 0..31
+        (fcl_calc.hud_values gives the numbers)"""
+        return self.request(OSD_HUD, pack("<BhhhB", flags & 7, a, b, c, tape & 31)) is not None
 
     def inputs(self):
         r = self.request(INPUTS)

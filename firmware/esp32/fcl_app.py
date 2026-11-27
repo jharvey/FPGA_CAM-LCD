@@ -6,13 +6,19 @@
 #
 # Pages:  0 Overview (the standard overlay; B2 = recording mark)     2 Height (of an object, from two sightings)
 #         1 Level (pitch, roll, slope)                               3 Bearing (mark a direction, come back to it)
+#         4 Survey (points from heading, pitch and distance: a room's corners give its plan and area)
 # Add your own with apps.add(MyApp()): see doc/DEVELOPER_GUIDE.md and the example at the end of that guide.
+#
+# Graphics drawn by the FPGA under the text: RETICLE (a cross at the centre), HORIZON (a line that stays level with
+# the ground), TAPE (compass ticks at the top).  A page asks for them with its `hud` attribute; the user can switch
+# them on for every page (menu "Graphics", command "hud").
 import math
 import fcl_calc
 
 T_ROW, V_ROW, V2_ROW, H_ROW = 4, 5, 8, 9            # LCD rows a page may use: title, value, second value, hint
 MENU_TOP, MENU_ROWS = 3, 7                          # menu: title on row 3, items on rows 4..10, hint on row 11
 LONG_MS = 700                                       # B1 held this long opens or closes the menu
+RETICLE, HORIZON, TAPE = fcl_calc.HUD_RETICLE, fcl_calc.HUD_HORIZON, fcl_calc.HUD_TAPE
 
 
 def _wrap180(d):
@@ -86,6 +92,10 @@ class Unit:
     def overlay(self, mask):
         self.hub.overlay(mask)
 
+    def graphics(self, mask):
+        """graphics on every page: RETICLE | HORIZON | TAPE, 0 = only what a page asks for"""
+        self.hub.graphics(mask)
+
     def beep(self, hz=880, ms=80):
         f = getattr(self.plat, "tone", None)
         if f:
@@ -96,9 +106,15 @@ class Unit:
         if self.hub.on_info:
             self.hub.on_info("$I," + text)
 
+    def line(self, text):
+        """a line of your own kind to the USB stream and the log, as it is: start it with $ and a capital letter"""
+        if self.hub.on_info:
+            self.hub.on_info(text)
+
 
 class App:
     name = "App"                 # shown on the LCD: 14 characters at most
+    hud = 0                      # graphics while this page shows: RETICLE | HORIZON | TAPE
 
     def start(self, unit):       # the page has been selected
         pass
@@ -115,6 +131,7 @@ class App:
 
 class Level(App):
     name = "LEVEL"
+    hud = RETICLE | HORIZON
 
     def draw(self, unit, put):
         p, r = unit.pitch(), unit.roll()
@@ -130,6 +147,7 @@ class Level(App):
 class Height(App):
     """Height of an object from two sightings: its foot (the ranger must reach it), then its top."""
     name = "HEIGHT"
+    hud = RETICLE
 
     def __init__(self):
         self.base = None         # (horizontal distance, height of the foot relative to the unit)
@@ -181,6 +199,7 @@ class Height(App):
 class Bearing(App):
     """Mark a direction and a height; shows the way back to it."""
     name = "BEARING"
+    hud = RETICLE | TAPE
 
     def __init__(self):
         self.mark = None         # (heading, height)
@@ -201,18 +220,75 @@ class Bearing(App):
         put(H_ROW, "B2 = NEW MARK")
 
 
+class Survey(App):
+    """Points around you from where you stand: aim at a corner, B2.  Each point is the ranger's distance along the
+    compass heading and the pitch; x is east, y north, z up, in metres from the unit.  The points in the order
+    taken are the corners of a shape: the page shows its last side, its area on the ground and its perimeter."""
+    name = "SURVEY"
+    hud = RETICLE | TAPE
+    MAX = 60
+
+    def __init__(self):
+        self.pts = []            # (heading, pitch, distance, x, y, z)
+
+    def clear(self):
+        self.pts = []
+
+    def point_line(self, i):
+        return "$P,%d,%.1f,%.1f,%.3f,%.3f,%.3f,%.3f" % ((i + 1,) + self.pts[i])
+
+    def button(self, unit):
+        d = unit.distance()
+        if d is None or len(self.pts) >= self.MAX:
+            unit.beep(220, 200)
+            return
+        h, p = unit.heading(), unit.pitch()
+        hr, pr = math.radians(h), math.radians(p)
+        g = d * math.cos(pr)
+        self.pts.append((h, p, d, g * math.sin(hr), g * math.cos(hr), d * math.sin(pr)))
+        unit.line(self.point_line(len(self.pts) - 1))
+        unit.beep()
+
+    def side(self, i):
+        """length on the ground from point i - 1 to point i"""
+        a, b = self.pts[i - 1], self.pts[i]
+        return math.sqrt((b[3] - a[3]) ** 2 + (b[4] - a[4]) ** 2)
+
+    def area(self):
+        """(area on the ground of the closed shape, its perimeter)"""
+        n = len(self.pts)
+        if n < 3:
+            return 0.0, 0.0
+        s = 0.0
+        for i in range(n):
+            a, b = self.pts[i - 1], self.pts[i]
+            s += a[3] * b[4] - b[3] * a[4]
+        return abs(s) / 2.0, sum(self.side(i) for i in range(n))
+
+    def draw(self, unit, put):
+        n = len(self.pts)
+        put(T_ROW, "%s  %d PT" % (self.name, n))
+        d = unit.distance()
+        put(V_ROW, ("D %.2fm" % d if d is not None else "D ---") + ("  SIDE %.2fm" % self.side(n - 1) if n >= 2 else ""))
+        if n >= 3:
+            put(V2_ROW, "AREA %.1fm2  AROUND %.1fm" % self.area())
+        put(H_ROW, "MEMORY FULL" if n >= self.MAX else "B2 = POINT" if d is not None else "OUT OF RANGE")
+
+
 class Apps:
     """Pages, menu and the keys.  The hub calls key(), compose() and report()."""
 
     def __init__(self, hub, plat=None):
         self.hub, self.plat = hub, plat
         self.unit = Unit(hub, plat)
-        self.pages = [None, Level(), Height(), Bearing()]       # page 0 is the overview: no app
+        self.survey = Survey()
+        self.pages = [None, Level(), Height(), Bearing(), self.survey]       # page 0 is the overview: no app
         self.menu_open = False
         self.sel = 0
         self.rows = {}               # LCD rows written by the page or the menu in the last frame
         self._sent = {}
         self._sent_t = -1000
+        self._hud_sent = None
         self.log_on = False
         self.items = (
             (lambda: "View: " + ("edges" if hub.edges else "camera"), lambda: hub.view(not hub.edges)),
@@ -225,6 +301,9 @@ class Apps:
             (self._cal_label, self._cal_go),
             (self._wifi_label, self._wifi_go),
             (lambda: "Log: " + ("on" if self.log_on else "off"), lambda: self.log(not self.log_on)),
+            (lambda: "Graphics: " + {0: "page", 1: "reticle", 7: "all"}.get(hub.hud_mask, "custom"),
+             lambda: hub.graphics({0: 1, 1: 7}.get(hub.hud_mask, 0))),
+            (lambda: "Clear points: %d" % len(self.survey.pts), self.survey.clear),
             (lambda: "Exit", self._close),
         )
 
@@ -299,6 +378,14 @@ class Apps:
         if self.pages[n] is not None:
             self.pages[n].start(self.unit)
 
+    def hud_flags(self):
+        """graphics for the page that shows now: none under the menu"""
+        if self.menu_open:
+            return 0
+        hub = self.hub
+        app = self.pages[hub.mode_n] if hub.mode_n < len(self.pages) else None
+        return hub.hud_mask | (app.hud if app is not None else 0)
+
     # ---- the LCD text for one telemetry frame
     def compose(self, t):
         rows = {}
@@ -334,9 +421,13 @@ class Apps:
     def report(self, now_ms, out):
         """$L lines for the rows the page or the menu wrote, 5 times a second at most, only when they change;
         an empty text gives the row back to the standard overlay"""
-        if now_ms - self._sent_t < 200 or self.rows == self._sent:
+        hud = self.hub.hud
+        if now_ms - self._sent_t < 200 or (self.rows == self._sent and hud == self._hud_sent):
             return
         self._sent_t = now_ms
+        if hud != self._hud_sent:        # $H,flags,a,b,c,tape: the graphics as the FPGA has them
+            self._hud_sent = hud
+            out("$H,%d,%d,%d,%d,%d" % hud)
         for r in sorted(set(self.rows) | set(self._sent)):
             a, b = self._sent.get(r, ""), self.rows.get(r, "")
             if a != b:

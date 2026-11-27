@@ -172,6 +172,19 @@ class Plat:
             self.logf = None
         return "%s %d bytes" % (self.log_name, self.log_bytes)
 
+    # ---- restart, FPGA
+    def reboot(self):
+        import machine
+        self.log_stop()
+        machine.reset()
+
+    def fpga(self, name, to_flash=False):
+        """load a bitstream file into the FPGA over JTAG (esp32ecp5's ecp5.py).  The sensors stop until the bridge
+        in the new bitstream is set up again: restart the ESP32 afterwards (command reboot)."""
+        import ecp5
+        ok = ecp5.flash(name) if to_flash else ecp5.prog(name)
+        return ("written to the configuration memory" if to_flash else "loaded") if ok else "failed"
+
     # ---- audio
     def _i2s(self, direction, rate):
         if self.i2s and (self.dir != direction or self.rate != rate):

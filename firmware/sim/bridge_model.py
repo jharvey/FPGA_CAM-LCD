@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "esp32"))
 import fcl_hub      # noqa: E402    (frame format and parser are shared with the old hub link)
 
-PING, I2C, SCHED, ADC, SERVO, OUT, OSD_TEXT, OSD_DOT, INPUTS = 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28
+PING, I2C, SCHED, ADC, SERVO, OUT, OSD_TEXT, OSD_DOT, INPUTS, OSD_HUD = 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29
 SAMPLE, ADC_DATA, INPUT_DATA = 0x30, 0x31, 0x32
 
 
@@ -34,6 +34,7 @@ class BridgeModel:
         self.edges, self.threshold = False, 0       # what the camera design's key logic would have done with them
         self.osd = [" "] * 450
         self.dot = (240, 240, 0, 0)
+        self.hud = (0, 0, 0, 0, 0)          # graphics: flags, a, b, c, tape (11-bit signed a, b, c as the FPGA keeps them)
         self.btn = self.btn_sent = 0
         self.ints = 0
         self.hold_ms = 0
@@ -103,6 +104,10 @@ class BridgeModel:
                 self._send(typ, b"\x00")
             elif typ == OSD_DOT:
                 self.dot = (p[0] | (p[1] & 3) << 8, p[2] | (p[3] & 3) << 8, p[4] & 1, p[4] >> 1 & 1)
+                self._send(typ, b"\x00")
+            elif typ == OSD_HUD:
+                s11 = lambda lo, hi: ((lo | (hi & 7) << 8) ^ 0x400) - 0x400         # noqa: E731
+                self.hud = (p[0] & 7, s11(p[1], p[2]), s11(p[3], p[4]), s11(p[5], p[6]), p[7] & 31)
                 self._send(typ, b"\x00")
             elif typ == INPUTS:
                 self._send(INPUT_DATA, self._t() + bytes((self.btn, self.ints)))

@@ -80,3 +80,6 @@ fpga/bridge/build/
 abc.history
 fpga/full/build/
 doc/manual/_profile/
+fpga/full/sim/
+firmware/sim/unit_files/
+mpy_fs_*/

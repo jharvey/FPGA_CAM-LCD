@@ -12,6 +12,9 @@
 #                          state none | auto | manual | manual-running | stored; offset and field in milligauss
 #   $L,<row>,<text>        LCD row 0-14 as written by the page or the menu (leading spaces kept); empty text:
 #                          the row is back to the standard overlay
+#   $H,<flags>,<a>,<b>,<c>,<tape>   LCD graphics as the FPGA draws them: flags 1 reticle, 2 horizon, 4 compass
+#                          tape; the horizon is the line a*dx + b*dy + 128*c = 0 in pixels from the centre
+#   $P,<n>,<heading>,<pitch>,<distance m>,<x east m>,<y north m>,<z up m>     a point of the Survey page
 #   $C,<name>=<value>,...  calibration values (fcl_cfg.py)
 #   $R,ok|err,<text>       reply to a command
 #   $I,<text>              information (help text, scan results, version)
@@ -35,11 +38,13 @@ HELP = (
     "stream on|off|<hz>        telemetry lines per second (1-20), default 10",
     "servo <1-6> <us|off>      servo pulse 500-2500 us; servo 1 stops following pitch",
     "follow on|off             servo 1 holds the camera level (pitch)",
-    "mode <n>                  LCD page: 0 overview, 1 level, 2 height, 3 bearing (B1 steps through them)",
+    "mode <n>                  LCD page: 0 overview, 1 level, 2 height, 3 bearing, 4 survey (B1 steps through them)",
+    "points                    the Survey page's points ($P lines);  points clear",
     "key B1|B2|B1L             press a button from here (B1L = B1 held: menu)",
     "view camera|edges         LCD picture;  threshold up|down: edge threshold one step",
     "pan <deg>|here|off        servo 2 holds a compass heading",
     "overlay <items>|<mask>    LCD overlay: dot heading attitude baro dist batt | all | none | number",
+    "hud <items>|<mask>        LCD graphics on every page: reticle horizon tape | all | off | number ($H line)",
     "zero                      make the present height 0",
     "magcal                    compass calibration status ($M line)",
     "magcal start | stop       calibrate by hand: point the unit up, down and to the four sides",
@@ -50,6 +55,9 @@ HELP = (
     "mic on|off [rate]         microphone to $A lines (8000 or 16000 Hz)",
     "spk <rate> <base64>       play 16-bit mono PCM on the speaker;  spk off",
     "tone <hz> <ms>            test tone on the speaker",
+    "webpin <4-8 digits>|off   PIN for the web page's protected actions (here on the USB port only)",
+    "fpga <file> [flash]       load a bitstream file into the FPGA; flash: into its configuration memory (a minute)",
+    "reboot                    restart the ESP32",
     "repl                      leave the stream and go back to the MicroPython prompt",
 )
 
@@ -115,7 +123,7 @@ class Bridge:
             self.capture.append(s)
             return
         self._out(s)
-        if self.log and s[1] in "EBLM":
+        if self.log and s[1] in "EBLMHP":
             self.log(s)
 
     # ---- hub -> USB
@@ -224,6 +232,17 @@ class Bridge:
                 mask |= OVERLAY[w] if w in OVERLAY else int(w, 0)
             hub.overlay(mask & 0x3F)
             self._ok("overlay 0x%02X" % (mask & 0x3F))
+        elif c == "hud":
+            if not hasattr(hub, "graphics"):
+                return self._err("not with this hub")
+            if a:
+                names = {"reticle": 1, "horizon": 2, "tape": 4, "all": 7, "off": 0, "none": 0}
+                mask = 0
+                for w in a:
+                    w = w.lower()
+                    mask |= names[w] if w in names else int(w, 0)
+                hub.graphics(mask)
+            self._ok("hud %d" % hub.hud_mask)
         elif c == "zero":
             hub.zero_alt()
             self._ok("zero")
@@ -330,6 +349,35 @@ class Bridge:
             if f:
                 f(int(a[0]), int(a[1]))
                 self._ok("tone %s Hz %s ms" % (a[0], a[1]))
+        elif c == "points":
+            sv = getattr(getattr(hub, "apps", None), "survey", None)
+            if sv is None:
+                return self._err("not with this hub")
+            if a and a[0].lower() == "clear":
+                sv.clear()
+            elif a:
+                return self._err("points | points clear")
+            for i in range(len(sv.pts)):
+                self.out(sv.point_line(i))
+            self._ok("points %d" % len(sv.pts))
+        elif c == "webpin":
+            w = getattr(self, "web", None)
+            if w is None:
+                return self._err("the web page is not running")
+            if self.capture is not None:
+                return self._err("webpin is set on the USB port only")
+            if a:
+                w.set_pin("" if a[0].lower() in ("off", "none") else a[0])
+            self._ok("webpin " + ("set" if w.pin else "off"))
+        elif c == "fpga":
+            f = self._plat("fpga")
+            if f:
+                self._ok("fpga %s: %s" % (a[0], f(a[0], len(a) > 1 and a[1].lower() == "flash")))
+        elif c == "reboot":
+            f = self._plat("reboot")
+            if f:
+                self._ok("reboot")
+                f()
         elif c == "repl":
             self.exit = True
             self._ok("repl")

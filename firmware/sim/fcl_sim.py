@@ -238,6 +238,8 @@ class SimPlat:
         self.mic_on, self.mic_rate, self.phase = False, 16000, 0.0
         self.spk_bytes, self.spk_rate, self.spk_level = 0, 0, 0
         self.tone_log = []
+        self.rebooted, self.fpga_log = 0, []
+        self.fs_root = None              # a folder: logs are also written there as files (for the web page)
 
     def wifi_set(self, ssid, pw):
         self.wifi = ["connecting", ssid, "", 0]
@@ -265,8 +267,19 @@ class SimPlat:
         return "fcl%03d.log" % self.log_n
 
     def log_stop(self):
+        was_on = self.sim.bridge.log is not None
         self.sim.bridge.log = None
+        if was_on and self.fs_root is not None:
+            with open(os.path.join(self.fs_root, "fcl%03d.log" % self.log_n), "w", newline="\n") as f:
+                f.write("\n".join(self.log_lines) + "\n")
         return "%d lines" % len(getattr(self, "log_lines", ()))
+
+    def reboot(self):
+        self.rebooted += 1
+
+    def fpga(self, name, to_flash=False):
+        self.fpga_log.append((name, to_flash))
+        return "written to the configuration memory" if to_flash else "loaded"
 
     def mic(self, on, rate):
         self.mic_on, self.mic_rate = on, rate
@@ -526,7 +539,7 @@ class Sim:
             off = m.shutdown or m.force_off
             self.state = {"servo": [0] * 6 if off else list(m.servo), "led": [m.led & 1, m.led >> 1], "power_hold": 0 if off else 1,
                           "dot": (m.dot[0] - 240, m.dot[1] - 240, m.dot[2]), "osd": m.osd_rows(),
-                          "edges": m.edges, "threshold": m.threshold}
+                          "edges": m.edges, "threshold": m.threshold, "hud": m.hud}
         else:
             self.t += STEP_S
             s, btn = self.scenario.at(self.t)
@@ -552,8 +565,11 @@ def serve(port, backend, web_port=0, user=None):
     web = None
     if web_port and sim.bridge_mode:
         import fcl_web
-        web = fcl_web.Web(sim.bridge, sim.hubpy, sim.plat, web_port)
-        print("web page: http://127.0.0.1:%d" % web_port)
+        root = os.path.join(HERE, "unit_files")              # the simulated unit's flash: uploads and logs land here
+        os.makedirs(root, exist_ok=True)
+        sim.plat.fs_root = root
+        web = fcl_web.Web(sim.bridge, sim.hubpy, sim.plat, web_port, root + os.sep)
+        print("web page: http://127.0.0.1:%d   (its files: %s)" % (web_port, root))
     srv = socket.socket()
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     srv.bind(("127.0.0.1", port))

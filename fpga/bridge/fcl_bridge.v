@@ -18,6 +18,9 @@
 //   0x26 OSD_TEXT  address(2) = row * 30 + col, characters          -> status
 //   0x27 OSD_DOT   x(2), y(2), flags (bit 0 on, bit 1 inside)       -> status
 //   0x28 INPUTS    -                                              -> as 0x32
+//   0x29 OSD_HUD   flags (bit 0 reticle, 1 horizon, 2 compass tape),
+//                  a(2), b(2), c(2) signed (the horizon line, see fpga/osd/fcl_osd.v),
+//                  tape (0-31)                                     -> status
 // Sent without being asked:
 //   0x30 SAMPLE    slot, t_us(4), data[rlen], status      a scheduled read, time-stamped when it started
 //   0x31 ADC       t_us(4), 8 x code(2)                   inputs 0..7
@@ -60,7 +63,8 @@ module fcl_bridge #(
     output reg  [9:0]  dot_x,
     output reg  [9:0]  dot_y,
     output reg         dot_on,
-    output reg         dot_inside
+    output reg         dot_inside,
+    output reg  [40:0] hud               // {tape[4:0], c[10:0], b[10:0], a[10:0], flags[2:0]}
 );
     localparam integer UDIV = (CLK_HZ + BAUD / 2) / BAUD;         // clocks per UART bit
     localparam integer USDIV = CLK_HZ / 1000000;                  // clocks per microsecond
@@ -368,7 +372,7 @@ module fcl_bridge #(
         fb_we <= 0;
         if (rst) begin
             e <= E_IDLE; op_on <= 0; snd_busy <= 0; adc_cnv <= 1; adc_sck <= 0; adc_din <= 0;
-            led <= 0; aux <= 0; tof_xshut <= 0; out_shutdown <= 0; dot_on <= 0; dot_inside <= 0; dot_x <= 240; dot_y <= 240;
+            led <= 0; aux <= 0; tof_xshut <= 0; out_shutdown <= 0; dot_on <= 0; dot_inside <= 0; dot_x <= 240; dot_y <= 240; hud <= 0;
             for (ci = 0; ci < 6; ci = ci + 1) sv_us[ci] <= 0;
         end else begin
             // ---- frame sender: A5 5A type len prefix data crc
@@ -425,6 +429,7 @@ module fcl_bridge #(
                     end
                     8'h26: begin o_i <= 2; e <= E_OSD; end
                     8'h27: begin dot_x <= {hd[1][1:0], hd[0]}; dot_y <= {hd[3][1:0], hd[2]}; dot_on <= hd[4][0]; dot_inside <= hd[4][1]; end
+                    8'h29: hud <= {hd[7][4:0], hd[6][2:0], hd[5], hd[4][2:0], hd[3], hd[2][2:0], hd[1], hd[0][2:0]};
                     8'h28: begin fb_type <= 8'h32; stamp(3'd0); pre[4] <= {5'b0, btn_db}; pre[5] <= {3'b0, int_s1}; pre_n <= 6; end
                     default: pre[0] <= 8'hFF;
                 endcase

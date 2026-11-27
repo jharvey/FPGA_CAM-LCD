@@ -66,6 +66,8 @@ class Hub:
         self.now_ms = 0
         self.osd = [" " * 30] * 15
         self.dot = None
+        self.hud_mask = 0                # graphics the user switched on for every page (fcl_app.RETICLE ...)
+        self.hud = (0, 0, 0, 0, 0)       # as sent to the FPGA: flags, a, b, c, tape
         self.servo_us = -1
         self.leds = -1
         self._tof_due = 0
@@ -160,6 +162,10 @@ class Hub:
 
     def overlay(self, mask):
         self.overlay_mask = mask & 0x3F
+
+    def graphics(self, mask):
+        """reticle 1, horizon 2, compass tape 4 on every page; a page adds its own (App.hud)"""
+        self.hud_mask = mask & 7
 
     def zero_alt(self):
         self.zero_req = True
@@ -396,6 +402,16 @@ class Hub:
         if dot != self.dot:
             self.dot = dot
             br.osd_dot(*dot)
+        f = self.apps.hud_flags()
+        hud = (0, 0, 0, 0, 0)
+        if f:
+            ok, a, b, c, tape = fcl_calc.hud_values(hd, pt, rl, cfg["hfov"])
+            if not (f & 2 and ok):                                  # no horizon wanted, or it has left the picture
+                f, a, b, c = f & ~2, 0, 0, 0
+            hud = (f, a, b, c, tape if f & 4 else 0)
+        if hud != self.hud:
+            self.hud = hud
+            br.osd_hud(*hud)
         if self.follow_on:                                          # servo 1 holds the camera level
             us = int(min(2000, max(1000, 1500 + cfg["tilt_us"] * pt)))
             if us != self.servo_us:

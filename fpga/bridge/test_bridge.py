@@ -51,6 +51,7 @@ def script():
         f(bm.OUT, bytes((0xAF, 0xA5))),             # LED0, ranger on; aux bits 1 and 3 (mask 0xA0)
         f(bm.OSD_TEXT, struct.pack("<H", 45) + b"HELLO 123"),
         f(bm.OSD_DOT, struct.pack("<HHB", 250, 380, 3)),
+        f(bm.OSD_HUD, struct.pack("<BhhhB", 5, -106, 499, -240, 19)),   # graphics: reticle and tape on, a line
         f(0x2A, b"\x01\x02"),                                          # unknown command
         f(bm.PING, b"")[:-1] + b"\x00",                                # broken CRC: must be ignored
         f(bm.SCHED, struct.pack("<BHBBBBB", 0, 50, 0x68, 1, 0x00, 0x1D, 14)),      # IMU every 5 ms
@@ -178,6 +179,9 @@ def main():
           "overlay text written at cells 45..53: '%s'" % text)
     dots = re.findall(r"DOT (\d+) (\d+) (\d) (\d)", log)
     check(dots and dots[-1] == ("250", "380", "1", "1"), "overlay dot set to (250, 380), on, inside")
+    hud = re.findall(r"HUD (\d+) (-?\d+) (-?\d+) (-?\d+) (\d+)", log)
+    check(hud and hud[-1] == ("5", "-106", "499", "-240", "19") and m.hud == (5, -106, 499, -240, 19),
+          "overlay graphics set: flags 5, line (-106, 499, -240), tape 19, as in the model")
 
     if "--no-synth" not in sys.argv:
         try:

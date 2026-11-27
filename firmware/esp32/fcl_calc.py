@@ -83,3 +83,23 @@ def osd_compose(t):
         s = " ".join(["--" if x == SOC_NO_CELL else "%d" % _round10(int(round(c * 10))) for x, c in zip(soc, tc)])
         centre(13, s + "C" + (" HOT" if fl & TF_HOT else ""))
     return grid
+
+
+HUD_RETICLE, HUD_HORIZON, HUD_TAPE = 1, 2, 4
+
+
+def hud_values(heading, pitch, roll, hfov=40.0):
+    """-> (horizon_ok, a, b, c, tape) for the FPGA's graphics (fpga/osd/fcl_osd.v).
+    Horizon: the line a*dx + b*dy + 128*c = 0 in pixels from the screen centre (dx right, dy down); (a, b) is 512 x
+    its unit normal, c in quarter pixels.  Lens up (pitch +) moves it down; right side down (roll +) raises its
+    right end.  horizon_ok is False when the line has left the picture.  Tape: pixels the ticks are moved right,
+    0..31, 3.2 px per degree (a tall tick every 10 degrees passes the pointer when the heading is a multiple of 10)."""
+    r = math.radians(roll)
+    s, co = math.sin(r), math.cos(r)
+    px_per_deg = 480.0 / hfov
+    d = pitch * px_per_deg                       # the horizon's distance from the centre, pixels, + = below
+    a, b = int(round(512 * s)), int(round(512 * co))
+    c = int(round(-4 * d))
+    ok = -900 <= c <= 900
+    tape = int(round(heading * 3.2)) & 31
+    return ok, a, b, max(-1023, min(1023, c)), tape

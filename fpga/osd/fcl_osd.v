@@ -4,6 +4,12 @@
 // Same pixels as firmware/sim/fcl_osd.py (overlay_pixel), checked by fpga/osd/test_osd.py:
 //   * a character cell that holds a character: glyph pixels white, the rest of the cell at half brightness
 //   * the dot: filled centre (r <= 3) and ring (8 <= r <= 11) in the dot colour, black edge out to r = 13
+//   * the graphics, each switched by a bit of hud[2:0], drawn under the text and the dot:
+//       bit 0  reticle: a cross at the centre (240, 240) with a gap, white with a black edge
+//       bit 1  horizon: the line a*dx + b*dy + 128*c = 0 (dx, dy from the centre; a, b = 512 x the line's unit
+//              normal; c in quarter pixels), white with a black edge, between 48 and 176 px from the centre
+//       bit 2  compass tape: a band at the top (x 152..327, y 18..29) with a tick every 16 px (5 degrees), tall
+//              every 32, moved right by `tape` pixels (0..31), and a fixed pointer above it
 //
 // The bridge (fpga/bridge/fcl_bridge.v) writes the text through the char_* port (address = row * 30 + col,
 // ASCII) on its own clock wclk, and sets the dot registers (screen pixels, 0..479).  fcl_osd_stream.v wraps
@@ -30,7 +36,9 @@ module fcl_osd #(
     input  wire [9:0]        dot_x,
     input  wire [9:0]        dot_y,
     input  wire              dot_on,
-    input  wire              dot_inside          // 1: green (in the picture), 0: amber (on the rim)
+    input  wire              dot_inside,         // 1: green (in the picture), 0: amber (on the rim)
+    // graphics: {tape[4:0], c[10:0], b[10:0], a[10:0], flags[2:0]}, see above
+    input  wire [40:0]       hud
 );
     localparam COLS = 30;
 
@@ -71,6 +79,27 @@ module fcl_osd #(
     wire signed [10:0] ddx = $signed({1'b0, x1}) - $signed({1'b0, dot_x});
     wire signed [10:0] ddy = $signed({1'b0, y1}) - $signed({1'b0, dot_y});
     reg  [21:0] d2;
+    // graphics
+    wire signed [10:0] ha = hud[13:3], hb = hud[24:14], hc = hud[35:25];
+    wire signed [10:0] dx = $signed({1'b0, x1}) - 11'sd240;
+    wire signed [10:0] dy = $signed({1'b0, y1}) - 11'sd240;
+    wire [9:0] adx = dx[10] ? -dx : dx, ady = dy[10] ? -dy : dy;
+    wire [9:0] far = (adx > ady) ? adx : ady;
+    wire [4:0] tv  = x1[4:0] + 5'd16 + hud[40:36];           // (x - 240 + tape) mod 32
+    wire       band = (x1 >= 10'd152) && (x1 <= 10'd327) && (y1 >= 10'd18) && (y1 <= 10'd29);
+    reg signed [22:0] he;
+    reg        h_ring, r_core, r_edge, t_band, t_tick;
+    always @(posedge clk) begin
+        he     <= ha * dx + hb * dy + (hc <<< 7);
+        h_ring <= hud[1] && (far >= 10'd48) && (far <= 10'd176);
+        r_core <= hud[0] && ((dy == 0 && adx <= 10'd28 && (adx >= 10'd6 || adx == 0)) || (dx == 0 && ady >= 10'd6 && ady <= 10'd28));
+        r_edge <= hud[0] && ((ady <= 10'd1 && adx <= 10'd29 && (adx >= 10'd5 || adx <= 10'd1)) || (adx <= 10'd1 && ady >= 10'd5 && ady <= 10'd29));
+        t_band <= hud[2] && band;
+        t_tick <= hud[2] && ((band && (tv < 5'd2 || ((tv == 5'd16 || tv == 5'd17) && y1 >= 10'd24)))
+                             || (adx <= 10'd1 && y1 >= 10'd10 && y1 <= 10'd15));
+    end
+    wire h_core = h_ring && (he >= -23'sd512) && (he <= 23'sd512);
+    wire h_edge = h_ring && (he >= -23'sd1100) && (he <= 23'sd1100);
     always @(posedge clk) begin
         bits      <= font[{glyph, gy1}];
         cell_used <= (ch != 7'd32) && (ch >= 7'd32);
@@ -92,7 +121,13 @@ module fcl_osd #(
     reg [3*BITS-1:0] px;
     always @* begin
         px = rgb2;
-        if (cell_used) px = text_px ? {3*BITS{1'b1}} : {r2 >> 1, g2 >> 1, b2 >> 1};
+        if (t_band)                 px = {r2 >> 1, g2 >> 1, b2 >> 1};
+        if (t_tick)                 px = {3*BITS{1'b1}};
+        if (h_core)                 px = {3*BITS{1'b1}};
+        else if (h_edge)            px = {3*BITS{1'b0}};
+        if (r_core)                 px = {3*BITS{1'b1}};
+        else if (r_edge)            px = {3*BITS{1'b0}};
+        if (cell_used) px = text_px ? {3*BITS{1'b1}} : {px[3*BITS-1:2*BITS] >> 1, px[2*BITS-1:BITS] >> 1, px[BITS-1:0] >> 1};
         if (dot_core)      px = {cr[7:8-BITS], cg[7:8-BITS], cb[7:8-BITS]};
         else if (dot_edge) px = {3*BITS{1'b0}};
     end

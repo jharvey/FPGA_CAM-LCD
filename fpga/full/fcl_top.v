@@ -8,7 +8,9 @@
 //     presses the video keys itself (OUT bits 4, 5, 6: view, threshold up, threshold down)
 //   * the power button no longer resets the video pipeline; a power-on reset does
 //   * LED0 / LED1 belong to the bridge (the camera design's led[1:0] are not shown)
-module fcl_top (
+module fcl_top #(
+    parameter POR_BITS = 20              // power-on reset: 2^POR_BITS clocks of 25 MHz (42 ms); the test bench shortens it
+) (
     input  wire        clk_25mhz,
     // camera
     input  wire        cmos_pclk,
@@ -75,9 +77,9 @@ module fcl_top (
     output wire        srv_pwm5,
     output wire        srv_pwm6
 );
-    reg [20:0] por = 0;                          // reset for 42 ms after configuration (the PLLs lock meanwhile)
-    wire rst = !por[20];
-    always @(posedge clk_25mhz) if (rst) por <= por + 21'd1;
+    reg [POR_BITS:0] por = 0;                          // reset for 42 ms after configuration (the PLLs lock meanwhile)
+    wire rst = !por[POR_BITS];
+    always @(posedge clk_25mhz) if (rst) por <= por + 1'b1;
 
     // ---- bridge
     wire scl_oe, sda_oe;
@@ -90,6 +92,7 @@ module fcl_top (
     wire [8:0] osd_addr;
     wire [6:0] osd_data;
     wire [9:0] dot_x, dot_y;
+    wire [40:0] hud;
     assign {srv_pwm6, srv_pwm5, srv_pwm4, srv_pwm3, srv_pwm2, srv_pwm1} = servo;
     assign {led1, led0} = led;
 
@@ -100,7 +103,7 @@ module fcl_top (
         .btn_n({btn2_n, btn1_n, btn_pwr_n}), .int_in({tof_int, baro_int, mag_drdy, imu_int2, imu_int1}),
         .led(led), .tof_xshut(tof_xshut), .shutdown(shutdown), .servo(servo), .aux(aux),
         .osd_we(osd_we), .osd_addr(osd_addr), .osd_data(osd_data),
-        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside));
+        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside), .hud(hud));
 
     // ---- camera design; its key inputs are active low
     wire own = aux[3];
@@ -133,5 +136,5 @@ module fcl_top (
         .pix_clk(pix_clk), .de(c_de), .hs(c_hs), .vs(c_vs), .rgb({c_r, c_g, c_b}),
         .de_o(LCD_DE), .hs_o(LCD_HS), .vs_o(LCD_VS), .rgb_o({LCD_R, LCD_G, LCD_B}),
         .wclk(clk_25mhz), .char_we(osd_we), .char_addr(osd_addr), .char_data(osd_data),
-        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside));
+        .dot_x(dot_x), .dot_y(dot_y), .dot_on(dot_on), .dot_inside(dot_inside), .hud(hud));
 endmodule
