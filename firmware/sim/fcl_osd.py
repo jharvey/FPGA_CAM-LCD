@@ -96,6 +96,12 @@ def osd_compose(t):
     return grid
 
 
+# The calculations live in firmware/esp32/fcl_calc.py (the file the ESP32 runs); use those here too.
+import sys                                                        # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "esp32"))
+from fcl_calc import soc_from_mv, down_dot, osd_compose           # noqa: E402,F811
+
+
 # ---------------------------------------------------------------- pixels
 _font = None
 

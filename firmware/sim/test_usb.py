@@ -39,10 +39,10 @@ def run(backend):
                 r = fcl_usb.parse_line(line)
                 if r:
                     seen[r[0]].append(r[1])
-            if fcl_hub.last and sim.state["power_hold"]:
+            if sim.last and sim.state["power_hold"]:
                 n_osd += 1
-                osd_same &= sim.state["osd"] == fcl_osd.osd_compose(fcl_hub.last)
-                dot_same &= sim.state["dot"][:2] == (fcl_hub.last["dot_x"], fcl_hub.last["dot_y"])
+                osd_same &= sim.state["osd"] == fcl_osd.osd_compose(sim.last)
+                dot_same &= sim.state["dot"][:2] == (sim.last["dot_x"], sim.last["dot_y"])
 
     go(4.0)
     t = seen["T"][-1]
@@ -136,7 +136,8 @@ def run(backend):
     go(0.1)
     check(any(r[0] == "err" and "unknown" in r[1] for r in seen["R"]) and sum("servo" in i[0] for i in seen["I"]) >= 1,
           "unknown command refused; help lists the commands")
-    check(fcl_hub.crc_errors == 0 and n_osd > 300, "link: %d frames, %d CRC errors" % (fcl_hub.frames, fcl_hub.crc_errors))
+    fr, bad = sim.link_stats()
+    check(bad == 0 and n_osd > 300, "link: %d frames, %d CRC errors" % (fr, bad))
     check(osd_same and dot_same, "overlay text and dot from the hub equal the Python layout (fcl_osd.py) on %d frames" % n_osd)
 
     sim.command("sim press PWR 2500")
@@ -145,6 +146,7 @@ def run(backend):
     sim.close()
 
 
+run("bridge")
 run("python")
 if fcl_sim.find_live():
     run("c")

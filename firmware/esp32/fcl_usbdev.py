@@ -15,9 +15,10 @@ import select
 import time
 import math
 import micropython
-from machine import Pin, I2S
+from machine import Pin, I2S, UART
 import network
-import fcl_hub
+import fcl_bridge
+import fcl_hubpy
 import fcl_usb
 
 I2S_BCLK, I2S_WS, I2S_SPK, I2S_MIC, AMP_SD = 35, 36, 37, 38, 47
@@ -132,18 +133,30 @@ class Plat:
 def run():
     out = sys.stdout
     plat = Plat()
-    bridge = fcl_usb.Bridge(fcl_hub, lambda s: out.write(s + "\r\n"), plat)
-    fcl_hub.on_telemetry = bridge.on_telemetry
-    fcl_hub.on_event = bridge.on_event
-    fcl_hub.stop_timer()                    # this loop polls the hub UART itself
+    # the FPGA bridge on UART1: TX GPIO11 -> FPGA L1, RX GPIO12 <- FPGA L2
+    uart = UART(1, baudrate=921600, tx=11, rx=12, rxbuf=4096)
+
+    def rd():
+        return uart.read() if uart.any() else b""
+
+    br = fcl_bridge.Bridge(uart.write, rd, time.sleep_ms)
+    hub = fcl_hubpy.Hub(br)
+    bridge = fcl_usb.Bridge(hub, lambda s: out.write(s + "\r\n"), plat)
+    hub.on_telemetry = bridge.on_telemetry
+    hub.on_event = bridge.on_event
     poll = select.poll()
     poll.register(sys.stdin, select.POLLIN)
     micropython.kbd_intr(-1)
     out.write("$I," + fcl_usb.VERSION + "\r\n")
+    if br.ping() is None:
+        out.write("$I,no answer from the FPGA bridge: is a bitstream with fcl_bridge loaded?\r\n")
+    found = hub.start()
+    out.write("$I,sensors found 0x%02X (1 IMU, 2 compass, 4 barometer, 8 ranger, 16 ADC)\r\n" % found)
     last_w = time.ticks_ms()
     try:
         while not bridge.exit:
-            fcl_hub.poll()
+            br.poll()
+            hub.tick_ms(time.ticks_ms())
             while poll.poll(0):
                 line = sys.stdin.readline()
                 if line:
@@ -152,8 +165,8 @@ def run():
             if time.ticks_diff(time.ticks_ms(), last_w) > 5000:
                 last_w = time.ticks_ms()
                 bridge.wifi_line()
-            time.sleep_ms(5)
+            if not uart.any():
+                time.sleep_ms(1)
     finally:
         micropython.kbd_intr(3)
         plat._i2s(None, plat.rate)
-        fcl_hub.start_timer()

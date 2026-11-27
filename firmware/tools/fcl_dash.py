@@ -305,7 +305,7 @@ class SimSource:
     def __init__(self, backend="auto", realtime=True):
         import fcl_sim
         self.sim = fcl_sim.Sim(backend)
-        self.name = "simulator (%s)" % self.sim.hub.name
+        self.name = "simulator"
         self.step_s = fcl_sim.STEP_S
         self.q = queue.Queue()
         self.cmd = queue.Queue()
@@ -492,7 +492,7 @@ if __name__ == "__main__":
     g.add_argument("--sim", action="store_true", help="run the built-in simulator")
     g.add_argument("--port", help="serial port of the unit, e.g. COM7 or /dev/ttyACM0")
     g.add_argument("--tcp", help="host:port of a running fcl_sim.py")
-    ap.add_argument("--hub", choices=("auto", "c", "python"), default="auto", help="simulator hub back end")
+    ap.add_argument("--hub", choices=("auto", "bridge", "c", "python"), default="auto", help="simulator hub back end")
     ap.add_argument("--ascii", action="store_true", help="plain ASCII frame characters")
     ap.add_argument("--snapshot", type=float, metavar="SECONDS", help="with --sim: print one frame after this time and exit")
     ap.add_argument("--cmd", action="append", default=[], metavar="T:COMMAND", help="with --snapshot: send COMMAND at time T")

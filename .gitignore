@@ -76,3 +76,5 @@ firmware/sim/*.exe
 firmware/sim/out.csv
 firmware/sim/link.bin
 fpga/osd/build/
+fpga/bridge/build/
+abc.history

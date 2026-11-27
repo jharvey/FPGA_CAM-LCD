@@ -5,10 +5,11 @@
     python firmware/tools/fcl_dash.py --sim        or run it inside the dashboard, no socket
 
 What is real and what is simulated
-    hub        the real hub firmware (firmware/common, built as sim/fcl_sim_live by `make -C firmware/sim all`)
-               running against register-level sensor models, when that program exists;
-               otherwise a Python stand-in (PyHub) that produces the same link frames from the truth directly
-    ESP32      the real protocol code (fcl_hub.py, fcl_usb.py); Wi-Fi and audio are stand-ins
+    ESP32      the files the unit runs: fcl_bridge.py (FPGA bridge driver), fcl_fix.py (attitude filter),
+               fcl_hubpy.py (hub), fcl_usb.py (USB protocol); Wi-Fi and audio are stand-ins
+    FPGA       a Python model of the bridge (bridge_model.py), checked frame by frame against the Verilog
+    sensors    register-level models of the IMU, compass, barometer, ranger and battery ADC
+    --hub c / python   the earlier design instead: the C hub (firmware/common) or its stand-in over the hub link
     the world  a 60 s demo loop: pan, look straight down, tilt, climb 3 m, button presses, cells running down
 
 Extra commands (simulator only):
@@ -62,7 +63,8 @@ class Scenario:
         elif m < 16:
             pitch, roll = -90 * _smooth((m - 10) / 6), 0.0
         elif m < 20:
-            pitch, roll = -90 + 3 * math.sin(2 * math.pi * (m - 16) / 2), 3 * math.sin(2 * math.pi * (m - 16) / 1.5)
+            # near straight down: 0 to 4 degrees off, turning about the lens axis, so the dot circles the centre
+            pitch, roll = -90 + 4 * math.sin(math.pi * (m - 16) / 4) ** 2, 90.0 * (m - 16)
         elif m < 26:
             pitch, roll = -90 * (1 - _smooth((m - 20) / 6)), 0.0
         else:
@@ -293,40 +295,189 @@ def find_live():
     return None
 
 
+class SensorWorld:
+    """register-level models of the sensors and the ADC, as the FPGA bridge sees them (a port of sim.c)"""
+
+    def __init__(self, scenario):
+        import random
+        self.sc = scenario
+        self.rnd = random.Random(12345)
+        self.t = 0.0
+        self.s, self.btn = scenario.at(0.0)
+        self.R_prev = self.rot(self.s)
+        self.t_prev = 0.0
+        self.gyro = (0.0, 0.0, 0.0)
+        self.tof_clear = -1.0
+        self.hist = [0, 0]
+
+    def now(self, t):
+        if t > self.t:
+            self.t = t
+            self.s, self.btn = self.sc.at(t)
+
+    @staticmethod
+    def rot(s):
+        """body -> earth; earth x north, y west, z up; body x forward, y left, z up"""
+        a, b, c = math.radians(-s["heading"]), math.radians(-s["pitch"]), math.radians(s["roll"])
+        ca, sa, cb, sb, cc, sc = math.cos(a), math.sin(a), math.cos(b), math.sin(b), math.cos(c), math.sin(c)
+        Rz = ((ca, -sa, 0), (sa, ca, 0), (0, 0, 1))
+        Ry = ((cb, 0, sb), (0, 1, 0), (-sb, 0, cb))
+        Rx = ((1, 0, 0), (0, cc, -sc), (0, sc, cc))
+        T = [[sum(Rz[i][k] * Ry[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+        return [[sum(T[i][k] * Rx[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+
+    def n(self, sd):
+        return self.rnd.gauss(0.0, sd)
+
+    @staticmethod
+    def _s16(v):
+        return max(-32768, min(32767, int(round(v)))) & 0xFFFF
+
+    def i2c(self, addr, nreg, reg, wdata, rlen):
+        s = self.s
+        if addr == 0x68:
+            if reg == 0x75:
+                return b"\x47", 0
+            if reg == 0x1D and rlen:
+                R = self.rot(s)
+                dt = self.t - self.t_prev
+                if dt > 1e-6:                                      # mean body rate since the last sample
+                    Rp = self.R_prev
+                    W = [[sum(Rp[k][i] * (R[k][j] - Rp[k][j]) for k in range(3)) / dt for j in range(3)] for i in range(3)]
+                    d = 180.0 / math.pi
+                    self.gyro = ((W[2][1] - W[1][2]) / 2 * d, (W[0][2] - W[2][0]) / 2 * d, (W[1][0] - W[0][1]) / 2 * d)
+                    self.R_prev, self.t_prev = R, self.t
+                g = self.gyro
+                v = [(30.0 - 25.0) * 132.48] + [R[2][i] * 8192 + self.n(0.003 * 8192) for i in range(3)] + \
+                    [(g[i] + (0.4, -0.3, 0.5)[i] + self.n(0.05)) * 65.5 for i in range(3)]
+                return struct.pack(">7H", *[self._s16(x) for x in v])[:rlen], 0
+            return bytes(rlen), 0
+        if addr == 0x1E:
+            if reg == 0x4F:
+                return b"\x40", 0
+            if reg == 0x68 and rlen:
+                R = self.rot(s)
+                m = [R[0][i] * 0.20 + R[2][i] * -0.43 + self.n(0.002) for i in range(3)]       # 0.2 G north, 0.43 G down
+                return struct.pack("<3H", *[self._s16(x / 0.0015) for x in m])[:rlen], 0
+            return bytes(rlen), 0
+        if addr == 0x5C:
+            if reg == 0x0F:
+                return b"\xb4", 0
+            if reg == 0x28 and rlen:
+                p = 1013.25 * (1.0 - s["alt"] / 44330.0) ** 5.255 + self.n(0.01)
+                raw = int(round(p * 4096))
+                return (struct.pack("<I", raw)[:3] + struct.pack("<h", 2250))[:rlen], 0
+            return bytes(rlen), 0
+        if addr == 0x29:
+            if reg == 0x010F:
+                return b"\xea", 0
+            if reg == 0x0031 and rlen:
+                return bytes((0 if self.t - self.tof_clear >= 0.05 else 1,)), 0
+            if reg == 0x0096 and rlen:
+                return struct.pack(">H", int(max(0, min(65535, s["dist"]))))[:rlen], 0
+            if reg == 0x0086 and wdata:
+                self.tof_clear = self.t
+            return bytes(rlen), 0
+        return b"", 1
+
+    def adc_xfer(self, cfg):
+        old = self.hist[0]
+        self.hist = [self.hist[1], cfg]
+        ch = old >> 7 & 7
+        s = self.s
+        if ch <= 2:
+            v = s["cell%d" % (ch + 1)] / ((47.0 + 56.0) / 56.0)
+        elif ch == 4:
+            v = 2.5
+        elif ch == 5:
+            v = (max(s["cell1"], s["cell2"], s["cell3"]) - 0.05) / ((100.0 + 68.0) / 68.0)
+        else:
+            tc = s["temp%d" % {3: 1, 6: 2, 7: 3}[ch]]
+            r = 10000.0 * math.exp(3435.0 * (1.0 / (tc + 273.15) - 1.0 / 298.15))
+            v = 2.5 * r / (r + 10000.0)
+        return int(max(0, min(65535, v / 2.5 * 65536.0 + self.n(2.0))))
+
+
 class Sim:
+    """backend 'bridge' (default): sensor models -> FPGA bridge model -> the ESP32's MicroPython hub (fcl_bridge.py,
+    fcl_fix.py, fcl_hubpy.py) -> fcl_usb.py.   'c' / 'python': the earlier C hub or its stand-in over the hub link."""
+
     def __init__(self, backend="auto"):
-        exe = find_live() if backend in ("auto", "c") else None
-        if backend == "c" and not exe:
-            raise SystemExit("fcl_sim_live not built: make -C firmware/sim all")
-        self.hub = CHub(exe) if exe else PyHub()
         self.scenario = Scenario()
         self.t = 0.0
-        self.rx = bytearray()
         self.lines = []
         self.state = {"servo": [0] * 6, "led": [0, 0], "power_hold": 1, "dot": (0, 0, 0), "osd": [" " * 30] * 15}
         self.plat = SimPlat(self)
-        # fcl_hub keeps its state in the module, as on the ESP32: one simulator per process
-        fcl_hub.last, fcl_hub.frames, fcl_hub.crc_errors = {}, 0, 0
-        del fcl_hub.events[:]
-        fcl_hub._parser = fcl_hub.Parser()
-        fcl_hub.send_raw = self.rx.extend
-        self.bridge = fcl_usb.Bridge(fcl_hub, self.lines.append, self.plat)
-        fcl_hub.on_telemetry = self.bridge.on_telemetry
-        fcl_hub.on_event = self.bridge.on_event
-        self.lines.append("$I," + fcl_usb.VERSION + " (simulator, " + self.hub.name + ")")
         self._w = 0.0
+        self.bridge_mode = backend in ("auto", "bridge")
+        if self.bridge_mode:
+            import bridge_model
+            import fcl_bridge
+            import fcl_hubpy
+            self.world = SensorWorld(self.scenario)
+            self.model = bridge_model.BridgeModel(self.world)
+            self.pending = bytearray()
+            self.br = fcl_bridge.Bridge(self.model.feed, self._take)
+            self.hubpy = fcl_hubpy.Hub(self.br)
+            self.bridge = fcl_usb.Bridge(self.hubpy, self.lines.append, self.plat)
+            self.hubpy.on_telemetry = self.bridge.on_telemetry
+            self.hubpy.on_event = self.bridge.on_event
+            self.hub = self                                         # for .name
+            self.name = "MicroPython hub over the FPGA bridge"
+            self.sensors_found = self.hubpy.start()
+        else:
+            exe = find_live() if backend == "c" else None
+            if backend == "c" and not exe:
+                raise SystemExit("fcl_sim_live not built: make -C firmware/sim all")
+            self.hub = CHub(exe) if exe else PyHub()
+            self.rx = bytearray()
+            # fcl_hub keeps its state in the module, as on the ESP32: one simulator per process
+            fcl_hub.last, fcl_hub.frames, fcl_hub.crc_errors = {}, 0, 0
+            del fcl_hub.events[:]
+            fcl_hub._parser = fcl_hub.Parser()
+            fcl_hub.send_raw = self.rx.extend
+            self.bridge = fcl_usb.Bridge(fcl_hub, self.lines.append, self.plat)
+            fcl_hub.on_telemetry = self.bridge.on_telemetry
+            fcl_hub.on_event = self.bridge.on_event
+        self.lines.append("$I," + fcl_usb.VERSION + " (simulator, " + self.hub.name + ")")
+
+    def _take(self):
+        d = bytes(self.pending) + bytes(self.model.out)
+        del self.pending[:]
+        del self.model.out[:]
+        return d
+
+    @property
+    def last(self):
+        return self.hubpy.last if self.bridge_mode else fcl_hub.last
+
+    def link_stats(self):
+        """(frames received, CRC errors) on the link from the FPGA"""
+        return (self.br.frames, self.br.crc_errors) if self.bridge_mode else (fcl_hub.frames, fcl_hub.crc_errors)
 
     def command(self, line):
         self.bridge.command(line)
 
     def step(self):
         """advance 50 ms; returns the lines the device sent"""
-        self.t += STEP_S
-        s, btn = self.scenario.at(self.t)
-        rx = bytes(self.rx)
-        del self.rx[:]
-        tx, self.state = self.hub.step(s, btn, rx)
-        fcl_hub.handle(tx)
+        if self.bridge_mode:
+            m = self.model
+            for _ in range(10):                                     # 5 ms at a time, as the ESP32's loop would
+                self.t += STEP_S / 10
+                self.world.now(self.t)
+                self.pending += m.advance(5000, buttons=self.world.btn)
+                self.br.poll()
+                self.hubpy.tick_ms(int(self.t * 1000))
+            off = m.shutdown or m.force_off
+            self.state = {"servo": [0] * 6 if off else list(m.servo), "led": [m.led & 1, m.led >> 1], "power_hold": 0 if off else 1,
+                          "dot": (m.dot[0] - 240, m.dot[1] - 240, m.dot[2]), "osd": m.osd_rows()}
+        else:
+            self.t += STEP_S
+            s, btn = self.scenario.at(self.t)
+            rx = bytes(self.rx)
+            del self.rx[:]
+            tx, self.state = self.hub.step(s, btn, rx)
+            fcl_hub.handle(tx)
         self.plat.pump(self.bridge)
         if self.t - self._w >= 5.0:
             self._w = self.t
@@ -336,7 +487,8 @@ class Sim:
         return out
 
     def close(self):
-        self.hub.close()
+        if not self.bridge_mode:
+            self.hub.close()
 
 
 def serve(port, backend):
@@ -395,6 +547,7 @@ if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--port", type=int, default=7007)
-    ap.add_argument("--hub", choices=("auto", "c", "python"), default="auto", help="hub back end (auto: C if built)")
+    ap.add_argument("--hub", choices=("auto", "bridge", "c", "python"), default="auto",
+                    help="auto / bridge: MicroPython hub over the FPGA bridge; c: the C hub (needs fcl_sim_live); python: its stand-in")
     a = ap.parse_args()
     serve(a.port, a.hub)

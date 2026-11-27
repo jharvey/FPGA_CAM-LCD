@@ -12,10 +12,14 @@ files on the ESP32 or the SD card, through Wi-Fi FTP (`uftpd`) or the REPL. Upst
 | `uftpd.py` | upstream | `mount()` first tries the S3's SDMMC 4-bit bus on the pins in `sdpin.py`, then falls back to upstream |
 | `jtagpin.py` | new | JTAG pins of U9: TCK 18, TMS 9, TDI 10, TDO 8 (`fpga/ESP32_PINS.md`); GPIO2 / GPIO1 (unconnected) for the SPI workaround and the LED |
 | `sdpin.py` | new | microSD on SDMMC: CLK 15, CMD 7, D0 16, D1 17, D2 5, D3 6, card detect 4 |
-| `fcl_hub.py` | new | UART1 (TX 11 -> FPGA L1, RX 12 <- FPGA L2, 921600): decodes the sensor hub's telemetry and events, sends servo / mode commands, optional CSV log |
+| `fcl_hub.py` | earlier design | link to a C hub on a soft CPU in the FPGA (not built). Kept for the simulator's `--hub c` path; the unit does not load it |
+| `fcl_bridge.py` | new | driver for the FPGA bridge (`fpga/bridge/fcl_bridge.v`) on UART1 (TX 11 -> FPGA L1, RX 12 <- FPGA L2, 921600): I2C, ADC, servos, buttons, LCD overlay |
+| `fcl_fix.py` | new | attitude filter in 32-bit integer arithmetic, written for the viper compiler (native code, no heap use at 200 Hz) |
+| `fcl_hubpy.py` | new | the sensor hub: sensor set-up, battery, buttons, down dot, overlay, telemetry |
+| `fcl_calc.py` | new | charge table, down dot, overlay text (also used by the PC tools) |
 | `fcl_usb.py` | new | the USB text protocol (telemetry lines, commands); also runs on a PC, tested in the simulator |
 | `fcl_usbdev.py` | new | the ESP32 side of it: USB serial port, Wi-Fi setup into `wifiman.conf`, I2S microphone / speaker as base64 lines. Not run on hardware |
-| `main.py` | upstream + | also starts `fcl_hub`, then the USB stream (`fcl_usbdev.run()`). The command `repl` on the port, or a file named `nostream`, gives the Python prompt back |
+| `main.py` | upstream + | starts the hub and the USB stream (`fcl_usbdev.run()`). The command `repl` on the port, or a file named `nostream`, gives the Python prompt back |
 
 ## Install
 
