@@ -1,8 +1,11 @@
 """Write JLCPCB assembly files (BOM + CPL) for FCL.kicad_pcb.
 
 Run with KiCad's Python:
-    "C:/Program Files/KiCad/10.0/bin/python.exe" scripts/jlc_cpl.py [board] [out_dir]
-Defaults: FCL.kicad_pcb next to this folder, output in production/.
+    "C:/Program Files/KiCad/10.0/bin/python.exe" scripts/jlc_cpl.py [board] [out_dir] [variant]
+Defaults: FCL.kicad_pcb next to this folder, output in production/, variant fixed.
+Variants (battery ends):
+  fixed      JLC fits the spring contacts BT13 / BT23 / BT33 (cells held between + contact and spring)
+  removable  springs left out (the aluminium blocks + bayonet caps go there instead, see FCL_mech_bom.csv)
 
 Per-footprint fields (set in the schematic, carried to the board):
   LCSC                 JLC/LCSC part number; parts without one are left out.
@@ -28,6 +31,8 @@ board = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, '..', 'FCL.kica
 out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(here, '..', 'production')
 os.makedirs(out, exist_ok=True)
 stem = os.path.splitext(os.path.basename(board))[0]
+variant = sys.argv[3] if len(sys.argv) > 3 else 'fixed'
+EXCLUDE = {'fixed': set(), 'removable': {'BT13', 'BT23', 'BT33'}}[variant]
 
 
 def field(fp, name):
@@ -78,7 +83,7 @@ cpl, bom, skipped = [], collections.OrderedDict(), []
 for fp in sorted(b.GetFootprints(), key=lambda f: f.GetReference()):
     ref = fp.GetReference()
     lcsc = field(fp, 'LCSC')
-    if fp.IsDNP() or (fp.GetAttributes() & pcbnew.FP_EXCLUDE_FROM_POS_FILES) or not fp.Pads():
+    if fp.IsDNP() or (fp.GetAttributes() & pcbnew.FP_EXCLUDE_FROM_POS_FILES) or not fp.Pads() or ref in EXCLUDE:
         continue
     if not lcsc:
         skipped.append(ref)
@@ -113,5 +118,5 @@ with open(os.path.join(out, stem + '_bom_jlc.csv'), 'w', newline='') as f:
     w.writerow(['Comment', 'Designator', 'Footprint', 'LCSC'])
     for lcsc, (vals, fpn, refs) in bom.items():
         w.writerow(['/'.join(vals), ','.join(refs), fpn, lcsc])
-print('placed %d parts (%d BOM lines) -> %s' % (len(cpl), len(bom), out))
+print('%s: placed %d parts (%d BOM lines) -> %s; left out for this variant: %s' % (variant, len(cpl), len(bom), out, ' '.join(sorted(EXCLUDE)) or '-'))
 print('no LCSC number (not in BOM/CPL): %d: %s' % (len(skipped), ' '.join(skipped)))

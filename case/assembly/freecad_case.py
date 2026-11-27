@@ -22,7 +22,7 @@ grp_r = doc.addObject("App::DocumentObjectGroup", "Reference_meshes_do_not_edit"
 sfx = "_fixed" if fixed else ""
 # object name, file in case/print, group
 solids = [("FCL_case_rear", "FCL_case_rear" + sfx, grp_p), ("FCL_case_front", "FCL_case_front" + sfx, grp_p),
-          ("FCL_cell_cradle", "FCL_cell_cradle" + sfx, grp_p), ("FCL_button_actuators", "FCL_button_actuators", grp_p),
+          ("FCL_cell_cradle", "FCL_cell_cradle" + sfx, grp_p), ("FCL_button_actuators", "FCL_button_actuators", grp_p), ("FCL_button_caps", "FCL_button_caps", grp_p),
           ("FCL_cell_cradle_top", "FCL_cell_cradle_top", grp_p)]
 if not fixed:
     solids.append(("FCL_battery_block_right", "FCL_battery_block_right", grp_m))

@@ -115,6 +115,10 @@ LENS_FRONT = 32.6                    # lens front face Z
 # B4 RESET / B3 BOOT (KMR2, camera side) -> 1.6 mm pin holes in the front face.  B0 PWR is under cell 3 (see notes).
 ACT_STEM, ACT_HOLE, ACT_FLANGE = 3.4, 3.8, 5.0
 ACT_PROUD = 0.6
+# two-piece button: the plunger's split end and barb sit in the counterbore, under a cap pressed on from outside;
+# the cap's tongue fills the split, so the barb can no longer close and the plunger is captive
+CAP_D, CAP_PROUD, CAP_SEAT = 4.8, 0.8, 0.05     # cap disc, how far it stands out of the face, seat below the face
+TONGUE_W, TONGUE_L, TONGUE_D = 0.8, 2.8, 1.15  # into the 0.9 mm split of the plunger
 PINHOLES = ((53.2, 12.0), (80.1, 22.1))
 GUIDE_OD = 5.6                       # guide tube for the actuators, from the rear inner face toward the PCB
 GUIDE_TOP = -15.6                    # stops short of cell 1 (its can reaches y 6.2 at Z -11.8)
@@ -324,16 +328,17 @@ def make_top_cradle(tft_bb):
     TFT circle it rises to the rear shell so the stack is clamped when the case closes"""
     tx = (tft_bb[0] + tft_bb[2]) / 2
     ty = tft_bb[1] + A.TFT_OD / 2
-    c = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], TFT_SUPPORT_Z, TOPCR_Z)
-    outer = box(CR_X[0], CR_Y[0], CR_X[1], CR_Y[1], Z_REAR_IN + 0.2, TFT_SUPPORT_Z + 0.01).cut(
+    CX0, CX1 = (CRF_X0, W - CRF_X0) if FIXED else CR_X      # same length and width as the PCB-side support
+    c = box(CX0, CR_Y[0], CX1, CR_Y[1], TFT_SUPPORT_Z, TOPCR_Z)
+    outer = box(CX0, CR_Y[0], CX1, CR_Y[1], Z_REAR_IN + 0.2, TFT_SUPPORT_Z + 0.01).cut(
         zcyl(tx, ty, RET_TFT_CLR, Z_REAR_IN - 1, 1))
     c = c.union(outer)
     for row in ROWS:
-        c = c.cut(xcyl(CR_X[0] - 1, CR_X[1] + 1, row, CZ, CR_BORE / 2))
+        c = c.cut(xcyl(CX0 - 1, CX1 + 1, row, CZ, CR_BORE / 2))
     # crest slots under the TFT (the skin over each cell crest would be 0.2 mm): 8 mm wide, 1 mm into the bore
     tcyl = zcyl(tx, ty, RET_TFT_CLR - 0.5, Z_REAR_IN - 1, 1)
     for row in ROWS:
-        slot = box(CR_X[0] - 1, row - 4.0, CR_X[1] + 1, row + 4.0, TFT_SUPPORT_Z - 0.3, CZ - CR_BORE / 2 + 1.0)
+        slot = box(CX0 - 1, row - 4.0, CX1 + 1, row + 4.0, TFT_SUPPORT_Z - 0.3, CZ - CR_BORE / 2 + 1.0)
         c = c.cut(slot.intersect(tcyl))
     # TFT flat tail / ribbon exit (same opening as the locating ring in the rear shell)
     c = c.cut(box(tx - 18.5, ty + 18.0, tx + 18.5, H, Z_REAR_IN - 1, TFT_SUPPORT_Z))
@@ -434,19 +439,24 @@ def button_z(back):
 
 
 def make_actuators(back):
-    """printed plungers: flange inside the rear shell (keeps them in), stem out through the eye face"""
-    w = None
+    """two-piece buttons. Plunger: flange inside the rear shell, stem down the guide, split barb that clicks into the
+    counterbore in the eye face. Cap: a plain disc pressed on from outside, its tongue into the plunger's split."""
+    w = caps = None
     for (x, y), zb in zip(BUTTONS, button_z(back)):
-        a = zcyl(x, y, ACT_STEM / 2, Z_REAR_OUT - ACT_PROUD, zb - 0.1)
-        a = a.edges("<Z").fillet(0.6)
+        z_seat = Z_REAR_OUT + CAP_SEAT                       # plunger end = cap underside
+        a = zcyl(x, y, ACT_STEM / 2, z_seat, zb - 0.1)
+        a = a.edges(">Z").fillet(0.6)
         a = a.union(zcyl(x, y, ACT_FLANGE / 2, GUIDE_TOP + 0.2, GUIDE_TOP + 1.0))
         zf = Z_REAR_OUT + ACT_CB_DEPTH                       # counterbore floor
         zs = zf - ACT_BARB_GAP                               # barb catch face (travel ACT_BARB_GAP before it touches)
         a = a.union(zcone(x, y, ACT_STEM / 2, ACT_BARB_D / 2, zs - 0.9, zs))
-        a = a.cut(box(x - ACT_SLOT / 2, y - 3, x + ACT_SLOT / 2, y + 3, Z_REAR_OUT - ACT_PROUD - 1, zs + 4.0))
+        a = a.cut(box(x - ACT_SLOT / 2, y - 3, x + ACT_SLOT / 2, y + 3, z_seat - 1, zs + 4.0))
         w = a if w is None else w.union(a)
+        c = zcyl(x, y, CAP_D / 2, Z_REAR_OUT - CAP_PROUD, z_seat).edges("<Z").fillet(0.3)
+        c = c.union(box(x - TONGUE_W / 2, y - TONGUE_L / 2, x + TONGUE_W / 2, y + TONGUE_L / 2, z_seat - 0.01, z_seat + TONGUE_D))
+        caps = c if caps is None else caps.union(c)
     print("  button plunger tops Z:", [round(z, 2) for z in button_z(back)], flush=True)
-    return w
+    return w, caps
 
 
 def spring_parts(solids):
@@ -654,7 +664,7 @@ def main():
     cradle = make_cradle(back)
     rear = make_rear(back, bb(tft[1]))
     frontshell = make_front(front)
-    actuators = make_actuators(back)
+    actuators, button_caps = make_actuators(back)
     topcradle = make_top_cradle(bb(tft[1]))
     hw = hardware()
     if FIXED:
@@ -662,7 +672,7 @@ def main():
         hw.pop("hw_block_washers")
     printed = (("FCL_battery_block_right", block, (0.62, 0.64, 0.68)), ("FCL_cell_cradle", cradle, (0.95, 0.75, 0.25)),
                ("FCL_case_rear", rear, (0.30, 0.50, 0.85)), ("FCL_case_front", frontshell, (0.35, 0.75, 0.55)),
-               ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)),
+               ("FCL_button_actuators", actuators, (0.85, 0.30, 0.25)), ("FCL_button_caps", button_caps, (0.20, 0.20, 0.22)),
                ("FCL_cell_cradle_top", topcradle, (0.98, 0.70, 0.20)))
     printed = tuple(q for q in printed if q[1] is not None)
     for name, w, _ in printed:

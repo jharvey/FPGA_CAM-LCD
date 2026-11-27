@@ -12,6 +12,7 @@ Reads case/build/case_parts[_fixed]/*.stl (written by build_case.py).  Three des
 Between them the part in hand is turned over (the view turns about the board's up axis).
 """
 import math
+import re
 import os
 import shutil
 import subprocess
@@ -39,7 +40,8 @@ Z0 = (0, 0, 0)
 SCENES = {"lid": ((0.35, -0.8, 0.75), (0, 0, 1), -26.5, 2.0),
           "pcb": ((-0.35, -0.8, -0.75), (0, 0, -1), 2.0, -10.0),
           "front": ((-0.35, -0.8, -0.75), (0, 0, -1), 44.6, 22.0),
-          "feet": ((0.35, -0.8, 0.75), (0, 0, 1), -25.85, -8.0)}
+          "feet": ((0.35, -0.8, 0.75), (0, 0, 1), -25.85, -8.0),
+          "lidup": ((-0.35, -0.8, -0.75), (0, 0, -1), 1.6, -14.0)}
 
 COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.25, 0.35, 0.75), "ribbon": (0.95, 0.62, 0.20),
        "cell1": (0.90, 0.50, 0.78), "cell2": (0.90, 0.50, 0.78), "cell3": (0.90, 0.50, 0.78),
@@ -47,11 +49,11 @@ COL = {"PCB": (0.20, 0.55, 0.28), "TFT": (0.30, 0.30, 0.36), "camera": (0.25, 0.
        "FCL_battery_block_right": (0.72, 0.74, 0.78), "left_blocks": (0.72, 0.74, 0.78),
        "caps_L": (0.33, 0.36, 0.28), "caps_R": (0.33, 0.36, 0.28), "slugs_L": (0.88, 0.72, 0.38), "slugs_R": (0.88, 0.72, 0.38),
        "FCL_cell_cradle": (0.98, 0.80, 0.30), "FCL_case_rear": (0.40, 0.60, 0.95), "FCL_case_front": (0.45, 0.82, 0.62),
-       "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_cell_cradle_top": (0.98, 0.70, 0.20),
+       "FCL_button_actuators": (0.90, 0.28, 0.22), "FCL_button_caps": (0.20, 0.20, 0.22), "FCL_cell_cradle_top": (0.98, 0.70, 0.20),
        "hw_case_screws": (0.15, 0.15, 0.17), "hw_cam_screws": (0.15, 0.15, 0.17), "hw_block_screws": (0.15, 0.15, 0.17), "hw_block_washers": (0.75, 0.75, 0.78),
        "hw_case_inserts": (0.80, 0.62, 0.25), "hw_cam_inserts": (0.80, 0.62, 0.25)}
 
-LID = ["FCL_case_rear", "hw_case_inserts", "FCL_button_actuators"]
+LID = ["FCL_case_rear", "hw_case_inserts", "FCL_button_actuators", "FCL_button_caps"]
 FRONT = ["FCL_case_front", "hw_cam_inserts", "camera", "hw_cam_screws"]
 SCREWS = ["hw_case_screws"]
 
@@ -67,7 +69,7 @@ if FIXED:
         ("4  Battery spacer down over the contacts: it backs up every plate", "pcb", "", (STACK,)),
         ("5  Cells in: + end against its plate, press down against the spring", "pcb", "", (STACK,)),
         ("6  LCD-side battery support on top", "pcb", "", (STACK,)),
-        ("7  LCD: ribbon into J7, lay the display on the support", "pcb", "", (STACK,)),
+        ("7  LCD and its ribbon (one part): lay the display on the support, ribbon end into J7", "pcb", "", (STACK,)),
         ("8  Pick the stack up and turn it over", "lid", "flip", (STACK,)),
         ("9  Lower the stack into the lid, display first", "lid", "", (LID, STACK)),
         ("10  Front shell face down: camera in, 4 x M2.5 screws into the inserts in the posts", "front", "cut", (FRONT,)),
@@ -92,8 +94,8 @@ if FIXED:
         "cell2": stack((4, (0, 0, -55), Z0, 0.25, 0.75)),
         "cell3": stack((4, (0, 0, -55), Z0, 0.5, 1.0)),
         "FCL_cell_cradle_top": stack((5, (0, 0, -55), Z0)),
-        "ribbon": stack((6, (0, 0, -40), Z0, 0.0, 0.6)),
-        "TFT": stack((6, (0, 0, -60), Z0, 0.3, 1.0)),
+        "ribbon": stack((6, (0, 0, -60), Z0)),
+        "TFT": stack((6, (0, 0, -60), Z0)),
     }
 else:
     TITLE = "FCL monocular - assembly, removable cells (blocks + bayonet caps)"
@@ -109,7 +111,7 @@ else:
         ("6  Turn it back over, camera side down", "pcb", "turn", (STACK,)),
         ("7  Battery spacer onto the back of the PCB, between the blocks", "pcb", "", (STACK,)),
         ("8  LCD-side battery support on top", "pcb", "", (STACK,)),
-        ("9  LCD: ribbon into J7, lay the display on the support", "pcb", "", (STACK,)),
+        ("9  LCD and its ribbon (one part): lay the display on the support, ribbon end into J7", "pcb", "", (STACK,)),
         ("10  Pick the stack up and turn it over", "lid", "flip", (STACK,)),
         ("11  Lower the stack into the lid, display first", "lid", "", (LID, STACK)),
         ("12  Front shell face down: camera in, 4 x M2.5 screws into the inserts in the posts", "front", "cut", (FRONT,)),
@@ -135,8 +137,8 @@ else:
         "hw_block_screws": stack((4, (0, 0, 40), Z0)),
         "FCL_cell_cradle": stack((6, (0, 0, -70), Z0)),
         "FCL_cell_cradle_top": stack((7, (0, 0, -55), Z0)),
-        "ribbon": stack((8, (0, 0, -40), Z0, 0.0, 0.6)),
-        "TFT": stack((8, (0, 0, -60), Z0, 0.3, 1.0)),
+        "ribbon": stack((8, (0, 0, -60), Z0)),
+        "TFT": stack((8, (0, 0, -60), Z0)),
         "cell1": [(15, (-95, 0, 0), Z0)],
         "cell3": [(15, (-95, 0, 0), Z0)],
         "cell2": [(15, (95, 0, 0), Z0)],
@@ -146,6 +148,20 @@ else:
         "caps_R": [(16, (80, 0, 0), Z0, 0.3, 1.0)],
     }
 
+STEPS[2:2] = [("Turn the lid face up: it rests on its rim", "lidup", "turn", (LID,)),
+              ("Press the two button caps on from outside: their tongue locks the plunger", "lidup", "", (LID,)),
+              ("Turn the lid back over", "lid", "turn", (LID,))]
+
+
+def _shift(seg):
+    return (seg[0] + 3 if seg[0] >= 2 else seg[0],) + tuple(seg[1:])
+
+
+MOTION = {k: [_shift(g) for g in v] for k, v in MOTION.items()}
+MOTION["FCL_button_caps"] = [(3, (0, 0, -30), Z0)]
+S_FLIP, S_IN, F_FLIP, F_ON = S_FLIP + 3, S_IN + 3, F_FLIP + 3, F_ON + 3
+STEPS = [((f"{i + 1}  " + re.sub(r"^\d+\s+", "", c)) if not c.startswith("Done") else c,) + tuple(r) for i, (c, *r) in enumerate(STEPS)]
+
 ZOOM_NEAR, ZOOM_FAR = 76.0, 100.0            # half picture height: close for desk work, wide while a part is held above
 HOVER_FOCAL = 42.0                           # look higher while the part is held above the lid
 # exploded view (dx, dz) per part for the opening shot
@@ -153,7 +169,7 @@ EXPLODE = {"FCL_case_front": (0, 62), "hw_cam_inserts": (0, 62), "camera": (0, 2
            "hw_case_screws": (0, 92), "hw_block_screws": (0, 12), "hw_block_washers": (0, -6), "left_blocks": (-16, 0), "FCL_battery_block_right": (16, 0),
            "slugs_L": (-34, 0), "slugs_R": (34, 0), "caps_L": (-52, 0), "caps_R": (52, 0),
            "FCL_cell_cradle": (0, -30), "cell1": (0, -30), "cell2": (0, -30), "cell3": (0, -30),
-           "FCL_cell_cradle_top": (0, -48), "ribbon": (0, -58), "TFT": (0, -74), "FCL_button_actuators": (0, -98),
+           "FCL_cell_cradle_top": (0, -48), "ribbon": (0, -74), "TFT": (0, -74), "FCL_button_actuators": (0, -98), "FCL_button_caps": (0, -124),
            "hw_case_inserts": (0, -116), "FCL_case_rear": (0, -116)}
 F_SCENE = F_FLIP - 1
 MOTION.update({
@@ -174,14 +190,27 @@ def read(name):
 
 def split_cells():
     pd = read("cells")
+    c = vtk.vtkPolyDataConnectivityFilter()
+    c.SetInputData(pd)
+    c.SetExtractionModeToAllRegions()
+    c.Update()
+    n = c.GetNumberOfExtractedRegions()
     out = {}
-    for i, y in ROW_Y.items():
-        c = vtk.vtkPolyDataConnectivityFilter()
-        c.SetInputData(pd)
-        c.SetExtractionModeToClosestPointRegion()
-        c.SetClosestPoint(OX + 45.0, y, CZ)
-        c.Update()
-        out[f"cell{i}"] = c.GetOutput()
+    for rid in range(n):
+        c2 = vtk.vtkPolyDataConnectivityFilter()
+        c2.SetInputData(pd)
+        c2.SetExtractionModeToSpecifiedRegions()
+        c2.AddSpecifiedRegion(rid)
+        cl = vtk.vtkCleanPolyData()
+        cl.SetInputConnection(c2.GetOutputPort())
+        cl.Update()
+        part = vtk.vtkPolyData()
+        part.DeepCopy(cl.GetOutput())
+        b = part.GetBounds()
+        yc = (b[2] + b[3]) / 2
+        i = min(ROW_Y, key=lambda k: abs(ROW_Y[k] - yc))
+        out[f"cell{i}"] = part
+    assert sorted(out) == ["cell1", "cell2", "cell3"], sorted(out)
     return out
 
 
@@ -384,7 +413,7 @@ def main():
             cam.SetViewUp(*u)
             cam.OrthogonalizeViewUp()
             cam.SetParallelScale(sc)
-            desk.SetVisibility(mode not in ("flip", "turn"))
+            desk.SetVisibility(not (mode == "flip" or (mode == "turn" and t < 1.0)))   # turned on the desk: desk back once it lies
             desk.SetPosition(CX, CY, desk_z - 2.0 * tu[2])
             for nm, segs in MOTION.items():
                 o = offset(segs, si, t) if nm in shown else None

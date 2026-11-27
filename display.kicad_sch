@@ -5196,7 +5196,7 @@
 				)
 			)
 		)
-		(property "FT Position Offset" "0,0.224"
+		(property "FT Position Offset" ""
 			(at 120.65 113.03 0)
 			(hide yes)
 			(show_name no)

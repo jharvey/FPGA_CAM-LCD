@@ -1,0 +1,24 @@
+Ref,Item,Category,Qty,Manufacturer,MPN,File,Notes
+"BT12,BT22,BT32","Aluminium battery end block, MS3181-16 bayonet boss",Machined,3,,,footprints/fcl_local.3dshapes/FCL_BatteryBlock_MS3181_A.step,"6061-T6. 7 x 25 mm flange, two M1.6 tapped holes S1 (3.2, -10.3) / S2 (3.5, +9.3), 19.2 bore. Machining drawing still shows the earlier block: redraw before ordering."
+MP2,"Brass slug, left, 17.5 OD x 19.7",Machined,2,,,case/battery_blocks/ms3181/ms3181_slug_L.step,Cells 1 and 3. Spring end soldered to it.
+MP3,"Brass slug, right, 17.5 OD x 15.3",Machined,1,,,case/battery_blocks/ms3181/ms3181_slug_R.step,Cell 2.
+MP4,Brass contact disc 24 x 0.8,Machined,3,,,case/battery_blocks/ms3181/ms3181_disc.step,Spring lug soldered to it; RTV dot to the cap gasket. Clamped onto the bare boss face = GND path.
+MP5,"Dust cap MS3181-16, bayonet, rope lanyard",Purchased,3,Amphenol,MS3181-16RA,,"Alt: MS3181-16CA (chain), Glenair MS3181-16C. Measure one before machining the boss (provisional dims)."
+MP6,"Battery coil spring, 17-19 mm cells, solder lug",Purchased,3,Keystone,5220,,Working height 6.0 mm assumed (provisional).
+MP7,O-ring 20 x 1 mm,Purchased,3,,,,"Face seal in the boss end face, groove 1.4 x 0.75."
+MP8,"Bayonet pin, dowel 2.4 x 3.8",Purchased,9,,,,"3 per block, pressed through the boss wall, flush with the cell bore. Match to the cap slots."
+MP10,"Screw M1.6 x 5, socket head",Purchased,6,,ISO 4762 M1.6x5 A2,,"Block screws, two per block (S1 and S2, one each side of the cell). They go in from the camera side and thread into the block; the screw head on the GND ring connects the block. 1.8 mm holes, 2.6 mm GND pads. About 2.9 mm thread engagement with the 0.5 mm spacer."
+MP25,"Washer M2.5 small, 4.5 OD x 0.5 (spacer)",Purchased,6,,ISO 7092 M2.5 A2,,"Between block and PCB at every block screw: sets the 0.5 mm gap. An M2.5 size, loose on the M1.6 screw: check the fit, or use a 0.5 mm M1.6 shim washer."
+MP12,Li-ion cell 18650,Purchased,3,,,,Flat-top or button-top; length 65.0-65.3 (unprotected). Longer protected cells need shorter slugs.
+MP13,Case rear shell,Printed,1,,,case/print/FCL_case_rear.step / .stl,
+MP14,Case front shell,Printed,1,,,case/print/FCL_case_front.step / .stl,
+MP15,Cell cradle,Printed,1,,,case/print/FCL_cell_cradle.step / .stl,
+MP19,Button actuator (x2 in one print),Printed,2,,,case/print/FCL_button_actuators.step / .stl,"B1/B2 PTS645 plungers, snap in from inside the rear shell; the button cap (MP26) goes on from outside."
+MP20,Heat-set insert 1/4-20 UNC (tripod),Purchased,1,,,,"Bottom face, rear shell. Hole 8.2 x 10.5 deep: check against the insert datasheet. Picatinny adapter later."
+MP21,Heat-set insert M2.5,Purchased,8,,,,"4 x case corners (rear shell) + 4 x camera posts (front shell); hole 3.6, insert 4 mm long."
+MP22,"Screw M2.5 x 10, socket head (case)",Purchased,4,,ISO 4762 M2.5x10 A2,,"Head seats 3 mm above the PCB in the front-shell counterbore, about 10 mm to the rear insert."
+MP23,"Cell cradle, LCD side",Printed,1,,,case/print/FCL_cell_cradle_top.step / .stl,Sits on the PCB-side cradle; encloses the cells and carries the TFT back face.
+MP24,"Screw M2.5 x 6, socket head (camera)",Purchased,4,,ISO 4762 M2.5x6 A2,,OV7670 board to the front-shell posts (3.0 mm holes in the module).
+MP17,"Thread locker, medium strength",Consumable,-,,Loctite 243,,Block screws and bayonet pins.
+MP18,RTV silicone,Consumable,-,,,,Dot to hold the contact disc on the cap gasket.
+MP26,Button cap (x2 in one print),Printed,2,,,case/print/FCL_button_caps.step / .stl,Pressed onto the plunger from outside; its tongue fills the plunger's split and locks it.

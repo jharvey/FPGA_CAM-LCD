@@ -40416,7 +40416,7 @@
 				)
 			)
 		)
-		(property "Description" "Aluminium battery end block mount (PG16 cell bore): M2.5 screw + 2 mm dowel pin"
+		(property "Description" "Aluminium battery end block mount (common block): two M1.6 screws from the camera side, GND pads"
 			(at 345.44 135.89 0)
 			(hide yes)
 			(show_name no)
@@ -43177,7 +43177,7 @@
 				)
 			)
 		)
-		(property "Description" "Aluminium battery end block mount (PG16 cell bore): M2.5 screw + 2 mm dowel pin"
+		(property "Description" "Aluminium battery end block mount (common block): two M1.6 screws from the camera side, GND pads"
 			(at 345.44 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -46567,7 +46567,7 @@
 				)
 			)
 		)
-		(property "Description" "Aluminium battery end block mount (common block, right side): M2.5 screw + 2 mm pin"
+		(property "Description" "Aluminium battery end block mount (common block): two M1.6 screws from the camera side, GND pads"
 			(at 345.44 143.51 0)
 			(hide yes)
 			(show_name no)
