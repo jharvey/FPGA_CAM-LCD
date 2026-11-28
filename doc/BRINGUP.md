@@ -197,7 +197,7 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 | 3.2 | Enter download mode if needed | hold B3 (BOOT), tap B4 (RESET), release B3 | port re-appears in download mode | |
 | 3.3 | Flash MicroPython | `esptool.py --chip esp32s3 erase_flash`, then `write_flash 0 <ESP32_GENERIC_S3-SPIRAM .bin>` | completes, reset, REPL on the port | |
 | 3.4 | PSRAM / flash size | REPL: `import esp, gc; esp.flash_size(); gc.mem_free()` | 8 MB flash; about 2 MB free (N8R2: 2 MB quad PSRAM) | |
-| 3.5 | Copy esp32ecp5 + FCL files | `mpremote cp firmware/esp32/*.py :` and a `wifiman.conf` with your Wi-Fi | files listed by `mpremote ls` | |
+| 3.5 | Copy esp32ecp5 + FCL files | `python firmware/tools/fcl_install.py --port <port> --wifi <name> <password> --pin 1234` (or by hand: `mpremote cp firmware/esp32/*.py :` and a `wifiman.conf`) | the installer reports every file copied and, after the restart, the unit's first `$I` line | |
 | 3.6 | Wi-Fi + FTP | reset, read the IP in the REPL, `ftp <ip>` | FTP login works | |
 | 3.7 | JTAG to the FPGA | REPL: `import ecp5; ecp5.idcode()` | `0x41113043` (LFE5U-85F). If 0 or 0xFFFFFFFF: check JTAG pins / J4 / U1 | |
 

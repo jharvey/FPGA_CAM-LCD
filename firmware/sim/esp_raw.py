@@ -95,7 +95,12 @@ class Board:
 
     def raw(self):
         """into the raw REPL.  If the unit's USB stream is running (it ignores Ctrl-C), its command "repl" ends it."""
-        for attempt in range(4):                     # a board that is still starting up takes a few tries
+        try:                                         # a board that is starting up: wait for its prompt first
+            self.s.sendall(b"\r\n")
+            self.read_until(b">>> ", 60)
+        except TimeoutError:
+            pass                                     # no prompt: perhaps the unit's stream is running
+        for attempt in range(4):
             self.s.sendall(b"\r\nrepl\r\n")
             time.sleep(0.5)
             self.s.sendall(b"\r\x03\x03")

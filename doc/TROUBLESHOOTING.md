@@ -74,6 +74,7 @@ The start line `$I,sensors found 0x1F` has one bit per sensor: 1 IMU, 2 compass,
 | `too many wrong PINs` | five wrong tries | wait a minute |
 | `fcl_update.py`: `no answer` | address, or the unit is busy restarting | ping the address; wait 10 s |
 | `fcl_update.py`: a file `REFUSED` | PIN, or the flash is full | the line says which; `--dry` shows the plan; old logs are on the flash when no SD card is in (`mpremote rm :fcl001.log`) |
+| After installing, the USB port shows the `>>>` prompt and no `$I` lines | `main.py` did not run or stopped: press Ctrl-D and read the error. A `boot.py` from before 2026-11-28 stops at an unconfigured WebREPL | `python firmware/tools/fcl_install.py --port <port>` again (it copies the current `boot.py`) |
 | After an update the unit does not start its stream | an error in a new file | USB port: the Python prompt shows the error. Create an empty file `nostream` to stay at the prompt (`mpremote fs touch :nostream`), copy the old file back with `mpremote cp`, remove `nostream` |
 | After a bitstream update no picture | the wrong file was loaded | the bitstream in the FPGA's memory is only read at power-on: load the right one with `fpga <file>` or FTP, or `--flash` again |
 

@@ -285,6 +285,15 @@ session runs on the emulated board, web server included. MicroPython on the ESP3
 the PC with 64-bit ones: 598 of 710 lines are identical, the rest within heading 0.05 deg, pitch and roll 0.01 deg,
 height 1 cm, a rounded number one off, or a slewing value one frame (20 ms) late. That is what the unit will do.
 
+**The installer on the emulated ESP32** (`fcl_install.py --port 5556` against a fresh emulated board): MicroPython
+answered, 22 files copied and checked, `wifiman.conf` and `webpin.txt` written, restart. After the restart it found a
+real fault: `boot.py` (from esp32ecp5) started WebREPL, which raises an error on a board where WebREPL was never set
+up, and an error in `boot.py` keeps MicroPython from running `main.py`, so the unit's software never started. Fixed
+(WebREPL is now optional). Past that, `main.py` starts Wi-Fi, which the emulator does not have (the chip stops at
+the radio's registers), so the emulator cannot run the unit's start-up further. The real ESP32 has the radio.
+
+**Precompiled files, measured and not used (2026-11-28).** `firmware/sim/measure_mpy.py` compares the unit's modules as `.py` and as `.mpy` (mpy-cross 1.24.1, `-march=xtensawin`) on the emulated ESP32: the `.mpy` files take 76 kB of heap instead of 99 kB and import a third faster, and are 63 kB instead of 133 kB on the flash. With about 2 MB of heap that is not needed, and a `.mpy` file only loads on the MicroPython version it was made for. Worth doing if memory ever runs short: build with mpy-cross for that firmware version, and remove the `.py` files of the same name.
+
 What the simulator is: the ESP32 files run as they are, on a Python model of the bridge that is checked frame by
 frame against the Verilog, on register-level models of the sensors. What it cannot show: timing and memory on the
 real ESP32, real sensor behaviour, and the FPGA on a board.
