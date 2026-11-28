@@ -191,6 +191,24 @@ and comes out at 97 MHz possible for the memory clock: a FAIL by 3 %. So the mar
 either direction, by this tool's estimate. If the first board shows trouble here, the next step down is 87.5 MHz
 (25 x 7 / 2): the capture and the refresh count (656) allow it, and the SDRAM has spare throughput.
 
+**2026-11-28, more margin.** Two more changes in the project, both found from nextpnr's slowest paths:
+
+- the SDRAM scheduler (block `sdram_interface`) compares the three FIFO fill levels one clock earlier, into three
+  registers (`cam_full_q`, `vga_low_q`, `sobel_full_q`), instead of in the same clock as everything that follows.
+  Safe one clock late: only this block reads the camera and edge FIFOs, so their counts cannot fall meanwhile; the
+  SDRAM controller needs at least four clocks after a burst before it is ready again; and a display FIFO seen low
+  one clock late gets one more burst, which its 2048 words hold;
+- one register (`led_o`) between the camera set-up logic and the LED pins, which in the camera-only design pulled
+  that logic to the edge of the chip.
+
+Memory clock after these: full design 109 MHz possible at 100, camera-only 101 MHz at 100. Both pass.
+
+**Fallback at 87.5 MHz.** `python fpga/full/build_full.py --mem-mhz 87.5` (and `fpga/build.py --mem-mhz 87.5`)
+builds the same design with the memory clock at 25 x 7 / 2 MHz and the refresh count 656; nothing in the .ice
+file changes. 119 MHz possible: a 36 % margin. Stored as `fpga/prebuilt/full87/fcl_full_87.bit`. Load it if the first
+board shows wrong pixels with the 100 MHz bitstream: if the pixels are then right, the memory clock's timing was
+the cause.
+
 Things that follow from the 100 MHz clock and were left as they are:
 - the camera set-up bus now really runs at 100 kHz (its divider was written for 100 MHz; at 142.857 it ran at 143 kHz);
 - the waits written as `delay_q[26]` are 0.67 s as their comments say (0.47 s before), `delay_q[16]` 0.66 ms;

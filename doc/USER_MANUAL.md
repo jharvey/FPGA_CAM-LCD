@@ -105,7 +105,7 @@ Hold B1 for 0.7 s. B1 moves down, B2 selects, holding B1 again (or `Exit`) close
 | | Overlay: all / dot / off | how much of the Overview text is shown |
 | | Level servo: on / off | servo 1 holds a camera mount level |
 | | Zero height | makes the present height 0 |
-| ![compass](manual/lcd_menu_compass.png) | Compass cal | starts the compass calibration by hand: point the unit up, down and to four sides; the item counts the directions seen (`Compass 2/6`) and finishes by itself |
+| ![compass](manual/lcd_menu_compass.png) | Compass cal | starts the compass calibration by hand: point the unit up, down and to four sides, turning it slowly between them; the item counts the directions seen (`Compass 2/6`) and finishes by itself. With all six seen it also corrects for steel near the compass bending the field (soft iron) |
 | | WiFi ... | shows the state or the address; switches Wi-Fi off, or on with the saved network |
 | | Log: on / off | records to a file on the unit (see Logging) |
 | | Graphics: page / reticle / all | graphics on every page: none beyond what the page asks for, the reticle, or all three |
@@ -254,7 +254,8 @@ direction and the travel per degree are calibration values (`tilt_us`, `pan_us`;
   discharge test of a real cell.
 - The height page has only been checked with exact simulated readings. On a real unit its error is set by how
   steadily it is held and by the ranger: expect centimetres, not millimetres.
-- The compass next to three steel-cased cells may need the soft-iron correction that does not exist yet.
+- The soft-iron correction has only been checked against a simulated bend of the field. How much the three
+  steel-cased cells bend it, and whether the correction is stable as the cells are changed, needs the real unit.
 - The phone page has been tested in a desktop browser against the simulator, and its server under MicroPython on
   a PC, not on the ESP32. Whether the ESP32 has the memory for a 440 kB bitstream upload next to everything else
   has to be tried; the FTP server of esp32ecp5 remains as the other way in.

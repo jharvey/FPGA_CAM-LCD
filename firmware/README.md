@@ -18,7 +18,7 @@ The sensors, buttons, battery ADC and servo outputs are wired to the FPGA; the E
 | `esp32/fcl_web.py` | ESP32 | the phone page over Wi-Fi: state, commands, PIN, files up and down |
 | `fpga/full/fcl_top.v` | FPGA | camera design + LCD overlay + bridge in one bitstream (`python fpga/full/build_full.py`) |
 | `tools/fcl_calibrate.py`, `fcl_log.py` | PC | guided calibration of a unit; summary / CSV / plot of a recorded stream |
-| `tools/fcl.py`, `fcl_survey.py`, `fcl_update.py` | PC | the unit in a Python script; the Survey page's points as a plan; new software over Wi-Fi |
+| `tools/fcl.py`, `fcl_survey.py`, `fcl_update.py`, `fcl_bringup.py` | PC | the unit in a Python script; the Survey page's points as a plan; new software over Wi-Fi; a new board's stage-9 checks with a report |
 
 MicroPython is the plan for the long run: speed comes from viper (integer native code) for the fast path, not from a
 later move to C. The soft-CPU design below (`common/`, `hub/`) is kept as a tested reference and for the simulator's

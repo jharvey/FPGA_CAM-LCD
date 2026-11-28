@@ -179,6 +179,17 @@ with fcl.connect("sim", realtime=False) as u:      # or "COM7", "tcp:127.0.0.1:7
 half a second, and a script gives the same result every run. That is how the lessons and `test_tools.py` use it.
 A refused command raises `fcl.Error` with the unit's text.
 
+## Compass: hard and soft iron
+
+`fcl_magcal.py` fits a sphere to compass readings (hard iron: a constant offset), automatically while the unit is
+used and on request (`magcal start`). In a manual calibration that has seen all six directions it also fits an
+ellipsoid (soft iron: steel near the sensor bends the field), and keeps it if it fits clearly better and is no more
+squashed than 1.5 : 1. The result is a 3 x 3 matrix, stored in `magcal.json` and applied by `fcl_fix.mag_step` to
+every reading after the offset, in Q14 integers. The `$M` line ends with the ellipsoid's axis ratio (1.00: none).
+`sim softiron xx yy zz xy xz yz` bends the field in the simulator; `test_magcal.py` checks that a 1.18 : 0.86 bend
+with skew is taken out (heading within 0.5 deg on a level turn, 13.5 deg wrong without the matrix) and that a unit
+without one keeps the sphere.
+
 ## Calibration values
 
 `fcl_cfg.py` holds the names, defaults and limits (the table at its top). The hub applies them where a reading is
@@ -248,13 +259,25 @@ a diff of `x/main.v` against `fpga/prebuilt/camera/main.v` shows it as Verilog.
 | `test_web.py` | the phone page over real sockets: page, state, commands, refusals, the PIN and its lock, files up (CRC, broken, refused names, 300 kB) and down, a silent client | `python firmware/sim/test_web.py` |
 | `test_tools.py` | `fcl.py`, `fcl_survey.py`, `fcl_update.py` against the simulator | `python firmware/sim/test_tools.py` |
 | `test_lessons.py` | the six lesson scripts | `python firmware/sim/test_lessons.py` |
-| `test_mpy.py` | the ESP32 files under real MicroPython (Unix port): imports, a 40 s session compared line for line with ordinary Python, and the real main loop `fcl_usbdev.run()` with stand-ins for pins, I2S, UART and Wi-Fi. Says SKIPPED when there is no `micropython` | `MICROPYTHON=/path/to/micropython python firmware/sim/test_mpy.py` |
+| `test_mpy.py` | the ESP32 files under real MicroPython (Unix port, 64- and 32-bit): imports, a 40 s session compared line for line with ordinary Python, and the real main loop `fcl_usbdev.run()` with stand-ins for pins, I2S, UART and Wi-Fi, a 440 kB upload while it runs, and the heap it needed. `FCL_HEAP=192K` caps the heap. Says SKIPPED when there is no `micropython` | `MICROPYTHON=/path/to/micropython python firmware/sim/test_mpy.py` |
+| `test_esp32_qemu.py` | the same 40 s session on an emulated ESP32 (Espressif's QEMU, the official MicroPython 1.24.1 firmware with PSRAM): the viper code as Xtensa machine code, compared line for line with ordinary Python | on the Linux VM: `python3 firmware/sim/test_esp32_qemu.py --qemu ~/fpga-cases/esp32qemu` |
 | `test_calibrate.py` | the guided calibration against simulated hardware with errors built in | `python firmware/sim/test_calibrate.py` |
 | `test_usb.py` | the USB stream: every older command, buttons, Wi-Fi, audio, overlay | `python firmware/sim/test_usb.py` |
 | `test_filter.py`, `test_magcal.py` | attitude filter; compass calibration | `python firmware/sim/test_filter.py`, `test_magcal.py` |
 | `test_bridge.py` | `fcl_bridge.v` in Icarus Verilog against the Python model | `python fpga/bridge/test_bridge.py` |
 | `test_osd.py` | the overlay pixel for pixel (text, dot, graphics), alone and behind `fcl_osd_stream.v` with video timing and a second clock | `python fpga/osd/test_osd.py` |
 | `test_full.py` | the whole FPGA design: clocks, camera set-up, panel set-up, a camera picture through the SDRAM to the panel pins pixel for pixel, the view key, the bridge alongside (about an hour) | `python fpga/full/test_full.py` |
+
+**The heap.** The running unit (main loop, pages, phone page, a 440 kB upload, and in the test also the simulated
+sensors and FPGA bridge) runs in a 192 KB heap and not in 160 KB; about 116 KB is in use at 32-bit. The ESP32-S3
+with 2 MB of PSRAM has about ten times that.
+
+**The emulated ESP32.** Set up on the Linux VM in `~/fpga-cases/esp32qemu`: Espressif's QEMU release
+(`qemu-xtensa-softmmu-esp_develop_9.2.2_20261109`), its one missing library (`libslirp0`, unpacked from Debian's
+package into `lib/`), and `flash32.bin`, a 4 MB image with `ESP32_GENERIC-SPIRAM-20241129-v1.24.1.bin` at 0x1000.
+It emulates the ESP32, not the S3: the emulator's S3 machine stops at the S3 firmware's USB set-up. Both chips are
+Xtensa and MicroPython uses the same viper code generator for them. `esp_raw.py` copies files over the emulated
+UART in the raw REPL's raw-paste mode (flow controlled; plain writes lose bytes). The copy takes about 5 minutes.
 
 What the simulator is: the ESP32 files run as they are, on a Python model of the bridge that is checked frame by
 frame against the Verilog, on register-level models of the sensors. What it cannot show: timing and memory on the
@@ -269,7 +292,6 @@ the ESP32 itself: Xtensa machine code instead of x86, its memory, and its real p
 
 ## Not done
 
-- Soft-iron correction of the compass.
 - Nothing has been loaded into a board. The whole FPGA design is simulated with models of the camera, the SDRAM
   and the panel's pins; those models have no delays.
 - **Timing margin of the memory clock.** It runs at 100 MHz and nextpnr estimates 103 MHz possible: a pass by 3 %.

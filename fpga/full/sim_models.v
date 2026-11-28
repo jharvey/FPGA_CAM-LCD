@@ -85,7 +85,8 @@ endmodule
 
 // ---- OV7670: takes its set-up over SCCB (every register write goes to tb_sccb.txt) and sends 640 x 480 RGB565
 // frames with the sensor's own timing: 784 pixels (1568 clocks) per line, 510 lines, pixel clock = xclk.
-// The picture: 40 x 40 pixel blocks, block (bx, by) has colour number (3 bx + 5 by) mod 16 of the table below.
+// The picture: 40 x 40 pixel blocks, block (bx, by) has colour number (3 bx + 5 by) mod 16 of the table below; or,
+// with +photo, the 640 x 480 RGB565 words of tb_photo.hex (one per line, row by row).
 module ov7670_model (
     input xclk, output pclk, output reg href, output reg vsync, output reg [7:0] db,
     input scl, inout sda
@@ -103,7 +104,12 @@ module ov7670_model (
     integer px = 0, ln = 0, frames = 0;
     integer xi, yi;
     reg [15:0] w;
-    initial begin href = 0; vsync = 0; db = 0; end
+    reg [15:0] photo [0:640 * 480 - 1];
+    reg use_photo = 0;
+    initial begin
+        href = 0; vsync = 0; db = 0;
+        if ($test$plusargs("photo")) begin $readmemh("tb_photo.hex", photo); use_photo = 1; end
+    end
     always @(negedge xclk) begin                 // the sensor changes its outputs on the falling edge of PCLK
         if (px == 1567) begin
             px = 0;
@@ -112,7 +118,7 @@ module ov7670_model (
         vsync <= (ln < 3);
         if (ln >= 20 && ln < 500 && px < 1280) begin
             xi = px / 2; yi = ln - 20;
-            w = colour((3 * (xi / 40) + 5 * (yi / 40)) % 16);
+            w = use_photo ? photo[yi * 640 + xi] : colour((3 * (xi / 40) + 5 * (yi / 40)) % 16);
             href <= 1;
             db <= px[0] ? w[7:0] : w[15:8];
         end else begin

@@ -8,6 +8,8 @@ import sys
 
 MPY = sys.implementation.name == "micropython"
 HERE = __file__.replace("\\", "/").rsplit("/", 1)[0] if "/" in __file__.replace("\\", "/") else "."
+if sys.platform == "esp32":                  # on the board (test_esp32_qemu.py): every file at the top of its flash
+    HERE = ""
 if MPY:
     sys.path.insert(0, HERE + "/mpy")       # os.path, subprocess, random: what the simulator needs from the desktop
 sys.path.insert(0, HERE + "/../esp32")
@@ -81,6 +83,7 @@ cmd("log off", "wifi", "tone 880 100", "status", "nonsense", "cal reset", "hud b
 go(1.0)
 
 # ---- the web page over real sockets
+print("== web")
 PORT = 18473
 ROOT = HERE + "/mpy_fs_" + ("m" if MPY else "c") + "/"       # the unit's flash for this run
 try:

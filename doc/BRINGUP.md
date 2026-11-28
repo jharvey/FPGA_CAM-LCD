@@ -213,7 +213,7 @@ To switch off before the firmware can: unplug USB (and remove the cell in later 
 | 4.6 | Panel lights | look at the TFT | backlight on, then picture (the panel is initialised over SPI by the design) | |
 | 4.6a | Pixel clock | scope on the `pix_clk_out` via (ball C13), full design only | 17.86 MHz, even pulses; the panel's frame rate is then 55.1 Hz (`LCD_VS`) | |
 | 4.7 | Camera clock | J1 pin 8 (`XCLK_J`, after R15) | 25 MHz | |
-| 4.7a | SDRAM clock | scope on the SDRAM's CLK pin | 100 MHz | |
+| 4.7a | SDRAM clock | scope on the SDRAM's CLK pin | 100 MHz (87.5 MHz with the fallback bitstream `fpga/prebuilt/full87/fcl_full_87.bit`) | |
 | 4.8 | Camera picture | look closely at flat areas and edges | live image on the TFT, no sparkle, no shifted columns (wrong pixels: `doc/TROUBLESHOOTING.md`, The picture) | |
 | 4.9 | B1 | press | toggles raw camera / Sobel edge view | |
 | 4.10 | B2 | press several times in edge view | edge sensitivity steps, wraps after about 50 presses | |
@@ -276,6 +276,9 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 | 8.4 | Power off | with `fcl_bridge.bit` or `fcl_full.bit` and the ESP32 running: hold B0 2 s (`SHUTDOWN` goes high). With the ESP32 stopped: hold B0 8 s | D11 goes dark, rails 0 V, < 1 mA from the cell | |
 
 ## Stage 9 - sensors through the FPGA, then the whole unit
+
+Rows 9.4 to 9.10 can be run by `python firmware/tools/fcl_bringup.py --port <port> --board <n>`: it tells you what
+to do, reads the unit, decides pass or fail and writes `bringup_board<n>_<date>.md` with every measured value.
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|

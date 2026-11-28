@@ -4,6 +4,9 @@ a camera model in front, an SDRAM model beside it and a script playing the ESP32
 
     python fpga/full/test_full.py [--ms N] [--keep]        75 minutes or more; exit code 0 = all checks pass
     python fpga/full/test_full.py --analyse                check the files of the last run again (kept with --keep)
+    python fpga/full/test_full.py --photo                  a real photo instead of the coloured blocks (folder sim_photo):
+                                                           the camera picture must still arrive exact; the camera and edge
+                                                           pictures are saved as doc/manual/fpga_photo_*.png
 
 What is checked
     clocks     the pixel clock, SDRAM clock and camera clock as the design really makes them
@@ -76,8 +79,40 @@ def check(ok, text):
     fail += not ok
 
 
+PHOTO = None                                                # 640 x 480 RGB565 words, with --photo
+
+
 def cam_word(x, y):
+    if PHOTO is not None:
+        return PHOTO[y * 640 + x]
     return PALETTE[(3 * (x // 40) + 5 * (y // 40)) % 16]
+
+
+def load_photo():
+    """Grace Hopper's portrait from matplotlib's sample data (US Navy photo, public domain), cropped to 4:3 and
+    scaled to the camera's 640 x 480, as RGB565 words"""
+    import matplotlib
+    from PIL import Image
+    src = os.path.join(os.path.dirname(matplotlib.__file__), "mpl-data", "sample_data", "grace_hopper.jpg")
+    im = Image.open(src).convert("RGB")
+    w, h = im.size
+    ch = int(w * 3 / 4)                                     # 4:3 from the middle (the face is in the upper part)
+    top = max(0, min(h - ch, int(h * 0.12)))
+    im = im.crop((0, top, w, top + ch)).resize((640, 480), Image.LANCZOS)
+    return [((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3) for r, g, b in im.getdata()]
+
+
+def save_picture(px, path, round_mask=True):
+    from PIL import Image
+    im = Image.new("RGB", (480, 480))
+    d = im.load()
+    for i, p in enumerate(px):
+        x, y = i % 480, i // 480
+        if round_mask and (x - 239.5) ** 2 + (y - 239.5) ** 2 > 240 * 240:
+            d[x, y] = (20, 20, 20)
+        elif p is not None:
+            d[x, y] = (p[0] << 2 | p[0] >> 4, p[1] << 2 | p[1] >> 4, p[2] << 2 | p[2] >> 4)
+    im.save(path)
 
 
 def cam_rgb6(w):
@@ -189,7 +224,11 @@ def read_frame(path):
 
 def main():
     end_ms = int(sys.argv[sys.argv.index("--ms") + 1]) if "--ms" in sys.argv else 113
-    build = os.path.join(HERE, "sim")
+    global PHOTO
+    photo = "--photo" in sys.argv
+    build = os.path.join(HERE, "sim_photo" if photo else "sim")
+    if photo:
+        PHOTO = load_photo()
     os.makedirs(build, exist_ok=True)
     again = "--analyse" in sys.argv
     for n in os.listdir(build):
@@ -216,12 +255,14 @@ def main():
         out = open(os.path.join(build, "tb_stdout.txt")).read()
         return analyse(build, out, grid, want, end_ms)
     open(os.path.join(build, "tb_stim.txt"), "w", newline="\n").write("\n".join(stim) + "\n")
+    if photo:
+        open(os.path.join(build, "tb_photo.hex"), "w", newline="\n").write("\n".join("%04x" % w for w in PHOTO) + "\n")
     src = [os.path.join(HERE, "fcl_top_tb.v"), os.path.join(HERE, "sim_models.v"), "main_sim.v", "fcl_cam.v",
            os.path.join(HERE, "fcl_top.v"), os.path.join(FPGA, "bridge", "fcl_bridge.v"), os.path.join(FPGA, "osd", "fcl_osd.v"),
            os.path.join(FPGA, "osd", "fcl_osd_stream.v")]
     subprocess.check_call([tool("iverilog"), "-g2005", "-o", "tb_full.vvp"] + src, cwd=build, env=env())
     t0 = time.time()
-    out = subprocess.run([tool("vvp"), "-n", "tb_full.vvp"], cwd=build, env=env(), stdout=subprocess.PIPE,
+    out = subprocess.run([tool("vvp"), "-n", "tb_full.vvp"] + (["+photo"] if photo else []), cwd=build, env=env(), stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT).stdout.decode(errors="replace").replace("\r\n", "\n")
     open(os.path.join(build, "tb_stdout.txt"), "w", newline="\n").write(out)
     print("simulated %d ms in %.0f s" % (end_ms, time.time() - t0))
@@ -302,8 +343,15 @@ def analyse(build, out, grid, want, end_ms):
     if end_ms * 1000 > T_KEY_US + 30000:
         check(len(edge_frames) >= 1, "the view key (OUT bit 4 from the ESP32) switches to the edge picture: picture %s is black and white only"
               % [n for n, _ in edge_frames][:1])
-        if edge_frames:
+        if edge_frames and PHOTO is None:
             check(*edge_check(edge_frames[-1][1], grid, dot, shift))
+    if PHOTO is not None:
+        man = os.path.join(FPGA, "..", "doc", "manual")
+        for n in exact_cam[:1]:
+            save_picture(read_frame(os.path.join(build, "tb_lcd_%d.txt" % n)), os.path.join(man, "fpga_photo_camera.png"))
+        for n, px in edge_frames[-1:]:
+            save_picture(px, os.path.join(man, "fpga_photo_edges.png"))
+        print("pictures written to doc/manual/fpga_photo_camera.png and fpga_photo_edges.png")
 
     # ---- bridge
     data = bytes(int(x, 16) for x in open(os.path.join(build, "tb_out.txt")).read().split())

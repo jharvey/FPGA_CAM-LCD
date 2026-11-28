@@ -66,7 +66,16 @@ def build(work):
     if code and not os.path.isfile(os.path.join(full, "fcl_full.bit")):
         raise SystemExit("full build failed:\n" + out3[-2000:])
     open(os.path.join(full, "build_summary.txt"), "w", newline="\n").write(out3.replace("\r\n", "\n").replace(work, "<build>"))
+    f87 = os.path.join(work, "full87")
+    code, out4 = run([sys.executable, "fpga/full/build_full.py", "--mem-mhz", "87.5", "--out", f87])
+    if code and not os.path.isfile(os.path.join(f87, "fcl_full.bit")):
+        raise SystemExit("full build at 87.5 MHz failed:\n" + out4[-2000:])
+    shutil.copyfile(os.path.join(f87, "fcl_full.bit"), os.path.join(f87, "fcl_full_87.bit"))
+    open(os.path.join(f87, "build_summary.txt"), "w", newline="\n").write(out4.replace("\r\n", "\n").replace(work, "<build>"))
     return {
+        "full87": {"fcl_full_87.bit": os.path.join(f87, "fcl_full_87.bit"), "nextpnr.log": os.path.join(f87, "nextpnr.log"),
+                   "build_summary.txt": os.path.join(f87, "build_summary.txt"),
+                   "_zip": {"fcl_full.json": os.path.join(f87, "fcl_full.json"), "fcl_full.config": os.path.join(f87, "fcl_full.config")}},
         "full": {"fcl_full.bit": os.path.join(full, "fcl_full.bit"), "fcl_top.lpf": os.path.join(full, "fcl_top.lpf"),
                  "main.v": os.path.join(full, "main.v"), "fcl_cam.v": os.path.join(full, "fcl_cam.v"),
                  "nextpnr.log": os.path.join(full, "nextpnr.log"), "build_summary.txt": os.path.join(full, "build_summary.txt"),
@@ -151,17 +160,18 @@ def main():
         f.write("Built from commit `%s`%s.\n\n" % (commit, " plus uncommitted changes in fpga/ or firmware/" if dirty else ""))
         f.write("| Design | Bitstream | What it is |\n|---|---|---|\n")
         f.write("| full | `full/fcl_full.bit` | camera to TFT with the LCD overlay and the sensor bridge (`fpga/full/fcl_top.v`): the bitstream the unit runs. Timing and size: `full/build_summary.txt`. |\n")
+        f.write("| full87 | `full87/fcl_full_87.bit` | the same with the memory clock at 87.5 MHz instead of 100 (`build_full.py --mem-mhz 87.5`): the fallback if the first board shows wrong pixels. |\n")
         f.write("| bridge | `bridge/fcl_bridge.bit` | the sensor bridge alone (`fpga/bridge/fcl_bridge_top.v`): sensors, ADC, buttons, servos from the ESP32. No camera or LCD. For first bring-up. |\n")
         f.write("| camera | `camera/main.bit` | camera to TFT with the Sobel view alone (`fpga/CameraToTFTSobel_FCL.ice`): no bridge, no overlay. |\n\n")
         f.write("None has been loaded into a real board. nextpnr runs with a fixed seed, so the same tool versions should give the same files.\n\n")
         f.write("## Timing\n\nFrom nextpnr, after routing. A FAIL is the tool's estimate for the slowest path, not a measurement.\n\n"
                 "| Design | Clock | Result |\n|---|---|---|\n")
-        for design in ("full", "camera"):
+        for design in ("full", "full87", "camera"):
             for line in open(fresh[design]["build_summary.txt"]):
                 if line.startswith("clock "):
                     p = line.split()
                     f.write("| %s | `%s` | %s |\n" % (design, p[1], " ".join(p[2:])))
-        fails = [d for d in ("full", "camera") for line in open(fresh[d]["build_summary.txt"]) if line.startswith("clock ") and "FAIL" in line]
+        fails = [d for d in ("full", "full87", "camera") for line in open(fresh[d]["build_summary.txt"]) if line.startswith("clock ") and "FAIL" in line]
         f.write("\n%s Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every clock against "
                 "12 MHz; with the frequencies given, the camera design's memory clock failed at 142.9 MHz, and the project was "
                 "changed (`fpga/IO_REMAP.md`, section Clocks).\n\n" %

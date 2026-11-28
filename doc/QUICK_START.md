@@ -57,6 +57,7 @@ Aim with the cross at the centre. The ranger reaches about 4 m.
 | `python firmware/tools/fcl_survey.py --from COM7 --svg plan.svg` | the Survey points as a plan |
 | `python firmware/tools/fcl_log.py trip.log --plot trip.png` | a log as a picture |
 | `python firmware/tools/fcl_update.py <address> --pin 1234` | new software over Wi-Fi |
+| `python firmware/tools/fcl_bringup.py --port COM7 --board 1` | a new board's checks, with a report |
 | `import fcl; u = fcl.connect("COM7")` | the unit in a Python script |
 
 Not working? [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
