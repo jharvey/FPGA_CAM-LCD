@@ -5,6 +5,8 @@ decides pass or fail, and writes a report with every measured value.
     python firmware/tools/fcl_bringup.py --port COM7 --board 1          (Linux: /dev/ttyACM0); needs pyserial
     python firmware/tools/fcl_bringup.py --port COM7 cells buttons      only these checks
     python firmware/tools/fcl_bringup.py --sim --demo                   the whole run in the simulator, with a simulated person
+    python firmware/tools/fcl_bringup.py --port COM7 --board 5 --production    the short set for every later board
+                                                                        (doc/PRODUCTION_TEST.md), no multimeter
 
 Before it: stages 0 to 8 by hand, then the full bitstream loaded (9.4) and the ESP32 running the FCL files.
 You need a multimeter, and for the servo check a servo on J_SRV1.  Questions: y = yes, n = no, Enter = skip.
@@ -35,6 +37,7 @@ import fcl_calibrate as fc      # noqa: E402    (the links to the unit, the Unit
 import fcl_usb                  # noqa: E402
 
 CHECKS = ("link", "readings", "attitude", "distance", "buttons", "screen", "pages", "servo", "audio", "log", "wifi")
+PRODUCTION = ("link", "plausible", "distance", "buttons", "screen", "log")      # what catches assembly faults
 
 
 class Unit(fc.Unit):
@@ -154,6 +157,18 @@ def check_readings(u, ui):
     return out
 
 
+def check_plausible(u, ui):
+    """the readings without a multimeter: every cell, temperature and the pressure in a believable range"""
+    m = u.measure(2.0)
+    out = [r("readings: pressure", 870 <= m["press_hpa"] <= 1085, "%.1f hPa" % m["press_hpa"], "870-1085 hPa")]
+    for i in (1, 2, 3):
+        mv, t = m["cell%d_mv" % i], m["temp%d_c" % i]
+        out.append(r("readings: cell %d" % i, mv < 500 or 2500 <= mv <= 4300, "%.3f V, %.1f C" % (mv / 1000.0, t),
+                     "no cell (under 0.5 V), or 2.5-4.3 V"))
+        out.append(r("readings: cell %d temperature" % i, 5 <= t <= 45, "%.1f C" % t, "5-45 C"))
+    return out
+
+
 def check_attitude(u, ui):
     ui.do("flat", "ATTITUDE 1/2. Put the unit on a table, lens at the horizon, buttons on top.")
     m = u.measure(2.0)
@@ -248,7 +263,7 @@ def check_wifi(u, ui):
             r("wifi: phone page", seen, "", "the page with live readings")]
 
 
-RUN = dict((c, globals()["check_" + c]) for c in CHECKS)
+RUN = dict((c, globals()["check_" + c]) for c in CHECKS + PRODUCTION)
 
 
 def bringup(link, ui, checks=CHECKS):
@@ -291,20 +306,21 @@ def main():
     ap.add_argument("--demo", action="store_true", help="with --sim: a simulated person")
     ap.add_argument("--board", default="1", help="the board's number, for the report")
     ap.add_argument("--out", help="report file (default bringup_board<N>_<date>.md)")
+    ap.add_argument("--production", action="store_true", help="the short set for every board after the first: " + " ".join(PRODUCTION))
     ap.add_argument("checks", nargs="*", help="checks to run (default: all): " + " ".join(CHECKS))
     a = ap.parse_args()
     for c in a.checks:
-        if c not in CHECKS:
+        if c not in CHECKS + ("plausible",):
             ap.error("unknown check %s" % c)
     if a.sim and not a.demo:
         ap.error("--sim needs --demo: the simulator has no hands")
     link = fc.SimLink() if a.sim else fc.PortLink(a.port, a.tcp)
     try:
-        res, u = bringup(link, DemoPerson(link) if a.sim else Person(), tuple(a.checks) or CHECKS)
+        res, u = bringup(link, DemoPerson(link) if a.sim else Person(), tuple(a.checks) or (PRODUCTION if a.production else CHECKS))
     finally:
         link.close()
     text = report(res, u, a.board, "simulator" if a.sim else (a.port or a.tcp))
-    path = a.out or "bringup_board%s_%s.md" % (a.board, datetime.date.today().isoformat())
+    path = a.out or "%s_board%s_%s.md" % ("production" if a.production else "bringup", a.board, datetime.date.today().isoformat())
     open(path, "w", encoding="utf-8", newline="\n").write("\n".join(text) + "\n")
     print("\n".join(text[4:]))
     print("\nreport written to", path)

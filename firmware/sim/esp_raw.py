@@ -1,5 +1,6 @@
-"""Talk to MicroPython running in the ESP32 emulator (its UART0 on a TCP port) through the raw REPL, in raw-paste
-mode, whose flow control keeps the emulated UART from dropping bytes.  Used by test_esp32_qemu.py.
+"""Talk to MicroPython through its raw REPL, in raw-paste mode (flow controlled, so a slow UART drops nothing):
+on a real board's USB serial port (needs pyserial) or on the ESP32 emulator's UART0 on a TCP port.
+Used by firmware/tools/fcl_install.py and firmware/sim/test_esp32_qemu.py.
 
     python3 esp_raw.py probe                       boot messages and a version line
     python3 esp_raw.py put <local> <remote> ...    copy files
@@ -12,19 +13,49 @@ import time
 PORT = 5555
 
 
+class _Serial:
+    """a serial port with the socket calls Board uses"""
+
+    def __init__(self, name):
+        import serial
+        self.p = serial.Serial(name, 115200, timeout=0.2)
+
+    def sendall(self, data):
+        self.p.write(data)
+
+    def settimeout(self, t):
+        self.p.timeout = t
+
+    def recv(self, n):
+        d = self.p.read(max(1, min(n, self.p.in_waiting or 1)))
+        if not d:
+            raise socket.timeout()
+        return d
+
+    def close(self):
+        self.p.close()
+
+
 class Board:
     def __init__(self, port=PORT, wait=30.0):
-        end = time.time() + wait
-        while True:
-            try:
-                self.s = socket.create_connection(("127.0.0.1", port))
-                break
-            except OSError:
-                if time.time() > end:
-                    raise
-                time.sleep(0.5)
+        """port: a TCP port on this machine (the emulator), or a serial port name (COM7, /dev/ttyACM0)"""
+        if isinstance(port, str) and not port.isdigit():
+            self.s = _Serial(port)
+        else:
+            end = time.time() + wait
+            while True:
+                try:
+                    self.s = socket.create_connection(("127.0.0.1", int(port)))
+                    break
+                except OSError:
+                    if time.time() > end:
+                        raise
+                    time.sleep(0.5)
         self.s.settimeout(0.2)
         self.buf = b""
+
+    def close(self):
+        self.s.close()
 
     def _fill(self, wait):
         """take what has arrived; wait up to `wait` seconds for something"""
@@ -63,11 +94,21 @@ class Board:
         return out
 
     def raw(self):
-        self.s.sendall(b"\r\x03\x03")
-        time.sleep(0.3)
-        self.read(0.3)
-        self.s.sendall(b"\r\x01")
-        self.read_until(b"raw REPL; CTRL-B to exit\r\n>", 10)
+        """into the raw REPL.  If the unit's USB stream is running (it ignores Ctrl-C), its command "repl" ends it."""
+        for attempt in range(4):                     # a board that is still starting up takes a few tries
+            self.s.sendall(b"\r\nrepl\r\n")
+            time.sleep(0.5)
+            self.s.sendall(b"\r\x03\x03")
+            time.sleep(0.3)
+            self.read(0.3)
+            self.s.sendall(b"\r\x01")
+            try:
+                self.read_until(b"raw REPL; CTRL-B to exit\r\n>", 10)
+                return
+            except TimeoutError:
+                if attempt == 3:
+                    raise
+                self.buf = b""
 
     def exec(self, code, timeout=60):
         """run code on the board -> (output, error output)"""

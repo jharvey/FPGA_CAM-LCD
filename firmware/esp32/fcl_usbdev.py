@@ -62,7 +62,10 @@ class Plat:
         self.i2s = None
         self.dir = None          # "rx" | "tx"
         self.rate = 16000
-        self.amp = Pin(AMP_SD, Pin.OUT, value=0)
+        try:
+            self.amp = Pin(AMP_SD, Pin.OUT, value=0)
+        except ValueError:                   # no such pin (another ESP32, as in the emulator test): no amplifier
+            self.amp = Pin(2, Pin.OUT, value=0)
         self.raw = bytearray(4 * 320)       # 20 ms at 16 kHz
         self.pcm = bytearray(2 * 320)
         self.usb = None                     # fcl_usb.Bridge, set by run()

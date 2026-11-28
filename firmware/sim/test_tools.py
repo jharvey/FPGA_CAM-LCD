@@ -170,6 +170,11 @@ failed = [x[0] for x in res if x[1] is False]
 text = chr(10).join(fcl_bringup.report(res, bu, "7", "simulator"))
 check(failed == ["readings: cell 2"] and "**FAIL**" in text and "# Bring-up stage 9, board 7" in text,
       "fcl_bringup: a cell reading 5 %% high is the one failure, and the report marks it (%s)" % failed)
+link = fcl_calibrate.SimLink()
+person = fcl_bringup.DemoPerson(link, quiet=True)
+res, bu = fcl_bringup.bringup(link, person, fcl_bringup.PRODUCTION)
+link.close()
+check(len(res) >= 15 and all(x[1] for x in res), "fcl_bringup --production: %d checks, all pass on a good simulated unit" % len(res))
 shutil.rmtree(work, ignore_errors=True)
 print("ALL CHECKS PASSED" if not fail else "%d CHECK(S) FAILED" % fail)
 sys.exit(1 if fail else 0)
