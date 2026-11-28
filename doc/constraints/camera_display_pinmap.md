@@ -1,5 +1,7 @@
 # Camera + display FPGA pin map (monocular-strip)
 
+> **Ball numbers out of date (noted 2026-11-28).** The connector pins and nets in these tables are right; the *ECP5 ball* column is from before the board was rerouted. The balls in use now are in `fpga/prebuilt/full/fcl_top.lpf`, and `python fpga/check_pins.py` checks every one of them against `FCL.kicad_pcb`, through to the J1 and J7 pins listed here.
+
 Generated from the KiCad netlist (`FCL.kicad_sch`, sheets `display`, `camera`, `fpga-io`)
 and `doc/ECP5U85Pinout.csv` (CABGA381 column). Use this when writing the `.lpf` for the
 monocular; the legacy `ulx3s_v20.lpf` names (`gp[]`/`gn[]`) still match the net names.

@@ -1077,5 +1077,6 @@ New:
 - **Compass soft-iron correction**: ellipsoid fit in a manual calibration, a 3 x 3 matrix in the filter. Simulated 1.18 : 0.86 bend: heading within 0.5 deg, 13.5 deg wrong without it.
 - **`firmware/tools/fcl_bringup.py`**: the first board's stage 9 with a report per board.
 - **Memory**: the running unit fits in a 192 KB heap including a 440 kB upload (the ESP32-S3 has about 2 MB).
-- **Emulated ESP32** (Espressif QEMU, official MicroPython 1.24.1 with PSRAM): `firmware/sim/test_esp32_qemu.py`. Result below when it has finished.
+- **Emulated ESP32** (Espressif QEMU, official MicroPython 1.24.1 with PSRAM): `firmware/sim/test_esp32_qemu.py`. The viper code gives exactly ordinary Python's numbers as Xtensa machine code; the 40 s session runs there, web server included, within the 32-bit-float differences (heading 0.05 deg). The emulator's S3 machine stops at the S3 firmware's USB set-up, so the plain ESP32 stands in.
+- **Pin check** `fpga/check_pins.py`: all 117 pins of the full design, the 4 JTAG pins and the 18 GPIOs of the firmware are on their nets in `FCL.kicad_pcb`, camera and display signals traced to their J1 / J7 pins. `doc/constraints/camera_display_pinmap.md` has old ball numbers (marked).
 - **Pictures and video refreshed**: the tour video (92 s: pages, menu, graphics), the manual's pictures, the firmware guide, the PDFs; the FPGA's own camera and edge pictures in the manual; lesson 4 extended to soft iron; a sample bring-up report.

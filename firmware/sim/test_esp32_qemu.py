@@ -5,9 +5,12 @@ with PSRAM, and the files copied onto its flash.  Two runs there:
 1. viper_check.py: the attitude filter (viper) and the link CRC on made-up integer data.  No floats: the output must
    equal ordinary Python's exactly.  This is the check of the viper code as Xtensa machine code.
 2. mpy_scenario.py, the 40 s session of test_mpy.py.  MicroPython on the ESP32 calculates with 32-bit floats (the
-   PC with 64-bit ones), so numbers differ in their last digits and a slewed value can land one frame later.  The
-   lines must match in kind and order, and every number within 0.6 + 1 % of its value; the largest difference
-   of each telemetry field is printed.  The board's output is kept as esp32_session.txt in the --qemu folder.
+   PC with 64-bit ones), so numbers differ in their last digits, a whole number worked out from a float can be
+   one off, and a line timed by the clock can come one frame earlier or later.  So each line must have a partner
+   of the same kind within three lines, with every number within 1 + 1 % of its value (a telemetry value also
+   within what it changes in one frame); the largest difference of each telemetry field is printed.  The board's output is kept as esp32_session.txt in the --qemu folder.
+
+    python3 firmware/sim/test_esp32_qemu.py --analyse FILE    compare a kept esp32_session.txt again, no emulator
 
     python3 firmware/sim/test_esp32_qemu.py --qemu DIR       DIR holds qemu/bin/qemu-system-xtensa, lib/ (libslirp)
                                                              and flash32.bin (the firmware at 0x1000 of 4 MB)
@@ -18,6 +21,7 @@ machine stops at the S3 firmware's USB set-up, so the ESP32 stands in.  Both run
 generator for viper.  Not emulated: Wi-Fi (the session's web part is reported, not required), I2S, the real UART.
 """
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -28,6 +32,7 @@ ESP = os.path.join(HERE, "..", "esp32")
 sys.path.insert(0, HERE)
 sys.path.insert(0, ESP)
 import esp_raw      # noqa: E402
+from fcl_usb import T_FIELDS      # noqa: E402
 
 FILES = [(os.path.join(ESP, n), "/" + n) for n in ("fcl_bridge.py", "fcl_calc.py", "fcl_cfg.py", "fcl_fix.py", "fcl_magcal.py",
                                                   "fcl_app.py", "fcl_hubpy.py", "fcl_usb.py", "fcl_web.py", "fcl_user_example.py",
@@ -45,7 +50,79 @@ def check(ok, text):
     fail += not ok
 
 
+NUM = re.compile(r"-?\d+(?:\.\d+)?")
+
+
+def close(a, b, worst, allow=None):
+    """two lines of the same kind whose numbers agree within the float tolerance; allow: field -> what that field
+    changes in one frame, for telemetry (a slewing value may arrive one frame late)"""
+    if a.startswith("$T,"):
+        fa, fb = a.split(","), b.split(",")
+        if len(fa) != len(fb) or fb[0] != "$T":
+            return False
+        for k, (x, y) in enumerate(zip(fa, fb)):
+            if k == 0 or x == y:
+                continue
+            try:
+                d = abs(float(x) - float(y))
+            except ValueError:
+                return False
+            name = T_FIELDS[k - 1] if k <= len(T_FIELDS) else ""
+            if d > 1.0 + 0.01 * abs(float(x)) + (allow or {}).get(name, 0.0):
+                return False
+            if name != "t_ms":
+                worst[name] = max(worst.get(name, 0.0), d)
+        return True
+    # other lines: the same words, and the numbers in them within the tolerance
+    if NUM.sub("#", a) != NUM.sub("#", b):
+        return False
+    return all(abs(float(x) - float(y)) <= 1.0 + 0.01 * abs(float(x)) for x, y in zip(NUM.findall(a), NUM.findall(b)))
+
+
+def compare(board):
+    ref = subprocess.run([sys.executable, os.path.join(HERE, "mpy_scenario.py")], stdout=subprocess.PIPE, universal_newlines=True).stdout
+    ref = ref.rstrip("\n").split("\n")
+    cut = ref.index("== web") if "== web" in ref else len(ref)
+    worst, used, bad, same = {}, set(), [], 0
+    tele = [i for i, x in enumerate(ref[:cut]) if x.startswith("$T,")]
+    for i, a in enumerate(ref[:cut]):
+        if i < len(board) and board[i] == a:
+            used.add(i)
+            same += 1
+            continue
+        allow = {}
+        if a.startswith("$T,"):                          # what each field changes over one frame here
+            k = tele.index(i)
+            this = a.split(",")[1:]
+            for n in (k - 1, k + 1):
+                if 0 <= n < len(tele):
+                    other = ref[tele[n]].split(",")[1:]
+                    for name, x, y in zip(T_FIELDS, this, other):
+                        try:
+                            allow[name] = max(allow.get(name, 0.0), abs(float(x) - float(y)))
+                        except ValueError:
+                            pass
+        for j in sorted(range(max(0, i - 3), min(len(board), i + 4)), key=lambda j: abs(j - i)):
+            if j not in used and close(a, board[j], worst, allow):
+                used.add(j)
+                break
+        else:
+            bad.append((i, a, board[i] if i < len(board) else ""))
+    check(len(board) >= cut and not bad, "the session's output matches ordinary Python's within the float tolerance: %d lines, "
+          "%d identical, %d within it, %d not" % (cut, same, cut - same - len(bad), len(bad)))
+    for i, a, b in bad[:4]:
+        print("   line %d\n     python  %s\n     esp32   %s" % (i + 1, a, b))
+    if worst:
+        print("      largest differences (32-bit floats): " + ", ".join("%s %g" % kv for kv in sorted(worst.items())))
+    if len(board) > cut:
+        print("      after the web marker the board printed: " + " | ".join(board[cut + 1:cut + 3])[:150])
+
+
 def main():
+    if "--analyse" in sys.argv:
+        compare(open(sys.argv[sys.argv.index("--analyse") + 1]).read().rstrip("\n").split("\n"))
+        print("ALL CHECKS PASSED" if not fail else "%d CHECK(S) FAILED" % fail)
+        return 1 if fail else 0
     qdir = os.path.abspath(sys.argv[sys.argv.index("--qemu") + 1])
     work = os.path.join(qdir, "run")
     shutil.rmtree(work, ignore_errors=True)
@@ -84,42 +161,8 @@ def main():
           % (vref.count("\n"), vsecs, "" if not verr else ": " + verr.strip().split("\n")[-1]))
     board = out.replace("\r\n", "\n").rstrip("\n").split("\n")
     open(os.path.join(qdir, "esp32_session.txt"), "w").write("\n".join(board) + "\n")
-    ref = subprocess.run([sys.executable, os.path.join(HERE, "mpy_scenario.py")], stdout=subprocess.PIPE, universal_newlines=True).stdout
-    ref = ref.rstrip("\n").split("\n")
-    cut = ref.index("== web") if "== web" in ref else len(ref)
     check(not err, "the session ran on the board in %.0f s without an error%s" % (secs, "" if not err else ": " + err.strip().split("\n")[-1]))
-    same = sum(a == b for a, b in zip(ref[:cut], board[:cut]))
-    bad, worst = [], {}
-    names = None
-    try:
-        import fcl_usb
-        names = fcl_usb.T_FIELDS
-    except ImportError:
-        pass
-    for i, (a, b) in enumerate(zip(ref[:cut], board[:cut])):
-        if a == b:
-            continue
-        fa, fb = a.split(","), b.split(",")
-        ok = len(fa) == len(fb) and fa[0] == fb[0]
-        for k, (x, y) in enumerate(zip(fa, fb)):
-            if not ok or x == y:
-                continue
-            try:
-                d = abs(float(x) - float(y))
-            except ValueError:
-                ok = False
-                continue
-            ok = ok and d <= 0.6 + 0.01 * abs(float(x))
-            if a.startswith("$T,") and names and 0 < k <= len(names):
-                worst[names[k - 1]] = max(worst.get(names[k - 1], 0.0), d)
-        if not ok:
-            bad.append((i, a, b))
-    check(len(board) >= cut and not bad, "the session's output matches ordinary Python's within the float tolerance: %d lines, %d identical, "
-          "%d with small differences" % (cut, same, cut - same - len(bad)))
-    for i, a, b in bad[:4]:
-        print("   line %d\n     python  %s\n     esp32   %s" % (i + 1, a, b))
-    if worst:
-        print("      largest differences (32-bit floats): " + ", ".join("%s %g" % kv for kv in sorted(worst.items())))
+    compare(board)
     t = [x for x in board[:cut] if x.startswith("$T")]
     print("      %d telemetry lines from the board; after the web marker it printed: %s" %
           (len(t), " | ".join(board[cut + 1:cut + 3])[:150] if len(board) > cut else "nothing"))

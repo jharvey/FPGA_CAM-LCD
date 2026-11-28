@@ -260,7 +260,8 @@ a diff of `x/main.v` against `fpga/prebuilt/camera/main.v` shows it as Verilog.
 | `test_tools.py` | `fcl.py`, `fcl_survey.py`, `fcl_update.py` against the simulator | `python firmware/sim/test_tools.py` |
 | `test_lessons.py` | the six lesson scripts | `python firmware/sim/test_lessons.py` |
 | `test_mpy.py` | the ESP32 files under real MicroPython (Unix port, 64- and 32-bit): imports, a 40 s session compared line for line with ordinary Python, and the real main loop `fcl_usbdev.run()` with stand-ins for pins, I2S, UART and Wi-Fi, a 440 kB upload while it runs, and the heap it needed. `FCL_HEAP=192K` caps the heap. Says SKIPPED when there is no `micropython` | `MICROPYTHON=/path/to/micropython python firmware/sim/test_mpy.py` |
-| `test_esp32_qemu.py` | the same 40 s session on an emulated ESP32 (Espressif's QEMU, the official MicroPython 1.24.1 firmware with PSRAM): the viper code as Xtensa machine code, compared line for line with ordinary Python | on the Linux VM: `python3 firmware/sim/test_esp32_qemu.py --qemu ~/fpga-cases/esp32qemu` |
+| `test_esp32_qemu.py` | on an emulated ESP32 (Espressif's QEMU, the official MicroPython 1.24.1 firmware with PSRAM): the viper code as Xtensa machine code on integer test data, exactly as ordinary Python (`viper_check.py`), and the 40 s session within a 32-bit-float tolerance. About 40 minutes. `--analyse esp32_session.txt` compares a kept run again | on the Linux VM: `python3 firmware/sim/test_esp32_qemu.py --qemu ~/fpga-cases/esp32qemu` |
+| `check_pins.py` | every pin of the full FPGA design against the routed board: through J1 and J7 to the camera and panel pins, named nets for the rest, the JTAG pins; every GPIO the firmware uses against the ESP32 module's pads | `python fpga/check_pins.py` |
 | `test_calibrate.py` | the guided calibration against simulated hardware with errors built in | `python firmware/sim/test_calibrate.py` |
 | `test_usb.py` | the USB stream: every older command, buttons, Wi-Fi, audio, overlay | `python firmware/sim/test_usb.py` |
 | `test_filter.py`, `test_magcal.py` | attitude filter; compass calibration | `python firmware/sim/test_filter.py`, `test_magcal.py` |
@@ -277,7 +278,12 @@ with 2 MB of PSRAM has about ten times that.
 package into `lib/`), and `flash32.bin`, a 4 MB image with `ESP32_GENERIC-SPIRAM-20241129-v1.24.1.bin` at 0x1000.
 It emulates the ESP32, not the S3: the emulator's S3 machine stops at the S3 firmware's USB set-up. Both chips are
 Xtensa and MicroPython uses the same viper code generator for them. `esp_raw.py` copies files over the emulated
-UART in the raw REPL's raw-paste mode (flow controlled; plain writes lose bytes). The copy takes about 5 minutes.
+UART in the raw REPL's raw-paste mode (flow controlled; plain writes lose bytes). The copy takes 5 to 13 minutes.
+
+Result (2026-11-28): the filter and the CRC give exactly ordinary Python's numbers as Xtensa machine code. The whole
+session runs on the emulated board, web server included. MicroPython on the ESP32 calculates with 32-bit floats,
+the PC with 64-bit ones: 598 of 710 lines are identical, the rest within heading 0.05 deg, pitch and roll 0.01 deg,
+height 1 cm, a rounded number one off, or a slewing value one frame (20 ms) late. That is what the unit will do.
 
 What the simulator is: the ESP32 files run as they are, on a Python model of the bridge that is checked frame by
 frame against the Verilog, on register-level models of the sensors. What it cannot show: timing and memory on the

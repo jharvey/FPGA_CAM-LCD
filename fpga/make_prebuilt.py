@@ -32,7 +32,7 @@ from test_osd import tool, env        # noqa: E402
 TESTS = [("firmware/sim/test_usb.py", []), ("firmware/sim/test_filter.py", []), ("firmware/sim/test_magcal.py", []),
          ("firmware/sim/test_app.py", []), ("firmware/sim/test_web.py", []), ("firmware/sim/test_calibrate.py", []),
          ("firmware/sim/test_tools.py", []), ("firmware/sim/test_lessons.py", []), ("firmware/sim/test_mpy.py", []),
-         ("fpga/bridge/test_bridge.py", []), ("fpga/osd/test_osd.py", [])]
+         ("fpga/bridge/test_bridge.py", []), ("fpga/osd/test_osd.py", []), ("fpga/check_pins.py", [])]
 # fpga/full/test_full.py (the whole design, about an hour) is run by hand; its output is kept as fpga/prebuilt/test_full.txt
 
 
