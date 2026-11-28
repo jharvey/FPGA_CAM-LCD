@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Command-line build of the Icestudio project, without opening Icestudio.
 
-    python fpga/build.py [--ice FILE] [--out DIR] [--gen-only]
+    python fpga/build.py [--ice FILE] [--out DIR] [--gen-only] [--mem-mhz 87.5] [--seed N]
+
+--mem-mhz 87.5 builds the fallback with a slower memory clock (SDRAM, capture, FIFOs, edge filter): 25 x 7 / 2 MHz
+instead of 25 x 4, the SDRAM refresh count scaled to match.  Only the generated main.v changes; the .ice file stays.
 
 Steps: run Icestudio's own code generator (compiler.js from the Icestudio install) on the
 .ice file with the FCL board definition in fpga/icestudio/FCL, then yosys -> nextpnr-ecp5 ->
@@ -150,6 +153,28 @@ def generate(ice, out, board_dir):
     print('generated:', ', '.join(sorted(files)))
 
 
+# the memory clock's PLL and the refresh count that goes with it (fpga/IO_REMAP.md, section Clocks)
+MEM_CLOCKS = {100.0: ('"100"', 1, 4, 750), 87.5: ('"87.5"', 2, 7, 656)}
+
+
+def mem_clock(out, mhz):
+    """rewrite the generated main.v for another memory clock: PLL dividers, its frequency attribute, refresh count"""
+    if mhz == 100.0:
+        return
+    path = os.path.join(out, 'main.v')
+    v = open(path, encoding='utf-8').read()
+    a, b = MEM_CLOCKS[100.0], MEM_CLOCKS[mhz]
+    for old, new in (('FREQUENCY_PIN_CLKOP=%s' % a[0], 'FREQUENCY_PIN_CLKOP=%s' % b[0]),
+                     ('.CLKI_DIV(%d),' % a[1], '.CLKI_DIV(%d),' % b[1]),
+                     ('.CLKFB_DIV(%d)' % a[2], '.CLKFB_DIV(%d)' % b[2]),
+                     ('refresh_ctr_q==%d' % a[3], 'refresh_ctr_q==%d' % b[3])):
+        if v.count(old) != 1:
+            sys.exit('main.v: "%s" found %d times, expected once: the memory clock block has changed' % (old, v.count(old)))
+        v = v.replace(old, new)
+    open(path, 'w', encoding='utf-8', newline='\n').write(v)
+    print('memory clock set to %g MHz in main.v' % mhz)
+
+
 def run(cmd, cwd, env):
     print('>', ' '.join(cmd))
     sys.stdout.flush()
@@ -166,8 +191,11 @@ def main():
     ap.add_argument('--out', default=os.path.join(HERE, 'build'))
     ap.add_argument('--board', default=os.path.join(HERE, 'icestudio', 'FCL'))
     ap.add_argument('--gen-only', action='store_true', help='stop after writing main.v and main.lpf')
+    ap.add_argument('--mem-mhz', type=float, default=100.0, choices=sorted(MEM_CLOCKS), help='memory clock (default 100)')
+    ap.add_argument('--seed', type=int, default=1, help='nextpnr placement seed (default 1)')
     a = ap.parse_args()
     generate(a.ice, a.out, a.board)
+    mem_clock(a.out, a.mem_mhz)
     if a.gen_only:
         return
     env = dict(os.environ)
@@ -179,7 +207,7 @@ def main():
             sys.exit('Cannot find %s (set OSS_CAD_SUITE to an oss-cad-suite folder)' % tool)
     run(['yosys', '-q', '-l', 'yosys.log', '-p', 'read_verilog main.v; synth_ecp5 -top main -json main.json'], a.out, env)
     run(['nextpnr-ecp5', '--85k', '--package', 'CABGA381', '--json', 'main.json', '--lpf', 'main.lpf',
-         '--textcfg', 'main.config', '--timing-allow-fail', '-q', '-l', 'nextpnr.log'], a.out, env)
+         '--textcfg', 'main.config', '--seed', str(a.seed), '--timing-allow-fail', '-q', '-l', 'nextpnr.log'], a.out, env)
     run(['ecppack', '--compress', 'main.config', 'main.bit'], a.out, env)
     last = {}
     for line in open(os.path.join(a.out, 'nextpnr.log'), encoding='utf-8', errors='replace'):

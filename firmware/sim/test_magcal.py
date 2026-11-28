@@ -43,11 +43,13 @@ class Tumble(fcl_sim.Scenario):
         return s, 0
 
 
-def run(scenario, seconds, iron=IRON, store=None, commands=(), window=None, skip=None):
+def run(scenario, seconds, iron=IRON, store=None, commands=(), window=None, skip=None, soft=None):
     sim = fcl_sim.Sim("bridge", store=store)
     sim.scenario = scenario
     sim.world.sc = scenario
     sim.world.hardiron = list(iron)
+    if soft:
+        sim.world.softiron = soft
     todo = sorted(commands)
     lines = []
     err_early = err_late = 0.0
@@ -97,7 +99,36 @@ off = sim.hubpy.cal.off
 check(e1 < 4.0 and all(abs(o) < 15 for o in off), "no hard iron: automatic calibration leaves it alone (offset %.0f %.0f %.0f, heading within %.1f deg)" % (tuple(off) + (e1,)))
 
 sim, lines, e0, e1 = run(Pan(), 20.0, commands=[(1.0, "magcal auto off"), (15.0, "magcal reset"), (16.0, "magcal bogus")])
-check(sim.hubpy.cal.state == "none" and any("$R,err" in x for x in lines) and any(x.endswith(",fixed") for x in lines),
+check(sim.hubpy.cal.state == "none" and any("$R,err" in x for x in lines) and any(",fixed," in x for x in lines),
       "magcal auto off stops the automatic fit; reset clears it; a bad argument is refused")
+# ---- soft iron: the field bent as well as shifted (steel-cased cells next to the sensor): 1.18 : 0.86 along two axes,
+# and a skew.  A sphere cannot take that out; the ellipsoid of a manual calibration can.
+SOFT = [[1.18, 0.06, 0.0], [0.06, 0.86, 0.04], [0.0, 0.04, 1.0]]
+sim, lines, e0, e1 = run(Tumble(), 45.0, commands=[(1.0, "magcal auto off"), (2.0, "magcal start")], window=(35.0, 45.0), skip=down, soft=SOFT)
+cal = sim.hubpy.cal
+check(cal.ratio > 1.2 and e1 < 2.5, "soft iron, manual calibration: ellipsoid %.2f : 1 found, heading within %.1f deg" % (cal.ratio, e1))
+
+
+class Level(fcl_sim.Scenario):
+    """level, turning slowly: the use the compass is for"""
+
+    def at(self, t):
+        s, _ = fcl_sim.Scenario.at(self, 0.0)
+        s.update(heading=15.0 * t, pitch=0.0, roll=0.0)
+        return s, 0
+
+
+import copy      # noqa: E402
+st = fcl_sim.MemStore()
+st.d = copy.deepcopy(sim.hubpy.cal.store.d) if sim.hubpy.cal.store else {}
+sim2, _, a0, a1 = run(Level(), 30.0, store=st, commands=[(0.5, "magcal auto off")], window=(3.0, 30.0), soft=SOFT)
+st2 = fcl_sim.MemStore()
+st2.d = dict(st.d, soft=[1, 0, 0, 0, 1, 0, 0, 0, 1], ratio=1.0)
+sim3, _, b0, b1 = run(Level(), 30.0, store=st2, commands=[(0.5, "magcal auto off")], window=(3.0, 30.0), soft=SOFT)
+check(st.d.get("ratio", 1) > 1.2 and a1 < 2.5 and b1 > 2 * a1 and b1 > 4.0,
+      "soft iron, a level turn: heading within %.1f deg with the stored matrix, %.1f deg with the same offset and no matrix" % (a1, b1))
+sim, lines, e0, e1 = run(Tumble(), 45.0, iron=(60, -40, 30), commands=[(1.0, "magcal auto off"), (2.0, "magcal start")], window=(35.0, 45.0), skip=down)
+check(sim.hubpy.cal.ratio == 1.0 and e1 < 3.0, "no soft iron: the manual calibration keeps the sphere (ratio %.2f), heading within %.1f deg"
+      % (sim.hubpy.cal.ratio, e1))
 print("ALL CHECKS PASSED" if not fail else "%d CHECK(S) FAILED" % fail)
 sys.exit(1 if fail else 0)

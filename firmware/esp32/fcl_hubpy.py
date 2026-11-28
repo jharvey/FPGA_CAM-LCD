@@ -180,6 +180,9 @@ class Hub:
     def _cal_apply(self):
         for i in range(3):
             self.st[16 + i] = int(round(self.cal.off[i]))
+            for j in range(3):
+                w = max(-1.9, min(1.9, self.cal.soft[i][j]))
+                self.st[20 + 3 * i + j] = int(round(w * 16384))
 
     def _cal_report(self):
         if self.on_info:

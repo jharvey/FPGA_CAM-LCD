@@ -9,10 +9,11 @@
 # Turning a world-fixed vector v seen from a body rotating at w:  v += (v x w) dt.
 # Heading, pitch and roll are worked out from the two vectors at the telemetry rate (fcl_hubpy.py), in floats.
 #
-# State layout (array('i'), 20 words):
+# State layout (array('i'), 29 words):
 #   0..2 up (Q28)   3..5 north (Q16)   6..8 gyro bias (raw counts)   9..11 bias sum   12 bias samples
 #   13 gain shift for the accelerometer pull   14 samples seen   15 magnetometer started
 #   16..18 compass offset in counts (hard iron, from fcl_magcal.py), subtracted from every reading
+#   19 spare   20..28 compass matrix, Q14, row by row (soft iron, from fcl_magcal.py), applied after the offset
 from array import array
 try:
     import micropython                   # the decorator must be spelled @micropython.viper for the compiler to see it
@@ -28,7 +29,7 @@ except ImportError:                      # CPython: plain functions, arrays inst
     def ptr8(x):
         return x
 
-ST_WORDS = 20
+ST_WORDS = 29
 ACC_1G = 8192                            # ICM-42688-P at +-4 g: counts per g
 BIAS_SAMPLES = 200                       # gyro bias: mean of the first second, if the unit is still
 
@@ -37,6 +38,7 @@ def new_state():
     st = array("i", [0] * ST_WORDS)
     st[2] = 1 << 28                      # up = +z until the accelerometer says otherwise
     st[13] = 2                           # fast pull for the first second, then slow
+    st[20] = st[24] = st[28] = 1 << 14   # compass matrix: identity until a calibration gives another
     return st
 
 
@@ -159,6 +161,14 @@ def mag_step(st_o, buf_o) -> int:
     mx -= ((st[16] << s) >> s)
     my -= ((st[17] << s) >> s)
     mz -= ((st[18] << s) >> s)
+    # soft iron: the matrix (Q14, entries under 2) turns the squashed sphere of readings round again.  With
+    # readings within +-16000 after the offset the sums stay under 2^31.
+    m0 = ((st[20] << s) >> s) * mx + ((st[21] << s) >> s) * my + ((st[22] << s) >> s) * mz
+    m1 = ((st[23] << s) >> s) * mx + ((st[24] << s) >> s) * my + ((st[25] << s) >> s) * mz
+    m2 = ((st[26] << s) >> s) * mx + ((st[27] << s) >> s) * my + ((st[28] << s) >> s) * mz
+    mx = m0 >> 14
+    my = m1 >> 14
+    mz = m2 >> 14
     if ((st[15] << s) >> s) == 0:
         st[3] = mx << 16
         st[4] = my << 16

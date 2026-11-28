@@ -3,6 +3,7 @@
 
     python firmware/sim/test_mpy.py            needs a `micropython` program: on the PATH, or MICROPYTHON=/path/to/it
                                                (build: github.com/micropython/micropython, ports/unix, v1.24.1 used)
+    FCL_HEAP=256K python firmware/sim/test_mpy.py      the unit's main loop (part 3) with that much heap only
 Exit code 0 = all checks pass, or no micropython found (it says so).
 
 1. Every file of firmware/esp32 that the unit loads is compiled and imported by MicroPython.
@@ -10,7 +11,9 @@ Exit code 0 = all checks pass, or no micropython found (it says so).
    sockets, with the example user page) runs under both interpreters; the two outputs must agree line for line.
    Here the viper code (attitude filter, CRC) runs as compiled machine code.
 3. mpy_unit.py runs the unit's real main loop (fcl_usbdev.py) with stand-ins for the ESP32's pins, I2S, UART and
-   Wi-Fi, in real time, driven through stdin / stdout as the USB port would be.
+   Wi-Fi, in real time, driven through stdin / stdout as the USB port would be.  While it runs, a 440 kB bitstream is
+   uploaded to its web server and a log downloaded, and the most heap it ever used is reported.  The heap also holds
+   the simulated sensors and FPGA bridge, which the real unit does not: the figure is an upper bound.
 
 Run it with a 64-bit and with a 32-bit build (make MICROPY_FORCE_32BIT=1, needs gcc-multilib): the ESP32 is 32-bit,
 and the viper code of fcl_fix.py depends on the word size.  Both passed on 2026-11-27.
@@ -23,7 +26,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
+import urllib.request
+import binascii
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ESP = os.path.join(HERE, "..", "esp32")
@@ -93,11 +99,38 @@ check(len(t) > 200 and "frames" in b[-3] and b[-3].endswith("crc errors 0"),
 
 # ---- 3
 work = tempfile.mkdtemp(prefix="fcl_mpy_")
-p = subprocess.Popen([mpy, "mpy_unit.py", work], cwd=HERE, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+heap = os.environ.get("FCL_HEAP")
+p = subprocess.Popen([mpy] + (["-X", "heapsize=" + heap] if heap else []) + ["mpy_unit.py", work], cwd=HERE, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                      universal_newlines=True, bufsize=1)
 SCRIPT = ((2.5, "status"), (0.2, "key B1"), (0.6, "log on"), (1.5, "log off"), (0.2, "tone 880 60"), (0.2, "servo 3 1700"),
-          (0.2, "cal set hfov 50"), (0.2, "wifi HomeNet secret"), (0.5, "wifi"), (0.5, "repl"))
+          (0.2, "cal set hfov 50"), (0.2, "wifi HomeNet secret"), (0.5, "wifi"), (0.2, "webpin 2468"), ("up", ""), (1.0, "status"),
+          (0.5, "repl"))
+BIT = bytes((i * 31 + (i >> 9)) & 255 for i in range(440000))        # the size of fcl_full.bit
+web = {}
+
+
+def transfer():
+    """a 440 kB bitstream up, the log down, through the unit's own web server (port 18474, see mpy_unit.py)"""
+    base = "http://127.0.0.1:18474"
+    try:
+        t0 = time.time()
+        req = urllib.request.Request(base + "/f/fcl_full.bit", data=BIT, method="PUT",
+                                     headers={"X-Pin": "2468", "X-Crc": "%08x" % (binascii.crc32(BIT) & 0xFFFFFFFF)})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            web["put"] = r.read().decode()
+        web["put_s"] = time.time() - t0
+        with urllib.request.urlopen(base + "/f/fcl001.log", timeout=60) as r:
+            web["log"] = r.read()
+    except Exception as e:
+        web["error"] = repr(e)
+
+
 for wait, line in SCRIPT:
+    if wait == "up":
+        th = threading.Thread(target=transfer)
+        th.start()
+        th.join(180)
+        continue
     time.sleep(wait)
     try:
         p.stdin.write(line + "\n")
@@ -115,7 +148,7 @@ check("#unit end" in lines, "fcl_usbdev.run() starts, runs and returns on 'repl'
 if "#unit end" not in lines:
     print("\n".join(lines[-12:]))
 check(any("sensors found 0x1F" in x for x in lines), "the main loop finds all five sensors through the bridge driver")
-secs = sum(w for w, _ in SCRIPT)
+secs = sum(w for w, _ in SCRIPT if w != "up") + web.get("put_s", 0)
 check(len(t) > 5 * secs and all(len(x) == len(t[0]) for x in t),
       "telemetry in real time: %d lines in %.1f s (%.0f per second)" % (len(t), secs, len(t) / secs))
 check("$E,B1" in lines and any(x.startswith("#unit row4 |") and "LEVEL" in x for x in lines), "key B1: event, and LEVEL on the LCD model")
@@ -127,6 +160,13 @@ log = open(os.path.join(work, "fcl001.log")).read().split("\n") if "fcl001.log" 
 check(sum(x.startswith("$T") for x in log) >= 8, "log on / off: fcl001.log with %d telemetry lines" % sum(x.startswith("$T") for x in log))
 check("cal.json" in files and "50" in open(os.path.join(work, "cal.json")).read() and "wifiman.conf" in files,
       "cal set and wifi write cal.json and wifiman.conf")
+check('"ok": true' in web.get("put", "") and os.path.exists(os.path.join(work, "fcl_full.bit"))
+      and open(os.path.join(work, "fcl_full.bit"), "rb").read() == BIT and web.get("log", b"").count(b"$T,") >= 8,
+      "web, while the unit runs: a 440 kB bitstream uploaded whole in %.1f s, the log downloaded%s"
+      % (web.get("put_s", -1), "" if "error" not in web else ": " + web["error"]))
+for x in lines:
+    if x.startswith("#unit heap"):
+        print("      " + x[6:] + " bytes (FCL_HEAP=%s; the ESP32-S3 N8R2 has about 2 MB)" % (heap or "default"))
 errs = [x for x in lines if "Traceback" in x or "Error" in x]
 check(not errs, "no Python error in the stream" + ("" if not errs else ": " + errs[0]))
 shutil.rmtree(work, ignore_errors=True)

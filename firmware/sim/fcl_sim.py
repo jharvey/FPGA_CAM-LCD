@@ -20,6 +20,8 @@ Extra commands (simulator only):
     sim press <PWR|B1|B2> [ms]                        press a button (default 300 ms)
     sim buttons on|off                                the demo loop's own button presses (default on)
     sim hardiron <x> <y> <z>                          add a constant field to the compass, in counts (1.5 mG each)
+    sim softiron <xx> <yy> <zz> <xy> <xz> <yz>        bend the field at the compass: reading = S x field (S symmetric;
+                                                      1 1 1 0 0 0 is none)
     sim error <cell1|cell2|cell3|temp1|temp2|temp3|dist|pitch|roll> <value>
                                                       give the hardware an error for the calibration to find: cell gain
                                                       (1.02 = reads 2 % high), temperature / distance / mounting offset
@@ -315,6 +317,10 @@ class SimPlat:
         if a[0] == "set" and a[1] in KEYS:
             sc.hold[a[1]] = float(a[2])
             return "sim set %s %s" % (a[1], a[2])
+        if a[0] == "softiron" and getattr(self.sim, "bridge_mode", False):
+            xx, yy, zz, xy, xz, yz = [float(v) for v in a[1:7]]
+            self.sim.world.softiron = [[xx, xy, xz], [xy, yy, yz], [xz, yz, zz]]
+            return "sim softiron " + " ".join(a[1:7])
         if a[0] == "hardiron" and getattr(self.sim, "bridge_mode", False):
             self.sim.world.hardiron = [float(a[1]), float(a[2]), float(a[3])]
             return "sim hardiron %s %s %s" % (a[1], a[2], a[3])
@@ -367,6 +373,7 @@ class SensorWorld:
         self.tof_clear = -1.0
         self.hist = [0, 0]
         self.hardiron = [0.0, 0.0, 0.0]     # counts added to the compass: `sim hardiron x y z`
+        self.softiron = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]     # `sim softiron ...`
         # hardware errors for the calibration to find: `sim error <name> <value>`
         self.err = {"cell1": 1.0, "cell2": 1.0, "cell3": 1.0, "temp1": 0.0, "temp2": 0.0, "temp3": 0.0,
                     "dist": 0.0, "pitch": 0.0, "roll": 0.0}
@@ -421,6 +428,8 @@ class SensorWorld:
             if reg == 0x68 and rlen:
                 R = self.rot(s)
                 m = [R[0][i] * 0.20 + R[2][i] * -0.43 + self.n(0.002) for i in range(3)]       # 0.2 G north, 0.43 G down
+                S = self.softiron
+                m = [sum(S[i][j] * m[j] for j in range(3)) for i in range(3)]
                 return struct.pack("<3H", *[self._s16(m[i] / 0.0015 + self.hardiron[i]) for i in range(3)])[:rlen], 0
             return bytes(rlen), 0
         if addr == 0x5C:

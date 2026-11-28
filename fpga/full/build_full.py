@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the full FPGA design: camera to TFT + LCD overlay + sensor bridge, in one bitstream.
 
-    python fpga/full/build_full.py [--out DIR]      -> fpga/full/build/fcl_full.bit
+    python fpga/full/build_full.py [--out DIR] [--mem-mhz 87.5] [--seed N]      -> fpga/full/build/fcl_full.bit
 
 Steps: Icestudio's code generator on fpga/CameraToTFTSobel_FCL.ice (fpga/build.py --gen-only) gives main.v; this
 script writes fcl_cam.v (the same module with readable port names) and fcl_top.lpf (pins from the .ice file and from
@@ -102,7 +102,9 @@ def main():
     if "--out" in sys.argv:
         build = os.path.abspath(sys.argv[sys.argv.index("--out") + 1])
     os.makedirs(build, exist_ok=True)
-    r = subprocess.run([sys.executable, os.path.join(FPGA, "build.py"), "--gen-only", "--out", build],
+    mem = sys.argv[sys.argv.index("--mem-mhz") + 1] if "--mem-mhz" in sys.argv else "100"
+    seed = sys.argv[sys.argv.index("--seed") + 1] if "--seed" in sys.argv else "1"
+    r = subprocess.run([sys.executable, os.path.join(FPGA, "build.py"), "--gen-only", "--out", build, "--mem-mhz", mem],
                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if r.returncode:
         raise SystemExit("code generation failed:\n" + r.stdout.decode(errors="replace")[-2000:])
@@ -113,7 +115,7 @@ def main():
     files = " ".join(["main.v", "fcl_cam.v"] + [s.replace("\\", "/") for s in src])
     run(build, [tool("yosys"), "-p", "read_verilog %s; synth_ecp5 -top fcl_top -json fcl_full.json" % files], "yosys.log")
     out = run(build, [tool("nextpnr-ecp5"), "--85k", "--package", "CABGA381", "--speed", "6", "--json", "fcl_full.json",
-                      "--lpf", "fcl_top.lpf", "--textcfg", "fcl_full.config", "--seed", "1", "--timing-allow-fail"], "nextpnr.log")
+                      "--lpf", "fcl_top.lpf", "--textcfg", "fcl_full.config", "--seed", seed, "--timing-allow-fail"], "nextpnr.log")
     run(build, [tool("ecppack"), "--compress", "fcl_full.config", "fcl_full.bit"], "ecppack.log")
     print("pins placed: %d" % pins)
     for name, used, total, pct in re.findall(r"(TRELLIS_COMB|TRELLIS_FF|DP16KD|TRELLIS_IO):\s+(\d+)/\s*(\d+)\s+(\d+)%", out):

@@ -36,4 +36,7 @@ print("#unit servo %s" % list(m.servo))
 print("#unit i2s %s written %d" % (machine.I2S.made, machine.I2S.written))
 print("#unit row4 |%s|" % m.osd_rows()[4])
 print("#unit files %s" % sorted(os.listdir(".")))
+import gc                           # noqa: E402
+gc.collect()
+print("#unit heap %d in use after the run, of %d" % (gc.mem_alloc(), gc.mem_alloc() + gc.mem_free()))
 print("#unit end")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Tests of the PC tools above the USB protocol: fcl.py (scripting), fcl_survey.py (plan of a survey) and
-fcl_update.py (new software over Wi-Fi), all against the simulator.
+"""Tests of the PC tools above the USB protocol: fcl.py (scripting), fcl_survey.py (plan of a survey),
+fcl_update.py (new software over Wi-Fi) and fcl_bringup.py (the first board's stage 9), all against the simulator.
 
     python firmware/sim/test_tools.py
 Exit code 0 = all checks pass.
@@ -149,6 +149,27 @@ check(ok and "1 to send: fcl_calc.py" in said[0] and open(os.path.join(root, "fc
 running = False
 th.join()
 web.close()
+
+# ---------------------------------------------------------------- fcl_bringup.py
+import fcl_bringup      # noqa: E402
+import fcl_calibrate    # noqa: E402
+link = fcl_calibrate.SimLink()
+person = fcl_bringup.DemoPerson(link, quiet=True)
+res, bu = fcl_bringup.bringup(link, person)
+link.close()
+bad = [x for x in res if x[1] is False]
+check(len(res) >= 25 and not bad and [x[0] for x in res if x[1] is None] == ["wifi"],
+      "fcl_bringup: %d checks on a good simulated unit, all pass but Wi-Fi (not set up)%s" % (len(res), "; FAIL: %s" % bad if bad else ""))
+link = fcl_calibrate.SimLink()
+person = fcl_bringup.DemoPerson(link, quiet=True)
+link.send("sim error cell2 1.05")                       # a sense divider 5 % off
+person.ask = lambda key, text: link.sim.world.s[key] if key.startswith("cell") else None
+res, bu = fcl_bringup.bringup(link, person, ("readings", "buttons"))
+link.close()
+failed = [x[0] for x in res if x[1] is False]
+text = chr(10).join(fcl_bringup.report(res, bu, "7", "simulator"))
+check(failed == ["readings: cell 2"] and "**FAIL**" in text and "# Bring-up stage 9, board 7" in text,
+      "fcl_bringup: a cell reading 5 %% high is the one failure, and the report marks it (%s)" % failed)
 shutil.rmtree(work, ignore_errors=True)
 print("ALL CHECKS PASSED" if not fail else "%d CHECK(S) FAILED" % fail)
 sys.exit(1 if fail else 0)
