@@ -27,6 +27,10 @@ From nextpnr, after routing. A FAIL is the tool's estimate for the slowest path,
 
 **A clock does not meet timing in: camera.** Builds before 2026-11-27 did not tell nextpnr the clock frequencies, so it checked every clock against 12 MHz; with the frequencies given, the camera design's memory clock failed at 142.9 MHz, and the project was changed (`fpga/IO_REMAP.md`, section Clocks).
 
+## Whole-design simulation
+
+`python fpga/full/test_full.py` takes over an hour and is run by hand, not by this script. Its output for these sources is `test_full.txt`: all checks passed, including a camera picture that reaches the panel pins exact in all 230400 pixels and the edge view.
+
 ## Tools
 
 | Tool | Version |

@@ -2,7 +2,8 @@
 """The whole FPGA design in one simulation: fcl_top.v (camera design + overlay + bridge) in Icarus Verilog, with
 a camera model in front, an SDRAM model beside it and a script playing the ESP32 on the UART.
 
-    python fpga/full/test_full.py [--ms N] [--keep]        about an hour; exit code 0 = all checks pass
+    python fpga/full/test_full.py [--ms N] [--keep]        75 minutes or more; exit code 0 = all checks pass
+    python fpga/full/test_full.py --analyse                check the files of the last run again (kept with --keep)
 
 What is checked
     clocks     the pixel clock, SDRAM clock and camera clock as the design really makes them
@@ -101,6 +102,49 @@ def plain(x, y, grid, dot):
         fcl_osd.hud_pixel(x, y, (1, 2, 3), HUD, 63) == (1, 2, 3)
 
 
+def luma(w):
+    """brightness of an RGB565 colour, 0..255"""
+    r, g, b = (w >> 11) << 3, ((w >> 5) & 63) << 2, (w & 31) << 3
+    return (77 * r + 150 * g + 29 * b) >> 8
+
+
+def edge_check(px, grid, dot, shift):
+    """The edge view is a thresholded edge filter, so a border between two blocks must be white along its length when
+    their brightness differs a lot, and black when it differs little; and nothing away from a border may be white.
+    -> (ok, text) for check().  Lines are looked for 1..4 columns right of a vertical border (the filter's output is
+    2 pixels late) and 2 rows either side of a horizontal one."""
+    white = [p == (63, 63, 63) for p in px]
+    blk = lambda bx, by: luma(PALETTE[(3 * bx + 5 * by) % 16])          # noqa: E731
+    o = 80 + (shift or 0)                                                # camera column of panel column 0
+    seg = []                                                             # (brightness difference, part of the border lit)
+    for k in range(3, 14):                                               # vertical borders at camera column 40 k
+        for by in range(12):
+            xs = [40 * k - o + d for d in range(1, 5)]
+            ys = [y for y in range(by * 40 + 3, by * 40 + 37) if all(plain(x, y, grid, dot) for x in xs)]
+            if len(ys) >= 10:
+                seg.append((abs(blk(k - 1, by) - blk(k, by)), sum(any(white[y * 480 + x] for x in xs) for y in ys) / len(ys)))
+    for j in range(1, 12):                                               # horizontal borders at row 40 j
+        for bx in range(2, 14):
+            ys = [40 * j + d for d in range(-2, 3)]
+            xs = [x for x in range(bx * 40 - o + 3, bx * 40 - o + 37) if 0 <= x < 480 and all(plain(x, y, grid, dot) for y in ys)]
+            if len(xs) >= 10:
+                seg.append((abs(blk(bx, j - 1) - blk(bx, j)), sum(any(white[y * 480 + x] for y in ys) for x in xs) / len(xs)))
+    lit = [d for d, f in seg if f >= 0.9]
+    dark = [d for d, f in seg if f <= 0.1]
+    unclear = len(seg) - len(lit) - len(dark)
+    stray = 0
+    for y in range(480):
+        for x in range(480):
+            if white[y * 480 + x] and plain(x, y, grid, dot):
+                cx, cy = (x + o) % 40, y % 40
+                if not (1 <= cx <= 4 or min(cy, 40 - cy) <= 2):
+                    stray += 1
+    ok = lit and dark and not unclear and min(lit) > max(dark) and stray == 0
+    return ok, ("edge picture: %d block borders white along their length (brightness difference %d or more), %d black (%d or less), "
+                "%d half lit; %d white pixels away from a border" % (len(lit), min(lit) if lit else -1, len(dark),
+                                                                     max(dark) if dark else -1, unclear, stray))
+
+
 def stimulus(end_us):
     f = fcl_hub.frame
     grid = [" " * 30] * 15
@@ -115,8 +159,8 @@ def stimulus(end_us):
     ev.append((t + 800, f(bm.OSD_HUD, struct.pack("<BhhhB", *HUD))))
     ev.append((t + 1500, f(bm.SCHED, struct.pack("<BHBBBBB", 0, 100, 0x68, 1, 0x00, 0x1D, 14))))        # every 10 ms
     ev.append((t + 3000, f(bm.INPUTS, b"")))
-    ev.append((30000, "P 4"))                                # B2 down ...
-    ev.append((33000, "P 0"))
+    ev.append((30000, "P 4"))                                # B2 down for 12 ms (the bridge debounces for 5)
+    ev.append((42000, "P 0"))
     ev.append((T_KEY_US, f(bm.OUT, bytes((0x10, 0x10)))))    # the view key, as the hub presses it
     ev.append((T_KEY_US + 4000, f(bm.OUT, bytes((0x10, 0x00)))))
     lines, now = [], 0
@@ -147,8 +191,9 @@ def main():
     end_ms = int(sys.argv[sys.argv.index("--ms") + 1]) if "--ms" in sys.argv else 113
     build = os.path.join(HERE, "sim")
     os.makedirs(build, exist_ok=True)
+    again = "--analyse" in sys.argv
     for n in os.listdir(build):
-        if n.startswith("tb_"):
+        if n.startswith("tb_") and not again:
             os.remove(os.path.join(build, n))
     r = subprocess.run([sys.executable, os.path.join(FPGA, "build.py"), "--gen-only", "--out", build],
                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -164,8 +209,12 @@ def main():
     open(os.path.join(build, "main_sim.v"), "w", encoding="utf-8", newline="\n").write(v)
     listed = re.findall(r"16'h([0-9a-fA-F]{2})_([0-9a-fA-F]{2})", open(os.path.join(build, "v15a1ce.list")).read())
     want = [(int(a, 16), int(b, 16)) for a, b in listed][:78]
-    open(os.path.join(build, "v15a1ce.list"), "w", newline="\n").write("".join("16%s%s\n" % ab for ab in listed))      # as Yosys reads it
+    if not again:
+        open(os.path.join(build, "v15a1ce.list"), "w", newline="\n").write("".join("16%s%s\n" % ab for ab in listed))  # as Yosys reads it
     stim, grid = stimulus(end_ms * 1000)
+    if again:
+        out = open(os.path.join(build, "tb_stdout.txt")).read()
+        return analyse(build, out, grid, want, end_ms)
     open(os.path.join(build, "tb_stim.txt"), "w", newline="\n").write("\n".join(stim) + "\n")
     src = [os.path.join(HERE, "fcl_top_tb.v"), os.path.join(HERE, "sim_models.v"), "main_sim.v", "fcl_cam.v",
            os.path.join(HERE, "fcl_top.v"), os.path.join(FPGA, "bridge", "fcl_bridge.v"), os.path.join(FPGA, "osd", "fcl_osd.v"),
@@ -177,6 +226,10 @@ def main():
     open(os.path.join(build, "tb_stdout.txt"), "w", newline="\n").write(out)
     print("simulated %d ms in %.0f s" % (end_ms, time.time() - t0))
     sys.stdout.flush()
+    return analyse(build, out, grid, want, end_ms)
+
+
+def analyse(build, out, grid, want, end_ms):
 
     # ---- clocks
     m = re.search(r"CLOCKS us (\d+) pix (\d+) sdram (\d+) xclk (\d+) lcd_pclk (\d+)", out)
@@ -206,8 +259,8 @@ def main():
     cam = re.search(r"CAMERA frames (\d+) backlight (\d+) lcd_reset_n (\d+)", out)
     check(sd and sd.group(1) == "1" and sd.group(6) == "0", "SDRAM set to CAS latency 3, full-page bursts; %s read and %s write bursts, %s refreshes"
           % (sd.group(2), sd.group(3), sd.group(5)))
-    check(all(f["pixels"] == 230400 and f["lines"] == 480 for f in frames) and len(frames) >= 1,
-          "every picture is 480 lines of 480 pixels (%d pictures)" % len(frames))
+    check(all(f["pixels"] == 230400 and f["lines"] == 480 and f["hsync"] == 506 for f in frames[1:]) and len(frames) >= 2,
+          "every picture after the first is 480 lines of 480 pixels in 506 lines (%d pictures)" % len(frames))
 
     # ---- pictures
     dot = DOT
@@ -246,28 +299,11 @@ def main():
     before_key = [n for n in exact_cam if frames[n]["at"] < T_KEY_US]
     check(len(before_key) >= 1, "camera -> SDRAM -> TFT: picture %s is exact in all 230400 pixels, text, graphics and dot included "
           "(camera column = panel column + %s)" % (before_key[:1], "?" if shift is None else 80 + shift))
-    if end_ms * 1000 > T_KEY_US + 60000:
+    if end_ms * 1000 > T_KEY_US + 30000:
         check(len(edge_frames) >= 1, "the view key (OUT bit 4 from the ESP32) switches to the edge picture: picture %s is black and white only"
               % [n for n, _ in edge_frames][:1])
         if edge_frames:
-            px = edge_frames[-1][1]
-            near = far = white_near = white_far = 0
-            for y in range(4, 476):
-                for x in range(4, 476):
-                    if not plain(x, y, grid, dot):
-                        continue
-                    cx, cy = (x + 80 + shift) % 40, y % 40
-                    d = min(cx, 40 - cx, cy, 40 - cy)                    # distance to the nearest block border
-                    w = px[y * 480 + x] == (63, 63, 63)
-                    if d <= 1:
-                        near += 1
-                        white_near += w
-                    elif d >= 5:
-                        far += 1
-                        white_far += w
-            check(near and white_near > 0.5 * near and white_far == 0,
-                  "edge picture: white on %.0f %% of the pixels along the block borders, on %d of %d pixels inside the blocks"
-                  % (100.0 * white_near / max(1, near), white_far, far))
+            check(*edge_check(edge_frames[-1][1], grid, dot, shift))
 
     # ---- bridge
     data = bytes(int(x, 16) for x in open(os.path.join(build, "tb_out.txt")).read().split())
@@ -285,7 +321,7 @@ def main():
     check(any(p[-2] & 4 for p in inputs) and inputs[-1][-2] == 0, "bridge: B2 press and release reported (%d input frames)" % len(inputs))
     check(kinds.count(bm.OUT) >= (3 if end_ms * 1000 > T_KEY_US + 5000 else 1) and kinds.count(bm.OSD_TEXT) == len(TEXT)
           and kinds.count(bm.OSD_HUD) == 1, "bridge: overlay text, graphics and output commands acknowledged")
-    if "--keep" not in sys.argv:
+    if "--keep" not in sys.argv and "--analyse" not in sys.argv:
         for n in os.listdir(build):
             if n.startswith("tb_lcd_"):
                 os.remove(os.path.join(build, n))
