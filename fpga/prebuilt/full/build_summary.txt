@@ -1,9 +1,9 @@
 pins placed: 117
 TRELLIS_IO       117 / 365 (32 %)
 DP16KD            18 / 208 (8 %)
-TRELLIS_FF      2300 / 83640 (2 %)
-TRELLIS_COMB    8420 / 83640 (10 %)
-clock $glbnet$cam.m.w25                         103.44 MHz possible, PASS at 100.00 MHz  (SDRAM clock of the camera design)
-clock $glbnet$cmos_xclk$TRELLIS_IO_OUT           57.27 MHz possible, PASS at 25.00 MHz  (25 MHz board clock: bridge, overlay text memory, camera set-up)
-clock $glbnet$pix_clk_out$TRELLIS_IO_OUT         73.41 MHz possible, PASS at 17.86 MHz  (LCD pixel clock, 25 MHz x 5 / 7)
-wrote <build>\full\fcl_full.bit 443582 bytes
+TRELLIS_FF      2308 / 83640 (2 %)
+TRELLIS_COMB    8176 / 83640 (9 %)
+clock $glbnet$cam.m.w25                         111.00 MHz possible, PASS at 100.00 MHz  (SDRAM clock of the camera design)
+clock $glbnet$cmos_xclk$TRELLIS_IO_OUT           56.86 MHz possible, PASS at 25.00 MHz  (25 MHz board clock: bridge, overlay text memory, camera set-up)
+clock $glbnet$pix_clk_out$TRELLIS_IO_OUT         69.81 MHz possible, PASS at 17.86 MHz  (LCD pixel clock, 25 MHz x 5 / 7)
+wrote <build>\full\fcl_full.bit 439532 bytes

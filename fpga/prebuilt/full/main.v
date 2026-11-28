@@ -931,7 +931,11 @@ module vf72cc6_v93ba14 #(
  	 assign cmos_pwdn=0; //fixed at ground
  	 assign cmos_rst_n=1; //fixed at high
  	 
- 	 assign led=led_q; //debugging LED , non-red LED if no problem
+ 	 //led_o (2026-11-28): one more register before the LED pins, so that the LED logic need not sit beside
+  	 //pins at the edge of the chip; that wire was the slowest path of the 100 MHz clock in the camera-only design.
+  	 reg[7:0] led_o=0;
+  	 always @(posedge clk_100) led_o<=led_q;
+  	 assign led=led_o; //debugging LED , non-red LED if no problem
  	 
  	 always @(posedge clk_100) begin
      	 key0_prev<=key0;
@@ -2007,6 +2011,17 @@ module v2b8124_vd61c04 (
   reg orig_q=0,orig_d;
   reg[14:0] f_addr;
   reg[15:0] f2s_data;
+  //The three FIFO fill levels, compared one clock early (2026-11-27). Before, the comparisons ran in the same clock
+  //as everything that follows from them, the slowest path of the memory clock. Safe one clock late: only this block
+  //reads the camera and edge FIFOs, so their counts cannot fall meanwhile, and the SDRAM controller needs at least
+  //four clocks after a burst before it is ready again; a display FIFO seen low one clock late gets one more burst,
+  //which its 2048 words hold.
+  reg cam_full_q=0, vga_low_q=0, sobel_full_q=0;
+  always @(posedge clk) begin
+ 	cam_full_q<=data_count_camera_fifo>512;
+ 	vga_low_q<=data_count_w<250;
+ 	sobel_full_q<=data_count_r>500;
+  end
   
   
   //register operation
@@ -2039,7 +2054,7 @@ module v2b8124_vd61c04 (
  	orig_d=orig_q;
  	
  	case(state_q)
- 		    idle: if(data_count_camera_fifo>512 && ready) begin //wait for the first 512 pixel-data to fill the asyn_fifo then burst-write it to sdram
+ 		    idle: if(cam_full_q && ready) begin //wait for the first 512 pixel-data to fill the asyn_fifo then burst-write it to sdram
  						rw_en=1;
  						rw=0;
  						sobel_addr_d=600;
@@ -2049,7 +2064,7 @@ module v2b8124_vd61c04 (
  						orig_d=1;
  					 end
  		burst_op: if(ready) begin //choose whether to read the colored image or edge detected image OR write to the fifo of VGA
- 							if(data_count_camera_fifo>512) begin //colored image container is filled to 512 thus we can now burst-write(full-page has 512 data) it to SDRAM 
+ 							if(cam_full_q) begin //colored image container is filled to 512 thus we can now burst-write(full-page has 512 data) it to SDRAM 
  								rw_en=1;
  								rw=0;
  								colored_addr_d=(colored_addr_q==599)? 0:colored_addr_q+1'b1; //One frame(640x480) fills the addresses 0-to-599
@@ -2057,13 +2072,13 @@ module v2b8124_vd61c04 (
  								orig_d=1;
  							end
  							
- 							else if(data_count_w<250) begin //asyn_fifo of VGA has only 250 pixel data left, we will now fill it by another 512 pixel data via burst reading the sdram
+ 							else if(vga_low_q) begin //asyn_fifo of VGA has only 250 pixel data left, we will now fill it by another 512 pixel data via burst reading the sdram
  								rw_en=1;
  								rw=1;
  								rd_addr_d=(rd_addr_q==599)? 0:rd_addr_q+1'b1;
  								f_addr= sobel? (rd_addr_q+600):rd_addr_q;
  							end
- 							else if(data_count_r>500) begin //burst write the edge detected image to SDRAM
+ 							else if(sobel_full_q) begin //burst write the edge detected image to SDRAM
  								rw_en=1;
  								rw=0;
  								sobel_addr_d=(sobel_addr_q==1199)? 600:sobel_addr_q+1'b1;

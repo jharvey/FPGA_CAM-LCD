@@ -61,12 +61,15 @@ PASS  automatic, demo loop: after a minute the heading is within 1.5 deg
 PASS  offset found 152 -100 79 counts (true 150 -100 80)
 PASS  automatic, level pan only: heading within 2.0 deg after two turns (was up to 179)
 PASS  level pan: the offset across the pan is found (150 -101); the vertical part is left alone (2, not seen)
-PASS  manual: progress lines while turning, then finished by itself: $M,manual,226,-150,120,475,0.4,60,6,fixed
+PASS  manual: progress lines while turning, then finished by itself: $M,manual,226,-150,120,475,0.4,60,6,fixed,1.00
 PASS  manual: offset 150 -100 80 counts (true 150 -100 80), heading within 1.3 deg
-PASS  calibration stored: {'off': [150.4, -99.8, 79.9], 'radius': 316.4, 'auto': False}
+PASS  calibration stored: {'off': [150.4, -99.8, 79.9], 'radius': 316.4, 'auto': False, 'soft': [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], 'ratio': 1.0}
 PASS  after a restart the stored calibration is used at once: heading within 0.6 deg from the start
 PASS  no hard iron: automatic calibration leaves it alone (offset 2 0 -1, heading within 2.2 deg)
 PASS  magcal auto off stops the automatic fit; reset clears it; a bad argument is refused
+PASS  soft iron, manual calibration: ellipsoid 1.42 : 1 found, heading within 1.3 deg
+PASS  soft iron, a level turn: heading within 0.5 deg with the stored matrix, 13.5 deg with the same offset and no matrix
+PASS  no soft iron: the manual calibration keeps the sphere (ratio 1.00), heading within 1.3 deg
 ALL CHECKS PASSED
 
 ===== python firmware/sim/test_app.py   (exit code 0)
@@ -150,7 +153,7 @@ PASS  a meter reading 2.0 V on a 4 V cell and a wall 1.5 m further than measured
 ALL CHECKS PASSED
 
 ===== python firmware/sim/test_tools.py   (exit code 0)
-PASS  fcl.connect('sim', realtime=False): 4 s of the unit in 0.5 s; heading 100.0 pitch 2.0 roll -3.0 distance 1.50 m
+PASS  fcl.connect('sim', realtime=False): 4 s of the unit in 0.6 s; heading 100.0 pitch 2.0 roll -3.0 distance 1.50 m
 PASS  command(): returns the reply; a refused command raises fcl.Error ('servo 1-6, 500-2500 us or off')
 PASS  page('level'): LCD row 4 'LEVEL', graphics (3, -27, 511, -97, 0)
 PASS  telemetry(count=20): 20 frames over 1900 ms
@@ -165,6 +168,8 @@ PASS  one file changed, one added: only those two are sent
 PASS  bitstream: sent whole, loaded into the configuration memory, restarted ('$R,ok,fpga fcl_full.bit: written to the configuration memory')
 PASS  wrong PIN: refused, nothing changed, no restart ('fcl_calc.py            REFUSED: this needs the PIN')
 PASS  --dry: says what it would send and sends nothing
+PASS  fcl_bringup: 26 checks on a good simulated unit, all pass but Wi-Fi (not set up)
+PASS  fcl_bringup: a cell reading 5 % high is the one failure, and the report marks it (['readings: cell 2'])
 ALL CHECKS PASSED
 
 ===== python firmware/sim/test_lessons.py   (exit code 0)

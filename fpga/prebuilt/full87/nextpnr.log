@@ -1,0 +1,1082 @@
+Info: constraining clock net 'clk_25mhz' to 25.00 MHz
+Info: constraining clock net 'cmos_pclk' to 24.00 MHz
+
+Info: Logic utilisation before packing:
+Info:     Total LUT4s:      7548/83640     9%
+Info:         logic LUTs:   5426/83640     6%
+Info:         carry LUTs:   1996/83640     2%
+Info:           RAM LUTs:     84/10455     0%
+Info:          RAMW LUTs:     42/20910     0%
+
+Info:      Total DFFs:      2308/83640     2%
+
+Info: Packing IOs..
+Info: $i2c_sda$iobuf_i: i2c_sda_$_TBUF__Y.Y
+Info: pin 'i2c_sda$tr_io' constrained to Bel 'X126/Y29/PIOB'.
+Info: $i2c_scl$iobuf_i: i2c_scl_$_TBUF__Y.Y
+Info: pin 'i2c_scl$tr_io' constrained to Bel 'X126/Y56/PIOB'.
+Info: pin 'tof_xshut$tr_io' constrained to Bel 'X126/Y53/PIOA'.
+Info: pin 'tof_int$tr_io' constrained to Bel 'X126/Y56/PIOA'.
+Info: pin 'srv_pwm6$tr_io' constrained to Bel 'X80/Y0/PIOA'.
+Info: pin 'srv_pwm5$tr_io' constrained to Bel 'X85/Y0/PIOA'.
+Info: pin 'srv_pwm4$tr_io' constrained to Bel 'X107/Y0/PIOA'.
+Info: pin 'srv_pwm3$tr_io' constrained to Bel 'X112/Y0/PIOB'.
+Info: pin 'srv_pwm2$tr_io' constrained to Bel 'X126/Y11/PIOB'.
+Info: pin 'srv_pwm1$tr_io' constrained to Bel 'X126/Y11/PIOA'.
+Info: pin 'shutdown$tr_io' constrained to Bel 'X69/Y0/PIOA'.
+Info: pin 'sdram_we_n$tr_io' constrained to Bel 'X126/Y86/PIOC'.
+Info: pin 'sdram_ras_n$tr_io' constrained to Bel 'X126/Y86/PIOB'.
+Info: pin 'sdram_dqm[1]$tr_io' constrained to Bel 'X126/Y38/PIOA'.
+Info: pin 'sdram_dqm[0]$tr_io' constrained to Bel 'X126/Y89/PIOC'.
+Info: sdram_dq[15] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[15].u0, removing $nextpnr_obuf sdram_dq[15].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[15].u0' constrained to Bel 'X126/Y20/PIOC'.
+Info: sdram_dq[14] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[14].u0, removing $nextpnr_obuf sdram_dq[14].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[14].u0' constrained to Bel 'X126/Y41/PIOC'.
+Info: sdram_dq[13] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[13].u0, removing $nextpnr_obuf sdram_dq[13].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[13].u0' constrained to Bel 'X126/Y14/PIOD'.
+Info: sdram_dq[12] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[12].u0, removing $nextpnr_obuf sdram_dq[12].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[12].u0' constrained to Bel 'X126/Y14/PIOC'.
+Info: sdram_dq[11] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[11].u0, removing $nextpnr_obuf sdram_dq[11].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[11].u0' constrained to Bel 'X126/Y35/PIOA'.
+Info: sdram_dq[10] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[10].u0, removing $nextpnr_obuf sdram_dq[10].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[10].u0' constrained to Bel 'X126/Y35/PIOB'.
+Info: sdram_dq[9] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[9].u0, removing $nextpnr_obuf sdram_dq[9].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[9].u0' constrained to Bel 'X126/Y35/PIOC'.
+Info: sdram_dq[8] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[8].u0, removing $nextpnr_obuf sdram_dq[8].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[8].u0' constrained to Bel 'X126/Y35/PIOD'.
+Info: sdram_dq[7] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[7].u0, removing $nextpnr_obuf sdram_dq[7].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[7].u0' constrained to Bel 'X126/Y86/PIOD'.
+Info: sdram_dq[6] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[6].u0, removing $nextpnr_obuf sdram_dq[6].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[6].u0' constrained to Bel 'X126/Y92/PIOD'.
+Info: sdram_dq[5] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[5].u0, removing $nextpnr_obuf sdram_dq[5].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[5].u0' constrained to Bel 'X126/Y89/PIOD'.
+Info: sdram_dq[4] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[4].u0, removing $nextpnr_obuf sdram_dq[4].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[4].u0' constrained to Bel 'X126/Y83/PIOD'.
+Info: sdram_dq[3] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[3].u0, removing $nextpnr_obuf sdram_dq[3].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[3].u0' constrained to Bel 'X126/Y53/PIOC'.
+Info: sdram_dq[2] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[2].u0, removing $nextpnr_obuf sdram_dq[2].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[2].u0' constrained to Bel 'X126/Y50/PIOD'.
+Info: sdram_dq[1] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[1].u0, removing $nextpnr_obuf sdram_dq[1].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[1].u0' constrained to Bel 'X126/Y50/PIOC'.
+Info: sdram_dq[0] feeds TRELLIS_IO cam.m.v50aef8.vbdbe11.vf775c2.genblk1[0].u0, removing $nextpnr_obuf sdram_dq[0].
+Info: pin 'cam.m.v50aef8.vbdbe11.vf775c2.genblk1[0].u0' constrained to Bel 'X126/Y20/PIOD'.
+Info: pin 'sdram_cs_n$tr_io' constrained to Bel 'X126/Y86/PIOA'.
+Info: pin 'sdram_clk$tr_io' constrained to Bel 'X126/Y38/PIOB'.
+Info: pin 'sdram_cke$tr_io' constrained to Bel 'X126/Y38/PIOC'.
+Info: pin 'sdram_cas_n$tr_io' constrained to Bel 'X126/Y89/PIOA'.
+Info: pin 'sdram_ba[1]$tr_io' constrained to Bel 'X126/Y83/PIOB'.
+Info: pin 'sdram_ba[0]$tr_io' constrained to Bel 'X126/Y83/PIOC'.
+Info: pin 'sdram_addr[12]$tr_io' constrained to Bel 'X126/Y41/PIOA'.
+Info: pin 'sdram_addr[11]$tr_io' constrained to Bel 'X126/Y38/PIOD'.
+Info: pin 'sdram_addr[10]$tr_io' constrained to Bel 'X126/Y83/PIOA'.
+Info: pin 'sdram_addr[9]$tr_io' constrained to Bel 'X126/Y41/PIOB'.
+Info: pin 'sdram_addr[8]$tr_io' constrained to Bel 'X126/Y44/PIOA'.
+Info: pin 'sdram_addr[7]$tr_io' constrained to Bel 'X126/Y44/PIOC'.
+Info: pin 'sdram_addr[6]$tr_io' constrained to Bel 'X126/Y41/PIOD'.
+Info: pin 'sdram_addr[5]$tr_io' constrained to Bel 'X126/Y44/PIOB'.
+Info: pin 'sdram_addr[4]$tr_io' constrained to Bel 'X126/Y44/PIOD'.
+Info: pin 'sdram_addr[3]$tr_io' constrained to Bel 'X126/Y47/PIOC'.
+Info: pin 'sdram_addr[2]$tr_io' constrained to Bel 'X126/Y47/PIOA'.
+Info: pin 'sdram_addr[1]$tr_io' constrained to Bel 'X126/Y47/PIOD'.
+Info: pin 'sdram_addr[0]$tr_io' constrained to Bel 'X126/Y47/PIOB'.
+Info: pin 'pix_clk_out$tr_io' constrained to Bel 'X78/Y0/PIOB'.
+Info: pin 'mag_drdy$tr_io' constrained to Bel 'X126/Y50/PIOB'.
+Info: pin 'led1$tr_io' constrained to Bel 'X0/Y35/PIOD'.
+Info: pin 'led0$tr_io' constrained to Bel 'X0/Y35/PIOC'.
+Info: pin 'imu_int2$tr_io' constrained to Bel 'X0/Y83/PIOC'.
+Info: pin 'imu_int1$tr_io' constrained to Bel 'X126/Y29/PIOA'.
+Info: pin 'esp_tx$tr_io' constrained to Bel 'X0/Y86/PIOD'.
+Info: pin 'esp_rx$tr_io' constrained to Bel 'X0/Y89/PIOC'.
+Info: pin 'cmos_xclk$tr_io' constrained to Bel 'X119/Y0/PIOA'.
+Info: pin 'cmos_vsync$tr_io' constrained to Bel 'X121/Y0/PIOA'.
+Info: cmos_sda feeds TRELLIS_IO cam.m.vc07f95.v385830.vb70907.tristate, removing $nextpnr_obuf cmos_sda.
+Info: pin 'cam.m.vc07f95.v385830.vb70907.tristate' constrained to Bel 'X119/Y0/PIOB'.
+Info: pin 'cmos_scl$tr_io' constrained to Bel 'X121/Y0/PIOB'.
+Info: pin 'cmos_rst_n$tr_io' constrained to Bel 'X76/Y0/PIOA'.
+Info: pin 'cmos_pwdn$tr_io' constrained to Bel 'X78/Y0/PIOA'.
+Info: pin 'cmos_pclk$tr_io' constrained to Bel 'X71/Y0/PIOA'.
+Info: pin 'cmos_href$tr_io' constrained to Bel 'X116/Y0/PIOB'.
+Info: pin 'cmos_db[7]$tr_io' constrained to Bel 'X116/Y0/PIOA'.
+Info: pin 'cmos_db[6]$tr_io' constrained to Bel 'X114/Y0/PIOA'.
+Info: pin 'cmos_db[5]$tr_io' constrained to Bel 'X110/Y0/PIOB'.
+Info: pin 'cmos_db[4]$tr_io' constrained to Bel 'X110/Y0/PIOA'.
+Info: pin 'cmos_db[3]$tr_io' constrained to Bel 'X105/Y0/PIOA'.
+Info: pin 'cmos_db[2]$tr_io' constrained to Bel 'X103/Y0/PIOA'.
+Info: pin 'cmos_db[1]$tr_io' constrained to Bel 'X83/Y0/PIOA'.
+Info: pin 'cmos_db[0]$tr_io' constrained to Bel 'X76/Y0/PIOB'.
+Info: pin 'clk_25mhz$tr_io' constrained to Bel 'X0/Y47/PIOA'.
+Info: pin 'cam_led[5]$tr_io' constrained to Bel 'X0/Y41/PIOD'.
+Info: pin 'cam_led[4]$tr_io' constrained to Bel 'X0/Y17/PIOA'.
+Info: pin 'cam_led[3]$tr_io' constrained to Bel 'X0/Y44/PIOD'.
+Info: pin 'cam_led[2]$tr_io' constrained to Bel 'X0/Y17/PIOB'.
+Info: pin 'cam_led[1]$tr_io' constrained to Bel 'X0/Y38/PIOC'.
+Info: pin 'cam_led[0]$tr_io' constrained to Bel 'X0/Y17/PIOD'.
+Info: pin 'btn_pwr_n$tr_io' constrained to Bel 'X6/Y0/PIOB'.
+Info: pin 'btn2_n$tr_io' constrained to Bel 'X0/Y77/PIOA'.
+Info: pin 'btn1_n$tr_io' constrained to Bel 'X0/Y83/PIOB'.
+Info: pin 'baro_int$tr_io' constrained to Bel 'X126/Y53/PIOB'.
+Info: pin 'adc_sdo$tr_io' constrained to Bel 'X0/Y38/PIOA'.
+Info: pin 'adc_sck$tr_io' constrained to Bel 'X0/Y38/PIOB'.
+Info: pin 'adc_din$tr_io' constrained to Bel 'X0/Y38/PIOD'.
+Info: pin 'adc_cnv$tr_io' constrained to Bel 'X0/Y35/PIOB'.
+Info: pin 'LCD_VS$tr_io' constrained to Bel 'X0/Y35/PIOA'.
+Info: pin 'LCD_SPI_MOSI$tr_io' constrained to Bel 'X63/Y0/PIOB'.
+Info: pin 'LCD_SPI_DC$tr_io' constrained to Bel 'X65/Y0/PIOA'.
+Info: pin 'LCD_SPI_CS_N$tr_io' constrained to Bel 'X63/Y0/PIOA'.
+Info: pin 'LCD_SPI_CLK$tr_io' constrained to Bel 'X65/Y0/PIOB'.
+Info: pin 'LCD_RESET_N$tr_io' constrained to Bel 'X60/Y0/PIOB'.
+Info: pin 'LCD_R[5]$tr_io' constrained to Bel 'X58/Y0/PIOB'.
+Info: pin 'LCD_R[4]$tr_io' constrained to Bel 'X60/Y0/PIOA'.
+Info: pin 'LCD_R[3]$tr_io' constrained to Bel 'X58/Y0/PIOA'.
+Info: pin 'LCD_R[2]$tr_io' constrained to Bel 'X54/Y0/PIOA'.
+Info: pin 'LCD_R[1]$tr_io' constrained to Bel 'X18/Y0/PIOB'.
+Info: pin 'LCD_R[0]$tr_io' constrained to Bel 'X15/Y0/PIOB'.
+Info: pin 'LCD_PCLK$tr_io' constrained to Bel 'X0/Y14/PIOD'.
+Info: pin 'LCD_HS$tr_io' constrained to Bel 'X0/Y17/PIOC'.
+Info: pin 'LCD_G[5]$tr_io' constrained to Bel 'X15/Y0/PIOA'.
+Info: pin 'LCD_G[4]$tr_io' constrained to Bel 'X18/Y0/PIOA'.
+Info: pin 'LCD_G[3]$tr_io' constrained to Bel 'X11/Y0/PIOB'.
+Info: pin 'LCD_G[2]$tr_io' constrained to Bel 'X4/Y0/PIOA'.
+Info: pin 'LCD_G[1]$tr_io' constrained to Bel 'X4/Y0/PIOB'.
+Info: pin 'LCD_G[0]$tr_io' constrained to Bel 'X11/Y0/PIOA'.
+Info: pin 'LCD_DE$tr_io' constrained to Bel 'X0/Y14/PIOC'.
+Info: pin 'LCD_BL_EN$tr_io' constrained to Bel 'X126/Y17/PIOC'.
+Info: pin 'LCD_B[5]$tr_io' constrained to Bel 'X0/Y11/PIOB'.
+Info: pin 'LCD_B[4]$tr_io' constrained to Bel 'X0/Y11/PIOC'.
+Info: pin 'LCD_B[3]$tr_io' constrained to Bel 'X0/Y11/PIOD'.
+Info: pin 'LCD_B[2]$tr_io' constrained to Bel 'X0/Y11/PIOA'.
+Info: pin 'LCD_B[1]$tr_io' constrained to Bel 'X0/Y14/PIOB'.
+Info: pin 'LCD_B[0]$tr_io' constrained to Bel 'X0/Y14/PIOA'.
+Info: IOLOGIC component cam.m.v50aef8.vbdbe11.vf775c2.oddr_primitive connected to PIO Bel X126/Y38/PIOB
+Info: Packing constants..
+Info: Packing carries...
+Info: Packing LUTs...
+Info: Packing LUT5-7s...
+Info: Packing FFs...
+Info:     1088 FFs paired with LUTs.
+Info: Generating derived timing constraints...
+Info:     Input frequency of PLL 'cam.m.v9df384.pll_pix' is constrained to 25.0 MHz
+Info:     Derived frequency constraint of 17.9 MHz for net pix_clk_out$TRELLIS_IO_OUT
+Info:     Input frequency of PLL 'cam.m.v3383b1.v32750d.pll_i' is constrained to 25.0 MHz
+Info:     Derived frequency constraint of 87.5 MHz for net cam.m.w25
+Info: Promoting globals...
+Info:     promoting clock net cmos_xclk$TRELLIS_IO_OUT to global network
+Info:     promoting clock net cam.m.w25 to global network
+Info:     promoting clock net pix_clk_out$TRELLIS_IO_OUT to global network
+Info: Checksum: 0xfb3131d8
+
+Info: Device utilisation:
+Info: 	          TRELLIS_IO:   117/  365    32%
+Info: 	                DCCA:     3/   56     5%
+Info: 	              DP16KD:    18/  208     8%
+Info: 	          MULT18X18D:     5/  156     3%
+Info: 	              ALU54B:     0/   78     0%
+Info: 	             EHXPLLL:     2/    4    50%
+Info: 	             EXTREFB:     0/    2     0%
+Info: 	                DCUA:     0/    2     0%
+Info: 	           PCSCLKDIV:     0/    2     0%
+Info: 	             IOLOGIC:     1/  224     0%
+Info: 	            SIOLOGIC:     0/  141     0%
+Info: 	                 GSR:     0/    1     0%
+Info: 	               JTAGG:     0/    1     0%
+Info: 	                OSCG:     0/    1     0%
+Info: 	               SEDGA:     0/    1     0%
+Info: 	                 DTR:     0/    1     0%
+Info: 	             USRMCLK:     0/    1     0%
+Info: 	             CLKDIVF:     0/    4     0%
+Info: 	           ECLKSYNCB:     0/   10     0%
+Info: 	             DLLDELD:     0/    8     0%
+Info: 	              DDRDLL:     0/    4     0%
+Info: 	             DQSBUFM:     0/   14     0%
+Info: 	     TRELLIS_ECLKBUF:     0/    8     0%
+Info: 	        ECLKBRIDGECS:     0/    2     0%
+Info: 	                DCSC:     0/    2     0%
+Info: 	          TRELLIS_FF:  2308/83640     2%
+Info: 	        TRELLIS_COMB:  8232/83640     9%
+Info: 	        TRELLIS_RAMW:    21/10455     0%
+
+Info: Placed 120 cells based on constraints.
+Info: Creating initial analytic placement for 5393 cells, random placement wirelen = 662469.
+Info:     at initial placer iter 0, wirelen = 16457
+Info:     at initial placer iter 1, wirelen = 12219
+Info:     at initial placer iter 2, wirelen = 11288
+Info:     at initial placer iter 3, wirelen = 10897
+Info: Running main analytical placer, max placement attempts per cell = 14329981.
+Info:     at iteration #1, type ALL: wirelen solved = 10737, spread = 56426, legal = 61795; time = 0.64s
+Info:     at iteration #2, type ALL: wirelen solved = 14067, spread = 43829, legal = 50630; time = 0.51s
+Info:     at iteration #3, type ALL: wirelen solved = 15956, spread = 43718, legal = 48125; time = 0.51s
+Info:     at iteration #4, type ALL: wirelen solved = 17843, spread = 39400, legal = 46333; time = 0.48s
+Info:     at iteration #5, type ALL: wirelen solved = 18904, spread = 39062, legal = 46225; time = 0.43s
+Info:     at iteration #6, type ALL: wirelen solved = 19920, spread = 37475, legal = 44904; time = 0.45s
+Info:     at iteration #7, type ALL: wirelen solved = 20457, spread = 36662, legal = 44136; time = 0.49s
+Info:     at iteration #8, type ALL: wirelen solved = 20924, spread = 41290, legal = 47350; time = 0.49s
+Info:     at iteration #9, type ALL: wirelen solved = 22168, spread = 40470, legal = 48101; time = 0.46s
+Info:     at iteration #10, type ALL: wirelen solved = 22705, spread = 43677, legal = 49310; time = 0.43s
+Info:     at iteration #11, type ALL: wirelen solved = 24324, spread = 43093, legal = 49066; time = 0.42s
+Info:     at iteration #12, type ALL: wirelen solved = 24880, spread = 43401, legal = 48252; time = 0.42s
+Info: HeAP Placer Time: 9.26s
+Info:   of which solving equations: 4.83s
+Info:   of which spreading cells: 1.05s
+Info:   of which strict legalisation: 1.06s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 1792, wirelen = 44136
+Info:   at iteration #5: temp = 0.000000, timing cost = 1166, wirelen = 35599
+Info:   at iteration #10: temp = 0.000000, timing cost = 1244, wirelen = 34158
+Info:   at iteration #15: temp = 0.000000, timing cost = 1501, wirelen = 33257
+Info:   at iteration #20: temp = 0.000000, timing cost = 1331, wirelen = 32795
+Info:   at iteration #25: temp = 0.000000, timing cost = 1443, wirelen = 32623
+Info:   at iteration #29: temp = 0.000000, timing cost = 1297, wirelen = 32578 
+Info: SA placement time 42.02s
+
+Info: Max frequency for clock                  '$glbnet$cam.m.w25': 91.33 MHz (PASS at 87.50 MHz)
+Info: Max frequency for clock   '$glbnet$cmos_xclk$TRELLIS_IO_OUT': 52.09 MHz (PASS at 25.00 MHz)
+Info: Max frequency for clock '$glbnet$pix_clk_out$TRELLIS_IO_OUT': 61.21 MHz (PASS at 17.86 MHz)
+
+Info: Max delay <async>                                    -> <async>                                   : 1.32 ns
+Info: Max delay <async>                                    -> posedge $glbnet$cam.m.w25                 : 12.36 ns
+Info: Max delay <async>                                    -> posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT  : 21.90 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> <async>                                   : 13.24 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT  : 6.08 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT: 2.32 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> <async>                                   : 17.32 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> posedge $glbnet$cam.m.w25                 : 9.23 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT: 9.94 ns
+Info: Max delay posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT -> <async>                                   : 11.08 ns
+Info: Max delay posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT -> posedge $glbnet$cam.m.w25                 : 1.84 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 17 endpoint(s)
+Info:          + represents [1,17) endpoint(s)
+Info: [   479,   3218) |****+
+Info: [  3218,   5957) |**************+
+Info: [  5957,   8696) |***********************+
+Info: [  8696,  11435) |*******+
+Info: [ 11435,  14174) | 
+Info: [ 14174,  16913) | 
+Info: [ 16913,  19652) | 
+Info: [ 19652,  22391) |+
+Info: [ 22391,  25130) | 
+Info: [ 25130,  27869) |**+
+Info: [ 27869,  30608) |************************************************************ 
+Info: [ 30608,  33347) |*************************************+
+Info: [ 33347,  36086) |**************************************+
+Info: [ 36086,  38825) |*********************************************************+
+Info: [ 38825,  41564) |*********+
+Info: [ 41564,  44303) |********+
+Info: [ 44303,  47042) |********+
+Info: [ 47042,  49781) |****+
+Info: [ 49781,  52520) |****+
+Info: [ 52520,  55259) |**********+
+Info: Checksum: 0x931740d6
+Info: Routing globals...
+Info:     routing clock net $glbnet$pix_clk_out$TRELLIS_IO_OUT using global 0
+Info:     routing clock net $glbnet$cam.m.w25 using global 1
+Info:     routing clock net $glbnet$cmos_xclk$TRELLIS_IO_OUT using global 2
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 26817 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |      314        685 |  314   685 |     26217|       1.24       1.24|
+Info:       2000 |      725       1274 |  411   589 |     25778|       0.41       1.65|
+Info:       3000 |     1037       1962 |  312   688 |     25201|       0.55       2.19|
+Info:       4000 |     1292       2707 |  255   745 |     24506|       0.52       2.71|
+Info:       5000 |     1489       3510 |  197   803 |     23771|       0.43       3.14|
+Info:       6000 |     1693       4306 |  204   796 |     23058|       0.43       3.57|
+Info:       7000 |     1896       5103 |  203   797 |     22315|       0.37       3.94|
+Info:       8000 |     2119       5880 |  223   777 |     21603|       0.46       4.40|
+Info:       9000 |     2440       6559 |  321   679 |     20980|       0.44       4.84|
+Info:      10000 |     2944       7055 |  504   496 |     20526|       0.67       5.51|
+Info:      11000 |     3226       7773 |  282   718 |     19842|       0.44       5.95|
+Info:      12000 |     3454       8545 |  228   772 |     19216|       0.44       6.39|
+Info:      13000 |     3687       9305 |  233   760 |     18507|       0.37       6.75|
+Info:      14000 |     4000       9938 |  313   633 |     17889|       0.38       7.14|
+Info:      15000 |     4292      10604 |  292   666 |     17227|       0.47       7.61|
+Info:      16000 |     4495      11365 |  203   761 |     16458|       0.30       7.91|
+Info:      17000 |     4695      12105 |  200   740 |     15769|       0.32       8.23|
+Info:      18000 |     4929      12811 |  234   706 |     15092|       0.33       8.55|
+Info:      19000 |     5132      13544 |  203   733 |     14335|       0.30       8.85|
+Info:      20000 |     5326      14268 |  194   724 |     13556|       0.34       9.20|
+Info:      21000 |     5513      14982 |  187   714 |     12764|       0.37       9.57|
+Info:      22000 |     5691      15702 |  178   720 |     11976|       0.35       9.92|
+Info:      23000 |     5889      16382 |  198   680 |     11184|       0.40      10.32|
+Info:      24000 |     6096      17058 |  207   676 |     10516|       0.32      10.64|
+Info:      25000 |     6273      17809 |  177   751 |      9711|       0.36      11.00|
+Info:      26000 |     6453      18532 |  180   723 |      8928|       0.37      11.37|
+Info:      27000 |     6641      19238 |  188   706 |      8130|       0.31      11.68|
+Info:      28000 |     6831      20006 |  190   768 |      7339|       0.40      12.09|
+Info:      29000 |     7000      20730 |  169   724 |      6520|       0.38      12.46|
+Info:      30000 |     7178      21460 |  178   730 |      5711|       0.44      12.90|
+Info:      31000 |     7352      22192 |  174   732 |      4913|       0.39      13.28|
+Info:      32000 |     7574      22850 |  222   658 |      4180|       0.42      13.70|
+Info:      33000 |     7784      23540 |  210   690 |      3414|       0.46      14.16|
+Info:      34000 |     7914      24330 |  130   790 |      2549|       0.37      14.53|
+Info:      35000 |     8039      25047 |  125   717 |      1687|       0.41      14.94|
+Info:      36000 |     8067      25721 |   28   674 |       741|       0.41      15.35|
+Info:      36827 |     8091      26300 |   24   579 |         0|       0.35      15.70|
+Info: Routing complete.
+Info: Router1 time 15.70s
+Info: Checksum: 0x04a8e5d4
+
+Info: Critical path report for clock '$glbnet$cam.m.w25' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v50aef8.vb01cee.v65c4d4.r_grey_sync_TRELLIS_FF_Q_6.Q
+Info:  1.0  1.6    Net cam.m.v50aef8.vb01cee.v65c4d4.r_grey_sync[5] (95,13) -> (95,13)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  1.8  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0  1.8    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT (95,13) -> (95,13)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.30-157.32
+Info:  0.2  2.0  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0  2.0    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1 (95,13) -> (95,13)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.54-157.56
+Info:  0.2  2.2  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  0.0  2.2    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D0 (95,13) -> (95,13)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.FXA
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:157.66-157.68
+Info:  0.2  2.5  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0_L6MUX21_Z_1_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  1.2  3.7    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_4_A0[1] (95,13) -> (89,16)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_A0_LUT4_D_Z_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  3.9  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_A0_LUT4_D_Z_LUT4_Z.F
+Info:  1.2  5.1    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_B_CCU2C_S0_A0_LUT4_D_Z[5] (89,16) -> (89,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2241.22-2241.41
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:32.22-32.23
+Info:  0.4  5.5  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0  5.5    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_COUT[6] (89,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2241.22-2241.41
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  5.6  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0  5.6    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_FCI_INT (90,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0  5.6  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0  5.6    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_COUT[8] (90,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2241.22-2241.41
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  5.7  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  5.7    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0$CCU2_FCI_INT (90,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  5.7  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  5.7    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT_S0_CCU2C_S0_COUT[10] (90,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2241.22-2241.41
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  5.7  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0  5.7    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT$CCU2_FCI_INT (90,15) -> (90,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0  5.7  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0  5.7    Net $nextpnr_CCU2C_165$CIN (90,15) -> (90,15)
+Info:                Sink $nextpnr_CCU2C_165$CCU2_COMB0.FCI
+Info:  0.4  6.2  Source $nextpnr_CCU2C_165$CCU2_COMB0.F
+Info:  0.7  6.9    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey_nxt_LUT4_C_Z_PFUMX_C0_Z_LUT4_Z_2_D[6] (90,15) -> (91,15)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_D_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.M
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.3  7.1  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_D_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  0.9  8.1    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_DI_LUT4_Z_D[2] (91,15) -> (91,17)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_6_DI_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  8.3  Source cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_6_DI_LUT4_Z.F
+Info:  0.1  8.4    Net cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_6_DI (91,17) -> (91,17)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_6.DI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2228.4-2243.7
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  8.4  Setup cam.m.v50aef8.vb01cee.v65c4d4.data_count_w_TRELLIS_FF_Q_6.DI
+Info: 3.2 ns logic, 5.2 ns routing
+
+Info: Critical path report for clock '$glbnet$cmos_xclk$TRELLIS_IO_OUT' (posedge -> posedge):
+Info: curr total
+Info:  5.8  5.8  Source cam.m.v32ef04.v7e62b7.v21516f.ram.0.0.DOB5
+Info:  1.9  7.7    Net cam.m.v32ef04.v7e62b7.v21516f.ram.0.0_DOB5[1] (105,22) -> (108,31)
+Info:                Sink cam.m.v32ef04.v285763.dout_2_LUT4_Z_2.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/brams_map.v:46.13-46.16
+Info:  0.2  8.0  Source cam.m.v32ef04.v285763.dout_2_LUT4_Z_2.F
+Info:  0.9  8.9    Net cam.m.v32ef04.w68[3] (108,31) -> (108,32)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB1.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:2887.13-2887.16
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.4  9.3  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0  9.3    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0_3_COUT[6] (108,32) -> (109,32)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3458.11-3458.24
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1  9.4  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  9.4    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0$CCU2_FCI_INT (109,32) -> (109,32)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.4  9.8  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.F
+Info:  1.1 10.9    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_LUT4_Z_D[7] (109,32) -> (110,31)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_CCU2C_S0_S1_LUT4_Z.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3458.11-3458.24
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:34.26-34.27
+Info:  0.2 11.1  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_C0_CCU2C_S0_S1_LUT4_Z.F
+Info:  1.0 12.1    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_1_C0[3] (110,31) -> (110,32)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_3_ALUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2 12.3  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_3_ALUT_LUT4_Z.F
+Info:  0.0 12.3    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_3_ALUT (110,32) -> (110,32)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_3_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:133.22-133.24
+Info:  0.2 12.5  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0_PFUMX_Z_3_BLUT_LUT4_Z.OFX
+Info:  1.3 13.8    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_A0[3] (110,32) -> (107,30)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_2$CCU2_COMB1.A
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3473.19-3473.22
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:30.22-30.23
+Info:  0.4 14.3  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0 14.3    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_3_COUT[4] (107,30) -> (107,30)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3473.19-3473.22
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 14.4  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0 14.4    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_1$CCU2_FCI_INT (107,30) -> (107,30)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0 14.4  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0 14.4    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0_3_COUT[6] (107,30) -> (108,30)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3473.19-3473.22
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.1 14.4  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0 14.4    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0$CCU2_FCI_INT (108,30) -> (108,30)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.4 14.8  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D_CCU2C_S0$CCU2_COMB1.F
+Info:  0.7 15.6    Net cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_8_D[7] (108,30) -> (108,29)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_1.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3473.19-3473.22
+Info:                  main.v:3213.18-3239.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:34.26-34.27
+Info:  0.2 15.8  Source cam.m.v32ef04.veb1519.v95f545.v21516f.din_LUT4_Z_1.F
+Info:  1.1 16.9    Net cam.m.v32ef04.w51[1] (108,29) -> (107,22)
+Info:                Sink cam.m.v32ef04.veb1519.v95f545.v21516f.ram.0.0.DIA7
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:2870.13-2870.16
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2 17.2  Setup cam.m.v32ef04.veb1519.v95f545.v21516f.ram.0.0.DIA7
+Info: 9.1 ns logic, 8.1 ns routing
+
+Info: Critical path report for clock '$glbnet$pix_clk_out$TRELLIS_IO_OUT' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source osd.osd.y1_TRELLIS_FF_Q_5.Q
+Info:  1.2  1.7    Net osd.osd.dy_CCU2C_S0_3_COUT[1] (64,11) -> (57,11)
+Info:                Sink osd.osd.dy_CCU2C_S0_3$CCU2_COMB0.A
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:63.20-63.22
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:  0.4  2.1  Source osd.osd.dy_CCU2C_S0_3$CCU2_COMB0.FCO
+Info:  0.0  2.1    Net osd.osd.dy_CCU2C_S0_3$CCU2_FCI_INT (57,11) -> (57,11)
+Info:                Sink osd.osd.dy_CCU2C_S0_3$CCU2_COMB1.FCI
+Info:  0.0  2.1  Source osd.osd.dy_CCU2C_S0_3$CCU2_COMB1.FCO
+Info:  0.0  2.1    Net osd.osd.dy_CCU2C_S0_3_COUT[2] (57,11) -> (57,11)
+Info:                Sink osd.osd.dy_CCU2C_S0_2$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:85.29-85.59
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:65.22-65.25
+Info:  0.1  2.2  Source osd.osd.dy_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0  2.2    Net osd.osd.dy_CCU2C_S0_2$CCU2_FCI_INT (57,11) -> (57,11)
+Info:                Sink osd.osd.dy_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0  2.2  Source osd.osd.dy_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0  2.2    Net osd.osd.dy_CCU2C_S0_3_COUT[4] (57,11) -> (57,11)
+Info:                Sink osd.osd.dy_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:85.29-85.59
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:65.22-65.25
+Info:  0.4  2.7  Source osd.osd.dy_CCU2C_S0_1$CCU2_COMB0.F
+Info:  1.3  3.9    Net osd.osd.ady_LUT4_Z_C[0] (57,11) -> (58,12)
+Info:                Sink osd.osd.ady_LUT4_Z_C_CCU2C_S0$CCU2_COMB0.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:85.24-85.26
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:  0.4  4.4  Source osd.osd.ady_LUT4_Z_C_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  4.4    Net osd.osd.ady_LUT4_Z_C_CCU2C_S0$CCU2_FCI_INT (58,12) -> (58,12)
+Info:                Sink osd.osd.ady_LUT4_Z_C_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.4  4.8  Source osd.osd.ady_LUT4_Z_C_CCU2C_S0$CCU2_COMB1.F
+Info:  0.9  5.7    Net osd.osd.ady_LUT4_Z_9_C[9] (58,12) -> (58,13)
+Info:                Sink osd.osd.ady_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  5.9  Source osd.osd.ady_LUT4_Z.F
+Info:  1.7  7.6    Net osd.osd.adx_LUT4_Z_C_CCU2C_S0_S1_LUT4_C_Z_PFUMX_ALUT_Z_L6MUX21_SD_Z_L6MUX21_D1_Z[2] (58,13) -> (62,15)
+Info:                Sink osd.osd.far_LUT4_Z_D_CCU2C_COUT$CCU2_COMB1.A
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.4  8.0  Source osd.osd.far_LUT4_Z_D_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0  8.0    Net $nextpnr_CCU2C_175$CIN (62,15) -> (62,15)
+Info:                Sink $nextpnr_CCU2C_175$CCU2_COMB0.FCI
+Info:  0.4  8.5  Source $nextpnr_CCU2C_175$CCU2_COMB0.F
+Info:  0.9  9.4    Net osd.osd.far_LUT4_Z_D[9] (62,15) -> (62,16)
+Info:                Sink osd.osd.far_LUT4_Z_5.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:87.23-87.32
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.2  9.6  Source osd.osd.far_LUT4_Z_5.F
+Info:  1.1 10.7    Net osd.osd.far[0] (62,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_3$CCU2_COMB0.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:87.16-87.19
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:  0.4 11.2  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_3$CCU2_COMB0.FCO
+Info:  0.0 11.2    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_3$CCU2_FCI_INT (64,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_3$CCU2_COMB1.FCI
+Info:  0.0 11.2  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_3$CCU2_COMB1.FCO
+Info:  0.0 11.2    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C[1] (64,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:94.30-94.43
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 11.2  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0 11.2    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_FCI_INT (64,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0 11.2  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0 11.2    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C[3] (64,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:94.30-94.43
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 11.3  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0 11.3    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_FCI_INT (64,16) -> (64,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0 11.3  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0 11.3    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C[5] (64,16) -> (65,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:94.30-94.43
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 11.4  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0 11.4    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0$CCU2_FCI_INT (65,16) -> (65,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0 11.4  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0 11.4    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C[7] (65,16) -> (65,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:94.30-94.43
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1 11.4  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0 11.4    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT$CCU2_FCI_INT (65,16) -> (65,16)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0 11.4  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0 11.4    Net $nextpnr_CCU2C_223$CIN (65,16) -> (65,16)
+Info:                Sink $nextpnr_CCU2C_223$CCU2_COMB0.FCI
+Info:  0.4 11.9  Source $nextpnr_CCU2C_223$CCU2_COMB0.F
+Info:  0.9 12.8    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z_C[9] (65,16) -> (65,17)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z.C
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:94.30-94.43
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.2 13.1  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD_LUT4_Z.F
+Info:  0.4 13.5    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_SD[4] (65,17) -> (65,17)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.M
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.3 13.7  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.0 13.7    Net osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_D1 (65,17) -> (65,17)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.FXB
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:141.38-141.40
+Info:  0.2 14.0  Source osd.osd.h_ring_TRELLIS_FF_Q_DI_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z.OFX
+Info:  0.5 14.4    Net osd.osd.h_ring_TRELLIS_FF_Q_DI (65,17) -> (65,17)
+Info:                Sink osd.osd.h_ring_TRELLIS_FF_Q.M
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd.v:92.5-100.8
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:55.51-58.104
+Info:  0.0 14.4  Setup osd.osd.h_ring_TRELLIS_FF_Q.M
+Info: 5.6 ns logic, 8.8 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> '<async>':
+Info: curr total
+Info:  0.0  0.0  Source clk_25mhz$tr_io.O
+Info:  0.2  0.2    Net cmos_xclk$TRELLIS_IO_OUT (0,47) -> (3,46)
+Info:                Sink $gbuf$cmos_xclk$TRELLIS_IO_OUT.CLKI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:135.61-139.91
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/osd/fcl_osd_stream.v:21.30-21.34
+Info:  0.0  0.2  Source $gbuf$cmos_xclk$TRELLIS_IO_OUT.CLKO
+Info:  0.0  0.2    Net $glbnet$cmos_xclk$TRELLIS_IO_OUT (3,46) -> (119,0)
+Info:                Sink cmos_xclk$tr_io.I
+Info: 0.0 ns logic, 0.2 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$cam.m.w25':
+Info: curr total
+Info:  0.0  0.0  Source cam.m.vc07f95.v385830.vb70907.tristate.O
+Info:  1.3  1.3    Net cam.m.vc07f95.v385830.vb70907.sda_in (119,0) -> (108,3)
+Info:                Sink cam.m.vc07f95.v385830.vb70907.sda_in_LUT4_B.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1091.4-1103.3
+Info:                  main.v:1161.9-1161.15
+Info:                  main.v:574.10-584.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  1.6  Source cam.m.vc07f95.v385830.vb70907.sda_in_LUT4_B.F
+Info:  0.9  2.5    Net cam.m.vc07f95.v385830.vb70907.sda_in_LUT4_B_Z[2] (108,3) -> (109,3)
+Info:                Sink cam.m.vc07f95.v93ba14.state_d_LUT4_Z_2_D_LUT4_Z_A_LUT4_Z_C_LUT4_D_1_Z_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  2.7  Source cam.m.vc07f95.v93ba14.state_d_LUT4_Z_2_D_LUT4_Z_A_LUT4_Z_C_LUT4_D_1_Z_LUT4_Z.F
+Info:  3.0  5.7    Net cam.m.vc07f95.v93ba14.addr_q_LUT4_B_1_Z_PFUMX_ALUT_Z_LUT4_Z_A[3] (109,3) -> (63,4)
+Info:                Sink cam.m.vc07f95.v93ba14.led_d_LUT4_Z_D_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  5.9  Source cam.m.vc07f95.v93ba14.led_d_LUT4_Z_D_LUT4_Z.F
+Info:  0.7  6.6    Net cam.m.vc07f95.v93ba14.led_d_LUT4_Z_D[2] (63,4) -> (62,4)
+Info:                Sink cam.m.vc07f95.v93ba14.led_d_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  6.8  Source cam.m.vc07f95.v93ba14.led_d_LUT4_Z.F
+Info:  0.1  7.0    Net cam.m.vc07f95.v93ba14.led_d[7] (62,4) -> (62,4)
+Info:                Sink cam.m.vc07f95.v93ba14.led_q_TRELLIS_FF_Q.DI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:225.10-245.3
+Info:                  main.v:697.21-697.26
+Info:                  main.v:607.4-628.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  7.0  Setup cam.m.vc07f95.v93ba14.led_q_TRELLIS_FF_Q.DI
+Info: 0.9 ns logic, 6.0 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.0  0.0  Source btn1_n$tr_io.O
+Info:  8.8  8.8    Net btn1_n$TRELLIS_IO_IN (0,83) -> (86,20)
+Info:                Sink cam.m.v32ef04.v5bfbe7.va7041c.in_LUT4_Z.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:62.24-62.30
+Info:  0.2  9.0  Source cam.m.v32ef04.v5bfbe7.va7041c.in_LUT4_Z.F
+Info:  0.2  9.2    Net key_view_n (86,20) -> (86,20)
+Info:                Sink cam.m.v32ef04.v5bfbe7.va7041c.in_LUT4_C.C
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:110.10-110.20
+Info:  0.2  9.4  Source cam.m.v32ef04.v5bfbe7.va7041c.in_LUT4_C.F
+Info:  1.2 10.7    Net cam.m.v32ef04.v5bfbe7.va7041c.in_LUT4_C_Z[0] (86,20) -> (87,23)
+Info:                Sink cam.m.v32ef04.v5bfbe7.va7041c.btn_out_r_TRELLIS_FF_Q_CE_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2 10.9  Source cam.m.v32ef04.v5bfbe7.va7041c.btn_out_r_TRELLIS_FF_Q_CE_LUT4_Z.F
+Info:  0.4 11.3    Net cam.m.v32ef04.v5bfbe7.va7041c.btn_out_r_TRELLIS_FF_Q_CE (87,23) -> (87,23)
+Info:                Sink cam.m.v32ef04.v5bfbe7.va7041c.btn_out_r_TRELLIS_FF_Q.CE
+Info:  0.0 11.3  Setup cam.m.v32ef04.v5bfbe7.va7041c.btn_out_r_TRELLIS_FF_Q.CE
+Info: 0.7 ns logic, 10.6 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cam.m.w25' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v50aef8.vbdbe11.vf775c2.tri_q_TRELLIS_FF_Q.Q
+Info:  1.2  1.7    Net cam.m.v50aef8.vbdbe11.vf775c2.tri_q (111,29) -> (116,29)
+Info:                Sink cam.m.v50aef8.vbdbe11.vf775c2.tri_q_LUT4_D.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2436.18-2457.3
+Info:                  main.v:2543.7-2543.12
+Info:                  main.v:1937.10-1958.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  1.9  Source cam.m.v50aef8.vbdbe11.vf775c2.tri_q_LUT4_D.F
+Info:  4.7  6.6    Net cam.m.v50aef8.vbdbe11.vf775c2.tri_q_LUT4_D_Z (116,29) -> (126,92)
+Info:                Sink cam.m.v50aef8.vbdbe11.vf775c2.genblk1[6].u0.T
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2436.18-2457.3
+Info:                  main.v:2792.11-2792.17
+Info:                  main.v:1937.10-1958.3
+Info:                  fcl_cam.v:58.10-113.6
+Info: 0.8 ns logic, 5.9 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cam.m.w25' -> 'posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.vc07f95.vdb3cff.v65c4d4.r_ptr_sync_TRELLIS_FF_Q_11.Q
+Info:  1.1  1.7    Net cam.m.vc07f95.vdb3cff.v65c4d4.r_ptr_sync[0] (104,21) -> (103,20)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C_LUT4_Z_1_D_LUT4_Z.B
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1626.18-1639.3
+Info:                  main.v:1676.28-1676.38
+Info:                  main.v:595.10-604.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  1.9  Source cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C_LUT4_Z_1_D_LUT4_Z.F
+Info:  0.6  2.5    Net cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C_LUT4_Z_1_D[2] (103,20) -> (103,20)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C_LUT4_Z_1.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  2.7  Source cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C_LUT4_Z_1.F
+Info:  1.0  3.7    Net cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1_C[2] (103,20) -> (103,23)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  3.9  Source cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_S0_LUT4_Z_1.F
+Info:  1.2  5.1    Net cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_1_DI_PFUMX_Z_BLUT_LUT4_Z_D[1] (103,23) -> (102,24)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI_PFUMX_Z_ALUT_LUT4_Z.B
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  5.3  Source cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0  5.3    Net cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI_PFUMX_Z_ALUT (102,24) -> (102,24)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:133.22-133.24
+Info:  0.2  5.5  Source cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.7  6.2    Net cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3_DI (102,24) -> (103,24)
+Info:                Sink cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3.M
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:225.10-245.3
+Info:                  main.v:1626.18-1639.3
+Info:                  main.v:1720.4-1733.7
+Info:                  main.v:595.10-604.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  6.2  Setup cam.m.vc07f95.vdb3cff.v65c4d4.data_count_r_TRELLIS_FF_Q_3.M
+Info: 1.6 ns logic, 4.6 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cam.m.w25' -> 'posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v50aef8.vb01cee.v65c4d4.w_ptr_q_TRELLIS_FF_Q_9.Q
+Info:  1.2  1.7    Net cam.m.v50aef8.vb01cee.w8[8] (92,16) -> (89,18)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_LUT4_Z_10.C
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2135.14-2135.16
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  2.0  Source cam.m.v50aef8.vb01cee.v65c4d4.w_grey_LUT4_Z_10.F
+Info:  0.1  2.1    Net cam.m.v50aef8.vb01cee.v65c4d4.w_grey[2] (89,18) -> (89,18)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.w_grey_sync_temp_TRELLIS_FF_Q_9.DI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.0  2.1  Setup cam.m.v50aef8.vb01cee.v65c4d4.w_grey_sync_temp_TRELLIS_FF_Q_9.DI
+Info: 0.8 ns logic, 1.3 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source bridge.tx_busy_TRELLIS_FF_Q.Q
+Info:  0.9  1.4    Net bridge.tx_busy (63,30) -> (62,30)
+Info:                Sink esp_tx_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  1.7  Source esp_tx_LUT4_Z.F
+Info:  7.1  8.8    Net esp_tx$TRELLIS_IO_OUT (62,30) -> (0,86)
+Info:                Sink esp_tx$tr_io.I
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:54.24-54.30
+Info: 0.8 ns logic, 8.0 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT' -> 'posedge $glbnet$cam.m.w25':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v32ef04.veb1519.v65c4d4.r_ptr_sync_TRELLIS_FF_Q_8.Q
+Info:  1.1  1.7    Net cam.m.v32ef04.veb1519.v65c4d4.r_ptr_sync[3] (110,26) -> (108,25)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0_A0_LUT4_Z_8.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3632.18-3645.3
+Info:                  main.v:3682.28-3682.38
+Info:                  main.v:3194.10-3203.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  1.9  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0_A0_LUT4_Z_8.F
+Info:  0.9  2.8    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0_A0[3] (108,25) -> (108,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_8_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.A
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3632.18-3645.3
+Info:                  main.v:3737.44-3737.62
+Info:                  main.v:3194.10-3203.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:59.22-59.24
+Info:  0.4  3.2  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_8_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  3.2    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_COUT[4] (108,26) -> (108,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_6_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:65.22-65.25
+Info:  0.1  3.3  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_6_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  3.3    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_6_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_FCI_INT (108,26) -> (108,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_6_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  3.3  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_6_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  3.3    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_COUT[6] (108,26) -> (109,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_4_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:65.22-65.25
+Info:  0.1  3.4  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_4_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  3.4    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_4_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_FCI_INT (109,26) -> (109,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_4_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  3.4  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_4_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  3.4    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_9_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S1_COUT[8] (109,26) -> (109,26)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:65.22-65.25
+Info:  0.4  3.8  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_BLUT_LUT4_Z_D_CCU2C_S0$CCU2_COMB0.F
+Info:  1.4  5.2    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_BLUT_LUT4_Z_D[3] (109,26) -> (112,27)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_ALUT_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  5.4  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_ALUT_LUT4_Z.F
+Info:  0.0  5.4    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_ALUT (112,27) -> (112,27)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_BLUT_LUT4_Z.F1
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:133.22-133.24
+Info:  0.2  5.6  Source cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:  0.4  6.0    Net cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2_DI (112,27) -> (113,27)
+Info:                Sink cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2.M
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:271.10-286.3
+Info:                  main.v:3632.18-3645.3
+Info:                  main.v:3726.4-3739.7
+Info:                  main.v:3194.10-3203.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  6.0  Setup cam.m.v32ef04.veb1519.v65c4d4.data_count_r_TRELLIS_FF_Q_2.M
+Info: 2.2 ns logic, 3.8 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT' -> 'posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v32ef04.v2d8c02.threshold_TRELLIS_FF_Q_6.Q
+Info:  2.2  2.7    Net cam.m.w46[6] (90,20) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.A
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:108.13-108.16
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.4  3.2  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB0.FCO
+Info:  0.0  3.2    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_FCI_INT (87,13) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCI
+Info:  0.0  3.2  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_2$CCU2_COMB1.FCO
+Info:  0.0  3.2    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A[1] (87,13) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4065.20-4065.40
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  3.3  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB0.FCO
+Info:  0.0  3.3    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_FCI_INT (87,13) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCI
+Info:  0.0  3.3  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0_1$CCU2_COMB1.FCO
+Info:  0.0  3.3    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A[3] (87,13) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4065.20-4065.40
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  3.3  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB0.FCO
+Info:  0.0  3.3    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0$CCU2_FCI_INT (87,13) -> (87,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCI
+Info:  0.0  3.3  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT_S0_CCU2C_S0$CCU2_COMB1.FCO
+Info:  0.0  3.3    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A[5] (87,13) -> (88,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT$CCU2_COMB0.FCI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4065.20-4065.40
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:63.22-63.23
+Info:  0.1  3.4  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT$CCU2_COMB0.FCO
+Info:  0.0  3.4    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT$CCU2_FCI_INT (88,13) -> (88,13)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT$CCU2_COMB1.FCI
+Info:  0.0  3.4  Source osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A_CCU2C_COUT$CCU2_COMB1.FCO
+Info:  0.0  3.4    Net $nextpnr_CCU2C_239$CIN (88,13) -> (88,13)
+Info:                Sink $nextpnr_CCU2C_239$CCU2_COMB0.FCI
+Info:  0.4  3.8  Source $nextpnr_CCU2C_239$CCU2_COMB0.F
+Info:  1.1  5.0    Net osd.osd.rgb1_TRELLIS_FF_Q_DI_LUT4_Z_B_LUT4_Z_A[7] (88,13) -> (87,12)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_9_DI_LUT4_Z_C_LUT4_Z.A
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4065.20-4065.40
+Info:                  fcl_cam.v:58.10-113.6
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/arith_map.v:38.23-38.25
+Info:  0.2  5.2  Source osd.osd.rgb1_TRELLIS_FF_Q_9_DI_LUT4_Z_C_LUT4_Z.F
+Info:  1.0  6.2    Net osd.osd.rgb1_TRELLIS_FF_Q_9_DI_LUT4_Z_C[1] (87,12) -> (87,9)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_9_DI_LUT4_Z.C
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  6.4  Source osd.osd.rgb1_TRELLIS_FF_Q_9_DI_LUT4_Z.F
+Info:  0.1  6.6    Net osd.osd.rgb1_TRELLIS_FF_Q_9_DI (87,9) -> (87,9)
+Info:                Sink osd.osd.rgb1_TRELLIS_FF_Q_9.DI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:287.15-323.3
+Info:                  main.v:4084.2-4150.5
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  6.6  Setup osd.osd.rgb1_TRELLIS_FF_Q_9.DI
+Info: 2.1 ns logic, 4.5 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v5ec133.init_done_TRELLIS_FF_Q.Q
+Info:  3.6  4.1    Net osd.de_LUT4_Z_A[2] (58,8) -> (11,13)
+Info:                Sink LCD_PCLK_LUT4_Z.D
+Info:                Defined in:
+Info:                  C:\Users\MyPC\ICESTU~1\apio\packages\TOOLS-~1\bin\../share/yosys/ecp5/cells_map.v:108.23-108.24
+Info:  0.2  4.3  Source LCD_PCLK_LUT4_Z.F
+Info:  1.6  6.0    Net LCD_PCLK$TRELLIS_IO_OUT (11,13) -> (0,14)
+Info:                Sink LCD_PCLK$tr_io.I
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:111.7-111.10
+Info:                  fcl_cam.v:58.10-113.6
+Info: 0.8 ns logic, 5.2 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT' -> 'posedge $glbnet$cam.m.w25':
+Info: curr total
+Info:  0.5  0.5  Source cam.m.v50aef8.vb01cee.v65c4d4.r_ptr_q_TRELLIS_FF_Q.Q
+Info:  1.1  1.7    Net cam.m.v50aef8.vb01cee.v65c4d4.r_grey[11] (93,12) -> (95,11)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.r_grey_LUT4_Z.D
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2249.28-2249.35
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.2  1.9  Source cam.m.v50aef8.vb01cee.v65c4d4.r_grey_LUT4_Z.F
+Info:  0.1  2.0    Net cam.m.v50aef8.vb01cee.v65c4d4.r_grey[10] (95,11) -> (95,11)
+Info:                Sink cam.m.v50aef8.vb01cee.v65c4d4.r_grey_sync_temp_TRELLIS_FF_Q_1.DI
+Info:                Defined in:
+Info:                  M:/FPGA_CAM-LCD-merged/fpga/full/fcl_top.v:119.13-131.94
+Info:                  main.v:246.10-270.3
+Info:                  main.v:2167.18-2180.3
+Info:                  main.v:2253.29-2253.35
+Info:                  main.v:1926.10-1936.3
+Info:                  fcl_cam.v:58.10-113.6
+Info:  0.0  2.0  Setup cam.m.v50aef8.vb01cee.v65c4d4.r_grey_sync_temp_TRELLIS_FF_Q_1.DI
+Info: 0.8 ns logic, 1.3 ns routing
+
+Info: Max frequency for clock                  '$glbnet$cam.m.w25': 118.71 MHz (PASS at 87.50 MHz)
+Info: Max frequency for clock   '$glbnet$cmos_xclk$TRELLIS_IO_OUT': 58.31 MHz (PASS at 25.00 MHz)
+Info: Max frequency for clock '$glbnet$pix_clk_out$TRELLIS_IO_OUT': 69.32 MHz (PASS at 17.86 MHz)
+
+Info: Max delay <async>                                    -> <async>                                   : 0.25 ns
+Info: Max delay <async>                                    -> posedge $glbnet$cam.m.w25                 : 6.98 ns
+Info: Max delay <async>                                    -> posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT  : 11.30 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> <async>                                   : 6.64 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT  : 6.19 ns
+Info: Max delay posedge $glbnet$cam.m.w25                  -> posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT: 2.09 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> <async>                                   : 8.77 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> posedge $glbnet$cam.m.w25                 : 6.04 ns
+Info: Max delay posedge $glbnet$cmos_xclk$TRELLIS_IO_OUT   -> posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT: 6.57 ns
+Info: Max delay posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT -> <async>                                   : 5.98 ns
+Info: Max delay posedge $glbnet$pix_clk_out$TRELLIS_IO_OUT -> posedge $glbnet$cam.m.w25                 : 2.04 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 20 endpoint(s)
+Info:          + represents [1,20) endpoint(s)
+Info: [  3004,   5607) |******+
+Info: [  5607,   8210) |**********************+
+Info: [  8210,  10813) |*************+
+Info: [ 10813,  13416) | 
+Info: [ 13416,  16019) | 
+Info: [ 16019,  18622) | 
+Info: [ 18622,  21225) | 
+Info: [ 21225,  23828) |+
+Info: [ 23828,  26431) |+
+Info: [ 26431,  29034) |+
+Info: [ 29034,  31637) |*****+
+Info: [ 31637,  34240) |****************************************************+
+Info: [ 34240,  36843) |*******************************************************+
+Info: [ 36843,  39446) |************************************************************ 
+Info: [ 39446,  42049) |+
+Info: [ 42049,  44652) |***+
+Info: [ 44652,  47255) |***+
+Info: [ 47255,  49858) |**********+
+Info: [ 49858,  52461) |****+
+Info: [ 52461,  55064) |***********+
+
+Info: Program finished normally.
