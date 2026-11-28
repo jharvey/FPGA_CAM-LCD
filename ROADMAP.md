@@ -1069,3 +1069,4 @@ New:
 - **Open:** nothing on hardware. The memory clock's 3 % margin and the SDRAM's pin timing are to be watched on the
   first board. The three changed blocks of the camera project should be looked at in Icestudio by its author. The
   viper code has only run as 64-bit code. A 32-bit MicroPython build on the VM would need `gcc-multilib`.
+- Later the same day: `gcc-multilib` installed on the VM; `test_mpy.py` passes with a 32-bit MicroPython build as well (750 lines identical, the real main loop runs), so the viper code is no longer untested at the ESP32's word size. Whole-design simulation: all checks pass (`fpga/prebuilt/test_full.txt`).
