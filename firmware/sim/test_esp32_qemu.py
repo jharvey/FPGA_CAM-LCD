@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """The ESP32 files on an emulated ESP32: Espressif's QEMU, the official MicroPython 1.24.1 firmware for the ESP32
-with PSRAM, the files copied onto its flash, and mpy_scenario.py run there.  Its output must equal ordinary
-Python's line for line: that checks the viper code (attitude filter, CRC) as real Xtensa machine code, and the
-ESP32 port of MicroPython itself.
+with PSRAM, and the files copied onto its flash.  Two runs there:
+
+1. viper_check.py: the attitude filter (viper) and the link CRC on made-up integer data.  No floats: the output must
+   equal ordinary Python's exactly.  This is the check of the viper code as Xtensa machine code.
+2. mpy_scenario.py, the 40 s session of test_mpy.py.  MicroPython on the ESP32 calculates with 32-bit floats (the
+   PC with 64-bit ones), so numbers differ in their last digits and a slewed value can land one frame later.  The
+   lines must match in kind and order, and every number within 0.6 + 1 % of its value; the largest difference
+   of each telemetry field is printed.  The board's output is kept as esp32_session.txt in the --qemu folder.
 
     python3 firmware/sim/test_esp32_qemu.py --qemu DIR       DIR holds qemu/bin/qemu-system-xtensa, lib/ (libslirp)
                                                              and flash32.bin (the firmware at 0x1000 of 4 MB)
@@ -21,12 +26,13 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ESP = os.path.join(HERE, "..", "esp32")
 sys.path.insert(0, HERE)
+sys.path.insert(0, ESP)
 import esp_raw      # noqa: E402
 
 FILES = [(os.path.join(ESP, n), "/" + n) for n in ("fcl_bridge.py", "fcl_calc.py", "fcl_cfg.py", "fcl_fix.py", "fcl_magcal.py",
                                                   "fcl_app.py", "fcl_hubpy.py", "fcl_usb.py", "fcl_web.py", "fcl_user_example.py",
                                                   "fcl_hub.py")] + \
-        [(os.path.join(HERE, n), "/" + n) for n in ("fcl_sim.py", "bridge_model.py", "fcl_osd.py", "mpy_scenario.py")] + \
+        [(os.path.join(HERE, n), "/" + n) for n in ("fcl_sim.py", "bridge_model.py", "fcl_osd.py", "mpy_scenario.py", "viper_check.py")] + \
         [(os.path.join(HERE, "mpy", n), "/mpy/" + n.replace(os.sep, "/")) for n in ("random.py", "subprocess.py", os.path.join("os", "__init__.py"),
                                                                                     os.path.join("os", "path.py"))]
 fail = 0
@@ -63,21 +69,57 @@ def main():
             b.put(local, remote)
         check(True, "%d files copied onto its flash in %.0f s" % (len(FILES), time.time() - t0))
         t0 = time.time()
-        out, err = b.exec("import os\nos.chdir('/')\nimport mpy_scenario", timeout=7200)
+        vout, verr = b.exec("import os\nos.chdir('/')\nimport viper_check", timeout=3600)
+        vsecs = time.time() - t0
+        t0 = time.time()
+        out, err = b.exec("import mpy_scenario", timeout=7200)
         secs = time.time() - t0
     finally:
         q.kill()
         q.wait()
+    vref = subprocess.run([sys.executable, os.path.join(HERE, "viper_check.py")], stdout=subprocess.PIPE, universal_newlines=True).stdout
+    vboard = vout.replace("\r\n", "\n")
+    check(not verr and vboard == vref and vref.endswith("END\n"),
+          "viper code as Xtensa machine code: the filter and the CRC give exactly ordinary Python's numbers (%d lines, %.0f s)%s"
+          % (vref.count("\n"), vsecs, "" if not verr else ": " + verr.strip().split("\n")[-1]))
     board = out.replace("\r\n", "\n").rstrip("\n").split("\n")
+    open(os.path.join(qdir, "esp32_session.txt"), "w").write("\n".join(board) + "\n")
     ref = subprocess.run([sys.executable, os.path.join(HERE, "mpy_scenario.py")], stdout=subprocess.PIPE, universal_newlines=True).stdout
     ref = ref.rstrip("\n").split("\n")
     cut = ref.index("== web") if "== web" in ref else len(ref)
     check(not err, "the session ran on the board in %.0f s without an error%s" % (secs, "" if not err else ": " + err.strip().split("\n")[-1]))
     same = sum(a == b for a, b in zip(ref[:cut], board[:cut]))
-    diff = [(i, a, b) for i, (a, b) in enumerate(zip(ref[:cut], board[:cut])) if a != b]
-    check(len(board) >= cut and not diff, "its output equals ordinary Python's: %d lines before the web part, %d identical" % (cut, same))
-    for i, a, b in diff[:4]:
+    bad, worst = [], {}
+    names = None
+    try:
+        import fcl_usb
+        names = fcl_usb.T_FIELDS
+    except ImportError:
+        pass
+    for i, (a, b) in enumerate(zip(ref[:cut], board[:cut])):
+        if a == b:
+            continue
+        fa, fb = a.split(","), b.split(",")
+        ok = len(fa) == len(fb) and fa[0] == fb[0]
+        for k, (x, y) in enumerate(zip(fa, fb)):
+            if not ok or x == y:
+                continue
+            try:
+                d = abs(float(x) - float(y))
+            except ValueError:
+                ok = False
+                continue
+            ok = ok and d <= 0.6 + 0.01 * abs(float(x))
+            if a.startswith("$T,") and names and 0 < k <= len(names):
+                worst[names[k - 1]] = max(worst.get(names[k - 1], 0.0), d)
+        if not ok:
+            bad.append((i, a, b))
+    check(len(board) >= cut and not bad, "the session's output matches ordinary Python's within the float tolerance: %d lines, %d identical, "
+          "%d with small differences" % (cut, same, cut - same - len(bad)))
+    for i, a, b in bad[:4]:
         print("   line %d\n     python  %s\n     esp32   %s" % (i + 1, a, b))
+    if worst:
+        print("      largest differences (32-bit floats): " + ", ".join("%s %g" % kv for kv in sorted(worst.items())))
     t = [x for x in board[:cut] if x.startswith("$T")]
     print("      %d telemetry lines from the board; after the web marker it printed: %s" %
           (len(t), " | ".join(board[cut + 1:cut + 3])[:150] if len(board) > cut else "nothing"))

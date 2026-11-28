@@ -7,7 +7,11 @@ port. Three 18650 cells.
 **State.** The board is routed and not yet ordered. The FPGA design and the software are written and tested in
 simulation only; nothing here has run on hardware.
 
-![the screen with graphics](doc/manual/lcd_graphics.png)
+| The FPGA design, simulated with a photo | Its edge view |
+|---|---|
+| ![camera](doc/manual/fpga_photo_camera.png) | ![edges](doc/manual/fpga_photo_edges.png) |
+
+A [92-second video](doc/fw/fcl_sim_tour.mp4) of the simulated unit: pages, menu, graphics.
 
 ## Try it now, without hardware
 

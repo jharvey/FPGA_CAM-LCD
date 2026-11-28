@@ -10,9 +10,10 @@
 # The result is stored (magcal.json on the ESP32) and loaded at the next start.
 #
 # Soft iron (manual mode only): steel near the sensor bends the field, so the readings lie on an ellipsoid, not a
-#   sphere, and the heading error then changes with direction.  When the readings cover all six directions, an
-#   ellipsoid is fitted as well, and a 3 x 3 matrix that turns it back into a sphere is stored with the offset.  It
-#   is used only if it fits clearly better than the sphere and the ellipsoid is no more squashed than 1.5 : 1.
+#   sphere, and the heading error then changes with direction.  When the readings cover at least five of the six
+#   directions, an ellipsoid is fitted as well, and a 3 x 3 matrix that turns it back into a sphere is stored with the
+#   offset.  It is used only if it fits clearly better than the sphere and is no more squashed than 1.5 : 1.  A
+#   sphere fit that misses the readings by more than 3 % is not stored: on a bent field its centre is wrong too.
 #
 # Not corrected: anything that changes with time, such as a servo motor or a current-carrying wire next to the sensor.
 import math
@@ -250,15 +251,21 @@ class MagCal:
         self.pts = []
 
     def manual_stop(self):
+        prev = (list(self.off), [list(r) for r in self.soft], self.ratio, self.radius, self.rms, self.state)
         ok = len(self.pts) >= 12 and self._fit(prior=False)
-        if ok or (len(self.pts) >= 12 and self.radius):
-            self._soft_fit()
+        soft = len(self.pts) >= 12 and self.radius and self._soft_fit()
+        if not soft and self.radius and self.rms > 0.03:
+            # the readings are not on a sphere (bent field) and the ellipsoid could not be used: keep what was there
+            self.off, self.soft, self.ratio, self.radius, self.rms, self.state = prev
+            self.save()
+            ok = False
         self.manual = False
-        return ok
+        return bool(ok or soft)
 
     def _soft_fit(self):
         """after a manual sphere fit: replace the sphere by an ellipsoid if that fits clearly better"""
-        e = ellipsoid(self.pts) if self.seen == 0x3F and len(self.pts) >= 20 else None
+        n_dirs = sum(1 for i in range(6) if self.seen >> i & 1)
+        e = ellipsoid(self.pts) if n_dirs >= 5 and len(self.pts) >= 20 else None
         if e is None:
             return False
         c, W, ratio, rms, r = e

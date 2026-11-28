@@ -89,8 +89,15 @@ small magnet next to the compass, measures again, calibrates, and measures a thi
 **Look for.** With the magnet the error is large in some directions and small in others. Which directions, and why
 those? (Where the magnet's field points along the earth's it changes the strength, not the direction.)
 
-**Questions.** Why must the unit be pointed up and down as well, not only turned round? Would the calibration
-still be right after you put in different cells?
+**Part 2: bent fields.** Plain steel (not a magnet) does something else: it bends the earth's field, stronger along
+one axis and weaker along another. The readings then lie on a squashed ball, an ellipsoid, and the first
+calibration cannot help: the script shows about 10 degrees of error, changing sign twice in a turn. A second
+calibration with the unit turned, tilted and rolled slowly for half a minute lets the unit fit the ellipsoid and
+undo the bend: under a degree again.
+
+**Questions.** Why must the unit be pointed up and down as well, not only turned round? Why does the bent field make
+an error that repeats twice in one turn, while the magnet's repeats once? Would the calibration still be right after
+you put in different cells?
 
 **With a real unit.** Menu, Compass cal. Then hold a steel spoon near the top of the unit and watch the heading.
 

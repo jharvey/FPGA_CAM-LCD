@@ -278,7 +278,8 @@ with the limit at 0.5 A. Check the slot's row in the Stage 0 cell table again be
 ## Stage 9 - sensors through the FPGA, then the whole unit
 
 Rows 9.4 to 9.10 can be run by `python firmware/tools/fcl_bringup.py --port <port> --board <n>`: it tells you what
-to do, reads the unit, decides pass or fail and writes `bringup_board<n>_<date>.md` with every measured value.
+to do, reads the unit, decides pass or fail and writes `bringup_board<n>_<date>.md` with every measured value. A sample report:
+[manual/bringup_demo.md](manual/bringup_demo.md).
 
 | # | Check | How | Expected | Result |
 |---|---|---|---|---|

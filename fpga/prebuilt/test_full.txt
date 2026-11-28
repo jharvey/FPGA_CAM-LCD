@@ -1,11 +1,11 @@
-python fpga/full/test_full.py, run 2026-11-27 on the FPGA sources of commit 606e8d97 (the stored bitstreams were built from 2fa52355; no FPGA source changed in between)
-simulated 113 ms in 4400 s
+python fpga/full/test_full.py, run 2026-11-28 on the FPGA sources of commit 33813603 (the stored bitstreams were built from those sources)
+simulated 113 ms in 4867 s
 clocks: pixel 17.86 MHz, SDRAM 100.00 MHz, camera 25.00 MHz
 PASS  pixel clock 17.86 MHz, SDRAM clock 100 MHz, camera clock 25 MHz
 pictures: 6, one every 18.1 ms (55.1 per second)
 PASS  camera set-up: 78 register writes reach the camera model, equal to the project's list
 PASS  panel set-up: 247 bytes on the SPI pins, 48 commands, sleep-out (11) before display-on (29)
-PASS  SDRAM set to CAS latency 3, full-page bursts; 2470 read and 3027 write bursts, 19033 refreshes
+PASS  SDRAM set to CAS latency 3, full-page bursts; 2470 read and 3027 write bursts, 19036 refreshes
 PASS  every picture after the first is 480 lines of 480 pixels in 506 lines (6 pictures)
 PASS  picture 1, the design's own test pattern with text, graphics and dot on top: 0 of 230400 pixels differ
    picture 2 at  56 ms: mixed   (133604 pixels differ from the camera picture at shift +0, 133604 undefined, 190121 not black or white)
@@ -21,3 +21,30 @@ PASS  bridge: 10 scheduled sensor samples while the video runs (one every 10 ms)
 PASS  bridge: B2 press and release reported (3 input frames)
 PASS  bridge: overlay text, graphics and output commands acknowledged
 ALL CHECKS PASSED
+
+
+python fpga/full/test_full.py --photo (the same sources): a real photo through the design
+simulated 113 ms in 5059 s
+clocks: pixel 17.86 MHz, SDRAM 100.00 MHz, camera 25.00 MHz
+PASS  pixel clock 17.86 MHz, SDRAM clock 100 MHz, camera clock 25 MHz
+pictures: 6, one every 18.1 ms (55.1 per second)
+PASS  camera set-up: 78 register writes reach the camera model, equal to the project's list
+PASS  panel set-up: 247 bytes on the SPI pins, 48 commands, sleep-out (11) before display-on (29)
+PASS  SDRAM set to CAS latency 3, full-page bursts; 2470 read and 3027 write bursts, 19036 refreshes
+PASS  every picture after the first is 480 lines of 480 pixels in 506 lines (6 pictures)
+PASS  picture 1, the design's own test pattern with text, graphics and dot on top: 0 of 230400 pixels differ
+   picture 2 at  56 ms: mixed   (133604 pixels differ from the camera picture at shift +0, 133604 undefined, 199724 not black or white)
+   picture 3 at  74 ms: camera  (0 pixels differ from the camera picture at shift +0, 0 undefined, 198418 not black or white)
+   picture 4 at  92 ms: mixed   (143330 pixels differ from the camera picture at shift +0, 0 undefined, 70313 not black or white)
+   picture 5 at 110 ms: edges   (221533 pixels differ from the camera picture at shift +0, 0 undefined, 0 not black or white)
+PASS  camera -> SDRAM -> TFT: picture [3] is exact in all 230400 pixels, text, graphics and dot included (camera column = panel column + 80)
+PASS  the view key (OUT bit 4 from the ESP32) switches to the edge picture: picture [5] is black and white only
+pictures written to doc/manual/fpga_photo_camera.png and fpga_photo_edges.png
+PASS  bridge: 25 frames on the UART, no CRC error, ping answered
+PASS  bridge: I2C register read returns the device's value
+PASS  bridge: 10 scheduled sensor samples while the video runs (one every 10 ms)
+PASS  bridge: B2 press and release reported (3 input frames)
+PASS  bridge: overlay text, graphics and output commands acknowledged
+ALL CHECKS PASSED
+simulated 113 ms in 4867 s
+clocks: pixel 17.86 MHz, SDRAM 100.00 MHz, camera 25.00 MHz

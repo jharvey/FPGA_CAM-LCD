@@ -196,7 +196,10 @@ class Hub:
             cal.manual_start()
             r = "magcal started: point the unit up, down, north, south, east and west"
         elif c == "stop":
-            r = "magcal stored" if cal.manual_stop() else "magcal stopped: not enough directions, nothing changed"
+            if not cal.manual:
+                r = "magcal: no calibration running (" + cal.state + ")"
+            else:
+                r = "magcal stored" if cal.manual_stop() else "magcal stopped: not enough directions, nothing changed"
         elif c == "auto":
             cal.auto = a[1] == "on"
             cal.save()

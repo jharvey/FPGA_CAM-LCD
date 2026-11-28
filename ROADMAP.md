@@ -1070,3 +1070,12 @@ New:
   first board. The three changed blocks of the camera project should be looked at in Icestudio by its author. The
   viper code has only run as 64-bit code. A 32-bit MicroPython build on the VM would need `gcc-multilib`.
 - Later the same day: `gcc-multilib` installed on the VM; `test_mpy.py` passes with a 32-bit MicroPython build as well (750 lines identical, the real main loop runs), so the viper code is no longer untested at the ESP32's word size. Whole-design simulation: all checks pass (`fpga/prebuilt/test_full.txt`).
+
+### 2026-11-28 – Fallback bitstream, bring-up assistant, soft iron, emulated ESP32, refreshed pictures
+
+- **Camera project, two more timing changes** (`fpga/IO_REMAP.md`, Clocks): the SDRAM scheduler compares the FIFO fill levels one clock early; one register before the LED pins. Memory clock: full design 111 MHz possible at 100, camera-only 101 at 100. **Fallback** `fpga/prebuilt/full87/fcl_full_87.bit` with the memory clock at 87.5 MHz (119 possible). Whole-design simulation passes on the changed sources, with the test pattern and with a real photo (`fpga/prebuilt/test_full.txt`).
+- **Compass soft-iron correction**: ellipsoid fit in a manual calibration, a 3 x 3 matrix in the filter. Simulated 1.18 : 0.86 bend: heading within 0.5 deg, 13.5 deg wrong without it.
+- **`firmware/tools/fcl_bringup.py`**: the first board's stage 9 with a report per board.
+- **Memory**: the running unit fits in a 192 KB heap including a 440 kB upload (the ESP32-S3 has about 2 MB).
+- **Emulated ESP32** (Espressif QEMU, official MicroPython 1.24.1 with PSRAM): `firmware/sim/test_esp32_qemu.py`. Result below when it has finished.
+- **Pictures and video refreshed**: the tour video (92 s: pages, menu, graphics), the manual's pictures, the firmware guide, the PDFs; the FPGA's own camera and edge pictures in the manual; lesson 4 extended to soft iron; a sample bring-up report.

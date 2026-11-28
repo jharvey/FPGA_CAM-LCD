@@ -130,5 +130,20 @@ check(st.d.get("ratio", 1) > 1.2 and a1 < 2.5 and b1 > 2 * a1 and b1 > 4.0,
 sim, lines, e0, e1 = run(Tumble(), 45.0, iron=(60, -40, 30), commands=[(1.0, "magcal auto off"), (2.0, "magcal start")], window=(35.0, 45.0), skip=down)
 check(sim.hubpy.cal.ratio == 1.0 and e1 < 3.0, "no soft iron: the manual calibration keeps the sphere (ratio %.2f), heading within %.1f deg"
       % (sim.hubpy.cal.ratio, e1))
+# a strongly bent field seen from four directions only: too few for the ellipsoid, and the sphere misses the
+# readings by more than 3 %, so nothing may be stored (the calibration that was there stays)
+sys.path.insert(0, os.path.join(HERE, "..", "esp32"))
+import fcl_magcal      # noqa: E402
+mc = fcl_magcal.MagCal()
+mc.off, mc.radius, mc.state = [5.0, 5.0, 5.0], 300.0, "stored"
+mc.manual_start()
+for k in range(40):
+    az, el = 2 * math.pi * k / 40, math.radians(35 * math.sin(4 * math.pi * k / 40))
+    v = (math.cos(el) * math.cos(az), math.cos(el) * math.sin(az), math.sin(el))
+    m = [300 * sum(row[j] * v[j] for j in range(3)) for row in ((1.45, 0.1, 0.0), (0.1, 0.7, 0.0), (0.0, 0.0, 1.0))]
+    mc.add(m[0] + 60, m[1] - 40, m[2] + 30)
+kept = mc.manual_stop() is False and mc.off == [5.0, 5.0, 5.0] and mc.ratio == 1.0
+check(kept, "a bent field seen from too few directions: nothing stored, the earlier offset kept (%s, fit error %.1f %%)"
+      % (mc.off, 100 * mc.rms))
 print("ALL CHECKS PASSED" if not fail else "%d CHECK(S) FAILED" % fail)
 sys.exit(1 if fail else 0)

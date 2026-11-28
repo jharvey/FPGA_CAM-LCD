@@ -266,7 +266,7 @@ a diff of `x/main.v` against `fpga/prebuilt/camera/main.v` shows it as Verilog.
 | `test_filter.py`, `test_magcal.py` | attitude filter; compass calibration | `python firmware/sim/test_filter.py`, `test_magcal.py` |
 | `test_bridge.py` | `fcl_bridge.v` in Icarus Verilog against the Python model | `python fpga/bridge/test_bridge.py` |
 | `test_osd.py` | the overlay pixel for pixel (text, dot, graphics), alone and behind `fcl_osd_stream.v` with video timing and a second clock | `python fpga/osd/test_osd.py` |
-| `test_full.py` | the whole FPGA design: clocks, camera set-up, panel set-up, a camera picture through the SDRAM to the panel pins pixel for pixel, the view key, the bridge alongside (about an hour) | `python fpga/full/test_full.py` |
+| `test_full.py` | the whole FPGA design: clocks, camera set-up, panel set-up, a camera picture through the SDRAM to the panel pins pixel for pixel, the view key and the edge view, the bridge alongside (75 minutes or more). `--photo`: a real photo instead of the coloured blocks, exact too; it writes `doc/manual/fpga_photo_*.png` | `python fpga/full/test_full.py` |
 
 **The heap.** The running unit (main loop, pages, phone page, a 440 kB upload, and in the test also the simulated
 sensors and FPGA bridge) runs in a 192 KB heap and not in 160 KB; about 116 KB is in use at 32-bit. The ESP32-S3

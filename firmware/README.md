@@ -24,7 +24,7 @@ MicroPython is the plan for the long run: speed comes from viper (integer native
 later move to C. The soft-CPU design below (`common/`, `hub/`) is kept as a tested reference and for the simulator's
 `--hub c` path; the unit does not use it.
 
-Video of the simulated unit (dashboard beside the LCD overlay, a 62 s tour): `doc/fw/fcl_sim_tour.mp4`, made by
+Video of the simulated unit (dashboard beside the LCD overlay, a 92 s tour of the pages, menu and graphics): `doc/fw/fcl_sim_tour.mp4`, made by
 `python firmware/tools/make_video.py`.
 
 Tests: `python firmware/sim/test_usb.py`, `test_app.py`, `test_web.py`, `test_tools.py`, `test_lessons.py`, `test_calibrate.py`, `test_filter.py`, `test_magcal.py`, `test_mpy.py` (real MicroPython, needs its Unix port; all in `firmware/sim/`), `python fpga/bridge/test_bridge.py`,

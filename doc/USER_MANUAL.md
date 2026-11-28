@@ -10,6 +10,9 @@ nothing here has run on real hardware. The pictures are made by the simulator (`
 the text, the graphics and the dot are what the unit's software put on the screen; the camera picture behind them
 is a stand-in.
 
+A 92-second video of the simulated unit going through the pages, the menu and the graphics:
+[fw/fcl_sim_tour.mp4](fw/fcl_sim_tour.mp4).
+
 Try it on a PC, no hardware needed (Python 3 only):
 
 ```
@@ -48,6 +51,17 @@ Each page switches on what it needs: Level the reticle and the horizon, Height t
 reticle and the tape. To have them on every page, use the menu item **Graphics** (page / reticle / all) or the
 command `hud reticle horizon tape` (`hud off` goes back to what the page asks for). Nothing is drawn while the menu
 is open.
+
+### Camera and edge view
+
+| Camera | Edge view (menu **View**) |
+|---|---|
+| ![camera](manual/fpga_photo_camera.png) | ![edges](manual/fpga_photo_edges.png) |
+
+These two are not drawn by the PC: a photo was fed into a model of the camera, and the whole FPGA design was
+simulated (`python fpga/full/test_full.py --photo`). What leaves the FPGA for the screen is shown as it is, with the
+overlay's test text, the graphics and the dot on top. The edge view shows only edges stronger than its threshold
+(menu **Edges + / -**). The photo is Grace Hopper's portrait from matplotlib's sample data (US Navy, public domain).
 
 ## Pages
 

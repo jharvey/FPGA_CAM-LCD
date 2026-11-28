@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Video of the simulated unit: the dashboard (USB serial stream) beside the LCD with its overlay, through a
-scripted tour: level to the north-east, pan to the south-east, tilt, point straight down, climb, buttons, a low cell.
+scripted tour: level to the north-east, pan, tilt, point straight down, climb, then the pages (Level with its
+horizon line, a height measurement, Bearing with the compass tape, a Survey of three corners), the menu, all
+graphics on, and a low cell.
 
     python firmware/tools/make_video.py [out.mp4]        (needs numpy, Pillow, matplotlib's fonts and ffmpeg)
 
@@ -47,14 +49,39 @@ KEYS = [
     (31.0, 150, -90, 0, 0.0, "Moving a few degrees off and around: the dot follows."),
     (36.0, 150, -90, 0, 0.0, "Back up to level, turning to the north-west."),
     (42.0, 315, 0, 0, 0.0, "North-west, level. Raising the unit 2 m: height and pressure change."),
-    (47.0, 315, 0, 0, 2.0, "Button B2: recording mark (REC). Button B1: next page, Level."),
-    (51.0, 315, 0, 0, 2.0, "Commands over USB: servo 2 to 1800 us, then the overlay reduced to dot and charge."),
-    (56.0, 330, 0, 0, 2.0, "Cell 3 runs low and warm: LOW on the LCD and in the dashboard."),
-    (62.0, 330, 0, 0, 2.0, ""),
+    (47.0, 315, 0, 0, 2.0, "Button B2: recording mark (REC). Then B1: the Level page, with a cross and a horizon line."),
+    (50.0, 315, 0, 0, 2.0, "Rolling and tilting: the horizon line stays level with the ground; the page shows the slope."),
+    (52.5, 315, 6, -10, 2.0, ""),
+    (55.0, 315, 0, 0, 2.0, "B1: the Height page. Aim the cross at the foot of a door, B2."),
+    (57.0, 315, -27, 0, 2.0, ""),
+    (59.5, 315, -27, 0, 2.0, "Tilt up to the top of the door, B2: its height, from two sightings."),
+    (62.0, 315, 15, 0, 2.0, ""),
+    (64.5, 315, 15, 0, 2.0, "B1: the Bearing page, with the compass tape. B2 marks this heading; turning away, it shows the way back."),
+    (66.5, 315, 0, 0, 2.0, ""),
+    (69.5, 265, 0, 0, 2.0, ""),
+    (71.0, 265, 0, 0, 2.0, "B1: the Survey page. B2 at each corner of a room: sides and area."),
+    (72.5, 400, -30, 0, 2.0, ""),
+    (74.5, 400, -30, 0, 2.0, ""),
+    (75.5, 500, -30, 0, 2.0, ""),
+    (77.5, 500, -30, 0, 2.0, ""),
+    (78.5, 590, -30, 0, 2.0, ""),
+    (80.0, 590, -30, 0, 2.0, ""),
+    (80.5, 590, 0, 0, 2.0, "Holding B1 opens the menu. Graphics: all, on every page. Back to the Overview."),
+    (86.0, 640, 3, 4, 2.0, "Cell 3 runs low and warm: LOW on the LCD and in the dashboard."),
+    (92.0, 660, 0, 0, 2.0, ""),
 ]
-COMMANDS = [(47.5, "sim press B2 400"), (49.0, "sim press B1 400"), (51.5, "servo 2 1800"), (53.0, "overlay dot batt"),
-            (55.5, "overlay all"), (56.0, "sim set cell3 3.36"), (56.0, "sim set temp3 41"), (1.0, "wifi HomeNet secretpass")]
-END = 62.0
+COMMANDS = [(47.5, "sim press B2 400"), (48.5, "sim press B1 400"),
+            (55.2, "sim press B1 400"), (55.2, "sim set dist 2280"), (58.6, "sim press B2 300"), (59.2, "sim set dist 3000"),
+            (63.0, "sim press B2 300"),
+            (64.7, "sim press B1 400"), (66.6, "sim press B2 300"),
+            (71.2, "sim press B1 400"), (71.2, "points clear"), (71.2, "sim set dist 2100"), (73.8, "sim press B2 300"),
+            (76.8, "sim press B2 300"), (79.3, "sim press B2 300"), (80.0, "sim auto"),
+            (80.8, "sim press B1 1000"), (82.2, "sim press B1 300"), (82.6, "sim press B1 300"), (83.0, "sim press B1 300"),
+            (83.4, "sim press B1 300"), (83.8, "sim press B1 300"), (84.2, "sim press B1 300"), (84.6, "sim press B1 300"),
+            (85.0, "sim press B1 300"), (85.4, "sim press B1 300"), (86.0, "sim press B2 300"),
+            (86.6, "sim press B2 300"), (87.2, "sim press B1 1000"), (88.4, "mode 0"),
+            (88.5, "sim set cell3 3.36"), (88.5, "sim set temp3 41"), (1.0, "wifi HomeNet secretpass")]
+END = 92.0
 
 
 class Tour(fcl_sim.Scenario):
@@ -97,7 +124,32 @@ BX, BY, BZ = 1 / NRM, -U / NRM, -V / NRM
 ROUND = (XX - 239.5) ** 2 + (YY - 239.5) ** 2 > 240 * 240
 
 
-def lcd(t, grid):
+DX, DY = XX - 240, YY - 240
+ADX, ADY = np.abs(DX), np.abs(DY)
+FAR = np.maximum(ADX, ADY)
+BAND = (XX >= 152) & (XX <= 327) & (YY >= 18) & (YY <= 29)
+RET_CORE = ((DY == 0) & (ADX <= 28) & ((ADX >= 6) | (ADX == 0))) | ((DX == 0) & (ADY >= 6) & (ADY <= 28))
+RET_EDGE = ((ADY <= 1) & (ADX <= 29) & ((ADX >= 5) | (ADX <= 1))) | ((ADX <= 1) & (ADY >= 5) & (ADY <= 29))
+
+
+def hud(img, h):
+    """the FPGA's graphics, the pixel rules of fpga/osd/fcl_osd.v (firmware/sim/fcl_osd.py hud_pixel), with numpy"""
+    flags, a, b, c, tape = h
+    if flags & 4:
+        tv = (XX + 16 + tape) & 31
+        img[BAND] >>= 1
+        img[(BAND & ((tv < 2) | (((tv == 16) | (tv == 17)) & (YY >= 24)))) | ((ADX <= 1) & (YY >= 10) & (YY <= 15))] = 255
+    if flags & 2:
+        e = a * DX + b * DY + c * 128
+        ring = (FAR >= 48) & (FAR <= 176)
+        img[ring & (np.abs(e) <= 1100)] = 0
+        img[ring & (np.abs(e) <= 512)] = 255
+    if flags & 1:
+        img[RET_EDGE & ~RET_CORE] = 0
+        img[RET_CORE] = 255
+
+
+def lcd(t, grid, hud_state=(0, 0, 0, 0, 0)):
     p, r, hd = math.radians(t["pitch"]), math.radians(t["roll"]), math.radians(t["heading"])
     y2 = BY * math.cos(r) - BZ * math.sin(r)
     z2 = BY * math.sin(r) + BZ * math.cos(r)
@@ -114,6 +166,7 @@ def lcd(t, grid):
     base = np.where(line[..., None], np.array([200, 205, 190], dtype=np.float32), np.array([88, 120, 70], dtype=np.float32))
     ground = base * fade + 110 * (1 - fade)
     img = np.where((z3 > 0)[..., None], sky, ground).astype(np.uint8)
+    hud(img, hud_state)
     for row in range(15):                                         # text: glyph white, the rest of the cell at half brightness
         for col in range(30):
             ch = ord(grid[row][col])
@@ -125,8 +178,6 @@ def lcd(t, grid):
         d2 = (XX - 240 - t["dot_x"]) ** 2 + (YY - 240 - t["dot_y"]) ** 2
         img[d2 <= 169] = 0
         img[(d2 <= 9) | ((d2 >= 64) & (d2 <= 121))] = fcl_osd.DOT_INSIDE_RGB if t["flags"] & 32 else fcl_osd.DOT_RIM_RGB
-    img[240, 232:249] = np.maximum(img[240, 232:249], 150)      # centre cross of the picture (not part of the overlay)
-    img[232:249, 240] = np.maximum(img[232:249, 240], 150)
     img[ROUND] = (20, 20, 20)
     return Image.fromarray(img)
 
@@ -163,9 +214,9 @@ def frame(dash, sim, caption):
             if c != " ":
                 im.paste(glyph(c), (30 + j * CW, 60 + i * CH))
     if sim.last:
-        im.paste(lcd(sim.last, sim.state["osd"]).resize((560, 560), Image.LANCZOS), (1010, 70))
+        im.paste(lcd(sim.last, sim.state["osd"], sim.state.get("hud", (0, 0, 0, 0, 0))).resize((560, 560), Image.LANCZOS), (1010, 70))
     d.text((1010, 650), "Camera picture: a stand-in scene (sky, ground with a 1 m grid).", font=MONO, fill=(120, 130, 140))
-    d.text((1010, 672), "Text and dot: the overlay as the unit composes it.", font=MONO, fill=(120, 130, 140))
+    d.text((1010, 672), "Text, graphics and dot: what the unit sends to the FPGA's overlay.", font=MONO, fill=(120, 130, 140))
     d.rectangle((0, H - 130, W, H), fill=(28, 34, 44))
     d.text((30, H - 112), "t = %4.1f s" % sim.t, font=MONO, fill=(120, 200, 255))
     d.text((30, H - 86), caption, font=CAP, fill=(240, 240, 240))
@@ -189,7 +240,8 @@ def main():
                           stdin=subprocess.PIPE)
     sim.command("status")
     n = 0
-    stills = {4.0: "tour_ne_level", 12.0: "tour_se_level", 29.5: "tour_down", 50.0: "tour_nw_rec", 59.0: "tour_low_cell"}
+    stills = {4.0: "tour_ne_level", 29.5: "tour_down", 53.0: "tour_level_page", 63.5: "tour_height", 69.5: "tour_bearing",
+              80.0: "tour_survey", 91.0: "tour_graphics_low_cell"}
     while sim.t < END:
         for _ in range(int(round(1.0 / FPS / fcl_sim.STEP_S))):
             while todo and todo[0][0] <= sim.t:

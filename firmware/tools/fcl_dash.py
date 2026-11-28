@@ -295,7 +295,7 @@ class Dash:
         lcd = "LCD    " + (("menu: " if t["flags"] & 128 else page + ": ") + shown if shown else
                          page + " (B1 or 'key B1': next page; hold B1 or 'key B1L': menu)")
         gfx = [n for i, n in enumerate(("reticle", "horizon", "tape")) if getattr(self, "hud", 0) >> i & 1]
-        for s in (wifi + "    LCD overlay: " + (" ".join(ov) if ov else "none") + ("    graphics: " + " ".join(gfx) if gfx else ""), audio, mag, lcd):
+        for s in (wifi + "    LCD overlay: " + ("all" if len(ov) == 6 else " ".join(ov) if ov else "none") + ("    graphics: " + " ".join(gfx) if gfx else ""), audio, mag, lcd):
             out.append("│ " + s[:FULL - 1].ljust(FULL - 1) + "│")
         out.append("├─ LOG " + "─" * (FULL - 6) + "┤")
         log = list(self.log)

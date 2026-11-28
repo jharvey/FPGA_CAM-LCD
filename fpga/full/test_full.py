@@ -99,7 +99,7 @@ def load_photo():
     ch = int(w * 3 / 4)                                     # 4:3 from the middle (the face is in the upper part)
     top = max(0, min(h - ch, int(h * 0.12)))
     im = im.crop((0, top, w, top + ch)).resize((640, 480), Image.LANCZOS)
-    return [((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3) for r, g, b in im.getdata()]
+    return [((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3) for r, g, b in (im.get_flattened_data() if hasattr(im, "get_flattened_data") else im.getdata())]
 
 
 def save_picture(px, path, round_mask=True):
