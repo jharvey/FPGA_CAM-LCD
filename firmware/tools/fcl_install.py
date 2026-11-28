@@ -53,8 +53,10 @@ def install(port, firmware=None, wifi=None, pin=None, bit=None, flash=False, use
     say("2. raw REPL")
     b.read(1.0)
     b.raw()
-    out, err = b.exec("import sys, gc, os\nprint(sys.version.split(';')[1].strip(), gc.mem_free(), os.statvfs('/')[0] * os.statvfs('/')[3])")
-    say("   %s, %s bytes free in the heap, %s bytes free on the flash" % tuple(out.split()[-3:]) if not err else "   " + err)
+    out, err = b.exec("import sys, gc, os\nprint(sys.version.split(';')[1].strip() + '|' + str(gc.mem_free()) + '|' + "
+                      "str(os.statvfs('/')[0] * os.statvfs('/')[3]))")
+    parts = out.strip().split("|")
+    say("   %s, %s bytes free in the heap, %s bytes free on the flash" % tuple(parts) if not err and len(parts) == 3 else "   " + (err or out))
     todo = files(user)
     say("3. copying %d files" % len(todo))
     t0 = time.time()
