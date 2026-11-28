@@ -263,9 +263,9 @@ real ESP32, real sensor behaviour, and the FPGA on a board.
 Running the files under real MicroPython found three faults that ordinary Python had hidden (2026-11-27): the
 bridge driver deleted slices of a bytearray, which MicroPython cannot do (the driver would have stopped at the
 first frame); the attitude filter had a number above 2^30 in viper code, which a 32-bit MicroPython does not take
-as a native integer; and a log file that could not be opened stopped the main loop. The Unix port is 64-bit, so
-one difference to the ESP32 remains untested: `fcl_fix.py` sign-extends what it reads from its state array so that
-both word sizes give the same result, and the 64-bit side of that is what has run.
+as a native integer; and a log file that could not be opened stopped the main loop. `test_mpy.py` passes with a
+64-bit and a 32-bit build of MicroPython; `fcl_fix.py` gives the same results with both word sizes. What remains is
+the ESP32 itself: Xtensa machine code instead of x86, its memory, and its real pins and radio.
 
 ## Not done
 
@@ -278,7 +278,6 @@ both word sizes give the same result, and the 64-bit side of that is what has ru
   the inverted memory clock today.
 - The camera capture, the SDRAM clock and the pixel clock of the camera project were changed on 2026-11-27
   (`fpga/IO_REMAP.md`, Clocks). The project's author should look at those three blocks in Icestudio.
-- The viper code has run as 64-bit machine code only (above).
 - The phone page's PIN is not encryption. HTTPS on the ESP32 would need certificates and more memory.
 - Audio and the phone page at the same time have not been tried on the ESP32.
 - A file upload larger than the free flash is refused only when the write fails; the update tool does not ask for

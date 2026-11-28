@@ -12,8 +12,11 @@ Exit code 0 = all checks pass, or no micropython found (it says so).
 3. mpy_unit.py runs the unit's real main loop (fcl_usbdev.py) with stand-ins for the ESP32's pins, I2S, UART and
    Wi-Fi, in real time, driven through stdin / stdout as the USB port would be.
 
-What this does not show: the ESP32 itself.  The Unix port is 64-bit and has plenty of memory; the ESP32-S3 is
-32-bit with about 2 MB of heap, and its machine / network / I2S modules are the real ones.
+Run it with a 64-bit and with a 32-bit build (make MICROPY_FORCE_32BIT=1, needs gcc-multilib): the ESP32 is 32-bit,
+and the viper code of fcl_fix.py depends on the word size.  Both passed on 2026-11-27.
+
+What this does not show: the ESP32 itself: its memory (about 2 MB of heap), its Xtensa machine code, and its
+machine / network / I2S modules, which are stand-ins here.
 """
 import os
 import shutil
